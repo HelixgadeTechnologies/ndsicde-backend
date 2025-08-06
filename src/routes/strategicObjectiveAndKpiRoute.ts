@@ -7,7 +7,7 @@ const strategicObjectiveRouter: Router = Router();
  * /api/strategic-objectivesAndKpi/strategic-objective:
  *   post:
  *     summary: Create or update a strategic objective
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     description: If `isCreate` is true, a new user is created.
@@ -55,7 +55,7 @@ strategicObjectiveRouter.post("/strategic-objective", createOrUpdateStrategicObj
  * /api/strategic-objectivesAndKpi/delete:
  *   delete:
  *     summary: Delete a strategic objective
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     requestBody:
@@ -83,7 +83,7 @@ strategicObjectiveRouter.delete("/delete", removeStrategicObjective);
  * /api/strategic-objectivesAndKpi/strategic-objectives:
  *   get:
  *     summary: Get all strategic objectives
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     responses:
  *       200:
  *         description: A list of strategic objectives
@@ -97,7 +97,7 @@ strategicObjectiveRouter.get("/strategic-objectives", fetchAllStrategicObjective
  * /api/strategic-objectivesAndKpi/strategic-objectives/{id}:
  *   get:
  *     summary: Get a specific strategic objective by ID
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     parameters:
  *       - in: path
  *         name: id
@@ -120,7 +120,7 @@ strategicObjectiveRouter.get("/strategic-objectives/:id", fetchStrategicObjectiv
  * /api/strategic-objectivesAndKpi/kpi:
  *   post:
  *     summary: Create or update a KPI
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     requestBody:
@@ -176,7 +176,7 @@ strategicObjectiveRouter.post("/kpi", createOrUpdateKpi);
  * /api/strategic-objectivesAndKpi/deleteKpi:
  *   delete:
  *     summary: Delete a KPI by ID
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     requestBody:
@@ -204,7 +204,7 @@ strategicObjectiveRouter.delete("/deleteKpi", removeKpi);
  * /api/strategic-objectivesAndKpi/kpis:
  *   get:
  *     summary: Get all KPIs
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     responses:
  *       200:
  *         description: List of KPIs
@@ -218,7 +218,7 @@ strategicObjectiveRouter.get("/kpis", fetchAllKpis);
  * /api/strategic-objectivesAndKpi/kpi/{id}:
  *   get:
  *     summary: Get a KPI by ID
- *     tags: [StrategicObjectivesAndKpi]
+ *     tags: [Strategic Objectives And Kpi]
  *     parameters:
  *       - in: path
  *         name: id

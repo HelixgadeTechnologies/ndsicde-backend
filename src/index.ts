@@ -28,7 +28,8 @@ app.use((req, res, next) => {
     // Define routes to exclude from authentication
     const excludedRoutes = [
         "/api/auth/signIn",
-        "/api/auth/signUp"
+        "/api/auth/signUp",
+        "/api/auth/forgot-password"
     ];
 
     if (excludedRoutes.includes(req.path)) {

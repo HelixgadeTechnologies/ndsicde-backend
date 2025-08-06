@@ -8,7 +8,7 @@ const settingsRouter: Router = Router();
  * /api/settings/general:
  *   post:
  *     summary: Create or update general settings
- *     tags: [GeneralSettings]
+ *     tags: [General Settings]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     description: If `isCreate` is true, a new settings entry is created.
@@ -67,7 +67,7 @@ settingsRouter.post("/general", saveGeneralSettings);
  * /api/settings/general:
  *   get:
  *     summary: Get general settings
- *     tags: [GeneralSettings]
+ *     tags: [General Settings]
  *     responses:
  *       200:
  *         description: General settings retrieved
@@ -81,7 +81,7 @@ settingsRouter.get("/general", fetchGeneralSettings);
  * /api/settings/register-role:
  *   post:
  *     summary: Create or update a role
- *     tags: [GeneralSettings]
+ *     tags: [General Settings]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     description: If `isCreate` is true, a new role is created.
@@ -127,7 +127,7 @@ settingsRouter.post("/register-role", registerRoleController);
  * /api/settings/roles:
  *   get:
  *     summary: Retrieve all roles
- *     tags: [GeneralSettings]
+ *     tags: [General Settings]
  *     responses:
  *       201:
  *         description: List of all roles

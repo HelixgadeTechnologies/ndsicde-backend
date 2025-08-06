@@ -118,7 +118,7 @@ model Project {
   strategicObjective    StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
   strategicObjectiveId  String?
   createAt              DateTime?           @default(now())
-  updateAt              DateTime?           @default(now())
+  updateAt              DateTime?           @default(now())        
 
   @@map("project")
 }

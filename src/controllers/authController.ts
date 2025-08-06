@@ -112,6 +112,10 @@ export const getRoles = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const token = await loginUser(req.body);
+        console.log(token, "token")
+        if (!token) {
+            return res.status(400).json(errorResponse("Invalid credentials"));
+        }
         res.status(200).json(successResponse("Login successfully", token));
     } catch (error: any) {
         res.status(400).json(errorResponse("Internal server error", error));

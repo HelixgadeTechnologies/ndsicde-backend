@@ -183,33 +183,38 @@ export const getAllRole = async (): Promise<Array<Role>> => {
 export const loginUser = async (data: ILogin) => {
 
   // console.log(data)
+  try {
+    const user: IUserView[] = await prisma.$queryRaw`
+    SELECT * FROM user_view WHERE email = ${data.email}
+  `;
+    // console.log(user)
+    if (user.length < 1) throw new Error("Invalid credentials");
 
-  const user: IUserView[] = await prisma.$queryRaw`
-  SELECT * FROM user_view WHERE email = ${data.email}
-`;
-  // console.log(user)
-  if (user.length < 1) throw new Error("Invalid credentials");
+    // if (user[0].status == 0) throw new Error("Your Account is not approved, pleas contact the admin");
 
-  // if (user[0].status == 0) throw new Error("Your Account is not approved, pleas contact the admin");
+    const isPasswordValid = await bcrypt.compare(data.password, user[0].password as string);
 
-  const isPasswordValid = await bcrypt.compare(data.password, user[0].password as string);
+    // console.log("IsValid", isPasswordValid)
+    if (!isPasswordValid) throw new Error("Invalid credentials");
 
-  // console.log("IsValid", isPasswordValid)
-  if (!isPasswordValid) throw new Error("Invalid credentials");
+    // Update last login time and status
+    if (user[0].status === "Inactive") {
+      await prisma.user.update({
+        where: { userId: user[0].userId },
+        data: {
+          loginLast: new Date(),
+          status: "Active",
+          updateAt: new Date()
+        },
+      });
+    }
 
-  // Update last login time and status
-  if (user[0].status === "Inactive") {
-    await prisma.user.update({
-      where: { userId: user[0].userId },
-      data: {
-        loginLast: new Date(),
-        status: "Active",
-        updateAt: new Date()
-      },
-    });
+    return jwt.sign(user[0], JWT_SECRET as string, { expiresIn: "2h" });
+
+  } catch (error) {
+    console.log(error, "Login Error");
   }
 
-  return jwt.sign(user[0], JWT_SECRET as string, { expiresIn: "2h" });
 };
 
 export const changePassword = async (userId: string, oldPassword: string, newPassword: string, confirmPassword: string) => {

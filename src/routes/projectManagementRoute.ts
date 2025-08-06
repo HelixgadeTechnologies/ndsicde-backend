@@ -8,7 +8,7 @@ const projectManagementRouter: Router = Router();
  * /api/projectManagement/project:
  *   post:
  *     summary: Create or update a project
- *     tags: [ProjectManagement]
+ *     tags: [Project Management]
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     description: If `isCreate` is true, a new ProjectManagement entry is created.
@@ -70,7 +70,7 @@ projectManagementRouter.post("/project", createOrUpdateProject);
  * /api/projectManagement/projects:
  *   get:
  *     summary: Get all projects
- *     tags: [ProjectManagement]
+ *     tags: [Project Management]
  *     responses:
  *       200:
  *         description: A list of projects
@@ -84,7 +84,7 @@ projectManagementRouter.get("/projects", fetchAllProjects);
  * /api/projectManagement/projects/{id}:
  *   get:
  *     summary: Get a project by ID
- *     tags: [ProjectManagement]
+ *     tags: [Project Management]
  *     parameters:
  *       - in: path
  *         name: id
@@ -107,7 +107,7 @@ projectManagementRouter.get("/projects/:id", fetchProjectById);
  * /api/projectManagement/delete:
  *   delete:
  *     summary: Delete a project by ID
- *     tags: [ProjectManagement]
+ *     tags: [Project Management]
  *     requestBody:
  *       required: true
  *       content:
@@ -132,7 +132,7 @@ projectManagementRouter.delete("/delete", removeProject);
  * /api/projectManagement/project-stats:
  *   get:
  *     summary: Get project summary by status
- *     tags: [ProjectManagement]
+ *     tags: [Project Management]
  *     description: Returns total number of projects and count of projects by status (Active, Completed, On Hold)
  *     responses:
  *       200:

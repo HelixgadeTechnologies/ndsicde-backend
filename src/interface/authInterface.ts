@@ -18,6 +18,29 @@ export interface IUser {
     updateAt?: string | null;
 }
 
+export interface IUserView {
+  userId: string;
+  fullName?: string;
+  email?: string;
+  address?: string;
+  phoneNumber?: string;
+  roleId?: string;
+  roleName?: string;
+  status?: string;
+  assignedProjectId?: string;
+  department?: string;
+  community?: string;
+  state?: string;
+  localGovernmentArea?: string;
+  profilePic?: string;
+  password?: string;
+  profilePicMimeType?: string;
+  loginLast?: Date;
+  createAt?: Date;
+  updateAt?: Date;
+}
+
+
 export interface ISignUpAdmin {
     userId: string;
     firstName: string | null;
@@ -45,28 +68,6 @@ export interface ILogin {
 }
 
 
-// Views
-
-export interface IUserView {
-    userId: string
-    fullName?: string | null;
-    email?: string;
-    phoneNumber?: string | null;
-    roleId?: string | null;
-    password?: string | null;
-    address?: string | null;
-    status?: string | null;
-    assignedProjectId?: string | null;
-    department?: string | null;
-    community?: string | null;
-    state?: string | null;
-    localGovernmentArea?: string | null;
-    profilePic?: string | null;
-    profilePicMimeType?: string | null;
-    loginLast?: string | null;
-    createAt?: string | null;
-    updateAt?: string | null;
-}
 
 export interface IUserClient {
     userId: number;
