@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//MODEL
+model User {
+  userId              String    @id @default(uuid())
+  fullName            String?
+  email               String?   @unique
+  address             String?
+  phoneNumber         String?
+  role                Role?     @relation(fields: [roleId], references: [roleId])
+  roleId              String?
+  status              String?
+  assignedProjectId   String?
+  department          String?
+  community           String?
+  state               String?
+  localGovernmentArea String?
+  password            String?
+  profilePic          String?
+  profilePicMimeType  String?
+  loginLast           DateTime?
+  createAt            DateTime? @default(now())
+  updateAt            DateTime? @default(now())
+
+  @@map("users")
+}
+
+model GeneralSettings {
+  generalSettingsId   String    @id @default(uuid())
+  organizationName    String?
+  contactEmail        String?
+  contactPhone        String?
+  website             String?
+  organizationLogo    String?
+  defaultCurrency     String?
+  defaultTimeZone     String?
+  dateRetentionPolicy String?
+  auditLogRetention   String?
+  emailNotification   Boolean?
+  maintenanceAlert    Boolean?
+  createAt            DateTime? @default(now())
+  updateAt            DateTime? @default(now())
+
+  @@map("generalsettings")
+}
+
+model Role {
+  roleId      String    @id @default(uuid())
+  roleName    String?
+  description String?
+  permission  String?
+  createAt    DateTime? @default(now())
+  updateAt    DateTime? @default(now())
+  users       User[]
+
+  @@map("role")
+}
+
+model StrategicObjective {
+  strategicObjectiveId String    @id @default(uuid())
+  statement            String?
+  thematicAreas        String?
+  pillarLead           String?
+  status               String?
+  createAt             DateTime? @default(now())
+  updateAt             DateTime? @default(now())
+  kpi                  Kpi[]
+  project              Project[]
+
+  @@map("strategicObjective")
+}
+
+model Kpi {
+  kpiId                String              @id @default(uuid())
+  statement            String?
+  definition           String?
+  type                 String?
+  specificAreas        String?
+  unitOfMeasure        String?
+  itemInMeasure        String?
+  disaggregation       String?
+  baseLine             String?
+  target               String?
+  strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
+  strategicObjectiveId String?
+  createAt             DateTime?           @default(now())
+  updateAt             DateTime?           @default(now())
+
+  @@map("kpi")
+}
+
+model Project {
+  projectId             String              @id @default(uuid())
+  budgetCurrency        String?
+  totalBudgetAmount     String?
+  startDate             DateTime?           @default(now())
+  endDate               DateTime?           @default(now())
+  country               String?
+  state                 String?
+  localGovernment       String?
+  community             String?
+  thematicAreasOrPillar String?
+  status                String?
+  strategicObjective    StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
+  strategicObjectiveId  String?
+  createAt              DateTime?           @default(now())
+  updateAt              DateTime?           @default(now())
+
+  @@map("project")
+}
