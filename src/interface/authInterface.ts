@@ -95,6 +95,17 @@ export interface IRole {
     updateAt?: string;
 }
 
+export interface IRoleView {
+  roleId: string
+  roleName?: string
+  description?: string
+  permission?: string
+  createAt?: Date
+  updateAt?: Date
+  users: number // Count of users with this role
+}
+
+
 export interface IGeneralSettings {
     generalSettingsId: string;
     organizationName?: string;

@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { loginUser, registerUser, removeUser, getUserById, getAllRole, changePassword, updateProfilePicture, deleteCloudFile, updateLoginUser, getAllUser, forgotPassword, getGeneralSettings, registerGeneralSettings, registerRole } from "../service/authService"
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
-import { Prisma, PrismaClient, User } from "@prisma/client";
-import { JwtPayload } from "jsonwebtoken";
 import { uploadFile } from "../utils/upload";
 
 export const register = async (req: Request, res: Response) => {
