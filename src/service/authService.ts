@@ -26,7 +26,7 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         roleId: data.roleId ?? null,
         department: data.department ?? null,
         phoneNumber: data.phoneNumber ?? null,
-        status: data.status ?? null,
+        status: data.status?.toUpperCase() ?? null,
         assignedProjectId: data.assignedProjectId ?? null,
         password: hashedPassword
       } as Prisma.UserCreateInput
@@ -40,7 +40,7 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         roleId: data.roleId ?? null,
         department: data.department ?? null,
         phoneNumber: data.phoneNumber ?? null,
-        status: data.status ?? null,
+        status: data.status?.toUpperCase() ?? null,
         assignedProjectId: data.assignedProjectId ?? null,
         updateAt: new Date(),
       },
@@ -205,12 +205,12 @@ export const loginUser = async (data: ILogin) => {
     if (!isPasswordValid) throw new Error("Invalid credentials");
 
     // Update last login time and status
-    if (user[0].status === "Inactive") {
+    if (user[0].status === "INACTIVE") {
       await prisma.user.update({
         where: { userId: user[0].userId },
         data: {
           loginLast: new Date(),
-          status: "Active",
+          status: "ACTIVE",
           updateAt: new Date()
         },
       });

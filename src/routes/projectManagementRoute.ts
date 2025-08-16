@@ -31,6 +31,8 @@ const projectManagementRouter: Router = Router();
  *                 properties:
  *                   projectId:
  *                     type: string
+ *                   projectName:
+ *                     type: string
  *                   budgetCurrency:
  *                     type: string
  *                   totalBudgetAmount:

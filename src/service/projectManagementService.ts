@@ -1,10 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { Project } from "@prisma/client"; // Optional interface import
-import { IProjectStatus, IProjectView } from "../interface/projectManagementInterface";
+import {
+  IProjectStatus,
+  IProjectView,
+} from "../interface/projectManagementInterface";
 
 const prisma = new PrismaClient();
 
-export const saveProject = async (data: Partial<Project>, isCreate: boolean) => {
+export const saveProject = async (
+  data: Partial<Project>,
+  isCreate: boolean
+) => {
   if (isCreate) {
     return await prisma.project.create({
       data: {
@@ -43,16 +49,25 @@ export const saveProject = async (data: Partial<Project>, isCreate: boolean) => 
 };
 
 export const getAllProjects = async () => {
-  const projects:Array<IProjectView> = await prisma.$queryRaw`
+  const projects: Array<IProjectView> = await prisma.$queryRaw`
   SELECT * FROM project_view
 `;
   return projects;
 };
 export const getProjectsStatus = async () => {
-  const outcomes: Array<IProjectStatus> = await prisma.$queryRaw`
+  
+  const outcomes = await prisma.$queryRaw<any[]>`
     SELECT * FROM project_status_summary_view
   `;
-  return outcomes[0];
+
+  const data:Array<IProjectStatus>  = outcomes.map(v=>(  {
+    totalProjects: Number(v.totalProjects) ,
+    activeProjects: Number(v.activeProjects) ,
+    completedProjects: Number(v.completedProjects),
+    onHoldProjects: Number(v.onHoldProjects) 
+  }));
+
+  return data[0];
 };
 
 export const getProjectById = async (projectId: string) => {

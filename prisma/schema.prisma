@@ -35,6 +35,7 @@ model User {
   loginLast           DateTime?
   createAt            DateTime? @default(now())
   updateAt            DateTime? @default(now())
+  auditLog       AuditLog[]
 
   @@map("users")
 }
@@ -105,6 +106,7 @@ model Kpi {
 
 model Project {
   projectId             String              @id @default(uuid())
+  projectName        String?
   budgetCurrency        String?
   totalBudgetAmount     String?
   startDate             DateTime?           @default(now())
@@ -119,6 +121,33 @@ model Project {
   strategicObjectiveId  String?
   createAt              DateTime?           @default(now())
   updateAt              DateTime?           @default(now())        
+  projectValidation              ProjectValidation[]
 
   @@map("project")
+}
+
+model ProjectValidation {
+  projectValidationId   String   @id @default(uuid())
+  submissionName           String   // e.g. "Q3 Financial Report"
+  project        Project? @relation(fields: [projectId], references: [projectId])
+  projectId      String?
+  submittedBy String?
+  status         String   // "Pending", "Approved", "Rejected"
+  type           String?  // Optional: if you want to classify the submission type
+  createAt       DateTime @default(now())
+  updateAt       DateTime @default(now())
+
+  @@map("projectvalidation")
+  
+}
+model AuditLog {
+  auditLogId   String   @id @default(uuid())
+  action       String   // e.g. "User Created", "Project Updated"
+  user         User?    @relation(fields: [userId], references: [userId])
+  userId       String?
+  details      String?  // Optional: additional details about the action
+  createAt     DateTime @default(now())
+  updateAt     DateTime @default(now())
+
+  @@map("auditlog")
 }

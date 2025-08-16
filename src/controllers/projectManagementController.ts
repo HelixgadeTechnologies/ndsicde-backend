@@ -1,12 +1,22 @@
 import { Request, Response } from "express";
 import { deleteProject, getAllProjects, getProjectById, getProjectsStatus, saveProject } from "../service/projectManagementService";
 import { errorResponse, successResponse } from "../utils/responseHandler";
+import { AuditLogService } from '../service/auditlogService';
+
+
+// Import the AuditLogService to log actions
+const auditLogService = new AuditLogService();
 
 export const createOrUpdateProject = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
-
+ const userId = req.user?.userId; // Assuming user ID is available from authentication middleware
   try {
     const project = await saveProject(data, isCreate);
+    await auditLogService.createAuditLog(
+      isCreate ? 'Project Created' : 'Project Updated', 
+      userId, 
+      `Project ${isCreate ? 'created' : 'updated'} with Name: ${project.projectName}`
+    );
     const message = isCreate ? "Project created successfully" : "Project updated successfully";
     res.status(isCreate ? 201 : 200).json(successResponse(message, project));
   } catch (error: any) {
@@ -42,6 +52,7 @@ export const removeProject = async (req: Request, res: Response) => {
 
   try {
     const deleted = await deleteProject(projectId);
+
     res.status(200).json(successResponse("Project deleted successfully", deleted));
   } catch (error: any) {
     res.status(500).json(errorResponse(error.message));

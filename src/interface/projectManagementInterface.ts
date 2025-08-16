@@ -1,5 +1,6 @@
 export interface IProject {
   projectId: string;
+  projectName?: string;
   budgetCurrency?: string;
   totalBudgetAmount?: string;
   startDate?: Date;
@@ -24,6 +25,7 @@ export interface IProjectStatus {
 
 export interface IProjectView {
   projectId: string;
+  projectName?: string;
   budgetCurrency?: string;
   totalBudgetAmount?: string;
   startDate?: Date;

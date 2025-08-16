@@ -1,12 +1,19 @@
 import { Request, Response } from "express";
 import { deleteKpi, deleteStrategicObjective, getAllKpis, getAllStrategicObjectives, getKpiById, getStrategicObjectiveById, saveKpi, saveStrategicObjective } from "../service/strategicObjectiveAndKpiService";
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
+import { AuditLogService } from "../service/auditlogService";
 
+const auditLogService = new AuditLogService();
 export const createOrUpdateStrategicObjective = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
-
+   const userId = req.user?.userId; // Assuming user ID is available from authentication middleware
   try {
     const result = await saveStrategicObjective(data, isCreate);
+    await auditLogService.createAuditLog(
+      isCreate ? 'Strategic Objective Created' : 'Strategic Objective Updated', 
+      userId, 
+      `Strategic Objective ${isCreate ? 'created' : 'updated'} with Name: ${result.statement}`
+    );
     const message = isCreate ? "Strategic Objective created successfully" : "Strategic Objective updated successfully";
     res.status(isCreate ? 201 : 200).json(successResponse(message,result));
   } catch (error: any) {
@@ -50,8 +57,14 @@ export const fetchStrategicObjectiveById = async (req: Request, res: Response) =
 
 export const createOrUpdateKpi = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
+  const userId = req.user?.userId; // Assuming user ID is available from authentication middleware
   try {
     const result = await saveKpi(data, isCreate);
+    await auditLogService.createAuditLog(
+      isCreate ? 'KPI Created' : 'KPI Updated', 
+      userId,
+      `KPI ${isCreate ? 'created' : 'updated'} with Name: ${result.statement}`
+    );
     const message = isCreate ? "KPI created successfully" : "KPI updated successfully";
     res.status(isCreate ? 201 : 200).json(successResponse(message,result));
   } catch (error: any) {
