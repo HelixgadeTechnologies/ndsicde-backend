@@ -1,0 +1,65 @@
+export interface IRequest {
+  requestId: string;
+  staff?: string;
+  outputId?: string;
+  activityTitle?: string;
+  activityBudgetCode?: number;
+  activityLocation?: string;
+  activityPurposeDescription?: string;
+  activityStartDate?: Date;
+  activityEndDate?: Date;
+  activityLineDescription?: string;
+  quantity?: number;
+  frequency?: number;
+  unitCost?: number;
+  budgetCode?: number;
+  total?: number;
+  modeOfTransport?: string;
+  driverName?: string;
+  driversPhoneNumber?: string;
+  vehiclePlateNumber?: string;
+  vehicleColor?: string;
+  departureTime?: Date;
+  route?: string;
+  recipientPhoneNumber?: string;
+  documentName?: string;
+  documentURL?: string;
+  projectId?: string;
+  status?: string;
+  createAt?: Date;
+  updateAt?: Date;
+}
+
+export interface IRequestView {
+  requestId: string;
+  staff?: string;
+  outputId?: string;
+  outputStatement?: string;
+  activityTitle?: string;
+  activityBudgetCode?: number;
+  activityLocation?: string;
+  activityPurposeDescription?: string;
+  activityStartDate?: Date;
+  activityEndDate?: Date;
+  activityLineDescription?: string;
+  quantity?: number;
+  frequency?: number;
+  unitCost?: number;
+  budgetCode?: number;
+  total?: number;
+  modeOfTransport?: string;
+  driverName?: string;
+  driversPhoneNumber?: string;
+  vehiclePlateNumber?: string;
+  vehicleColor?: string;
+  departureTime?: Date;
+  route?: string;
+  recipientPhoneNumber?: string;
+  documentName?: string;
+  documentURL?: string;
+  projectId?: string;
+  projectName?: string;
+  status?: string;
+  createAt?: Date;
+  updateAt?: Date;
+}
