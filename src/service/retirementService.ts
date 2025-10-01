@@ -11,8 +11,12 @@ export const createOrUpdateRetirement = async (
   if (isCreate) {
     return await prisma.retirement.create({
       data: {
-        lineItem: payload.lineItem,
-        actualCostOfLineItem: payload.actualCostOfLineItem,
+        activityLineDescription: payload.activityLineDescription,
+        quantity: payload.quantity,
+        frequency: payload.frequency,
+        unitCost: payload.unitCost,
+        actualCost: payload.actualCost,
+        totalBudget: payload.totalBudget,
         documentName: payload.documentName,
         documentURL: payload.documentURL,
         requestId: payload.requestId,
@@ -26,8 +30,12 @@ export const createOrUpdateRetirement = async (
     return await prisma.retirement.update({
       where: { retirementId: payload.retirementId },
       data: {
-        lineItem: payload.lineItem,
-        actualCostOfLineItem: payload.actualCostOfLineItem,
+        activityLineDescription: payload.activityLineDescription,
+        quantity: payload.quantity,
+        frequency: payload.frequency,
+        unitCost: payload.unitCost,
+        actualCost: payload.actualCost,
+        totalBudget: payload.totalBudget,
         documentName: payload.documentName,
         documentURL: payload.documentURL,
         requestId: payload.requestId,
