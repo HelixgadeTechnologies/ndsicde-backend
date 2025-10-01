@@ -1,27 +1,28 @@
 import { Router } from "express";
 import {
-    createOrUpdateActivityController,
+  createOrUpdateActivityController,
   createOrUpdateActivityReportController,
+  createOrUpdateAgeDisaggregationController,
+  createOrUpdateDepartmentDisaggregationController,
+  createOrUpdateGenderDisaggregationController,
   createOrUpdateImpactController,
-  createOrUpdateImpactIndicatorController,
-  createOrUpdateImpactIndicatorReportFormat,
+  createOrUpdateIndicatorController,
+  createOrUpdateIndicatorReport,
+  createOrUpdateLGADisaggregationController,
   createOrUpdateLogicalFrameworkController,
-  createOrUpdateOutcomeIndicator,
-  createOrUpdateOutcomeIndicatorReportFormat,
   createOrUpdateOutputController,
-  createOrUpdateOutputIndicatorController,
   createOrUpdatePartnerController,
+  createOrUpdateProductDisaggregationController,
   createOrUpdateProject,
+  createOrUpdateStateDisaggregationController,
   createOrUpdateTeamMemberController,
-  createOutputIndicatorReportFormat,
+  createOrUpdateTenureDisaggregationController,
   deleteActivityController,
   deleteActivityReportController,
   deleteImpactController,
   deleteLogicalFrameworkController,
   deleteOutcomeController,
   deleteOutputController,
-  deleteOutputIndicatorController,
-  deleteOutputIndicatorReportFormatController,
   deletePartnerController,
   deleteTeamMemberController,
   fetchAllProjects,
@@ -29,33 +30,29 @@ import {
   fetchProjectStatusStats,
   getActivityByIdController,
   getActivityReportByIdController,
+  getAgeDisaggregationByIndicatorController,
   getAllActivitiesController,
   getAllActivityReportsController,
-  getAllImpactIndicators,
   getAllImpactsController,
+  getAllIndicatorsByResult,
   getAllLogicalFrameworksController,
   getAllOutcomesController,
-  getAllOutputIndicatorReportFormatController,
-  getAllOutputIndicatorsController,
   getAllOutputsController,
   getAllPartnersController,
+  getAllResultType,
   getAllTeamMemberController,
-  getImpactIndicatorById,
-  getImpactIndicatorReportFormat,
-  getImpactIndicatorReportFormats,
-  getImpactIndicatorsByProjectId,
+  getDepartmentDisaggregationByIndicatorController,
+  getDisaggregation,
+  getImpactIndicatorReportById,
+  getIndicatorById,
+  getIndicatorReportsByResult,
+  getLGADisaggregationByIndicatorController,
   getLogicalFrameworkByIdController,
   getOutcomeByIdController,
-  getOutcomeIndicatorById,
-  getOutcomeIndicatorReportFormatByIdController,
-  getOutcomeIndicatorReportFormats,
-  getOutcomeIndicators,
   getOutputByIdController,
-  getOutputIndicatorByIdController,
-  getOutputIndicatorReportFormatByIdController,
-  removeImpactIndicatorReportFormat,
-  removeOutcomeIndicator,
-  removeOutcomeIndicatorReportFormat,
+  getProductDisaggregationByIndicatorController,
+  getTenureDisaggregationByIndicatorController,
+  removeIndicatorReport,
   removeProject,
   saveOutcomeController,
 } from "../controllers/projectManagementController";
@@ -282,6 +279,8 @@ projectManagementRouter.get("/team-members", getAllTeamMemberController);
  * @swagger
  * /api/projectManagement/team-member/{id}:
  *   delete:
+ *     security:
+ *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     summary: Delete a Team Member
  *     description: Delete a team member by their ID.
  *     tags: [TEAM MEMBER]
@@ -373,6 +372,8 @@ projectManagementRouter.get("/partners", getAllPartnersController);
  * @swagger
  * /api/projectManagement/partners/{id}:
  *   delete:
+ *     security:
+ *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     summary: Delete a partner
  *     description: Delete a partner by ID.
  *     tags: [PARTNERS]
@@ -390,6 +391,21 @@ projectManagementRouter.get("/partners", getAllPartnersController);
  *         description: Server error
  */
 projectManagementRouter.delete("/partners/:id", deletePartnerController);
+
+/**
+ * @swagger
+ * /api/projectManagement/result_types:
+ *   get:
+ *     summary: Get all result type
+ *     description: Fetch all result type.
+ *     tags: [RESULT]
+ *     responses:
+ *       200:
+ *         description: List of result type
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/result_types", getAllResultType);
 
 /**
  * @swagger
@@ -428,6 +444,9 @@ projectManagementRouter.delete("/partners/:id", deletePartnerController);
  *                   projectId:
  *                     type: string
  *                     example: "p09876d5-c43b-21fe-dcba-0987654321fe"
+ *                   resultTypeId:
+ *                     type: string
+ *                     example: "p09876d5-c43b-21fe-dcba-0987654321fe"
  *     responses:
  *       200:
  *         description: Impact created or updated successfully
@@ -448,12 +467,14 @@ projectManagementRouter.post("/impact", createOrUpdateImpactController);
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.get("/impact", getAllImpactsController);
+projectManagementRouter.get("/impacts", getAllImpactsController);
 
 /**
  * @swagger
  * /api/projectManagement/impact/{id}:
  *   delete:
+ *     security:
+ *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     summary: Delete an Impact
  *     tags: [IMPACT]
  *     parameters:
@@ -471,17 +492,661 @@ projectManagementRouter.get("/impact", getAllImpactsController);
  */
 projectManagementRouter.delete("/impact/:id", deleteImpactController);
 
+
 /**
  * @swagger
- * /api/projectManagement/impact-indicator:
+ * /api/projectManagement/disaggregation:
+ *   get:
+ *     summary: Get all disaggregation
+ *     tags: [DISAGGREGATION]
+ *     responses:
+ *       200:
+ *         description: A list of disaggregation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   disaggregationId:
+ *                     type: string
+ *                   disaggregationName:
+ *                     type: string
+ *       404:
+ *         description: No disaggregation found
+ *       500:
+ *         description: Server error
+ */
+ projectManagementRouter.get("/disaggregation", getDisaggregation);
+
+/**
+ * @swagger
+ * /api/projectManagement/gender-disaggregation:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update a Gender Disaggregation
+ *     description: >
+ *       Create a new Gender Disaggregation (if `isCreate` is `true`)  
+ *       or update an existing one (if `isCreate` is `false`).  
+ *       When updating, you must provide the `genderDisaggregationId`.
+ *     tags: [GENDER DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: object
+ *                 properties:
+ *                   genderDisaggregationId:
+ *                     type: string
+ *                     description: Required for update
+ *                   targetMale:
+ *                     type: number
+ *                   targetFemale:
+ *                     type: number
+ *                   actualMale:
+ *                     type: number
+ *                   actualFemale:
+ *                     type: number
+ *                   disaggregationId:
+ *                     type: string
+ *                   indicatorId:
+ *                     type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 targetMale: 50
+ *                 targetFemale: 60
+ *                 actualMale: 45
+ *                 actualFemale: 55
+ *                 disaggregationId: "uuid-123"
+ *                 indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: Gender disaggregation created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/gender-disaggregation", createOrUpdateGenderDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/gender-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get Gender Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all gender disaggregationS linked to a specific `indicatorId`.
+ *     tags: [GENDER DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter gender disaggregations
+ *     responses:
+ *       200:
+ *         description: Gender disaggregationS retrieved successfully
+ *       404:
+ *         description: No gender disaggregationS found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/gender-disaggregations/:indicatorId", createOrUpdateGenderDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/product-disaggregation:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update Product Disaggregations
+ *     description: >
+ *       Create multiple Product Disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `productDisaggregationId`.
+ *     tags: [PRODUCT DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     productDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     productName:
+ *                       type: string
+ *                     targetCount:
+ *                       type: number
+ *                     actualCount:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - productName: "Mosquito Nets"
+ *                   targetCount: 1000
+ *                   actualCount: 950
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - productName: "Medicines"
+ *                   targetCount: 500
+ *                   actualCount: 480
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: Product disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/product-disaggregation", createOrUpdateProductDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/product-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get Product Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all product disaggregations linked to a specific `indicatorId`.
+ *     tags: [PRODUCT DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter product disaggregations
+ *     responses:
+ *       200:
+ *         description: Product disaggregations retrieved successfully
+ *       404:
+ *         description: No product disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/product-disaggregations/:indicatorId", getProductDisaggregationByIndicatorController);
+
+/**
+ * @swagger
+ * /api/projectManagement/department-disaggregation:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update Department Disaggregations
+ *     description: >
+ *       Create multiple Department Disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `departmentDisaggregationId`.
+ *     tags: [DEPARTMENT DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     departmentDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     departmentName:
+ *                       type: string
+ *                     targetCount:
+ *                       type: number
+ *                     actualCount:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - departmentName: "HR"
+ *                   targetCount: 20
+ *                   actualCount: 18
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - departmentName: "Finance"
+ *                   targetCount: 15
+ *                   actualCount: 14
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: Department disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/department-disaggregations", createOrUpdateDepartmentDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/department-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get Department Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all department disaggregations linked to a specific `indicatorId`.
+ *     tags: [DEPARTMENT DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter department disaggregations
+ *     responses:
+ *       200:
+ *         description: Department disaggregations retrieved successfully
+ *       404:
+ *         description: No department disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/department-disaggregations/:indicatorId", getDepartmentDisaggregationByIndicatorController);
+
+/**
+ * @swagger
+ * /api/projectManagement/state-disaggregation:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update State Disaggregations
+ *     description: >
+ *       Create multiple State Disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `stateDisaggregationId`.
+ *     tags: [STATE DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     stateDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     stateName:
+ *                       type: string
+ *                     targetCount:
+ *                       type: number
+ *                     actualCount:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - stateName: "Lagos"
+ *                   targetCount: 500
+ *                   actualCount: 480
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - stateName: "Abuja"
+ *                   targetCount: 300
+ *                   actualCount: 290
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: State disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/state-disaggregation", createOrUpdateStateDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/state-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get State Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all state disaggregations linked to a specific `indicatorId`.
+ *     tags: [STATE DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter state disaggregations
+ *     responses:
+ *       200:
+ *         description: State disaggregations retrieved successfully
+ *       404:
+ *         description: No state disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/state-disaggregations/:indicatorId", createOrUpdateStateDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/lga-disaggregations:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update LGA Disaggregations
+ *     description: >
+ *       Create multiple LGA Disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `lgaDisaggregationId`.
+ *     tags: [LGA DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     lgaDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     lgaName:
+ *                       type: string
+ *                     targetCount:
+ *                       type: number
+ *                     actualCount:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - lgaName: "Ikeja"
+ *                   targetCount: 200
+ *                   actualCount: 180
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - lgaName: "Alimosho"
+ *                   targetCount: 150
+ *                   actualCount: 140
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: LGA disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/lga-disaggregation", createOrUpdateLGADisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/lga-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get LGA Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all LGA disaggregations linked to a specific `indicatorId`.
+ *     tags: [LGA DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter LGA disaggregations
+ *     responses:
+ *       200:
+ *         description: LGA disaggregations retrieved successfully
+ *       404:
+ *         description: No LGA disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/lga-disaggregations/:indicatorId", getLGADisaggregationByIndicatorController);
+
+/**
+ * @swagger
+ * /api/projectManagement/tenure-disaggregation:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update Tenure Disaggregations
+ *     description: >
+ *       Create multiple tenure disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `tenureDisaggregationId`.
+ *     tags: [TENURE DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     tenureDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     tenureName:
+ *                       type: string
+ *                     targetCount:
+ *                       type: number
+ *                     actualCount:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - tenureName: "Permanent"
+ *                   targetCount: 300
+ *                   actualCount: 280
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - tenureName: "Contract"
+ *                   targetCount: 150
+ *                   actualCount: 120
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: Tenure disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/tenure-disaggregation", createOrUpdateTenureDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/tenure-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get Tenure Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all tenure disaggregations linked to a specific `indicatorId`.
+ *     tags: [TENURE DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter tenure disaggregations
+ *     responses:
+ *       200:
+ *         description: Tenure disaggregations retrieved successfully
+ *       404:
+ *         description: No tenure disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/tenure-disaggregations/:indicatorId", getTenureDisaggregationByIndicatorController);
+
+/**
+ * @swagger
+ * /api/projectManagement/age-disaggregations:
+ *   post:
+ *     security:
+ *       - bearerAuth: []  # 👈 JWT token auth only for POST
+ *     summary: Create or Update Age Disaggregations
+ *     description: >
+ *       Create multiple age disaggregations (if `isCreate` is `true`)  
+ *       or update multiple existing ones (if `isCreate` is `false`).  
+ *       When updating, each item must include its `ageDisaggregationId`.
+ *     tags: [AGE DISAGGREGATION]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               isCreate:
+ *                 type: boolean
+ *                 description: Pass true to create, false to update
+ *               payload:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     ageDisaggregationId:
+ *                       type: string
+ *                       description: Required for update
+ *                     targetFrom:
+ *                       type: number
+ *                     targetTo:
+ *                       type: number
+ *                     actualFrom:
+ *                       type: number
+ *                     actualTo:
+ *                       type: number
+ *                     disaggregationId:
+ *                       type: string
+ *                     indicatorId:
+ *                       type: string
+ *             example:
+ *               isCreate: true
+ *               payload:
+ *                 - targetFrom: 0
+ *                   targetTo: 5
+ *                   actualFrom: 0
+ *                   actualTo: 4
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *                 - targetFrom: 6
+ *                   targetTo: 10
+ *                   actualFrom: 6
+ *                   actualTo: 9
+ *                   disaggregationId: "uuid-123"
+ *                   indicatorId: "uuid-456"
+ *     responses:
+ *       200:
+ *         description: Age disaggregations created or updated successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.post("/age-disaggregation", createOrUpdateAgeDisaggregationController);
+
+/**
+ * @swagger
+ * /api/projectManagement/age-disaggregations/{indicatorId}:
+ *   get:
+ *     summary: Get Age Disaggregations by Indicator ID
+ *     description: >
+ *       Retrieve all age disaggregations linked to a specific `indicatorId`.
+ *     tags: [AGE DISAGGREGATION]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator ID to filter age disaggregations
+ *     responses:
+ *       200:
+ *         description: Age disaggregations retrieved successfully
+ *       404:
+ *         description: No age disaggregations found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/age-disaggregations/:indicatorId", getAgeDisaggregationByIndicatorController);
+
+/**
+ * @swagger
+ * /api/projectManagement/indicator:
  *   post:
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
- *     summary: Create or Update an Impact Indicator
+ *     summary: Create or Update an Indicator
  *     description: >
- *       Create a new Impact Indicator (if `isCreate` is `true`) or update an existing one (if `isCreate` is `false`).
- *       When updating, you must provide the `impactIndicatorId`.
- *     tags: [IMPACT INDICATOR]
+ *       Create a new Indicator (if `isCreate` is `true`) or update an existing one (if `isCreate` is `false`).
+ *       When updating, you must provide the `indicatorId`.
+ *     tags: [INDICATOR]
  *     requestBody:
  *       required: true
  *       content:
@@ -493,101 +1158,104 @@ projectManagementRouter.delete("/impact/:id", deleteImpactController);
  *                 type: boolean
  *                 example: true
  *               data:
- *                 $ref: '#/components/schemas/IImpactIndicator'
+ *                 $ref: '#/components/schemas/IIndicator'
  *     responses:
  *       201:
- *         description: Impact Indicator created successfully
+ *         description: Indicator created successfully
  *       200:
- *         description: Impact Indicator updated successfully
+ *         description: Indicator updated successfully
  *       404:
- *         description: Impact Indicator not found
+ *         description: Indicator not found
  *       500:
  *         description: Server error
  */
-projectManagementRouter.post(
-  "/impact-indicator",
-  createOrUpdateImpactIndicatorController
-);
+projectManagementRouter.post("/indicator", createOrUpdateIndicatorController);
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicators:
+ * /api/projectManagement/indicators/{resultId}:
  *   get:
- *     summary: Get all Impact Indicators
- *     description: Retrieve a list of all impact indicators with their details.
- *     tags: [IMPACT INDICATOR]
+ *     summary: Get all Indicators by it's result
+ *     description: Retrieve a list of all indicators with their details.
+ *     tags: [INDICATOR]
+ *     parameters:
+ *       - in: path
+ *         name: resultId
+ *         required: true
+ *         description: The unique Result ID
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: List of impact indicators
+ *         description: List of indicators
  *       404:
- *         description: No impact indicators found
+ *         description: No indicators found
  *       500:
  *         description: Server error
  */
-projectManagementRouter.get("/impact-indicators", getAllImpactIndicators);
+projectManagementRouter.get("/indicators/:resultId", getAllIndicatorsByResult);
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicator/{id}:
+ * /api/projectManagement/indicator/{indicatorId}:
  *   get:
- *     summary: Get an Impact Indicator by ID
- *     description: Retrieve details of a specific impact indicator using its unique ID.
- *     tags: [IMPACT INDICATOR]
+ *     summary: Get an Indicator by it's ID
+ *     description: Retrieve details of a specific indicator using its unique ID.
+ *     tags: [INDICATOR]
+ *     parameters:
+ *       - in: path
+ *         name: indicatorId
+ *         required: true
+ *         description: The unique ID of the indicator
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Indicator retrieved successfully
+ *       404:
+ *         description: Indicator not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/indicator/:indicatorId", getIndicatorById);
+
+/**
+ * @swagger
+ * /api/projectManagement/indicator/{indicatorId}:
+ *   delete:
+ *     security:
+ *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
+ *     summary: Delete an Indicator
+ *     tags: [INDICATOR]
  *     parameters:
  *       - in: path
  *         name: id
- *         required: true
- *         description: The unique ID of the impact indicator
  *         schema:
  *           type: string
- *     responses:
- *       200:
- *         description: Impact Indicator retrieved successfully
- *       404:
- *         description: Impact Indicator not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/impact-indicator/:id", getImpactIndicatorById);
-
-/**
- * @swagger
- * /api/projectManagement/impact-indicators/project/{projectId}:
- *   get:
- *     summary: Get Impact Indicators by Project ID
- *     description: Retrieve all impact indicators linked to a specific project.
- *     tags: [IMPACT INDICATOR]
- *     parameters:
- *       - in: path
- *         name: projectId
  *         required: true
- *         description: The unique ID of the project
- *         schema:
- *           type: string
+ *         description: The ID of the Indicator to delete
  *     responses:
  *       200:
- *         description: List of impact indicators for the given project
- *       404:
- *         description: No impact indicators found for the project
+ *         description: Indicator deleted successfully
  *       500:
- *         description: Server error
+ *         description: Internal server error
  */
-projectManagementRouter.get(
-  "/impact-indicators/project/:projectId",
-  getImpactIndicatorsByProjectId
+projectManagementRouter.delete(
+  "/indicator/:indicatorId",
+  deleteImpactController
 );
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicator-report-format:
+ * /api/projectManagement/indicator_report:
  *   post:
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
- *     summary: Create or update an Impact Indicator Report Format
+ *     summary: Create or update an Indicator Report Format
  *     description: >
- *       Creates a new Impact Indicator Report Format if `isCreate` is true.
- *       Otherwise, updates an existing record if `impactIndicatorReportFormatId` is provided.
- *     tags: [IMPACT INDICATOR REPORT FORMAT]
+ *       Creates a new Indicator Report Format if `isCreate` is true.
+ *       Otherwise, updates an existing record if `IndicatorReportId` is provided.
+ *     tags: [INDICATOR REPORT]
  *     requestBody:
  *       required: true
  *       content:
@@ -596,30 +1264,37 @@ projectManagementRouter.get(
  *             type: object
  *             properties:
  *               payload:
- *                 $ref: '#/components/schemas/IImpactIndicatorReportFormat'
+ *                 $ref: '#/components/schemas/IIndicatorReport'
  *               isCreate:
  *                 type: boolean
  *                 example: true
  *     responses:
  *       200:
- *         description: Impact Indicator Report Format created/updated successfully
+ *         description: Indicator Report Format created/updated successfully
  *       400:
  *         description: Bad request (missing required fields)
  *       500:
  *         description: Internal server error
  */
 projectManagementRouter.post(
-  "/impact-indicator-report-format",
-  createOrUpdateImpactIndicatorReportFormat
+  "/indicator_report",
+  createOrUpdateIndicatorReport
 );
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicator-report-formats:
+ * /api/projectManagement/indicator-report/{resultId}:
  *   get:
- *     summary: Get all Impact Indicator Report Formats
- *     description: Fetches all Impact Indicator Report Formats from the database.
- *     tags: [IMPACT INDICATOR REPORT FORMAT]
+ *     summary: Get all Indicator Report Formats
+ *     description: Fetches all Indicator Report Formats from the database.
+ *     tags: [INDICATOR REPORT]
+ *     parameters:
+ *       - in: path
+ *         name: resultId
+ *         required: true
+ *         description: The unique Result ID
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Successfully retrieved list of Impact Indicator Report Formats
@@ -629,51 +1304,53 @@ projectManagementRouter.post(
  *         description: Internal server error
  */
 projectManagementRouter.get(
-  "/impact-indicator-report-formats",
-  getImpactIndicatorReportFormats
+  "/indicator-reports/:resultId",
+  getIndicatorReportsByResult
 );
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicator-report-format/{id}:
+ * /api/projectManagement/indicator-report/{id}:
  *   get:
- *     summary: Get a single Impact Indicator Report Format by ID
- *     description: Fetches a single Impact Indicator Report Format by its ID.
- *     tags: [IMPACT INDICATOR REPORT FORMAT]
+ *     summary: Get a single Indicator Report Format by ID
+ *     description: Fetches a single Indicator Report Format by its ID.
+ *     tags: [INDICATOR REPORT]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Impact Indicator Report Format ID
+ *         description: Indicator Report Format ID
  *     responses:
  *       200:
- *         description: Successfully retrieved Impact Indicator Report Format
+ *         description: Successfully retrieved Indicator Report Format
  *       404:
  *         description: Record not found
  *       500:
  *         description: Internal server error
  */
 projectManagementRouter.get(
-  "/impact-indicator-report-format/:id",
-  getImpactIndicatorReportFormat
+  "/indicator-report/:id",
+  getImpactIndicatorReportById
 );
 
 /**
  * @swagger
- * /api/projectManagement/impact-indicator-report-format/{id}:
+ * /api/projectManagement/indicator-report/{id}:
  *   delete:
- *     summary: Delete an Impact Indicator Report Format
- *     description: Deletes an Impact Indicator Report Format by its ID.
- *     tags: [IMPACT INDICATOR REPORT FORMAT]
+ *     security:
+ *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
+ *     summary: Delete an Indicator Report Format
+ *     description: Deletes an Indicator Report Format by its ID.
+ *     tags: [INDICATOR REPORT]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Impact Indicator Report Format ID
+ *         description: Indicator Report Format ID
  *     responses:
  *       200:
  *         description: Successfully deleted
@@ -682,10 +1359,7 @@ projectManagementRouter.get(
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.delete(
-  "/impact-indicator-report-format/:id",
-  removeImpactIndicatorReportFormat
-);
+projectManagementRouter.delete("/indicator-report/:id", removeIndicatorReport);
 
 /**
  * @swagger
@@ -758,6 +1432,8 @@ projectManagementRouter.get("/outcome/:id", getOutcomeByIdController);
  *                     type: string
  *                   projectId:
  *                     type: string
+ *                   resultTypeId:
+ *                     type: string
  *     responses:
  *       200:
  *         description: Outcome created/updated successfully
@@ -794,255 +1470,6 @@ projectManagementRouter.post("/outcome", saveOutcomeController);
  *         description: Server error
  */
 projectManagementRouter.delete("/outcome/:id", deleteOutcomeController);
-
-/**
- * @swagger
- * /api/projectManagement/outcomeIndicator:
- *   post:
- *     summary: Create or update an OutcomeIndicator
- *     tags: [OUTCOME_INDICATOR]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass `true` to create, `false` to update
- *               payload:
- *                 $ref: '#/components/schemas/OutcomeIndicator'
- *     responses:
- *       200:
- *         description: OutcomeIndicator created/updated successfully
- *       400:
- *         description: Invalid request
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post(
-  "/outcomeIndicator",
-  createOrUpdateOutcomeIndicator
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcomeIndicators:
- *   get:
- *     summary: Get all OutcomeIndicators
- *     tags: [OUTCOME_INDICATOR]
- *     responses:
- *       200:
- *         description: List of OutcomeIndicators
- *       404:
- *         description: No OutcomeIndicators found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/outcomeIndicators", getOutcomeIndicators);
-
-/**
- * @swagger
- * /api/projectManagement/outcomeIndicator/{outcomeIndicatorId}:
- *   get:
- *     summary: Get an OutcomeIndicator by ID
- *     tags: [OUTCOME_INDICATOR]
- *     parameters:
- *       - in: path
- *         name: outcomeIndicatorId
- *         schema:
- *           type: string
- *         required: true
- *         description: OutcomeIndicator ID
- *     responses:
- *       200:
- *         description: OutcomeIndicator fetched successfully
- *       404:
- *         description: OutcomeIndicator not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get(
-  "/outcomeIndicator/:outcomeIndicatorId",
-  getOutcomeIndicatorById
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcomeIndicator/{outcomeIndicatorId}:
- *   delete:
- *     summary: Delete an OutcomeIndicator by ID
- *     tags: [OUTCOME_INDICATOR]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: outcomeIndicatorId
- *         schema:
- *           type: string
- *         required: true
- *         description: OutcomeIndicator ID
- *     responses:
- *       200:
- *         description: OutcomeIndicator deleted successfully
- *       404:
- *         description: OutcomeIndicator not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.delete(
-  "/outcomeIndicator/:outcomeIndicatorId",
-  removeOutcomeIndicator
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcome-indicator-report-formats:
- *   get:
- *     summary: Get all OutcomeIndicatorReportFormats
- *     tags: [OUTCOME INDICATOR REPORT FORMAT]
- *     responses:
- *       200:
- *         description: List of all OutcomeIndicatorReportFormats
- *       404:
- *         description: No OutcomeIndicatorReportFormats found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get(
-  "/outcome-indicator-report-formats",
-  getOutcomeIndicatorReportFormats
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcome-indicator-report-format/{id}:
- *   get:
- *     summary: Get OutcomeIndicatorReportFormat by ID
- *     tags: [OUTCOME INDICATOR REPORT FORMAT]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the OutcomeIndicatorReportFormat
- *     responses:
- *       200:
- *         description: OutcomeIndicatorReportFormat fetched successfully
- *       404:
- *         description: OutcomeIndicatorReportFormat not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get(
-  "/outcome-indicator-report-format/:outcomeIndicatorReportFormatId",
-  getOutcomeIndicatorReportFormatByIdController
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcome-indicator-report-format:
- *   post:
- *     summary: Create or Update an OutcomeIndicatorReportFormat
- *     description: |
- *       This endpoint is used to either create a new OutcomeIndicatorReportFormat or update an existing one.
- *
- *       - When **isCreate = true**, a new OutcomeIndicatorReportFormat record will be created.
- *       - When **isCreate = false**, the existing OutcomeIndicatorReportFormat will be updated with the provided payload.
- *     tags: [OUTCOME INDICATOR REPORT FORMAT]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - isCreate
- *               - payload
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 example: true
- *                 description: Flag to determine whether to create (true) or update (false).
- *               payload:
- *                 type: object
- *                 description: OutcomeIndicatorReportFormat payload
- *                 properties:
- *                   indicatorSource:
- *                     type: string
- *                   thematicAreasOrPillar:
- *                     type: string
- *                   indicatorStatement:
- *                     type: string
- *                   responsiblePersons:
- *                     type: string
- *                   disaggregationType:
- *                     type: string
- *                   linkKpiToSdnOrgKpi:
- *                     type: string
- *                   definition:
- *                     type: string
- *                   specificArea:
- *                     type: string
- *                   unitOfMeasure:
- *                     type: string
- *                   itemInMeasure:
- *                     type: string
- *                   actualDate:
- *                     type: string
- *                     format: date-time
- *                   cumulativeActual:
- *                     type: string
- *                   actualNarrative:
- *                     type: string
- *                   attachmentUrl:
- *                     type: string
- *                   outcomeIndicatorId:
- *                     type: string
- *     responses:
- *       200:
- *         description: OutcomeIndicatorReportFormat created or updated successfully
- *       404:
- *         description: OutcomeIndicatorReportFormat not found (when updating)
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post(
-  "/outcome-indicator-report-format",
-  createOrUpdateOutcomeIndicatorReportFormat
-);
-
-/**
- * @swagger
- * /api/projectManagement/outcome-indicator-report-format/{id}:
- *   delete:
- *     summary: Delete an OutcomeIndicatorReportFormat
- *     tags: [OUTCOME INDICATOR REPORT FORMAT]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the OutcomeIndicatorReportFormat
- *     responses:
- *       200:
- *         description: OutcomeIndicatorReportFormat deleted successfully
- *       500:
- *         description: Server error
- */
-projectManagementRouter.delete(
-  "/outcome-indicator-report-format/:outcomeIndicatorReportFormatId",
-  removeOutcomeIndicatorReportFormat
-);
 
 /**
  * @swagger
@@ -1150,208 +1577,6 @@ projectManagementRouter.get("/output/:id", getOutputByIdController);
  */
 projectManagementRouter.delete("/output/:id", deleteOutputController);
 
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator:
- *   post:
- *     summary: Create or Update an OutputIndicator
- *     description: |
- *       This endpoint handles both **create** and **update** operations for output indicators.  
- *       - If `isCreate` is **true**, a new OutputIndicator is created.  
- *       - If `isCreate` is **false**, the existing OutputIndicator is updated.  
- *       The `payload` object contains the OutputIndicator details.
- *     security:
- *       - bearerAuth: []
- *     tags: [OUTPUT INDICATOR]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 example: true
- *               payload:
- *                 $ref: '#/components/schemas/OutputIndicator'
- *     responses:
- *       200:
- *         description: OutputIndicator created or updated successfully
- *       400:
- *         description: Invalid request payload
- *       401:
- *         description: Unauthorized (missing or invalid token)
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/output-indicator", createOrUpdateOutputIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicators:
- *   get:
- *     summary: Get all OutputIndicators
- *     description: Retrieve all output indicators from the view.
- *     tags: [OUTPUT INDICATOR]
- *     responses:
- *       200:
- *         description: A list of OutputIndicators
- *       404:
- *         description: No OutputIndicators found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/output-indicators", getAllOutputIndicatorsController);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator/{id}:
- *   get:
- *     summary: Get OutputIndicator by ID
- *     description: Retrieve a specific OutputIndicator by its ID.
- *     tags: [OUTPUT INDICATOR]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The OutputIndicator ID
- *     responses:
- *       200:
- *         description: OutputIndicator fetched successfully
- *       404:
- *         description: OutputIndicator not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/output-indicator/:id", getOutputIndicatorByIdController);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator/{id}:
- *   delete:
- *     summary: Delete OutputIndicator
- *     description: Delete an OutputIndicator by its ID.
- *     security:
- *       - bearerAuth: []
- *     tags: [OUTPUT INDICATOR]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The OutputIndicator ID
- *     responses:
- *       200:
- *         description: OutputIndicator deleted successfully
- *       401:
- *         description: Unauthorized (missing or invalid token)
- *       404:
- *         description: OutputIndicator not found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.delete("/output-indicator/:id", deleteOutputIndicatorController);
-
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator-report-format:
- *   post:
- *     summary: Create or Update an Output Indicator Report Format
- *     description: |
- *       Create a new Output Indicator Report Format when `isCreate` is true.
- *       Update an existing Output Indicator Report Format when `isCreate` is false.
- *     tags: [OUTPUT INDICATOR REPORT FORMAT]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: true to create, false to update
- *               payload:
- *                 $ref: '#/components/schemas/OutputIndicatorReportFormat'
- *     responses:
- *       200:
- *         description: Output Indicator Report Format created/updated successfully
- *       500:
- *         description: Internal server error
- */
-projectManagementRouter.post("/output-indicator-report-format", createOutputIndicatorReportFormat);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator-report-formats:
- *   get:
- *     summary: Get all Output Indicator Report Formats
- *     tags: [OUTPUT INDICATOR REPORT FORMAT]
- *     responses:
- *       200:
- *         description: List of Output Indicator Report Formats
- *       404:
- *         description: No Output Indicator Report Formats found
- *       500:
- *         description: Internal server error
- */
-projectManagementRouter.get("/output-indicator-report-formats", getAllOutputIndicatorReportFormatController);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator-report-format/{id}:
- *   get:
- *     summary: Get Output Indicator Report Format by ID
- *     tags: [OUTPUT INDICATOR REPORT FORMAT]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Output Indicator Report Format ID
- *     responses:
- *       200:
- *         description: Output Indicator Report Format details
- *       404:
- *         description: Output Indicator Report Format not found
- *       500:
- *         description: Internal server error
- */
-projectManagementRouter.get("/output-indicator-report-format/:id", getOutputIndicatorReportFormatByIdController);
-
-/**
- * @swagger
- * /api/projectManagement/output-indicator-report-format/{id}:
- *   delete:
- *     summary: Delete an Output Indicator Report Format
- *     tags: [OUTPUT INDICATOR REPORT FORMAT]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Output Indicator Report Format ID
- *     responses:
- *       200:
- *         description: Output Indicator Report Format deleted successfully
- *       500:
- *         description: Internal server error
- */
-projectManagementRouter.delete("/output-indicator-report-format/:id", deleteOutputIndicatorReportFormatController);
-
-
 /**
  * @swagger
  * /api/projectManagement/activity:
@@ -1445,16 +1670,15 @@ projectManagementRouter.get("/activity/:id", getActivityByIdController);
  */
 projectManagementRouter.delete("/activity/:id", deleteActivityController);
 
-
 /**
  * @swagger
  * /api/projectManagement/activity-report:
  *   post:
  *     summary: Create or Update an ActivityReport
  *     description: >
- *       This endpoint allows you to **create or update an ActivityReport**.  
- *       - If `isCreate` is set to `true`, a new ActivityReport will be created.  
- *       - If `isCreate` is set to `false`, the existing ActivityReport will be updated (requires `activityReportId`).  
+ *       This endpoint allows you to **create or update an ActivityReport**.
+ *       - If `isCreate` is set to `true`, a new ActivityReport will be created.
+ *       - If `isCreate` is set to `false`, the existing ActivityReport will be updated (requires `activityReportId`).
  *     tags: [ACTIVITY REPORTS]
  *     security:
  *       - bearerAuth: []
@@ -1476,7 +1700,10 @@ projectManagementRouter.delete("/activity/:id", deleteActivityController);
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.post("/activity-report", createOrUpdateActivityReportController);
+projectManagementRouter.post(
+  "/activity-report",
+  createOrUpdateActivityReportController
+);
 
 /**
  * @swagger
@@ -1490,7 +1717,10 @@ projectManagementRouter.post("/activity-report", createOrUpdateActivityReportCon
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.get("/activity-reports", getAllActivityReportsController);
+projectManagementRouter.get(
+  "/activity-reports",
+  getAllActivityReportsController
+);
 
 /**
  * @swagger
@@ -1513,7 +1743,10 @@ projectManagementRouter.get("/activity-reports", getAllActivityReportsController
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.get("/activity-report/:id", getActivityReportByIdController);
+projectManagementRouter.get(
+  "/activity-report/:id",
+  getActivityReportByIdController
+);
 
 /**
  * @swagger
@@ -1536,8 +1769,10 @@ projectManagementRouter.get("/activity-report/:id", getActivityReportByIdControl
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.delete("/activity-report/:id", deleteActivityReportController);
-
+projectManagementRouter.delete(
+  "/activity-report/:id",
+  deleteActivityReportController
+);
 
 /**
  * @swagger
@@ -1570,7 +1805,10 @@ projectManagementRouter.delete("/activity-report/:id", deleteActivityReportContr
  *       500:
  *         description: Server error
  */
-projectManagementRouter.post("/logical_framework", createOrUpdateLogicalFrameworkController);
+projectManagementRouter.post(
+  "/logical_framework",
+  createOrUpdateLogicalFrameworkController
+);
 
 /**
  * @swagger
@@ -1590,7 +1828,10 @@ projectManagementRouter.post("/logical_framework", createOrUpdateLogicalFramewor
  *       500:
  *         description: Server error
  */
-projectManagementRouter.get("/logical_frameworks", getAllLogicalFrameworksController);
+projectManagementRouter.get(
+  "/logical_frameworks",
+  getAllLogicalFrameworksController
+);
 
 /**
  * @swagger
@@ -1617,7 +1858,10 @@ projectManagementRouter.get("/logical_frameworks", getAllLogicalFrameworksContro
  *       500:
  *         description: Server error
  */
-projectManagementRouter.get("/logical_framework/:id", getLogicalFrameworkByIdController);
+projectManagementRouter.get(
+  "/logical_framework/:id",
+  getLogicalFrameworkByIdController
+);
 
 /**
  * @swagger
@@ -1642,8 +1886,9 @@ projectManagementRouter.get("/logical_framework/:id", getLogicalFrameworkByIdCon
  *       500:
  *         description: Server error
  */
-projectManagementRouter.delete("/logical_framework/:id", deleteLogicalFrameworkController);
-
-
+projectManagementRouter.delete(
+  "/logical_framework/:id",
+  deleteLogicalFrameworkController
+);
 
 export default projectManagementRouter;

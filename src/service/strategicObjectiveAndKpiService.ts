@@ -1,8 +1,15 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { IKpi, IStrategicObjective, IStrategicObjectiveView } from "../interface/strategicObjectiveAndKpiInterface";
+import {
+  IKpi,
+  IStrategicObjective,
+  IStrategicObjectiveView,
+} from "../interface/strategicObjectiveAndKpiInterface";
 const prisma = new PrismaClient();
 
-export const saveStrategicObjective = async (data: IStrategicObjective, isCreate: boolean) => {
+export const saveStrategicObjective = async (
+  data: IStrategicObjective,
+  isCreate: boolean
+) => {
   if (isCreate) {
     return await prisma.strategicObjective.create({
       data: {
@@ -26,7 +33,9 @@ export const saveStrategicObjective = async (data: IStrategicObjective, isCreate
   });
 };
 
-export const deleteStrategicObjective = async (strategicObjectiveId: string) => {
+export const deleteStrategicObjective = async (
+  strategicObjectiveId: string
+) => {
   return await prisma.$transaction(async (tx) => {
     // Step 1: Delete all related KPIs
     await tx.kpi.deleteMany({
@@ -41,10 +50,11 @@ export const deleteStrategicObjective = async (strategicObjectiveId: string) => 
 };
 
 export const getAllStrategicObjectives = async () => {
-  const strategicObjectivesWithCount:Array<IStrategicObjectiveView> = await prisma.$queryRaw`
+  const strategicObjectivesWithCount: Array<IStrategicObjectiveView> =
+    await prisma.$queryRaw`
   SELECT * FROM strategic_objective_view
 `;
-  return strategicObjectivesWithCount
+  return strategicObjectivesWithCount;
 };
 
 export const getStrategicObjectiveById = async (id: string) => {
@@ -52,7 +62,6 @@ export const getStrategicObjectiveById = async (id: string) => {
     where: { strategicObjectiveId: id },
   });
 };
-
 
 export const saveKpi = async (data: IKpi, isCreate: boolean) => {
   if (isCreate) {
@@ -100,4 +109,10 @@ export const getAllKpis = async () => {
 
 export const getKpiById = async (kpiId: string) => {
   return prisma.kpi.findUnique({ where: { kpiId } });
+};
+
+export const getKpiByStrategicObjectiveId = async (
+  strategicObjectiveId: string
+) => {
+  return prisma.kpi.findMany({ where: { strategicObjectiveId } });
 };

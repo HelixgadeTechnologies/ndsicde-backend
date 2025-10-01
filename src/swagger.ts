@@ -11,8 +11,8 @@ const options: swaggerJSDoc.Options = {
       version: "1.0.0",
       description: "API documentation for NDSICDE.",
     },
-    servers: [{ url: "https://ndsicde-backend-1.onrender.com/" }],
-    // servers: [{ url: "http://localhost:8000/" }],
+    // servers: [{ url: "https://ndsicde-backend-1.onrender.com/" }],
+    servers: [{ url: "http://localhost:8000/" }],
     tags: [
       { name: "Auth", description: "Authentication Endpoints" },
       { name: "Upload", description: "Upload Endpoints" },
@@ -40,10 +40,10 @@ const options: swaggerJSDoc.Options = {
       },
 
       schemas: {
-        IImpactIndicator: {
+        IIndicator: {
           type: "object",
           properties: {
-            impactIndicatorId: {
+            indicatorId: {
               type: "string",
               example: "uuid-1234-5678",
             },
@@ -79,9 +79,9 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "Children aged 1-5 years",
             },
-            disaggregation: {
+            disaggregationId: {
               type: "string",
-              example: "By gender, by age group",
+              example: "uuid-1234-5678",
             },
             baseLineDate: {
               type: "string",
@@ -117,16 +117,20 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "Dr. John Doe, Jimmy smit Johnson",
             },
-            impactId: {
+            result: {
+              type: "string",
+              example: "uuid-5678-1234",
+            },
+            resultTypeId: {
               type: "string",
               example: "uuid-5678-1234",
             },
           },
         },
-        IImpactIndicatorReportFormat: {
+        IIndicatorReport: {
           type: "object",
           properties: {
-            impactIndicatorReportFormatId: {
+            indicatorReportId: {
               type: "string",
               example: "uuid-1234",
             },
@@ -146,29 +150,9 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "John Doe",
             },
-            disaggregationType: {
+            disaggregationId: {
               type: "string",
-              example: "Gender",
-            },
-            linkKpiToSdnOrgKpi: {
-              type: "string",
-              example: "KPI-002",
-            },
-            definition: {
-              type: "string",
-              example: "Number of students enrolled in school",
-            },
-            specificArea: {
-              type: "string",
-              example: "Rural areas",
-            },
-            unitOfMeasure: {
-              type: "string",
-              example: "Percentage",
-            },
-            itemInMeasure: {
-              type: "string",
-              example: "Students",
+               example: "uuid-1234-5678",
             },
             actualDate: {
               type: "string",
@@ -186,74 +170,17 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "https://example.com/report.pdf",
             },
-            impactIndicatorId: {
+            status: {
+              type: "string",
+              example: "PENDING, APPROVE, DECLINE",
+            },
+            indicatorId: {
               type: "string",
               example: "impact-uuid-5678",
             },
-          },
-        },
-        OutcomeIndicator: {
-          type: "object",
-          properties: {
-            outcomeIndicatorId: {
+            resultTypeId: {
               type: "string",
-              description: "Required if updating",
-            },
-            indicatorSource: {
-              type: "string",
-            },
-            thematicAreasOrPillar: {
-              type: "string",
-            },
-            statement: {
-              type: "string",
-            },
-            linkKpiToSdnOrgKpi: {
-              type: "string",
-            },
-            definition: {
-              type: "string",
-            },
-            specificArea: {
-              type: "string",
-            },
-            unitOfMeasure: {
-              type: "string",
-            },
-            itemInMeasure: {
-              type: "string",
-            },
-            disaggregation: {
-              type: "string",
-            },
-            baseLineDate: {
-              type: "string",
-              format: "date-time",
-            },
-            cumulativeValue: {
-              type: "string",
-            },
-            baselineNarrative: {
-              type: "string",
-            },
-            targetDate: {
-              type: "string",
-              format: "date-time",
-            },
-            cumulativeTarget: {
-              type: "string",
-            },
-            targetNarrative: {
-              type: "string",
-            },
-            targetType: {
-              type: "string",
-            },
-            responsiblePersons: {
-              type: "string",
-            },
-            outcomeId: {
-              type: "string",
+              example: "impact-uuid-5678",
             },
           },
         },
@@ -295,6 +222,10 @@ const options: swaggerJSDoc.Options = {
               example: "project-uuid-5678",
               description: "Related project ID (optional)",
             },
+            resultTypeId: {
+              type: "string",
+              example: "impact-uuid-5678",
+            },
           },
           example: {
             outputId: "6f5c477c-f27f-11ef-aadb-204747b55a5a",
@@ -303,154 +234,6 @@ const options: swaggerJSDoc.Options = {
             thematicAreas: "Education",
             responsiblePerson: "Jane Doe",
             projectId: "project-uuid-5678",
-          },
-        },
-        OutputIndicator: {
-          type: "object",
-          properties: {
-            outputIndicatorId: {
-              type: "string",
-              format: "uuid",
-              description: "Unique identifier of the OutputIndicator",
-            },
-            indicatorSource: {
-              type: "string",
-              nullable: true,
-            },
-            thematicAreasOrPillar: {
-              type: "string",
-              nullable: true,
-            },
-            statement: {
-              type: "string",
-              nullable: true,
-            },
-            linkKpiToSdnOrgKpi: {
-              type: "string",
-              nullable: true,
-            },
-            definition: {
-              type: "string",
-              nullable: true,
-            },
-            specificArea: {
-              type: "string",
-              nullable: true,
-            },
-            unitOfMeasure: {
-              type: "string",
-              nullable: true,
-            },
-            itemInMeasure: {
-              type: "string",
-              nullable: true,
-            },
-            disaggregation: {
-              type: "string",
-              nullable: true,
-            },
-            baseLineDate: {
-              type: "string",
-              format: "date-time",
-              nullable: true,
-            },
-            cumulativeValue: {
-              type: "string",
-              nullable: true,
-            },
-            baselineNarrative: {
-              type: "string",
-              nullable: true,
-            },
-            targetDate: {
-              type: "string",
-              format: "date-time",
-              nullable: true,
-            },
-            cumulativeTarget: {
-              type: "string",
-              nullable: true,
-            },
-            targetNarrative: {
-              type: "string",
-              nullable: true,
-            },
-            targetType: {
-              type: "string",
-              nullable: true,
-            },
-            responsiblePersons: {
-              type: "string",
-              nullable: true,
-            },
-            // Foreign key to Output
-            outputId: {
-              type: "string",
-              format: "uuid",
-              nullable: true,
-              description: "Foreign key referencing Output",
-            },
-          },
-        },
-        OutputIndicatorReportFormat: {
-          type: "object",
-          properties: {
-            outputIndicatorReportFormatId: {
-              type: "string",
-              format: "uuid",
-              description: "Unique ID of the Output Indicator Report Format",
-            },
-            indicatorSource: {
-              type: "string",
-              nullable: true,
-              description: "Source of the indicator",
-            },
-            thematicAreasOrPillar: {
-              type: "string",
-              nullable: true,
-              description: "Thematic area or pillar",
-            },
-            indicatorStatement: {
-              type: "string",
-              nullable: true,
-              description: "Indicator statement",
-            },
-            responsiblePersons: {
-              type: "string",
-              nullable: true,
-              description: "Persons responsible for the indicator",
-            },
-            disaggregationType: {
-              type: "string",
-              nullable: true,
-              description: "Type of disaggregation",
-            },
-            actualDate: {
-              type: "string",
-              format: "date-time",
-              nullable: true,
-              description: "Actual date for the indicator",
-            },
-            cumulativeActual: {
-              type: "string",
-              nullable: true,
-              description: "Cumulative actual value",
-            },
-            actualNarrative: {
-              type: "string",
-              nullable: true,
-              description: "Narrative for the actuals",
-            },
-            attachmentUrl: {
-              type: "string",
-              nullable: true,
-              description: "URL of any attachment",
-            },
-            outputIndicatorId: {
-              type: "string",
-              nullable: true,
-              description: "Related Output Indicator ID",
-            },
           },
         },
         Activity: {

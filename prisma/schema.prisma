@@ -157,212 +157,247 @@ model Partner {
   @@map("partner")
 }
 
+model ResultType {
+  resultTypeId    String            @id @default(uuid())
+  resultName      String
+  impact          Impact[]
+  outcome         Outcome[]
+  output          Output[]
+  Indicator       Indicator[]
+  IndicatorReport IndicatorReport[]
+
+  @@map("result_type")
+}
+
 // IMPACT RELATION
 
 model Impact {
-  impactId          String            @id @default(uuid())
+  impactId          String      @id @default(uuid())
   statement         String
   thematicArea      String
   responsiblePerson String
-  project           Project?          @relation(fields: [projectId], references: [projectId])
+  project           Project?    @relation(fields: [projectId], references: [projectId])
   projectId         String?
-  createAt          DateTime?         @default(now())
-  updateAt          DateTime?         @default(now())
-  impactIndicator   ImpactIndicator[]
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
   outcome           Outcome[]
 
   @@map("impact")
 }
 
-model ImpactIndicator {
-  impactIndicatorId           String                        @id @default(uuid())
-  indicatorSource             String?
-  thematicAreasOrPillar       String?
-  statement                   String?
-  linkKpiToSdnOrgKpi          String?
-  definition                  String?
-  specificArea                String?
-  unitOfMeasure               String?
-  itemInMeasure               String?
-  disaggregation              String?
-  baseLineDate                DateTime?
-  cumulativeValue             String?
-  baselineNarrative           String?
-  targetDate                  DateTime?
-  cumulativeTarget            String?
-  targetNarrative             String?
-  targetType                  String?
-  responsiblePersons          String?
-  createAt                    DateTime?                     @default(now())
-  updateAt                    DateTime?                     @default(now())
-  impact                      Impact?                       @relation(fields: [impactId], references: [impactId])
-  impactId                    String?
-  impactIndicatorReportFormat ImpactIndicatorReportFormat[]
-
-  @@map("impactindicator")
-}
-
-model ImpactIndicatorReportFormat {
-  impactIndicatorReportFormatId String           @id @default(uuid())
-  indicatorSource               String?
-  thematicAreasOrPillar         String?
-  indicatorStatement            String?
-  responsiblePersons            String?
-  disaggregationType            String?
-  linkKpiToSdnOrgKpi            String?
-  definition                    String?
-  specificArea                  String?
-  unitOfMeasure                 String?
-  itemInMeasure                 String?
-  actualDate                    DateTime?
-  cumulativeActual              String?
-  actualNarrative               String?
-  attachmentUrl                 String?
-  createAt                      DateTime?        @default(now())
-  updateAt                      DateTime?        @default(now())
-  impactIndicator               ImpactIndicator? @relation(fields: [impactIndicatorId], references: [impactIndicatorId])
-  impactIndicatorId             String?
-
-  @@map("impactindicatorreportformat")
-}
-
 // OUTCOME RELATION
 
 model Outcome {
-  outcomeId         String             @id @default(uuid())
+  outcomeId         String      @id @default(uuid())
   outcomeStatement  String
   outcomeType       String
-  impact            Impact?            @relation(fields: [impactId], references: [impactId])
+  impact            Impact?     @relation(fields: [impactId], references: [impactId])
   impactId          String?
   thematicAreas     String?
   responsiblePerson String
-  project           Project?           @relation(fields: [projectId], references: [projectId])
+  project           Project?    @relation(fields: [projectId], references: [projectId])
   projectId         String?
-  createAt          DateTime?          @default(now())
-  updateAt          DateTime?          @default(now())
-  outcomeIndicator  OutcomeIndicator[]
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
   output            Output[]
 
   @@map("outcome")
 }
 
-model OutcomeIndicator {
-  outcomeIndicatorId           String                         @id @default(uuid())
-  indicatorSource              String?
-  thematicAreasOrPillar        String?
-  statement                    String?
-  linkKpiToSdnOrgKpi           String?
-  definition                   String?
-  specificArea                 String?
-  unitOfMeasure                String?
-  itemInMeasure                String?
-  disaggregation               String?
-  baseLineDate                 DateTime?
-  cumulativeValue              String?
-  baselineNarrative            String?
-  targetDate                   DateTime?
-  cumulativeTarget             String?
-  targetNarrative              String?
-  targetType                   String?
-  responsiblePersons           String?
-  createAt                     DateTime?                      @default(now())
-  updateAt                     DateTime?                      @default(now())
-  outcome                      Outcome?                       @relation(fields: [outcomeId], references: [outcomeId])
-  outcomeId                    String?
-  outcomeIndicatorReportFormat OutcomeIndicatorReportFormat[]
-
-  @@map("outcomeindicator")
-}
-
-model OutcomeIndicatorReportFormat {
-  outcomeIndicatorReportFormatId String            @id @default(uuid())
-  indicatorSource                String?
-  thematicAreasOrPillar          String?
-  indicatorStatement             String?
-  responsiblePersons             String?
-  disaggregationType             String?
-  linkKpiToSdnOrgKpi             String?
-  definition                     String?
-  specificArea                   String?
-  unitOfMeasure                  String?
-  itemInMeasure                  String?
-  actualDate                     DateTime?
-  cumulativeActual               String?
-  actualNarrative                String?
-  attachmentUrl                  String?
-  createAt                       DateTime?         @default(now())
-  updateAt                       DateTime?         @default(now())
-  outcomeIndicator               OutcomeIndicator? @relation(fields: [outcomeIndicatorId], references: [outcomeIndicatorId])
-  outcomeIndicatorId             String?
-
-  @@map("outcomeindicatorreportformat")
-}
-
 // OUTPUT Relation
 
 model Output {
-  outputId          String            @id @default(uuid())
+  outputId          String      @id @default(uuid())
   outputStatement   String
-  outcome           Outcome?          @relation(fields: [outcomeId], references: [outcomeId])
+  outcome           Outcome?    @relation(fields: [outcomeId], references: [outcomeId])
   outcomeId         String?
   thematicAreas     String?
   responsiblePerson String
-  project           Project?          @relation(fields: [projectId], references: [projectId])
+  project           Project?    @relation(fields: [projectId], references: [projectId])
   projectId         String?
-  createAt          DateTime?         @default(now())
-  updateAt          DateTime?         @default(now())
-  outputIndicator   OutputIndicator[]
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
   activity          Activity[]
   request           Request[]
 
   @@map("output")
 }
 
-model OutputIndicator {
-  outputIndicatorId           String                        @id @default(uuid())
-  indicatorSource             String?
-  thematicAreasOrPillar       String?
-  statement                   String?
-  linkKpiToSdnOrgKpi          String?
-  definition                  String?
-  specificArea                String?
-  unitOfMeasure               String?
-  itemInMeasure               String?
-  disaggregation              String?
-  baseLineDate                DateTime?
-  cumulativeValue             String?
-  baselineNarrative           String?
-  targetDate                  DateTime?
-  cumulativeTarget            String?
-  targetNarrative             String?
-  targetType                  String?
-  responsiblePersons          String?
-  createAt                    DateTime?                     @default(now())
-  updateAt                    DateTime?                     @default(now())
-  Output                      Output?                       @relation(fields: [outputId], references: [outputId])
-  outputId                    String?
-  outputIndicatorReportFormat OutputIndicatorReportFormat[]
+model Disaggregation {
+  disaggregationId         String                     @id @default(uuid())
+  disaggregationName       String
+  GenderDisaggregation     GenderDisaggregation[]
+  ProductDisaggregation    ProductDisaggregation[]
+  DepartmentDisaggregation DepartmentDisaggregation[]
+  StateDisaggregation      StateDisaggregation[]
+  TenureDisaggregation     TenureDisaggregation[]
+  LgaDisaggregation        LgaDisaggregation[]
+  AgeDisaggregation        AgeDisaggregation[]
+  Indicator                Indicator[]
+  IndicatorReport          IndicatorReport[]
 
-  @@map("outputindicator")
+  @@map("disaggregation")
 }
 
-model OutputIndicatorReportFormat {
-  outputIndicatorReportFormatId String           @id @default(uuid())
-  indicatorSource               String?
-  thematicAreasOrPillar         String?
-  indicatorStatement            String?
-  responsiblePersons            String?
-  disaggregationType            String?
-  actualDate                    DateTime?
-  cumulativeActual              String?
-  actualNarrative               String?
-  attachmentUrl                 String?
-  createAt                      DateTime?        @default(now())
-  updateAt                      DateTime?        @default(now())
-  outputIndicator               OutputIndicator? @relation(fields: [outputIndicatorId], references: [outputIndicatorId])
-  outputIndicatorId             String?
+model GenderDisaggregation {
+  genderDisaggregationId String          @id @default(uuid())
+  targetMale             Int?
+  targetFemale           Int?
+  actualMale             Int?
+  actualFemale           Int?
+  Disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId       String?
+  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId            String?
 
-  @@map("outputindicatorreportformat")
+  @@map("gender_disaggregation")
+}
+
+model ProductDisaggregation {
+  productDisaggregationId String          @id @default(uuid())
+  productName             String?
+  targetCount             Int?
+  actualCount             Int?
+  Disaggregation          Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId        String?
+  indicator               Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId             String?
+
+  @@map("product_disaggregation")
+}
+
+model DepartmentDisaggregation {
+  departmentDisaggregationId String          @id @default(uuid())
+  departmentName             String?
+  targetCount                Int?
+  actualCount                Int?
+  Disaggregation             Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId           String?
+  indicator                  Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId                String?
+
+  @@map("department_disaggregation")
+}
+
+model StateDisaggregation {
+  stateDisaggregationId String          @id @default(uuid())
+  stateName             String?
+  targetCount           Int?
+  actualCount           Int?
+  Disaggregation        Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId      String?
+  indicator             Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId           String?
+
+  @@map("state_disaggregation")
+}
+
+model LgaDisaggregation {
+  lgaDisaggregationId String          @id @default(uuid())
+  lgaName             String?
+  targetCount         Int?
+  actualCount         Int?
+  Disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId    String?
+  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId         String?
+
+  @@map("lga_disaggregation")
+}
+
+model TenureDisaggregation {
+  tenureDisaggregationId String          @id @default(uuid())
+  tenureName             String?
+  targetCount            Int?
+  actualCount            Int?
+  Disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId       String?
+  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId            String?
+
+  @@map("tenure_disaggregation")
+}
+
+model AgeDisaggregation {
+  ageDisaggregationId String          @id @default(uuid())
+  targetFrom                Int?
+  targetTo                  Int?
+  actualFrom                Int?
+  actualTo                  Int?
+  Disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId    String?
+  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId         String?
+
+  @@map("age_disaggregation")
+}
+
+// indicator
+model Indicator {
+  indicatorId              String                     @id @default(uuid())
+  indicatorSource          String?
+  thematicAreasOrPillar    String?
+  statement                String?
+  linkKpiToSdnOrgKpi       String?
+  definition               String?
+  specificArea             String?
+  unitOfMeasure            String?
+  itemInMeasure            String?
+  Disaggregation           Disaggregation?            @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId         String?
+  baseLineDate             DateTime?
+  cumulativeValue          Int?
+  baselineNarrative        String?
+  targetDate               DateTime?
+  cumulativeTarget         Int?
+  targetNarrative          String?
+  targetType               String?
+  responsiblePersons       String?
+  createAt                 DateTime?                  @default(now())
+  updateAt                 DateTime?                  @default(now())
+  result                   String?
+  ResultType               ResultType?                @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId             String?
+  indicatorReport          IndicatorReport[]
+  GenderDisaggregation     GenderDisaggregation[]
+  ProductDisaggregation    ProductDisaggregation[]
+  DepartmentDisaggregation DepartmentDisaggregation[]
+  StateDisaggregation      StateDisaggregation[]
+  LgaDisaggregation        LgaDisaggregation[]
+  TenureDisaggregation     TenureDisaggregation[]
+  AgeDisaggregation        AgeDisaggregation[]
+
+  @@map("indicator")
+}
+
+//indicator report
+model IndicatorReport {
+  indicatorReportId     String          @id @default(uuid())
+  indicatorSource       String?
+  thematicAreasOrPillar String?
+  indicatorStatement    String?
+  responsiblePersons    String?
+  Disaggregation        Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId      String?
+  actualDate            DateTime?
+  cumulativeActual      String?
+  actualNarrative       String?
+  attachmentUrl         String?
+  status                String?
+  createAt              DateTime?       @default(now())
+  updateAt              DateTime?       @default(now())
+  indicator             Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId           String?
+  ResultType            ResultType?     @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId          String?
+
+  @@map("indicator_report")
 }
 
 // ACTIVITY RELATION
@@ -457,16 +492,20 @@ model Request {
 
 //Retirement
 model Retirement {
-  retirementId         String    @id @default(uuid())
-  lineItem             String?
-  actualCostOfLineItem Int?
-  documentName         String?
-  documentURL          String?
-  request              Request?  @relation(fields: [requestId], references: [requestId])
-  requestId            String?
-  status               String?
-  createAt             DateTime? @default(now())
-  updateAt             DateTime? @default(now())
+  retirementId            String    @id @default(uuid())
+  activityLineDescription String?
+  quantity                Int?
+  frequency               Int?
+  unitCost                Int?
+  actualCost              Int?
+  totalBudget             Int?
+  documentName            String?
+  documentURL             String?
+  request                 Request?  @relation(fields: [requestId], references: [requestId])
+  requestId               String?
+  status                  String?
+  createAt                DateTime? @default(now())
+  updateAt                DateTime? @default(now())
 
   @@map("retirement")
 }

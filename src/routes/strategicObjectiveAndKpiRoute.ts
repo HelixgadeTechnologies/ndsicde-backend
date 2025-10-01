@@ -1,5 +1,14 @@
 import { Router } from "express";
-import { createOrUpdateKpi, createOrUpdateStrategicObjective, fetchAllKpis, fetchAllStrategicObjectives, fetchKpiById, fetchStrategicObjectiveById, removeKpi, removeStrategicObjective } from "../controllers/strategicObjectiveAndKpiController";
+import {
+  createOrUpdateKpi,
+  createOrUpdateStrategicObjective,
+  fetchAllKpis,
+  fetchAllStrategicObjectives,
+  fetchKpiById,
+  fetchStrategicObjectiveById,
+  removeKpi,
+  removeStrategicObjective,
+} from "../controllers/strategicObjectiveAndKpiController";
 const strategicObjectiveRouter: Router = Router();
 
 /**
@@ -48,7 +57,10 @@ const strategicObjectiveRouter: Router = Router();
  *       400:
  *         description: Error or invalid input
  */
-strategicObjectiveRouter.post("/strategic-objective", createOrUpdateStrategicObjective);
+strategicObjectiveRouter.post(
+  "/strategic-objective",
+  createOrUpdateStrategicObjective
+);
 
 /**
  * @swagger
@@ -77,7 +89,6 @@ strategicObjectiveRouter.post("/strategic-objective", createOrUpdateStrategicObj
  */
 strategicObjectiveRouter.delete("/delete", removeStrategicObjective);
 
-
 /**
  * @swagger
  * /api/strategic-objectivesAndKpi/strategic-objectives:
@@ -90,7 +101,10 @@ strategicObjectiveRouter.delete("/delete", removeStrategicObjective);
  *       500:
  *         description: Server error
  */
-strategicObjectiveRouter.get("/strategic-objectives", fetchAllStrategicObjectives);
+strategicObjectiveRouter.get(
+  "/strategic-objectives",
+  fetchAllStrategicObjectives
+);
 
 /**
  * @swagger
@@ -113,7 +127,10 @@ strategicObjectiveRouter.get("/strategic-objectives", fetchAllStrategicObjective
  *       500:
  *         description: Server error
  */
-strategicObjectiveRouter.get("/strategic-objectives/:id", fetchStrategicObjectiveById);
+strategicObjectiveRouter.get(
+  "/strategic-objectives/:id",
+  fetchStrategicObjectiveById
+);
 
 /**
  * @swagger
@@ -198,7 +215,6 @@ strategicObjectiveRouter.post("/kpi", createOrUpdateKpi);
  */
 strategicObjectiveRouter.delete("/deleteKpi", removeKpi);
 
-
 /**
  * @swagger
  * /api/strategic-objectivesAndKpi/kpis:
@@ -236,5 +252,27 @@ strategicObjectiveRouter.get("/kpis", fetchAllKpis);
  */
 strategicObjectiveRouter.get("/kpi/:id", fetchKpiById);
 
+/**
+ * @swagger
+ * /api/strategic-objectivesAndKpi/kpi/stId/{strategicObjectiveId}:
+ *   get:
+ *     summary: Get all KPI by StrategicObjective Id
+ *     tags: [Strategic Objectives And Kpi]
+ *     parameters:
+ *       - in: path
+ *         name: strategicObjectiveId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: strategic Objective Id
+ *     responses:
+ *       200:
+ *         description: KPI found
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Server error
+ */
+strategicObjectiveRouter.get("/kpi/stId/:strategicObjectiveId", fetchKpiById);
 
 export default strategicObjectiveRouter;

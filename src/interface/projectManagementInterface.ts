@@ -87,6 +87,7 @@ export interface IImpact {
   thematicArea: string;
   responsiblePerson: string;
   projectId?: string | null;
+  resultTypeId?: string | null;
   createAt?: Date;
   updateAt?: Date;
 }
@@ -98,12 +99,14 @@ export interface IImpactView {
   responsiblePerson: string;
   projectId?: string | null;
   projectName?: string | null; // comes from the joined project table
+  resultTypeId?: string | null;
+  resultName?: string | null;
   createAt?: Date;
   updateAt?: Date;
 }
 
-export interface IImpactIndicator {
-  impactIndicatorId: string;
+export interface IIndicator {
+  indicatorId: string;
   indicatorSource?: string | null;
   thematicAreasOrPillar?: string | null;
   statement?: string | null;
@@ -112,21 +115,23 @@ export interface IImpactIndicator {
   specificArea?: string | null;
   unitOfMeasure?: string | null;
   itemInMeasure?: string | null;
-  disaggregation?: string | null;
+  disaggregationId?: string | null;
   baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
+  cumulativeValue?: number | null;
   baselineNarrative?: string | null;
   targetDate?: Date | null;
-  cumulativeTarget?: string | null;
+  cumulativeTarget?: number | null;
   targetNarrative?: string | null;
   targetType?: string | null;
   responsiblePersons?: string | null;
+  result?: string | null;
+  resultTypeId?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
   impactId?: string | null;
 }
 
-export interface IImpactIndicatorView {
+export interface IIndicatorView {
   impactIndicatorId: string;
   indicatorSource?: string | null;
   thematicAreasOrPillar?: string | null;
@@ -136,79 +141,67 @@ export interface IImpactIndicatorView {
   specificArea?: string | null;
   unitOfMeasure?: string | null;
   itemInMeasure?: string | null;
-  disaggregation?: string | null;
+  disaggregationId?: string | null;
+  disaggregationName?: string | null;
   baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
+  cumulativeValue?: number | null;
   baselineNarrative?: string | null;
   targetDate?: Date | null;
-  cumulativeTarget?: string | null;
+  cumulativeTarget?: number | null;
   targetNarrative?: string | null;
   targetType?: string | null;
   responsiblePersons?: string | null;
   createAt?: Date;
   updateAt?: Date;
-  impactId?: string | null;
+  resultTypeId?: string | null;
+  resultName?: string | null;
+  result?: string | null;
 
   // From related Impact
-  impactStatement?: string | null;
-  impactThematicArea?: string | null;
-  impactResponsiblePerson?: string | null;
-  projectId?: string | null;
+  resultStatement?: string | null;
+  resultThematicArea?: string | null;
+  resultResponsiblePerson?: string | null;
+  resultProjectId?: string | null;
 }
 
-export interface IImpactIndicatorReportFormat {
-  impactIndicatorReportFormatId: string;
+export interface IIndicatorReport {
+  indicatorReportId: string;
   indicatorSource?: string | null;
   thematicAreasOrPillar?: string | null;
   indicatorStatement?: string | null;
   responsiblePersons?: string | null;
-  disaggregationType?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
+  disaggregationId?: string | null;
   actualDate?: Date | null;
   cumulativeActual?: string | null;
   actualNarrative?: string | null;
   attachmentUrl?: string | null;
+  status?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
-  impactIndicatorId?: string | null;
+  indicatorId?: string | null;
+  resultTypeId?: string | null;
 }
 
-export interface ImpactIndicatorReportFormatView {
-  impactIndicatorReportFormatId: string;
+export interface IIndicatorReportView {
+  indicatorReportId: string;
   indicatorSource?: string | null;
   thematicAreasOrPillar?: string | null;
   indicatorStatement?: string | null;
   responsiblePersons?: string | null;
-  disaggregationType?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
+  disaggregationId?: string | null;
+  disaggregationName?: string | null;
   actualDate?: Date | null;
   cumulativeActual?: string | null;
   actualNarrative?: string | null;
   attachmentUrl?: string | null;
+  status?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
-  impactIndicatorId?: string | null;
-
-  // Fields from ImpactIndicator
-  impactIndicatorStatement?: string | null;
-  impactIndicatorDefinition?: string | null;
-  impactIndicatorUnit?: string | null;
-  impactIndicatorItem?: string | null;
-  impactIndicatorBaseLine?: Date | null;
-  impactIndicatorCumulativeValue?: string | null;
-  impactIndicatorTargetDate?: Date | null;
-  impactIndicatorCumulativeTarget?: string | null;
-  impactIndicatorTargetType?: string | null;
-  impactIndicatorResponsiblePersons?: string | null;
-  impactId?: string | null;
+  indicatorId?: string | null;
+  result?: string | null;
+  resultProjectId?: string | null;
+  resultTypeId?: string | null;
+  resultName?: string | null;
 }
 
 // OutcomeIndicator interfaces
@@ -220,6 +213,7 @@ export interface IOutcome {
   thematicAreas?: string | null;
   responsiblePerson: string;
   projectId?: string | null;
+  resultTypeId?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
 }
@@ -234,109 +228,10 @@ export interface IOutcomeView {
   responsiblePerson: string;
   projectId?: string | null;
   projectName?: string | null;
+  resultTypeId?: string | null;
+  resultName?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
-}
-
-export interface IOutcomeIndicator {
-  outcomeIndicatorId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  statement?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
-  disaggregation?: string | null;
-  baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
-  baselineNarrative?: string | null;
-  targetDate?: Date | null;
-  cumulativeTarget?: string | null;
-  targetNarrative?: string | null;
-  targetType?: string | null;
-  responsiblePersons?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outcomeId?: string | null;
-}
-
-export interface IOutcomeIndicatorView {
-  outcomeIndicatorId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  statement?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
-  disaggregation?: string | null;
-  baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
-  baselineNarrative?: string | null;
-  targetDate?: Date | null;
-  cumulativeTarget?: string | null;
-  targetNarrative?: string | null;
-  targetType?: string | null;
-  responsiblePersons?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outcomeId?: string | null;
-
-  // From joined Outcome
-  outcomeStatement?: string | null;
-  outcomeType?: string | null;
-  outcomeResponsiblePerson?: string | null;
-  projectId?: string | null;
-}
-
-export interface IOutcomeIndicatorReportFormat {
-  outcomeIndicatorReportFormatId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  indicatorStatement?: string | null;
-  responsiblePersons?: string | null;
-  disaggregationType?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
-  actualDate?: Date | null;
-  cumulativeActual?: string | null;
-  actualNarrative?: string | null;
-  attachmentUrl?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outcomeIndicatorId?: string | null;
-}
-
-export interface IOutcomeIndicatorReportFormatView {
-  outcomeIndicatorReportFormatId: string;
-  indicatorSource?: string;
-  thematicAreasOrPillar?: string;
-  indicatorStatement?: string;
-  responsiblePersons?: string;
-  disaggregationType?: string;
-  linkKpiToSdnOrgKpi?: string;
-  definition?: string;
-  specificArea?: string;
-  unitOfMeasure?: string;
-  itemInMeasure?: string;
-  actualDate?: Date;
-  cumulativeActual?: string;
-  actualNarrative?: string;
-  attachmentUrl?: string;
-  createAt?: Date;
-  updateAt?: Date;
-  outcomeIndicatorId?: string;
-
-  // Fields coming from OutcomeIndicator
-  outcomeStatement?: string;
-  outcomeThematicArea?: string;
-  outcomeResponsiblePersons?: string;
 }
 
 export interface IOutput {
@@ -346,6 +241,7 @@ export interface IOutput {
   thematicAreas?: string | null;
   responsiblePerson: string;
   projectId?: string | null;
+  resultTypeId?: string | null;
   createAt?: Date;
   updateAt?: Date;
 }
@@ -358,97 +254,10 @@ export interface IOutputView {
   responsiblePerson: string;
   projectId?: string | null;
   projectName?: string | null;
+  resultTypeId?: string | null;
+  resultName?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
-}
-
-export interface IOutputIndicator {
-  outputIndicatorId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  statement?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
-  disaggregation?: string | null;
-  baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
-  baselineNarrative?: string | null;
-  targetDate?: Date | null;
-  cumulativeTarget?: string | null;
-  targetNarrative?: string | null;
-  targetType?: string | null;
-  responsiblePersons?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outputId?: string | null;
-}
-
-export interface IOutputIndicatorView {
-  outputIndicatorId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  statement?: string | null;
-  linkKpiToSdnOrgKpi?: string | null;
-  definition?: string | null;
-  specificArea?: string | null;
-  unitOfMeasure?: string | null;
-  itemInMeasure?: string | null;
-  disaggregation?: string | null;
-  baseLineDate?: Date | null;
-  cumulativeValue?: string | null;
-  baselineNarrative?: string | null;
-  targetDate?: Date | null;
-  cumulativeTarget?: string | null;
-  targetNarrative?: string | null;
-  targetType?: string | null;
-  responsiblePersons?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outputId?: string | null;
-
-  // Fields from joined Output
-  outputStatement?: string | null;
-  outputResponsiblePerson?: string | null;
-  outputThematicAreas?: string | null;
-}
-
-export interface IOutputIndicatorReportFormat {
-  outputIndicatorReportFormatId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  indicatorStatement?: string | null;
-  responsiblePersons?: string | null;
-  disaggregationType?: string | null;
-  actualDate?: Date | null;
-  cumulativeActual?: string | null;
-  actualNarrative?: string | null;
-  attachmentUrl?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outputIndicatorId?: string | null;
-}
-
-export interface IOutputIndicatorReportFormatView {
-  outputIndicatorReportFormatId: string;
-  indicatorSource?: string | null;
-  thematicAreasOrPillar?: string | null;
-  indicatorStatement?: string | null;
-  responsiblePersons?: string | null;
-  disaggregationType?: string | null;
-  actualDate?: Date | null;
-  cumulativeActual?: string | null;
-  actualNarrative?: string | null;
-  attachmentUrl?: string | null;
-  createAt?: Date | null;
-  updateAt?: Date | null;
-  outputIndicatorId?: string | null;
-
-  // From joined OutputIndicator
-  outputIndicatorStatement?: string | null;
-  outputIndicatorUnitOfMeasure?: string | null;
 }
 
 export interface IActivity {
@@ -472,7 +281,7 @@ export interface IActivityView {
   activityId: string;
   activityStatement?: string;
   outputId?: string;
-  outputStatement?: string;       // from Output table
+  outputStatement?: string; // from Output table
   activityTotalBudget?: number;
   responsiblePerson?: string;
   startDate?: Date;
@@ -482,7 +291,7 @@ export interface IActivityView {
   descriptionAction?: string;
   deliveryDate?: Date;
   projectId?: string;
-  projectName?: string;      // from Project table
+  projectName?: string; // from Project table
   createAt?: Date;
   updateAt?: Date;
 }
@@ -517,21 +326,89 @@ export interface IActivityReportView {
 }
 
 export interface ILogicalFramework {
-  logicalFrameworkId: string;   // Unique identifier
-  projectId?: string | null;    // Optional project reference
+  logicalFrameworkId: string; // Unique identifier
+  projectId?: string | null; // Optional project reference
   documentName?: string | null; // Name of the document
-  documentURL?: string | null;  // URL pointing to the document
-  createAt?: Date | null;       // Creation timestamp
-  updateAt?: Date | null;       // Last update timestamp
+  documentURL?: string | null; // URL pointing to the document
+  createAt?: Date | null; // Creation timestamp
+  updateAt?: Date | null; // Last update timestamp
 }
 
 export interface ILogicalFrameworkView {
-  logicalFrameworkId: string;   // Unique identifier
-  projectId?: string | null;    // Project reference
-  projectName?: string | null;  // Project name (from join)
+  logicalFrameworkId: string; // Unique identifier
+  projectId?: string | null; // Project reference
+  projectName?: string | null; // Project name (from join)
   documentName?: string | null; // Name of the document
-  documentURL?: string | null;  // URL to the document
-  createAt?: Date | null;       // Creation timestamp
-  updateAt?: Date | null;       // Last update timestamp
+  documentURL?: string | null; // URL to the document
+  createAt?: Date | null; // Creation timestamp
+  updateAt?: Date | null; // Last update timestamp
 }
 
+export interface IDisaggregation{
+  disaggregationId?: string;
+  disaggregationName?: string |null
+}
+export interface IGenderDisaggregation{
+  genderDisaggregationId?: string;
+  targetMale?: number | null;
+  targetFemale?: number | null;
+  actualMale?: number | null;
+  actualFemale?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface IProductDisaggregation{
+  productDisaggregationId?: string;
+  productName?: string | null;
+  targetCount?: number | null;
+  actualCount?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface IDepartmentDisaggregation{
+  departmentDisaggregationId?: string;
+  departmentName?: string | null;
+  targetCount?: number | null;
+  actualCount?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface IStateDisaggregation{
+  stateDisaggregationId?: string;
+  stateName?: string | null;
+  targetCount?: number | null;
+  actualCount?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface ILgaDisaggregation{
+  lgaDisaggregationId?: string;
+  lgaName?: string | null;
+  targetCount?: number | null;
+  actualCount?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface ITenureDisaggregation{
+  tenureDisaggregationId?: string;
+  tenureName?: string | null;
+  targetCount?: number | null;
+  actualCount?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+export interface IAgeDisaggregation{
+  ageDisaggregationId?: string;
+  targetFrom?: number | null;
+  targetTo?: number | null;
+  actualFrom?: number | null;
+  actualTo?: number | null;
+  disaggregationId?: string | null;
+  indicatorId?: string | null;
+}
+
+export enum IReportStatus {
+  pending = "PENDING",
+  approve = "APPROVE",
+  decline = "DECLINE",
+}

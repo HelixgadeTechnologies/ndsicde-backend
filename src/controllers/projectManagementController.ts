@@ -2,61 +2,60 @@ import { Request, Response } from "express";
 import {
   createOrUpdateActivity,
   createOrUpdateActivityReport,
+  createOrUpdateAgeDisaggregation,
+  createOrUpdateDepartmentDisaggregation,
+  createOrUpdateGenderAggregation,
   createOrUpdateImpact,
-  createOrUpdateImpactIndicator,
+  createOrUpdateIndicator,
+  createOrUpdateLGADisaggregation,
   createOrUpdateLogicalFramework,
   createOrUpdateOutput,
-  createOrUpdateOutputIndicator,
-  createOrUpdateOutputIndicatorReportFormat,
   createOrUpdatePartner,
+  createOrUpdateProductDisaggregation,
+  createOrUpdateStateDisaggregation,
   createOrUpdateTeamMember,
+  createOrUpdateTenureDisaggregation,
   deleteActivity,
   deleteActivityReport,
   deleteImpact,
-  deleteImpactIndicatorReportFormat,
+  deleteIndicatorReport,
   deleteLogicalFramework,
   deleteOutcome,
-  deleteOutcomeIndicator,
-  deleteOutcomeIndicatorReportFormat,
   deleteOutput,
-  deleteOutputIndicator,
-  deleteOutputIndicatorReportFormat,
   deletePartner,
   deleteProject,
   deleteTeamMember,
   getActivityById,
   getActivityReportById,
+  getAgeDisaggregationByIndicatorId,
   getAllActivities,
   getAllActivityReports,
+  getAllDisaggregation,
   getAllImpact,
-  getAllImpactIndicatorReportFormats,
-  getAllImpactIndicatorsView,
+  getAllImpactIndicatorsByResultIdView,
+  getAllIndicatorReportByResultId,
   getAllLogicalFrameworks,
-  getAllOutcomeIndicatorReportFormats,
-  getAllOutcomeIndicatorsView,
   getAllOutcomesView,
-  getAllOutputIndicatorReportFormats,
-  getAllOutputIndicators,
   getAllOutputs,
   getAllPartners,
   getAllProjects,
   getAllTeamMember,
-  getImpactIndicatorByIdView,
-  getImpactIndicatorReportFormatById,
-  getImpactIndicatorsByProjectIdView,
+  getDepartmentDisaggregationByIndicatorId,
+  getGenderDisaggregationByIndicatorId,
+  getIndicatorByIdView,
+  getIndicatorReportById,
+  getLGADisaggregationByIndicatorId,
   getLogicalFrameworkById,
-  getOutcomeIndicatorReportFormatById,
-  getOutcomeIndicatorViewById,
   getOutcomeViewById,
   getOutputById,
-  getOutputIndicatorById,
-  getOutputIndicatorReportFormatById,
+  getProductDisaggregationByIndicatorId,
   getProjectById,
   getProjectsStatus,
-  saveImpactIndicatorReportFormat,
+  getResultType,
+  getStateDisaggregationByIndicatorId,
+  getTenureDisaggregationByIndicatorId,
+  saveIndicatorReport,
   saveOutcome,
-  saveOutcomeIndicator,
-  saveOutcomeIndicatorReportFormat,
   saveProject,
 } from "../service/projectManagementService";
 import {
@@ -67,15 +66,18 @@ import {
 import {
   IActivity,
   IActivityReport,
-  IImpactIndicator,
-  IImpactIndicatorReportFormat,
+  IAgeDisaggregation,
+  IDepartmentDisaggregation,
+  IIndicator,
+  IIndicatorReport,
+  ILgaDisaggregation,
   ILogicalFramework,
   IOutcome,
-  IOutcomeIndicator,
-  IOutcomeIndicatorReportFormat,
   IOutput,
-  IOutputIndicatorReportFormat,
+  IProductDisaggregation,
+  IStateDisaggregation,
   ITeamMember,
+  ITenureDisaggregation,
 } from "../interface/projectManagementInterface";
 
 export const createOrUpdateProject = async (req: Request, res: Response) => {
@@ -282,29 +284,24 @@ export const deleteImpactController = async (req: Request, res: Response) => {
 
 // Impact indicator controllers will go here (create/update, get all, delete)
 
-// ✅ Create OR Update Impact Indicator
-export const createOrUpdateImpactIndicatorController = async (
+// ✅ Create OR Update Indicator
+export const createOrUpdateIndicatorController = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const { isCreate, data }: { isCreate: boolean; data: IImpactIndicator } =
+    const { isCreate, data }: { isCreate: boolean; data: IIndicator } =
       req.body;
 
-    // If update, attach ID from params (optional: fallback from body)
-    if (!isCreate && req.params.id) {
-      data.impactIndicatorId = req.params.id;
-    }
-
-    const result = await createOrUpdateImpactIndicator(data, isCreate);
+    const result = await createOrUpdateIndicator(data, isCreate);
 
     return res
       .status(isCreate ? 201 : 200)
       .json(
         successResponse(
           isCreate
-            ? "Impact Indicator created successfully"
-            : "Impact Indicator updated successfully",
+            ? "Indicator created successfully"
+            : "Indicator updated successfully",
           result
         )
       );
@@ -318,83 +315,90 @@ export const createOrUpdateImpactIndicatorController = async (
 };
 
 // ✅ Get all Impact Indicators (View)
-export const getAllImpactIndicators = async (_req: Request, res: Response) => {
+export const getAllIndicatorsByResult = async (req: Request, res: Response) => {
   try {
-    const indicators = await getAllImpactIndicatorsView();
+    const { resultId } = req.params;
+    const indicators = await getAllImpactIndicatorsByResultIdView(resultId);
     if (!indicators || indicators.length === 0) {
       return res
         .status(404)
-        .json(notFoundResponse("Impact Indicators not found", null));
+        .json(notFoundResponse("Indicators not found", null));
     }
     return res
       .status(200)
-      .json(successResponse("Impact Indicators retrieved", indicators));
+      .json(successResponse("Indicators retrieved", indicators));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
   }
 };
 
 // ✅ Get single Impact Indicator by ID (View)
-export const getImpactIndicatorById = async (req: Request, res: Response) => {
+export const getIndicatorById = async (req: Request, res: Response) => {
   try {
-    const id = req.params.id;
-    const indicator = await getImpactIndicatorByIdView(id);
+    const indicatorId = req.params.indicatorId;
+    const indicator = await getIndicatorByIdView(indicatorId);
 
     if (!indicator) {
       return res
         .status(404)
-        .json(notFoundResponse("Impact Indicator not found", null));
+        .json(notFoundResponse("Indicator not found", null));
     }
 
     return res
       .status(200)
-      .json(successResponse("Impact Indicator retrieved", indicator));
+      .json(successResponse("Indicator retrieved", indicator));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+// ✅ Get single Impact Indicator by ID (View)
+export const getAllResultType = async (req: Request, res: Response) => {
+  try {
+    const results = await getResultType();
+
+    if (results.length < 1) {
+      return res
+        .status(404)
+        .json(notFoundResponse("Result type not found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Result type retrieved", results));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
   }
 };
 
-// ✅ Get Impact Indicators by Project ID (View)
-export const getImpactIndicatorsByProjectId = async (
-  req: Request,
-  res: Response
-) => {
+// Delete Impact
+export const deleteIndicatorController = async (req: Request, res: Response) => {
   try {
-    const projectId = req.params.projectId;
-    const indicators = await getImpactIndicatorsByProjectIdView(projectId);
-
-    if (!indicators || indicators.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("Impact Indicators not found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Impact Indicators retrieved", indicators));
+    const { id } = req.params;
+    await deleteImpact(id);
+    res.status(200).json(successResponse("Indicator deleted successfully", null));
   } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
+    res.status(500).json(errorResponse(error.message));
   }
 };
 
 // Create or Update
-export const createOrUpdateImpactIndicatorReportFormat = async (
+export const createOrUpdateIndicatorReport = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const payload: IImpactIndicatorReportFormat = req.body.payload;
+    const payload: IIndicatorReport = req.body.payload;
     const isCreate: boolean = req.body.isCreate;
 
-    const result = await saveImpactIndicatorReportFormat(payload, isCreate);
+    const result = await saveIndicatorReport(payload, isCreate);
 
     res
       .status(200)
       .json(
         successResponse(
           isCreate
-            ? "Impact created successfully"
-            : "Impact updated successfully",
+            ? "Indicator created successfully"
+            : "Indicator updated successfully",
           result
         )
       );
@@ -404,18 +408,19 @@ export const createOrUpdateImpactIndicatorReportFormat = async (
 };
 
 // Get All
-export const getImpactIndicatorReportFormats = async (
+export const getIndicatorReportsByResult = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const results = await getAllImpactIndicatorReportFormats();
+    const resultId = req.params.resultId;
+    const results = await getAllIndicatorReportByResultId(resultId);
 
     if (!results || results.length === 0) {
       return res
         .status(404)
         .json(
-          notFoundResponse("Impacts indicator report formats not found", null)
+          notFoundResponse("indicator report not found", null)
         );
     }
 
@@ -423,7 +428,7 @@ export const getImpactIndicatorReportFormats = async (
       .status(200)
       .json(
         successResponse(
-          "Impacts indicator report formats fetched successfully",
+          "indicator report fetched successfully",
           results
         )
       );
@@ -433,19 +438,19 @@ export const getImpactIndicatorReportFormats = async (
 };
 
 // Get By ID
-export const getImpactIndicatorReportFormat = async (
+export const getImpactIndicatorReportById = async (
   req: Request,
   res: Response
 ) => {
   try {
-    const id = req.params.id;
-    const result = await getImpactIndicatorReportFormatById(id);
+    const id = req.params.indicatorId;
+    const result = await getIndicatorReportById(id);
 
     if (!result) {
       return res
         .status(404)
         .json(
-          notFoundResponse("Impact indicator report formats not found", null)
+          notFoundResponse("indicator report not found", null)
         );
     }
 
@@ -453,7 +458,7 @@ export const getImpactIndicatorReportFormat = async (
       .status(200)
       .json(
         successResponse(
-          "Impact indicator report formats fetched successfully",
+          "indicator report fetched successfully",
           result
         )
       );
@@ -463,19 +468,19 @@ export const getImpactIndicatorReportFormat = async (
 };
 
 // Delete
-export const removeImpactIndicatorReportFormat = async (
+export const removeIndicatorReport = async (
   req: Request,
   res: Response
 ) => {
   try {
     const id = req.params.id;
-    await deleteImpactIndicatorReportFormat(id);
+    await deleteIndicatorReport(id);
 
     res
       .status(200)
       .json(
         successResponse(
-          "Impact indicator report formats deleted successfully",
+          "indicator report deleted successfully",
           null
         )
       );
@@ -558,197 +563,7 @@ export const deleteOutcomeController = async (req: Request, res: Response) => {
   }
 };
 
-// Create or Update OutcomeIndicator
-export const createOrUpdateOutcomeIndicator = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const {
-      isCreate,
-      payload,
-    }: { isCreate: boolean; payload: IOutcomeIndicator } = req.body;
 
-    const result = await saveOutcomeIndicator(payload, isCreate);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate === true
-            ? "OutcomeIndicator created successfully"
-            : "OutcomeIndicator updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get All OutcomeIndicators (View)
-export const getOutcomeIndicators = async (req: Request, res: Response) => {
-  try {
-    const results = await getAllOutcomeIndicatorsView();
-
-    if (!results || results.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("OutcomeIndicators not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("OutcomeIndicators fetched successfully", results));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get OutcomeIndicator By ID (View)
-export const getOutcomeIndicatorById = async (req: Request, res: Response) => {
-  try {
-    const { outcomeIndicatorId } = req.params;
-    const result = await getOutcomeIndicatorViewById(outcomeIndicatorId);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(notFoundResponse("OutcomeIndicator not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("OutcomeIndicator fetched successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Delete OutcomeIndicator
-export const removeOutcomeIndicator = async (req: Request, res: Response) => {
-  try {
-    const { outcomeIndicatorId } = req.params;
-
-    await deleteOutcomeIndicator(outcomeIndicatorId);
-
-    res
-      .status(200)
-      .json(successResponse("OutcomeIndicator deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Create or Update OutcomeIndicatorReportFormat
-export const createOrUpdateOutcomeIndicatorReportFormat = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const {
-      isCreate,
-      payload,
-    }: { isCreate: boolean; payload: IOutcomeIndicatorReportFormat } = req.body;
-
-    const result = await saveOutcomeIndicatorReportFormat(payload, isCreate);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "OutcomeIndicatorReportFormat created successfully"
-            : "OutcomeIndicatorReportFormat updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get All OutcomeIndicatorReportFormats (View)
-export const getOutcomeIndicatorReportFormats = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const results = await getAllOutcomeIndicatorReportFormats();
-
-    if (!results || results.length === 0) {
-      return res
-        .status(404)
-        .json(
-          notFoundResponse("OutcomeIndicatorReportFormats not found", null)
-        );
-    }
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "OutcomeIndicatorReportFormats fetched successfully",
-          results
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get OutcomeIndicatorReportFormat By ID (View)
-export const getOutcomeIndicatorReportFormatByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { outcomeIndicatorReportFormatId } = req.params;
-    const result = await getOutcomeIndicatorReportFormatById(
-      outcomeIndicatorReportFormatId
-    );
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(notFoundResponse("OutcomeIndicatorReportFormat not found", null));
-    }
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "OutcomeIndicatorReportFormat fetched successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Delete OutcomeIndicatorReportFormat
-export const removeOutcomeIndicatorReportFormat = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { outcomeIndicatorReportFormatId } = req.params;
-
-    await deleteOutcomeIndicatorReportFormat(outcomeIndicatorReportFormatId);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "OutcomeIndicatorReportFormat deleted successfully",
-          null
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
 
 // ✅ Create or Update Output
 export const createOrUpdateOutputController = async (
@@ -812,6 +627,7 @@ export const getOutputByIdController = async (req: Request, res: Response) => {
   }
 };
 
+
 // ✅ Delete Output
 export const deleteOutputController = async (req: Request, res: Response) => {
   try {
@@ -822,202 +638,6 @@ export const deleteOutputController = async (req: Request, res: Response) => {
     res.status(200).json(successResponse("Output deleted successfully", null));
   } catch (error: any) {
     res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Create or Update OutputIndicator
-export const createOrUpdateOutputIndicatorController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, payload } = req.body;
-
-    const result = await createOrUpdateOutputIndicator(payload, isCreate);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "OutputIndicator created successfully"
-            : "OutputIndicator updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get all OutputIndicators
-export const getAllOutputIndicatorsController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const result = await getAllOutputIndicators();
-
-    if (!result || result.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("OutputIndicators not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("OutputIndicators fetched successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get OutputIndicator by Id
-export const getOutputIndicatorByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-    const result = await getOutputIndicatorById(id);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(notFoundResponse("OutputIndicator not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("OutputIndicator fetched successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Delete OutputIndicator
-export const deleteOutputIndicatorController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-
-    await deleteOutputIndicator(id);
-
-    res
-      .status(200)
-      .json(successResponse("OutputIndicator deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Create OutputIndicatorReportFormat
-export const createOutputIndicatorReportFormat = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, payload } = req.body;
-    const result = await createOrUpdateOutputIndicatorReportFormat(
-      payload,
-      isCreate
-    );
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Output Indicator Report Format created successfully"
-            : "Output Indicator Report Format updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-
-// ✅ Get All OutputIndicatorReportFormats
-export const getAllOutputIndicatorReportFormatController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const result = await getAllOutputIndicatorReportFormats();
-
-    if (!result || result.length === 0) {
-      return res
-        .status(404)
-        .json(
-          notFoundResponse("No Output Indicator Report Formats found", null)
-        );
-    }
-
-    return res
-      .status(200)
-      .json(
-        successResponse(
-          "Output Indicator Report Formats fetched successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get OutputIndicatorReportFormat by Id
-export const getOutputIndicatorReportFormatByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const id = req.params.id;
-    const result = await getOutputIndicatorReportFormatById(id);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(
-          notFoundResponse("Output Indicator Report Format not found", null)
-        );
-    }
-
-    return res
-      .status(200)
-      .json(
-        successResponse(
-          "Output Indicator Report Format fetched successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Delete OutputIndicatorReportFormat
-export const deleteOutputIndicatorReportFormatController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const id = req.params.id;
-    await deleteOutputIndicatorReportFormat(id);
-
-    return res
-      .status(200)
-      .json(
-        successResponse(
-          "Output Indicator Report Format deleted successfully",
-          null
-        )
-      );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
   }
 };
 
@@ -1225,6 +845,334 @@ export const deleteLogicalFrameworkController = async (
       .status(200)
       .json(successResponse("LogicalFramework deleted successfully", result));
   } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getDisaggregation = async (req: Request, res: Response) => {
+  try {
+
+    const disaggregation = await getAllDisaggregation();
+
+    if (!disaggregation || disaggregation.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No disaggregation found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Disaggregation retrieved", disaggregation));
+  } catch (error:any) {
+    // console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateGenderDisaggregationController = async(req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body
+
+    const result = await createOrUpdateGenderAggregation(
+      payload,
+      isCreate === "true"
+    );
+
+    return res
+      .status(200)
+      .json(successResponse("Gender disaggregation saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getGenderDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregation = await getGenderDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregation || disaggregation.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No gender disaggregation found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Gender disaggregation retrieved", disaggregation));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateProductDisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate that each item has an ID for update
+      const missingId = payload.some((item:IProductDisaggregation) => !item.productDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include productDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateProductDisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("Product disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getProductDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getProductDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No product disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Product disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateDepartmentDisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate that each item has an ID for update
+      const missingId = payload.some((item:IDepartmentDisaggregation) => !item.departmentDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include departmentDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateDepartmentDisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("Department disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getDepartmentDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getDepartmentDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No department disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Department disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateStateDisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate that each item has an ID for update
+      const missingId = payload.some((item:IStateDisaggregation) => !item.stateDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include stateDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateStateDisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("State disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getStateDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getStateDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No state disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("State disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateLGADisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate that each item has an ID for update
+      const missingId = payload.some((item:ILgaDisaggregation) => !item.lgaDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include lgaDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateLGADisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("LGA disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getLGADisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getLGADisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No LGA disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("LGA disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateTenureDisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate IDs for update
+      const missingId = payload.some((item:ITenureDisaggregation) => !item.tenureDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include tenureDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateTenureDisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("Tenure disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getTenureDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getTenureDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No tenure disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Tenure disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const createOrUpdateAgeDisaggregationController = async (req: Request, res: Response) => {
+  try {
+    const { isCreate, payload } = req.body;
+
+    if (!isCreate) {
+      // Validate IDs for update
+      const missingId = payload.some((item:IAgeDisaggregation) => !item.ageDisaggregationId);
+      if (missingId) {
+        return res
+          .status(400)
+          .json(errorResponse("Each item must include ageDisaggregationId for update"));
+      }
+    }
+
+    const result = await createOrUpdateAgeDisaggregation(payload, isCreate);
+
+    return res
+      .status(200)
+      .json(successResponse("Age disaggregations saved", result));
+  } catch (error:any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getAgeDisaggregationByIndicatorController = async (req: Request, res: Response) => {
+  try {
+    const { indicatorId } = req.params;
+    const disaggregations = await getAgeDisaggregationByIndicatorId(indicatorId);
+
+    if (!disaggregations || disaggregations.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No age disaggregations found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Age disaggregations retrieved", disaggregations));
+  } catch (error:any) {
+    console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
 };

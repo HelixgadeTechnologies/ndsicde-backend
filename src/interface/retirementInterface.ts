@@ -1,7 +1,11 @@
 export interface IRetirement {
   retirementId: string;
-  lineItem?: string;
-  actualCostOfLineItem?: number;
+  activityLineDescription?: string;
+  quantity?: number;
+  frequency?: number;
+  unitCost?: number;
+  actualCost?: number;
+  totalBudget?: number;
   documentName?: string;
   documentURL?: string;
   requestId?: string;
@@ -9,18 +13,19 @@ export interface IRetirement {
   createAt?: Date;
   updateAt?: Date;
 }
-
 export interface IRetirementView {
   retirementId: string;
-  lineItem?: string;
-  actualCostOfLineItem?: number;
+  activityLineDescription?: string;
+  quantity?: number;
+  frequency?: number;
+  unitCost?: number;
+  actualCost?: number;
+  totalBudget?: number;
   documentName?: string;
   documentURL?: string;
   requestId?: string;
-  requestActivityTitle?: string;
-  requestStaff?: string;
-  requestStatus?: string;
-  retirementStatus?: string;
+  activityTitle?: string;
+  status?: string;
   createAt?: Date;
   updateAt?: Date;
 }

@@ -5,6 +5,7 @@ import {
   getAllKpis,
   getAllStrategicObjectives,
   getKpiById,
+  getKpiByStrategicObjectiveId,
   getStrategicObjectiveById,
   saveKpi,
   saveStrategicObjective,
@@ -119,6 +120,22 @@ export const fetchKpiById = async (req: Request, res: Response) => {
   try {
     const result = await getKpiById(id);
     if (!result) {
+      return res.status(404).json(notFoundResponse("KPI not found"));
+    }
+    res.status(200).json(successResponse("KPI found", result));
+  } catch (error: any) {
+    res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const fetchKpiByStrategicObjectiveId = async (
+  req: Request,
+  res: Response
+) => {
+  const { strategicObjectiveId } = req.params;
+  try {
+    const result = await getKpiByStrategicObjectiveId(strategicObjectiveId);
+    if (!result || result.length == 0) {
       return res.status(404).json(notFoundResponse("KPI not found"));
     }
     res.status(200).json(successResponse("KPI found", result));

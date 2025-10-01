@@ -1,34 +1,38 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { Project } from "@prisma/client"; // Optional interface import
 import {
   IActivity,
   IActivityReport,
   IActivityReportView,
   IActivityView,
+  IAgeDisaggregation,
+  IDepartmentDisaggregation,
+  IGenderDisaggregation,
   IImpact,
-  IImpactIndicator,
-  IImpactIndicatorReportFormat,
-  IImpactIndicatorView,
+
   IImpactView,
+  IIndicator,
+  IIndicatorReport,
+  IIndicatorReportView,
+  IIndicatorView,
+  ILgaDisaggregation,
   ILogicalFramework,
   ILogicalFrameworkView,
-  ImpactIndicatorReportFormatView,
+
   IOutcome,
-  IOutcomeIndicator,
-  IOutcomeIndicatorReportFormat,
-  IOutcomeIndicatorReportFormatView,
-  IOutcomeIndicatorView,
+
   IOutcomeView,
   IOutput,
-  IOutputIndicator,
-  IOutputIndicatorReportFormat,
-  IOutputIndicatorReportFormatView,
-  IOutputIndicatorView,
+
   IOutputView,
   IPartner,
   IPartnerView,
+  IProductDisaggregation,
+  IReportStatus,
+  IStateDisaggregation,
   ITeamMember,
   ITeamMemberView,
+  ITenureDisaggregation,
 } from "../interface/projectManagementInterface";
 import {
   IProjectStatus,
@@ -216,6 +220,7 @@ export const createOrUpdateImpact = async (
         thematicArea: payload.thematicArea,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId
       },
     });
   } else {
@@ -230,6 +235,7 @@ export const createOrUpdateImpact = async (
         thematicArea: payload.thematicArea,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId,
         updateAt: new Date(),
       },
     });
@@ -251,13 +257,13 @@ export const deleteImpact = async (impactId: string) => {
   });
 };
 
-// ✅ Create Impact Indicator
-export const createOrUpdateImpactIndicator = async (
-  payload: IImpactIndicator,
+// ✅ Create Indicator
+export const createOrUpdateIndicator = async (
+  payload: IIndicator,
   isCreate: boolean
-): Promise<IImpactIndicator> => {
+): Promise<IIndicator> => {
   if (isCreate) {
-    return await prisma.impactIndicator.create({
+    return await prisma.indicator.create({
       data: {
         indicatorSource: payload.indicatorSource,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
@@ -267,7 +273,7 @@ export const createOrUpdateImpactIndicator = async (
         specificArea: payload.specificArea,
         unitOfMeasure: payload.unitOfMeasure,
         itemInMeasure: payload.itemInMeasure,
-        disaggregation: payload.disaggregation,
+        disaggregationId: payload.disaggregationId,
         baseLineDate: payload.baseLineDate,
         cumulativeValue: payload.cumulativeValue,
         baselineNarrative: payload.baselineNarrative,
@@ -276,13 +282,14 @@ export const createOrUpdateImpactIndicator = async (
         targetNarrative: payload.targetNarrative,
         targetType: payload.targetType,
         responsiblePersons: payload.responsiblePersons,
-        impactId: payload.impactId,
+        result: payload.impactId as string,
+        resultTypeId:payload.resultTypeId
       },
     });
   }
 
-  return await prisma.impactIndicator.update({
-    where: { impactIndicatorId: payload.impactIndicatorId },
+  return await prisma.indicator.update({
+    where: { indicatorId: payload.indicatorId },
     data: {
       indicatorSource: payload.indicatorSource,
       thematicAreasOrPillar: payload.thematicAreasOrPillar,
@@ -292,7 +299,7 @@ export const createOrUpdateImpactIndicator = async (
       specificArea: payload.specificArea,
       unitOfMeasure: payload.unitOfMeasure,
       itemInMeasure: payload.itemInMeasure,
-      disaggregation: payload.disaggregation,
+      disaggregationId: payload.disaggregationId,
       baseLineDate: payload.baseLineDate,
       cumulativeValue: payload.cumulativeValue,
       baselineNarrative: payload.baselineNarrative,
@@ -301,89 +308,84 @@ export const createOrUpdateImpactIndicator = async (
       targetNarrative: payload.targetNarrative,
       targetType: payload.targetType,
       responsiblePersons: payload.responsiblePersons,
-      impactId: payload.impactId,
+      result: payload.impactId as string,
+      resultTypeId:payload.resultTypeId,
       updateAt: new Date(),
     },
   });
 };
 
-// ✅ Get all Impact Indicators with Impact details
-export const getAllImpactIndicatorsView = async (): Promise<
-  IImpactIndicatorView[]
+// ✅ Get all specific result Indicators with details
+export const getAllImpactIndicatorsByResultIdView = async (resultId:string): Promise<
+  IIndicatorView[]
 > => {
-  return await prisma.$queryRaw<IImpactIndicatorView[]>`
-    SELECT * FROM impact_indicator_view;
+  return await prisma.$queryRaw<IIndicatorView[]>`
+    SELECT * FROM indicator_view WHERE result = ${resultId};
   `;
 };
 
-// ✅ Get a single Impact Indicator by ID
-export const getImpactIndicatorByIdView = async (
+// ✅ Get a single Indicator by ID
+export const getIndicatorByIdView = async (
   id: string
-): Promise<IImpactIndicatorView | null> => {
-  const result = await prisma.$queryRaw<IImpactIndicatorView[]>`
-    SELECT * FROM impact_indicator_view WHERE impactIndicatorId = ${id};
+): Promise<IIndicatorView | null> => {
+  const result = await prisma.$queryRaw<IIndicatorView[]>`
+    SELECT * FROM indicator_view WHERE indicatorId = ${id};
   `;
   return result.length > 0 ? result[0] : null;
 };
 
-// ✅ Get all Impact Indicators by Project ID (optional helper)
-export const getImpactIndicatorsByProjectIdView = async (
-  projectId: string
-): Promise<IImpactIndicatorView[]> => {
-  return await prisma.$queryRaw<IImpactIndicatorView[]>`
-    SELECT * FROM impact_indicator_view WHERE projectId = ${projectId};
-  `;
+// Delete Indicator
+export const deleteIndicator = async (indicatorId: string) => {
+  await prisma.indicatorReport.deleteMany({where:{indicatorId}});
+  return await prisma.indicator.delete({
+    where: { indicatorId },
+  });
 };
 
+
 // Create or Update Impact Indicator Report Format
-export async function saveImpactIndicatorReportFormat(
-  payload: IImpactIndicatorReportFormat,
+export async function saveIndicatorReport(
+  payload: IIndicatorReport,
   isCreate: boolean
 ) {
   if (isCreate) {
-    return await prisma.impactIndicatorReportFormat.create({
+    return await prisma.indicatorReport.create({
       data: {
         indicatorSource: payload.indicatorSource,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
         indicatorStatement: payload.indicatorStatement,
         responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
+        disaggregationId: payload.disaggregationId,
         actualDate: payload.actualDate,
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,
         attachmentUrl: payload.attachmentUrl,
-        impactIndicatorId: payload.impactIndicatorId,
+        status:IReportStatus.pending,
+        resultTypeId:payload.resultTypeId,
+        indicatorId: payload.indicatorId,
       },
     });
   } else {
-    if (!payload.impactIndicatorReportFormatId) {
-      throw new Error("impactIndicatorReportFormatId is required for update");
+    if (!payload.indicatorReportId) {
+      throw new Error("indicatorReportId is required for update");
     }
-    return await prisma.impactIndicatorReportFormat.update({
+    return await prisma.indicatorReport.update({
       where: {
-        impactIndicatorReportFormatId: payload.impactIndicatorReportFormatId,
+        indicatorReportId: payload.indicatorReportId,
       },
       data: {
-        indicatorSource: payload.indicatorSource,
+   indicatorSource: payload.indicatorSource,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
         indicatorStatement: payload.indicatorStatement,
         responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
+        disaggregationId: payload.disaggregationId,
         actualDate: payload.actualDate,
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,
         attachmentUrl: payload.attachmentUrl,
-        impactIndicatorId: payload.impactIndicatorId,
+        status:payload.status,
+        resultTypeId:payload.resultTypeId,
+        indicatorId: payload.indicatorId,
         updateAt: new Date(), // update timestamp
       },
     });
@@ -391,27 +393,27 @@ export async function saveImpactIndicatorReportFormat(
 }
 
 // Get all Impact Indicator Report Formats
-export async function getAllImpactIndicatorReportFormats(): Promise<
-  ImpactIndicatorReportFormatView[]
+export async function getAllIndicatorReportByResultId(resultId:string): Promise<
+  IIndicatorReportView[]
 > {
-  return await prisma.$queryRaw<ImpactIndicatorReportFormatView[]>`
-    SELECT * FROM impact_indicator_report_format_view
+  return await prisma.$queryRaw<IIndicatorReportView[]>`
+    SELECT * FROM indicator_report_view WHERE result = ${resultId};
   `;
 }
 
-export async function getImpactIndicatorReportFormatById(
+export async function getIndicatorReportById(
   id: string
-): Promise<ImpactIndicatorReportFormatView | null> {
-  const result = await prisma.$queryRaw<ImpactIndicatorReportFormatView[]>`
-    SELECT * FROM impact_indicator_report_format_view
-    WHERE impactIndicatorReportFormatId = ${id}
+): Promise<IIndicatorReportView | null> {
+  const result = await prisma.$queryRaw<IIndicatorReportView[]>`
+    SELECT * FROM indicator_report_view
+    WHERE indicatorReportId = ${id}
   `;
   return result.length > 0 ? result[0] : null;
 }
 
-export async function deleteImpactIndicatorReportFormat(id: string) {
-  return await prisma.impactIndicatorReportFormat.delete({
-    where: { impactIndicatorReportFormatId: id },
+export async function deleteIndicatorReport(id: string) {
+  return await prisma.indicatorReport.delete({
+    where: { indicatorReportId: id },
   });
 }
 
@@ -429,6 +431,7 @@ export const saveOutcome = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId,
       },
     });
   } else {
@@ -444,6 +447,7 @@ export const saveOutcome = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId,
         updateAt: new Date(),
       },
     });
@@ -474,175 +478,6 @@ export const deleteOutcome = async (outcomeId: string): Promise<void> => {
   });
 };
 
-// Create or Update OutcomeIndicator
-export const saveOutcomeIndicator = async (
-  payload: IOutcomeIndicator,
-  isCreate: boolean
-): Promise<IOutcomeIndicator> => {
-  if (isCreate) {
-    return await prisma.outcomeIndicator.create({
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        statement: payload.statement,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        disaggregation: payload.disaggregation,
-        baseLineDate: payload.baseLineDate,
-        cumulativeValue: payload.cumulativeValue,
-        baselineNarrative: payload.baselineNarrative,
-        targetDate: payload.targetDate,
-        cumulativeTarget: payload.cumulativeTarget,
-        targetNarrative: payload.targetNarrative,
-        targetType: payload.targetType,
-        responsiblePersons: payload.responsiblePersons,
-        outcomeId: payload.outcomeId,
-      },
-    });
-  } else {
-    if (!payload.outcomeIndicatorId) {
-      throw new Error("OutcomeIndicator ID is required for update.");
-    }
-
-    return await prisma.outcomeIndicator.update({
-      where: { outcomeIndicatorId: payload.outcomeIndicatorId },
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        statement: payload.statement,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        disaggregation: payload.disaggregation,
-        baseLineDate: payload.baseLineDate,
-        cumulativeValue: payload.cumulativeValue,
-        baselineNarrative: payload.baselineNarrative,
-        targetDate: payload.targetDate,
-        cumulativeTarget: payload.cumulativeTarget,
-        targetNarrative: payload.targetNarrative,
-        targetType: payload.targetType,
-        responsiblePersons: payload.responsiblePersons,
-        outcomeId: payload.outcomeId,
-        updateAt: new Date(),
-      },
-    });
-  }
-};
-
-// Get All from View
-export const getAllOutcomeIndicatorsView = async (): Promise<
-  IOutcomeIndicatorView[]
-> => {
-  return await prisma.$queryRaw<IOutcomeIndicatorView[]>`
-    SELECT * FROM outcomeindicator_view
-  `;
-};
-
-// Get By ID from View
-export const getOutcomeIndicatorViewById = async (
-  outcomeIndicatorId: string
-): Promise<IOutcomeIndicatorView | null> => {
-  const results = await prisma.$queryRaw<IOutcomeIndicatorView[]>`
-    SELECT * FROM outcomeindicator_view WHERE outcomeIndicatorId = ${outcomeIndicatorId}
-  `;
-  return results.length > 0 ? results[0] : null;
-};
-
-// Delete
-export const deleteOutcomeIndicator = async (
-  outcomeIndicatorId: string
-): Promise<void> => {
-  await prisma.outcomeIndicator.delete({
-    where: { outcomeIndicatorId },
-  });
-};
-
-export const saveOutcomeIndicatorReportFormat = async (
-  payload: IOutcomeIndicatorReportFormat,
-  isCreate: boolean
-): Promise<IOutcomeIndicatorReportFormat> => {
-  if (isCreate) {
-    return await prisma.outcomeIndicatorReportFormat.create({
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        indicatorStatement: payload.indicatorStatement,
-        responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        actualDate: payload.actualDate,
-        cumulativeActual: payload.cumulativeActual,
-        actualNarrative: payload.actualNarrative,
-        attachmentUrl: payload.attachmentUrl,
-        outcomeIndicatorId: payload.outcomeIndicatorId,
-      },
-    });
-  } else {
-    if (!payload.outcomeIndicatorReportFormatId) {
-      throw new Error("outcomeIndicatorReportFormatId is required for update");
-    }
-
-    return await prisma.outcomeIndicatorReportFormat.update({
-      where: {
-        outcomeIndicatorReportFormatId: payload.outcomeIndicatorReportFormatId,
-      },
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        indicatorStatement: payload.indicatorStatement,
-        responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        actualDate: payload.actualDate,
-        cumulativeActual: payload.cumulativeActual,
-        actualNarrative: payload.actualNarrative,
-        attachmentUrl: payload.attachmentUrl,
-        outcomeIndicatorId: payload.outcomeIndicatorId,
-        updateAt: new Date(),
-      },
-    });
-  }
-};
-
-export const getAllOutcomeIndicatorReportFormats = async (): Promise<
-  Array<IOutcomeIndicatorReportFormatView>
-> => {
-  const results = await prisma.$queryRaw<IOutcomeIndicatorReportFormatView[]>`
-    SELECT * FROM outcome_indicator_report_format_view
-    ORDER BY "createAt" DESC
-  `;
-  return results;
-};
-
-export const getOutcomeIndicatorReportFormatById = async (
-  id: string
-): Promise<IOutcomeIndicatorReportFormatView | null> => {
-  const results = await prisma.$queryRaw<IOutcomeIndicatorReportFormatView[]>`
-    SELECT * FROM outcome_indicator_report_format_view WHERE "outcomeIndicatorReportFormatId" = ${id}
-  `;
-  return results.length > 0 ? results[0] : null;
-};
-
-export const deleteOutcomeIndicatorReportFormat = async (
-  id: string
-): Promise<IOutcomeIndicatorReportFormat> => {
-  return await prisma.outcomeIndicatorReportFormat.delete({
-    where: { outcomeIndicatorReportFormatId: id },
-  });
-};
 
 
 // ✅ Create or Update Output
@@ -658,6 +493,7 @@ export const createOrUpdateOutput = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId,
       },
     });
   } else {
@@ -673,6 +509,7 @@ export const createOrUpdateOutput = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
+        resultTypeId:payload.resultTypeId,
         updateAt: new Date(),
       },
     });
@@ -701,167 +538,6 @@ export const getOutputById = async (
 export const deleteOutput = async (outputId: string) => {
   await prisma.output.delete({
     where: { outputId },
-  });
-};
-
-
-// ✅ Create or Update OutputIndicator
-export const createOrUpdateOutputIndicator = async (
-  payload: IOutputIndicator,
-  isCreate: boolean
-) => {
-  if (isCreate) {
-    return await prisma.outputIndicator.create({
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        statement: payload.statement,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        disaggregation: payload.disaggregation,
-        baseLineDate: payload.baseLineDate,
-        cumulativeValue: payload.cumulativeValue,
-        baselineNarrative: payload.baselineNarrative,
-        targetDate: payload.targetDate,
-        cumulativeTarget: payload.cumulativeTarget,
-        targetNarrative: payload.targetNarrative,
-        targetType: payload.targetType,
-        responsiblePersons: payload.responsiblePersons,
-        outputId: payload.outputId,
-      },
-    });
-  } else {
-    if (!payload.outputIndicatorId) {
-      throw new Error("outputIndicatorId is required for update");
-    }
-
-    return await prisma.outputIndicator.update({
-      where: { outputIndicatorId: payload.outputIndicatorId },
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        statement: payload.statement,
-        linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
-        definition: payload.definition,
-        specificArea: payload.specificArea,
-        unitOfMeasure: payload.unitOfMeasure,
-        itemInMeasure: payload.itemInMeasure,
-        disaggregation: payload.disaggregation,
-        baseLineDate: payload.baseLineDate,
-        cumulativeValue: payload.cumulativeValue,
-        baselineNarrative: payload.baselineNarrative,
-        targetDate: payload.targetDate,
-        cumulativeTarget: payload.cumulativeTarget,
-        targetNarrative: payload.targetNarrative,
-        targetType: payload.targetType,
-        responsiblePersons: payload.responsiblePersons,
-        outputId: payload.outputId,
-        updateAt: new Date(),
-      },
-    });
-  }
-};
-
-// ✅ Get all OutputIndicators (from view)
-export const getAllOutputIndicators = async (): Promise<IOutputIndicatorView[]> => {
-  const indicators: IOutputIndicatorView[] = await prisma.$queryRaw`
-    SELECT * FROM output_indicator_view
-  `;
-  return indicators;
-};
-
-// ✅ Get OutputIndicator by Id (from view)
-export const getOutputIndicatorById = async (
-  outputIndicatorId: string
-): Promise<IOutputIndicatorView | null> => {
-  const rows: IOutputIndicatorView[] = await prisma.$queryRaw`
-    SELECT * FROM output_indicator_view WHERE "outputIndicatorId" = ${outputIndicatorId}
-  `;
-  return rows.length > 0 ? rows[0] : null;
-};
-
-// ✅ Delete OutputIndicator
-export const deleteOutputIndicator = async (outputIndicatorId: string) => {
-  await prisma.outputIndicator.delete({
-    where: { outputIndicatorId },
-  });
-};
-
-
-
-// ✅ Create or Update OutputIndicatorReportFormat
-export const createOrUpdateOutputIndicatorReportFormat = async (
-  payload: IOutputIndicatorReportFormat,
-  isCreate: boolean
-) => {
-  if (isCreate) {
-    return await prisma.outputIndicatorReportFormat.create({
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        indicatorStatement: payload.indicatorStatement,
-        responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        actualDate: payload.actualDate,
-        cumulativeActual: payload.cumulativeActual,
-        actualNarrative: payload.actualNarrative,
-        attachmentUrl: payload.attachmentUrl,
-        createAt: payload.createAt,
-        updateAt: new Date(),
-        outputIndicatorId: payload.outputIndicatorId,
-      },
-    });
-  } else {
-    if (!payload.outputIndicatorReportFormatId) {
-      throw new Error("outputIndicatorReportFormatId is required for update");
-    }
-
-    return await prisma.outputIndicatorReportFormat.update({
-      where: { outputIndicatorReportFormatId: payload.outputIndicatorReportFormatId },
-      data: {
-        indicatorSource: payload.indicatorSource,
-        thematicAreasOrPillar: payload.thematicAreasOrPillar,
-        indicatorStatement: payload.indicatorStatement,
-        responsiblePersons: payload.responsiblePersons,
-        disaggregationType: payload.disaggregationType,
-        actualDate: payload.actualDate,
-        cumulativeActual: payload.cumulativeActual,
-        actualNarrative: payload.actualNarrative,
-        attachmentUrl: payload.attachmentUrl,
-        createAt: payload.createAt,
-        updateAt: new Date(),
-        outputIndicatorId: payload.outputIndicatorId,
-      },
-    });
-  }
-};
-
-// ✅ Get All (from view)
-export const getAllOutputIndicatorReportFormats = async (): Promise<IOutputIndicatorReportFormatView[]> => {
-  return await prisma.$queryRaw<IOutputIndicatorReportFormatView[]>`
-    SELECT * FROM output_indicator_report_format_view
-  `;
-};
-
-// ✅ Get By Id (from view)
-export const getOutputIndicatorReportFormatById = async (
-  id: string
-): Promise<IOutputIndicatorReportFormatView | null> => {
-  const result = await prisma.$queryRaw<IOutputIndicatorReportFormatView[]>`
-    SELECT * 
-    FROM output_indicator_report_format_view 
-    WHERE outputIndicatorReportFormatId = ${id}
-  `;
-  return result.length > 0 ? result[0] : null;
-};
-
-// ✅ Delete
-export const deleteOutputIndicatorReportFormat = async (id: string) => {
-  return await prisma.outputIndicatorReportFormat.delete({
-    where: { outputIndicatorReportFormatId: id },
   });
 };
 
@@ -1045,4 +721,279 @@ export const deleteLogicalFramework = async (id: string) => {
   return await prisma.logicalFramework.delete({
     where: { logicalFrameworkId: id },
   });
+};
+
+export const getResultType = async () => {
+  return await prisma.resultType.findMany();
+};
+
+export const getAllDisaggregation = async () => {
+  return await prisma.disaggregation.findMany();
+};
+
+export const createOrUpdateGenderAggregation = async (
+  payload: IGenderDisaggregation,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.genderDisaggregation.create({
+      data: {
+        targetMale: Number(payload.targetMale),
+        targetFemale: Number(payload.targetFemale),
+        actualMale: Number(payload.actualMale),
+        actualFemale: Number(payload.actualFemale),
+        disaggregationId: payload.disaggregationId,
+        indicatorId: payload.indicatorId,
+      },
+    });
+  } else {
+    if (!payload.genderDisaggregationId) {
+      throw new Error("gender disaggregation Id is required for update");
+    }
+
+    return await prisma.genderDisaggregation.update({
+      where: { genderDisaggregationId: payload.genderDisaggregationId },
+      data: {
+        targetMale: Number(payload.targetMale),
+        targetFemale: Number(payload.targetFemale),
+        actualMale: Number(payload.actualMale),
+        actualFemale: Number(payload.actualFemale),
+        disaggregationId: payload.disaggregationId,
+        indicatorId: payload.indicatorId,
+      },
+    });
+  }
+};
+export const getGenderDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.genderDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateProductDisaggregation = async (
+  payload: Array<IProductDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.productDisaggregation.createMany({
+      data: payload.map(item => ({
+        ProductName: item.productName,
+        targetCount: Number(item.targetCount),
+        actualCount: Number(item.actualCount),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.productDisaggregation.update({
+        where: { productDisaggregationId: item.productDisaggregationId },
+        data: {
+          productName: item.productName,
+          targetCount: Number(item.targetCount),
+          actualCount: Number(item.actualCount),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getProductDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.productDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateDepartmentDisaggregation = async (
+  payload: Array<IDepartmentDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.departmentDisaggregation.createMany({
+      data: payload.map(item => ({
+        departmentName: item.departmentName,
+        targetCount: Number(item.targetCount),
+        actualCount: Number(item.actualCount),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.departmentDisaggregation.update({
+        where: { departmentDisaggregationId: item.departmentDisaggregationId },
+        data: {
+          departmentName: item.departmentName,
+          targetCount: Number(item.targetCount),
+          actualCount: Number(item.actualCount),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getDepartmentDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.departmentDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateStateDisaggregation = async (
+  payload: Array<IStateDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.stateDisaggregation.createMany({
+      data: payload.map(item => ({
+        stateName: item.stateName,
+        targetCount: Number(item.targetCount),
+        actualCount: Number(item.actualCount),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.stateDisaggregation.update({
+        where: { stateDisaggregationId: item.stateDisaggregationId },
+        data: {
+          stateName: item.stateName,
+          targetCount: Number(item.targetCount),
+          actualCount: Number(item.actualCount),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getStateDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.stateDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateLGADisaggregation = async (
+  payload: Array<ILgaDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.lgaDisaggregation.createMany({
+      data: payload.map(item => ({
+        lgaName: item.lgaName,
+        targetCount: Number(item.targetCount),
+        actualCount: Number(item.actualCount),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.lgaDisaggregation.update({
+        where: { lgaDisaggregationId: item.lgaDisaggregationId },
+        data: {
+          lgaName: item.lgaName,
+          targetCount: Number(item.targetCount),
+          actualCount: Number(item.actualCount),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getLGADisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.lgaDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateTenureDisaggregation = async (
+  payload: Array<ITenureDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.tenureDisaggregation.createMany({
+      data: payload.map(item => ({
+        tenureName: item.tenureName,
+        targetCount: Number(item.targetCount),
+        actualCount: Number(item.actualCount),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.tenureDisaggregation.update({
+        where: { tenureDisaggregationId: item.tenureDisaggregationId },
+        data: {
+          tenureName: item.tenureName,
+          targetCount: Number(item.targetCount),
+          actualCount: Number(item.actualCount),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getTenureDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.tenureDisaggregation.findMany({where:{indicatorId}});
+};
+
+export const createOrUpdateAgeDisaggregation = async (
+  payload: Array<IAgeDisaggregation>,
+  isCreate: boolean
+) => {
+  if (isCreate) {
+    return await prisma.ageDisaggregation.createMany({
+      data: payload.map(item => ({
+        targetFrom: Number(item.targetFrom),
+        targetTo: Number(item.targetTo),
+        actualFrom: Number(item.targetFrom),
+        actualTo: Number(item.targetTo),
+        disaggregationId: item.disaggregationId,
+        indicatorId: item.indicatorId,
+      }
+    )),
+    });
+  } else {
+   
+ // Bulk update using transaction
+    const updateOperations = payload.map((item) =>
+      prisma.ageDisaggregation.update({
+        where: { ageDisaggregationId: item.ageDisaggregationId },
+        data: {
+          targetFrom: Number(item.targetFrom),
+          targetTo: Number(item.targetTo),
+          actualFrom: Number(item.targetFrom),
+          actualTo: Number(item.targetTo),
+          disaggregationId: item.disaggregationId,
+          indicatorId: item.indicatorId,
+        },
+      })
+    );
+
+    return await prisma.$transaction(updateOperations);
+  }
+};
+export const getAgeDisaggregationByIndicatorId = async (indicatorId:string) => {
+  return await prisma.ageDisaggregation.findMany({where:{indicatorId}});
 };
