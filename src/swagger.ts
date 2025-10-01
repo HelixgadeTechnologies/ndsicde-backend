@@ -11,7 +11,8 @@ const options: swaggerJSDoc.Options = {
       version: "1.0.0",
       description: "API documentation for NDSICDE.",
     },
-    servers: [{ url: "https://ndsicde-backend-1.onrender.com/" }],
+    // servers: [{ url: "https://ndsicde-backend-1.onrender.com/" }],
+    servers: [{ url: "https://ndsicde-backend66.onrender.com/" }],
     // servers: [{ url: "http://localhost:8000/" }],
     tags: [
       { name: "Auth", description: "Authentication Endpoints" },
@@ -152,7 +153,7 @@ const options: swaggerJSDoc.Options = {
             },
             disaggregationId: {
               type: "string",
-               example: "uuid-1234-5678",
+              example: "uuid-1234-5678",
             },
             actualDate: {
               type: "string",
