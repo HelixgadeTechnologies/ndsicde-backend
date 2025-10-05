@@ -1920,7 +1920,7 @@ projectManagementRouter.get(
  * @swagger
  * /api/projectManagement/org_kpi_dashboard:
  *   get:
- *     summary: Get result dashboard data by PROJECT ID
+ *     summary: Get Org Kpi dashboard
  *     tags: [ORG KPI DASHBOARD]
  *     responses:
  *       200:
