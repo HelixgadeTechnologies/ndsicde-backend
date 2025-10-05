@@ -79,6 +79,7 @@ import {
   ITeamMember,
   ITenureDisaggregation,
 } from "../interface/projectManagementInterface";
+import { getOrgKpiDashboardData, getResultDashboardData } from "../service/kpiDashboardService";
 
 export const createOrUpdateProject = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
@@ -863,13 +864,13 @@ export const getDisaggregation = async (req: Request, res: Response) => {
     return res
       .status(200)
       .json(successResponse("Disaggregation retrieved", disaggregation));
-  } catch (error:any) {
+  } catch (error: any) {
     // console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
 };
 
-export const createOrUpdateGenderDisaggregationController = async(req: Request, res: Response) => {
+export const createOrUpdateGenderDisaggregationController = async (req: Request, res: Response) => {
   try {
     const { isCreate, payload } = req.body
 
@@ -881,7 +882,7 @@ export const createOrUpdateGenderDisaggregationController = async(req: Request, 
     return res
       .status(200)
       .json(successResponse("Gender disaggregation saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -901,7 +902,7 @@ export const getGenderDisaggregationByIndicatorController = async (req: Request,
     return res
       .status(200)
       .json(successResponse("Gender disaggregation retrieved", disaggregation));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -913,7 +914,7 @@ export const createOrUpdateProductDisaggregationController = async (req: Request
 
     if (!isCreate) {
       // Validate that each item has an ID for update
-      const missingId = payload.some((item:IProductDisaggregation) => !item.productDisaggregationId);
+      const missingId = payload.some((item: IProductDisaggregation) => !item.productDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -926,7 +927,7 @@ export const createOrUpdateProductDisaggregationController = async (req: Request
     return res
       .status(200)
       .json(successResponse("Product disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -946,7 +947,7 @@ export const getProductDisaggregationByIndicatorController = async (req: Request
     return res
       .status(200)
       .json(successResponse("Product disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -958,7 +959,7 @@ export const createOrUpdateDepartmentDisaggregationController = async (req: Requ
 
     if (!isCreate) {
       // Validate that each item has an ID for update
-      const missingId = payload.some((item:IDepartmentDisaggregation) => !item.departmentDisaggregationId);
+      const missingId = payload.some((item: IDepartmentDisaggregation) => !item.departmentDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -971,7 +972,7 @@ export const createOrUpdateDepartmentDisaggregationController = async (req: Requ
     return res
       .status(200)
       .json(successResponse("Department disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -991,7 +992,7 @@ export const getDepartmentDisaggregationByIndicatorController = async (req: Requ
     return res
       .status(200)
       .json(successResponse("Department disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1003,7 +1004,7 @@ export const createOrUpdateStateDisaggregationController = async (req: Request, 
 
     if (!isCreate) {
       // Validate that each item has an ID for update
-      const missingId = payload.some((item:IStateDisaggregation) => !item.stateDisaggregationId);
+      const missingId = payload.some((item: IStateDisaggregation) => !item.stateDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -1016,7 +1017,7 @@ export const createOrUpdateStateDisaggregationController = async (req: Request, 
     return res
       .status(200)
       .json(successResponse("State disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1036,7 +1037,7 @@ export const getStateDisaggregationByIndicatorController = async (req: Request, 
     return res
       .status(200)
       .json(successResponse("State disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1048,7 +1049,7 @@ export const createOrUpdateLGADisaggregationController = async (req: Request, re
 
     if (!isCreate) {
       // Validate that each item has an ID for update
-      const missingId = payload.some((item:ILgaDisaggregation) => !item.lgaDisaggregationId);
+      const missingId = payload.some((item: ILgaDisaggregation) => !item.lgaDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -1061,7 +1062,7 @@ export const createOrUpdateLGADisaggregationController = async (req: Request, re
     return res
       .status(200)
       .json(successResponse("LGA disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1081,7 +1082,7 @@ export const getLGADisaggregationByIndicatorController = async (req: Request, re
     return res
       .status(200)
       .json(successResponse("LGA disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1093,7 +1094,7 @@ export const createOrUpdateTenureDisaggregationController = async (req: Request,
 
     if (!isCreate) {
       // Validate IDs for update
-      const missingId = payload.some((item:ITenureDisaggregation) => !item.tenureDisaggregationId);
+      const missingId = payload.some((item: ITenureDisaggregation) => !item.tenureDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -1106,7 +1107,7 @@ export const createOrUpdateTenureDisaggregationController = async (req: Request,
     return res
       .status(200)
       .json(successResponse("Tenure disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1126,7 +1127,7 @@ export const getTenureDisaggregationByIndicatorController = async (req: Request,
     return res
       .status(200)
       .json(successResponse("Tenure disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1138,7 +1139,7 @@ export const createOrUpdateAgeDisaggregationController = async (req: Request, re
 
     if (!isCreate) {
       // Validate IDs for update
-      const missingId = payload.some((item:IAgeDisaggregation) => !item.ageDisaggregationId);
+      const missingId = payload.some((item: IAgeDisaggregation) => !item.ageDisaggregationId);
       if (missingId) {
         return res
           .status(400)
@@ -1151,7 +1152,7 @@ export const createOrUpdateAgeDisaggregationController = async (req: Request, re
     return res
       .status(200)
       .json(successResponse("Age disaggregations saved", result));
-  } catch (error:any) {
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }
@@ -1171,7 +1172,33 @@ export const getAgeDisaggregationByIndicatorController = async (req: Request, re
     return res
       .status(200)
       .json(successResponse("Age disaggregations retrieved", disaggregations));
-  } catch (error:any) {
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+export const getResultDashboardDataController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const dashboardData = await getResultDashboardData(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Data", dashboardData));
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+export const getOrgKpiDashboardDataController = async (req: Request, res: Response) => {
+  try {
+    
+    const dashboardData = await getOrgKpiDashboardData();
+
+    return res
+      .status(200)
+      .json(successResponse("Data", dashboardData));
+  } catch (error: any) {
     console.error(error);
     return res.status(500).json(errorResponse(error.message));
   }

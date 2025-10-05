@@ -132,7 +132,7 @@ export interface IIndicator {
 }
 
 export interface IIndicatorView {
-  impactIndicatorId: string;
+  indicatorId: string;
   indicatorSource?: string | null;
   thematicAreasOrPillar?: string | null;
   statement?: string | null;
@@ -344,11 +344,11 @@ export interface ILogicalFrameworkView {
   updateAt?: Date | null; // Last update timestamp
 }
 
-export interface IDisaggregation{
+export interface IDisaggregation {
   disaggregationId?: string;
-  disaggregationName?: string |null
+  disaggregationName?: string | null
 }
-export interface IGenderDisaggregation{
+export interface IGenderDisaggregation {
   genderDisaggregationId?: string;
   targetMale?: number | null;
   targetFemale?: number | null;
@@ -357,7 +357,7 @@ export interface IGenderDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface IProductDisaggregation{
+export interface IProductDisaggregation {
   productDisaggregationId?: string;
   productName?: string | null;
   targetCount?: number | null;
@@ -365,7 +365,7 @@ export interface IProductDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface IDepartmentDisaggregation{
+export interface IDepartmentDisaggregation {
   departmentDisaggregationId?: string;
   departmentName?: string | null;
   targetCount?: number | null;
@@ -373,7 +373,7 @@ export interface IDepartmentDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface IStateDisaggregation{
+export interface IStateDisaggregation {
   stateDisaggregationId?: string;
   stateName?: string | null;
   targetCount?: number | null;
@@ -381,7 +381,7 @@ export interface IStateDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface ILgaDisaggregation{
+export interface ILgaDisaggregation {
   lgaDisaggregationId?: string;
   lgaName?: string | null;
   targetCount?: number | null;
@@ -389,7 +389,7 @@ export interface ILgaDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface ITenureDisaggregation{
+export interface ITenureDisaggregation {
   tenureDisaggregationId?: string;
   tenureName?: string | null;
   targetCount?: number | null;
@@ -397,7 +397,7 @@ export interface ITenureDisaggregation{
   disaggregationId?: string | null;
   indicatorId?: string | null;
 }
-export interface IAgeDisaggregation{
+export interface IAgeDisaggregation {
   ageDisaggregationId?: string;
   targetFrom?: number | null;
   targetTo?: number | null;

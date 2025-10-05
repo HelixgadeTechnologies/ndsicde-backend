@@ -48,9 +48,11 @@ import {
   getIndicatorReportsByResult,
   getLGADisaggregationByIndicatorController,
   getLogicalFrameworkByIdController,
+  getOrgKpiDashboardDataController,
   getOutcomeByIdController,
   getOutputByIdController,
   getProductDisaggregationByIndicatorController,
+  getResultDashboardDataController,
   getTenureDisaggregationByIndicatorController,
   removeIndicatorReport,
   removeProject,
@@ -518,7 +520,7 @@ projectManagementRouter.delete("/impact/:id", deleteImpactController);
  *       500:
  *         description: Server error
  */
- projectManagementRouter.get("/disaggregation", getDisaggregation);
+projectManagementRouter.get("/disaggregation", getDisaggregation);
 
 /**
  * @swagger
@@ -1889,6 +1891,46 @@ projectManagementRouter.get(
 projectManagementRouter.delete(
   "/logical_framework/:id",
   deleteLogicalFrameworkController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/result_dashboard/{projectId}:
+ *   get:
+ *     summary: Get result dashboard data by PROJECT ID
+ *     tags: [RESULT DASHBOARD]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: PROJECT ID
+ *     responses:
+ *       200:
+ *         description: data
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/result_dashboard/:projectId",
+  getResultDashboardDataController
+);
+/**
+ * @swagger
+ * /api/projectManagement/org_kpi_dashboard:
+ *   get:
+ *     summary: Get result dashboard data by PROJECT ID
+ *     tags: [ORG KPI DASHBOARD]
+ *     responses:
+ *       200:
+ *         description: data
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/org_kpi_dashboard",
+  getOrgKpiDashboardDataController
 );
 
 export default projectManagementRouter;
