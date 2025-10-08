@@ -79,7 +79,7 @@ import {
   ITeamMember,
   ITenureDisaggregation,
 } from "../interface/projectManagementInterface";
-import { getOrgKpiDashboardData, getResultDashboardData } from "../service/kpiDashboardService";
+import { getOrgKpiDashboardData, getProjectActivityDashboardData, getResultDashboardData } from "../service/kpiDashboardService";
 
 export const createOrUpdateProject = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
@@ -1194,6 +1194,21 @@ export const getOrgKpiDashboardDataController = async (req: Request, res: Respon
   try {
     
     const dashboardData = await getOrgKpiDashboardData();
+
+    return res
+      .status(200)
+      .json(successResponse("Data", dashboardData));
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+export const getProjectActivityDashboardDataController = async (req: Request, res: Response) => {
+  try {
+
+     const { projectId } = req.params;
+    const dashboardData = await getProjectActivityDashboardData(projectId);
+
 
     return res
       .status(200)

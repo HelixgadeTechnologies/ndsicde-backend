@@ -52,6 +52,7 @@ import {
   getOutcomeByIdController,
   getOutputByIdController,
   getProductDisaggregationByIndicatorController,
+  getProjectActivityDashboardDataController,
   getResultDashboardDataController,
   getTenureDisaggregationByIndicatorController,
   removeIndicatorReport,
@@ -1916,6 +1917,8 @@ projectManagementRouter.get(
   "/result_dashboard/:projectId",
   getResultDashboardDataController
 );
+
+
 /**
  * @swagger
  * /api/projectManagement/org_kpi_dashboard:
@@ -1931,6 +1934,31 @@ projectManagementRouter.get(
 projectManagementRouter.get(
   "/org_kpi_dashboard",
   getOrgKpiDashboardDataController
+);
+
+
+/**
+ * @swagger
+ * /api/projectManagement/project_activity_dashboard/{projectId}:
+ *   get:
+ *     summary: Get project activity dashboard data by PROJECT ID
+ *     tags: [RESULT DASHBOARD]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: PROJECT ID
+ *     responses:
+ *       200:
+ *         description: data
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/project_activity_dashboard/:projectId",
+  getProjectActivityDashboardDataController
 );
 
 export default projectManagementRouter;

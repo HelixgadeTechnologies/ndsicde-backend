@@ -1,20 +1,10 @@
 import { Prisma, PrismaClient, Project } from '@prisma/client';
 import { IIndicatorView } from "../interface/projectManagementInterface";
 import { ArchiveApiOptions } from 'cloudinary';
+import { IKpiDashboardData, IKpiDashboardOutput } from '../interface/dashboardInterface';
 const prisma = new PrismaClient();
 
-export interface IKpiDashboardData {
-    projectId: string,
-    resultTypeId: string,
-    disaggregationId: string,
-    data: void | any[]
-}
-export interface IKpiDashboardOutput {
-    INDICATOR_STATUS: void | any[],
-    INDICATOR_DATA: Array<IKpiDashboardData>,
-    AVERAGE_INDICATOR_PERFORMANCE: void | any[],
-    INDICATOR_PERFORMANCE: void | any[],
-}
+
 
 function normalizeBigInts<T>(data: T): T {
     if (Array.isArray(data)) {
@@ -460,4 +450,87 @@ export async function getOrgKpiDashboardData() {
 
     // console.log("result", section)
     return section;
+}
+
+
+async function callProjectActivityProcedure(option: number, projectId: string): Promise<void | any[]> {
+    const raws = await prisma.$queryRawUnsafe<any[]>(
+        `CALL GetProjectActivityFinanceDashboard(?,?)`,
+        option,
+        projectId
+    );
+    // console.log(selectedYear,selectedState)
+    // console.log(raws)
+
+    const cleaned = normalizeBigInts(raws);
+    if (option == 1) {
+        return cleaned.map((row: any) => ({
+            ["totalProjects"]: Number(row.f0),
+            ["underBudgetProjects"]: Number(row.f1),
+            ["overBudgetProjects"]: Number(row.f2),
+            ["onBudgetProjects"]: Number(row.f3),
+            ["underBudgetPercentage"]: Number(row.f4),
+            ["overBudgetPercentage"]: Number(row.f5),
+            ["onBudgetPercentage"]: Number(row.f6),
+        }));
+
+    } else if (option == 2) {
+        return cleaned.map((row: any) => ({
+            ["projectId"]: String(row.f0),
+            ["implementationTimeAnalysis"]: String(row.f1),
+            ["totalActivities"]: Number(row.f2),
+            ["percentage"]: Number(row.f3),
+        }));
+    } else if (option == 3) {
+        return cleaned.map((row: any) => ({
+            ["activityId"]: String(row.f0),
+            ["outputId"]: String(row.f1),
+            ["projectId"]: String(row.f2),
+            ["activityStatement"]: String(row.f3),
+            ["activityPlannedStartDate"]: row.f4,
+            ["activityPlannedEndDate"]: row.f5,
+            ["activityActualStartDate"]: row.f6,
+            ["activityActualEndDate"]: row.f7,
+            ["activityCompletionRate"]: Number(row.f8),
+            ["budgetAtCompletion"]: Number(row.f9),
+            ["actualCost"]: Number(row.f10),
+            ["totalActivityPlannedDays"]: Number(row.f11),
+            ["totalActivitySpentDays"]: Number(row.f12),
+            ["daysVariance"]: Number(row.f13),
+            ["percentageDaysSpent"]: Number(row.f14),
+            ["earnedValue"]: Number(row.f15),
+            ["plannedValue"]: Number(row.f16),
+            ["costVariance"]: Number(row.f17),
+            ["scheduleVariance"]: Number(row.f18),
+            ["costPerformanceIndex"]: Number(row.f19),
+            ["schedulePerformanceIndex"]: Number(row.f20),
+            ["burnRate"]: String(row.f21),
+            ["costPerformanceStatus"]: String(row.f22),
+            ["schedulePerformanceStatus"]: String(row.f23),
+            ["implementationTimeAnalysis"]: String(row.f24),
+        }));
+    } else {
+        return []
+    }
+}
+
+export async function getProjectActivityDashboardData(projectId:string) {
+ const keys = [
+        'PROJECT_BUDGET_PERFORMANCE_SUMMARY',
+        'IMPLEMENTATION_TIME_ANALYSIS',
+        'ACTIVITY_FINANCIAL_DATA'
+    ];
+
+    const finalResult: Record<string, any> = {};
+
+    for (let index = 0; index < keys.length; index++) {
+        const result = await callProjectActivityProcedure(index + 1, projectId);
+        finalResult[keys[index]] = result;
+
+        // if(index == 19 || index == 20) {
+        //     console.log(result)
+        // }
+    }
+    // console.log("result", finalResult)
+    return finalResult;
 }
