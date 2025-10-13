@@ -1942,7 +1942,7 @@ projectManagementRouter.get(
  * /api/projectManagement/project_activity_dashboard/{projectId}:
  *   get:
  *     summary: Get project activity dashboard data by PROJECT ID
- *     tags: [RESULT DASHBOARD]
+ *     tags: [PROJECT ACTIVITY DASHBOARD]
  *     parameters:
  *       - in: path
  *         name: projectId
