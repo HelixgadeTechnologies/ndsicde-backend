@@ -88,7 +88,6 @@ export const deleteRequestController = async (
 
     if (!result) {
       return res.status(404).json(notFoundResponse("Request not found", null));
-      
     }
 
     return res

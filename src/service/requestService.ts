@@ -98,3 +98,12 @@ export const deleteRequest = async (requestId: string) => {
     where: { requestId },
   });
 };
+
+export const requestApproval = async (requestId: string, userId:string, approvedBy:string)=>{
+  try {
+    const request = prisma.request.findUnique({where:{requestId}});
+    
+  } catch (error) {
+    console.log(error)
+  }
+};

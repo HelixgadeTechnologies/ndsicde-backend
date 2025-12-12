@@ -50,11 +50,24 @@ export const deleteStrategicObjective = async (
 };
 
 export const getAllStrategicObjectives = async () => {
-  const strategicObjectivesWithCount: Array<IStrategicObjectiveView> =
-    await prisma.$queryRaw`
-  SELECT * FROM strategic_objective_view
-`;
-  return strategicObjectivesWithCount;
+  try {
+    const strategicObjectivesWithCount: Array<IStrategicObjectiveView> =
+      await prisma.$queryRaw`
+    SELECT * FROM strategic_objective_view
+  `;
+
+    // Convert BigInt values to numbers for JSON serialization
+    const result = strategicObjectivesWithCount.map((obj: any) => ({
+      ...obj,
+      linkedKpi: obj.linkedKpi ? Number(obj.linkedKpi) : 0,
+    }));
+
+    console.log(result);
+    return result;
+  } catch (error: any) {
+    console.error("Error fetching strategic objectives:", error);
+    throw error;
+  }
 };
 
 export const getStrategicObjectiveById = async (id: string) => {
