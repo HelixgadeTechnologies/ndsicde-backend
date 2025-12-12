@@ -81,7 +81,7 @@ model StrategicObjective {
   kpi                  Kpi[]
   project              Project[]
 
-  @@map("strategicObjective")
+  @@map("strategic_objective")
 }
 
 model Kpi {
@@ -326,10 +326,10 @@ model TenureDisaggregation {
 
 model AgeDisaggregation {
   ageDisaggregationId String          @id @default(uuid())
-  targetFrom                Int?
-  targetTo                  Int?
-  actualFrom                Int?
-  actualTo                  Int?
+  targetFrom          Int?
+  targetTo            Int?
+  actualFrom          Int?
+  actualTo            Int?
   Disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
   disaggregationId    String?
   indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])

@@ -10,27 +10,33 @@ export const saveStrategicObjective = async (
   data: IStrategicObjective,
   isCreate: boolean
 ) => {
-  if (isCreate) {
-    return await prisma.strategicObjective.create({
+  try {
+    if (isCreate) {
+      return await prisma.strategicObjective.create({
+        data: {
+          statement: data.statement ?? null,
+          thematicAreas: data.thematicAreas ?? null,
+          pillarLead: data.pillarLead ?? null,
+          status: data.status ?? null,
+        },
+      });
+    }
+
+    return await prisma.strategicObjective.update({
+      where: { strategicObjectiveId: data.strategicObjectiveId },
       data: {
         statement: data.statement ?? null,
         thematicAreas: data.thematicAreas ?? null,
         pillarLead: data.pillarLead ?? null,
         status: data.status ?? null,
+        updateAt: new Date(),
       },
     });
-  }
 
-  return await prisma.strategicObjective.update({
-    where: { strategicObjectiveId: data.strategicObjectiveId },
-    data: {
-      statement: data.statement ?? null,
-      thematicAreas: data.thematicAreas ?? null,
-      pillarLead: data.pillarLead ?? null,
-      status: data.status ?? null,
-      updateAt: new Date(),
-    },
-  });
+  } catch (error: any) {
+    // console.error("Error saving strategic objective:", error);
+    throw error;
+  }
 };
 
 export const deleteStrategicObjective = async (
@@ -62,10 +68,10 @@ export const getAllStrategicObjectives = async () => {
       linkedKpi: obj.linkedKpi ? Number(obj.linkedKpi) : 0,
     }));
 
-    console.log(result);
+    // console.log(result);
     return result;
   } catch (error: any) {
-    console.error("Error fetching strategic objectives:", error);
+    // console.error("Error fetching strategic objectives:", error);
     throw error;
   }
 };
