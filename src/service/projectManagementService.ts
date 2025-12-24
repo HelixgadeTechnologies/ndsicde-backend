@@ -48,6 +48,7 @@ export const saveProject = async (
   if (isCreate) {
     return await prisma.project.create({
       data: {
+        projectName: data.projectName ?? null,
         budgetCurrency: data.budgetCurrency ?? null,
         totalBudgetAmount: data.totalBudgetAmount ?? null,
         startDate: data.startDate ?? undefined,
@@ -66,6 +67,7 @@ export const saveProject = async (
   return await prisma.project.update({
     where: { projectId: data.projectId },
     data: {
+      projectName: data.projectName ?? null,
       budgetCurrency: data.budgetCurrency ?? null,
       totalBudgetAmount: data.totalBudgetAmount ?? null,
       startDate: data.startDate ?? undefined,
