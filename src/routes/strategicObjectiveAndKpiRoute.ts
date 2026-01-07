@@ -5,6 +5,7 @@ import {
   fetchAllKpis,
   fetchAllStrategicObjectives,
   fetchKpiById,
+  fetchKpiByStrategicObjectiveId,
   fetchStrategicObjectiveById,
   removeKpi,
   removeStrategicObjective,
@@ -273,6 +274,6 @@ strategicObjectiveRouter.get("/kpi/:id", fetchKpiById);
  *       500:
  *         description: Server error
  */
-strategicObjectiveRouter.get("/kpi/stId/:strategicObjectiveId", fetchKpiById);
+strategicObjectiveRouter.get("/kpi/stId/:strategicObjectiveId", fetchKpiByStrategicObjectiveId);
 
 export default strategicObjectiveRouter;

@@ -119,19 +119,19 @@ export const saveKpi = async (data: IKpi, isCreate: boolean) => {
 };
 
 export const deleteKpi = async (kpiId: string) => {
-  return prisma.kpi.delete({ where: { kpiId } });
+  return await prisma.kpi.delete({ where: { kpiId } });
 };
 
 export const getAllKpis = async () => {
-  return prisma.kpi.findMany();
+  return await prisma.kpi.findMany();
 };
 
 export const getKpiById = async (kpiId: string) => {
-  return prisma.kpi.findUnique({ where: { kpiId } });
+  return await prisma.kpi.findUnique({ where: { kpiId } });
 };
 
 export const getKpiByStrategicObjectiveId = async (
   strategicObjectiveId: string
 ) => {
-  return prisma.kpi.findMany({ where: { strategicObjectiveId } });
+  return await prisma.kpi.findMany({ where: { strategicObjectiveId } });
 };
