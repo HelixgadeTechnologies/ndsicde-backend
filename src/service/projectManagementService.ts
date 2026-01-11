@@ -122,11 +122,17 @@ export const createOrUpdateTeamMember = async (
   payload: ITeamMember,
   isCreate: boolean
 ) => {
+  const existingUser = await prisma.user.findUnique({ where: { email: payload.email } });
+  if (!existingUser) {
+    throw new Error("User not found");
+  }
   if (isCreate) {
     // CREATE
     return await prisma.teamMember.create({
       data: {
-        email: payload.email,
+        userId: existingUser.userId,
+        fullName: String(existingUser.fullName),
+        email: String(existingUser.email),
         roleId: payload.roleId,
         projectId: payload.projectId,
       },
@@ -139,7 +145,9 @@ export const createOrUpdateTeamMember = async (
     return await prisma.teamMember.update({
       where: { teamMemberId: payload.teamMemberId },
       data: {
-        email: payload.email,
+        userId: existingUser.userId,
+        fullName: String(existingUser.fullName),
+        email: String(existingUser.email),
         roleId: payload.roleId,
         projectId: payload.projectId,
         updateAt: new Date(),

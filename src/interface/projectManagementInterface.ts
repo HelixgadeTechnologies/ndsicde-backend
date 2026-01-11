@@ -51,6 +51,8 @@ export interface ITeamMember {
 
 export interface ITeamMemberView {
   teamMemberId: string;
+  userId: string;
+  fullName: string;
   email: string;
   roleId: string;
   roleName: string | null; // because LEFT JOIN may return null
