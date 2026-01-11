@@ -124,7 +124,7 @@ export const createOrUpdateTeamMember = async (
 ) => {
   const existingUser = await prisma.user.findUnique({ where: { email: payload.email } });
   if (!existingUser) {
-    throw new Error("User not found");
+    throw new Error("No user found with this email");
   }
   if (isCreate) {
     // CREATE
