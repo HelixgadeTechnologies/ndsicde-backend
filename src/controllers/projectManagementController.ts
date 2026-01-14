@@ -492,13 +492,9 @@ export const removeIndicatorReport = async (
 
 // Create or Update
 export const saveOutcomeController = async (req: Request, res: Response) => {
-  // const { isCreate } = req.body; // expects ?isCreate=true/false
-  // const payload: IOutcome = req.body;
-  const { isCreate, payload }: { isCreate: boolean; payload: IOutcome } =
-    req.body;
-
+  const { isCreate, data }: { isCreate: boolean; data: IOutcome } = req.body;
   try {
-    const result = await saveOutcome(payload, isCreate);
+    const result = await saveOutcome(data, isCreate);
 
     res
       .status(200)

@@ -432,35 +432,40 @@ export const saveOutcome = async (
   payload: IOutcome,
   isCreate: boolean
 ): Promise<IOutcome> => {
-  if (isCreate) {
-    return await prisma.outcome.create({
-      data: {
-        outcomeStatement: payload.outcomeStatement,
-        outcomeType: payload.outcomeType,
-        impactId: payload.impactId,
-        thematicAreas: payload.thematicAreas,
-        responsiblePerson: payload.responsiblePerson,
-        projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId,
-      },
-    });
-  } else {
-    if (!payload.outcomeId) {
-      throw new Error("Outcome ID is required for update.");
+  try {
+    if (isCreate) {
+      return await prisma.outcome.create({
+        data: {
+          outcomeStatement: payload.outcomeStatement,
+          outcomeType: payload.outcomeType,
+          impactId: payload.impactId,
+          thematicAreas: payload.thematicAreas,
+          responsiblePerson: payload.responsiblePerson,
+          projectId: payload.projectId,
+          resultTypeId: payload.resultTypeId,
+        },
+      });
+    } else {
+      if (!payload.outcomeId) {
+        throw new Error("Outcome ID is required for update.");
+      }
+
+      return await prisma.outcome.update({
+        where: { outcomeId: payload.outcomeId },
+        data: {
+          outcomeStatement: payload.outcomeStatement,
+          outcomeType: payload.outcomeType,
+          impactId: payload.impactId,
+          thematicAreas: payload.thematicAreas,
+          responsiblePerson: payload.responsiblePerson,
+          projectId: payload.projectId,
+          resultTypeId: payload.resultTypeId,
+          updateAt: new Date(),
+        },
+      });
     }
-    return await prisma.outcome.update({
-      where: { outcomeId: payload.outcomeId },
-      data: {
-        outcomeStatement: payload.outcomeStatement,
-        outcomeType: payload.outcomeType,
-        impactId: payload.impactId,
-        thematicAreas: payload.thematicAreas,
-        responsiblePerson: payload.responsiblePerson,
-        projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId,
-        updateAt: new Date(),
-      },
-    });
+  } catch (error) {
+    throw error; // ✅ IMPORTANT
   }
 };
 

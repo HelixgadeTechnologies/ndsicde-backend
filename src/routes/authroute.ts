@@ -47,7 +47,7 @@ const authRoutes: Router = Router();
  *                       example: "123456"
  *                     email:
  *                       type: string
- *                       example: "user@example.com"
+ *                       example: "neutron22@example.com"
  *                     token:
  *                       type: string
  *                       example: "jwt-token-string"
