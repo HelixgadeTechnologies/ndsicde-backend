@@ -390,7 +390,7 @@ export const getAllIndicatorReportCommentsService = async () => {
             indicatorReportCommentId: true,
             indicatorReportId: true,
             comment: true,
-            // createAt: true,
+            createAt: true,
             updateAt: true
         }
     });
