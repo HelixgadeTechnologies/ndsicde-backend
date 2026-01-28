@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { deleteUser, fetchAllUsers, fetchUserById, forgotPasswordController, login, register, test, updateLogInUser, updateUserProfilePicture } from "../controllers/authController";
+import { changePasswordController } from "../controllers/managementAndStaffControlleer";
 
 const authRoutes: Router = Router();
 /**
@@ -161,6 +162,47 @@ authRoutes.put("/update-login-user", updateLogInUser);
  *         description: Unauthorized (user not authenticated)
  */
 authRoutes.put("/profile-picture", updateUserProfilePicture);
+
+/**
+ * @swagger
+ * /api/auth/change-password:
+ *   patch:
+ *     summary: Change user password
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - oldPassword
+ *               - newPassword
+ *               - confirmPassword
+ *             properties:
+ *               oldPassword:
+ *                 type: string
+ *                 example: OldPassword123!
+ *               newPassword:
+ *                 type: string
+ *                 example: NewPassword123!
+ *               confirmPassword:
+ *                 type: string
+ *                 example: NewPassword123!
+ *     responses:
+ *       200:
+ *         description: Password changed successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
+authRoutes.patch(
+    "/change-password",
+    changePasswordController
+);
 
 
 /**

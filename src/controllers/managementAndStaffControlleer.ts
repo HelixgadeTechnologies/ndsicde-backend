@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { createIndicatorReportCommentService, getAllIndicatorReportCommentsService, getBudgetUtilizationService, getCommentsByIndicatorReportIdService, getDashboardSummaryService, getIndicatorReportsService, getKpiPerformanceService, getProjectsService, getProjectStatusDistributionService } from "../service/managementAndStaffService";
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
+import { changePassword } from "../service/authService";
 
 
 export const getDashboardSummary = async (
@@ -220,5 +221,37 @@ export const getAllIndicatorReportCommentsController = async (
       .json(successResponse("Comments fetched successfully", comments));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+
+export const changePasswordController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const userId = req.user?.userId;
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    if (!userId) {
+      return res
+        .status(404)
+        .json(notFoundResponse("User not found", null));
+    }
+
+    const result = await changePassword(
+      userId,
+      oldPassword,
+      newPassword,
+      confirmPassword
+    );
+
+    return res
+      .status(200)
+      .json(successResponse(result.message, null));
+  } catch (error: any) {
+    return res
+      .status(500)
+      .json(errorResponse(error.message));
   }
 };

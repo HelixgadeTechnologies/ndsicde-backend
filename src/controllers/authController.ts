@@ -40,12 +40,13 @@ export const fetchUserById = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json(notFoundResponse("User not found", undefined));
+      }
+      res.status(200).json(successResponse("User found", user));
+    } catch (err: any) {
+      res.status(500).json(errorResponse("Internal server error", err));
     }
-    res.status(200).json(successResponse("User found", user));
-  } catch (err: any) {
-    res.status(500).json(errorResponse("Internal server error", err));
-  }
-};
+  };
+ 
 
 export const fetchAllUsers = async (_req: Request, res: Response) => {
   try {
@@ -233,3 +234,5 @@ export const fetchGeneralSettings = async (_req: Request, res: Response) => {
 export const test = async (req: Request, res: Response) => {
   res.send("NDSICDE API WORKING");
 };
+
+
