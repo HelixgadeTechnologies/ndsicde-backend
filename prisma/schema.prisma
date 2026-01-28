@@ -134,10 +134,10 @@ model Project {
 
 model TeamMember {
   teamMemberId String    @id @default(uuid())
-  userId       String
-  fullName     String
-  email        String
-  roleId       String
+  userId       String?
+  fullName     String?
+  email        String?
+  roleId       String?
   project      Project?  @relation(fields: [projectId], references: [projectId])
   projectId    String?
   createAt     DateTime? @default(now())
@@ -380,27 +380,40 @@ model Indicator {
 
 //indicator report
 model IndicatorReport {
-  indicatorReportId     String          @id @default(uuid())
-  indicatorSource       String?
-  thematicAreasOrPillar String?
-  indicatorStatement    String?
-  responsiblePersons    String?
-  Disaggregation        Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId      String?
-  actualDate            DateTime?
-  cumulativeActual      String?
-  actualNarrative       String?
-  attachmentUrl         String?
-  status                String?
-  createAt              DateTime?       @default(now())
-  updateAt              DateTime?       @default(now())
-  indicator             Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId           String?
-  ResultType            ResultType?     @relation(fields: [resultTypeId], references: [resultTypeId])
-  resultTypeId          String?
+  indicatorReportId      String                   @id @default(uuid())
+  indicatorSource        String?
+  thematicAreasOrPillar  String?
+  indicatorStatement     String?
+  responsiblePersons     String?
+  Disaggregation         Disaggregation?          @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId       String?
+  actualDate             DateTime?
+  cumulativeActual       String?
+  actualNarrative        String?
+  attachmentUrl          String?
+  status                 String?
+  createAt               DateTime?                @default(now())
+  updateAt               DateTime?                @default(now())
+  indicator              Indicator?               @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId            String?
+  ResultType             ResultType?              @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId           String?
+  indicatorReportComment IndicatorReportComment[]
 
   @@map("indicator_report")
 }
+
+model IndicatorReportComment {
+  indicatorReportCommentId String           @id @default(uuid()) @db.VarChar(191)
+  IndicatorReport          IndicatorReport? @relation(fields: [indicatorReportId], references: [indicatorReportId])
+  indicatorReportId        String?          @db.VarChar(191)
+  comment                  String?          @db.VarChar(255)
+  createAt                 DateTime?        @default(now()) @map("createAt") @db.DateTime(3)
+  updateAt                 DateTime?        @default(now()) @map("updateAt") @db.DateTime(3)
+
+  @@map("indicator_report_comment")
+}
+
 
 // ACTIVITY RELATION
 

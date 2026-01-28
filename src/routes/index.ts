@@ -6,6 +6,7 @@ import strategicObjectiveRouter from "./strategicObjectiveAndKpiRoute";
 import projectManagementRouter from "./projectManagementRoute";
 import userManagementRoutes from "./userManagementRoute";
 import requestRouter from "./requestRoute";
+import managementAndStaffRouter from "./managementAndStaffRoute";
 
 const rootRoutes: Router = Router();
 
@@ -16,5 +17,6 @@ rootRoutes.use("/strategic-objectivesAndKpi", strategicObjectiveRouter);
 rootRoutes.use("/projectManagement", projectManagementRouter);
 rootRoutes.use("/userManagement", userManagementRoutes);
 rootRoutes.use("/request", requestRouter);
+rootRoutes.use("/managementAndStaff", managementAndStaffRouter);
 
 export default rootRoutes;
