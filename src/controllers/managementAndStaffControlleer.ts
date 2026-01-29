@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createIndicatorReportCommentService, getAllIndicatorReportCommentsService, getBudgetUtilizationService, getCommentsByIndicatorReportIdService, getDashboardSummaryService, getIndicatorReportsService, getKpiPerformanceService, getProjectsService, getProjectStatusDistributionService } from "../service/managementAndStaffService";
+import { createIndicatorReportCommentService, getAllIndicatorReportCommentsService, getAllIndicatorReportsService, getBudgetUtilizationService, getCommentsByIndicatorReportIdService, getDashboardSummaryService, getKpiPerformanceService, getProjectsService, getProjectStatusDistributionService } from "../service/managementAndStaffService";
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
 import { changePassword } from "../service/authService";
 
@@ -145,25 +145,25 @@ export const getBudgetUtilization = async (
   }
 };
 
-
-export const getIndicatorReportsController = async (
-  req: Request,
-  res: Response
-) => {
+export const getAllIndicatorReports = async (req: Request, res: Response) => {
   try {
-    const result = await getIndicatorReportsService(req.query);
-
-    if (!result.data.length) {
+    const reports = await getAllIndicatorReportsService();
+    
+    // Check if no reports found
+    if (!reports || reports.length === 0) {
       return res
         .status(404)
-        .json(notFoundResponse("No reports found", null));
+        .json(notFoundResponse("No indicator reports found", []));
     }
-
+    
     return res
       .status(200)
-      .json(successResponse("Reports fetched successfully", result));
+      .json(successResponse("Indicator reports fetched successfully", reports));
   } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
+    console.error('Controller error:', error);
+    return res
+      .status(500)
+      .json(errorResponse(error.message || "Failed to fetch indicator reports"));
   }
 };
 
@@ -176,10 +176,11 @@ export const createIndicatorReportCommentController = async (
     return res
       .status(201)
       .json(successResponse("Comment created successfully", result));
-  } catch (error: any) {
+    } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
-  }
+}
 };
+
 
 export const getCommentsByIndicatorReportIdController = async (
   req: Request,

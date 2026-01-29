@@ -223,122 +223,79 @@ export const getBudgetUtilizationService = async () => {
 };
 
 
-interface IndicatorReportQuery {
-    search?: string;
-    status?: string;
-    impact?: string;
-    output?: string;
-    outcome?: string;
-    activity?: string;
-    page?: number;
-    limit?: number;
-}
-
-export const getIndicatorReportsService = async (
-    query: IndicatorReportQuery
-) => {
-    const {
-        search,
-        status,
-        impact,
-        outcome,
-        output,
-        page = 1,
-        limit = 10
-    } = query;
-
-    const pageNumber = Number(page) > 0 ? Number(page) : 1;
-    const pageLimit = Number(limit) > 0 ? Number(limit) : 10;
-
-    const where: Prisma.IndicatorReportWhereInput = {
-        ...(status && { status }),
-
-        ...(search && {
-            indicatorStatement: {
-                contains: search
-            }
-        }),
-
-        // ✅ IMPACT filter (ResultType → Impact)
-        ...(impact && {
-            ResultType: {
-                resultTypeId: impact
-            }
-        }),
-
-        // ✅ OUTCOME filter (IndicatorReport → Indicator → Outcome)
-        ...(outcome && {
-            Indicator: {
-                outcome: {
-                    some: {
-                        ResultType: {
-                            resultTypeId: outcome
-                        }
-                    }
-                }
-            }
-        }),
-
-        // ✅ OUTPUT filter (IndicatorReport → Indicator → Outcome → Output)
-        ...(output && {
-            Indicator: {
-                outcome: {
-                    some: {
-                        output: {
-                            some: {
-                                ResultType: {
-                                    resultTypeId: output
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        })
-    };
-
-    const [data, total] = await Promise.all([
-        prisma.indicatorReport.findMany({
-            where,
-            skip: (pageNumber - 1) * pageLimit,
-            take: pageLimit,
-            orderBy: { createAt: "desc" },
-            select: {
-                indicatorReportId: true,
-                indicatorStatement: true,
-                thematicAreasOrPillar: true,
-                status: true,
-                createAt: true,
-                cumulativeActual: true,
-                indicator: {
-                    select: {
-                        cumulativeTarget: true
-                    }
-                }
-            }
-        }),
-        prisma.indicatorReport.count({ where })
-    ]);
-
-    const formatted = data.map((report) => {
-        const actual = Number(report.cumulativeActual || 0);
-        const target = Number(report.indicator?.cumulativeTarget || 0);
-
-        return {
-            ...report,
-            kpiStatus: actual >= target ? "Met" : "Not Met"
-        };
+export const getAllIndicatorReportsService = async () => {
+  try {
+    // Fetch all indicator reports with ResultType included
+    const reports = await prisma.indicatorReport.findMany({
+      include: {
+        // Include indicator for KPI calculation
+        indicator: {
+          select: {
+            cumulativeTarget: true
+          }
+        },
+        // Include ResultType to get resultName
+        ResultType: {
+          select: {
+            resultName: true,
+            resultTypeId: true
+          }
+        }
+      }
     });
 
-    return {
-        data: formatted,
-        pagination: {
-            total,
-            page: pageNumber,
-            limit: pageLimit,
-            totalPages: Math.ceil(total / pageLimit)
-        }
-    };
+    // Format the data
+    const formattedReports = reports.map((report) => {
+      const actual = Number(report.cumulativeActual || 0);
+      const target = Number(report.indicator?.cumulativeTarget || 0);
+      
+      // Calculate KPI status
+      let kpiStatus = "Not Met";
+      if (actual >= target && target > 0) {
+        kpiStatus = "Met";
+      } else if (target === 0) {
+        kpiStatus = "N/A";
+      }
+
+      return {
+        // From UI screenshot columns
+        reportId: report.indicatorReportId,
+        reportTitle: report.indicatorStatement || "Untitled Report",
+        project: report.thematicAreasOrPillar || "No Project",
+        dateGenerated: report.createAt 
+          ? new Date(report.createAt).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })
+          : "N/A",
+        status: report.status || "Pending",
+        kpiStatus: kpiStatus,
+        
+        // ResultType field
+        resultType: report.ResultType?.resultName || "Not Specified",
+        resultTypeId: report.ResultType?.resultTypeId || "",
+        
+        // Additional fields from schema
+        indicatorSource: report.indicatorSource,
+        responsiblePersons: report.responsiblePersons,
+        actualDate: report.actualDate,
+        cumulativeActual: report.cumulativeActual,
+        actualNarrative: report.actualNarrative,
+        attachmentUrl: report.attachmentUrl,
+        createAt: report.createAt,
+        updateAt: report.updateAt,
+        
+        // Optional: Include the full ResultType object if needed
+        resultTypeDetails: report.ResultType
+      };
+    });
+
+    return formattedReports;
+  } catch (error) {
+    console.error('Error fetching all indicator reports:', error);
+    throw new Error('Failed to fetch indicator reports');
+  }
 };
 
 // ----------------------

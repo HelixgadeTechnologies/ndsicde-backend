@@ -100,8 +100,53 @@ model Kpi {
   createAt             DateTime?           @default(now())
   updateAt             DateTime?           @default(now())
 
+  kpiReport            KpiReport[]
+
+  kpiAssignment        KpiAssignment[]
+
   @@map("kpi")
 }
+
+model KpiAssignment {
+  kpiAssignmentId String   @id @default(uuid())
+  kpi             Kpi      @relation(fields: [kpiId], references: [kpiId])
+  kpiId           String
+
+  projectId       String?
+  assignedToId    String? // user / staff
+  assignedAt      DateTime @default(now())
+
+  @@map("kpiassignment")
+}
+
+model KpiReport {
+  kpiReportId   String   @id @default(uuid())
+  kpi           Kpi      @relation(fields: [kpiId], references: [kpiId])
+  kpiId         String
+
+  actualValue   Float
+  reportingDate DateTime
+  status        String   // Pending | Approved | Rejected
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+  kpiReview     KpiReview[]
+
+  @@map("kpireport")
+}
+model KpiReview {
+  kpiReviewId String   @id @default(uuid())
+  kpiReport   KpiReport @relation(fields: [kpiReportId], references: [kpiReportId])
+  kpiReportId String
+
+  comment     String?
+  reviewedBy  String?
+  reviewedAt  DateTime @default(now())
+
+  @@map("kpireview")
+}
+
+
 
 model Project {
   projectId             String              @id @default(uuid())

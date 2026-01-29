@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createIndicatorReportCommentController, getAllIndicatorReportCommentsController, getBudgetUtilization, getCommentsByIndicatorReportIdController, getDashboardSummary, getIndicatorReportsController, getKpiPerformance, getProjects, getProjectStatusDistribution } from "../controllers/managementAndStaffControlleer";
+import { createIndicatorReportCommentController, getAllIndicatorReportCommentsController, getAllIndicatorReports, getBudgetUtilization, getCommentsByIndicatorReportIdController, getDashboardSummary, getKpiPerformance, getProjects, getProjectStatusDistribution } from "../controllers/managementAndStaffControlleer";
 
 const managementAndStaffRouter = Router();
 
@@ -183,154 +183,92 @@ managementAndStaffRouter.get("/project-status-distribution", getProjectStatusDis
  */
 managementAndStaffRouter.get("/budget-utilization", getBudgetUtilization);
 
-
 /**
  * @swagger
  * /api/managementAndStaff/indicator-reports:
  *   get:
- *     summary: Get indicator reports with filters
- *     description: Fetch reports for View Reports & Comments table
+ *     summary: Get all indicator reports
+ *     description: Returns an array of all indicator reports with calculated KPI status and result type information
  *     tags:
  *       - MANAGEMENT AND STAFF
- *     parameters:
- *       - in: query
- *         name: search
- *         schema:
- *           type: string
- *         description: Search by report title
- *       - in: query
- *         name: status
- *         schema:
- *           type: string
- *           example: Approved
- *       - in: query
- *         name: page
- *         schema:
- *           type: number
- *           example: 1
- *       - in: query
- *         name: limit
- *         schema:
- *           type: number
- *           example: 10
  *     responses:
  *       200:
- *         description: Reports fetched successfully
- *       404:
- *         description: No reports found
- *       500:
- *         description: Server error
- */
-managementAndStaffRouter.get("/indicator-reports", getIndicatorReportsController);
-
-
-/**
- * @swagger
- * /api/managementAndStaff/indicator-reports:
- *   get:
- *     summary: Retrieve a list of indicator reports
- *     description: Returns paginated indicator reports filtered by search, status, impact, outcome, or output.
- *     tags:
- *       - MANAGEMENT AND STAFF
- *     parameters:
- *       - in: query
- *         name: search
- *         schema:
- *           type: string
- *         description: Search term for indicator statement
- *       - in: query
- *         name: status
- *         schema:
- *           type: string
- *         description: Status of the indicator report
- *       - in: query
- *         name: impact
- *         schema:
- *           type: string
- *         description: Filter by impact (ResultType ID)
- *       - in: query
- *         name: outcome
- *         schema:
- *           type: string
- *         description: Filter by outcome (ResultType ID)
- *       - in: query
- *         name: output
- *         schema:
- *           type: string
- *         description: Filter by output (ResultType ID)
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           default: 1
- *         description: Page number
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           default: 10
- *         description: Number of items per page
- *     responses:
- *       200:
- *         description: Reports fetched successfully
+ *         description: Successfully retrieved all indicator reports
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
  *                 message:
  *                   type: string
+ *                   example: "Indicator reports fetched successfully"
  *                 data:
- *                   type: object
- *                   properties:
- *                     data:
- *                       type: array
- *                       items:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       reportId:
+ *                         type: string
+ *                         example: "550e8400-e29b-41d4-a716-446655440000"
+ *                       reportTitle:
+ *                         type: string
+ *                         example: "Q1 Marketing Performance"
+ *                       project:
+ *                         type: string
+ *                         example: "Marketing Campaign 2023"
+ *                       dateGenerated:
+ *                         type: string
+ *                         example: "Jan 15, 2023"
+ *                       status:
+ *                         type: string
+ *                         example: "Approved"
+ *                       kpiStatus:
+ *                         type: string
+ *                         enum: [Met, Not Met, N/A]
+ *                         example: "Met"
+ *                       resultType:
+ *                         type: string
+ *                         example: "Impact"
+ *                       resultTypeId:
+ *                         type: string
+ *                         example: "ioju8988bhb87t68bniu89"
+ *                       indicatorSource:
+ *                         type: string
+ *                         example: "Quarterly Report"
+ *                       responsiblePersons:
+ *                         type: string
+ *                         example: "John Doe, Jane Smith"
+ *                       actualDate:
+ *                         type: string
+ *                         format: date-time
+ *                         example: "2023-03-31T00:00:00.000Z"
+ *                       cumulativeActual:
+ *                         type: string
+ *                         example: "95"
+ *                       actualNarrative:
+ *                         type: string
+ *                         example: "Marketing campaign exceeded expectations"
+ *                       attachmentUrl:
+ *                         type: string
+ *                         example: "https://example.com/report.pdf"
+ *                       createAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updateAt:
+ *                         type: string
+ *                         format: date-time
+ *                       resultTypeDetails:
  *                         type: object
  *                         properties:
- *                           indicatorReportId:
+ *                           resultName:
  *                             type: string
- *                           indicatorStatement:
+ *                             example: "Impact"
+ *                           resultTypeId:
  *                             type: string
- *                           thematicAreasOrPillar:
- *                             type: string
- *                           status:
- *                             type: string
- *                           createAt:
- *                             type: string
- *                             format: date-time
- *                           cumulativeActual:
- *                             type: number
- *                           indicator:
- *                             type: object
- *                             properties:
- *                               cumulativeTarget:
- *                                 type: number
- *                           kpiStatus:
- *                             type: string
- *                             description: KPI status, either 'Met' or 'Not Met'
- *                     pagination:
- *                       type: object
- *                       properties:
- *                         total:
- *                           type: integer
- *                         page:
- *                           type: integer
- *                         limit:
- *                           type: integer
- *                         totalPages:
- *                           type: integer
- *       404:
- *         description: No reports found
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                 data:
- *                   type: null
+ *                             example: "ioju8988bhb87t68bniu89"
  *       500:
  *         description: Internal server error
  *         content:
@@ -338,10 +276,17 @@ managementAndStaffRouter.get("/indicator-reports", getIndicatorReportsController
  *             schema:
  *               type: object
  *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
  *                 message:
  *                   type: string
+ *                   example: "Failed to fetch indicator reports"
+ *                 error:
+ *                   type: string
+ *                   example: "Database connection error"
  */
-managementAndStaffRouter.get("/indicator-reports", getIndicatorReportsController);
+managementAndStaffRouter.get("/indicator-reports", getAllIndicatorReports);
 
 /**
  * @swagger
