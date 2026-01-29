@@ -224,78 +224,78 @@ export const getBudgetUtilizationService = async () => {
 
 
 export const getAllIndicatorReportsService = async () => {
-  try {
-    // Fetch all indicator reports with ResultType included
-    const reports = await prisma.indicatorReport.findMany({
-      include: {
-        // Include indicator for KPI calculation
-        indicator: {
-          select: {
-            cumulativeTarget: true
-          }
-        },
-        // Include ResultType to get resultName
-        ResultType: {
-          select: {
-            resultName: true,
-            resultTypeId: true
-          }
-        }
-      }
-    });
+    try {
+        // Fetch all indicator reports with ResultType included
+        const reports = await prisma.indicatorReport.findMany({
+            include: {
+                // Include indicator for KPI calculation
+                indicator: {
+                    select: {
+                        cumulativeTarget: true
+                    }
+                },
+                // Include ResultType to get resultName
+                ResultType: {
+                    select: {
+                        resultName: true,
+                        resultTypeId: true
+                    }
+                }
+            }
+        });
 
-    // Format the data
-    const formattedReports = reports.map((report) => {
-      const actual = Number(report.cumulativeActual || 0);
-      const target = Number(report.indicator?.cumulativeTarget || 0);
-      
-      // Calculate KPI status
-      let kpiStatus = "Not Met";
-      if (actual >= target && target > 0) {
-        kpiStatus = "Met";
-      } else if (target === 0) {
-        kpiStatus = "N/A";
-      }
+        // Format the data
+        const formattedReports = reports.map((report) => {
+            const actual = Number(report.cumulativeActual || 0);
+            const target = Number(report.indicator?.cumulativeTarget || 0);
 
-      return {
-        // From UI screenshot columns
-        reportId: report.indicatorReportId,
-        reportTitle: report.indicatorStatement || "Untitled Report",
-        project: report.thematicAreasOrPillar || "No Project",
-        dateGenerated: report.createAt 
-          ? new Date(report.createAt).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric'
-            })
-          : "N/A",
-        status: report.status || "Pending",
-        kpiStatus: kpiStatus,
-        
-        // ResultType field
-        resultType: report.ResultType?.resultName || "Not Specified",
-        resultTypeId: report.ResultType?.resultTypeId || "",
-        
-        // Additional fields from schema
-        indicatorSource: report.indicatorSource,
-        responsiblePersons: report.responsiblePersons,
-        actualDate: report.actualDate,
-        cumulativeActual: report.cumulativeActual,
-        actualNarrative: report.actualNarrative,
-        attachmentUrl: report.attachmentUrl,
-        createAt: report.createAt,
-        updateAt: report.updateAt,
-        
-        // Optional: Include the full ResultType object if needed
-        resultTypeDetails: report.ResultType
-      };
-    });
+            // Calculate KPI status
+            let kpiStatus = "Not Met";
+            if (actual >= target && target > 0) {
+                kpiStatus = "Met";
+            } else if (target === 0) {
+                kpiStatus = "N/A";
+            }
 
-    return formattedReports;
-  } catch (error) {
-    console.error('Error fetching all indicator reports:', error);
-    throw new Error('Failed to fetch indicator reports');
-  }
+            return {
+                // From UI screenshot columns
+                reportId: report.indicatorReportId,
+                reportTitle: report.indicatorStatement || "Untitled Report",
+                project: report.thematicAreasOrPillar || "No Project",
+                dateGenerated: report.createAt
+                    ? new Date(report.createAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    })
+                    : "N/A",
+                status: report.status || "Pending",
+                kpiStatus: kpiStatus,
+
+                // ResultType field
+                resultType: report.ResultType?.resultName || "Not Specified",
+                resultTypeId: report.ResultType?.resultTypeId || "",
+
+                // Additional fields from schema
+                indicatorSource: report.indicatorSource,
+                responsiblePersons: report.responsiblePersons,
+                actualDate: report.actualDate,
+                cumulativeActual: report.cumulativeActual,
+                actualNarrative: report.actualNarrative,
+                attachmentUrl: report.attachmentUrl,
+                createAt: report.createAt,
+                updateAt: report.updateAt,
+
+                // Optional: Include the full ResultType object if needed
+                resultTypeDetails: report.ResultType
+            };
+        });
+
+        return formattedReports;
+    } catch (error) {
+        console.error('Error fetching all indicator reports:', error);
+        throw new Error('Failed to fetch indicator reports');
+    }
 };
 
 // ----------------------
@@ -353,4 +353,76 @@ export const getAllIndicatorReportCommentsService = async () => {
     });
 
     return comments;
+};
+
+const MONTHS = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+
+export const getIndicatorReportOverviewService = async (
+    indicatorReportId: string
+) => {
+    const report = await prisma.indicatorReport.findUnique({
+        where: { indicatorReportId },
+        include: {
+            indicator: true,
+            indicatorReportComment: {
+                orderBy: { createAt: "desc" },
+            },
+        },
+    });
+
+    if (!report || !report.indicator) return null;
+
+    const indicator = report.indicator;
+
+    /**
+     * 🔹 Fetch all reports for this indicator (across months)
+     */
+    const allReports = await prisma.indicatorReport.findMany({
+        where: {
+            indicatorId: indicator.indicatorId,
+        },
+        select: {
+            cumulativeActual: true,
+            actualDate: true,
+            createAt: true,
+        },
+    });
+
+    /**
+     * 🔹 Initialize month-aligned arrays
+     */
+    const budget = Array(12).fill(0);
+    const actualSpending = Array(12).fill(0);
+
+    allReports.forEach((r) => {
+        const date = r.actualDate ?? r.createAt;
+        if (!date) return;
+
+        const monthIndex = new Date(date).getMonth(); // 0–11
+
+        actualSpending[monthIndex] += Number(r.cumulativeActual || 0);
+
+        /**
+         * Budget usually does NOT change monthly,
+         * but we align it to months for chart consistency
+         */
+        budget[monthIndex] = Number(indicator.cumulativeTarget || 0);
+    });
+
+    /**
+     * 🔹 Final UI-friendly structure
+     */
+    const financialOverview = {
+        months: MONTHS,
+        budget,
+        actualSpending,
+    };
+
+    return {
+        financialOverview,
+        comments: report.indicatorReportComment,
+    };
 };

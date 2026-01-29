@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createIndicatorReportCommentController, getAllIndicatorReportCommentsController, getAllIndicatorReports, getBudgetUtilization, getCommentsByIndicatorReportIdController, getDashboardSummary, getKpiPerformance, getProjects, getProjectStatusDistribution } from "../controllers/managementAndStaffControlleer";
+import { createIndicatorReportCommentController, getAllIndicatorReportCommentsController, getAllIndicatorReports, getBudgetUtilization, getCommentsByIndicatorReportIdController, getDashboardSummary, getIndicatorReportOverviewController, getKpiPerformance, getProjects, getProjectStatusDistribution } from "../controllers/managementAndStaffControlleer";
 
 const managementAndStaffRouter = Router();
 
@@ -453,5 +453,83 @@ managementAndStaffRouter.get("/indicator-report-comments/:indicatorReportId", ge
  *                   type: string
  */
 managementAndStaffRouter.get("/all-indicator-report-comments", getAllIndicatorReportCommentsController);
+/**
+ * @swagger
+ * /api/managementAndStaff/indicator-reports-overview/{indicatorReportId}:
+ *   get:
+ *     summary: Get indicator report overview (financial overview + comments)
+ *     tags:
+ *       - MANAGEMENT AND STAFF
+ *     parameters:
+ *       - in: path
+ *         name: indicatorReportId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Indicator Report ID
+ *     responses:
+ *       200:
+ *         description: Indicator report overview fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Indicator report overview fetched successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     financialOverview:
+ *                       type: object
+ *                       properties:
+ *                         months:
+ *                           type: array
+ *                           items:
+ *                             type: string
+ *                           example: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+ *                         budget:
+ *                           type: array
+ *                           items:
+ *                             type: number
+ *                           example: [70000, 100000, 40000, 72000, 52000, 90000, 120000, 150000, 180000, 210000, 240000, 270000]
+ *                         actualSpending:
+ *                           type: array
+ *                           items:
+ *                             type: number
+ *                           example: [60000, 78000, 28000, 92000, 43000, 75000, 105000, 135000, 165000, 195000, 225000, 255000]
+ *                     comments:
+ *                       type: array
+ *                       description: List of comments linked to the indicator report
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           indicatorReportCommentId:
+ *                             type: string
+ *                             example: "b1c2d3e4-f567-890a-bcde-f1234567890a"
+ *                           indicatorReportId:
+ *                             type: string
+ *                             example: "a123bc45-de67-890f-gh12-ijk345lmn678"
+ *                           comment:
+ *                             type: string
+ *                             example: "Performance improved significantly this quarter."
+ *                           createAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-06-01T10:15:30.000Z"
+ *                           updateAt:
+ *                             type: string
+ *                             format: date-time
+ *                             example: "2024-06-02T14:20:10.000Z"
+ *       404:
+ *         description: Indicator report not found
+ *       500:
+ *         description: Server error
+ */
+managementAndStaffRouter.get(
+    "/indicator-report-overview/:indicatorReportId",
+    getIndicatorReportOverviewController
+);
 
 export default managementAndStaffRouter;

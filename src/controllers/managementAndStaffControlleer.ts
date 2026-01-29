@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createIndicatorReportCommentService, getAllIndicatorReportCommentsService, getAllIndicatorReportsService, getBudgetUtilizationService, getCommentsByIndicatorReportIdService, getDashboardSummaryService, getKpiPerformanceService, getProjectsService, getProjectStatusDistributionService } from "../service/managementAndStaffService";
+import { createIndicatorReportCommentService, getAllIndicatorReportCommentsService, getAllIndicatorReportsService, getBudgetUtilizationService, getCommentsByIndicatorReportIdService, getDashboardSummaryService, getIndicatorReportOverviewService, getKpiPerformanceService, getProjectsService, getProjectStatusDistributionService } from "../service/managementAndStaffService";
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
 import { changePassword } from "../service/authService";
 
@@ -254,5 +254,35 @@ export const changePasswordController = async (
     return res
       .status(500)
       .json(errorResponse(error.message));
+  }
+};
+
+export const getIndicatorReportOverviewController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { indicatorReportId } = req.params;
+
+    const overview = await getIndicatorReportOverviewService(
+      indicatorReportId
+    );
+
+    if (!overview) {
+      return res
+        .status(404)
+        .json(notFoundResponse("Indicator report not found", null));
+    }
+
+    return res
+      .status(200)
+      .json(
+        successResponse(
+          "Indicator report overview fetched successfully",
+          overview
+        )
+      );
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
   }
 };
