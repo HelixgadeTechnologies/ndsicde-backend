@@ -59,17 +59,9 @@ export const getProjects = async (
   res: Response
 ) => {
   try {
-    const result = await getProjectsService({
-      search: req.query.search as string,
-      status: req.query.status as string,
-      category: req.query.category as string,
-      startDate: req.query.startDate as string,
-      endDate: req.query.endDate as string,
-      page: Number(req.query.page),
-      limit: Number(req.query.limit)
-    });
+    const projects = await getProjectsService();
 
-    if (!result.data.length) {
+    if (!projects.length) {
       return res
         .status(404)
         .json(notFoundResponse("Projects not found", null));
@@ -77,7 +69,7 @@ export const getProjects = async (
 
     return res
       .status(200)
-      .json(successResponse("Projects fetched successfully", result));
+      .json(successResponse("Projects fetched successfully", projects));
 
   } catch (error: any) {
     return res

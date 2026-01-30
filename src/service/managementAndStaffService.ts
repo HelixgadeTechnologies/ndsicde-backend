@@ -81,87 +81,28 @@ export const getKpiPerformanceService = async (year: number) => {
 
 
 
-interface ProjectQuery {
-    search?: string;
-    status?: string;
-    category?: string;
-    startDate?: string;
-    endDate?: string;
-    page?: number;
-    limit?: number;
-}
-
-import { Prisma } from "@prisma/client";
-
-export const getProjectsService = async (query: ProjectQuery) => {
-    const {
-        search,
-        status,
-        category,
-        startDate,
-        endDate,
-        page = 1,
-        limit = 10
-    } = query;
-
-    // ✅ ensure valid pagination
-    const pageNumber = Number(page) > 0 ? Number(page) : 1;
-    const pageLimit = Number(limit) > 0 ? Number(limit) : 10;
-
-    // ✅ strongly-typed Prisma where clause
-    const where: Prisma.ProjectWhereInput = {
-        ...(status && { status }),
-        ...(category && { thematicAreasOrPillar: category }),
-        ...(search && {
-            projectName: {
-                contains: search
-            }
-        }),
-        ...(startDate || endDate
-            ? {
-                startDate: {
-                    ...(startDate && { gte: new Date(startDate) }),
-                    ...(endDate && { lte: new Date(endDate) })
+export const getProjectsService = async () => {
+    const projects = await prisma.project.findMany({
+        orderBy: { createAt: "desc" },
+        select: {
+            projectId: true,
+            projectName: true,
+            status: true,
+            startDate: true,
+            endDate: true,
+            thematicAreasOrPillar: true,
+            strategicObjective: {
+                select: { statement: true }
+            },
+            teamMember: {
+                select: {
+                    fullName: true
                 }
             }
-            : {})
-    };
-
-    const [data, total] = await Promise.all([
-        prisma.project.findMany({
-            where,
-            skip: (pageNumber - 1) * pageLimit,
-            take: pageLimit,
-            orderBy: { createAt: "desc" },
-            select: {
-                projectId: true,
-                projectName: true,
-                status: true,
-                startDate: true,
-                endDate: true,
-                strategicObjective: {
-                    select: { statement: true }
-                },
-                teamMember: {
-                    select: {
-                        // ✅ nullable-safe
-                        fullName: true
-                    }
-                }
-            }
-        }),
-        prisma.project.count({ where })
-    ]);
-
-    return {
-        data,
-        pagination: {
-            total,
-            page: pageNumber,
-            limit: pageLimit,
-            totalPages: Math.ceil(total / pageLimit)
         }
-    };
+    });
+
+    return projects;
 };
 
 

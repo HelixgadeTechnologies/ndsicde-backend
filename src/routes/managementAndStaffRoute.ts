@@ -95,50 +95,56 @@ managementAndStaffRouter.get("/kpi-performance", getKpiPerformance);
  * @swagger
  * /api/managementAndStaff/projects:
  *   get:
- *     summary: Get list of projects
+ *     summary: Get all projects
  *     description: >
- *       Fetch projects with search, filters, date range, and pagination.
+ *       Fetch all projects as an array. Sorting and filtering should be done client-side.
  *     tags:
  *       - MANAGEMENT AND STAFF
- *     parameters:
- *       - in: query
- *         name: search
- *         schema:
- *           type: string
- *         example: health
- *       - in: query
- *         name: status
- *         schema:
- *           type: string
- *         example: Active
- *       - in: query
- *         name: category
- *         schema:
- *           type: string
- *         example: Healthcare
- *       - in: query
- *         name: startDate
- *         schema:
- *           type: string
- *           format: date
- *       - in: query
- *         name: endDate
- *         schema:
- *           type: string
- *           format: date
- *       - in: query
- *         name: page
- *         schema:
- *           type: number
- *           example: 1
- *       - in: query
- *         name: limit
- *         schema:
- *           type: number
- *           example: 10
  *     responses:
  *       200:
  *         description: Projects fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Projects fetched successfully
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       projectId:
+ *                         type: string
+ *                       projectName:
+ *                         type: string
+ *                       status:
+ *                         type: string
+ *                       startDate:
+ *                         type: string
+ *                         format: date-time
+ *                       endDate:
+ *                         type: string
+ *                         format: date-time
+ *                       thematicAreasOrPillar:
+ *                         type: string
+ *                       strategicObjective:
+ *                         type: object
+ *                         properties:
+ *                           statement:
+ *                             type: string
+ *                       teamMember:
+ *                         type: array
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             fullName:
+ *                               type: string
  *       404:
  *         description: Projects not found
  *       500:
