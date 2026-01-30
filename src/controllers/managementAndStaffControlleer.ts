@@ -148,14 +148,14 @@ export const getBudgetUtilization = async (
 export const getAllIndicatorReports = async (req: Request, res: Response) => {
   try {
     const reports = await getAllIndicatorReportsService();
-    
+
     // Check if no reports found
     if (!reports || reports.length === 0) {
       return res
         .status(404)
         .json(notFoundResponse("No indicator reports found", []));
     }
-    
+
     return res
       .status(200)
       .json(successResponse("Indicator reports fetched successfully", reports));
@@ -176,9 +176,9 @@ export const createIndicatorReportCommentController = async (
     return res
       .status(201)
       .json(successResponse("Comment created successfully", result));
-    } catch (error: any) {
+  } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
-}
+  }
 };
 
 
@@ -262,6 +262,7 @@ export const getIndicatorReportOverviewController = async (
   res: Response
 ) => {
   try {
+    console.log("req.params", req.params);
     const { indicatorReportId } = req.params;
 
     const overview = await getIndicatorReportOverviewService(

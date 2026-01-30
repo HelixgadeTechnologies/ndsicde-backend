@@ -453,6 +453,7 @@ managementAndStaffRouter.get("/indicator-report-comments/:indicatorReportId", ge
  *                   type: string
  */
 managementAndStaffRouter.get("/all-indicator-report-comments", getAllIndicatorReportCommentsController);
+
 /**
  * @swagger
  * /api/managementAndStaff/indicator-reports-overview/{indicatorReportId}:
@@ -528,7 +529,7 @@ managementAndStaffRouter.get("/all-indicator-report-comments", getAllIndicatorRe
  *         description: Server error
  */
 managementAndStaffRouter.get(
-    "/indicator-report-overview/:indicatorReportId",
+    "/indicator-reports-overview/:indicatorReportId",
     getIndicatorReportOverviewController
 );
 
