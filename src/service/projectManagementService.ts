@@ -230,7 +230,7 @@ export const createOrUpdateImpact = async (
         thematicArea: payload.thematicArea,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId
+        resultTypeId: payload.resultTypeId
       },
     });
   } else {
@@ -245,7 +245,7 @@ export const createOrUpdateImpact = async (
         thematicArea: payload.thematicArea,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId,
+        resultTypeId: payload.resultTypeId,
         updateAt: new Date(),
       },
     });
@@ -292,8 +292,8 @@ export const createOrUpdateIndicator = async (
         targetNarrative: payload.targetNarrative,
         targetType: payload.targetType,
         responsiblePersons: payload.responsiblePersons,
-        result: payload.impactId as string,
-        resultTypeId:payload.resultTypeId
+        result: payload.result as string,
+        resultTypeId: payload.resultTypeId
       },
     });
   }
@@ -318,15 +318,15 @@ export const createOrUpdateIndicator = async (
       targetNarrative: payload.targetNarrative,
       targetType: payload.targetType,
       responsiblePersons: payload.responsiblePersons,
-      result: payload.impactId as string,
-      resultTypeId:payload.resultTypeId,
+      result: payload.result as string,
+      resultTypeId: payload.resultTypeId,
       updateAt: new Date(),
     },
   });
 };
 
 // ✅ Get all specific result Indicators with details
-export const getAllImpactIndicatorsByResultIdView = async (resultId:string): Promise<
+export const getAllImpactIndicatorsByResultIdView = async (resultId: string): Promise<
   IIndicatorView[]
 > => {
   return await prisma.$queryRaw<IIndicatorView[]>`
@@ -346,7 +346,7 @@ export const getIndicatorByIdView = async (
 
 // Delete Indicator
 export const deleteIndicator = async (indicatorId: string) => {
-  await prisma.indicatorReport.deleteMany({where:{indicatorId}});
+  await prisma.indicatorReport.deleteMany({ where: { indicatorId } });
   return await prisma.indicator.delete({
     where: { indicatorId },
   });
@@ -370,8 +370,8 @@ export async function saveIndicatorReport(
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,
         attachmentUrl: payload.attachmentUrl,
-        status:IReportStatus.pending,
-        resultTypeId:payload.resultTypeId,
+        status: IReportStatus.pending,
+        resultTypeId: payload.resultTypeId,
         indicatorId: payload.indicatorId,
       },
     });
@@ -384,7 +384,7 @@ export async function saveIndicatorReport(
         indicatorReportId: payload.indicatorReportId,
       },
       data: {
-   indicatorSource: payload.indicatorSource,
+        indicatorSource: payload.indicatorSource,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
         indicatorStatement: payload.indicatorStatement,
         responsiblePersons: payload.responsiblePersons,
@@ -393,8 +393,8 @@ export async function saveIndicatorReport(
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,
         attachmentUrl: payload.attachmentUrl,
-        status:payload.status,
-        resultTypeId:payload.resultTypeId,
+        status: payload.status,
+        resultTypeId: payload.resultTypeId,
         indicatorId: payload.indicatorId,
         updateAt: new Date(), // update timestamp
       },
@@ -403,7 +403,7 @@ export async function saveIndicatorReport(
 }
 
 // Get all Impact Indicator Report Formats
-export async function getAllIndicatorReportByResultId(resultId:string): Promise<
+export async function getAllIndicatorReportByResultId(resultId: string): Promise<
   IIndicatorReportView[]
 > {
   return await prisma.$queryRaw<IIndicatorReportView[]>`
@@ -508,7 +508,7 @@ export const createOrUpdateOutput = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId,
+        resultTypeId: payload.resultTypeId,
       },
     });
   } else {
@@ -524,7 +524,7 @@ export const createOrUpdateOutput = async (
         thematicAreas: payload.thematicAreas,
         responsiblePerson: payload.responsiblePerson,
         projectId: payload.projectId,
-        resultTypeId:payload.resultTypeId,
+        resultTypeId: payload.resultTypeId,
         updateAt: new Date(),
       },
     });
@@ -779,8 +779,8 @@ export const createOrUpdateGenderAggregation = async (
     });
   }
 };
-export const getGenderDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.genderDisaggregation.findMany({where:{indicatorId}});
+export const getGenderDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.genderDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateProductDisaggregation = async (
@@ -796,11 +796,11 @@ export const createOrUpdateProductDisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.productDisaggregation.update({
         where: { productDisaggregationId: item.productDisaggregationId },
@@ -817,8 +817,8 @@ export const createOrUpdateProductDisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getProductDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.productDisaggregation.findMany({where:{indicatorId}});
+export const getProductDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.productDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateDepartmentDisaggregation = async (
@@ -834,11 +834,11 @@ export const createOrUpdateDepartmentDisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.departmentDisaggregation.update({
         where: { departmentDisaggregationId: item.departmentDisaggregationId },
@@ -855,8 +855,8 @@ export const createOrUpdateDepartmentDisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getDepartmentDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.departmentDisaggregation.findMany({where:{indicatorId}});
+export const getDepartmentDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.departmentDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateStateDisaggregation = async (
@@ -872,11 +872,11 @@ export const createOrUpdateStateDisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.stateDisaggregation.update({
         where: { stateDisaggregationId: item.stateDisaggregationId },
@@ -893,8 +893,8 @@ export const createOrUpdateStateDisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getStateDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.stateDisaggregation.findMany({where:{indicatorId}});
+export const getStateDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.stateDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateLGADisaggregation = async (
@@ -910,11 +910,11 @@ export const createOrUpdateLGADisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.lgaDisaggregation.update({
         where: { lgaDisaggregationId: item.lgaDisaggregationId },
@@ -931,8 +931,8 @@ export const createOrUpdateLGADisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getLGADisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.lgaDisaggregation.findMany({where:{indicatorId}});
+export const getLGADisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.lgaDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateTenureDisaggregation = async (
@@ -948,11 +948,11 @@ export const createOrUpdateTenureDisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.tenureDisaggregation.update({
         where: { tenureDisaggregationId: item.tenureDisaggregationId },
@@ -969,8 +969,8 @@ export const createOrUpdateTenureDisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getTenureDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.tenureDisaggregation.findMany({where:{indicatorId}});
+export const getTenureDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.tenureDisaggregation.findMany({ where: { indicatorId } });
 };
 
 export const createOrUpdateAgeDisaggregation = async (
@@ -987,11 +987,11 @@ export const createOrUpdateAgeDisaggregation = async (
         disaggregationId: item.disaggregationId,
         indicatorId: item.indicatorId,
       }
-    )),
+      )),
     });
   } else {
-   
- // Bulk update using transaction
+
+    // Bulk update using transaction
     const updateOperations = payload.map((item) =>
       prisma.ageDisaggregation.update({
         where: { ageDisaggregationId: item.ageDisaggregationId },
@@ -1009,6 +1009,6 @@ export const createOrUpdateAgeDisaggregation = async (
     return await prisma.$transaction(updateOperations);
   }
 };
-export const getAgeDisaggregationByIndicatorId = async (indicatorId:string) => {
-  return await prisma.ageDisaggregation.findMany({where:{indicatorId}});
+export const getAgeDisaggregationByIndicatorId = async (indicatorId: string) => {
+  return await prisma.ageDisaggregation.findMany({ where: { indicatorId } });
 };
