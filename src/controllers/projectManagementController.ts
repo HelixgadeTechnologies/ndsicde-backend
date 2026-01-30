@@ -996,7 +996,21 @@ export const getDepartmentDisaggregationByIndicatorController = async (req: Requ
 
 export const createOrUpdateStateDisaggregationController = async (req: Request, res: Response) => {
   try {
+    // Validate request body exists
+    if (!req.body) {
+      return res
+        .status(400)
+        .json(errorResponse("Request body is required"));
+    }
+
     const { isCreate, payload } = req.body;
+
+    // Validate required fields
+    if (isCreate === undefined || !payload) {
+      return res
+        .status(400)
+        .json(errorResponse("isCreate and payload are required fields"));
+    }
 
     if (!isCreate) {
       // Validate that each item has an ID for update
@@ -1041,7 +1055,21 @@ export const getStateDisaggregationByIndicatorController = async (req: Request, 
 
 export const createOrUpdateLGADisaggregationController = async (req: Request, res: Response) => {
   try {
+    // Validate request body exists
+    if (!req.body) {
+      return res
+        .status(400)
+        .json(errorResponse("Request body is required"));
+    }
+
     const { isCreate, payload } = req.body;
+
+    // Validate required fields
+    if (isCreate === undefined || !payload) {
+      return res
+        .status(400)
+        .json(errorResponse("isCreate and payload are required fields"));
+    }
 
     if (!isCreate) {
       // Validate that each item has an ID for update
@@ -1086,7 +1114,21 @@ export const getLGADisaggregationByIndicatorController = async (req: Request, re
 
 export const createOrUpdateTenureDisaggregationController = async (req: Request, res: Response) => {
   try {
+    // Validate request body exists
+    if (!req.body) {
+      return res
+        .status(400)
+        .json(errorResponse("Request body is required"));
+    }
+
     const { isCreate, payload } = req.body;
+
+    // Validate required fields
+    if (isCreate === undefined || !payload) {
+      return res
+        .status(400)
+        .json(errorResponse("isCreate and payload are required fields"));
+    }
 
     if (!isCreate) {
       // Validate IDs for update
@@ -1131,7 +1173,21 @@ export const getTenureDisaggregationByIndicatorController = async (req: Request,
 
 export const createOrUpdateAgeDisaggregationController = async (req: Request, res: Response) => {
   try {
+    // Validate request body exists
+    if (!req.body) {
+      return res
+        .status(400)
+        .json(errorResponse("Request body is required"));
+    }
+
     const { isCreate, payload } = req.body;
+
+    // Validate required fields
+    if (isCreate === undefined || !payload) {
+      return res
+        .status(400)
+        .json(errorResponse("isCreate and payload are required fields"));
+    }
 
     if (!isCreate) {
       // Validate IDs for update
@@ -1188,7 +1244,7 @@ export const getResultDashboardDataController = async (req: Request, res: Respon
 };
 export const getOrgKpiDashboardDataController = async (req: Request, res: Response) => {
   try {
-    
+
     const dashboardData = await getOrgKpiDashboardData();
 
     return res
@@ -1202,7 +1258,7 @@ export const getOrgKpiDashboardDataController = async (req: Request, res: Respon
 export const getProjectActivityDashboardDataController = async (req: Request, res: Response) => {
   try {
 
-     const { projectId } = req.params;
+    const { projectId } = req.params;
     const dashboardData = await getProjectActivityDashboardData(projectId);
 
 

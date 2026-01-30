@@ -54,6 +54,7 @@ import {
   getProductDisaggregationByIndicatorController,
   getProjectActivityDashboardDataController,
   getResultDashboardDataController,
+  getStateDisaggregationByIndicatorController,
   getTenureDisaggregationByIndicatorController,
   removeIndicatorReport,
   removeProject,
@@ -869,7 +870,7 @@ projectManagementRouter.post("/state-disaggregation", createOrUpdateStateDisaggr
  *       500:
  *         description: Server error
  */
-projectManagementRouter.get("/state-disaggregations/:indicatorId", createOrUpdateStateDisaggregationController);
+projectManagementRouter.get("/state-disaggregations/:indicatorId", getStateDisaggregationByIndicatorController);
 
 /**
  * @swagger
