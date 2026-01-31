@@ -12,7 +12,7 @@ const options: swaggerJSDoc.Options = {
       description: "API documentation for NDSICDE.",
     },
 
-    servers: [{ url: "https://ndsicde-backend66.onrender.com/" },{url:"http://localhost:8000/" }],
+    servers: [{ url: "https://ndsicde-backend66.onrender.com/" }, { url: "http://localhost:8000/" }],
 
     tags: [
       { name: "Auth", description: "Authentication Endpoints" },
@@ -90,8 +90,8 @@ const options: swaggerJSDoc.Options = {
               example: "2023-01-01T00:00:00Z",
             },
             cumulativeValue: {
-              type: "string",
-              example: "30%",
+              type: "number",
+              example: 30,
             },
             baselineNarrative: {
               type: "string",
@@ -103,8 +103,8 @@ const options: swaggerJSDoc.Options = {
               example: "2025-12-31T00:00:00Z",
             },
             cumulativeTarget: {
-              type: "string",
-              example: "80%",
+              type: "number",
+              example: 80,
             },
             targetNarrative: {
               type: "string",
@@ -160,8 +160,8 @@ const options: swaggerJSDoc.Options = {
               format: "date-time",
             },
             cumulativeActual: {
-              type: "number",
-              example: 75,
+              type: "string",
+              example: "75",
             },
             actualNarrative: {
               type: "string",
