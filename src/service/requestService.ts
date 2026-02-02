@@ -99,11 +99,209 @@ export const deleteRequest = async (requestId: string) => {
   });
 };
 
-export const requestApproval = async (requestId: string, userId:string, approvedBy:string)=>{
+// ✅ Request Approval with Auto-Level Detection
+export const requestApproval = async (
+  requestId: string,
+  approvalStatus: number,
+  approvedBy: string,
+  comment?: string
+) => {
   try {
-    const request = prisma.request.findUnique({where:{requestId}});
-    
+    // Fetch the request
+    const request = await prisma.request.findUnique({ where: { requestId } });
+
+    if (!request) {
+      throw new Error("Request not found");
+    }
+
+    // Determine the next approval level based on existing approvals
+    const approvalLevels: Array<"A" | "B" | "C" | "D" | "E"> = ["A", "B", "C", "D", "E"];
+    let currentLevel: "A" | "B" | "C" | "D" | "E" | null = null;
+
+    for (const level of approvalLevels) {
+      const approvalField = `approval_${level}` as keyof typeof request;
+      if (request[approvalField] === null || request[approvalField] === undefined) {
+        currentLevel = level;
+        break;
+      }
+    }
+
+    if (!currentLevel) {
+      throw new Error("All approval levels have already been processed");
+    }
+
+    // Validate sequential approval (ensure previous levels are approved)
+    const levelIndex = approvalLevels.indexOf(currentLevel);
+    if (levelIndex > 0) {
+      const previousLevel = approvalLevels[levelIndex - 1];
+      const previousApprovalField = `approval_${previousLevel}` as keyof typeof request;
+      if (request[previousApprovalField] !== 1) {
+        throw new Error(
+          `Cannot approve at level ${currentLevel}. Previous level ${previousLevel} must be approved first.`
+        );
+      }
+    }
+
+    // Determine the new status based on approval/rejection
+    let newStatus = request.status;
+    if (approvalStatus === 2) {
+      // Rejection
+      newStatus = "Rejected";
+    } else if (approvalStatus === 1 && currentLevel === "E") {
+      // Final approval
+      newStatus = "Approved";
+    } else if (approvalStatus === 1) {
+      // Intermediate approval
+      newStatus = "Pending";
+    }
+
+    // Build the update data dynamically
+    const updateData: any = {
+      [`approval_${currentLevel}`]: approvalStatus,
+      [`approvedBy_${currentLevel}`]: approvedBy,
+      [`comment_${currentLevel}`]: comment || null,
+      status: newStatus,
+      updateAt: new Date(),
+    };
+
+    // Update the request
+    const updatedRequest = await prisma.request.update({
+      where: { requestId },
+      data: updateData,
+    });
+
+    return updatedRequest;
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    throw error;
+  }
+};
+
+// ✅ Get Data Validation Statistics
+export const getDataValidationStats = async (
+  startDate?: string,
+  endDate?: string
+) => {
+  try {
+    const dateFilter: any = {};
+
+    if (startDate || endDate) {
+      dateFilter.createAt = {};
+      if (startDate) dateFilter.createAt.gte = new Date(startDate);
+      if (endDate) dateFilter.createAt.lte = new Date(endDate);
+    }
+
+    // Get current period statistics
+    const totalSubmissions = await prisma.request.count({
+      where: dateFilter,
+    });
+
+    const pendingReview = await prisma.request.count({
+      where: { ...dateFilter, status: "Pending" },
+    });
+
+    const approved = await prisma.request.count({
+      where: { ...dateFilter, status: "Approved" },
+    });
+
+    const rejected = await prisma.request.count({
+      where: { ...dateFilter, status: "Rejected" },
+    });
+
+    const approvedRetirements = await prisma.retirement.count({
+      where: {
+        ...(startDate || endDate ? {
+          createAt: {
+            ...(startDate && { gte: new Date(startDate) }),
+            ...(endDate && { lte: new Date(endDate) }),
+          }
+        } : {}),
+        status: "Approved",
+      },
+    });
+
+    // Calculate previous period for comparison
+    let percentageFromLastMonth = 0;
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const duration = end.getTime() - start.getTime();
+
+      const previousStart = new Date(start.getTime() - duration);
+      const previousEnd = start;
+
+      const previousSubmissions = await prisma.request.count({
+        where: {
+          createAt: {
+            gte: previousStart,
+            lt: previousEnd,
+          },
+        },
+      });
+
+      if (previousSubmissions > 0) {
+        percentageFromLastMonth =
+          ((totalSubmissions - previousSubmissions) / previousSubmissions) * 100;
+      }
+    }
+
+    // Calculate rates
+    const approvalRate = totalSubmissions > 0
+      ? (approved / totalSubmissions) * 100
+      : 0;
+
+    const rejectionRate = totalSubmissions > 0
+      ? (rejected / totalSubmissions) * 100
+      : 0;
+
+    return {
+      totalSubmissions,
+      pendingReview,
+      approved,
+      rejected,
+      pendingFinancialRequests: pendingReview, // Same as pending review
+      approvedRetirements,
+      percentageFromLastMonth: Number(percentageFromLastMonth.toFixed(2)),
+      approvalRate: Number(approvalRate.toFixed(2)),
+      rejectionRate: Number(rejectionRate.toFixed(2)),
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+// ✅ Get Requests with Date Range Filter
+export const getRequestsWithDateFilter = async (
+  startDate?: string,
+  endDate?: string
+) => {
+  try {
+    const dateFilter: any = {};
+
+    if (startDate || endDate) {
+      dateFilter.createAt = {};
+      if (startDate) dateFilter.createAt.gte = new Date(startDate);
+      if (endDate) dateFilter.createAt.lte = new Date(endDate);
+    }
+
+    const requests = await prisma.request.findMany({
+      where: dateFilter,
+      include: {
+        project: {
+          select: {
+            projectName: true,
+          },
+        },
+      },
+      orderBy: {
+        createAt: 'desc',
+      },
+    });
+
+    return requests;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };

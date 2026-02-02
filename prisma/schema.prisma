@@ -100,53 +100,52 @@ model Kpi {
   createAt             DateTime?           @default(now())
   updateAt             DateTime?           @default(now())
 
-  kpiReport            KpiReport[]
+  kpiReport KpiReport[]
 
-  kpiAssignment        KpiAssignment[]
+  kpiAssignment KpiAssignment[]
 
   @@map("kpi")
 }
 
 model KpiAssignment {
-  kpiAssignmentId String   @id @default(uuid())
-  kpi             Kpi      @relation(fields: [kpiId], references: [kpiId])
+  kpiAssignmentId String @id @default(uuid())
+  kpi             Kpi    @relation(fields: [kpiId], references: [kpiId])
   kpiId           String
 
-  projectId       String?
-  assignedToId    String? // user / staff
-  assignedAt      DateTime @default(now())
+  projectId    String?
+  assignedToId String? // user / staff
+  assignedAt   DateTime @default(now())
 
   @@map("kpiassignment")
 }
 
 model KpiReport {
-  kpiReportId   String   @id @default(uuid())
-  kpi           Kpi      @relation(fields: [kpiId], references: [kpiId])
-  kpiId         String
+  kpiReportId String @id @default(uuid())
+  kpi         Kpi    @relation(fields: [kpiId], references: [kpiId])
+  kpiId       String
 
   actualValue   Float
   reportingDate DateTime
-  status        String   // Pending | Approved | Rejected
+  status        String // Pending | Approved | Rejected
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
-  kpiReview     KpiReview[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @default(now())
+  kpiReview KpiReview[]
 
   @@map("kpireport")
 }
+
 model KpiReview {
-  kpiReviewId String   @id @default(uuid())
+  kpiReviewId String    @id @default(uuid())
   kpiReport   KpiReport @relation(fields: [kpiReportId], references: [kpiReportId])
   kpiReportId String
 
-  comment     String?
-  reviewedBy  String?
-  reviewedAt  DateTime @default(now())
+  comment    String?
+  reviewedBy String?
+  reviewedAt DateTime @default(now())
 
   @@map("kpireview")
 }
-
-
 
 model Project {
   projectId             String              @id @default(uuid())
@@ -459,7 +458,6 @@ model IndicatorReportComment {
   @@map("indicator_report_comment")
 }
 
-
 // ACTIVITY RELATION
 
 model Activity {
@@ -542,6 +540,21 @@ model Request {
   documentURL                String?
   project                    Project?     @relation(fields: [projectId], references: [projectId])
   projectId                  String?
+  approval_A                 Int?
+  approval_B                 Int?
+  approval_C                 Int?
+  approval_D                 Int?
+  approval_E                 Int?
+  approvedBy_A               String?      @db.VarChar(191)
+  approvedBy_B               String?      @db.VarChar(191)
+  approvedBy_C               String?      @db.VarChar(191)
+  approvedBy_D               String?      @db.VarChar(191)
+  approvedBy_E               String?      @db.VarChar(191)
+  comment_A                  String?
+  comment_B                  String?
+  comment_C                  String?
+  comment_D                  String?
+  comment_E                  String?
   status                     String?
   createAt                   DateTime?    @default(now())
   updateAt                   DateTime?    @default(now())

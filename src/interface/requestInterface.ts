@@ -83,3 +83,31 @@ export interface IRequestView {
   createAt?: Date;
   updateAt?: Date;
 }
+
+// Approval-related types and interfaces
+export type ApprovalLevel = 'A' | 'B' | 'C' | 'D' | 'E';
+
+export interface IApprovalRequest {
+  requestId: string;
+  approvalStatus: number; // 1 = Approved, 2 = Rejected
+  approvedBy: string;
+  comment?: string;
+}
+
+// Data Validation Dashboard interfaces
+export interface IDataValidationStats {
+  totalSubmissions: number;
+  pendingReview: number;
+  approved: number;
+  rejected: number;
+  pendingFinancialRequests: number;
+  approvedRetirements: number;
+  percentageFromLastMonth: number;
+  approvalRate: number;
+  rejectionRate: number;
+}
+
+export interface IDateRangeFilter {
+  startDate?: string;
+  endDate?: string;
+}
