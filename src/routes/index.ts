@@ -8,6 +8,7 @@ import userManagementRoutes from "./userManagementRoute";
 import requestRouter from "./requestRoute";
 import managementAndStaffRouter from "./managementAndStaffRoute";
 import financialDashboardRouter from "./financialDashboardRoute";
+import performanceDashboardRouter from "./performanceDashboardRoute";
 
 const rootRoutes: Router = Router();
 
@@ -20,5 +21,6 @@ rootRoutes.use("/userManagement", userManagementRoutes);
 rootRoutes.use("/request", requestRouter);
 rootRoutes.use("/managementAndStaff", managementAndStaffRouter);
 rootRoutes.use("/financial-dashboard", financialDashboardRouter);
+rootRoutes.use("/performance-dashboard", performanceDashboardRouter);
 
 export default rootRoutes;
