@@ -172,6 +172,7 @@ model Project {
   activity              Activity[]
   logicalFramework      LogicalFramework[]
   request               Request[]
+  report                Report[]
 
   @@map("project")
 }
@@ -581,4 +582,35 @@ model Retirement {
   updateAt                DateTime? @default(now())
 
   @@map("retirement")
+}
+
+// REPORT
+model Report {
+  reportId   String @id @default(uuid())
+  reportName String
+  reportType String // "Activity Summary", "Financial Overview", "Request Analysis", "Retirement Analysis"
+
+  // Filter parameters used
+  project         Project?  @relation(fields: [projectId], references: [projectId])
+  projectId       String?
+  startDate       DateTime?
+  endDate         DateTime?
+  selectedMetrics String?   @db.Text // JSON array of selected metrics
+
+  // Report metadata
+  generatedBy String? // User ID who generated the report
+  fileUrl     String? // Path to generated PDF file
+  fileSize    Int? // File size in bytes
+  status      String? // "Generating", "Completed", "Failed"
+
+  // Analytics summary (stored for quick access)
+  totalActivities   Int?
+  totalRequests     Int?
+  totalRetirements  Int?
+  budgetUtilization Float?
+
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+
+  @@map("report")
 }
