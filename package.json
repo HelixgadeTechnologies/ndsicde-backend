@@ -4,12 +4,9 @@
   "description": "NDSICDE backend",
   "main": "index.js",
   "scripts": {
+    "build": "npm run clean && prisma generate && tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
-    "build": "prisma generate",
-    "build:local": "npm run clean && prisma generate && tsc -p tsconfig.build.json",
-    "clean": "rimraf dist",
-    "postinstall": "prisma generate",
-    "prisma:generate": "prisma generate"
+    "clean": "rimraf dist"
   },
   "author": "Neutron Davis",
   "license": "ISC",
