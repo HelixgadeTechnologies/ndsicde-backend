@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
-    "build": "cross-env NODE_OPTIONS=--max-old-space-size=1024 prisma generate && cross-env NODE_OPTIONS=--max-old-space-size=1024 tsc -p tsconfig.build.json",
-    "postinstall": "cross-env NODE_OPTIONS=--max-old-space-size=1024 prisma generate && cross-env NODE_OPTIONS=--max-old-space-size=1024 tsc -p tsconfig.build.json",
+    "build": "npm run prisma:generate && npm run compile",
+    "compile": "NODE_OPTIONS='--max-old-space-size=2048' tsc -p tsconfig.build.json",
+    "postinstall": "npm run build",
     "prisma:generate": "prisma generate"
   },
   "author": "Neutron Davis",
