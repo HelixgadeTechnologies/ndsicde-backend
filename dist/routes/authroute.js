@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authController_1 = require("../controllers/authController");
+const managementAndStaffControlleer_1 = require("../controllers/managementAndStaffControlleer");
+const authRoutes = (0, express_1.Router)();
+authRoutes.post("/signIn", authController_1.login);
+authRoutes.post("/forgot-password", authController_1.forgotPasswordController);
+authRoutes.put("/update-login-user", authController_1.updateLogInUser);
+authRoutes.put("/profile-picture", authController_1.updateUserProfilePicture);
+authRoutes.patch("/change-password", managementAndStaffControlleer_1.changePasswordController);
+authRoutes.get("/test", authController_1.test);
+exports.default = authRoutes;

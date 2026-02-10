@@ -14,12 +14,6 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Step 2: Compiling TypeScript..."
-npx tsc -p tsconfig.build.json
-
-if [ $? -ne 0 ]; then
-    echo "TypeScript compilation failed!"
-    exit 1
-fi
+echo "Step 2: TypeScript compilation skipped (using pre-compiled dist folder)"
 
 echo "Build completed successfully!"

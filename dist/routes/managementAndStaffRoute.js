@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const managementAndStaffControlleer_1 = require("../controllers/managementAndStaffControlleer");
+const managementAndStaffRouter = (0, express_1.Router)();
+managementAndStaffRouter.get("/summary", managementAndStaffControlleer_1.getDashboardSummary);
+managementAndStaffRouter.get("/kpi-performance", managementAndStaffControlleer_1.getKpiPerformance);
+managementAndStaffRouter.get("/projects", managementAndStaffControlleer_1.getProjects);
+managementAndStaffRouter.get("/project-status-distribution", managementAndStaffControlleer_1.getProjectStatusDistribution);
+managementAndStaffRouter.get("/budget-utilization", managementAndStaffControlleer_1.getBudgetUtilization);
+managementAndStaffRouter.get("/indicator-reports", managementAndStaffControlleer_1.getAllIndicatorReports);
+managementAndStaffRouter.post("/indicator-report-comments", managementAndStaffControlleer_1.createIndicatorReportCommentController);
+managementAndStaffRouter.get("/indicator-report-comments/:indicatorReportId", managementAndStaffControlleer_1.getCommentsByIndicatorReportIdController);
+managementAndStaffRouter.get("/all-indicator-report-comments", managementAndStaffControlleer_1.getAllIndicatorReportCommentsController);
+managementAndStaffRouter.get("/indicator-reports-overview/:indicatorReportId", managementAndStaffControlleer_1.getIndicatorReportOverviewController);
+exports.default = managementAndStaffRouter;

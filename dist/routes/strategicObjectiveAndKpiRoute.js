@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const strategicObjectiveAndKpiController_1 = require("../controllers/strategicObjectiveAndKpiController");
+const strategicObjectiveRouter = (0, express_1.Router)();
+strategicObjectiveRouter.post("/strategic-objective", strategicObjectiveAndKpiController_1.createOrUpdateStrategicObjective);
+strategicObjectiveRouter.delete("/delete", strategicObjectiveAndKpiController_1.removeStrategicObjective);
+strategicObjectiveRouter.get("/strategic-objectives", strategicObjectiveAndKpiController_1.fetchAllStrategicObjectives);
+strategicObjectiveRouter.get("/strategic-objectives/:id", strategicObjectiveAndKpiController_1.fetchStrategicObjectiveById);
+strategicObjectiveRouter.post("/kpi", strategicObjectiveAndKpiController_1.createOrUpdateKpi);
+strategicObjectiveRouter.delete("/deleteKpi", strategicObjectiveAndKpiController_1.removeKpi);
+strategicObjectiveRouter.get("/kpis", strategicObjectiveAndKpiController_1.fetchAllKpis);
+strategicObjectiveRouter.get("/kpi/:id", strategicObjectiveAndKpiController_1.fetchKpiById);
+strategicObjectiveRouter.get("/kpi/stId/:strategicObjectiveId", strategicObjectiveAndKpiController_1.fetchKpiByStrategicObjectiveId);
+exports.default = strategicObjectiveRouter;

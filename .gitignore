@@ -3,3 +3,6 @@ node_modules
 .env
 
 /generated/prisma
+
+# Ensure dist is tracked for local deployment strategy
+!dist/

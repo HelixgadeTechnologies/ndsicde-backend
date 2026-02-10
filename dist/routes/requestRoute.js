@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const requestController_1 = require("../controllers/requestController");
+const requestRouter = (0, express_1.Router)();
+requestRouter.post("/request", requestController_1.createOrUpdateRequestController);
+requestRouter.get("/requests", requestController_1.getAllRequestsController);
+requestRouter.get("/request/:id", requestController_1.getRequestByIdController);
+requestRouter.delete("/request/:id", requestController_1.deleteRequestController);
+requestRouter.post("/request/approve", requestController_1.requestApprovalController);
+requestRouter.get("/data-validation/stats", requestController_1.getDataValidationStatsController);
+requestRouter.post("/data-validation/list", requestController_1.getRequestsWithDateFilterController);
+exports.default = requestRouter;

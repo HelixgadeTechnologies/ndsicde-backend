@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const retirementController_1 = require("../controllers/retirementController");
+const retirementRouter = (0, express_1.Router)();
+retirementRouter.post("/retirement", retirementController_1.createOrUpdateRetirementController);
+retirementRouter.get("/retirements", retirementController_1.getRetirements);
+retirementRouter.get("/retirement/:retirementId", retirementController_1.getRetirement);
+retirementRouter.delete("/retirement/:retirementId", retirementController_1.removeRetirement);
+exports.default = retirementRouter;
