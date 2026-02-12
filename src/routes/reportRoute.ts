@@ -16,6 +16,8 @@ const reportRouter = express.Router();
  *     summary: Generate a new report
  *     description: Generates a comprehensive PDF report with visualizations based on Activity, Request, and Retirement data
  *     tags: [Reports]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

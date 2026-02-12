@@ -48,11 +48,11 @@ export async function generateReport(params: ReportGenerationParams) {
             data: {
                 reportName,
                 reportType: params.reportType,
-                projectId: params.projectId,
+                projectId: params.projectId && params.projectId.trim() !== '' ? params.projectId : null,
                 startDate: params.startDate ? new Date(params.startDate) : null,
                 endDate: params.endDate ? new Date(params.endDate) : null,
                 selectedMetrics: params.selectedMetrics ? JSON.stringify(params.selectedMetrics) : null,
-                generatedBy: params.generatedBy,
+                generatedBy: params.generatedBy && params.generatedBy.trim() !== '' ? params.generatedBy : null,
                 fileUrl: pdfPath,
                 fileSize,
                 status: 'Completed',

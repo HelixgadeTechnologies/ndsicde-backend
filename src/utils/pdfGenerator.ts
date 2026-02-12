@@ -20,6 +20,7 @@ export async function generatePDFReport(options: PDFGenerationOptions): Promise<
     const doc = new PDFDocument({
         size: pageSize,
         layout: orientation,
+        bufferPages: true,
         margins: {
             top: 50,
             bottom: 50,
@@ -224,7 +225,7 @@ async function addChartsSection(doc: PDFKit.PDFDocument, charts: any[]) {
 
     for (const chartImage of chartImages) {
         // Check if we need a new page
-        if (doc.y + 300 > doc.page.height - 100) {
+        if (doc.y + 350 > doc.page.height - 100) {
             doc.addPage();
         }
 
@@ -247,7 +248,10 @@ async function addChartsSection(doc: PDFKit.PDFDocument, charts: any[]) {
             height: imageHeight
         });
 
-        doc.moveDown(3);
+        // Manually move the cursor down after the image
+        doc.y += imageHeight + 20;
+
+        doc.moveDown(1.5);
     }
 }
 
@@ -300,12 +304,16 @@ function addTablesSection(doc: PDFKit.PDFDocument, tables: TableData[]) {
         // Draw data rows
         table.rows.forEach((row, rowIndex) => {
             const rowY = doc.y;
+            const rowHeight = 25; // Default height
 
             // Check if we need a new page
-            if (rowY + 25 > doc.page.height - 100) {
+            if (rowY + rowHeight > doc.page.height - 100) {
                 doc.addPage();
                 doc.y = 50;
             }
+
+            const currentY = doc.y;
+            let maxCellHeight = rowHeight;
 
             row.forEach((cell, colIndex) => {
                 const x = 50 + colIndex * columnWidth;
@@ -313,7 +321,7 @@ function addTablesSection(doc: PDFKit.PDFDocument, tables: TableData[]) {
                 // Cell background (alternating colors)
                 const fillColor = rowIndex % 2 === 0 ? '#FFFFFF' : '#ECF0F1';
                 doc
-                    .rect(x, doc.y, columnWidth, 25)
+                    .rect(x, currentY, columnWidth, rowHeight)
                     .fillAndStroke(fillColor, '#BDC3C7');
 
                 // Cell text
@@ -321,13 +329,13 @@ function addTablesSection(doc: PDFKit.PDFDocument, tables: TableData[]) {
                     .fontSize(9)
                     .font('Helvetica')
                     .fillColor('#2C3E50')
-                    .text(cell.toString(), x + 5, doc.y + 7, {
+                    .text(cell.toString(), x + 5, currentY + 7, {
                         width: columnWidth - 10,
                         align: 'left'
                     });
             });
 
-            doc.y += 25;
+            doc.y = currentY + rowHeight;
         });
 
         doc.moveDown(2);
