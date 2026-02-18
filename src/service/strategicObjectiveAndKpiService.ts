@@ -43,12 +43,51 @@ export const deleteStrategicObjective = async (
   strategicObjectiveId: string
 ) => {
   return await prisma.$transaction(async (tx) => {
-    // Step 1: Delete all related KPIs
-    await tx.kpi.deleteMany({
+    // Step 1: Find all KPIs linked to this strategic objective
+    const kpis = await tx.kpi.findMany({
       where: { strategicObjectiveId },
+      select: { kpiId: true },
+    });
+    const kpiIds = kpis.map((k) => k.kpiId);
+
+    if (kpiIds.length > 0) {
+      // Step 2: Find all KpiReports linked to those KPIs
+      const kpiReports = await tx.kpiReport.findMany({
+        where: { kpiId: { in: kpiIds } },
+        select: { kpiReportId: true },
+      });
+      const kpiReportIds = kpiReports.map((r) => r.kpiReportId);
+
+      // Step 3: Delete KpiReviews for those KpiReports
+      if (kpiReportIds.length > 0) {
+        await tx.kpiReview.deleteMany({
+          where: { kpiReportId: { in: kpiReportIds } },
+        });
+      }
+
+      // Step 4: Delete KpiReports
+      await tx.kpiReport.deleteMany({
+        where: { kpiId: { in: kpiIds } },
+      });
+
+      // Step 5: Delete KpiAssignments
+      await tx.kpiAssignment.deleteMany({
+        where: { kpiId: { in: kpiIds } },
+      });
+
+      // Step 6: Delete the KPIs
+      await tx.kpi.deleteMany({
+        where: { strategicObjectiveId },
+      });
+    }
+
+    // Step 7: Nullify strategicObjectiveId on linked Projects (don't delete them)
+    await tx.project.updateMany({
+      where: { strategicObjectiveId },
+      data: { strategicObjectiveId: null },
     });
 
-    // Step 2: Delete the strategic objective
+    // Step 8: Delete the strategic objective
     return await tx.strategicObjective.delete({
       where: { strategicObjectiveId },
     });
