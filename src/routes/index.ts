@@ -11,6 +11,7 @@ import financialDashboardRouter from "./financialDashboardRoute";
 import performanceDashboardRouter from "./performanceDashboardRoute";
 import reportRouter from "./reportRoute";
 import dashboardOverviewRouter from "./dashboardOverviewRoute";
+import requestRetirementDashboardRouter from "./requestRetirementDashboardRoute";
 
 const rootRoutes: Router = Router();
 
@@ -26,5 +27,6 @@ rootRoutes.use("/financial-dashboard", financialDashboardRouter);
 rootRoutes.use("/performance-dashboard", performanceDashboardRouter);
 rootRoutes.use("/reports", reportRouter);
 rootRoutes.use("/dashboard-overview", dashboardOverviewRouter);
+rootRoutes.use("/request-retirement-dashboard", requestRetirementDashboardRouter);
 
 export default rootRoutes;
