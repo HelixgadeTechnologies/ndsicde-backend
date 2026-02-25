@@ -93,7 +93,7 @@ authRoutes.post("/forgot-password", forgotPasswordController);
 /**
  * @swagger
  * /api/auth/update-login-user:
- *   put:
+ *   post:
  *     summary: Update login user's information (including password if provided)
  *     tags: [Auth]
  *     security:
@@ -127,12 +127,12 @@ authRoutes.post("/forgot-password", forgotPasswordController);
  *       500:
  *         description: Internal server error
  */
-authRoutes.put("/update-login-user", updateLogInUser);
+authRoutes.post("/update-login-user", updateLogInUser);
 
 /**
  * @swagger
  * /api/auth/profile-picture:
- *   put:
+ *   post:
  *     summary: Update user's profile picture
  *     tags: [Auth]
  *     security:
@@ -161,12 +161,12 @@ authRoutes.put("/update-login-user", updateLogInUser);
  *       401:
  *         description: Unauthorized (user not authenticated)
  */
-authRoutes.put("/profile-picture", updateUserProfilePicture);
+authRoutes.post("/profile-picture", updateUserProfilePicture);
 
 /**
  * @swagger
  * /api/auth/change-password:
- *   patch:
+ *   post:
  *     summary: Change user password
  *     tags: [Auth]
  *     security:
@@ -199,7 +199,7 @@ authRoutes.put("/profile-picture", updateUserProfilePicture);
  *       500:
  *         description: Server error
  */
-authRoutes.patch(
+authRoutes.post(
     "/change-password",
     changePasswordController
 );

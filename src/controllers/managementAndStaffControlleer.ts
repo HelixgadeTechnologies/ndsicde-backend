@@ -224,6 +224,7 @@ export const changePasswordController = async (
 ) => {
   try {
     const userId = req.user?.userId;
+    console.log("userId", userId);
     const { oldPassword, newPassword, confirmPassword } = req.body;
 
     if (!userId) {
