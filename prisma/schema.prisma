@@ -205,6 +205,8 @@ model Partner {
   organizationName String
   email            String
   roleId           String
+  user             User?     @relation(fields: [userId], references: [userId])
+  userId           String?
   project          Project?  @relation(fields: [projectId], references: [projectId])
   projectId        String?
   createAt         DateTime? @default(now())
