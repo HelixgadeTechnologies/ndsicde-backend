@@ -52,6 +52,7 @@ import {
   getProjectById,
   getProjectsStatus,
   getResultType,
+  getPartnerByEmail,
   getStateDisaggregationByIndicatorId,
   getTenureDisaggregationByIndicatorId,
   saveIndicatorReport,
@@ -232,6 +233,20 @@ export const deletePartnerController = async (req: Request, res: Response) => {
     const { id } = req.params;
     await deletePartner(id);
     res.status(200).json(successResponse("Partner deleted successfully", null));
+  } catch (error: any) {
+    res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// Get Partner by Email
+export const getPartnerByEmailController = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.params;
+    const partner = await getPartnerByEmail(email);
+    if (!partner) {
+      return res.status(404).json(notFoundResponse("Partner not found", null));
+    }
+    res.status(200).json(successResponse("Partner retrieved successfully", partner));
   } catch (error: any) {
     res.status(500).json(errorResponse(error.message));
   }

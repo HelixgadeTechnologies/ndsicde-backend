@@ -6,12 +6,14 @@ import strategicObjectiveRouter from "./strategicObjectiveAndKpiRoute";
 import projectManagementRouter from "./projectManagementRoute";
 import userManagementRoutes from "./userManagementRoute";
 import requestRouter from "./requestRoute";
+import retirementRouter from "./retirementRoute";
 import managementAndStaffRouter from "./managementAndStaffRoute";
 import financialDashboardRouter from "./financialDashboardRoute";
 import performanceDashboardRouter from "./performanceDashboardRoute";
 import reportRouter from "./reportRoute";
 import dashboardOverviewRouter from "./dashboardOverviewRoute";
 import requestRetirementDashboardRouter from "./requestRetirementDashboardRoute";
+import kpiReportRouter from "./kpiReportRoute";
 
 const rootRoutes: Router = Router();
 
@@ -22,11 +24,13 @@ rootRoutes.use("/strategic-objectivesAndKpi", strategicObjectiveRouter);
 rootRoutes.use("/projectManagement", projectManagementRouter);
 rootRoutes.use("/userManagement", userManagementRoutes);
 rootRoutes.use("/request", requestRouter);
+rootRoutes.use("/retirement", retirementRouter);
 rootRoutes.use("/managementAndStaff", managementAndStaffRouter);
 rootRoutes.use("/financial-dashboard", financialDashboardRouter);
 rootRoutes.use("/performance-dashboard", performanceDashboardRouter);
 rootRoutes.use("/reports", reportRouter);
 rootRoutes.use("/dashboard-overview", dashboardOverviewRouter);
 rootRoutes.use("/request-retirement-dashboard", requestRetirementDashboardRouter);
+rootRoutes.use("/kpi-report", kpiReportRouter);
 
 export default rootRoutes;

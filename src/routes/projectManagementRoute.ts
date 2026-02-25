@@ -51,6 +51,7 @@ import {
   getOrgKpiDashboardDataController,
   getOutcomeByIdController,
   getOutputByIdController,
+  getPartnerByEmailController,
   getProductDisaggregationByIndicatorController,
   getProjectActivityDashboardDataController,
   getResultDashboardDataController,
@@ -398,6 +399,60 @@ projectManagementRouter.delete("/partners/:id", deletePartnerController);
 
 /**
  * @swagger
+ * /api/projectManagement/partners/email/{email}:
+ *   get:
+ *     summary: Get a partner by email
+ *     description: Retrieve a single partner record by their email address.
+ *     tags: [PARTNERS]
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: email
+ *         description: The email address of the partner
+ *         example: "info@greentech.com"
+ *     responses:
+ *       200:
+ *         description: Partner retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Partner retrieved successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     partnerId:
+ *                       type: string
+ *                       example: "2b4b1e3a-1b2c-4b5d-8a9f-0c1d2e3f4a5b"
+ *                     organizationName:
+ *                       type: string
+ *                       example: "GreenTech Ltd"
+ *                     email:
+ *                       type: string
+ *                       example: "info@greentech.com"
+ *                     roleId:
+ *                       type: string
+ *                       example: "8d1f6c1e-3b2a-4e5d-9c8b-7a6f5e4d3c2b"
+ *                     projectId:
+ *                       type: string
+ *                       nullable: true
+ *                       example: "3f2e1d0c-9b8a-7d6c-5e4f-3a2b1c0d9e8f"
+ *       404:
+ *         description: Partner not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get("/partners/email/:email", getPartnerByEmailController);
+
+
+/**
+ * @swagger
  * /api/projectManagement/result_types:
  *   get:
  *     summary: Get all result type
@@ -410,6 +465,7 @@ projectManagementRouter.delete("/partners/:id", deletePartnerController);
  *         description: Server error
  */
 projectManagementRouter.get("/result_types", getAllResultType);
+
 
 /**
  * @swagger

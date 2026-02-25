@@ -209,7 +209,12 @@ export const getAllPartners = async () => {
   `;
   return partners;
 };
-
+//create get partner by email
+export const getPartnerByEmail = async (email: string) => {
+  return await prisma.partner.findFirst({
+    where: { email },
+  });
+};
 // Delete Partner
 export const deletePartner = async (partnerId: string) => {
   return await prisma.partner.delete({

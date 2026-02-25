@@ -50,26 +50,26 @@ export const deleteStrategicObjective = async (
     });
     const kpiIds = kpis.map((k) => k.kpiId);
 
-    if (kpiIds.length > 0) {
-      // Step 2: Find all KpiReports linked to those KPIs
-      const kpiReports = await tx.kpiReport.findMany({
-        where: { kpiId: { in: kpiIds } },
-        select: { kpiReportId: true },
-      });
-      const kpiReportIds = kpiReports.map((r) => r.kpiReportId);
+    // Step 2: Find KpiReports linked directly to this strategic objective
+    const kpiReports = await tx.kpiReport.findMany({
+      where: { strategicObjectiveId },
+      select: { kpiReportId: true },
+    });
+    const kpiReportIds = kpiReports.map((r) => r.kpiReportId);
 
-      // Step 3: Delete KpiReviews for those KpiReports
-      if (kpiReportIds.length > 0) {
-        await tx.kpiReview.deleteMany({
-          where: { kpiReportId: { in: kpiReportIds } },
-        });
-      }
+    // Step 3: Delete KpiReviews for those KpiReports
+    if (kpiReportIds.length > 0) {
+      await tx.kpiReview.deleteMany({
+        where: { kpiReportId: { in: kpiReportIds } },
+      });
 
       // Step 4: Delete KpiReports
       await tx.kpiReport.deleteMany({
-        where: { kpiId: { in: kpiIds } },
+        where: { strategicObjectiveId },
       });
+    }
 
+    if (kpiIds.length > 0) {
       // Step 5: Delete KpiAssignments
       await tx.kpiAssignment.deleteMany({
         where: { kpiId: { in: kpiIds } },
