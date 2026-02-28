@@ -198,6 +198,13 @@ requestRouter.post("/request/approve", requestApprovalController);
  *         required: false
  *         description: End date for filtering (ISO 8601 format)
  *         example: "2024-12-31T23:59:59Z"
+ *       - in: query
+ *         name: projectId
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Optional project ID to filter statistics
+ *         example: "uuid-of-project"
  *     responses:
  *       200:
  *         description: Statistics fetched successfully
@@ -233,6 +240,9 @@ requestRouter.post("/request/approve", requestApprovalController);
  *                     approvedRetirements:
  *                       type: number
  *                       example: 80
+ *                     totalRetirement:
+ *                       type: number
+ *                       example: 90
  *                     percentageFromLastMonth:
  *                       type: number
  *                       example: 15.5
