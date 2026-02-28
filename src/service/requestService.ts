@@ -324,3 +324,28 @@ export const getRequestsWithDateFilter = async (
     throw error;
   }
 };
+
+// ✅ Get Requests by Project ID
+export const getRequestsByProjectId = async (projectId: string) => {
+  try {
+    const requests = await prisma.request.findMany({
+      where: { projectId },
+      include: {
+        project: {
+          select: {
+            projectName: true,
+          },
+        },
+        retirement: true,
+      },
+      orderBy: {
+        createAt: 'desc',
+      },
+    });
+
+    return requests;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

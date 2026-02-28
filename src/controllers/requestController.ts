@@ -13,7 +13,8 @@ import {
   getRequestById,
   requestApproval,
   getDataValidationStats,
-  getRequestsWithDateFilter
+  getRequestsWithDateFilter,
+  getRequestsByProjectId
 } from "../service/requestService";
 
 // ✅ Create or Update Request
@@ -177,6 +178,34 @@ export const getRequestsWithDateFilterController = async (
       return res
         .status(404)
         .json(notFoundResponse("No requests found", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Requests fetched successfully", result));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get Requests by Project ID
+export const getRequestsByProjectIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { projectId } = req.params;
+
+    if (!projectId) {
+      return res.status(400).json(errorResponse("projectId is required"));
+    }
+
+    const result = await getRequestsByProjectId(projectId);
+
+    if (!result || result.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No requests found for this project", null));
     }
 
     return res

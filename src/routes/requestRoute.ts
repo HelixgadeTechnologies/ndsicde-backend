@@ -6,7 +6,8 @@ import {
     getRequestByIdController,
     requestApprovalController,
     getDataValidationStatsController,
-    getRequestsWithDateFilterController
+    getRequestsWithDateFilterController,
+    getRequestsByProjectIdController
 } from "../controllers/requestController";
 
 const requestRouter: Router = Router();
@@ -307,5 +308,49 @@ requestRouter.get("/data-validation/stats", getDataValidationStatsController);
  *         description: Server error
  */
 requestRouter.post("/data-validation/list", getRequestsWithDateFilterController);
+
+/**
+ * @swagger
+ * /api/request/getRequestByProjectId/{projectId}:
+ *   get:
+ *     summary: Get Requests by Project ID
+ *     description: Returns a list of requests for a specific project, including associated project and retirement data.
+ *     tags: [Request]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Project ID
+ *         example: "550e8400-e29b-41d4-a716-446655440000"
+ *     responses:
+ *       200:
+ *         description: Requests fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Requests fetched successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Request'
+ *       400:
+ *         description: Project ID is required
+ *       404:
+ *         description: No requests found for this project
+ *       500:
+ *         description: Server error
+ */
+requestRouter.get("/project/:projectId", getRequestsByProjectIdController);
 
 export default requestRouter;
