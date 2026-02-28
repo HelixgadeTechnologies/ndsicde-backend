@@ -508,6 +508,9 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               format: "uuid",
             },
+            activityLineDescription: {
+              type: "string",
+            },
             lineItem: {
               type: "string",
             },
