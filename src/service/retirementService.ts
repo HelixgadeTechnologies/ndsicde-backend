@@ -58,7 +58,7 @@ export const getRetirementById = async (
   retirementId: string
 ): Promise<IRetirementView | null> => {
   const result = await prisma.$queryRaw<IRetirementView[]>`
-    SELECT * FROM retirement_view WHERE "retirementId" = ${retirementId}
+    SELECT * FROM retirement_view WHERE retirementId = ${retirementId}
   `;
   return result.length > 0 ? result[0] : null;
 };

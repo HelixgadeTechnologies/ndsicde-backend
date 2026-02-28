@@ -316,8 +316,6 @@ requestRouter.post("/data-validation/list", getRequestsWithDateFilterController)
  *     summary: Get Requests by Project ID
  *     description: Returns a list of requests for a specific project, including associated project and retirement data.
  *     tags: [Request]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: projectId

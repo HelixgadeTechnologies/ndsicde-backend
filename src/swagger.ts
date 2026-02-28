@@ -511,6 +511,21 @@ const options: swaggerJSDoc.Options = {
             lineItem: {
               type: "string",
             },
+            quantity: {
+              type: "integer",
+            },
+            frequency: {
+              type: "integer",
+            },
+            unitCost: {
+              type: "integer",
+            },
+            actualCost: {
+              type: "integer",
+            },
+            totalBudget: {
+              type: "integer",
+            },
             actualCostOfLineItem: {
               type: "integer",
             },
