@@ -102,6 +102,7 @@ export interface IDataValidationStats {
   rejected: number;
   pendingFinancialRequests: number;
   approvedRetirements: number;
+  totalRetirement: number;
   percentageFromLastMonth: number;
   approvalRate: number;
   rejectionRate: number;

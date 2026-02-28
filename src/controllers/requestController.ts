@@ -147,11 +147,12 @@ export const getDataValidationStatsController = async (
   res: Response
 ) => {
   try {
-    const { startDate, endDate } = req.query;
+    const { startDate, endDate, projectId } = req.query;
 
     const result = await getDataValidationStats(
       startDate as string,
-      endDate as string
+      endDate as string,
+      projectId as string
     );
 
     return res

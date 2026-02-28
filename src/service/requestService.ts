@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { IRequest, IRequestView } from "../interface/requestInterface";
+import { IDataValidationStats, IRequest, IRequestView } from "../interface/requestInterface";
 
 const prisma = new PrismaClient();
 
@@ -180,44 +180,61 @@ export const requestApproval = async (
 // ✅ Get Data Validation Statistics
 export const getDataValidationStats = async (
   startDate?: string,
-  endDate?: string
-) => {
+  endDate?: string,
+  projectId?: string
+): Promise<IDataValidationStats> => {
   try {
-    const dateFilter: any = {};
+    const commonFilter: any = {};
 
     if (startDate || endDate) {
-      dateFilter.createAt = {};
-      if (startDate) dateFilter.createAt.gte = new Date(startDate);
-      if (endDate) dateFilter.createAt.lte = new Date(endDate);
+      commonFilter.createAt = {};
+      if (startDate) commonFilter.createAt.gte = new Date(startDate);
+      if (endDate) commonFilter.createAt.lte = new Date(endDate);
+    }
+
+    if (projectId) {
+      commonFilter.projectId = projectId;
     }
 
     // Get current period statistics
     const totalSubmissions = await prisma.request.count({
-      where: dateFilter,
+      where: commonFilter,
     });
 
     const pendingReview = await prisma.request.count({
-      where: { ...dateFilter, status: "Pending" },
+      where: { ...commonFilter, status: "Pending" },
     });
 
     const approved = await prisma.request.count({
-      where: { ...dateFilter, status: "Approved" },
+      where: { ...commonFilter, status: "Approved" },
     });
 
     const rejected = await prisma.request.count({
-      where: { ...dateFilter, status: "Rejected" },
+      where: { ...commonFilter, status: "Rejected" },
     });
+
+    const retirementFilter: any = {
+      ...(startDate || endDate ? {
+        createAt: {
+          ...(startDate && { gte: new Date(startDate) }),
+          ...(endDate && { lte: new Date(endDate) }),
+        }
+      } : {}),
+    };
+
+    if (projectId) {
+      retirementFilter.request = { projectId };
+    }
 
     const approvedRetirements = await prisma.retirement.count({
       where: {
-        ...(startDate || endDate ? {
-          createAt: {
-            ...(startDate && { gte: new Date(startDate) }),
-            ...(endDate && { lte: new Date(endDate) }),
-          }
-        } : {}),
+        ...retirementFilter,
         status: "Approved",
       },
+    });
+
+    const totalRetirement = await prisma.retirement.count({
+      where: retirementFilter,
     });
 
     // Calculate previous period for comparison
@@ -236,6 +253,7 @@ export const getDataValidationStats = async (
             gte: previousStart,
             lt: previousEnd,
           },
+          ...(projectId && { projectId }),
         },
       });
 
@@ -261,6 +279,7 @@ export const getDataValidationStats = async (
       rejected,
       pendingFinancialRequests: pendingReview, // Same as pending review
       approvedRetirements,
+      totalRetirement,
       percentageFromLastMonth: Number(percentageFromLastMonth.toFixed(2)),
       approvalRate: Number(approvalRate.toFixed(2)),
       rejectionRate: Number(rejectionRate.toFixed(2)),
