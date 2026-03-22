@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { IRetirement, IRetirementView } from "../interface/retirementInterface";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // ✅ Create or Update Retirement
 export const createOrUpdateRetirement = async (

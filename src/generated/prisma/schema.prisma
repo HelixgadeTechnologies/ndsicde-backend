@@ -1,0 +1,666 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+//MODEL
+model User {
+  userId              String      @id @default(uuid())
+  fullName            String?
+  email               String?     @unique
+  address             String?
+  phoneNumber         String?
+  role                Role?       @relation(fields: [roleId], references: [roleId])
+  roleId              String?
+  status              String?
+  assignedProjectId   String?
+  department          String?
+  community           String?
+  state               String?
+  localGovernmentArea String?
+  password            String?
+  profilePic          String?
+  profilePicMimeType  String?
+  loginLast           DateTime?
+  createAt            DateTime?   @default(now())
+  updateAt            DateTime?   @default(now())
+  kpiReport           KpiReport[]
+  partner             Partner[]
+
+  @@map("users")
+}
+
+model GeneralSettings {
+  generalSettingsId   String    @id @default(uuid())
+  organizationName    String?
+  contactEmail        String?
+  contactPhone        String?
+  website             String?
+  organizationLogo    String?
+  defaultCurrency     String?
+  defaultTimeZone     String?
+  dateRetentionPolicy String?
+  auditLogRetention   String?
+  emailNotification   Boolean?
+  maintenanceAlert    Boolean?
+  createAt            DateTime? @default(now())
+  updateAt            DateTime? @default(now())
+
+  @@map("generalsettings")
+}
+
+model Role {
+  roleId      String    @id @default(uuid())
+  roleName    String?
+  description String?
+  permission  String?
+  createAt    DateTime? @default(now())
+  updateAt    DateTime? @default(now())
+  users       User[]
+
+  @@map("role")
+}
+
+model StrategicObjective {
+  strategicObjectiveId String      @id @default(uuid())
+  statement            String?
+  thematicAreas        String?
+  pillarLead           String?
+  status               String?
+  createAt             DateTime?   @default(now())
+  updateAt             DateTime?   @default(now())
+  kpi                  Kpi[]
+  project              Project[]
+  kpiReport            KpiReport[]
+
+  @@map("strategic_objective")
+}
+
+model Kpi {
+  kpiId                String              @id @default(uuid())
+  statement            String?
+  definition           String?
+  type                 String?
+  specificAreas        String?
+  unitOfMeasure        String?
+  itemInMeasure        String?
+  disaggregation       String?
+  baseLine             String?
+  target               String?
+  strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
+  strategicObjectiveId String?
+  createAt             DateTime?           @default(now())
+  updateAt             DateTime?           @default(now())
+
+  kpiAssignment KpiAssignment[]
+
+  @@map("kpi")
+}
+
+model KpiAssignment {
+  kpiAssignmentId String @id @default(uuid())
+  kpi             Kpi    @relation(fields: [kpiId], references: [kpiId])
+  kpiId           String
+
+  projectId    String?
+  assignedToId String? // user / staff
+  assignedAt   DateTime @default(now())
+
+  @@map("kpiassignment")
+}
+
+model KpiReport {
+  kpiReportId          String              @id @default(uuid())
+  projectId            String?
+  project              Project?            @relation(fields: [projectId], references: [projectId])
+  user                 User?               @relation(fields: [userId], references: [userId])
+  userId               String?
+  strategicObjectiveId String?
+  strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
+  kpiName              String?
+  kpiType              String? // Output | Outcome | Impact
+  baseline             Int?
+  target               Int?
+  actualValue          Int?
+  status               String? // Pending | Approved | Rejected
+  observation          String?
+  evidence             String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @default(now())
+  kpiReview            KpiReview[]
+
+  @@map("kpireport")
+}
+
+model KpiReview {
+  kpiReviewId String    @id @default(uuid())
+  kpiReport   KpiReport @relation(fields: [kpiReportId], references: [kpiReportId])
+  kpiReportId String
+
+  comment    String?
+  reviewedBy String?
+  reviewedAt DateTime @default(now())
+
+  @@map("kpireview")
+}
+
+model Project {
+  projectId             String              @id @default(uuid())
+  projectName           String?
+  budgetCurrency        String?
+  totalBudgetAmount     String?
+  startDate             DateTime?           @default(now())
+  endDate               DateTime?           @default(now())
+  country               String?
+  state                 String?
+  localGovernment       String?
+  community             String?
+  thematicAreasOrPillar String?
+  status                String?
+  strategicObjective    StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
+  strategicObjectiveId  String?
+  createAt              DateTime?           @default(now())
+  updateAt              DateTime?           @default(now())
+  teamMember            TeamMember[]
+  partner               Partner[]
+  impact                Impact[]
+  outcome               Outcome[]
+  output                Output[]
+  activity              Activity[]
+  logicalFramework      LogicalFramework[]
+  request               Request[]
+  report                Report[]
+  kpiReport             KpiReport[]
+
+  @@map("project")
+}
+
+model TeamMember {
+  teamMemberId String    @id @default(uuid())
+  userId       String?
+  fullName     String?
+  email        String?
+  roleId       String?
+  project      Project?  @relation(fields: [projectId], references: [projectId])
+  projectId    String?
+  createAt     DateTime? @default(now())
+  updateAt     DateTime? @default(now())
+
+  @@map("teammember")
+}
+
+model Partner {
+  partnerId        String    @id @default(uuid())
+  organizationName String
+  email            String
+  roleId           String
+  user             User?     @relation(fields: [userId], references: [userId])
+  userId           String?
+  project          Project?  @relation(fields: [projectId], references: [projectId])
+  projectId        String?
+  createAt         DateTime? @default(now())
+  updateAt         DateTime? @default(now())
+
+  @@map("partner")
+}
+
+model ResultType {
+  resultTypeId    String            @id @default(uuid())
+  resultName      String
+  impact          Impact[]
+  outcome         Outcome[]
+  output          Output[]
+  Indicator       Indicator[]
+  IndicatorReport IndicatorReport[]
+
+  @@map("result_type")
+}
+
+// IMPACT RELATION
+
+model Impact {
+  impactId          String      @id @default(uuid())
+  statement         String
+  thematicArea      String
+  responsiblePerson String
+  project           Project?    @relation(fields: [projectId], references: [projectId])
+  projectId         String?
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
+  outcome           Outcome[]
+
+  @@map("impact")
+}
+
+// OUTCOME RELATION
+
+model Outcome {
+  outcomeId         String      @id @default(uuid())
+  outcomeStatement  String
+  outcomeType       String
+  impact            Impact?     @relation(fields: [impactId], references: [impactId])
+  impactId          String?
+  thematicAreas     String?
+  responsiblePerson String
+  project           Project?    @relation(fields: [projectId], references: [projectId])
+  projectId         String?
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
+  output            Output[]
+
+  @@map("outcome")
+}
+
+// OUTPUT Relation
+
+model Output {
+  outputId          String      @id @default(uuid())
+  outputStatement   String
+  outcome           Outcome?    @relation(fields: [outcomeId], references: [outcomeId])
+  outcomeId         String?
+  thematicAreas     String?
+  responsiblePerson String
+  project           Project?    @relation(fields: [projectId], references: [projectId])
+  projectId         String?
+  createAt          DateTime?   @default(now())
+  updateAt          DateTime?   @default(now())
+  ResultType        ResultType? @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId      String?
+  activity          Activity[]
+  request           Request[]
+
+  @@map("output")
+}
+
+// indicator
+model Indicator {
+  indicatorId              String                     @id @default(uuid())
+  indicatorSource          String?
+  thematicAreasOrPillar    String?
+  statement                String?
+  linkKpiToSdnOrgKpi       String?
+  definition               String?
+  specificArea             String?
+  unitOfMeasure            String?
+  itemInMeasure            String?
+  baseLineDate             DateTime?
+  cumulativeValue          Int?
+  baselineNarrative        String?
+  targetDate               DateTime?
+  cumulativeTarget         Int?
+  targetNarrative          String?
+  targetType               String?
+  responsiblePersons       String?
+  createAt                 DateTime?                  @default(now())
+  updateAt                 DateTime?                  @default(now())
+  result                   String?
+  ResultType               ResultType?                @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId             String?
+  IndicatorReport          IndicatorReport[]
+  IndicatorDisaggregation  IndicatorDisaggregation[]
+  genderDisaggregation     GenderDisaggregation[]
+  productDisaggregation    ProductDisaggregation[]
+  departmentDisaggregation DepartmentDisaggregation[]
+  stateDisaggregation      StateDisaggregation[]
+  lgaDisaggregation        LgaDisaggregation[]
+  tenureDisaggregation     TenureDisaggregation[]
+  ageDisaggregation        AgeDisaggregation[]
+
+  @@map("indicator")
+}
+
+model IndicatorDisaggregation {
+  indicatorDisaggregationId String    @id @default(uuid())
+  indicatorId               String
+  indicator                 Indicator @relation(fields: [indicatorId], references: [indicatorId])
+
+  type     String // "gender", "state", "age"
+  category String // "Male", "Lagos", "18-25"
+
+  target Int? // optional per breakdown target
+
+  @@map("indicator_disaggregation")
+}
+
+//indicator report
+model IndicatorReport {
+  indicatorReportId     String  @id @default(uuid())
+  indicatorSource       String?
+  thematicAreasOrPillar String?
+  indicatorStatement    String?
+  responsiblePersons    String?
+
+  actualDate                    DateTime?
+  cumulativeActual              String?
+  actualNarrative               String?
+  attachmentUrl                 String?
+  status                        String?
+  createAt                      DateTime?                       @default(now())
+  updateAt                      DateTime?                       @default(now())
+  indicator                     Indicator?                      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId                   String?
+  ResultType                    ResultType?                     @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId                  String?
+  indicatorReportComment        IndicatorReportComment[]
+  IndicatorReportDisaggregation IndicatorReportDisaggregation[]
+
+  @@map("indicator_report")
+}
+
+model IndicatorReportDisaggregation {
+  indicatorReportDisaggregationId String          @id @default(uuid())
+  indicatorReportId               String
+  indicatorReport                 IndicatorReport @relation(fields: [indicatorReportId], references: [indicatorReportId])
+
+  type     String // same as above
+  category String // same as above
+
+  actual Int?
+
+  @@map("indicator_report_disaggregation")
+}
+
+model IndicatorReportComment {
+  indicatorReportCommentId String           @id @default(uuid()) @db.VarChar(191)
+  IndicatorReport          IndicatorReport? @relation(fields: [indicatorReportId], references: [indicatorReportId])
+  indicatorReportId        String?          @db.VarChar(191)
+  comment                  String?          @db.VarChar(255)
+  createAt                 DateTime?        @default(now()) @map("createAt") @db.DateTime(3)
+  updateAt                 DateTime?        @default(now()) @map("updateAt") @db.DateTime(3)
+
+  @@map("indicator_report_comment")
+}
+
+// ACTIVITY RELATION
+
+model Activity {
+  activityId          String           @id @default(uuid())
+  activityStatement   String?
+  output              Output?          @relation(fields: [outputId], references: [outputId])
+  outputId            String?
+  activityTotalBudget Int?
+  responsiblePerson   String?
+  startDate           DateTime?
+  endDate             DateTime?
+  activityFrequency   Int?
+  subActivity         String?
+  descriptionAction   String?
+  deliveryDate        DateTime?
+  project             Project?         @relation(fields: [projectId], references: [projectId])
+  projectId           String?
+  createAt            DateTime?        @default(now())
+  updateAt            DateTime?        @default(now())
+  activityReport      ActivityReport[]
+
+  @@map("activity")
+}
+
+model ActivityReport {
+  activityReportId     String    @id @default(uuid())
+  activity             Activity? @relation(fields: [activityId], references: [activityId])
+  activityId           String?
+  percentageCompletion Int?
+  actualStartDate      DateTime?
+  actualEndDate        DateTime?
+  actualCost           Int?
+  actualNarrative      String?
+  createAt             DateTime? @default(now())
+  updateAt             DateTime? @default(now())
+
+  @@map("activityreport")
+}
+
+// LOGICAL FRAMEWORK
+model LogicalFramework {
+  logicalFrameworkId String    @id @default(uuid())
+  project            Project?  @relation(fields: [projectId], references: [projectId])
+  projectId          String?
+  documentName       String?
+  documentURL        String?
+  createAt           DateTime? @default(now())
+  updateAt           DateTime? @default(now())
+
+  @@map("logicalframework")
+}
+
+// REQUEST
+model Request {
+  requestId                  String       @id @default(uuid())
+  staff                      String?
+  output                     Output?      @relation(fields: [outputId], references: [outputId])
+  outputId                   String?
+  activityTitle              String?
+  activityBudgetCode         Int?
+  activityLocation           String?
+  activityPurposeDescription String?
+  activityStartDate          DateTime?
+  activityEndDate            DateTime?
+  activityLineDescription    String?
+  quantity                   Int?
+  frequency                  Int?
+  unitCost                   Int?
+  budgetCode                 Int?
+  total                      Int?
+  modeOfTransport            String?
+  driverName                 String?
+  driversPhoneNumber         String?
+  vehiclePlateNumber         String?
+  vehicleColor               String?
+  departureTime              DateTime?
+  route                      String?
+  recipientPhoneNumber       String?
+  documentName               String?
+  documentURL                String?
+  project                    Project?     @relation(fields: [projectId], references: [projectId])
+  projectId                  String?
+  approval_A                 Int?
+  approval_B                 Int?
+  approval_C                 Int?
+  approval_D                 Int?
+  approval_E                 Int?
+  approvedBy_A               String?      @db.VarChar(191)
+  approvedBy_B               String?      @db.VarChar(191)
+  approvedBy_C               String?      @db.VarChar(191)
+  approvedBy_D               String?      @db.VarChar(191)
+  approvedBy_E               String?      @db.VarChar(191)
+  comment_A                  String?
+  comment_B                  String?
+  comment_C                  String?
+  comment_D                  String?
+  comment_E                  String?
+  status                     String?
+  createAt                   DateTime?    @default(now())
+  updateAt                   DateTime?    @default(now())
+  retirement                 Retirement[]
+
+  @@map("request")
+}
+
+//Retirement
+model Retirement {
+  retirementId            String    @id @default(uuid())
+  activityLineDescription String?
+  quantity                Int?
+  frequency               Int?
+  unitCost                Int?
+  actualCost              Int?
+  totalBudget             Int?
+  documentName            String?
+  documentURL             String?
+  request                 Request?  @relation(fields: [requestId], references: [requestId])
+  requestId               String?
+  status                  String?
+  createAt                DateTime? @default(now())
+  updateAt                DateTime? @default(now())
+
+  @@map("retirement")
+}
+
+// REPORT
+model Report {
+  reportId   String @id @default(uuid())
+  reportName String
+  reportType String // "Activity Summary", "Financial Overview", "Request Analysis", "Retirement Analysis"
+
+  // Filter parameters used
+  project         Project?  @relation(fields: [projectId], references: [projectId])
+  projectId       String?
+  startDate       DateTime?
+  endDate         DateTime?
+  selectedMetrics String?   @db.Text // JSON array of selected metrics
+
+  // Report metadata
+  generatedBy String? // User ID who generated the report
+  fileUrl     String? // Path to generated PDF file
+  fileSize    Int? // File size in bytes
+  status      String? // "Generating", "Completed", "Failed"
+
+  // Analytics summary (stored for quick access)
+  totalActivities   Int?
+  totalRequests     Int?
+  totalRetirements  Int?
+  budgetUtilization Float?
+
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+
+  @@map("report")
+}
+
+model Disaggregation {
+  disaggregationId   String    @id @default(uuid())
+  disaggregationName String?
+  createAt           DateTime? @default(now())
+  updateAt           DateTime? @default(now())
+
+  genderDisaggregation     GenderDisaggregation[]
+  productDisaggregation    ProductDisaggregation[]
+  departmentDisaggregation DepartmentDisaggregation[]
+  stateDisaggregation      StateDisaggregation[]
+  lgaDisaggregation        LgaDisaggregation[]
+  tenureDisaggregation     TenureDisaggregation[]
+  ageDisaggregation        AgeDisaggregation[]
+
+  @@map("disaggregation")
+}
+
+model GenderDisaggregation {
+  genderDisaggregationId String          @id @default(uuid())
+  targetMale             Int?
+  targetFemale           Int?
+  actualMale             Int?
+  actualFemale           Int?
+  disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId       String?
+  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId            String?
+  createAt               DateTime?       @default(now())
+  updateAt               DateTime?       @default(now())
+
+  @@map("gender_disaggregation")
+}
+
+model ProductDisaggregation {
+  productDisaggregationId String          @id @default(uuid())
+  ProductName             String?
+  targetCount             Int?
+  actualCount             Int?
+  disaggregation          Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId        String?
+  indicator               Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId             String?
+  createAt                DateTime?       @default(now())
+  updateAt                DateTime?       @default(now())
+
+  @@map("product_disaggregation")
+}
+
+model DepartmentDisaggregation {
+  departmentDisaggregationId String          @id @default(uuid())
+  departmentName             String?
+  targetCount                Int?
+  actualCount                Int?
+  disaggregation             Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId           String?
+  indicator                  Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId                String?
+  createAt                   DateTime?       @default(now())
+  updateAt                   DateTime?       @default(now())
+
+  @@map("department_disaggregation")
+}
+
+model StateDisaggregation {
+  stateDisaggregationId String          @id @default(uuid())
+  stateName             String?
+  targetCount           Int?
+  actualCount           Int?
+  disaggregation        Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId      String?
+  indicator             Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId           String?
+  createAt              DateTime?       @default(now())
+  updateAt              DateTime?       @default(now())
+
+  @@map("state_disaggregation")
+}
+
+model LgaDisaggregation {
+  lgaDisaggregationId String          @id @default(uuid())
+  lgaName             String?
+  targetCount         Int?
+  actualCount         Int?
+  disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId    String?
+  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId         String?
+  createAt            DateTime?       @default(now())
+  updateAt            DateTime?       @default(now())
+
+  @@map("lga_disaggregation")
+}
+
+model TenureDisaggregation {
+  tenureDisaggregationId String          @id @default(uuid())
+  tenureName             String?
+  targetCount            Int?
+  actualCount            Int?
+  disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId       String?
+  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId            String?
+  createAt               DateTime?       @default(now())
+  updateAt               DateTime?       @default(now())
+
+  @@map("tenure_disaggregation")
+}
+
+model AgeDisaggregation {
+  ageDisaggregationId String          @id @default(uuid())
+  targetFrom          Int?
+  targetTo            Int?
+  actualFrom          Int?
+  actualTo            Int?
+  disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
+  disaggregationId    String?
+  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
+  indicatorId         String?
+  createAt            DateTime?       @default(now())
+  updateAt            DateTime?       @default(now())
+
+  @@map("age_disaggregation")
+}

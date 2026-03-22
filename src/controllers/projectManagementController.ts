@@ -2,19 +2,12 @@ import { Request, Response } from "express";
 import {
   createOrUpdateActivity,
   createOrUpdateActivityReport,
-  createOrUpdateAgeDisaggregation,
-  createOrUpdateDepartmentDisaggregation,
-  createOrUpdateGenderAggregation,
   createOrUpdateImpact,
   createOrUpdateIndicator,
-  createOrUpdateLGADisaggregation,
   createOrUpdateLogicalFramework,
   createOrUpdateOutput,
   createOrUpdatePartner,
-  createOrUpdateProductDisaggregation,
-  createOrUpdateStateDisaggregation,
   createOrUpdateTeamMember,
-  createOrUpdateTenureDisaggregation,
   deleteActivity,
   deleteActivityReport,
   deleteImpact,
@@ -27,10 +20,8 @@ import {
   deleteTeamMember,
   getActivityById,
   getActivityReportById,
-  getAgeDisaggregationByIndicatorId,
   getAllActivities,
   getAllActivityReports,
-  getAllDisaggregation,
   getAllImpact,
   getAllImpactIndicatorsByResultIdView,
   getAllIndicatorReportByResultId,
@@ -40,21 +31,15 @@ import {
   getAllPartners,
   getAllProjects,
   getAllTeamMember,
-  getDepartmentDisaggregationByIndicatorId,
-  getGenderDisaggregationByIndicatorId,
   getIndicatorByIdView,
   getIndicatorReportById,
-  getLGADisaggregationByIndicatorId,
   getLogicalFrameworkById,
   getOutcomeViewById,
   getOutputById,
-  getProductDisaggregationByIndicatorId,
   getProjectById,
   getProjectsStatus,
   getResultType,
   getPartnerByEmail,
-  getStateDisaggregationByIndicatorId,
-  getTenureDisaggregationByIndicatorId,
   saveIndicatorReport,
   saveOutcome,
   saveProject,
@@ -67,18 +52,11 @@ import {
 import {
   IActivity,
   IActivityReport,
-  IAgeDisaggregation,
-  IDepartmentDisaggregation,
   IIndicator,
   IIndicatorReport,
-  ILgaDisaggregation,
   ILogicalFramework,
   IOutcome,
   IOutput,
-  IProductDisaggregation,
-  IStateDisaggregation,
-  ITeamMember,
-  ITenureDisaggregation,
 } from "../interface/projectManagementInterface";
 import { getOrgKpiDashboardData, getProjectActivityDashboardData, getResultDashboardData } from "../service/kpiDashboardService";
 
@@ -861,389 +839,6 @@ export const deleteLogicalFrameworkController = async (
   }
 };
 
-export const getDisaggregation = async (req: Request, res: Response) => {
-  try {
-
-    const disaggregation = await getAllDisaggregation();
-
-    if (!disaggregation || disaggregation.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No disaggregation found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Disaggregation retrieved", disaggregation));
-  } catch (error: any) {
-    // console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateGenderDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    const { isCreate, payload } = req.body
-
-    const result = await createOrUpdateGenderAggregation(
-      payload,
-      isCreate === "true"
-    );
-
-    return res
-      .status(200)
-      .json(successResponse("Gender disaggregation saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getGenderDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregation = await getGenderDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregation || disaggregation.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No gender disaggregation found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Gender disaggregation retrieved", disaggregation));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateProductDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    const { isCreate, payload } = req.body;
-
-    if (!isCreate) {
-      // Validate that each item has an ID for update
-      const missingId = payload.some((item: IProductDisaggregation) => !item.productDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include productDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateProductDisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("Product disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getProductDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getProductDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No product disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Product disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateDepartmentDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    const { isCreate, payload } = req.body;
-
-    if (!isCreate) {
-      // Validate that each item has an ID for update
-      const missingId = payload.some((item: IDepartmentDisaggregation) => !item.departmentDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include departmentDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateDepartmentDisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("Department disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getDepartmentDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getDepartmentDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No department disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Department disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateStateDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    // Validate request body exists
-    if (!req.body) {
-      return res
-        .status(400)
-        .json(errorResponse("Request body is required"));
-    }
-
-    const { isCreate, payload } = req.body;
-
-    // Validate required fields
-    if (isCreate === undefined || !payload) {
-      return res
-        .status(400)
-        .json(errorResponse("isCreate and payload are required fields"));
-    }
-
-    if (!isCreate) {
-      // Validate that each item has an ID for update
-      const missingId = payload.some((item: IStateDisaggregation) => !item.stateDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include stateDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateStateDisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("State disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getStateDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getStateDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No state disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("State disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateLGADisaggregationController = async (req: Request, res: Response) => {
-  try {
-    // Validate request body exists
-    if (!req.body) {
-      return res
-        .status(400)
-        .json(errorResponse("Request body is required"));
-    }
-
-    const { isCreate, payload } = req.body;
-
-    // Validate required fields
-    if (isCreate === undefined || !payload) {
-      return res
-        .status(400)
-        .json(errorResponse("isCreate and payload are required fields"));
-    }
-
-    if (!isCreate) {
-      // Validate that each item has an ID for update
-      const missingId = payload.some((item: ILgaDisaggregation) => !item.lgaDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include lgaDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateLGADisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("LGA disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getLGADisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getLGADisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No LGA disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("LGA disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateTenureDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    // Validate request body exists
-    if (!req.body) {
-      return res
-        .status(400)
-        .json(errorResponse("Request body is required"));
-    }
-
-    const { isCreate, payload } = req.body;
-
-    // Validate required fields
-    if (isCreate === undefined || !payload) {
-      return res
-        .status(400)
-        .json(errorResponse("isCreate and payload are required fields"));
-    }
-
-    if (!isCreate) {
-      // Validate IDs for update
-      const missingId = payload.some((item: ITenureDisaggregation) => !item.tenureDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include tenureDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateTenureDisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("Tenure disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getTenureDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getTenureDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No tenure disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Tenure disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const createOrUpdateAgeDisaggregationController = async (req: Request, res: Response) => {
-  try {
-    // Validate request body exists
-    if (!req.body) {
-      return res
-        .status(400)
-        .json(errorResponse("Request body is required"));
-    }
-
-    const { isCreate, payload } = req.body;
-
-    // Validate required fields
-    if (isCreate === undefined || !payload) {
-      return res
-        .status(400)
-        .json(errorResponse("isCreate and payload are required fields"));
-    }
-
-    if (!isCreate) {
-      // Validate IDs for update
-      const missingId = payload.some((item: IAgeDisaggregation) => !item.ageDisaggregationId);
-      if (missingId) {
-        return res
-          .status(400)
-          .json(errorResponse("Each item must include ageDisaggregationId for update"));
-      }
-    }
-
-    const result = await createOrUpdateAgeDisaggregation(payload, isCreate);
-
-    return res
-      .status(200)
-      .json(successResponse("Age disaggregations saved", result));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getAgeDisaggregationByIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { indicatorId } = req.params;
-    const disaggregations = await getAgeDisaggregationByIndicatorId(indicatorId);
-
-    if (!disaggregations || disaggregations.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("No age disaggregations found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Age disaggregations retrieved", disaggregations));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
 export const getResultDashboardDataController = async (req: Request, res: Response) => {
   try {
     const { projectId } = req.params;

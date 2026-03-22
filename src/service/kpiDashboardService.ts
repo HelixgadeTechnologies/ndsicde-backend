@@ -1,8 +1,8 @@
-import { Prisma, PrismaClient, Project } from '@prisma/client';
+import { Prisma, Project } from '@prisma/client';
 import { IIndicatorView } from "../interface/projectManagementInterface";
 import { ArchiveApiOptions } from 'cloudinary';
 import { IKpiDashboardData, IKpiDashboardOutput } from '../interface/dashboardInterface';
-const prisma = new PrismaClient();
+import { prisma } from '../lib/prisma';
 
 
 

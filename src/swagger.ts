@@ -80,10 +80,6 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "Children aged 1-5 years",
             },
-            disaggregationId: {
-              type: "string",
-              example: "uuid-1234-5678",
-            },
             baseLineDate: {
               type: "string",
               format: "date-time",
@@ -126,6 +122,27 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "uuid-5678-1234",
             },
+            IndicatorDisaggregation: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  indicatorDisaggregationId: { type: "string" },
+                  indicatorId: { type: "string" },
+                  type: {
+                    type: "string",
+                    enum: ["gender", "state", "age", "product", "lga", "department", "tenure"],
+                    example: "gender"
+                  },
+                  category: {
+                    type: "string",
+                    description: "Category for disaggregation. Samples based on type: \n- gender: Male, Female \n- state: Lagos, Rivers, Abuja, Kano, Oyo \n- age: 0-17, 18-25, 26-40, 41-60, 60+ \n- product: Product A, Product B, Product C \n- lga: Obio-Akpor, Port Harcourt, Ikeja, Surulere \n- department: HR, Finance, IT, Operations \n- tenure: 0-1 year, 1-3 years, 3-5 years, 5+ years",
+                    example: "Male"
+                  },
+                  target: { type: "number", example: 100 },
+                },
+              },
+            },
           },
         },
         IIndicatorReport: {
@@ -150,10 +167,6 @@ const options: swaggerJSDoc.Options = {
             responsiblePersons: {
               type: "string",
               example: "John Doe",
-            },
-            disaggregationId: {
-              type: "string",
-              example: "uuid-1234-5678",
             },
             actualDate: {
               type: "string",
@@ -182,6 +195,27 @@ const options: swaggerJSDoc.Options = {
             resultTypeId: {
               type: "string",
               example: "impact-uuid-5678",
+            },
+            IndicatorReportDisaggregation: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  indicatorReportDisaggregationId: { type: "string" },
+                  indicatorReportId: { type: "string" },
+                  type: {
+                    type: "string",
+                    enum: ["gender", "state", "age", "product", "lga", "department", "tenure"],
+                    example: "gender"
+                  },
+                  category: {
+                    type: "string",
+                    description: "Category for disaggregation. Samples based on type: \n- gender: Male, Female \n- state: Lagos, Rivers, Abuja, Kano, Oyo \n- age: 0-17, 18-25, 26-40, 41-60, 60+ \n- product: Product A, Product B, Product C \n- lga: Obio-Akpor, Port Harcourt, Ikeja, Surulere \n- department: HR, Finance, IT, Operations \n- tenure: 0-1 year, 1-3 years, 3-5 years, 5+ years",
+                    example: "Female"
+                  },
+                  actual: { type: "number", example: 85 },
+                },
+              },
             },
           },
         },

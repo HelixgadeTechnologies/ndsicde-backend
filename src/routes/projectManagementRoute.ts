@@ -2,21 +2,14 @@ import { Router } from "express";
 import {
   createOrUpdateActivityController,
   createOrUpdateActivityReportController,
-  createOrUpdateAgeDisaggregationController,
-  createOrUpdateDepartmentDisaggregationController,
-  createOrUpdateGenderDisaggregationController,
   createOrUpdateImpactController,
   createOrUpdateIndicatorController,
   createOrUpdateIndicatorReport,
-  createOrUpdateLGADisaggregationController,
   createOrUpdateLogicalFrameworkController,
   createOrUpdateOutputController,
   createOrUpdatePartnerController,
-  createOrUpdateProductDisaggregationController,
   createOrUpdateProject,
-  createOrUpdateStateDisaggregationController,
   createOrUpdateTeamMemberController,
-  createOrUpdateTenureDisaggregationController,
   deleteActivityController,
   deleteActivityReportController,
   deleteImpactController,
@@ -30,7 +23,6 @@ import {
   fetchProjectStatusStats,
   getActivityByIdController,
   getActivityReportByIdController,
-  getAgeDisaggregationByIndicatorController,
   getAllActivitiesController,
   getAllActivityReportsController,
   getAllImpactsController,
@@ -41,22 +33,16 @@ import {
   getAllPartnersController,
   getAllResultType,
   getAllTeamMemberController,
-  getDepartmentDisaggregationByIndicatorController,
-  getDisaggregation,
   getImpactIndicatorReportById,
   getIndicatorById,
   getIndicatorReportsByResult,
-  getLGADisaggregationByIndicatorController,
   getLogicalFrameworkByIdController,
   getOrgKpiDashboardDataController,
   getOutcomeByIdController,
   getOutputByIdController,
   getPartnerByEmailController,
-  getProductDisaggregationByIndicatorController,
   getProjectActivityDashboardDataController,
   getResultDashboardDataController,
-  getStateDisaggregationByIndicatorController,
-  getTenureDisaggregationByIndicatorController,
   removeIndicatorReport,
   removeProject,
   saveOutcomeController,
@@ -552,650 +538,6 @@ projectManagementRouter.get("/impacts", getAllImpactsController);
  */
 projectManagementRouter.delete("/impact/:id", deleteImpactController);
 
-
-/**
- * @swagger
- * /api/projectManagement/disaggregation:
- *   get:
- *     summary: Get all disaggregation
- *     tags: [DISAGGREGATION]
- *     responses:
- *       200:
- *         description: A list of disaggregation
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   disaggregationId:
- *                     type: string
- *                   disaggregationName:
- *                     type: string
- *       404:
- *         description: No disaggregation found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/disaggregation", getDisaggregation);
-
-/**
- * @swagger
- * /api/projectManagement/gender-disaggregation:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update a Gender Disaggregation
- *     description: >
- *       Create a new Gender Disaggregation (if `isCreate` is `true`)  
- *       or update an existing one (if `isCreate` is `false`).  
- *       When updating, you must provide the `genderDisaggregationId`.
- *     tags: [GENDER DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: object
- *                 properties:
- *                   genderDisaggregationId:
- *                     type: string
- *                     description: Required for update
- *                   targetMale:
- *                     type: number
- *                   targetFemale:
- *                     type: number
- *                   actualMale:
- *                     type: number
- *                   actualFemale:
- *                     type: number
- *                   disaggregationId:
- *                     type: string
- *                   indicatorId:
- *                     type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 targetMale: 50
- *                 targetFemale: 60
- *                 actualMale: 45
- *                 actualFemale: 55
- *                 disaggregationId: "uuid-123"
- *                 indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: Gender disaggregation created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/gender-disaggregation", createOrUpdateGenderDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/gender-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get Gender Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all gender disaggregationS linked to a specific `indicatorId`.
- *     tags: [GENDER DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter gender disaggregations
- *     responses:
- *       200:
- *         description: Gender disaggregationS retrieved successfully
- *       404:
- *         description: No gender disaggregationS found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/gender-disaggregations/:indicatorId", createOrUpdateGenderDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/product-disaggregation:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update Product Disaggregations
- *     description: >
- *       Create multiple Product Disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `productDisaggregationId`.
- *     tags: [PRODUCT DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     productDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     productName:
- *                       type: string
- *                     targetCount:
- *                       type: number
- *                     actualCount:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - productName: "Mosquito Nets"
- *                   targetCount: 1000
- *                   actualCount: 950
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - productName: "Medicines"
- *                   targetCount: 500
- *                   actualCount: 480
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: Product disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/product-disaggregation", createOrUpdateProductDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/product-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get Product Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all product disaggregations linked to a specific `indicatorId`.
- *     tags: [PRODUCT DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter product disaggregations
- *     responses:
- *       200:
- *         description: Product disaggregations retrieved successfully
- *       404:
- *         description: No product disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/product-disaggregations/:indicatorId", getProductDisaggregationByIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/department-disaggregation:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update Department Disaggregations
- *     description: >
- *       Create multiple Department Disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `departmentDisaggregationId`.
- *     tags: [DEPARTMENT DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     departmentDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     departmentName:
- *                       type: string
- *                     targetCount:
- *                       type: number
- *                     actualCount:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - departmentName: "HR"
- *                   targetCount: 20
- *                   actualCount: 18
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - departmentName: "Finance"
- *                   targetCount: 15
- *                   actualCount: 14
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: Department disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/department-disaggregations", createOrUpdateDepartmentDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/department-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get Department Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all department disaggregations linked to a specific `indicatorId`.
- *     tags: [DEPARTMENT DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter department disaggregations
- *     responses:
- *       200:
- *         description: Department disaggregations retrieved successfully
- *       404:
- *         description: No department disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/department-disaggregations/:indicatorId", getDepartmentDisaggregationByIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/state-disaggregation:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update State Disaggregations
- *     description: >
- *       Create multiple State Disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `stateDisaggregationId`.
- *     tags: [STATE DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     stateDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     stateName:
- *                       type: string
- *                     targetCount:
- *                       type: number
- *                     actualCount:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - stateName: "Lagos"
- *                   targetCount: 500
- *                   actualCount: 480
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - stateName: "Abuja"
- *                   targetCount: 300
- *                   actualCount: 290
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: State disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/state-disaggregation", createOrUpdateStateDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/state-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get State Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all state disaggregations linked to a specific `indicatorId`.
- *     tags: [STATE DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter state disaggregations
- *     responses:
- *       200:
- *         description: State disaggregations retrieved successfully
- *       404:
- *         description: No state disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/state-disaggregations/:indicatorId", getStateDisaggregationByIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/lga-disaggregations:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update LGA Disaggregations
- *     description: >
- *       Create multiple LGA Disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `lgaDisaggregationId`.
- *     tags: [LGA DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     lgaDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     lgaName:
- *                       type: string
- *                     targetCount:
- *                       type: number
- *                     actualCount:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - lgaName: "Ikeja"
- *                   targetCount: 200
- *                   actualCount: 180
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - lgaName: "Alimosho"
- *                   targetCount: 150
- *                   actualCount: 140
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: LGA disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/lga-disaggregation", createOrUpdateLGADisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/lga-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get LGA Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all LGA disaggregations linked to a specific `indicatorId`.
- *     tags: [LGA DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter LGA disaggregations
- *     responses:
- *       200:
- *         description: LGA disaggregations retrieved successfully
- *       404:
- *         description: No LGA disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/lga-disaggregations/:indicatorId", getLGADisaggregationByIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/tenure-disaggregation:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update Tenure Disaggregations
- *     description: >
- *       Create multiple tenure disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `tenureDisaggregationId`.
- *     tags: [TENURE DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     tenureDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     tenureName:
- *                       type: string
- *                     targetCount:
- *                       type: number
- *                     actualCount:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - tenureName: "Permanent"
- *                   targetCount: 300
- *                   actualCount: 280
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - tenureName: "Contract"
- *                   targetCount: 150
- *                   actualCount: 120
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: Tenure disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/tenure-disaggregation", createOrUpdateTenureDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/tenure-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get Tenure Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all tenure disaggregations linked to a specific `indicatorId`.
- *     tags: [TENURE DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter tenure disaggregations
- *     responses:
- *       200:
- *         description: Tenure disaggregations retrieved successfully
- *       404:
- *         description: No tenure disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/tenure-disaggregations/:indicatorId", getTenureDisaggregationByIndicatorController);
-
-/**
- * @swagger
- * /api/projectManagement/age-disaggregations:
- *   post:
- *     security:
- *       - bearerAuth: []  # 👈 JWT token auth only for POST
- *     summary: Create or Update Age Disaggregations
- *     description: >
- *       Create multiple age disaggregations (if `isCreate` is `true`)  
- *       or update multiple existing ones (if `isCreate` is `false`).  
- *       When updating, each item must include its `ageDisaggregationId`.
- *     tags: [AGE DISAGGREGATION]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               isCreate:
- *                 type: boolean
- *                 description: Pass true to create, false to update
- *               payload:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     ageDisaggregationId:
- *                       type: string
- *                       description: Required for update
- *                     targetFrom:
- *                       type: number
- *                     targetTo:
- *                       type: number
- *                     actualFrom:
- *                       type: number
- *                     actualTo:
- *                       type: number
- *                     disaggregationId:
- *                       type: string
- *                     indicatorId:
- *                       type: string
- *             example:
- *               isCreate: true
- *               payload:
- *                 - targetFrom: 0
- *                   targetTo: 5
- *                   actualFrom: 0
- *                   actualTo: 4
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *                 - targetFrom: 6
- *                   targetTo: 10
- *                   actualFrom: 6
- *                   actualTo: 9
- *                   disaggregationId: "uuid-123"
- *                   indicatorId: "uuid-456"
- *     responses:
- *       200:
- *         description: Age disaggregations created or updated successfully
- *       400:
- *         description: Missing required fields
- *       500:
- *         description: Server error
- */
-projectManagementRouter.post("/age-disaggregation", createOrUpdateAgeDisaggregationController);
-
-/**
- * @swagger
- * /api/projectManagement/age-disaggregations/{indicatorId}:
- *   get:
- *     summary: Get Age Disaggregations by Indicator ID
- *     description: >
- *       Retrieve all age disaggregations linked to a specific `indicatorId`.
- *     tags: [AGE DISAGGREGATION]
- *     parameters:
- *       - in: path
- *         name: indicatorId
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator ID to filter age disaggregations
- *     responses:
- *       200:
- *         description: Age disaggregations retrieved successfully
- *       404:
- *         description: No age disaggregations found
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get("/age-disaggregations/:indicatorId", getAgeDisaggregationByIndicatorController);
-
 /**
  * @swagger
  * /api/projectManagement/indicator:
@@ -1248,6 +590,12 @@ projectManagementRouter.post("/indicator", createOrUpdateIndicatorController);
  *     responses:
  *       200:
  *         description: List of indicators
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/IIndicator'
  *       404:
  *         description: No indicators found
  *       500:
@@ -1272,6 +620,10 @@ projectManagementRouter.get("/indicators/:resultId", getAllIndicatorsByResult);
  *     responses:
  *       200:
  *         description: Indicator retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/IIndicator'
  *       404:
  *         description: Indicator not found
  *       500:
@@ -1358,6 +710,12 @@ projectManagementRouter.post(
  *     responses:
  *       200:
  *         description: Successfully retrieved list of Impact Indicator Report Formats
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/IIndicatorReport'
  *       404:
  *         description: No records found
  *       500:
@@ -1385,6 +743,10 @@ projectManagementRouter.get(
  *     responses:
  *       200:
  *         description: Successfully retrieved Indicator Report Format
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/IIndicatorReport'
  *       404:
  *         description: Record not found
  *       500:

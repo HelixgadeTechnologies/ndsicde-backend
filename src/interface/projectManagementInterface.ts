@@ -131,6 +131,56 @@ export interface IIndicator {
   createAt?: Date | null;
   updateAt?: Date | null;
   impactId?: string | null;
+  IndicatorDisaggregation?: IIndicatorDisaggregation[];
+}
+
+export interface IIndicatorDisaggregation {
+  indicatorDisaggregationId: string;
+  indicatorId: string;
+  type: string;
+  category: string;
+  target: number;
+}
+
+export interface IIndicatorReportDisaggregation {
+  indicatorReportDisaggregationId: string;
+  indicatorReportId: string;
+  type: string;
+  category: string;
+  actual: number;
+}
+export interface IIndicatorWithDisaggregation {
+  indicatorId: string;
+  indicatorSource?: string | null;
+  thematicAreasOrPillar?: string | null;
+  statement?: string | null;
+  linkKpiToSdnOrgKpi?: string | null;
+  definition?: string | null;
+  specificArea?: string | null;
+  unitOfMeasure?: string | null;
+  itemInMeasure?: string | null;
+  baseLineDate?: Date | null;
+  cumulativeValue?: number | null;
+  baselineNarrative?: string | null;
+  targetDate?: Date | null;
+  cumulativeTarget?: number | null;
+  targetNarrative?: string | null;
+  targetType?: string | null;
+  responsiblePersons?: string | null;
+  createAt?: Date | null;
+  updateAt?: Date | null;
+  result?: string | null;
+  resultTypeId?: string | null;
+  
+  // Included relation
+  IndicatorDisaggregation: {
+    indicatorDisaggregationId: string;
+    indicatorId: string;
+    type: string;     // e.g., "gender", "state", "age"
+    category: string; // e.g., "Male", "Lagos", "18-25"
+    target?: number | null;
+  }[];
+
 }
 
 export interface IIndicatorView {
@@ -164,6 +214,8 @@ export interface IIndicatorView {
   resultThematicArea?: string | null;
   resultResponsiblePerson?: string | null;
   resultProjectId?: string | null;
+  IndicatorDisaggregation?: IIndicatorDisaggregation[];
+  IndicatorReport?: IIndicatorReport[];
 }
 
 export interface IIndicatorReport {
@@ -182,6 +234,33 @@ export interface IIndicatorReport {
   updateAt?: Date | null;
   indicatorId?: string | null;
   resultTypeId?: string | null;
+  IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
+}
+
+export interface IIndicatorReportWithDisaggregation {
+  indicatorReportId: string;
+  indicatorSource?: string | null;
+  thematicAreasOrPillar?: string | null;
+  indicatorStatement?: string | null;
+  responsiblePersons?: string | null;
+  actualDate?: Date | null;
+  cumulativeActual?: string | null;
+  actualNarrative?: string | null;
+  attachmentUrl?: string | null;
+  status?: string | null;
+  createAt?: Date | null;
+  updateAt?: Date | null;
+  indicatorId?: string | null;
+  resultTypeId?: string | null;
+
+  // Included relation
+  IndicatorReportDisaggregation: {
+    indicatorReportDisaggregationId: string;
+    indicatorReportId: string;
+    type: string;
+    category: string;
+    actual?: number | null;
+  }[];
 }
 
 export interface IIndicatorReportView {
@@ -204,6 +283,7 @@ export interface IIndicatorReportView {
   resultProjectId?: string | null;
   resultTypeId?: string | null;
   resultName?: string | null;
+  IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
 }
 
 // OutcomeIndicator interfaces

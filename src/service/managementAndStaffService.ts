@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 export const getDashboardSummaryService = async () => {
     const [
@@ -37,7 +35,7 @@ export const getKpiPerformanceService = async (year: number) => {
         select: {
             targetDate: true,
             cumulativeTarget: true,
-            indicatorReport: {
+            IndicatorReport: {
                 select: {
                     actualDate: true,
                     cumulativeActual: true
@@ -61,13 +59,13 @@ export const getKpiPerformanceService = async (year: number) => {
         Dec: { target: 0, actual: 0 }
     };
 
-    indicators.forEach(indicator => {
+    indicators.forEach((indicator: any) => {
         if (indicator.targetDate) {
             const month = indicator.targetDate.toLocaleString("en-US", { month: "short" });
             monthlyData[month].target += indicator.cumulativeTarget || 0;
         }
 
-        indicator.indicatorReport.forEach(report => {
+        indicator.IndicatorReport.forEach((report: any) => {
             if (report.actualDate) {
                 const month = report.actualDate.toLocaleString("en-US", { month: "short" });
                 monthlyData[month].actual += Number(report.cumulativeActual || 0);
@@ -120,7 +118,7 @@ export const getProjectStatusDistributionService = async () => {
         }
     });
 
-    return grouped.map(item => ({
+    return grouped.map((item: { status: any; _count: { status: number; }; }) => ({
         label: item.status,
         count: item._count.status,
         percentage: Math.round(
@@ -138,7 +136,7 @@ export const getBudgetUtilizationService = async () => {
     });
 
     const totalBudget = projects.reduce(
-        (sum, p) => sum + Number(p.totalBudgetAmount || 0),
+        (sum: number, p: { totalBudgetAmount: any; }) => sum + Number(p.totalBudgetAmount || 0),
         0
     );
 
@@ -186,7 +184,7 @@ export const getAllIndicatorReportsService = async () => {
         });
 
         // Format the data
-        const formattedReports = reports.map((report) => {
+        const formattedReports = reports.map((report: any) => {
             const actual = Number(report.cumulativeActual || 0);
             const target = Number(report.indicator?.cumulativeTarget || 0);
 
@@ -338,7 +336,7 @@ export const getIndicatorReportOverviewService = async (
     const budget = Array(12).fill(0);
     const actualSpending = Array(12).fill(0);
 
-    allReports.forEach((r) => {
+    allReports.forEach((r: any) => {
         const date = r.actualDate ?? r.createAt;
         if (!date) return;
 

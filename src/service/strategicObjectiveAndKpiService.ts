@@ -1,10 +1,10 @@
-import { Prisma, PrismaClient } from "@prisma/client";
 import {
   IKpi,
   IStrategicObjective,
   IStrategicObjectiveView,
 } from "../interface/strategicObjectiveAndKpiInterface";
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
+import type { Prisma } from "../lib/prisma";
 
 export const saveStrategicObjective = async (
   data: IStrategicObjective,
@@ -42,20 +42,20 @@ export const saveStrategicObjective = async (
 export const deleteStrategicObjective = async (
   strategicObjectiveId: string
 ) => {
-  return await prisma.$transaction(async (tx) => {
+  return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     // Step 1: Find all KPIs linked to this strategic objective
     const kpis = await tx.kpi.findMany({
       where: { strategicObjectiveId },
       select: { kpiId: true },
     });
-    const kpiIds = kpis.map((k) => k.kpiId);
+    const kpiIds = kpis.map((k: { kpiId: string }) => k.kpiId);
 
     // Step 2: Find KpiReports linked directly to this strategic objective
     const kpiReports = await tx.kpiReport.findMany({
       where: { strategicObjectiveId },
       select: { kpiReportId: true },
     });
-    const kpiReportIds = kpiReports.map((r) => r.kpiReportId);
+    const kpiReportIds = kpiReports.map((r: { kpiReportId: string }) => r.kpiReportId);
 
     // Step 3: Delete KpiReviews for those KpiReports
     if (kpiReportIds.length > 0) {

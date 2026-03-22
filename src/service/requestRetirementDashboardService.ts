@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // ─────────────────────────────────────────────────────────────
 // HELPER: week-over-week percentage change
@@ -199,7 +197,7 @@ export const getActivityFinancialList = async (
     // Filter by projectId after join (Prisma doesn't allow nested relation filter on optional)
     if (projectId && projectId !== "All") {
         return retirements.filter(
-            (r) => r.request?.projectId === projectId
+            (r: any) => r.request?.projectId === projectId
         );
     }
 

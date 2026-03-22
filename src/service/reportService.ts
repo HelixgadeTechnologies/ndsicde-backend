@@ -1,4 +1,3 @@
-import { PrismaClient } from '@prisma/client';
 import path from 'path';
 import {
     ReportGenerationParams,
@@ -15,8 +14,7 @@ import {
     RetirementReportData
 } from '../interface/reportInterface';
 import { generatePDFReport, getFileSize } from '../utils/pdfGenerator';
-
-const prisma = new PrismaClient();
+import { prisma } from '../lib/prisma';
 
 /**
  * Main function to generate a complete report
@@ -177,7 +175,7 @@ async function aggregateActivityData(whereClause: any): Promise<AggregatedActivi
         }
     });
 
-    const activityReports: ActivityReportData[] = activities.map(activity => {
+    const activityReports: ActivityReportData[] = activities.map((activity: any) => {
         const report = activity.activityReport[0]; // Get latest report
         const percentageCompletion = report?.percentageCompletion || 0;
 
@@ -238,7 +236,7 @@ async function aggregateRequestData(whereClause: any): Promise<AggregatedRequest
         }
     });
 
-    const requestReports: RequestReportData[] = requests.map(request => ({
+    const requestReports: RequestReportData[] = requests.map((request: any) => ({
         requestId: request.requestId,
         activityTitle: request.activityTitle || '',
         staff: request.staff || '',

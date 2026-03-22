@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { getTimeAgo } from "../utils/timeAgo";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 /**
  * Get dashboard overview statistics
  */
@@ -134,7 +132,7 @@ export async function getRecentActivities(params: {
         }
     });
 
-    projects.forEach(project => {
+    projects.forEach((project: any) => {
         activities.push({
             activityId: project.projectId,
             activityType: 'project',
@@ -160,7 +158,7 @@ export async function getRecentActivities(params: {
         }
     });
 
-    activityRecords.forEach(activity => {
+    activityRecords.forEach((activity: any) => {
         activities.push({
             activityId: activity.activityId,
             activityType: 'activity',
@@ -190,7 +188,7 @@ export async function getRecentActivities(params: {
         }
     });
 
-    activityReports.forEach(report => {
+    activityReports.forEach((report: any) => {
         if (projectId && report.activity?.projectId !== projectId) return;
 
         activities.push({
@@ -218,7 +216,7 @@ export async function getRecentActivities(params: {
         }
     });
 
-    requests.forEach(request => {
+    requests.forEach((request: any) => {
         activities.push({
             activityId: request.requestId,
             activityType: 'request',
@@ -244,7 +242,7 @@ export async function getRecentActivities(params: {
         }
     });
 
-    teamMembers.forEach(member => {
+    teamMembers.forEach((member: any) => {
         activities.push({
             activityId: member.teamMemberId,
             activityType: 'team_member',
@@ -265,7 +263,7 @@ export async function getRecentActivities(params: {
         take: 5
     });
 
-    indicatorReports.forEach(report => {
+    indicatorReports.forEach((report: any) => {
         activities.push({
             activityId: report.indicatorReportId,
             activityType: 'indicator_report',
@@ -302,7 +300,7 @@ export async function getPendingActivityFundRequests(limit: number = 5) {
         }
     });
 
-    return requests.map(request => ({
+    return requests.map((request: any) => ({
         requestId: request.requestId,
         title: request.activityTitle || 'Fund Request',
         projectName: request.project?.projectName || 'Unknown Project',
@@ -324,7 +322,7 @@ export async function getPendingReportApprovals(limit: number = 5) {
         take: limit
     });
 
-    return reports.map(report => ({
+    return reports.map((report: any) => ({
         reportId: report.indicatorReportId,
         title: report.indicatorStatement || 'Indicator Report',
         type: report.thematicAreasOrPillar || 'General',

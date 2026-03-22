@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import {
     IFinancialSummary,
     IBudgetTrend,
@@ -9,8 +8,7 @@ import {
     IFinancialDashboardResponse,
     IDateRangeFilter,
 } from "../interface/financialDashboardInterface";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // Helper function to categorize expenses
 const categorizeExpense = (description: string): string => {

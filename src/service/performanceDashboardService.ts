@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import {
     IPerformanceSummary,
     IKpiActualVsTarget,
@@ -8,8 +7,7 @@ import {
     IPerformanceDashboardResponse,
     IDateRangeFilter,
 } from "../interface/performanceDashboardInterface";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // Helper function to build date filter
 const buildDateFilter = (filter: IDateRangeFilter) => {
@@ -114,10 +112,10 @@ export const getPerformanceSummary = async (
         let totalBudget = 0;
         let totalExpenses = 0;
 
-        projects.forEach((project) => {
+        projects.forEach((project: { totalBudgetAmount: any; request: { retirement: { actualCost: any; }[]; }[]; }) => {
             totalBudget += parseFloat(project.totalBudgetAmount || "0");
-            project.request.forEach((req) => {
-                req.retirement.forEach((ret) => {
+            project.request.forEach((req: { retirement: { actualCost: any; }[]; }) => {
+                req.retirement.forEach((ret: { actualCost: any; }) => {
                     totalExpenses += ret.actualCost || 0;
                 });
             });
@@ -127,7 +125,7 @@ export const getPerformanceSummary = async (
 
         // Calculate average project health score
         const projectHealthScores = await Promise.all(
-            projects.map(async (project) => {
+            projects.map(async (project: { totalBudgetAmount: any; request: { retirement: { actualCost: any; }[]; }[]; }) => {
                 const budget = parseFloat(project.totalBudgetAmount || "0");
                 const expenses = project.request.reduce((sum, req) => {
                     return (
@@ -145,7 +143,7 @@ export const getPerformanceSummary = async (
 
         const projectHealthScore =
             projectHealthScores.length > 0
-                ? projectHealthScores.reduce((sum, score) => sum + score, 0) /
+                ? projectHealthScores.reduce((sum: number, score: number) => sum + score, 0) /
                 projectHealthScores.length
                 : 0;
 
@@ -210,7 +208,7 @@ export const getKpiActualsVsTargets = async (
                 statement: true,
                 cumulativeTarget: true,
                 result: true,
-                indicatorReport: {
+                IndicatorReport: {
                     where: dateFilter,
                     select: {
                         cumulativeActual: true,
@@ -226,8 +224,8 @@ export const getKpiActualsVsTargets = async (
             { actual: number; target: number; year: number; count: number }
         > = new Map();
 
-        indicators.forEach((indicator) => {
-            indicator.indicatorReport.forEach((report) => {
+        indicators.forEach((indicator: any) => {
+            indicator.IndicatorReport.forEach((report: any) => {
                 if (report.actualDate) {
                     const date = new Date(report.actualDate);
                     const quarter = Math.floor(date.getMonth() / 3) + 1;

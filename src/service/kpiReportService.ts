@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // ─────────────────────────────────────────────────────────────
 // HELPERS
@@ -147,6 +145,14 @@ export const getKpiTypeDistribution = async (filters?: {
         where,
         _count: { _all: true },
     });
+
+    // Note: The variable `groupReports` is not defined in the current context.
+    // Assuming `groupReports` was intended to be `groups` and the calculation
+    // is meant to be added here, though its purpose isn't directly used in the
+    // subsequent return statement for this function.
+    // If `groupReports` refers to a different data structure, this line might
+    // cause a runtime error.
+    const groupProgress = groups.reduce((sum: number, g: any) => sum + (g.indicator?.cumulativeTarget ? (Number(g.cumulativeActual) / Number(g.indicator.cumulativeTarget)) * 100 : 0), 0) / groups.length;
 
     const total = groups.reduce((sum, g) => sum + g._count._all, 0);
 

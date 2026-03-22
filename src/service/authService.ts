@@ -1,4 +1,5 @@
-import { Prisma, PrismaClient, Role, User } from "@prisma/client";
+import { prisma } from "../lib/prisma";
+import type { Prisma, Role, User } from "../lib/prisma";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { IGeneralSettings, ILogin, ILoginUpdate, IRole, IRoleView, IUser, IUserView } from "../interface/authInterface"
@@ -6,7 +7,6 @@ import { JWT_SECRET } from "../secrets";
 // import { sendAdminRegistrationEmail } from "../utils/mail";
 import { deleteFile, getFileName, uploadFile } from "../utils/upload";
 
-const prisma = new PrismaClient();
 
 
 
@@ -179,7 +179,7 @@ export const getAllRole = async (): Promise<Array<IRoleView>> => {
 const rawRoles = await prisma.$queryRaw<any[]>`
   SELECT * FROM role_view
 `;
-const roles: IRoleView[] = rawRoles.map(r => ({
+const roles: IRoleView[] = rawRoles.map((r: any) => ({
   ...r,
   users: Number(r.users) // BigInt → number
 }));

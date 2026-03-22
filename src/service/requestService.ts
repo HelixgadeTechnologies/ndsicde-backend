@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import { IDataValidationStats, IRequest, IRequestView } from "../interface/requestInterface";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 // ✅ Create or Update Request
 export const createOrUpdateRequest = async (
