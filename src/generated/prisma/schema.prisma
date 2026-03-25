@@ -288,37 +288,30 @@ model Output {
 
 // indicator
 model Indicator {
-  indicatorId              String                     @id @default(uuid())
-  indicatorSource          String?
-  thematicAreasOrPillar    String?
-  statement                String?
-  linkKpiToSdnOrgKpi       String?
-  definition               String?
-  specificArea             String?
-  unitOfMeasure            String?
-  itemInMeasure            String?
-  baseLineDate             DateTime?
-  cumulativeValue          Int?
-  baselineNarrative        String?
-  targetDate               DateTime?
-  cumulativeTarget         Int?
-  targetNarrative          String?
-  targetType               String?
-  responsiblePersons       String?
-  createAt                 DateTime?                  @default(now())
-  updateAt                 DateTime?                  @default(now())
-  result                   String?
-  ResultType               ResultType?                @relation(fields: [resultTypeId], references: [resultTypeId])
-  resultTypeId             String?
-  IndicatorReport          IndicatorReport[]
-  IndicatorDisaggregation  IndicatorDisaggregation[]
-  genderDisaggregation     GenderDisaggregation[]
-  productDisaggregation    ProductDisaggregation[]
-  departmentDisaggregation DepartmentDisaggregation[]
-  stateDisaggregation      StateDisaggregation[]
-  lgaDisaggregation        LgaDisaggregation[]
-  tenureDisaggregation     TenureDisaggregation[]
-  ageDisaggregation        AgeDisaggregation[]
+  indicatorId             String                    @id @default(uuid())
+  indicatorSource         String?
+  thematicAreasOrPillar   String?
+  statement               String?
+  linkKpiToSdnOrgKpi      String?
+  definition              String?
+  specificArea            String?
+  unitOfMeasure           String?
+  itemInMeasure           String?
+  baseLineDate            DateTime?
+  cumulativeValue         Int?
+  baselineNarrative       String?
+  targetDate              DateTime?
+  cumulativeTarget        Int?
+  targetNarrative         String?
+  targetType              String?
+  responsiblePersons      String?
+  createAt                DateTime?                 @default(now())
+  updateAt                DateTime?                 @default(now())
+  result                  String?
+  ResultType              ResultType?               @relation(fields: [resultTypeId], references: [resultTypeId])
+  resultTypeId            String?
+  IndicatorReport         IndicatorReport[]
+  IndicatorDisaggregation IndicatorDisaggregation[]
 
   @@map("indicator")
 }
@@ -539,128 +532,4 @@ model Report {
   updateAt DateTime @default(now())
 
   @@map("report")
-}
-
-model Disaggregation {
-  disaggregationId   String    @id @default(uuid())
-  disaggregationName String?
-  createAt           DateTime? @default(now())
-  updateAt           DateTime? @default(now())
-
-  genderDisaggregation     GenderDisaggregation[]
-  productDisaggregation    ProductDisaggregation[]
-  departmentDisaggregation DepartmentDisaggregation[]
-  stateDisaggregation      StateDisaggregation[]
-  lgaDisaggregation        LgaDisaggregation[]
-  tenureDisaggregation     TenureDisaggregation[]
-  ageDisaggregation        AgeDisaggregation[]
-
-  @@map("disaggregation")
-}
-
-model GenderDisaggregation {
-  genderDisaggregationId String          @id @default(uuid())
-  targetMale             Int?
-  targetFemale           Int?
-  actualMale             Int?
-  actualFemale           Int?
-  disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId       String?
-  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId            String?
-  createAt               DateTime?       @default(now())
-  updateAt               DateTime?       @default(now())
-
-  @@map("gender_disaggregation")
-}
-
-model ProductDisaggregation {
-  productDisaggregationId String          @id @default(uuid())
-  ProductName             String?
-  targetCount             Int?
-  actualCount             Int?
-  disaggregation          Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId        String?
-  indicator               Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId             String?
-  createAt                DateTime?       @default(now())
-  updateAt                DateTime?       @default(now())
-
-  @@map("product_disaggregation")
-}
-
-model DepartmentDisaggregation {
-  departmentDisaggregationId String          @id @default(uuid())
-  departmentName             String?
-  targetCount                Int?
-  actualCount                Int?
-  disaggregation             Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId           String?
-  indicator                  Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId                String?
-  createAt                   DateTime?       @default(now())
-  updateAt                   DateTime?       @default(now())
-
-  @@map("department_disaggregation")
-}
-
-model StateDisaggregation {
-  stateDisaggregationId String          @id @default(uuid())
-  stateName             String?
-  targetCount           Int?
-  actualCount           Int?
-  disaggregation        Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId      String?
-  indicator             Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId           String?
-  createAt              DateTime?       @default(now())
-  updateAt              DateTime?       @default(now())
-
-  @@map("state_disaggregation")
-}
-
-model LgaDisaggregation {
-  lgaDisaggregationId String          @id @default(uuid())
-  lgaName             String?
-  targetCount         Int?
-  actualCount         Int?
-  disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId    String?
-  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId         String?
-  createAt            DateTime?       @default(now())
-  updateAt            DateTime?       @default(now())
-
-  @@map("lga_disaggregation")
-}
-
-model TenureDisaggregation {
-  tenureDisaggregationId String          @id @default(uuid())
-  tenureName             String?
-  targetCount            Int?
-  actualCount            Int?
-  disaggregation         Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId       String?
-  indicator              Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId            String?
-  createAt               DateTime?       @default(now())
-  updateAt               DateTime?       @default(now())
-
-  @@map("tenure_disaggregation")
-}
-
-model AgeDisaggregation {
-  ageDisaggregationId String          @id @default(uuid())
-  targetFrom          Int?
-  targetTo            Int?
-  actualFrom          Int?
-  actualTo            Int?
-  disaggregation      Disaggregation? @relation(fields: [disaggregationId], references: [disaggregationId])
-  disaggregationId    String?
-  indicator           Indicator?      @relation(fields: [indicatorId], references: [indicatorId])
-  indicatorId         String?
-  createAt            DateTime?       @default(now())
-  updateAt            DateTime?       @default(now())
-
-  @@map("age_disaggregation")
 }

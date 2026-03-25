@@ -1,8 +1,7 @@
 node_modules
 # Keep environment variables out of version control
 .env
-
-/generated/prisma
+src/generated/prisma
 
 # Ensure dist is tracked for local deployment strategy
 !dist/

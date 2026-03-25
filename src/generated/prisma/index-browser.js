@@ -493,92 +493,6 @@ exports.Prisma.ReportScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
-exports.Prisma.DisaggregationScalarFieldEnum = {
-  disaggregationId: 'disaggregationId',
-  disaggregationName: 'disaggregationName',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.GenderDisaggregationScalarFieldEnum = {
-  genderDisaggregationId: 'genderDisaggregationId',
-  targetMale: 'targetMale',
-  targetFemale: 'targetFemale',
-  actualMale: 'actualMale',
-  actualFemale: 'actualFemale',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.ProductDisaggregationScalarFieldEnum = {
-  productDisaggregationId: 'productDisaggregationId',
-  ProductName: 'ProductName',
-  targetCount: 'targetCount',
-  actualCount: 'actualCount',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.DepartmentDisaggregationScalarFieldEnum = {
-  departmentDisaggregationId: 'departmentDisaggregationId',
-  departmentName: 'departmentName',
-  targetCount: 'targetCount',
-  actualCount: 'actualCount',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.StateDisaggregationScalarFieldEnum = {
-  stateDisaggregationId: 'stateDisaggregationId',
-  stateName: 'stateName',
-  targetCount: 'targetCount',
-  actualCount: 'actualCount',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.LgaDisaggregationScalarFieldEnum = {
-  lgaDisaggregationId: 'lgaDisaggregationId',
-  lgaName: 'lgaName',
-  targetCount: 'targetCount',
-  actualCount: 'actualCount',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.TenureDisaggregationScalarFieldEnum = {
-  tenureDisaggregationId: 'tenureDisaggregationId',
-  tenureName: 'tenureName',
-  targetCount: 'targetCount',
-  actualCount: 'actualCount',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
-exports.Prisma.AgeDisaggregationScalarFieldEnum = {
-  ageDisaggregationId: 'ageDisaggregationId',
-  targetFrom: 'targetFrom',
-  targetTo: 'targetTo',
-  actualFrom: 'actualFrom',
-  actualTo: 'actualTo',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -868,58 +782,6 @@ exports.Prisma.ReportOrderByRelevanceFieldEnum = {
   status: 'status'
 };
 
-exports.Prisma.DisaggregationOrderByRelevanceFieldEnum = {
-  disaggregationId: 'disaggregationId',
-  disaggregationName: 'disaggregationName'
-};
-
-exports.Prisma.GenderDisaggregationOrderByRelevanceFieldEnum = {
-  genderDisaggregationId: 'genderDisaggregationId',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.ProductDisaggregationOrderByRelevanceFieldEnum = {
-  productDisaggregationId: 'productDisaggregationId',
-  ProductName: 'ProductName',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.DepartmentDisaggregationOrderByRelevanceFieldEnum = {
-  departmentDisaggregationId: 'departmentDisaggregationId',
-  departmentName: 'departmentName',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.StateDisaggregationOrderByRelevanceFieldEnum = {
-  stateDisaggregationId: 'stateDisaggregationId',
-  stateName: 'stateName',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.LgaDisaggregationOrderByRelevanceFieldEnum = {
-  lgaDisaggregationId: 'lgaDisaggregationId',
-  lgaName: 'lgaName',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.TenureDisaggregationOrderByRelevanceFieldEnum = {
-  tenureDisaggregationId: 'tenureDisaggregationId',
-  tenureName: 'tenureName',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
-exports.Prisma.AgeDisaggregationOrderByRelevanceFieldEnum = {
-  ageDisaggregationId: 'ageDisaggregationId',
-  disaggregationId: 'disaggregationId',
-  indicatorId: 'indicatorId'
-};
-
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -947,15 +809,7 @@ exports.Prisma.ModelName = {
   LogicalFramework: 'LogicalFramework',
   Request: 'Request',
   Retirement: 'Retirement',
-  Report: 'Report',
-  Disaggregation: 'Disaggregation',
-  GenderDisaggregation: 'GenderDisaggregation',
-  ProductDisaggregation: 'ProductDisaggregation',
-  DepartmentDisaggregation: 'DepartmentDisaggregation',
-  StateDisaggregation: 'StateDisaggregation',
-  LgaDisaggregation: 'LgaDisaggregation',
-  TenureDisaggregation: 'TenureDisaggregation',
-  AgeDisaggregation: 'AgeDisaggregation'
+  Report: 'Report'
 };
 
 /**

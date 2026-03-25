@@ -1,4 +1,4 @@
-import { Prisma, Project } from '@prisma/client';
+import { Prisma, Project } from '../generated/prisma';
 import { IIndicatorView } from "../interface/projectManagementInterface";
 import { ArchiveApiOptions } from 'cloudinary';
 import { IKpiDashboardData, IKpiDashboardOutput } from '../interface/dashboardInterface';
