@@ -268,6 +268,7 @@ export const createOrUpdateIndicator = async (
       const indicator = await prisma.indicator.create({
         data: {
           indicatorSource: payload.indicatorSource,
+          orgKpiId: payload.orgKpiId,
           thematicAreasOrPillar: payload.thematicAreasOrPillar,
           statement: payload.statement,
           linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
@@ -275,7 +276,6 @@ export const createOrUpdateIndicator = async (
           specificArea: payload.specificArea,
           unitOfMeasure: payload.unitOfMeasure,
           itemInMeasure: payload.itemInMeasure,
-          // disaggregationId: payload.disaggregationId,
           baseLineDate: payload.baseLineDate,
           cumulativeValue: payload.cumulativeValue,
           baselineNarrative: payload.baselineNarrative,
@@ -296,8 +296,8 @@ export const createOrUpdateIndicator = async (
             await prisma.indicatorDisaggregation.create({
               data: {
                 indicatorId: indicator.indicatorId,
-                type: disaggregation.type,
-                category: disaggregation.category,
+                type: disaggregation.type.toUpperCase(),
+                category: disaggregation.category.toLowerCase(),
                 target: disaggregation.target,
               },
             });
@@ -311,6 +311,7 @@ export const createOrUpdateIndicator = async (
         where: { indicatorId: payload.indicatorId },
         data: {
           indicatorSource: payload.indicatorSource,
+          orgKpiId: payload.orgKpiId,
           thematicAreasOrPillar: payload.thematicAreasOrPillar,
           statement: payload.statement,
           linkKpiToSdnOrgKpi: payload.linkKpiToSdnOrgKpi,
@@ -318,7 +319,6 @@ export const createOrUpdateIndicator = async (
           specificArea: payload.specificArea,
           unitOfMeasure: payload.unitOfMeasure,
           itemInMeasure: payload.itemInMeasure,
-          // disaggregationId: payload.disaggregationId,
           baseLineDate: payload.baseLineDate,
           cumulativeValue: payload.cumulativeValue,
           baselineNarrative: payload.baselineNarrative,
@@ -341,8 +341,8 @@ export const createOrUpdateIndicator = async (
               where: { indicatorDisaggregationId: disaggregation.indicatorDisaggregationId },
               data: {
                 indicatorId: indicator.indicatorId,
-                type: disaggregation.type,
-                category: disaggregation.category,
+                type: disaggregation.type.toUpperCase(),
+                category: disaggregation.category.toLowerCase(),
                 target: disaggregation.target,
               },
             });
@@ -402,10 +402,10 @@ export async function saveIndicatorReport(
     const indicatorReport = await prisma.indicatorReport.create({
       data: {
         indicatorSource: payload.indicatorSource,
+        orgKpiId: payload.orgKpiId,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
         indicatorStatement: payload.indicatorStatement,
         responsiblePersons: payload.responsiblePersons,
-        // disaggregationId: payload.disaggregationId,
         actualDate: payload.actualDate,
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,
@@ -443,10 +443,10 @@ export async function saveIndicatorReport(
       },
       data: {
         indicatorSource: payload.indicatorSource,
+        orgKpiId: payload.orgKpiId,
         thematicAreasOrPillar: payload.thematicAreasOrPillar,
         indicatorStatement: payload.indicatorStatement,
         responsiblePersons: payload.responsiblePersons,
-        // disaggregationId: payload.disaggregationId,
         actualDate: payload.actualDate,
         cumulativeActual: payload.cumulativeActual,
         actualNarrative: payload.actualNarrative,

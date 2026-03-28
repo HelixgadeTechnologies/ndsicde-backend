@@ -110,6 +110,7 @@ export interface IImpactView {
 export interface IIndicator {
   indicatorId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   statement?: string | null;
   linkKpiToSdnOrgKpi?: string | null;
@@ -152,6 +153,7 @@ export interface IIndicatorReportDisaggregation {
 export interface IIndicatorWithDisaggregation {
   indicatorId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   statement?: string | null;
   linkKpiToSdnOrgKpi?: string | null;
@@ -186,6 +188,7 @@ export interface IIndicatorWithDisaggregation {
 export interface IIndicatorView {
   indicatorId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   statement?: string | null;
   linkKpiToSdnOrgKpi?: string | null;
@@ -221,6 +224,7 @@ export interface IIndicatorView {
 export interface IIndicatorReport {
   indicatorReportId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   indicatorStatement?: string | null;
   responsiblePersons?: string | null;
@@ -240,6 +244,7 @@ export interface IIndicatorReport {
 export interface IIndicatorReportWithDisaggregation {
   indicatorReportId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   indicatorStatement?: string | null;
   responsiblePersons?: string | null;
@@ -266,6 +271,7 @@ export interface IIndicatorReportWithDisaggregation {
 export interface IIndicatorReportView {
   indicatorReportId: string;
   indicatorSource?: string | null;
+  orgKpiId?: string | null;
   thematicAreasOrPillar?: string | null;
   indicatorStatement?: string | null;
   responsiblePersons?: string | null;

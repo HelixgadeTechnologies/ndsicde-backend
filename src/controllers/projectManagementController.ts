@@ -437,7 +437,7 @@ export const getImpactIndicatorReportById = async (
   res: Response
 ) => {
   try {
-    const id = req.params.indicatorId;
+    const id = req.params.id;
     const result = await getIndicatorReportById(id);
 
     if (!result) {
@@ -854,8 +854,27 @@ export const getResultDashboardDataController = async (req: Request, res: Respon
 };
 export const getOrgKpiDashboardDataController = async (req: Request, res: Response) => {
   try {
+    const {
+      thematicArea,
+      strategicObjectiveId,
+      resultLevel,
+      kpiId,
+      startDate,
+      endDate,
+      disaggregationType,
+      year,
+    } = req.query as Record<string, string | undefined>;
 
-    const dashboardData = await getOrgKpiDashboardData();
+    const dashboardData = await getOrgKpiDashboardData({
+      thematicArea,
+      strategicObjectiveId,
+      resultLevel,
+      kpiId,
+      startDate:          startDate ? new Date(startDate) : undefined,
+      endDate:            endDate   ? new Date(endDate)   : undefined,
+      disaggregationType,
+      year:               year      ? parseInt(year)       : undefined,
+    });
 
     return res
       .status(200)

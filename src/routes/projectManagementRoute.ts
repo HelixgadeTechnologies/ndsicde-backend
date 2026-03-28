@@ -1344,9 +1344,99 @@ projectManagementRouter.get(
  *   get:
  *     summary: Get Org Kpi dashboard
  *     tags: [ORG KPI DASHBOARD]
+ *     parameters:
+ *       - in: query
+ *         name: thematicArea
+ *         schema:
+ *           type: string
+ *         description: Filter by thematic area (e.g., Governance)
+ *       - in: query
+ *         name: strategicObjectiveId
+ *         schema:
+ *           type: string
+ *         description: Filter by strategic objective ID
+ *       - in: query
+ *         name: resultLevel
+ *         schema:
+ *           type: string
+ *         description: Filter by result level (e.g., Impact, Outcome, Output)
+ *       - in: query
+ *         name: kpiId
+ *         schema:
+ *           type: string
+ *         description: Filter by a specific KPI ID
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter reports from this actual date
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter reports up to this actual date
+ *       - in: query
+ *         name: disaggregationType
+ *         schema:
+ *           type: string
+ *         description: Filter by disaggregation type (e.g., GENDER, STATE)
+ *       - in: query
+ *         name: year
+ *         schema:
+ *           type: integer
+ *         description: Filter chart data by year (e.g., 2024)
  *     responses:
  *       200:
- *         description: data
+ *         description: Dashboard data retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:
+ *                 success: true
+ *                 message: "Data"
+ *                 data:
+ *                   THEMATIC_AREA_SUMMARY:
+ *                     - thematicArea: "Economic Diversification"
+ *                       totalSOs: 1
+ *                       totalKPIs: 1
+ *                       overallKPIPerformance: 85.5
+ *                   KPI_OVERVIEW_CHART:
+ *                     monthly:
+ *                       - period: "Jan"
+ *                         year: 2024
+ *                         actual: 150
+ *                         target: 5000
+ *                     quarterly:
+ *                       - period: "Q1"
+ *                         year: 2024
+ *                         actual: 450
+ *                         target: 5000
+ *                     baseline: 200
+ *                     annualTarget: 5000
+ *                   KPI_TABLE_DATA:
+ *                     - kpiId: "a0ea2153-0c14-40da-8447-9328bde20f32"
+ *                       code: "ECO-1"
+ *                       statement: "IMP Indicator 1.1: Change in employment rate of women/PwDs/Youth in the Niger Delta"
+ *                       thematicArea: "Economic Diversification"
+ *                       strategicObjective: "1.1. Foster Sustainable Livelihoods"
+ *                       resultLevel: "Impact"
+ *                       baseline: 200
+ *                       target: 5000
+ *                       actual: 450
+ *                       performance: 9.0
+ *                       status: "Not Met"
+ *                   PROJECT_INDICATOR_PERFORMANCE:
+ *                     kpis:
+ *                       - kpiId: "a0ea2153-0c14-40da-8447-9328bde20f32"
+ *                         code: "ECO-1"
+ *                         statement: "IMP Indicator 1.1: Change in employment rate of women/PwDs/Youth in the Niger Delta"
+ *                         actual: 450
+ *                         target: 5000
+ *                         performance: 9.0
+ *                     averagePerformance: 9.0
  *       500:
  *         description: Server error
  */

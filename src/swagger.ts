@@ -52,6 +52,10 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "Survey Data",
             },
+            orgKpiId: {
+              type: "string",
+              example: "uuid-1234-5678",
+            },
             thematicAreasOrPillar: {
               type: "string",
               example: "Health",
@@ -155,6 +159,10 @@ const options: swaggerJSDoc.Options = {
             indicatorSource: {
               type: "string",
               example: "Survey Data",
+            },
+            orgKpiId: {
+              type: "string",
+              example: "uuid-1234-5678",
             },
             thematicAreasOrPillar: {
               type: "string",

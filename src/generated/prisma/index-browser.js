@@ -310,6 +310,7 @@ exports.Prisma.OutputScalarFieldEnum = {
 exports.Prisma.IndicatorScalarFieldEnum = {
   indicatorId: 'indicatorId',
   indicatorSource: 'indicatorSource',
+  orgKpiId: 'orgKpiId',
   thematicAreasOrPillar: 'thematicAreasOrPillar',
   statement: 'statement',
   linkKpiToSdnOrgKpi: 'linkKpiToSdnOrgKpi',
@@ -342,6 +343,7 @@ exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
 exports.Prisma.IndicatorReportScalarFieldEnum = {
   indicatorReportId: 'indicatorReportId',
   indicatorSource: 'indicatorSource',
+  orgKpiId: 'orgKpiId',
   thematicAreasOrPillar: 'thematicAreasOrPillar',
   indicatorStatement: 'indicatorStatement',
   responsiblePersons: 'responsiblePersons',
@@ -659,6 +661,7 @@ exports.Prisma.OutputOrderByRelevanceFieldEnum = {
 exports.Prisma.IndicatorOrderByRelevanceFieldEnum = {
   indicatorId: 'indicatorId',
   indicatorSource: 'indicatorSource',
+  orgKpiId: 'orgKpiId',
   thematicAreasOrPillar: 'thematicAreasOrPillar',
   statement: 'statement',
   linkKpiToSdnOrgKpi: 'linkKpiToSdnOrgKpi',
@@ -684,6 +687,7 @@ exports.Prisma.IndicatorDisaggregationOrderByRelevanceFieldEnum = {
 exports.Prisma.IndicatorReportOrderByRelevanceFieldEnum = {
   indicatorReportId: 'indicatorReportId',
   indicatorSource: 'indicatorSource',
+  orgKpiId: 'orgKpiId',
   thematicAreasOrPillar: 'thematicAreasOrPillar',
   indicatorStatement: 'indicatorStatement',
   responsiblePersons: 'responsiblePersons',

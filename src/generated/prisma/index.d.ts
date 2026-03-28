@@ -19423,6 +19423,7 @@ export namespace Prisma {
   export type IndicatorMinAggregateOutputType = {
     indicatorId: string | null
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     statement: string | null
     linkKpiToSdnOrgKpi: string | null
@@ -19447,6 +19448,7 @@ export namespace Prisma {
   export type IndicatorMaxAggregateOutputType = {
     indicatorId: string | null
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     statement: string | null
     linkKpiToSdnOrgKpi: string | null
@@ -19471,6 +19473,7 @@ export namespace Prisma {
   export type IndicatorCountAggregateOutputType = {
     indicatorId: number
     indicatorSource: number
+    orgKpiId: number
     thematicAreasOrPillar: number
     statement: number
     linkKpiToSdnOrgKpi: number
@@ -19507,6 +19510,7 @@ export namespace Prisma {
   export type IndicatorMinAggregateInputType = {
     indicatorId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     statement?: true
     linkKpiToSdnOrgKpi?: true
@@ -19531,6 +19535,7 @@ export namespace Prisma {
   export type IndicatorMaxAggregateInputType = {
     indicatorId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     statement?: true
     linkKpiToSdnOrgKpi?: true
@@ -19555,6 +19560,7 @@ export namespace Prisma {
   export type IndicatorCountAggregateInputType = {
     indicatorId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     statement?: true
     linkKpiToSdnOrgKpi?: true
@@ -19666,6 +19672,7 @@ export namespace Prisma {
   export type IndicatorGroupByOutputType = {
     indicatorId: string
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     statement: string | null
     linkKpiToSdnOrgKpi: string | null
@@ -19709,6 +19716,7 @@ export namespace Prisma {
   export type IndicatorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     indicatorId?: boolean
     indicatorSource?: boolean
+    orgKpiId?: boolean
     thematicAreasOrPillar?: boolean
     statement?: boolean
     linkKpiToSdnOrgKpi?: boolean
@@ -19739,6 +19747,7 @@ export namespace Prisma {
   export type IndicatorSelectScalar = {
     indicatorId?: boolean
     indicatorSource?: boolean
+    orgKpiId?: boolean
     thematicAreasOrPillar?: boolean
     statement?: boolean
     linkKpiToSdnOrgKpi?: boolean
@@ -19760,7 +19769,7 @@ export namespace Prisma {
     resultTypeId?: boolean
   }
 
-  export type IndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorId" | "indicatorSource" | "thematicAreasOrPillar" | "statement" | "linkKpiToSdnOrgKpi" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "createAt" | "updateAt" | "result" | "resultTypeId", ExtArgs["result"]["indicator"]>
+  export type IndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "statement" | "linkKpiToSdnOrgKpi" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "createAt" | "updateAt" | "result" | "resultTypeId", ExtArgs["result"]["indicator"]>
   export type IndicatorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ResultType?: boolean | Indicator$ResultTypeArgs<ExtArgs>
     IndicatorReport?: boolean | Indicator$IndicatorReportArgs<ExtArgs>
@@ -19778,6 +19787,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       indicatorId: string
       indicatorSource: string | null
+      orgKpiId: string | null
       thematicAreasOrPillar: string | null
       statement: string | null
       linkKpiToSdnOrgKpi: string | null
@@ -20171,6 +20181,7 @@ export namespace Prisma {
   interface IndicatorFieldRefs {
     readonly indicatorId: FieldRef<"Indicator", 'String'>
     readonly indicatorSource: FieldRef<"Indicator", 'String'>
+    readonly orgKpiId: FieldRef<"Indicator", 'String'>
     readonly thematicAreasOrPillar: FieldRef<"Indicator", 'String'>
     readonly statement: FieldRef<"Indicator", 'String'>
     readonly linkKpiToSdnOrgKpi: FieldRef<"Indicator", 'String'>
@@ -21604,6 +21615,7 @@ export namespace Prisma {
   export type IndicatorReportMinAggregateOutputType = {
     indicatorReportId: string | null
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     indicatorStatement: string | null
     responsiblePersons: string | null
@@ -21621,6 +21633,7 @@ export namespace Prisma {
   export type IndicatorReportMaxAggregateOutputType = {
     indicatorReportId: string | null
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     indicatorStatement: string | null
     responsiblePersons: string | null
@@ -21638,6 +21651,7 @@ export namespace Prisma {
   export type IndicatorReportCountAggregateOutputType = {
     indicatorReportId: number
     indicatorSource: number
+    orgKpiId: number
     thematicAreasOrPillar: number
     indicatorStatement: number
     responsiblePersons: number
@@ -21657,6 +21671,7 @@ export namespace Prisma {
   export type IndicatorReportMinAggregateInputType = {
     indicatorReportId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     indicatorStatement?: true
     responsiblePersons?: true
@@ -21674,6 +21689,7 @@ export namespace Prisma {
   export type IndicatorReportMaxAggregateInputType = {
     indicatorReportId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     indicatorStatement?: true
     responsiblePersons?: true
@@ -21691,6 +21707,7 @@ export namespace Prisma {
   export type IndicatorReportCountAggregateInputType = {
     indicatorReportId?: true
     indicatorSource?: true
+    orgKpiId?: true
     thematicAreasOrPillar?: true
     indicatorStatement?: true
     responsiblePersons?: true
@@ -21781,6 +21798,7 @@ export namespace Prisma {
   export type IndicatorReportGroupByOutputType = {
     indicatorReportId: string
     indicatorSource: string | null
+    orgKpiId: string | null
     thematicAreasOrPillar: string | null
     indicatorStatement: string | null
     responsiblePersons: string | null
@@ -21815,6 +21833,7 @@ export namespace Prisma {
   export type IndicatorReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     indicatorReportId?: boolean
     indicatorSource?: boolean
+    orgKpiId?: boolean
     thematicAreasOrPillar?: boolean
     indicatorStatement?: boolean
     responsiblePersons?: boolean
@@ -21839,6 +21858,7 @@ export namespace Prisma {
   export type IndicatorReportSelectScalar = {
     indicatorReportId?: boolean
     indicatorSource?: boolean
+    orgKpiId?: boolean
     thematicAreasOrPillar?: boolean
     indicatorStatement?: boolean
     responsiblePersons?: boolean
@@ -21853,7 +21873,7 @@ export namespace Prisma {
     resultTypeId?: boolean
   }
 
-  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId", ExtArgs["result"]["indicatorReport"]>
+  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId", ExtArgs["result"]["indicatorReport"]>
   export type IndicatorReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     indicator?: boolean | IndicatorReport$indicatorArgs<ExtArgs>
     ResultType?: boolean | IndicatorReport$ResultTypeArgs<ExtArgs>
@@ -21873,6 +21893,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       indicatorReportId: string
       indicatorSource: string | null
+      orgKpiId: string | null
       thematicAreasOrPillar: string | null
       indicatorStatement: string | null
       responsiblePersons: string | null
@@ -22260,6 +22281,7 @@ export namespace Prisma {
   interface IndicatorReportFieldRefs {
     readonly indicatorReportId: FieldRef<"IndicatorReport", 'String'>
     readonly indicatorSource: FieldRef<"IndicatorReport", 'String'>
+    readonly orgKpiId: FieldRef<"IndicatorReport", 'String'>
     readonly thematicAreasOrPillar: FieldRef<"IndicatorReport", 'String'>
     readonly indicatorStatement: FieldRef<"IndicatorReport", 'String'>
     readonly responsiblePersons: FieldRef<"IndicatorReport", 'String'>
@@ -31771,6 +31793,7 @@ export namespace Prisma {
   export const IndicatorScalarFieldEnum: {
     indicatorId: 'indicatorId',
     indicatorSource: 'indicatorSource',
+    orgKpiId: 'orgKpiId',
     thematicAreasOrPillar: 'thematicAreasOrPillar',
     statement: 'statement',
     linkKpiToSdnOrgKpi: 'linkKpiToSdnOrgKpi',
@@ -31809,6 +31832,7 @@ export namespace Prisma {
   export const IndicatorReportScalarFieldEnum: {
     indicatorReportId: 'indicatorReportId',
     indicatorSource: 'indicatorSource',
+    orgKpiId: 'orgKpiId',
     thematicAreasOrPillar: 'thematicAreasOrPillar',
     indicatorStatement: 'indicatorStatement',
     responsiblePersons: 'responsiblePersons',
@@ -32204,6 +32228,7 @@ export namespace Prisma {
   export const IndicatorOrderByRelevanceFieldEnum: {
     indicatorId: 'indicatorId',
     indicatorSource: 'indicatorSource',
+    orgKpiId: 'orgKpiId',
     thematicAreasOrPillar: 'thematicAreasOrPillar',
     statement: 'statement',
     linkKpiToSdnOrgKpi: 'linkKpiToSdnOrgKpi',
@@ -32235,6 +32260,7 @@ export namespace Prisma {
   export const IndicatorReportOrderByRelevanceFieldEnum: {
     indicatorReportId: 'indicatorReportId',
     indicatorSource: 'indicatorSource',
+    orgKpiId: 'orgKpiId',
     thematicAreasOrPillar: 'thematicAreasOrPillar',
     indicatorStatement: 'indicatorStatement',
     responsiblePersons: 'responsiblePersons',
@@ -33679,6 +33705,7 @@ export namespace Prisma {
     NOT?: IndicatorWhereInput | IndicatorWhereInput[]
     indicatorId?: StringFilter<"Indicator"> | string
     indicatorSource?: StringNullableFilter<"Indicator"> | string | null
+    orgKpiId?: StringNullableFilter<"Indicator"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"Indicator"> | string | null
     statement?: StringNullableFilter<"Indicator"> | string | null
     linkKpiToSdnOrgKpi?: StringNullableFilter<"Indicator"> | string | null
@@ -33706,6 +33733,7 @@ export namespace Prisma {
   export type IndicatorOrderByWithRelationInput = {
     indicatorId?: SortOrder
     indicatorSource?: SortOrderInput | SortOrder
+    orgKpiId?: SortOrderInput | SortOrder
     thematicAreasOrPillar?: SortOrderInput | SortOrder
     statement?: SortOrderInput | SortOrder
     linkKpiToSdnOrgKpi?: SortOrderInput | SortOrder
@@ -33737,6 +33765,7 @@ export namespace Prisma {
     OR?: IndicatorWhereInput[]
     NOT?: IndicatorWhereInput | IndicatorWhereInput[]
     indicatorSource?: StringNullableFilter<"Indicator"> | string | null
+    orgKpiId?: StringNullableFilter<"Indicator"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"Indicator"> | string | null
     statement?: StringNullableFilter<"Indicator"> | string | null
     linkKpiToSdnOrgKpi?: StringNullableFilter<"Indicator"> | string | null
@@ -33764,6 +33793,7 @@ export namespace Prisma {
   export type IndicatorOrderByWithAggregationInput = {
     indicatorId?: SortOrder
     indicatorSource?: SortOrderInput | SortOrder
+    orgKpiId?: SortOrderInput | SortOrder
     thematicAreasOrPillar?: SortOrderInput | SortOrder
     statement?: SortOrderInput | SortOrder
     linkKpiToSdnOrgKpi?: SortOrderInput | SortOrder
@@ -33796,6 +33826,7 @@ export namespace Prisma {
     NOT?: IndicatorScalarWhereWithAggregatesInput | IndicatorScalarWhereWithAggregatesInput[]
     indicatorId?: StringWithAggregatesFilter<"Indicator"> | string
     indicatorSource?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
+    orgKpiId?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
     thematicAreasOrPillar?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
     statement?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
     linkKpiToSdnOrgKpi?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
@@ -33881,6 +33912,7 @@ export namespace Prisma {
     NOT?: IndicatorReportWhereInput | IndicatorReportWhereInput[]
     indicatorReportId?: StringFilter<"IndicatorReport"> | string
     indicatorSource?: StringNullableFilter<"IndicatorReport"> | string | null
+    orgKpiId?: StringNullableFilter<"IndicatorReport"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"IndicatorReport"> | string | null
     indicatorStatement?: StringNullableFilter<"IndicatorReport"> | string | null
     responsiblePersons?: StringNullableFilter<"IndicatorReport"> | string | null
@@ -33902,6 +33934,7 @@ export namespace Prisma {
   export type IndicatorReportOrderByWithRelationInput = {
     indicatorReportId?: SortOrder
     indicatorSource?: SortOrderInput | SortOrder
+    orgKpiId?: SortOrderInput | SortOrder
     thematicAreasOrPillar?: SortOrderInput | SortOrder
     indicatorStatement?: SortOrderInput | SortOrder
     responsiblePersons?: SortOrderInput | SortOrder
@@ -33927,6 +33960,7 @@ export namespace Prisma {
     OR?: IndicatorReportWhereInput[]
     NOT?: IndicatorReportWhereInput | IndicatorReportWhereInput[]
     indicatorSource?: StringNullableFilter<"IndicatorReport"> | string | null
+    orgKpiId?: StringNullableFilter<"IndicatorReport"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"IndicatorReport"> | string | null
     indicatorStatement?: StringNullableFilter<"IndicatorReport"> | string | null
     responsiblePersons?: StringNullableFilter<"IndicatorReport"> | string | null
@@ -33948,6 +33982,7 @@ export namespace Prisma {
   export type IndicatorReportOrderByWithAggregationInput = {
     indicatorReportId?: SortOrder
     indicatorSource?: SortOrderInput | SortOrder
+    orgKpiId?: SortOrderInput | SortOrder
     thematicAreasOrPillar?: SortOrderInput | SortOrder
     indicatorStatement?: SortOrderInput | SortOrder
     responsiblePersons?: SortOrderInput | SortOrder
@@ -33971,6 +34006,7 @@ export namespace Prisma {
     NOT?: IndicatorReportScalarWhereWithAggregatesInput | IndicatorReportScalarWhereWithAggregatesInput[]
     indicatorReportId?: StringWithAggregatesFilter<"IndicatorReport"> | string
     indicatorSource?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
+    orgKpiId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     thematicAreasOrPillar?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     indicatorStatement?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     responsiblePersons?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
@@ -36223,6 +36259,7 @@ export namespace Prisma {
   export type IndicatorCreateInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -36249,6 +36286,7 @@ export namespace Prisma {
   export type IndicatorUncheckedCreateInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -36275,6 +36313,7 @@ export namespace Prisma {
   export type IndicatorUpdateInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36301,6 +36340,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36327,6 +36367,7 @@ export namespace Prisma {
   export type IndicatorCreateManyInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -36351,6 +36392,7 @@ export namespace Prisma {
   export type IndicatorUpdateManyMutationInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36374,6 +36416,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateManyInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36453,6 +36496,7 @@ export namespace Prisma {
   export type IndicatorReportCreateInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -36472,6 +36516,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedCreateInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -36491,6 +36536,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36510,6 +36556,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36529,6 +36576,7 @@ export namespace Prisma {
   export type IndicatorReportCreateManyInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -36546,6 +36594,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateManyMutationInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36561,6 +36610,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateManyInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38590,6 +38640,7 @@ export namespace Prisma {
   export type IndicatorCountOrderByAggregateInput = {
     indicatorId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     statement?: SortOrder
     linkKpiToSdnOrgKpi?: SortOrder
@@ -38619,6 +38670,7 @@ export namespace Prisma {
   export type IndicatorMaxOrderByAggregateInput = {
     indicatorId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     statement?: SortOrder
     linkKpiToSdnOrgKpi?: SortOrder
@@ -38643,6 +38695,7 @@ export namespace Prisma {
   export type IndicatorMinOrderByAggregateInput = {
     indicatorId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     statement?: SortOrder
     linkKpiToSdnOrgKpi?: SortOrder
@@ -38746,6 +38799,7 @@ export namespace Prisma {
   export type IndicatorReportCountOrderByAggregateInput = {
     indicatorReportId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     indicatorStatement?: SortOrder
     responsiblePersons?: SortOrder
@@ -38763,6 +38817,7 @@ export namespace Prisma {
   export type IndicatorReportMaxOrderByAggregateInput = {
     indicatorReportId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     indicatorStatement?: SortOrder
     responsiblePersons?: SortOrder
@@ -38780,6 +38835,7 @@ export namespace Prisma {
   export type IndicatorReportMinOrderByAggregateInput = {
     indicatorReportId?: SortOrder
     indicatorSource?: SortOrder
+    orgKpiId?: SortOrder
     thematicAreasOrPillar?: SortOrder
     indicatorStatement?: SortOrder
     responsiblePersons?: SortOrder
@@ -43972,6 +44028,7 @@ export namespace Prisma {
   export type IndicatorCreateWithoutResultTypeInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -43997,6 +44054,7 @@ export namespace Prisma {
   export type IndicatorUncheckedCreateWithoutResultTypeInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -44032,6 +44090,7 @@ export namespace Prisma {
   export type IndicatorReportCreateWithoutResultTypeInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -44050,6 +44109,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedCreateWithoutResultTypeInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -44145,6 +44205,7 @@ export namespace Prisma {
     NOT?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
     indicatorId?: StringFilter<"Indicator"> | string
     indicatorSource?: StringNullableFilter<"Indicator"> | string | null
+    orgKpiId?: StringNullableFilter<"Indicator"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"Indicator"> | string | null
     statement?: StringNullableFilter<"Indicator"> | string | null
     linkKpiToSdnOrgKpi?: StringNullableFilter<"Indicator"> | string | null
@@ -44188,6 +44249,7 @@ export namespace Prisma {
     NOT?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
     indicatorReportId?: StringFilter<"IndicatorReport"> | string
     indicatorSource?: StringNullableFilter<"IndicatorReport"> | string | null
+    orgKpiId?: StringNullableFilter<"IndicatorReport"> | string | null
     thematicAreasOrPillar?: StringNullableFilter<"IndicatorReport"> | string | null
     indicatorStatement?: StringNullableFilter<"IndicatorReport"> | string | null
     responsiblePersons?: StringNullableFilter<"IndicatorReport"> | string | null
@@ -45168,6 +45230,7 @@ export namespace Prisma {
   export type IndicatorReportCreateWithoutIndicatorInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45186,6 +45249,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedCreateWithoutIndicatorInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45310,6 +45374,7 @@ export namespace Prisma {
   export type IndicatorCreateWithoutIndicatorDisaggregationInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -45335,6 +45400,7 @@ export namespace Prisma {
   export type IndicatorUncheckedCreateWithoutIndicatorDisaggregationInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -45376,6 +45442,7 @@ export namespace Prisma {
   export type IndicatorUpdateWithoutIndicatorDisaggregationInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45401,6 +45468,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateWithoutIndicatorDisaggregationInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45426,6 +45494,7 @@ export namespace Prisma {
   export type IndicatorCreateWithoutIndicatorReportInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -45451,6 +45520,7 @@ export namespace Prisma {
   export type IndicatorUncheckedCreateWithoutIndicatorReportInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -45563,6 +45633,7 @@ export namespace Prisma {
   export type IndicatorUpdateWithoutIndicatorReportInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45588,6 +45659,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateWithoutIndicatorReportInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45696,6 +45768,7 @@ export namespace Prisma {
   export type IndicatorReportCreateWithoutIndicatorReportDisaggregationInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45714,6 +45787,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedCreateWithoutIndicatorReportDisaggregationInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45748,6 +45822,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateWithoutIndicatorReportDisaggregationInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45766,6 +45841,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateWithoutIndicatorReportDisaggregationInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45784,6 +45860,7 @@ export namespace Prisma {
   export type IndicatorReportCreateWithoutIndicatorReportCommentInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45802,6 +45879,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedCreateWithoutIndicatorReportCommentInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -45836,6 +45914,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateWithoutIndicatorReportCommentInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45854,6 +45933,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateWithoutIndicatorReportCommentInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48071,6 +48151,7 @@ export namespace Prisma {
   export type IndicatorCreateManyResultTypeInput = {
     indicatorId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     statement?: string | null
     linkKpiToSdnOrgKpi?: string | null
@@ -48094,6 +48175,7 @@ export namespace Prisma {
   export type IndicatorReportCreateManyResultTypeInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -48217,6 +48299,7 @@ export namespace Prisma {
   export type IndicatorUpdateWithoutResultTypeInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48242,6 +48325,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateWithoutResultTypeInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48267,6 +48351,7 @@ export namespace Prisma {
   export type IndicatorUncheckedUpdateManyWithoutResultTypeInput = {
     indicatorId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48290,6 +48375,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateWithoutResultTypeInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48308,6 +48394,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateWithoutResultTypeInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48326,6 +48413,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateManyWithoutResultTypeInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48692,6 +48780,7 @@ export namespace Prisma {
   export type IndicatorReportCreateManyIndicatorInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
+    orgKpiId?: string | null
     thematicAreasOrPillar?: string | null
     indicatorStatement?: string | null
     responsiblePersons?: string | null
@@ -48715,6 +48804,7 @@ export namespace Prisma {
   export type IndicatorReportUpdateWithoutIndicatorInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48733,6 +48823,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateWithoutIndicatorInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
@@ -48751,6 +48842,7 @@ export namespace Prisma {
   export type IndicatorReportUncheckedUpdateManyWithoutIndicatorInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null

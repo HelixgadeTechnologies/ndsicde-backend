@@ -290,6 +290,7 @@ model Output {
 model Indicator {
   indicatorId             String                    @id @default(uuid())
   indicatorSource         String?
+  orgKpiId                String?
   thematicAreasOrPillar   String?
   statement               String?
   linkKpiToSdnOrgKpi      String?
@@ -333,6 +334,7 @@ model IndicatorDisaggregation {
 model IndicatorReport {
   indicatorReportId     String  @id @default(uuid())
   indicatorSource       String?
+  orgKpiId                String?
   thematicAreasOrPillar String?
   indicatorStatement    String?
   responsiblePersons    String?
@@ -341,7 +343,7 @@ model IndicatorReport {
   cumulativeActual              String?
   actualNarrative               String?
   attachmentUrl                 String?
-  status                        String?
+  status                        String?                         @default("PENDING")
   createAt                      DateTime?                       @default(now())
   updateAt                      DateTime?                       @default(now())
   indicator                     Indicator?                      @relation(fields: [indicatorId], references: [indicatorId])
