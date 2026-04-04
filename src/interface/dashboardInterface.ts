@@ -56,3 +56,59 @@ export interface IKpiDashboardOutput {
     AVERAGE_INDICATOR_PERFORMANCE: void | any[],
     INDICATOR_PERFORMANCE: void | any[],
 }
+
+// ─── Activity Table Row (Block 2 – Table tab) ─────────────────────────────────
+export interface IActivityTableRow {
+  activityId: string;
+  activityStatement: string;
+  /** Planned number of reports / cycles for this activity */
+  targetFrequency: number;
+  /** Actual number of ActivityReport records submitted */
+  actualFrequency: number;
+  /** percentageCompletion from the latest ActivityReport */
+  performance: number;
+  /** implementationTimeAnalysis label (e.g. "Due to Start", "In Progress (Early Start)") */
+  status: string;
+}
+
+// ─── Activity Overview Item (Block 2 – Pie chart) ────────────────────────────
+export interface IActivityOverviewItem {
+  category: string;
+  count: number;
+  percentage: number;
+}
+
+// ─── Result Summary (Block 1 – Top cards) ────────────────────────────────────
+export interface IResultSummary {
+  resultAndActivities: {
+    totalImpacts: number;
+    totalOutcomes: number;
+    totalOutputs: number;
+    totalActivities: number;
+  };
+  kpisDueForReporting: {
+    /** Indicators with result type "Impact" that have zero IndicatorReports */
+    impacts: number;
+    /** Indicators with result type "Outcome" that have zero IndicatorReports */
+    outcomes: number;
+    /** Indicators with result type "Output" that have zero IndicatorReports */
+    outputs: number;
+  };
+  overallPerformance: {
+    /** Average achievement % for Impact-level indicators */
+    impacts: number;
+    /** Average achievement % for Outcome-level indicators */
+    outcomes: number;
+    /** Average achievement % for Output-level indicators */
+    outputs: number;
+    /** Average achievement % across all indicators */
+    totalActivity: number;
+  };
+}
+
+// ─── Combined Result Dashboard Full response ──────────────────────────────────
+export interface IResultDashboardFullOutput {
+  RESULT_SUMMARY: IResultSummary;
+  ACTIVITY_OVERVIEW: IActivityOverviewItem[];
+  ACTIVITY_TABLE: IActivityTableRow[];
+}

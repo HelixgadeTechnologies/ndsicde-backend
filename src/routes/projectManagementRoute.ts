@@ -43,6 +43,8 @@ import {
   getPartnerByEmailController,
   getProjectActivityDashboardDataController,
   getResultDashboardDataController,
+  getResultDashboardFullDataController,
+  getResultDashboardKpiSectionDataController,
   removeIndicatorReport,
   removeProject,
   saveOutcomeController,
@@ -1315,31 +1317,6 @@ projectManagementRouter.delete(
 
 /**
  * @swagger
- * /api/projectManagement/result_dashboard/{projectId}:
- *   get:
- *     summary: Get result dashboard data by PROJECT ID
- *     tags: [RESULT DASHBOARD]
- *     parameters:
- *       - in: path
- *         name: projectId
- *         schema:
- *           type: string
- *         required: true
- *         description: PROJECT ID
- *     responses:
- *       200:
- *         description: data
- *       500:
- *         description: Server error
- */
-projectManagementRouter.get(
-  "/result_dashboard/:projectId",
-  getResultDashboardDataController
-);
-
-
-/**
- * @swagger
  * /api/projectManagement/org_kpi_dashboard:
  *   get:
  *     summary: Get Org Kpi dashboard
@@ -1468,6 +1445,187 @@ projectManagementRouter.get(
 projectManagementRouter.get(
   "/project_activity_dashboard/:projectId",
   getProjectActivityDashboardDataController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/result_dashboard_full/{projectId}:
+ *   get:
+ *     summary: Get full project result dashboard data
+ *     description: >
+ *       Returns all data needed to render the Project Result Dashboard in a single call:
+ *       **RESULT_SUMMARY** (top cards – Result & Activities, KPIs Due For Reporting, Overall Performance),
+ *       **ACTIVITY_OVERVIEW** (pie chart data – 6 status categories with counts and percentages),
+ *       **ACTIVITY_TABLE** (table view – Activity Statement, Target Frequency, Actual Frequency, Performance %, Status).
+ *       The KPI bar chart and indicator performance line chart are served separately by the `org_kpi_dashboard` endpoint.
+ *     tags: [RESULT DASHBOARD]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Dashboard data retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:
+ *                 success: true
+ *                 message: "Data"
+ *                 data:
+ *                   RESULT_SUMMARY:
+ *                     resultAndActivities:
+ *                       totalImpacts: 3
+ *                       totalOutcomes: 1
+ *                       totalOutputs: 2
+ *                       totalActivities: 3
+ *                     kpisDueForReporting:
+ *                       impacts: 0
+ *                       outcomes: 0
+ *                       outputs: 0
+ *                     overallPerformance:
+ *                       impacts: 0
+ *                       outcomes: 0
+ *                       outputs: 0
+ *                       totalActivity: 0
+ *                   ACTIVITY_OVERVIEW:
+ *                     - category: "Due to Start"
+ *                       count: 1
+ *                       percentage: 33.33
+ *                     - category: "In Progress (Early Start)"
+ *                       count: 1
+ *                       percentage: 33.33
+ *                   ACTIVITY_TABLE:
+ *                     - activityId: "uuid"
+ *                       activityStatement: "Statement 1"
+ *                       targetFrequency: 4
+ *                       actualFrequency: 1
+ *                       performance: 50
+ *                       status: "In Progress (Early Start)"
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/result_dashboard_full/:projectId",
+  getResultDashboardFullDataController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/result_dashboard_kpi/{projectId}:
+ *   get:
+ *     summary: Get KPI Overview and Indicator Performance sections for the Result Dashboard
+ *     description: >
+ *       Returns the filterable KPI section of the Project Result Dashboard.
+ *       Includes **KPI_OVERVIEW_CHART** (grouped bar chart – Actual vs Target by month/quarter),
+ *       **KPI_TABLE_DATA** (Code, Indicator, Baseline, Target, Actual, Performance%, Status),
+ *       and **PROJECT_INDICATOR_PERFORMANCE** (line chart per indicator + averagePerformance).
+ *       All data is scoped to the project's own Indicator records.
+ *       Apply query params to reflect filter bar selections on the frontend.
+ *     tags: [RESULT DASHBOARD]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *       - in: query
+ *         name: thematicArea
+ *         schema:
+ *           type: string
+ *         description: Filter by Indicator thematic area
+ *       - in: query
+ *         name: strategicObjectiveId
+ *         schema:
+ *           type: string
+ *         description: Filter by Strategic Objective ID (via Indicator.orgKpiId → Kpi)
+ *       - in: query
+ *         name: resultLevel
+ *         schema:
+ *           type: string
+ *         description: "Filter by result level: Impact | Outcome | Output"
+ *       - in: query
+ *         name: indicatorId
+ *         schema:
+ *           type: string
+ *         description: Filter to a specific indicator
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter IndicatorReports from this date
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: Filter IndicatorReports up to this date
+ *       - in: query
+ *         name: disaggregationType
+ *         schema:
+ *           type: string
+ *         description: "Filter disaggregation rows by type e.g. GENDER, STATE, SEX"
+ *       - in: query
+ *         name: year
+ *         schema:
+ *           type: integer
+ *         description: Restrict bar chart time-series to a specific year
+ *     responses:
+ *       200:
+ *         description: KPI section data retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               example:
+ *                 success: true
+ *                 message: "Data"
+ *                 data:
+ *                   KPI_OVERVIEW_CHART:
+ *                     monthly:
+ *                       - period: "Jan"
+ *                         year: 2024
+ *                         actual: 120
+ *                         target: 5000
+ *                     quarterly:
+ *                       - period: "Q1"
+ *                         year: 2024
+ *                         actual: 350
+ *                         target: 5000
+ *                     baseline: 500
+ *                     annualTarget: 5000
+ *                   KPI_TABLE_DATA:
+ *                     - indicatorId: "uuid"
+ *                       code: "EDU-01"
+ *                       statement: "Number of students enrolled"
+ *                       thematicArea: "Education"
+ *                       resultLevel: "Output"
+ *                       baseline: 500
+ *                       target: 450
+ *                       actual: 4500
+ *                       performance: 90
+ *                       status: "Partially Met"
+ *                   PROJECT_INDICATOR_PERFORMANCE:
+ *                     indicators:
+ *                       - indicatorId: "uuid"
+ *                         code: "EDU-01"
+ *                         statement: "Number of students enrolled"
+ *                         actual: 4500
+ *                         target: 450
+ *                         performance: 90
+ *                     averagePerformance: 87.5
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/result_dashboard_kpi/:projectId",
+  getResultDashboardKpiSectionDataController
 );
 
 export default projectManagementRouter;

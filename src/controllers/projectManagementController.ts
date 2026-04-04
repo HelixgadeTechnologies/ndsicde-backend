@@ -58,7 +58,7 @@ import {
   IOutcome,
   IOutput,
 } from "../interface/projectManagementInterface";
-import { getOrgKpiDashboardData, getProjectActivityDashboardData, getResultDashboardData } from "../service/kpiDashboardService";
+import { getOrgKpiDashboardData, getProjectActivityDashboardData, getResultDashboardData, getResultDashboardFullData, getResultDashboardKpiSectionData } from "../service/kpiDashboardService";
 
 export const createOrUpdateProject = async (req: Request, res: Response) => {
   const { isCreate, data } = req.body;
@@ -899,3 +899,51 @@ export const getProjectActivityDashboardDataController = async (req: Request, re
     return res.status(500).json(errorResponse(error.message));
   }
 };
+
+export const getResultDashboardFullDataController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const dashboardData = await getResultDashboardFullData(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Data", dashboardData));
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getResultDashboardKpiSectionDataController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const {
+      thematicArea,
+      strategicObjectiveId,
+      resultLevel,
+      indicatorId,
+      startDate,
+      endDate,
+      disaggregationType,
+      year,
+    } = req.query as Record<string, string | undefined>;
+
+    const dashboardData = await getResultDashboardKpiSectionData(projectId, {
+      thematicArea,
+      strategicObjectiveId,
+      resultLevel,
+      indicatorId,
+      startDate:  startDate ? new Date(startDate) : undefined,
+      endDate:    endDate   ? new Date(endDate)   : undefined,
+      disaggregationType,
+      year:       year ? parseInt(year) : undefined,
+    });
+
+    return res
+      .status(200)
+      .json(successResponse("Data", dashboardData));
+  } catch (error: any) {
+    console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
