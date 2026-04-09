@@ -40,6 +40,9 @@ import {
   getProjectsStatus,
   getResultType,
   getPartnerByEmail,
+  getImpactByProjectIdView,
+  getOutcomeViewByProjectId,
+  getOutputByProjectId,
   saveIndicatorReport,
   saveOutcome,
   saveProject,
@@ -944,6 +947,56 @@ export const getResultDashboardKpiSectionDataController = async (req: Request, r
       .json(successResponse("Data", dashboardData));
   } catch (error: any) {
     console.error(error);
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get impacts by project id (from view)
+export const getImpactByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const impacts = await getImpactByProjectIdView(projectId);
+    
+    return res
+      .status(200)
+      .json(successResponse("Impacts retrieved successfully", impacts));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get outcome by project id (from view)
+export const getOutcomeByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const outcome = await getOutcomeViewByProjectId(projectId);
+    
+    if (!outcome) {
+      return res.status(404).json(notFoundResponse("Outcome not found", null));
+    }
+    
+    return res
+      .status(200)
+      .json(successResponse("Outcome retrieved successfully", outcome));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get output by project id (from view)
+export const getOutputByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const output = await getOutputByProjectId(projectId);
+    
+    if (!output) {
+      return res.status(404).json(notFoundResponse("Output not found", null));
+    }
+    
+    return res
+      .status(200)
+      .json(successResponse("Output retrieved successfully", output));
+  } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
   }
 };

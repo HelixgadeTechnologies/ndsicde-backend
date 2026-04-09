@@ -243,7 +243,14 @@ export const createOrUpdateImpact = async (
   }
 };
 
-// Get all Impacts (from view)
+
+// Get Impacts by project id (from view)
+export const getImpactByProjectIdView = async (projectId: string) => {
+  const impacts: Array<IImpactView> = await prisma.$queryRaw`
+    SELECT * FROM impact_view WHERE projectId = ${projectId}
+  `;
+  return impacts;
+};
 export const getAllImpact = async () => {
   const impacts: Array<IImpactView> = await prisma.$queryRaw`
     SELECT * FROM impact_view
@@ -563,6 +570,15 @@ export const getAllOutcomesView = async (): Promise<IOutcomeView[]> => {
   `;
 };
 
+// Get By Project ID
+export const getOutcomeViewByProjectId = async (
+  projectId: string
+): Promise<IOutcomeView | null> => {
+  const results = await prisma.$queryRaw<IOutcomeView[]>`
+    SELECT * FROM outcome_view WHERE projectId = ${projectId}
+  `;
+  return results.length > 0 ? results[0] : null;
+};
 // Get By ID
 export const getOutcomeViewById = async (
   outcomeId: string
@@ -626,6 +642,15 @@ export const getAllOutputs = async (): Promise<IOutputView[]> => {
   return outputs;
 };
 
+// ✅ Get Output by Project Id (from view)
+export const getOutputByProjectId = async (
+  projectId: string
+): Promise<IOutputView | null> => {
+  const rows: IOutputView[] = await prisma.$queryRaw`
+    SELECT * FROM output_view WHERE "projectId" = ${projectId}
+  `;
+  return rows.length > 0 ? rows[0] : null;
+};
 // ✅ Get Output by Id (from view)
 export const getOutputById = async (
   outputId: string

@@ -39,12 +39,15 @@ import {
   getLogicalFrameworkByIdController,
   getOrgKpiDashboardDataController,
   getOutcomeByIdController,
+  getOutcomeByProjectIdController,
   getOutputByIdController,
+  getOutputByProjectIdController,
   getPartnerByEmailController,
   getProjectActivityDashboardDataController,
   getResultDashboardDataController,
   getResultDashboardFullDataController,
   getResultDashboardKpiSectionDataController,
+  getImpactByProjectIdController,
   removeIndicatorReport,
   removeProject,
   saveOutcomeController,
@@ -1625,7 +1628,83 @@ projectManagementRouter.get(
  */
 projectManagementRouter.get(
   "/result_dashboard_kpi/:projectId",
-  getResultDashboardKpiSectionDataController
+getResultDashboardKpiSectionDataController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/impacts/project/{projectId}:
+ *   get:
+ *     summary: Get Impacts by project ID
+ *     tags: [IMPACT]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Impacts retrieved successfully
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/impacts/project/:projectId",
+  getImpactByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/outcomes/project/{projectId}:
+ *   get:
+ *     summary: Get Outcome by project ID
+ *     tags: [OUTCOME]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Outcome retrieved successfully
+ *       404:
+ *         description: Outcome not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/outcomes/project/:projectId",
+  getOutcomeByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/outputs/project/{projectId}:
+ *   get:
+ *     summary: Get Output by project ID
+ *     tags: [OUTPUT]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Output retrieved successfully
+ *       404:
+ *         description: Output not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/outputs/project/:projectId",
+  getOutputByProjectIdController
 );
 
 export default projectManagementRouter;
