@@ -136,6 +136,8 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   profilePic: 'profilePic',
   profilePicMimeType: 'profilePicMimeType',
+  signature: 'signature',
+  signatureMimeType: 'signatureMimeType',
   loginLast: 'loginLast',
   createAt: 'createAt',
   updateAt: 'updateAt'
@@ -443,18 +445,28 @@ exports.Prisma.RequestScalarFieldEnum = {
   approval_B: 'approval_B',
   approval_C: 'approval_C',
   approval_D: 'approval_D',
-  approval_E: 'approval_E',
   approvedBy_A: 'approvedBy_A',
   approvedBy_B: 'approvedBy_B',
   approvedBy_C: 'approvedBy_C',
   approvedBy_D: 'approvedBy_D',
-  approvedBy_E: 'approvedBy_E',
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
   comment_D: 'comment_D',
-  comment_E: 'comment_E',
   status: 'status',
+  createAt: 'createAt',
+  updateAt: 'updateAt',
+  createdBy: 'createdBy'
+};
+
+exports.Prisma.LineItemScalarFieldEnum = {
+  lineItemId: 'lineItemId',
+  requestId: 'requestId',
+  description: 'description',
+  quantity: 'quantity',
+  frequency: 'frequency',
+  unitCost: 'unitCost',
+  total: 'total',
   createAt: 'createAt',
   updateAt: 'updateAt'
 };
@@ -469,8 +481,21 @@ exports.Prisma.RetirementScalarFieldEnum = {
   totalBudget: 'totalBudget',
   documentName: 'documentName',
   documentURL: 'documentURL',
+  approval_A: 'approval_A',
+  approval_B: 'approval_B',
+  approval_C: 'approval_C',
+  approval_D: 'approval_D',
+  approvedBy_A: 'approvedBy_A',
+  approvedBy_B: 'approvedBy_B',
+  approvedBy_C: 'approvedBy_C',
+  approvedBy_D: 'approvedBy_D',
+  comment_A: 'comment_A',
+  comment_B: 'comment_B',
+  comment_C: 'comment_C',
+  comment_D: 'comment_D',
   requestId: 'requestId',
   status: 'status',
+  createdBy: 'createdBy',
   createAt: 'createAt',
   updateAt: 'updateAt'
 };
@@ -520,7 +545,9 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   localGovernmentArea: 'localGovernmentArea',
   password: 'password',
   profilePic: 'profilePic',
-  profilePicMimeType: 'profilePicMimeType'
+  profilePicMimeType: 'profilePicMimeType',
+  signature: 'signature',
+  signatureMimeType: 'signatureMimeType'
 };
 
 exports.Prisma.GeneralSettingsOrderByRelevanceFieldEnum = {
@@ -757,13 +784,18 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
   approvedBy_B: 'approvedBy_B',
   approvedBy_C: 'approvedBy_C',
   approvedBy_D: 'approvedBy_D',
-  approvedBy_E: 'approvedBy_E',
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
   comment_D: 'comment_D',
-  comment_E: 'comment_E',
-  status: 'status'
+  status: 'status',
+  createdBy: 'createdBy'
+};
+
+exports.Prisma.LineItemOrderByRelevanceFieldEnum = {
+  lineItemId: 'lineItemId',
+  requestId: 'requestId',
+  description: 'description'
 };
 
 exports.Prisma.RetirementOrderByRelevanceFieldEnum = {
@@ -771,8 +803,17 @@ exports.Prisma.RetirementOrderByRelevanceFieldEnum = {
   activityLineDescription: 'activityLineDescription',
   documentName: 'documentName',
   documentURL: 'documentURL',
+  approvedBy_A: 'approvedBy_A',
+  approvedBy_B: 'approvedBy_B',
+  approvedBy_C: 'approvedBy_C',
+  approvedBy_D: 'approvedBy_D',
+  comment_A: 'comment_A',
+  comment_B: 'comment_B',
+  comment_C: 'comment_C',
+  comment_D: 'comment_D',
   requestId: 'requestId',
-  status: 'status'
+  status: 'status',
+  createdBy: 'createdBy'
 };
 
 exports.Prisma.ReportOrderByRelevanceFieldEnum = {
@@ -812,6 +853,7 @@ exports.Prisma.ModelName = {
   ActivityReport: 'ActivityReport',
   LogicalFramework: 'LogicalFramework',
   Request: 'Request',
+  LineItem: 'LineItem',
   Retirement: 'Retirement',
   Report: 'Report'
 };

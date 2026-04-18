@@ -15,12 +15,12 @@ datasource db {
 
 //MODEL
 model User {
-  userId              String      @id @default(uuid())
+  userId              String       @id @default(uuid())
   fullName            String?
-  email               String?     @unique
+  email               String?      @unique
   address             String?
   phoneNumber         String?
-  role                Role?       @relation(fields: [roleId], references: [roleId])
+  role                Role?        @relation(fields: [roleId], references: [roleId])
   roleId              String?
   status              String?
   assignedProjectId   String?
@@ -31,11 +31,15 @@ model User {
   password            String?
   profilePic          String?
   profilePicMimeType  String?
+  signature           String?
+  signatureMimeType   String?
   loginLast           DateTime?
-  createAt            DateTime?   @default(now())
-  updateAt            DateTime?   @default(now())
+  createAt            DateTime?    @default(now())
+  updateAt            DateTime?    @default(now())
   kpiReport           KpiReport[]
   partner             Partner[]
+  request             Request[]
+  retirement          Retirement[]
 
   @@map("users")
 }
@@ -466,23 +470,38 @@ model Request {
   approval_B                 Int?
   approval_C                 Int?
   approval_D                 Int?
-  approval_E                 Int?
   approvedBy_A               String?      @db.VarChar(191)
   approvedBy_B               String?      @db.VarChar(191)
   approvedBy_C               String?      @db.VarChar(191)
   approvedBy_D               String?      @db.VarChar(191)
-  approvedBy_E               String?      @db.VarChar(191)
   comment_A                  String?
   comment_B                  String?
   comment_C                  String?
   comment_D                  String?
-  comment_E                  String?
   status                     String?
   createAt                   DateTime?    @default(now())
   updateAt                   DateTime?    @default(now())
+  user                       User?        @relation(fields: [createdBy], references: [userId])
+  createdBy                  String?
   retirement                 Retirement[]
+  lineItem                   LineItem[]
 
   @@map("request")
+}
+
+model LineItem {
+  lineItemId  String    @id @default(uuid())
+  requestId   String
+  request     Request   @relation(fields: [requestId], references: [requestId])
+  description String?
+  quantity    Int?
+  frequency   Int?
+  unitCost    Int?
+  total       Int?
+  createAt    DateTime? @default(now())
+  updateAt    DateTime? @default(now())
+
+  @@map("lineitem")
 }
 
 //Retirement
@@ -496,9 +515,23 @@ model Retirement {
   totalBudget             Int?
   documentName            String?
   documentURL             String?
+  approval_A              Int?
+  approval_B              Int?
+  approval_C              Int?
+  approval_D              Int?
+  approvedBy_A            String?   @db.VarChar(191)
+  approvedBy_B            String?   @db.VarChar(191)
+  approvedBy_C            String?   @db.VarChar(191)
+  approvedBy_D            String?   @db.VarChar(191)
+  comment_A               String?
+  comment_B               String?
+  comment_C               String?
+  comment_D               String?
   request                 Request?  @relation(fields: [requestId], references: [requestId])
   requestId               String?
   status                  String?
+  user                    User?     @relation(fields: [createdBy], references: [userId])
+  createdBy               String?
   createAt                DateTime? @default(now())
   updateAt                DateTime? @default(now())
 

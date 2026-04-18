@@ -38,6 +38,7 @@ export interface IRequest {
   status?: string;
   createAt?: Date;
   updateAt?: Date;
+  createdBy?: string;
 }
 
 export interface IRequestView {
@@ -82,10 +83,11 @@ export interface IRequestView {
   status?: string;
   createAt?: Date;
   updateAt?: Date;
+  createdBy?: string;
 }
 
 // Approval-related types and interfaces
-export type ApprovalLevel = 'A' | 'B' | 'C' | 'D' | 'E';
+export type ApprovalLevel = 'A' | 'B' | 'C' | 'D';
 
 export interface IApprovalRequest {
   requestId: string;

@@ -136,7 +136,7 @@ export const fetchKpiByStrategicObjectiveId = async (
   try {
     const result = await getKpiByStrategicObjectiveId(strategicObjectiveId);
     if (!result || result.length == 0) {
-      return res.status(404).json(notFoundResponse("KPI not found"));
+      return res.status(200).json(successResponse("KPI not found", []));
     }
     res.status(200).json(successResponse("KPI found", result));
   } catch (error: any) {

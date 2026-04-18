@@ -134,6 +134,11 @@ export type LogicalFramework = $Result.DefaultSelection<Prisma.$LogicalFramework
  */
 export type Request = $Result.DefaultSelection<Prisma.$RequestPayload>
 /**
+ * Model LineItem
+ * 
+ */
+export type LineItem = $Result.DefaultSelection<Prisma.$LineItemPayload>
+/**
  * Model Retirement
  * 
  */
@@ -504,6 +509,16 @@ export class PrismaClient<
     * ```
     */
   get request(): Prisma.RequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.lineItem`: Exposes CRUD operations for the **LineItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LineItems
+    * const lineItems = await prisma.lineItem.findMany()
+    * ```
+    */
+  get lineItem(): Prisma.LineItemDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.retirement`: Exposes CRUD operations for the **Retirement** model.
@@ -982,6 +997,7 @@ export namespace Prisma {
     ActivityReport: 'ActivityReport',
     LogicalFramework: 'LogicalFramework',
     Request: 'Request',
+    LineItem: 'LineItem',
     Retirement: 'Retirement',
     Report: 'Report'
   };
@@ -999,7 +1015,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "activityReport" | "logicalFramework" | "request" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2587,6 +2603,72 @@ export namespace Prisma {
           }
         }
       }
+      LineItem: {
+        payload: Prisma.$LineItemPayload<ExtArgs>
+        fields: Prisma.LineItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LineItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LineItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          findFirst: {
+            args: Prisma.LineItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LineItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          findMany: {
+            args: Prisma.LineItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>[]
+          }
+          create: {
+            args: Prisma.LineItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          createMany: {
+            args: Prisma.LineItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.LineItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          update: {
+            args: Prisma.LineItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.LineItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LineItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LineItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LineItemPayload>
+          }
+          aggregate: {
+            args: Prisma.LineItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLineItem>
+          }
+          groupBy: {
+            args: Prisma.LineItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LineItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LineItemCountArgs<ExtArgs>
+            result: $Utils.Optional<LineItemCountAggregateOutputType> | number
+          }
+        }
+      }
       Retirement: {
         payload: Prisma.$RetirementPayload<ExtArgs>
         fields: Prisma.RetirementFieldRefs
@@ -2851,6 +2933,7 @@ export namespace Prisma {
     activityReport?: ActivityReportOmit
     logicalFramework?: LogicalFrameworkOmit
     request?: RequestOmit
+    lineItem?: LineItemOmit
     retirement?: RetirementOmit
     report?: ReportOmit
   }
@@ -2935,11 +3018,15 @@ export namespace Prisma {
   export type UserCountOutputType = {
     kpiReport: number
     partner: number
+    request: number
+    retirement: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpiReport?: boolean | UserCountOutputTypeCountKpiReportArgs
     partner?: boolean | UserCountOutputTypeCountPartnerArgs
+    request?: boolean | UserCountOutputTypeCountRequestArgs
+    retirement?: boolean | UserCountOutputTypeCountRetirementArgs
   }
 
   // Custom InputTypes
@@ -2965,6 +3052,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPartnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PartnerWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRetirementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RetirementWhereInput
   }
 
 
@@ -3508,10 +3609,12 @@ export namespace Prisma {
 
   export type RequestCountOutputType = {
     retirement: number
+    lineItem: number
   }
 
   export type RequestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     retirement?: boolean | RequestCountOutputTypeCountRetirementArgs
+    lineItem?: boolean | RequestCountOutputTypeCountLineItemArgs
   }
 
   // Custom InputTypes
@@ -3530,6 +3633,13 @@ export namespace Prisma {
    */
   export type RequestCountOutputTypeCountRetirementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RetirementWhereInput
+  }
+
+  /**
+   * RequestCountOutputType without action
+   */
+  export type RequestCountOutputTypeCountLineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LineItemWhereInput
   }
 
 
@@ -3563,6 +3673,8 @@ export namespace Prisma {
     password: string | null
     profilePic: string | null
     profilePicMimeType: string | null
+    signature: string | null
+    signatureMimeType: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
@@ -3584,6 +3696,8 @@ export namespace Prisma {
     password: string | null
     profilePic: string | null
     profilePicMimeType: string | null
+    signature: string | null
+    signatureMimeType: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
@@ -3605,6 +3719,8 @@ export namespace Prisma {
     password: number
     profilePic: number
     profilePicMimeType: number
+    signature: number
+    signatureMimeType: number
     loginLast: number
     createAt: number
     updateAt: number
@@ -3628,6 +3744,8 @@ export namespace Prisma {
     password?: true
     profilePic?: true
     profilePicMimeType?: true
+    signature?: true
+    signatureMimeType?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3649,6 +3767,8 @@ export namespace Prisma {
     password?: true
     profilePic?: true
     profilePicMimeType?: true
+    signature?: true
+    signatureMimeType?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3670,6 +3790,8 @@ export namespace Prisma {
     password?: true
     profilePic?: true
     profilePicMimeType?: true
+    signature?: true
+    signatureMimeType?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3764,6 +3886,8 @@ export namespace Prisma {
     password: string | null
     profilePic: string | null
     profilePicMimeType: string | null
+    signature: string | null
+    signatureMimeType: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
@@ -3802,12 +3926,16 @@ export namespace Prisma {
     password?: boolean
     profilePic?: boolean
     profilePicMimeType?: boolean
+    signature?: boolean
+    signatureMimeType?: boolean
     loginLast?: boolean
     createAt?: boolean
     updateAt?: boolean
     role?: boolean | User$roleArgs<ExtArgs>
     kpiReport?: boolean | User$kpiReportArgs<ExtArgs>
     partner?: boolean | User$partnerArgs<ExtArgs>
+    request?: boolean | User$requestArgs<ExtArgs>
+    retirement?: boolean | User$retirementArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3829,16 +3957,20 @@ export namespace Prisma {
     password?: boolean
     profilePic?: boolean
     profilePicMimeType?: boolean
+    signature?: boolean
+    signatureMimeType?: boolean
     loginLast?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "fullName" | "email" | "address" | "phoneNumber" | "roleId" | "status" | "assignedProjectId" | "department" | "community" | "state" | "localGovernmentArea" | "password" | "profilePic" | "profilePicMimeType" | "loginLast" | "createAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "fullName" | "email" | "address" | "phoneNumber" | "roleId" | "status" | "assignedProjectId" | "department" | "community" | "state" | "localGovernmentArea" | "password" | "profilePic" | "profilePicMimeType" | "signature" | "signatureMimeType" | "loginLast" | "createAt" | "updateAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | User$roleArgs<ExtArgs>
     kpiReport?: boolean | User$kpiReportArgs<ExtArgs>
     partner?: boolean | User$partnerArgs<ExtArgs>
+    request?: boolean | User$requestArgs<ExtArgs>
+    retirement?: boolean | User$retirementArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3848,6 +3980,8 @@ export namespace Prisma {
       role: Prisma.$RolePayload<ExtArgs> | null
       kpiReport: Prisma.$KpiReportPayload<ExtArgs>[]
       partner: Prisma.$PartnerPayload<ExtArgs>[]
+      request: Prisma.$RequestPayload<ExtArgs>[]
+      retirement: Prisma.$RetirementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       userId: string
@@ -3865,6 +3999,8 @@ export namespace Prisma {
       password: string | null
       profilePic: string | null
       profilePicMimeType: string | null
+      signature: string | null
+      signatureMimeType: string | null
       loginLast: Date | null
       createAt: Date | null
       updateAt: Date | null
@@ -4211,6 +4347,8 @@ export namespace Prisma {
     role<T extends User$roleArgs<ExtArgs> = {}>(args?: Subset<T, User$roleArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     kpiReport<T extends User$kpiReportArgs<ExtArgs> = {}>(args?: Subset<T, User$kpiReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     partner<T extends User$partnerArgs<ExtArgs> = {}>(args?: Subset<T, User$partnerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    request<T extends User$requestArgs<ExtArgs> = {}>(args?: Subset<T, User$requestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    retirement<T extends User$retirementArgs<ExtArgs> = {}>(args?: Subset<T, User$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4255,6 +4393,8 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly profilePic: FieldRef<"User", 'String'>
     readonly profilePicMimeType: FieldRef<"User", 'String'>
+    readonly signature: FieldRef<"User", 'String'>
+    readonly signatureMimeType: FieldRef<"User", 'String'>
     readonly loginLast: FieldRef<"User", 'DateTime'>
     readonly createAt: FieldRef<"User", 'DateTime'>
     readonly updateAt: FieldRef<"User", 'DateTime'>
@@ -4670,6 +4810,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PartnerScalarFieldEnum | PartnerScalarFieldEnum[]
+  }
+
+  /**
+   * User.request
+   */
+  export type User$requestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Request
+     */
+    select?: RequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Request
+     */
+    omit?: RequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RequestInclude<ExtArgs> | null
+    where?: RequestWhereInput
+    orderBy?: RequestOrderByWithRelationInput | RequestOrderByWithRelationInput[]
+    cursor?: RequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RequestScalarFieldEnum | RequestScalarFieldEnum[]
+  }
+
+  /**
+   * User.retirement
+   */
+  export type User$retirementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Retirement
+     */
+    select?: RetirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Retirement
+     */
+    omit?: RetirementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RetirementInclude<ExtArgs> | null
+    where?: RetirementWhereInput
+    orderBy?: RetirementOrderByWithRelationInput | RetirementOrderByWithRelationInput[]
+    cursor?: RetirementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RetirementScalarFieldEnum | RetirementScalarFieldEnum[]
   }
 
   /**
@@ -27832,7 +28020,6 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
-    approval_E: number | null
   }
 
   export type RequestSumAggregateOutputType = {
@@ -27846,7 +28033,6 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
-    approval_E: number | null
   }
 
   export type RequestMinAggregateOutputType = {
@@ -27880,20 +28066,18 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
-    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
-    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
-    comment_E: string | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
+    createdBy: string | null
   }
 
   export type RequestMaxAggregateOutputType = {
@@ -27927,20 +28111,18 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
-    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
-    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
-    comment_E: string | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
+    createdBy: string | null
   }
 
   export type RequestCountAggregateOutputType = {
@@ -27974,20 +28156,18 @@ export namespace Prisma {
     approval_B: number
     approval_C: number
     approval_D: number
-    approval_E: number
     approvedBy_A: number
     approvedBy_B: number
     approvedBy_C: number
     approvedBy_D: number
-    approvedBy_E: number
     comment_A: number
     comment_B: number
     comment_C: number
     comment_D: number
-    comment_E: number
     status: number
     createAt: number
     updateAt: number
+    createdBy: number
     _all: number
   }
 
@@ -28003,7 +28183,6 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
-    approval_E?: true
   }
 
   export type RequestSumAggregateInputType = {
@@ -28017,7 +28196,6 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
-    approval_E?: true
   }
 
   export type RequestMinAggregateInputType = {
@@ -28051,20 +28229,18 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
-    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
-    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
-    comment_E?: true
     status?: true
     createAt?: true
     updateAt?: true
+    createdBy?: true
   }
 
   export type RequestMaxAggregateInputType = {
@@ -28098,20 +28274,18 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
-    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
-    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
-    comment_E?: true
     status?: true
     createAt?: true
     updateAt?: true
+    createdBy?: true
   }
 
   export type RequestCountAggregateInputType = {
@@ -28145,20 +28319,18 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
-    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
-    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
-    comment_E?: true
     status?: true
     createAt?: true
     updateAt?: true
+    createdBy?: true
     _all?: true
   }
 
@@ -28279,20 +28451,18 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
-    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
-    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
-    comment_E: string | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
+    createdBy: string | null
     _count: RequestCountAggregateOutputType | null
     _avg: RequestAvgAggregateOutputType | null
     _sum: RequestSumAggregateOutputType | null
@@ -28345,23 +28515,23 @@ export namespace Prisma {
     approval_B?: boolean
     approval_C?: boolean
     approval_D?: boolean
-    approval_E?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
     approvedBy_D?: boolean
-    approvedBy_E?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
     comment_D?: boolean
-    comment_E?: boolean
     status?: boolean
     createAt?: boolean
     updateAt?: boolean
+    createdBy?: boolean
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
+    user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
+    lineItem?: boolean | Request$lineItemArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["request"]>
 
@@ -28398,27 +28568,27 @@ export namespace Prisma {
     approval_B?: boolean
     approval_C?: boolean
     approval_D?: boolean
-    approval_E?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
     approvedBy_D?: boolean
-    approvedBy_E?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
     comment_D?: boolean
-    comment_E?: boolean
     status?: boolean
     createAt?: boolean
     updateAt?: boolean
+    createdBy?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "budgetCode" | "total" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "status" | "createAt" | "updateAt", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "budgetCode" | "total" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "status" | "createAt" | "updateAt" | "createdBy", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
+    user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
+    lineItem?: boolean | Request$lineItemArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -28427,7 +28597,9 @@ export namespace Prisma {
     objects: {
       output: Prisma.$OutputPayload<ExtArgs> | null
       project: Prisma.$ProjectPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
       retirement: Prisma.$RetirementPayload<ExtArgs>[]
+      lineItem: Prisma.$LineItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       requestId: string
@@ -28460,20 +28632,18 @@ export namespace Prisma {
       approval_B: number | null
       approval_C: number | null
       approval_D: number | null
-      approval_E: number | null
       approvedBy_A: string | null
       approvedBy_B: string | null
       approvedBy_C: string | null
       approvedBy_D: string | null
-      approvedBy_E: string | null
       comment_A: string | null
       comment_B: string | null
       comment_C: string | null
       comment_D: string | null
-      comment_E: string | null
       status: string | null
       createAt: Date | null
       updateAt: Date | null
+      createdBy: string | null
     }, ExtArgs["result"]["request"]>
     composites: {}
   }
@@ -28816,7 +28986,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     output<T extends Request$outputArgs<ExtArgs> = {}>(args?: Subset<T, Request$outputArgs<ExtArgs>>): Prisma__OutputClient<$Result.GetResult<Prisma.$OutputPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     project<T extends Request$projectArgs<ExtArgs> = {}>(args?: Subset<T, Request$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Request$userArgs<ExtArgs> = {}>(args?: Subset<T, Request$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     retirement<T extends Request$retirementArgs<ExtArgs> = {}>(args?: Subset<T, Request$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lineItem<T extends Request$lineItemArgs<ExtArgs> = {}>(args?: Subset<T, Request$lineItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28876,20 +29048,18 @@ export namespace Prisma {
     readonly approval_B: FieldRef<"Request", 'Int'>
     readonly approval_C: FieldRef<"Request", 'Int'>
     readonly approval_D: FieldRef<"Request", 'Int'>
-    readonly approval_E: FieldRef<"Request", 'Int'>
     readonly approvedBy_A: FieldRef<"Request", 'String'>
     readonly approvedBy_B: FieldRef<"Request", 'String'>
     readonly approvedBy_C: FieldRef<"Request", 'String'>
     readonly approvedBy_D: FieldRef<"Request", 'String'>
-    readonly approvedBy_E: FieldRef<"Request", 'String'>
     readonly comment_A: FieldRef<"Request", 'String'>
     readonly comment_B: FieldRef<"Request", 'String'>
     readonly comment_C: FieldRef<"Request", 'String'>
     readonly comment_D: FieldRef<"Request", 'String'>
-    readonly comment_E: FieldRef<"Request", 'String'>
     readonly status: FieldRef<"Request", 'String'>
     readonly createAt: FieldRef<"Request", 'DateTime'>
     readonly updateAt: FieldRef<"Request", 'DateTime'>
+    readonly createdBy: FieldRef<"Request", 'String'>
   }
     
 
@@ -29276,6 +29446,25 @@ export namespace Prisma {
   }
 
   /**
+   * Request.user
+   */
+  export type Request$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Request.retirement
    */
   export type Request$retirementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29300,6 +29489,30 @@ export namespace Prisma {
   }
 
   /**
+   * Request.lineItem
+   */
+  export type Request$lineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    where?: LineItemWhereInput
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    cursor?: LineItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LineItemScalarFieldEnum | LineItemScalarFieldEnum[]
+  }
+
+  /**
    * Request without action
    */
   export type RequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29315,6 +29528,1030 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LineItem
+   */
+
+  export type AggregateLineItem = {
+    _count: LineItemCountAggregateOutputType | null
+    _avg: LineItemAvgAggregateOutputType | null
+    _sum: LineItemSumAggregateOutputType | null
+    _min: LineItemMinAggregateOutputType | null
+    _max: LineItemMaxAggregateOutputType | null
+  }
+
+  export type LineItemAvgAggregateOutputType = {
+    quantity: number | null
+    frequency: number | null
+    unitCost: number | null
+    total: number | null
+  }
+
+  export type LineItemSumAggregateOutputType = {
+    quantity: number | null
+    frequency: number | null
+    unitCost: number | null
+    total: number | null
+  }
+
+  export type LineItemMinAggregateOutputType = {
+    lineItemId: string | null
+    requestId: string | null
+    description: string | null
+    quantity: number | null
+    frequency: number | null
+    unitCost: number | null
+    total: number | null
+    createAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type LineItemMaxAggregateOutputType = {
+    lineItemId: string | null
+    requestId: string | null
+    description: string | null
+    quantity: number | null
+    frequency: number | null
+    unitCost: number | null
+    total: number | null
+    createAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type LineItemCountAggregateOutputType = {
+    lineItemId: number
+    requestId: number
+    description: number
+    quantity: number
+    frequency: number
+    unitCost: number
+    total: number
+    createAt: number
+    updateAt: number
+    _all: number
+  }
+
+
+  export type LineItemAvgAggregateInputType = {
+    quantity?: true
+    frequency?: true
+    unitCost?: true
+    total?: true
+  }
+
+  export type LineItemSumAggregateInputType = {
+    quantity?: true
+    frequency?: true
+    unitCost?: true
+    total?: true
+  }
+
+  export type LineItemMinAggregateInputType = {
+    lineItemId?: true
+    requestId?: true
+    description?: true
+    quantity?: true
+    frequency?: true
+    unitCost?: true
+    total?: true
+    createAt?: true
+    updateAt?: true
+  }
+
+  export type LineItemMaxAggregateInputType = {
+    lineItemId?: true
+    requestId?: true
+    description?: true
+    quantity?: true
+    frequency?: true
+    unitCost?: true
+    total?: true
+    createAt?: true
+    updateAt?: true
+  }
+
+  export type LineItemCountAggregateInputType = {
+    lineItemId?: true
+    requestId?: true
+    description?: true
+    quantity?: true
+    frequency?: true
+    unitCost?: true
+    total?: true
+    createAt?: true
+    updateAt?: true
+    _all?: true
+  }
+
+  export type LineItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LineItem to aggregate.
+     */
+    where?: LineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LineItems to fetch.
+     */
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LineItems
+    **/
+    _count?: true | LineItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LineItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LineItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LineItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LineItemMaxAggregateInputType
+  }
+
+  export type GetLineItemAggregateType<T extends LineItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateLineItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLineItem[P]>
+      : GetScalarType<T[P], AggregateLineItem[P]>
+  }
+
+
+
+
+  export type LineItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LineItemWhereInput
+    orderBy?: LineItemOrderByWithAggregationInput | LineItemOrderByWithAggregationInput[]
+    by: LineItemScalarFieldEnum[] | LineItemScalarFieldEnum
+    having?: LineItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LineItemCountAggregateInputType | true
+    _avg?: LineItemAvgAggregateInputType
+    _sum?: LineItemSumAggregateInputType
+    _min?: LineItemMinAggregateInputType
+    _max?: LineItemMaxAggregateInputType
+  }
+
+  export type LineItemGroupByOutputType = {
+    lineItemId: string
+    requestId: string
+    description: string | null
+    quantity: number | null
+    frequency: number | null
+    unitCost: number | null
+    total: number | null
+    createAt: Date | null
+    updateAt: Date | null
+    _count: LineItemCountAggregateOutputType | null
+    _avg: LineItemAvgAggregateOutputType | null
+    _sum: LineItemSumAggregateOutputType | null
+    _min: LineItemMinAggregateOutputType | null
+    _max: LineItemMaxAggregateOutputType | null
+  }
+
+  type GetLineItemGroupByPayload<T extends LineItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LineItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LineItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LineItemGroupByOutputType[P]>
+            : GetScalarType<T[P], LineItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LineItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    lineItemId?: boolean
+    requestId?: boolean
+    description?: boolean
+    quantity?: boolean
+    frequency?: boolean
+    unitCost?: boolean
+    total?: boolean
+    createAt?: boolean
+    updateAt?: boolean
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lineItem"]>
+
+
+
+  export type LineItemSelectScalar = {
+    lineItemId?: boolean
+    requestId?: boolean
+    description?: boolean
+    quantity?: boolean
+    frequency?: boolean
+    unitCost?: boolean
+    total?: boolean
+    createAt?: boolean
+    updateAt?: boolean
+  }
+
+  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "description" | "quantity" | "frequency" | "unitCost" | "total" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
+  export type LineItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }
+
+  export type $LineItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LineItem"
+    objects: {
+      request: Prisma.$RequestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      lineItemId: string
+      requestId: string
+      description: string | null
+      quantity: number | null
+      frequency: number | null
+      unitCost: number | null
+      total: number | null
+      createAt: Date | null
+      updateAt: Date | null
+    }, ExtArgs["result"]["lineItem"]>
+    composites: {}
+  }
+
+  type LineItemGetPayload<S extends boolean | null | undefined | LineItemDefaultArgs> = $Result.GetResult<Prisma.$LineItemPayload, S>
+
+  type LineItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LineItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LineItemCountAggregateInputType | true
+    }
+
+  export interface LineItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LineItem'], meta: { name: 'LineItem' } }
+    /**
+     * Find zero or one LineItem that matches the filter.
+     * @param {LineItemFindUniqueArgs} args - Arguments to find a LineItem
+     * @example
+     * // Get one LineItem
+     * const lineItem = await prisma.lineItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LineItemFindUniqueArgs>(args: SelectSubset<T, LineItemFindUniqueArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LineItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LineItemFindUniqueOrThrowArgs} args - Arguments to find a LineItem
+     * @example
+     * // Get one LineItem
+     * const lineItem = await prisma.lineItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LineItemFindUniqueOrThrowArgs>(args: SelectSubset<T, LineItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LineItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemFindFirstArgs} args - Arguments to find a LineItem
+     * @example
+     * // Get one LineItem
+     * const lineItem = await prisma.lineItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LineItemFindFirstArgs>(args?: SelectSubset<T, LineItemFindFirstArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LineItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemFindFirstOrThrowArgs} args - Arguments to find a LineItem
+     * @example
+     * // Get one LineItem
+     * const lineItem = await prisma.lineItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LineItemFindFirstOrThrowArgs>(args?: SelectSubset<T, LineItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LineItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LineItems
+     * const lineItems = await prisma.lineItem.findMany()
+     * 
+     * // Get first 10 LineItems
+     * const lineItems = await prisma.lineItem.findMany({ take: 10 })
+     * 
+     * // Only select the `lineItemId`
+     * const lineItemWithLineItemIdOnly = await prisma.lineItem.findMany({ select: { lineItemId: true } })
+     * 
+     */
+    findMany<T extends LineItemFindManyArgs>(args?: SelectSubset<T, LineItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LineItem.
+     * @param {LineItemCreateArgs} args - Arguments to create a LineItem.
+     * @example
+     * // Create one LineItem
+     * const LineItem = await prisma.lineItem.create({
+     *   data: {
+     *     // ... data to create a LineItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends LineItemCreateArgs>(args: SelectSubset<T, LineItemCreateArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LineItems.
+     * @param {LineItemCreateManyArgs} args - Arguments to create many LineItems.
+     * @example
+     * // Create many LineItems
+     * const lineItem = await prisma.lineItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LineItemCreateManyArgs>(args?: SelectSubset<T, LineItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a LineItem.
+     * @param {LineItemDeleteArgs} args - Arguments to delete one LineItem.
+     * @example
+     * // Delete one LineItem
+     * const LineItem = await prisma.lineItem.delete({
+     *   where: {
+     *     // ... filter to delete one LineItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LineItemDeleteArgs>(args: SelectSubset<T, LineItemDeleteArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LineItem.
+     * @param {LineItemUpdateArgs} args - Arguments to update one LineItem.
+     * @example
+     * // Update one LineItem
+     * const lineItem = await prisma.lineItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LineItemUpdateArgs>(args: SelectSubset<T, LineItemUpdateArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LineItems.
+     * @param {LineItemDeleteManyArgs} args - Arguments to filter LineItems to delete.
+     * @example
+     * // Delete a few LineItems
+     * const { count } = await prisma.lineItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LineItemDeleteManyArgs>(args?: SelectSubset<T, LineItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LineItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LineItems
+     * const lineItem = await prisma.lineItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LineItemUpdateManyArgs>(args: SelectSubset<T, LineItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one LineItem.
+     * @param {LineItemUpsertArgs} args - Arguments to update or create a LineItem.
+     * @example
+     * // Update or create a LineItem
+     * const lineItem = await prisma.lineItem.upsert({
+     *   create: {
+     *     // ... data to create a LineItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LineItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LineItemUpsertArgs>(args: SelectSubset<T, LineItemUpsertArgs<ExtArgs>>): Prisma__LineItemClient<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LineItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemCountArgs} args - Arguments to filter LineItems to count.
+     * @example
+     * // Count the number of LineItems
+     * const count = await prisma.lineItem.count({
+     *   where: {
+     *     // ... the filter for the LineItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends LineItemCountArgs>(
+      args?: Subset<T, LineItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LineItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LineItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LineItemAggregateArgs>(args: Subset<T, LineItemAggregateArgs>): Prisma.PrismaPromise<GetLineItemAggregateType<T>>
+
+    /**
+     * Group by LineItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LineItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LineItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LineItemGroupByArgs['orderBy'] }
+        : { orderBy?: LineItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LineItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLineItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LineItem model
+   */
+  readonly fields: LineItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LineItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LineItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    request<T extends RequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RequestDefaultArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LineItem model
+   */
+  interface LineItemFieldRefs {
+    readonly lineItemId: FieldRef<"LineItem", 'String'>
+    readonly requestId: FieldRef<"LineItem", 'String'>
+    readonly description: FieldRef<"LineItem", 'String'>
+    readonly quantity: FieldRef<"LineItem", 'Int'>
+    readonly frequency: FieldRef<"LineItem", 'Int'>
+    readonly unitCost: FieldRef<"LineItem", 'Int'>
+    readonly total: FieldRef<"LineItem", 'Int'>
+    readonly createAt: FieldRef<"LineItem", 'DateTime'>
+    readonly updateAt: FieldRef<"LineItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LineItem findUnique
+   */
+  export type LineItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LineItem to fetch.
+     */
+    where: LineItemWhereUniqueInput
+  }
+
+  /**
+   * LineItem findUniqueOrThrow
+   */
+  export type LineItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LineItem to fetch.
+     */
+    where: LineItemWhereUniqueInput
+  }
+
+  /**
+   * LineItem findFirst
+   */
+  export type LineItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LineItem to fetch.
+     */
+    where?: LineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LineItems to fetch.
+     */
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LineItems.
+     */
+    cursor?: LineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LineItems.
+     */
+    distinct?: LineItemScalarFieldEnum | LineItemScalarFieldEnum[]
+  }
+
+  /**
+   * LineItem findFirstOrThrow
+   */
+  export type LineItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LineItem to fetch.
+     */
+    where?: LineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LineItems to fetch.
+     */
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LineItems.
+     */
+    cursor?: LineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LineItems.
+     */
+    distinct?: LineItemScalarFieldEnum | LineItemScalarFieldEnum[]
+  }
+
+  /**
+   * LineItem findMany
+   */
+  export type LineItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LineItems to fetch.
+     */
+    where?: LineItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LineItems to fetch.
+     */
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LineItems.
+     */
+    cursor?: LineItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LineItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LineItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LineItems.
+     */
+    distinct?: LineItemScalarFieldEnum | LineItemScalarFieldEnum[]
+  }
+
+  /**
+   * LineItem create
+   */
+  export type LineItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LineItem.
+     */
+    data: XOR<LineItemCreateInput, LineItemUncheckedCreateInput>
+  }
+
+  /**
+   * LineItem createMany
+   */
+  export type LineItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LineItems.
+     */
+    data: LineItemCreateManyInput | LineItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LineItem update
+   */
+  export type LineItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LineItem.
+     */
+    data: XOR<LineItemUpdateInput, LineItemUncheckedUpdateInput>
+    /**
+     * Choose, which LineItem to update.
+     */
+    where: LineItemWhereUniqueInput
+  }
+
+  /**
+   * LineItem updateMany
+   */
+  export type LineItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LineItems.
+     */
+    data: XOR<LineItemUpdateManyMutationInput, LineItemUncheckedUpdateManyInput>
+    /**
+     * Filter which LineItems to update
+     */
+    where?: LineItemWhereInput
+    /**
+     * Limit how many LineItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LineItem upsert
+   */
+  export type LineItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LineItem to update in case it exists.
+     */
+    where: LineItemWhereUniqueInput
+    /**
+     * In case the LineItem found by the `where` argument doesn't exist, create a new LineItem with this data.
+     */
+    create: XOR<LineItemCreateInput, LineItemUncheckedCreateInput>
+    /**
+     * In case the LineItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LineItemUpdateInput, LineItemUncheckedUpdateInput>
+  }
+
+  /**
+   * LineItem delete
+   */
+  export type LineItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    /**
+     * Filter which LineItem to delete.
+     */
+    where: LineItemWhereUniqueInput
+  }
+
+  /**
+   * LineItem deleteMany
+   */
+  export type LineItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LineItems to delete
+     */
+    where?: LineItemWhereInput
+    /**
+     * Limit how many LineItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LineItem without action
+   */
+  export type LineItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
   }
 
 
@@ -29336,6 +30573,10 @@ export namespace Prisma {
     unitCost: number | null
     actualCost: number | null
     totalBudget: number | null
+    approval_A: number | null
+    approval_B: number | null
+    approval_C: number | null
+    approval_D: number | null
   }
 
   export type RetirementSumAggregateOutputType = {
@@ -29344,6 +30585,10 @@ export namespace Prisma {
     unitCost: number | null
     actualCost: number | null
     totalBudget: number | null
+    approval_A: number | null
+    approval_B: number | null
+    approval_C: number | null
+    approval_D: number | null
   }
 
   export type RetirementMinAggregateOutputType = {
@@ -29356,8 +30601,21 @@ export namespace Prisma {
     totalBudget: number | null
     documentName: string | null
     documentURL: string | null
+    approval_A: number | null
+    approval_B: number | null
+    approval_C: number | null
+    approval_D: number | null
+    approvedBy_A: string | null
+    approvedBy_B: string | null
+    approvedBy_C: string | null
+    approvedBy_D: string | null
+    comment_A: string | null
+    comment_B: string | null
+    comment_C: string | null
+    comment_D: string | null
     requestId: string | null
     status: string | null
+    createdBy: string | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -29372,8 +30630,21 @@ export namespace Prisma {
     totalBudget: number | null
     documentName: string | null
     documentURL: string | null
+    approval_A: number | null
+    approval_B: number | null
+    approval_C: number | null
+    approval_D: number | null
+    approvedBy_A: string | null
+    approvedBy_B: string | null
+    approvedBy_C: string | null
+    approvedBy_D: string | null
+    comment_A: string | null
+    comment_B: string | null
+    comment_C: string | null
+    comment_D: string | null
     requestId: string | null
     status: string | null
+    createdBy: string | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -29388,8 +30659,21 @@ export namespace Prisma {
     totalBudget: number
     documentName: number
     documentURL: number
+    approval_A: number
+    approval_B: number
+    approval_C: number
+    approval_D: number
+    approvedBy_A: number
+    approvedBy_B: number
+    approvedBy_C: number
+    approvedBy_D: number
+    comment_A: number
+    comment_B: number
+    comment_C: number
+    comment_D: number
     requestId: number
     status: number
+    createdBy: number
     createAt: number
     updateAt: number
     _all: number
@@ -29402,6 +30686,10 @@ export namespace Prisma {
     unitCost?: true
     actualCost?: true
     totalBudget?: true
+    approval_A?: true
+    approval_B?: true
+    approval_C?: true
+    approval_D?: true
   }
 
   export type RetirementSumAggregateInputType = {
@@ -29410,6 +30698,10 @@ export namespace Prisma {
     unitCost?: true
     actualCost?: true
     totalBudget?: true
+    approval_A?: true
+    approval_B?: true
+    approval_C?: true
+    approval_D?: true
   }
 
   export type RetirementMinAggregateInputType = {
@@ -29422,8 +30714,21 @@ export namespace Prisma {
     totalBudget?: true
     documentName?: true
     documentURL?: true
+    approval_A?: true
+    approval_B?: true
+    approval_C?: true
+    approval_D?: true
+    approvedBy_A?: true
+    approvedBy_B?: true
+    approvedBy_C?: true
+    approvedBy_D?: true
+    comment_A?: true
+    comment_B?: true
+    comment_C?: true
+    comment_D?: true
     requestId?: true
     status?: true
+    createdBy?: true
     createAt?: true
     updateAt?: true
   }
@@ -29438,8 +30743,21 @@ export namespace Prisma {
     totalBudget?: true
     documentName?: true
     documentURL?: true
+    approval_A?: true
+    approval_B?: true
+    approval_C?: true
+    approval_D?: true
+    approvedBy_A?: true
+    approvedBy_B?: true
+    approvedBy_C?: true
+    approvedBy_D?: true
+    comment_A?: true
+    comment_B?: true
+    comment_C?: true
+    comment_D?: true
     requestId?: true
     status?: true
+    createdBy?: true
     createAt?: true
     updateAt?: true
   }
@@ -29454,8 +30772,21 @@ export namespace Prisma {
     totalBudget?: true
     documentName?: true
     documentURL?: true
+    approval_A?: true
+    approval_B?: true
+    approval_C?: true
+    approval_D?: true
+    approvedBy_A?: true
+    approvedBy_B?: true
+    approvedBy_C?: true
+    approvedBy_D?: true
+    comment_A?: true
+    comment_B?: true
+    comment_C?: true
+    comment_D?: true
     requestId?: true
     status?: true
+    createdBy?: true
     createAt?: true
     updateAt?: true
     _all?: true
@@ -29557,8 +30888,21 @@ export namespace Prisma {
     totalBudget: number | null
     documentName: string | null
     documentURL: string | null
+    approval_A: number | null
+    approval_B: number | null
+    approval_C: number | null
+    approval_D: number | null
+    approvedBy_A: string | null
+    approvedBy_B: string | null
+    approvedBy_C: string | null
+    approvedBy_D: string | null
+    comment_A: string | null
+    comment_B: string | null
+    comment_C: string | null
+    comment_D: string | null
     requestId: string | null
     status: string | null
+    createdBy: string | null
     createAt: Date | null
     updateAt: Date | null
     _count: RetirementCountAggregateOutputType | null
@@ -29592,11 +30936,25 @@ export namespace Prisma {
     totalBudget?: boolean
     documentName?: boolean
     documentURL?: boolean
+    approval_A?: boolean
+    approval_B?: boolean
+    approval_C?: boolean
+    approval_D?: boolean
+    approvedBy_A?: boolean
+    approvedBy_B?: boolean
+    approvedBy_C?: boolean
+    approvedBy_D?: boolean
+    comment_A?: boolean
+    comment_B?: boolean
+    comment_C?: boolean
+    comment_D?: boolean
     requestId?: boolean
     status?: boolean
+    createdBy?: boolean
     createAt?: boolean
     updateAt?: boolean
     request?: boolean | Retirement$requestArgs<ExtArgs>
+    user?: boolean | Retirement$userArgs<ExtArgs>
   }, ExtArgs["result"]["retirement"]>
 
 
@@ -29611,21 +30969,36 @@ export namespace Prisma {
     totalBudget?: boolean
     documentName?: boolean
     documentURL?: boolean
+    approval_A?: boolean
+    approval_B?: boolean
+    approval_C?: boolean
+    approval_D?: boolean
+    approvedBy_A?: boolean
+    approvedBy_B?: boolean
+    approvedBy_C?: boolean
+    approvedBy_D?: boolean
+    comment_A?: boolean
+    comment_B?: boolean
+    comment_C?: boolean
+    comment_D?: boolean
     requestId?: boolean
     status?: boolean
+    createdBy?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "requestId" | "status" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
+  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
   export type RetirementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | Retirement$requestArgs<ExtArgs>
+    user?: boolean | Retirement$userArgs<ExtArgs>
   }
 
   export type $RetirementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Retirement"
     objects: {
       request: Prisma.$RequestPayload<ExtArgs> | null
+      user: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       retirementId: string
@@ -29637,8 +31010,21 @@ export namespace Prisma {
       totalBudget: number | null
       documentName: string | null
       documentURL: string | null
+      approval_A: number | null
+      approval_B: number | null
+      approval_C: number | null
+      approval_D: number | null
+      approvedBy_A: string | null
+      approvedBy_B: string | null
+      approvedBy_C: string | null
+      approvedBy_D: string | null
+      comment_A: string | null
+      comment_B: string | null
+      comment_C: string | null
+      comment_D: string | null
       requestId: string | null
       status: string | null
+      createdBy: string | null
       createAt: Date | null
       updateAt: Date | null
     }, ExtArgs["result"]["retirement"]>
@@ -29982,6 +31368,7 @@ export namespace Prisma {
   export interface Prisma__RetirementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     request<T extends Retirement$requestArgs<ExtArgs> = {}>(args?: Subset<T, Retirement$requestArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    user<T extends Retirement$userArgs<ExtArgs> = {}>(args?: Subset<T, Retirement$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30020,8 +31407,21 @@ export namespace Prisma {
     readonly totalBudget: FieldRef<"Retirement", 'Int'>
     readonly documentName: FieldRef<"Retirement", 'String'>
     readonly documentURL: FieldRef<"Retirement", 'String'>
+    readonly approval_A: FieldRef<"Retirement", 'Int'>
+    readonly approval_B: FieldRef<"Retirement", 'Int'>
+    readonly approval_C: FieldRef<"Retirement", 'Int'>
+    readonly approval_D: FieldRef<"Retirement", 'Int'>
+    readonly approvedBy_A: FieldRef<"Retirement", 'String'>
+    readonly approvedBy_B: FieldRef<"Retirement", 'String'>
+    readonly approvedBy_C: FieldRef<"Retirement", 'String'>
+    readonly approvedBy_D: FieldRef<"Retirement", 'String'>
+    readonly comment_A: FieldRef<"Retirement", 'String'>
+    readonly comment_B: FieldRef<"Retirement", 'String'>
+    readonly comment_C: FieldRef<"Retirement", 'String'>
+    readonly comment_D: FieldRef<"Retirement", 'String'>
     readonly requestId: FieldRef<"Retirement", 'String'>
     readonly status: FieldRef<"Retirement", 'String'>
+    readonly createdBy: FieldRef<"Retirement", 'String'>
     readonly createAt: FieldRef<"Retirement", 'DateTime'>
     readonly updateAt: FieldRef<"Retirement", 'DateTime'>
   }
@@ -30388,6 +31788,25 @@ export namespace Prisma {
      */
     include?: RequestInclude<ExtArgs> | null
     where?: RequestWhereInput
+  }
+
+  /**
+   * Retirement.user
+   */
+  export type Retirement$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -31574,6 +32993,8 @@ export namespace Prisma {
     password: 'password',
     profilePic: 'profilePic',
     profilePicMimeType: 'profilePicMimeType',
+    signature: 'signature',
+    signatureMimeType: 'signatureMimeType',
     loginLast: 'loginLast',
     createAt: 'createAt',
     updateAt: 'updateAt'
@@ -31950,23 +33371,36 @@ export namespace Prisma {
     approval_B: 'approval_B',
     approval_C: 'approval_C',
     approval_D: 'approval_D',
-    approval_E: 'approval_E',
     approvedBy_A: 'approvedBy_A',
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
     approvedBy_D: 'approvedBy_D',
-    approvedBy_E: 'approvedBy_E',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
     comment_D: 'comment_D',
-    comment_E: 'comment_E',
     status: 'status',
+    createAt: 'createAt',
+    updateAt: 'updateAt',
+    createdBy: 'createdBy'
+  };
+
+  export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
+
+
+  export const LineItemScalarFieldEnum: {
+    lineItemId: 'lineItemId',
+    requestId: 'requestId',
+    description: 'description',
+    quantity: 'quantity',
+    frequency: 'frequency',
+    unitCost: 'unitCost',
+    total: 'total',
     createAt: 'createAt',
     updateAt: 'updateAt'
   };
 
-  export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
+  export type LineItemScalarFieldEnum = (typeof LineItemScalarFieldEnum)[keyof typeof LineItemScalarFieldEnum]
 
 
   export const RetirementScalarFieldEnum: {
@@ -31979,8 +33413,21 @@ export namespace Prisma {
     totalBudget: 'totalBudget',
     documentName: 'documentName',
     documentURL: 'documentURL',
+    approval_A: 'approval_A',
+    approval_B: 'approval_B',
+    approval_C: 'approval_C',
+    approval_D: 'approval_D',
+    approvedBy_A: 'approvedBy_A',
+    approvedBy_B: 'approvedBy_B',
+    approvedBy_C: 'approvedBy_C',
+    approvedBy_D: 'approvedBy_D',
+    comment_A: 'comment_A',
+    comment_B: 'comment_B',
+    comment_C: 'comment_C',
+    comment_D: 'comment_D',
     requestId: 'requestId',
     status: 'status',
+    createdBy: 'createdBy',
     createAt: 'createAt',
     updateAt: 'updateAt'
   };
@@ -32042,7 +33489,9 @@ export namespace Prisma {
     localGovernmentArea: 'localGovernmentArea',
     password: 'password',
     profilePic: 'profilePic',
-    profilePicMimeType: 'profilePicMimeType'
+    profilePicMimeType: 'profilePicMimeType',
+    signature: 'signature',
+    signatureMimeType: 'signatureMimeType'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -32348,16 +33797,24 @@ export namespace Prisma {
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
     approvedBy_D: 'approvedBy_D',
-    approvedBy_E: 'approvedBy_E',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
     comment_D: 'comment_D',
-    comment_E: 'comment_E',
-    status: 'status'
+    status: 'status',
+    createdBy: 'createdBy'
   };
 
   export type RequestOrderByRelevanceFieldEnum = (typeof RequestOrderByRelevanceFieldEnum)[keyof typeof RequestOrderByRelevanceFieldEnum]
+
+
+  export const LineItemOrderByRelevanceFieldEnum: {
+    lineItemId: 'lineItemId',
+    requestId: 'requestId',
+    description: 'description'
+  };
+
+  export type LineItemOrderByRelevanceFieldEnum = (typeof LineItemOrderByRelevanceFieldEnum)[keyof typeof LineItemOrderByRelevanceFieldEnum]
 
 
   export const RetirementOrderByRelevanceFieldEnum: {
@@ -32365,8 +33822,17 @@ export namespace Prisma {
     activityLineDescription: 'activityLineDescription',
     documentName: 'documentName',
     documentURL: 'documentURL',
+    approvedBy_A: 'approvedBy_A',
+    approvedBy_B: 'approvedBy_B',
+    approvedBy_C: 'approvedBy_C',
+    approvedBy_D: 'approvedBy_D',
+    comment_A: 'comment_A',
+    comment_B: 'comment_B',
+    comment_C: 'comment_C',
+    comment_D: 'comment_D',
     requestId: 'requestId',
-    status: 'status'
+    status: 'status',
+    createdBy: 'createdBy'
   };
 
   export type RetirementOrderByRelevanceFieldEnum = (typeof RetirementOrderByRelevanceFieldEnum)[keyof typeof RetirementOrderByRelevanceFieldEnum]
@@ -32448,12 +33914,16 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     profilePic?: StringNullableFilter<"User"> | string | null
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
+    signature?: StringNullableFilter<"User"> | string | null
+    signatureMimeType?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: XOR<RoleNullableScalarRelationFilter, RoleWhereInput> | null
     kpiReport?: KpiReportListRelationFilter
     partner?: PartnerListRelationFilter
+    request?: RequestListRelationFilter
+    retirement?: RetirementListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -32472,12 +33942,16 @@ export namespace Prisma {
     password?: SortOrderInput | SortOrder
     profilePic?: SortOrderInput | SortOrder
     profilePicMimeType?: SortOrderInput | SortOrder
+    signature?: SortOrderInput | SortOrder
+    signatureMimeType?: SortOrderInput | SortOrder
     loginLast?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     role?: RoleOrderByWithRelationInput
     kpiReport?: KpiReportOrderByRelationAggregateInput
     partner?: PartnerOrderByRelationAggregateInput
+    request?: RequestOrderByRelationAggregateInput
+    retirement?: RetirementOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -32500,12 +33974,16 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     profilePic?: StringNullableFilter<"User"> | string | null
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
+    signature?: StringNullableFilter<"User"> | string | null
+    signatureMimeType?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: XOR<RoleNullableScalarRelationFilter, RoleWhereInput> | null
     kpiReport?: KpiReportListRelationFilter
     partner?: PartnerListRelationFilter
+    request?: RequestListRelationFilter
+    retirement?: RetirementListRelationFilter
   }, "userId" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -32524,6 +34002,8 @@ export namespace Prisma {
     password?: SortOrderInput | SortOrder
     profilePic?: SortOrderInput | SortOrder
     profilePicMimeType?: SortOrderInput | SortOrder
+    signature?: SortOrderInput | SortOrder
+    signatureMimeType?: SortOrderInput | SortOrder
     loginLast?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
@@ -32551,6 +34031,8 @@ export namespace Prisma {
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     profilePic?: StringNullableWithAggregatesFilter<"User"> | string | null
     profilePicMimeType?: StringNullableWithAggregatesFilter<"User"> | string | null
+    signature?: StringNullableWithAggregatesFilter<"User"> | string | null
+    signatureMimeType?: StringNullableWithAggregatesFilter<"User"> | string | null
     loginLast?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -34417,23 +35899,23 @@ export namespace Prisma {
     approval_B?: IntNullableFilter<"Request"> | number | null
     approval_C?: IntNullableFilter<"Request"> | number | null
     approval_D?: IntNullableFilter<"Request"> | number | null
-    approval_E?: IntNullableFilter<"Request"> | number | null
     approvedBy_A?: StringNullableFilter<"Request"> | string | null
     approvedBy_B?: StringNullableFilter<"Request"> | string | null
     approvedBy_C?: StringNullableFilter<"Request"> | string | null
     approvedBy_D?: StringNullableFilter<"Request"> | string | null
-    approvedBy_E?: StringNullableFilter<"Request"> | string | null
     comment_A?: StringNullableFilter<"Request"> | string | null
     comment_B?: StringNullableFilter<"Request"> | string | null
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
-    comment_E?: StringNullableFilter<"Request"> | string | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
+    createdBy?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
+    lineItem?: LineItemListRelationFilter
   }
 
   export type RequestOrderByWithRelationInput = {
@@ -34467,23 +35949,23 @@ export namespace Prisma {
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
     approval_D?: SortOrderInput | SortOrder
-    approval_E?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
     approvedBy_D?: SortOrderInput | SortOrder
-    approvedBy_E?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
-    comment_E?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
     output?: OutputOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     retirement?: RetirementOrderByRelationAggregateInput
+    lineItem?: LineItemOrderByRelationAggregateInput
     _relevance?: RequestOrderByRelevanceInput
   }
 
@@ -34521,23 +36003,23 @@ export namespace Prisma {
     approval_B?: IntNullableFilter<"Request"> | number | null
     approval_C?: IntNullableFilter<"Request"> | number | null
     approval_D?: IntNullableFilter<"Request"> | number | null
-    approval_E?: IntNullableFilter<"Request"> | number | null
     approvedBy_A?: StringNullableFilter<"Request"> | string | null
     approvedBy_B?: StringNullableFilter<"Request"> | string | null
     approvedBy_C?: StringNullableFilter<"Request"> | string | null
     approvedBy_D?: StringNullableFilter<"Request"> | string | null
-    approvedBy_E?: StringNullableFilter<"Request"> | string | null
     comment_A?: StringNullableFilter<"Request"> | string | null
     comment_B?: StringNullableFilter<"Request"> | string | null
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
-    comment_E?: StringNullableFilter<"Request"> | string | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
+    createdBy?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
+    lineItem?: LineItemListRelationFilter
   }, "requestId">
 
   export type RequestOrderByWithAggregationInput = {
@@ -34571,20 +36053,18 @@ export namespace Prisma {
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
     approval_D?: SortOrderInput | SortOrder
-    approval_E?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
     approvedBy_D?: SortOrderInput | SortOrder
-    approvedBy_E?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
-    comment_E?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
     _count?: RequestCountOrderByAggregateInput
     _avg?: RequestAvgOrderByAggregateInput
     _max?: RequestMaxOrderByAggregateInput
@@ -34626,20 +36106,96 @@ export namespace Prisma {
     approval_B?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approval_C?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approval_D?: IntNullableWithAggregatesFilter<"Request"> | number | null
-    approval_E?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approvedBy_A?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_B?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_C?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_D?: StringNullableWithAggregatesFilter<"Request"> | string | null
-    approvedBy_E?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_A?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_B?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_C?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_D?: StringNullableWithAggregatesFilter<"Request"> | string | null
-    comment_E?: StringNullableWithAggregatesFilter<"Request"> | string | null
     status?: StringNullableWithAggregatesFilter<"Request"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    createdBy?: StringNullableWithAggregatesFilter<"Request"> | string | null
+  }
+
+  export type LineItemWhereInput = {
+    AND?: LineItemWhereInput | LineItemWhereInput[]
+    OR?: LineItemWhereInput[]
+    NOT?: LineItemWhereInput | LineItemWhereInput[]
+    lineItemId?: StringFilter<"LineItem"> | string
+    requestId?: StringFilter<"LineItem"> | string
+    description?: StringNullableFilter<"LineItem"> | string | null
+    quantity?: IntNullableFilter<"LineItem"> | number | null
+    frequency?: IntNullableFilter<"LineItem"> | number | null
+    unitCost?: IntNullableFilter<"LineItem"> | number | null
+    total?: IntNullableFilter<"LineItem"> | number | null
+    createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }
+
+  export type LineItemOrderByWithRelationInput = {
+    lineItemId?: SortOrder
+    requestId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    quantity?: SortOrderInput | SortOrder
+    frequency?: SortOrderInput | SortOrder
+    unitCost?: SortOrderInput | SortOrder
+    total?: SortOrderInput | SortOrder
+    createAt?: SortOrderInput | SortOrder
+    updateAt?: SortOrderInput | SortOrder
+    request?: RequestOrderByWithRelationInput
+    _relevance?: LineItemOrderByRelevanceInput
+  }
+
+  export type LineItemWhereUniqueInput = Prisma.AtLeast<{
+    lineItemId?: string
+    AND?: LineItemWhereInput | LineItemWhereInput[]
+    OR?: LineItemWhereInput[]
+    NOT?: LineItemWhereInput | LineItemWhereInput[]
+    requestId?: StringFilter<"LineItem"> | string
+    description?: StringNullableFilter<"LineItem"> | string | null
+    quantity?: IntNullableFilter<"LineItem"> | number | null
+    frequency?: IntNullableFilter<"LineItem"> | number | null
+    unitCost?: IntNullableFilter<"LineItem"> | number | null
+    total?: IntNullableFilter<"LineItem"> | number | null
+    createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }, "lineItemId">
+
+  export type LineItemOrderByWithAggregationInput = {
+    lineItemId?: SortOrder
+    requestId?: SortOrder
+    description?: SortOrderInput | SortOrder
+    quantity?: SortOrderInput | SortOrder
+    frequency?: SortOrderInput | SortOrder
+    unitCost?: SortOrderInput | SortOrder
+    total?: SortOrderInput | SortOrder
+    createAt?: SortOrderInput | SortOrder
+    updateAt?: SortOrderInput | SortOrder
+    _count?: LineItemCountOrderByAggregateInput
+    _avg?: LineItemAvgOrderByAggregateInput
+    _max?: LineItemMaxOrderByAggregateInput
+    _min?: LineItemMinOrderByAggregateInput
+    _sum?: LineItemSumOrderByAggregateInput
+  }
+
+  export type LineItemScalarWhereWithAggregatesInput = {
+    AND?: LineItemScalarWhereWithAggregatesInput | LineItemScalarWhereWithAggregatesInput[]
+    OR?: LineItemScalarWhereWithAggregatesInput[]
+    NOT?: LineItemScalarWhereWithAggregatesInput | LineItemScalarWhereWithAggregatesInput[]
+    lineItemId?: StringWithAggregatesFilter<"LineItem"> | string
+    requestId?: StringWithAggregatesFilter<"LineItem"> | string
+    description?: StringNullableWithAggregatesFilter<"LineItem"> | string | null
+    quantity?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    frequency?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    unitCost?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    total?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    createAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
+    updateAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
   }
 
   export type RetirementWhereInput = {
@@ -34655,11 +36211,25 @@ export namespace Prisma {
     totalBudget?: IntNullableFilter<"Retirement"> | number | null
     documentName?: StringNullableFilter<"Retirement"> | string | null
     documentURL?: StringNullableFilter<"Retirement"> | string | null
+    approval_A?: IntNullableFilter<"Retirement"> | number | null
+    approval_B?: IntNullableFilter<"Retirement"> | number | null
+    approval_C?: IntNullableFilter<"Retirement"> | number | null
+    approval_D?: IntNullableFilter<"Retirement"> | number | null
+    approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
+    comment_A?: StringNullableFilter<"Retirement"> | string | null
+    comment_B?: StringNullableFilter<"Retirement"> | string | null
+    comment_C?: StringNullableFilter<"Retirement"> | string | null
+    comment_D?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
+    createdBy?: StringNullableFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     request?: XOR<RequestNullableScalarRelationFilter, RequestWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type RetirementOrderByWithRelationInput = {
@@ -34672,11 +36242,25 @@ export namespace Prisma {
     totalBudget?: SortOrderInput | SortOrder
     documentName?: SortOrderInput | SortOrder
     documentURL?: SortOrderInput | SortOrder
+    approval_A?: SortOrderInput | SortOrder
+    approval_B?: SortOrderInput | SortOrder
+    approval_C?: SortOrderInput | SortOrder
+    approval_D?: SortOrderInput | SortOrder
+    approvedBy_A?: SortOrderInput | SortOrder
+    approvedBy_B?: SortOrderInput | SortOrder
+    approvedBy_C?: SortOrderInput | SortOrder
+    approvedBy_D?: SortOrderInput | SortOrder
+    comment_A?: SortOrderInput | SortOrder
+    comment_B?: SortOrderInput | SortOrder
+    comment_C?: SortOrderInput | SortOrder
+    comment_D?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     request?: RequestOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     _relevance?: RetirementOrderByRelevanceInput
   }
 
@@ -34693,11 +36277,25 @@ export namespace Prisma {
     totalBudget?: IntNullableFilter<"Retirement"> | number | null
     documentName?: StringNullableFilter<"Retirement"> | string | null
     documentURL?: StringNullableFilter<"Retirement"> | string | null
+    approval_A?: IntNullableFilter<"Retirement"> | number | null
+    approval_B?: IntNullableFilter<"Retirement"> | number | null
+    approval_C?: IntNullableFilter<"Retirement"> | number | null
+    approval_D?: IntNullableFilter<"Retirement"> | number | null
+    approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
+    comment_A?: StringNullableFilter<"Retirement"> | string | null
+    comment_B?: StringNullableFilter<"Retirement"> | string | null
+    comment_C?: StringNullableFilter<"Retirement"> | string | null
+    comment_D?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
+    createdBy?: StringNullableFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     request?: XOR<RequestNullableScalarRelationFilter, RequestWhereInput> | null
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "retirementId">
 
   export type RetirementOrderByWithAggregationInput = {
@@ -34710,8 +36308,21 @@ export namespace Prisma {
     totalBudget?: SortOrderInput | SortOrder
     documentName?: SortOrderInput | SortOrder
     documentURL?: SortOrderInput | SortOrder
+    approval_A?: SortOrderInput | SortOrder
+    approval_B?: SortOrderInput | SortOrder
+    approval_C?: SortOrderInput | SortOrder
+    approval_D?: SortOrderInput | SortOrder
+    approvedBy_A?: SortOrderInput | SortOrder
+    approvedBy_B?: SortOrderInput | SortOrder
+    approvedBy_C?: SortOrderInput | SortOrder
+    approvedBy_D?: SortOrderInput | SortOrder
+    comment_A?: SortOrderInput | SortOrder
+    comment_B?: SortOrderInput | SortOrder
+    comment_C?: SortOrderInput | SortOrder
+    comment_D?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
+    createdBy?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: RetirementCountOrderByAggregateInput
@@ -34734,8 +36345,21 @@ export namespace Prisma {
     totalBudget?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
     documentName?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     documentURL?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approval_A?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
+    approval_B?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
+    approval_C?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
+    approval_D?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
+    approvedBy_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approvedBy_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approvedBy_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approvedBy_D?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    comment_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    comment_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    comment_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    comment_D?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     requestId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     status?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    createdBy?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
   }
@@ -34873,12 +36497,16 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
     kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
+    request?: RequestCreateNestedManyWithoutUserInput
+    retirement?: RetirementCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -34897,11 +36525,15 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
+    request?: RequestUncheckedCreateNestedManyWithoutUserInput
+    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -34919,12 +36551,16 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
     kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
+    request?: RequestUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -34943,11 +36579,15 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
+    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -34966,6 +36606,8 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -34986,6 +36628,8 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35007,6 +36651,8 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37030,23 +38676,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateInput = {
@@ -37080,21 +38725,20 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUpdateInput = {
@@ -37126,23 +38770,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateInput = {
@@ -37176,21 +38819,20 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateManyInput = {
@@ -37224,20 +38866,18 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
   }
 
   export type RequestUpdateManyMutationInput = {
@@ -37269,17 +38909,14 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37316,18 +38953,99 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LineItemCreateInput = {
+    lineItemId?: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    request: RequestCreateNestedOneWithoutLineItemInput
+  }
+
+  export type LineItemUncheckedCreateInput = {
+    lineItemId?: string
+    requestId: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemUpdateInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    request?: RequestUpdateOneRequiredWithoutLineItemNestedInput
+  }
+
+  export type LineItemUncheckedUpdateInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemCreateManyInput = {
+    lineItemId?: string
+    requestId: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemUpdateManyMutationInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemUncheckedUpdateManyInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -37342,10 +39060,23 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     request?: RequestCreateNestedOneWithoutRetirementInput
+    user?: UserCreateNestedOneWithoutRetirementInput
   }
 
   export type RetirementUncheckedCreateInput = {
@@ -37358,8 +39089,21 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     requestId?: string | null
     status?: string | null
+    createdBy?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -37374,10 +39118,23 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     request?: RequestUpdateOneWithoutRetirementNestedInput
+    user?: UserUpdateOneWithoutRetirementNestedInput
   }
 
   export type RetirementUncheckedUpdateInput = {
@@ -37390,8 +39147,21 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -37406,8 +39176,21 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     requestId?: string | null
     status?: string | null
+    createdBy?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -37422,6 +39205,18 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37437,8 +39232,21 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -37640,6 +39448,18 @@ export namespace Prisma {
     none?: PartnerWhereInput
   }
 
+  export type RequestListRelationFilter = {
+    every?: RequestWhereInput
+    some?: RequestWhereInput
+    none?: RequestWhereInput
+  }
+
+  export type RetirementListRelationFilter = {
+    every?: RetirementWhereInput
+    some?: RetirementWhereInput
+    none?: RetirementWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -37650,6 +39470,14 @@ export namespace Prisma {
   }
 
   export type PartnerOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RetirementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -37675,6 +39503,8 @@ export namespace Prisma {
     password?: SortOrder
     profilePic?: SortOrder
     profilePicMimeType?: SortOrder
+    signature?: SortOrder
+    signatureMimeType?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -37696,6 +39526,8 @@ export namespace Prisma {
     password?: SortOrder
     profilePic?: SortOrder
     profilePicMimeType?: SortOrder
+    signature?: SortOrder
+    signatureMimeType?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -37717,6 +39549,8 @@ export namespace Prisma {
     password?: SortOrder
     profilePic?: SortOrder
     profilePicMimeType?: SortOrder
+    signature?: SortOrder
+    signatureMimeType?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -38257,12 +40091,6 @@ export namespace Prisma {
     none?: LogicalFrameworkWhereInput
   }
 
-  export type RequestListRelationFilter = {
-    every?: RequestWhereInput
-    some?: RequestWhereInput
-    none?: RequestWhereInput
-  }
-
   export type ReportListRelationFilter = {
     every?: ReportWhereInput
     some?: ReportWhereInput
@@ -38290,10 +40118,6 @@ export namespace Prisma {
   }
 
   export type LogicalFrameworkOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39100,13 +40924,13 @@ export namespace Prisma {
     updateAt?: SortOrder
   }
 
-  export type RetirementListRelationFilter = {
-    every?: RetirementWhereInput
-    some?: RetirementWhereInput
-    none?: RetirementWhereInput
+  export type LineItemListRelationFilter = {
+    every?: LineItemWhereInput
+    some?: LineItemWhereInput
+    none?: LineItemWhereInput
   }
 
-  export type RetirementOrderByRelationAggregateInput = {
+  export type LineItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -39147,20 +40971,18 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
-    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
-    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
-    comment_E?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+    createdBy?: SortOrder
   }
 
   export type RequestAvgOrderByAggregateInput = {
@@ -39174,7 +40996,6 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
-    approval_E?: SortOrder
   }
 
   export type RequestMaxOrderByAggregateInput = {
@@ -39208,20 +41029,18 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
-    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
-    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
-    comment_E?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+    createdBy?: SortOrder
   }
 
   export type RequestMinOrderByAggregateInput = {
@@ -39255,20 +41074,18 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
-    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
-    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
-    comment_E?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+    createdBy?: SortOrder
   }
 
   export type RequestSumOrderByAggregateInput = {
@@ -39282,7 +41099,67 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
-    approval_E?: SortOrder
+  }
+
+  export type RequestScalarRelationFilter = {
+    is?: RequestWhereInput
+    isNot?: RequestWhereInput
+  }
+
+  export type LineItemOrderByRelevanceInput = {
+    fields: LineItemOrderByRelevanceFieldEnum | LineItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type LineItemCountOrderByAggregateInput = {
+    lineItemId?: SortOrder
+    requestId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    frequency?: SortOrder
+    unitCost?: SortOrder
+    total?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type LineItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    frequency?: SortOrder
+    unitCost?: SortOrder
+    total?: SortOrder
+  }
+
+  export type LineItemMaxOrderByAggregateInput = {
+    lineItemId?: SortOrder
+    requestId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    frequency?: SortOrder
+    unitCost?: SortOrder
+    total?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type LineItemMinOrderByAggregateInput = {
+    lineItemId?: SortOrder
+    requestId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    frequency?: SortOrder
+    unitCost?: SortOrder
+    total?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type LineItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    frequency?: SortOrder
+    unitCost?: SortOrder
+    total?: SortOrder
   }
 
   export type RequestNullableScalarRelationFilter = {
@@ -39306,8 +41183,21 @@ export namespace Prisma {
     totalBudget?: SortOrder
     documentName?: SortOrder
     documentURL?: SortOrder
+    approval_A?: SortOrder
+    approval_B?: SortOrder
+    approval_C?: SortOrder
+    approval_D?: SortOrder
+    approvedBy_A?: SortOrder
+    approvedBy_B?: SortOrder
+    approvedBy_C?: SortOrder
+    approvedBy_D?: SortOrder
+    comment_A?: SortOrder
+    comment_B?: SortOrder
+    comment_C?: SortOrder
+    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
+    createdBy?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -39318,6 +41208,10 @@ export namespace Prisma {
     unitCost?: SortOrder
     actualCost?: SortOrder
     totalBudget?: SortOrder
+    approval_A?: SortOrder
+    approval_B?: SortOrder
+    approval_C?: SortOrder
+    approval_D?: SortOrder
   }
 
   export type RetirementMaxOrderByAggregateInput = {
@@ -39330,8 +41224,21 @@ export namespace Prisma {
     totalBudget?: SortOrder
     documentName?: SortOrder
     documentURL?: SortOrder
+    approval_A?: SortOrder
+    approval_B?: SortOrder
+    approval_C?: SortOrder
+    approval_D?: SortOrder
+    approvedBy_A?: SortOrder
+    approvedBy_B?: SortOrder
+    approvedBy_C?: SortOrder
+    approvedBy_D?: SortOrder
+    comment_A?: SortOrder
+    comment_B?: SortOrder
+    comment_C?: SortOrder
+    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
+    createdBy?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -39346,8 +41253,21 @@ export namespace Prisma {
     totalBudget?: SortOrder
     documentName?: SortOrder
     documentURL?: SortOrder
+    approval_A?: SortOrder
+    approval_B?: SortOrder
+    approval_C?: SortOrder
+    approval_D?: SortOrder
+    approvedBy_A?: SortOrder
+    approvedBy_B?: SortOrder
+    approvedBy_C?: SortOrder
+    approvedBy_D?: SortOrder
+    comment_A?: SortOrder
+    comment_B?: SortOrder
+    comment_C?: SortOrder
+    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
+    createdBy?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -39358,6 +41278,10 @@ export namespace Prisma {
     unitCost?: SortOrder
     actualCost?: SortOrder
     totalBudget?: SortOrder
+    approval_A?: SortOrder
+    approval_B?: SortOrder
+    approval_C?: SortOrder
+    approval_D?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -39489,6 +41413,20 @@ export namespace Prisma {
     connect?: PartnerWhereUniqueInput | PartnerWhereUniqueInput[]
   }
 
+  export type RequestCreateNestedManyWithoutUserInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type RetirementCreateNestedManyWithoutUserInput = {
+    create?: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput> | RetirementCreateWithoutUserInput[] | RetirementUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RetirementCreateOrConnectWithoutUserInput | RetirementCreateOrConnectWithoutUserInput[]
+    createMany?: RetirementCreateManyUserInputEnvelope
+    connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+  }
+
   export type KpiReportUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
     connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
@@ -39501,6 +41439,20 @@ export namespace Prisma {
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput | PartnerCreateOrConnectWithoutUserInput[]
     createMany?: PartnerCreateManyUserInputEnvelope
     connect?: PartnerWhereUniqueInput | PartnerWhereUniqueInput[]
+  }
+
+  export type RequestUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+  }
+
+  export type RetirementUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput> | RetirementCreateWithoutUserInput[] | RetirementUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RetirementCreateOrConnectWithoutUserInput | RetirementCreateOrConnectWithoutUserInput[]
+    createMany?: RetirementCreateManyUserInputEnvelope
+    connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -39553,6 +41505,34 @@ export namespace Prisma {
     deleteMany?: PartnerScalarWhereInput | PartnerScalarWhereInput[]
   }
 
+  export type RequestUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutUserInput | RequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutUserInput | RequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutUserInput | RequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type RetirementUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput> | RetirementCreateWithoutUserInput[] | RetirementUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RetirementCreateOrConnectWithoutUserInput | RetirementCreateOrConnectWithoutUserInput[]
+    upsert?: RetirementUpsertWithWhereUniqueWithoutUserInput | RetirementUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RetirementCreateManyUserInputEnvelope
+    set?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    disconnect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    delete?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    update?: RetirementUpdateWithWhereUniqueWithoutUserInput | RetirementUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RetirementUpdateManyWithWhereWithoutUserInput | RetirementUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
+  }
+
   export type KpiReportUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
     connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
@@ -39579,6 +41559,34 @@ export namespace Prisma {
     update?: PartnerUpdateWithWhereUniqueWithoutUserInput | PartnerUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PartnerUpdateManyWithWhereWithoutUserInput | PartnerUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PartnerScalarWhereInput | PartnerScalarWhereInput[]
+  }
+
+  export type RequestUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput> | RequestCreateWithoutUserInput[] | RequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RequestCreateOrConnectWithoutUserInput | RequestCreateOrConnectWithoutUserInput[]
+    upsert?: RequestUpsertWithWhereUniqueWithoutUserInput | RequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RequestCreateManyUserInputEnvelope
+    set?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    disconnect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    delete?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    connect?: RequestWhereUniqueInput | RequestWhereUniqueInput[]
+    update?: RequestUpdateWithWhereUniqueWithoutUserInput | RequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RequestUpdateManyWithWhereWithoutUserInput | RequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RequestScalarWhereInput | RequestScalarWhereInput[]
+  }
+
+  export type RetirementUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput> | RetirementCreateWithoutUserInput[] | RetirementUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RetirementCreateOrConnectWithoutUserInput | RetirementCreateOrConnectWithoutUserInput[]
+    upsert?: RetirementUpsertWithWhereUniqueWithoutUserInput | RetirementUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RetirementCreateManyUserInputEnvelope
+    set?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    disconnect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    delete?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+    update?: RetirementUpdateWithWhereUniqueWithoutUserInput | RetirementUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RetirementUpdateManyWithWhereWithoutUserInput | RetirementUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -41309,6 +43317,12 @@ export namespace Prisma {
     connect?: ProjectWhereUniqueInput
   }
 
+  export type UserCreateNestedOneWithoutRequestInput = {
+    create?: XOR<UserCreateWithoutRequestInput, UserUncheckedCreateWithoutRequestInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRequestInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type RetirementCreateNestedManyWithoutRequestInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -41316,11 +43330,25 @@ export namespace Prisma {
     connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
   }
 
+  export type LineItemCreateNestedManyWithoutRequestInput = {
+    create?: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput> | LineItemCreateWithoutRequestInput[] | LineItemUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutRequestInput | LineItemCreateOrConnectWithoutRequestInput[]
+    createMany?: LineItemCreateManyRequestInputEnvelope
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+  }
+
   export type RetirementUncheckedCreateNestedManyWithoutRequestInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
     createMany?: RetirementCreateManyRequestInputEnvelope
     connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
+  }
+
+  export type LineItemUncheckedCreateNestedManyWithoutRequestInput = {
+    create?: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput> | LineItemCreateWithoutRequestInput[] | LineItemUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutRequestInput | LineItemCreateOrConnectWithoutRequestInput[]
+    createMany?: LineItemCreateManyRequestInputEnvelope
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
   }
 
   export type OutputUpdateOneWithoutRequestNestedInput = {
@@ -41343,6 +43371,16 @@ export namespace Prisma {
     update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutRequestInput, ProjectUpdateWithoutRequestInput>, ProjectUncheckedUpdateWithoutRequestInput>
   }
 
+  export type UserUpdateOneWithoutRequestNestedInput = {
+    create?: XOR<UserCreateWithoutRequestInput, UserUncheckedCreateWithoutRequestInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRequestInput
+    upsert?: UserUpsertWithoutRequestInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRequestInput, UserUpdateWithoutRequestInput>, UserUncheckedUpdateWithoutRequestInput>
+  }
+
   export type RetirementUpdateManyWithoutRequestNestedInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -41355,6 +43393,20 @@ export namespace Prisma {
     update?: RetirementUpdateWithWhereUniqueWithoutRequestInput | RetirementUpdateWithWhereUniqueWithoutRequestInput[]
     updateMany?: RetirementUpdateManyWithWhereWithoutRequestInput | RetirementUpdateManyWithWhereWithoutRequestInput[]
     deleteMany?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
+  }
+
+  export type LineItemUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput> | LineItemCreateWithoutRequestInput[] | LineItemUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutRequestInput | LineItemCreateOrConnectWithoutRequestInput[]
+    upsert?: LineItemUpsertWithWhereUniqueWithoutRequestInput | LineItemUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: LineItemCreateManyRequestInputEnvelope
+    set?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    disconnect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    delete?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    update?: LineItemUpdateWithWhereUniqueWithoutRequestInput | LineItemUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: LineItemUpdateManyWithWhereWithoutRequestInput | LineItemUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
   }
 
   export type RetirementUncheckedUpdateManyWithoutRequestNestedInput = {
@@ -41371,10 +43423,44 @@ export namespace Prisma {
     deleteMany?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
   }
 
+  export type LineItemUncheckedUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput> | LineItemCreateWithoutRequestInput[] | LineItemUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutRequestInput | LineItemCreateOrConnectWithoutRequestInput[]
+    upsert?: LineItemUpsertWithWhereUniqueWithoutRequestInput | LineItemUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: LineItemCreateManyRequestInputEnvelope
+    set?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    disconnect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    delete?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    update?: LineItemUpdateWithWhereUniqueWithoutRequestInput | LineItemUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: LineItemUpdateManyWithWhereWithoutRequestInput | LineItemUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+  }
+
+  export type RequestCreateNestedOneWithoutLineItemInput = {
+    create?: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutLineItemInput
+    connect?: RequestWhereUniqueInput
+  }
+
+  export type RequestUpdateOneRequiredWithoutLineItemNestedInput = {
+    create?: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutLineItemInput
+    upsert?: RequestUpsertWithoutLineItemInput
+    connect?: RequestWhereUniqueInput
+    update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutLineItemInput, RequestUpdateWithoutLineItemInput>, RequestUncheckedUpdateWithoutLineItemInput>
+  }
+
   export type RequestCreateNestedOneWithoutRetirementInput = {
     create?: XOR<RequestCreateWithoutRetirementInput, RequestUncheckedCreateWithoutRetirementInput>
     connectOrCreate?: RequestCreateOrConnectWithoutRetirementInput
     connect?: RequestWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutRetirementInput = {
+    create?: XOR<UserCreateWithoutRetirementInput, UserUncheckedCreateWithoutRetirementInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRetirementInput
+    connect?: UserWhereUniqueInput
   }
 
   export type RequestUpdateOneWithoutRetirementNestedInput = {
@@ -41385,6 +43471,16 @@ export namespace Prisma {
     delete?: RequestWhereInput | boolean
     connect?: RequestWhereUniqueInput
     update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutRetirementInput, RequestUpdateWithoutRetirementInput>, RequestUncheckedUpdateWithoutRetirementInput>
+  }
+
+  export type UserUpdateOneWithoutRetirementNestedInput = {
+    create?: XOR<UserCreateWithoutRetirementInput, UserUncheckedCreateWithoutRetirementInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRetirementInput
+    upsert?: UserUpsertWithoutRetirementInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRetirementInput, UserUpdateWithoutRetirementInput>, UserUncheckedUpdateWithoutRetirementInput>
   }
 
   export type ProjectCreateNestedOneWithoutReportInput = {
@@ -41702,6 +43798,174 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RequestCreateWithoutUserInput = {
+    requestId?: string
+    staff?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    budgetCode?: number | null
+    total?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    output?: OutputCreateNestedOneWithoutRequestInput
+    project?: ProjectCreateNestedOneWithoutRequestInput
+    retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestUncheckedCreateWithoutUserInput = {
+    requestId?: string
+    staff?: string | null
+    outputId?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    budgetCode?: number | null
+    total?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    projectId?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestCreateOrConnectWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type RequestCreateManyUserInputEnvelope = {
+    data: RequestCreateManyUserInput | RequestCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RetirementCreateWithoutUserInput = {
+    retirementId?: string
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    actualCost?: number | null
+    totalBudget?: number | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    request?: RequestCreateNestedOneWithoutRetirementInput
+  }
+
+  export type RetirementUncheckedCreateWithoutUserInput = {
+    retirementId?: string
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    actualCost?: number | null
+    totalBudget?: number | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    requestId?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type RetirementCreateOrConnectWithoutUserInput = {
+    where: RetirementWhereUniqueInput
+    create: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput>
+  }
+
+  export type RetirementCreateManyUserInputEnvelope = {
+    data: RetirementCreateManyUserInput | RetirementCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RoleUpsertWithoutUsersInput = {
     update: XOR<RoleUpdateWithoutUsersInput, RoleUncheckedUpdateWithoutUsersInput>
     create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
@@ -41797,6 +44061,118 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Partner"> | Date | string | null
   }
 
+  export type RequestUpsertWithWhereUniqueWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    update: XOR<RequestUpdateWithoutUserInput, RequestUncheckedUpdateWithoutUserInput>
+    create: XOR<RequestCreateWithoutUserInput, RequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type RequestUpdateWithWhereUniqueWithoutUserInput = {
+    where: RequestWhereUniqueInput
+    data: XOR<RequestUpdateWithoutUserInput, RequestUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RequestUpdateManyWithWhereWithoutUserInput = {
+    where: RequestScalarWhereInput
+    data: XOR<RequestUpdateManyMutationInput, RequestUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RequestScalarWhereInput = {
+    AND?: RequestScalarWhereInput | RequestScalarWhereInput[]
+    OR?: RequestScalarWhereInput[]
+    NOT?: RequestScalarWhereInput | RequestScalarWhereInput[]
+    requestId?: StringFilter<"Request"> | string
+    staff?: StringNullableFilter<"Request"> | string | null
+    outputId?: StringNullableFilter<"Request"> | string | null
+    activityTitle?: StringNullableFilter<"Request"> | string | null
+    activityBudgetCode?: IntNullableFilter<"Request"> | number | null
+    activityLocation?: StringNullableFilter<"Request"> | string | null
+    activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
+    activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    activityLineDescription?: StringNullableFilter<"Request"> | string | null
+    quantity?: IntNullableFilter<"Request"> | number | null
+    frequency?: IntNullableFilter<"Request"> | number | null
+    unitCost?: IntNullableFilter<"Request"> | number | null
+    budgetCode?: IntNullableFilter<"Request"> | number | null
+    total?: IntNullableFilter<"Request"> | number | null
+    modeOfTransport?: StringNullableFilter<"Request"> | string | null
+    driverName?: StringNullableFilter<"Request"> | string | null
+    driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
+    vehiclePlateNumber?: StringNullableFilter<"Request"> | string | null
+    vehicleColor?: StringNullableFilter<"Request"> | string | null
+    departureTime?: DateTimeNullableFilter<"Request"> | Date | string | null
+    route?: StringNullableFilter<"Request"> | string | null
+    recipientPhoneNumber?: StringNullableFilter<"Request"> | string | null
+    documentName?: StringNullableFilter<"Request"> | string | null
+    documentURL?: StringNullableFilter<"Request"> | string | null
+    projectId?: StringNullableFilter<"Request"> | string | null
+    approval_A?: IntNullableFilter<"Request"> | number | null
+    approval_B?: IntNullableFilter<"Request"> | number | null
+    approval_C?: IntNullableFilter<"Request"> | number | null
+    approval_D?: IntNullableFilter<"Request"> | number | null
+    approvedBy_A?: StringNullableFilter<"Request"> | string | null
+    approvedBy_B?: StringNullableFilter<"Request"> | string | null
+    approvedBy_C?: StringNullableFilter<"Request"> | string | null
+    approvedBy_D?: StringNullableFilter<"Request"> | string | null
+    comment_A?: StringNullableFilter<"Request"> | string | null
+    comment_B?: StringNullableFilter<"Request"> | string | null
+    comment_C?: StringNullableFilter<"Request"> | string | null
+    comment_D?: StringNullableFilter<"Request"> | string | null
+    status?: StringNullableFilter<"Request"> | string | null
+    createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
+    createdBy?: StringNullableFilter<"Request"> | string | null
+  }
+
+  export type RetirementUpsertWithWhereUniqueWithoutUserInput = {
+    where: RetirementWhereUniqueInput
+    update: XOR<RetirementUpdateWithoutUserInput, RetirementUncheckedUpdateWithoutUserInput>
+    create: XOR<RetirementCreateWithoutUserInput, RetirementUncheckedCreateWithoutUserInput>
+  }
+
+  export type RetirementUpdateWithWhereUniqueWithoutUserInput = {
+    where: RetirementWhereUniqueInput
+    data: XOR<RetirementUpdateWithoutUserInput, RetirementUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RetirementUpdateManyWithWhereWithoutUserInput = {
+    where: RetirementScalarWhereInput
+    data: XOR<RetirementUpdateManyMutationInput, RetirementUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RetirementScalarWhereInput = {
+    AND?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
+    OR?: RetirementScalarWhereInput[]
+    NOT?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
+    retirementId?: StringFilter<"Retirement"> | string
+    activityLineDescription?: StringNullableFilter<"Retirement"> | string | null
+    quantity?: IntNullableFilter<"Retirement"> | number | null
+    frequency?: IntNullableFilter<"Retirement"> | number | null
+    unitCost?: IntNullableFilter<"Retirement"> | number | null
+    actualCost?: IntNullableFilter<"Retirement"> | number | null
+    totalBudget?: IntNullableFilter<"Retirement"> | number | null
+    documentName?: StringNullableFilter<"Retirement"> | string | null
+    documentURL?: StringNullableFilter<"Retirement"> | string | null
+    approval_A?: IntNullableFilter<"Retirement"> | number | null
+    approval_B?: IntNullableFilter<"Retirement"> | number | null
+    approval_C?: IntNullableFilter<"Retirement"> | number | null
+    approval_D?: IntNullableFilter<"Retirement"> | number | null
+    approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
+    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
+    comment_A?: StringNullableFilter<"Retirement"> | string | null
+    comment_B?: StringNullableFilter<"Retirement"> | string | null
+    comment_C?: StringNullableFilter<"Retirement"> | string | null
+    comment_D?: StringNullableFilter<"Retirement"> | string | null
+    requestId?: StringNullableFilter<"Retirement"> | string | null
+    status?: StringNullableFilter<"Retirement"> | string | null
+    createdBy?: StringNullableFilter<"Retirement"> | string | null
+    createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+  }
+
   export type UserCreateWithoutRoleInput = {
     userId?: string
     fullName?: string | null
@@ -41812,11 +44188,15 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
+    request?: RequestCreateNestedManyWithoutUserInput
+    retirement?: RetirementCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRoleInput = {
@@ -41834,11 +44214,15 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
+    request?: RequestUncheckedCreateNestedManyWithoutUserInput
+    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRoleInput = {
@@ -41886,6 +44270,8 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     profilePic?: StringNullableFilter<"User"> | string | null
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
+    signature?: StringNullableFilter<"User"> | string | null
+    signatureMimeType?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -42398,11 +44784,15 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
     partner?: PartnerCreateNestedManyWithoutUserInput
+    request?: RequestCreateNestedManyWithoutUserInput
+    retirement?: RetirementCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutKpiReportInput = {
@@ -42421,10 +44811,14 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
+    request?: RequestUncheckedCreateNestedManyWithoutUserInput
+    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutKpiReportInput = {
@@ -42576,11 +44970,15 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
+    request?: RequestUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKpiReportInput = {
@@ -42599,10 +44997,14 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
+    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type StrategicObjectiveUpsertWithoutKpiReportInput = {
@@ -43043,22 +45445,21 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     output?: OutputCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutProjectInput = {
@@ -43091,21 +45492,20 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutProjectInput = {
@@ -43464,56 +45864,6 @@ export namespace Prisma {
     data: XOR<RequestUpdateManyMutationInput, RequestUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type RequestScalarWhereInput = {
-    AND?: RequestScalarWhereInput | RequestScalarWhereInput[]
-    OR?: RequestScalarWhereInput[]
-    NOT?: RequestScalarWhereInput | RequestScalarWhereInput[]
-    requestId?: StringFilter<"Request"> | string
-    staff?: StringNullableFilter<"Request"> | string | null
-    outputId?: StringNullableFilter<"Request"> | string | null
-    activityTitle?: StringNullableFilter<"Request"> | string | null
-    activityBudgetCode?: IntNullableFilter<"Request"> | number | null
-    activityLocation?: StringNullableFilter<"Request"> | string | null
-    activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
-    activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    activityLineDescription?: StringNullableFilter<"Request"> | string | null
-    quantity?: IntNullableFilter<"Request"> | number | null
-    frequency?: IntNullableFilter<"Request"> | number | null
-    unitCost?: IntNullableFilter<"Request"> | number | null
-    budgetCode?: IntNullableFilter<"Request"> | number | null
-    total?: IntNullableFilter<"Request"> | number | null
-    modeOfTransport?: StringNullableFilter<"Request"> | string | null
-    driverName?: StringNullableFilter<"Request"> | string | null
-    driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
-    vehiclePlateNumber?: StringNullableFilter<"Request"> | string | null
-    vehicleColor?: StringNullableFilter<"Request"> | string | null
-    departureTime?: DateTimeNullableFilter<"Request"> | Date | string | null
-    route?: StringNullableFilter<"Request"> | string | null
-    recipientPhoneNumber?: StringNullableFilter<"Request"> | string | null
-    documentName?: StringNullableFilter<"Request"> | string | null
-    documentURL?: StringNullableFilter<"Request"> | string | null
-    projectId?: StringNullableFilter<"Request"> | string | null
-    approval_A?: IntNullableFilter<"Request"> | number | null
-    approval_B?: IntNullableFilter<"Request"> | number | null
-    approval_C?: IntNullableFilter<"Request"> | number | null
-    approval_D?: IntNullableFilter<"Request"> | number | null
-    approval_E?: IntNullableFilter<"Request"> | number | null
-    approvedBy_A?: StringNullableFilter<"Request"> | string | null
-    approvedBy_B?: StringNullableFilter<"Request"> | string | null
-    approvedBy_C?: StringNullableFilter<"Request"> | string | null
-    approvedBy_D?: StringNullableFilter<"Request"> | string | null
-    approvedBy_E?: StringNullableFilter<"Request"> | string | null
-    comment_A?: StringNullableFilter<"Request"> | string | null
-    comment_B?: StringNullableFilter<"Request"> | string | null
-    comment_C?: StringNullableFilter<"Request"> | string | null
-    comment_D?: StringNullableFilter<"Request"> | string | null
-    comment_E?: StringNullableFilter<"Request"> | string | null
-    status?: StringNullableFilter<"Request"> | string | null
-    createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
-  }
-
   export type ReportUpsertWithWhereUniqueWithoutProjectInput = {
     where: ReportWhereUniqueInput
     update: XOR<ReportUpdateWithoutProjectInput, ReportUncheckedUpdateWithoutProjectInput>
@@ -43708,11 +46058,15 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
     kpiReport?: KpiReportCreateNestedManyWithoutUserInput
+    request?: RequestCreateNestedManyWithoutUserInput
+    retirement?: RetirementCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPartnerInput = {
@@ -43731,10 +46085,14 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
+    request?: RequestUncheckedCreateNestedManyWithoutUserInput
+    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPartnerInput = {
@@ -43827,11 +46185,15 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
     kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
+    request?: RequestUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPartnerInput = {
@@ -43850,10 +46212,14 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
+    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectUpsertWithoutPartnerInput = {
@@ -44966,22 +47332,21 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutOutputInput = {
@@ -45014,21 +47379,20 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutOutputInput = {
@@ -46502,6 +48866,63 @@ export namespace Prisma {
     create: XOR<ProjectCreateWithoutRequestInput, ProjectUncheckedCreateWithoutRequestInput>
   }
 
+  export type UserCreateWithoutRequestInput = {
+    userId?: string
+    fullName?: string | null
+    email?: string | null
+    address?: string | null
+    phoneNumber?: string | null
+    status?: string | null
+    assignedProjectId?: string | null
+    department?: string | null
+    community?: string | null
+    state?: string | null
+    localGovernmentArea?: string | null
+    password?: string | null
+    profilePic?: string | null
+    profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
+    loginLast?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    role?: RoleCreateNestedOneWithoutUsersInput
+    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
+    partner?: PartnerCreateNestedManyWithoutUserInput
+    retirement?: RetirementCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRequestInput = {
+    userId?: string
+    fullName?: string | null
+    email?: string | null
+    address?: string | null
+    phoneNumber?: string | null
+    roleId?: string | null
+    status?: string | null
+    assignedProjectId?: string | null
+    department?: string | null
+    community?: string | null
+    state?: string | null
+    localGovernmentArea?: string | null
+    password?: string | null
+    profilePic?: string | null
+    profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
+    loginLast?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
+    partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
+    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRequestInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRequestInput, UserUncheckedCreateWithoutRequestInput>
+  }
+
   export type RetirementCreateWithoutRequestInput = {
     retirementId?: string
     activityLineDescription?: string | null
@@ -46512,9 +48933,22 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    user?: UserCreateNestedOneWithoutRetirementInput
   }
 
   export type RetirementUncheckedCreateWithoutRequestInput = {
@@ -46527,7 +48961,20 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     status?: string | null
+    createdBy?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -46539,6 +48986,38 @@ export namespace Prisma {
 
   export type RetirementCreateManyRequestInputEnvelope = {
     data: RetirementCreateManyRequestInput | RetirementCreateManyRequestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LineItemCreateWithoutRequestInput = {
+    lineItemId?: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemUncheckedCreateWithoutRequestInput = {
+    lineItemId?: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemCreateOrConnectWithoutRequestInput = {
+    where: LineItemWhereUniqueInput
+    create: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput>
+  }
+
+  export type LineItemCreateManyRequestInputEnvelope = {
+    data: LineItemCreateManyRequestInput | LineItemCreateManyRequestInput[]
     skipDuplicates?: boolean
   }
 
@@ -46644,6 +49123,69 @@ export namespace Prisma {
     kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
+  export type UserUpsertWithoutRequestInput = {
+    update: XOR<UserUpdateWithoutRequestInput, UserUncheckedUpdateWithoutRequestInput>
+    create: XOR<UserCreateWithoutRequestInput, UserUncheckedCreateWithoutRequestInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRequestInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRequestInput, UserUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type UserUpdateWithoutRequestInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
+    partner?: PartnerUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRequestInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
+    partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type RetirementUpsertWithWhereUniqueWithoutRequestInput = {
     where: RetirementWhereUniqueInput
     update: XOR<RetirementUpdateWithoutRequestInput, RetirementUncheckedUpdateWithoutRequestInput>
@@ -46660,23 +49202,235 @@ export namespace Prisma {
     data: XOR<RetirementUpdateManyMutationInput, RetirementUncheckedUpdateManyWithoutRequestInput>
   }
 
-  export type RetirementScalarWhereInput = {
-    AND?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
-    OR?: RetirementScalarWhereInput[]
-    NOT?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
-    retirementId?: StringFilter<"Retirement"> | string
-    activityLineDescription?: StringNullableFilter<"Retirement"> | string | null
-    quantity?: IntNullableFilter<"Retirement"> | number | null
-    frequency?: IntNullableFilter<"Retirement"> | number | null
-    unitCost?: IntNullableFilter<"Retirement"> | number | null
-    actualCost?: IntNullableFilter<"Retirement"> | number | null
-    totalBudget?: IntNullableFilter<"Retirement"> | number | null
-    documentName?: StringNullableFilter<"Retirement"> | string | null
-    documentURL?: StringNullableFilter<"Retirement"> | string | null
-    requestId?: StringNullableFilter<"Retirement"> | string | null
-    status?: StringNullableFilter<"Retirement"> | string | null
-    createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+  export type LineItemUpsertWithWhereUniqueWithoutRequestInput = {
+    where: LineItemWhereUniqueInput
+    update: XOR<LineItemUpdateWithoutRequestInput, LineItemUncheckedUpdateWithoutRequestInput>
+    create: XOR<LineItemCreateWithoutRequestInput, LineItemUncheckedCreateWithoutRequestInput>
+  }
+
+  export type LineItemUpdateWithWhereUniqueWithoutRequestInput = {
+    where: LineItemWhereUniqueInput
+    data: XOR<LineItemUpdateWithoutRequestInput, LineItemUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type LineItemUpdateManyWithWhereWithoutRequestInput = {
+    where: LineItemScalarWhereInput
+    data: XOR<LineItemUpdateManyMutationInput, LineItemUncheckedUpdateManyWithoutRequestInput>
+  }
+
+  export type LineItemScalarWhereInput = {
+    AND?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+    OR?: LineItemScalarWhereInput[]
+    NOT?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+    lineItemId?: StringFilter<"LineItem"> | string
+    requestId?: StringFilter<"LineItem"> | string
+    description?: StringNullableFilter<"LineItem"> | string | null
+    quantity?: IntNullableFilter<"LineItem"> | number | null
+    frequency?: IntNullableFilter<"LineItem"> | number | null
+    unitCost?: IntNullableFilter<"LineItem"> | number | null
+    total?: IntNullableFilter<"LineItem"> | number | null
+    createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+  }
+
+  export type RequestCreateWithoutLineItemInput = {
+    requestId?: string
+    staff?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    budgetCode?: number | null
+    total?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    output?: OutputCreateNestedOneWithoutRequestInput
+    project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
+    retirement?: RetirementCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestUncheckedCreateWithoutLineItemInput = {
+    requestId?: string
+    staff?: string | null
+    outputId?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    budgetCode?: number | null
+    total?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    projectId?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    createdBy?: string | null
+    retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestCreateOrConnectWithoutLineItemInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+  }
+
+  export type RequestUpsertWithoutLineItemInput = {
+    update: XOR<RequestUpdateWithoutLineItemInput, RequestUncheckedUpdateWithoutLineItemInput>
+    create: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+    where?: RequestWhereInput
+  }
+
+  export type RequestUpdateToOneWithWhereWithoutLineItemInput = {
+    where?: RequestWhereInput
+    data: XOR<RequestUpdateWithoutLineItemInput, RequestUncheckedUpdateWithoutLineItemInput>
+  }
+
+  export type RequestUpdateWithoutLineItemInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    output?: OutputUpdateOneWithoutRequestNestedInput
+    project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
+    retirement?: RetirementUpdateManyWithoutRequestNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutLineItemInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateWithoutRetirementInput = {
@@ -46708,22 +49462,21 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
+    lineItem?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutRetirementInput = {
@@ -46757,25 +49510,81 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutRetirementInput = {
     where: RequestWhereUniqueInput
     create: XOR<RequestCreateWithoutRetirementInput, RequestUncheckedCreateWithoutRetirementInput>
+  }
+
+  export type UserCreateWithoutRetirementInput = {
+    userId?: string
+    fullName?: string | null
+    email?: string | null
+    address?: string | null
+    phoneNumber?: string | null
+    status?: string | null
+    assignedProjectId?: string | null
+    department?: string | null
+    community?: string | null
+    state?: string | null
+    localGovernmentArea?: string | null
+    password?: string | null
+    profilePic?: string | null
+    profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
+    loginLast?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    role?: RoleCreateNestedOneWithoutUsersInput
+    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
+    partner?: PartnerCreateNestedManyWithoutUserInput
+    request?: RequestCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRetirementInput = {
+    userId?: string
+    fullName?: string | null
+    email?: string | null
+    address?: string | null
+    phoneNumber?: string | null
+    roleId?: string | null
+    status?: string | null
+    assignedProjectId?: string | null
+    department?: string | null
+    community?: string | null
+    state?: string | null
+    localGovernmentArea?: string | null
+    password?: string | null
+    profilePic?: string | null
+    profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
+    loginLast?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
+    partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
+    request?: RequestUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRetirementInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRetirementInput, UserUncheckedCreateWithoutRetirementInput>
   }
 
   export type RequestUpsertWithoutRetirementInput = {
@@ -46818,22 +49627,21 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
+    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutRetirementInput = {
@@ -46867,20 +49675,82 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type UserUpsertWithoutRetirementInput = {
+    update: XOR<UserUpdateWithoutRetirementInput, UserUncheckedUpdateWithoutRetirementInput>
+    create: XOR<UserCreateWithoutRetirementInput, UserUncheckedCreateWithoutRetirementInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRetirementInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRetirementInput, UserUncheckedUpdateWithoutRetirementInput>
+  }
+
+  export type UserUpdateWithoutRetirementInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    role?: RoleUpdateOneWithoutUsersNestedInput
+    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
+    partner?: PartnerUpdateManyWithoutUserNestedInput
+    request?: RequestUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRetirementInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    roleId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
+    partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
+    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutReportInput = {
@@ -47033,6 +49903,78 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
+  export type RequestCreateManyUserInput = {
+    requestId?: string
+    staff?: string | null
+    outputId?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    budgetCode?: number | null
+    total?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    projectId?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type RetirementCreateManyUserInput = {
+    retirementId?: string
+    activityLineDescription?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    actualCost?: number | null
+    totalBudget?: number | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    requestId?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
   export type KpiReportUpdateWithoutUserInput = {
     kpiReportId?: StringFieldUpdateOperationsInput | string
     kpiName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47113,6 +50055,226 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type RequestUpdateWithoutUserInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    output?: OutputUpdateOneWithoutRequestNestedInput
+    project?: ProjectUpdateOneWithoutRequestNestedInput
+    retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutUserInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type RequestUncheckedUpdateManyWithoutUserInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type RetirementUpdateWithoutUserInput = {
+    retirementId?: StringFieldUpdateOperationsInput | string
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    actualCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    request?: RequestUpdateOneWithoutRetirementNestedInput
+  }
+
+  export type RetirementUncheckedUpdateWithoutUserInput = {
+    retirementId?: StringFieldUpdateOperationsInput | string
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    actualCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    requestId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type RetirementUncheckedUpdateManyWithoutUserInput = {
+    retirementId?: StringFieldUpdateOperationsInput | string
+    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    actualCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    requestId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type UserCreateManyRoleInput = {
     userId?: string
     fullName?: string | null
@@ -47128,6 +50290,8 @@ export namespace Prisma {
     password?: string | null
     profilePic?: string | null
     profilePicMimeType?: string | null
+    signature?: string | null
+    signatureMimeType?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -47148,11 +50312,15 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
+    request?: RequestUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRoleInput = {
@@ -47170,11 +50338,15 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
+    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
+    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRoleInput = {
@@ -47192,6 +50364,8 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     profilePic?: NullableStringFieldUpdateOperationsInput | string | null
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47576,20 +50750,18 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
   }
 
   export type ReportCreateManyProjectInput = {
@@ -47897,22 +51069,21 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutProjectInput = {
@@ -47945,21 +51116,20 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutProjectInput = {
@@ -47992,20 +51162,18 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReportUpdateWithoutProjectInput = {
@@ -48571,20 +51739,18 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
-    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
-    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
-    comment_E?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    createdBy?: string | null
   }
 
   export type ActivityUpdateWithoutOutputInput = {
@@ -48666,22 +51832,21 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutOutputInput = {
@@ -48714,21 +51879,20 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutOutputInput = {
@@ -48761,20 +51925,18 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportCreateManyIndicatorInput = {
@@ -48987,7 +52149,31 @@ export namespace Prisma {
     totalBudget?: number | null
     documentName?: string | null
     documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
     status?: string | null
+    createdBy?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemCreateManyRequestInput = {
+    lineItemId?: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    total?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -49002,9 +52188,22 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneWithoutRetirementNestedInput
   }
 
   export type RetirementUncheckedUpdateWithoutRequestInput = {
@@ -49017,7 +52216,20 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -49032,7 +52244,53 @@ export namespace Prisma {
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     documentName?: NullableStringFieldUpdateOperationsInput | string | null
     documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemUpdateWithoutRequestInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemUncheckedUpdateWithoutRequestInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemUncheckedUpdateManyWithoutRequestInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    total?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

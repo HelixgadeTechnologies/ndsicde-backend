@@ -113,8 +113,8 @@ export const requestApproval = async (
     }
 
     // Determine the next approval level based on existing approvals
-    const approvalLevels: Array<"A" | "B" | "C" | "D" | "E"> = ["A", "B", "C", "D", "E"];
-    let currentLevel: "A" | "B" | "C" | "D" | "E" | null = null;
+    const approvalLevels: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+    let currentLevel: "A" | "B" | "C" | "D" | null = null;
 
     for (const level of approvalLevels) {
       const approvalField = `approval_${level}` as keyof typeof request;
@@ -145,7 +145,7 @@ export const requestApproval = async (
     if (approvalStatus === 2) {
       // Rejection
       newStatus = "Rejected";
-    } else if (approvalStatus === 1 && currentLevel === "E") {
+    } else if (approvalStatus === 1 && currentLevel === "D") {
       // Final approval
       newStatus = "Approved";
     } else if (approvalStatus === 1) {
