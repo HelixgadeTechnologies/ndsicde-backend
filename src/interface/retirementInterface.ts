@@ -40,4 +40,5 @@ export interface IRetirementView {
   status?: string;
   createAt?: Date;
   updateAt?: Date;
+  projectName?: string;
 }

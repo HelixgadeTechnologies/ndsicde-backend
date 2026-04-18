@@ -518,15 +518,12 @@ model Retirement {
   approval_A              Int?
   approval_B              Int?
   approval_C              Int?
-  approval_D              Int?
   approvedBy_A            String?   @db.VarChar(191)
   approvedBy_B            String?   @db.VarChar(191)
   approvedBy_C            String?   @db.VarChar(191)
-  approvedBy_D            String?   @db.VarChar(191)
   comment_A               String?
   comment_B               String?
   comment_C               String?
-  comment_D               String?
   request                 Request?  @relation(fields: [requestId], references: [requestId])
   requestId               String?
   status                  String?

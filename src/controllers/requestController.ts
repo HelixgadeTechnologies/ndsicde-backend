@@ -123,10 +123,10 @@ export const requestApprovalController = async (
     }
 
     // Validate approvalStatus value
-    if (approvalStatus !== 1 && approvalStatus !== 2) {
+    if (![1, 2, 3].includes(Number(approvalStatus))) {
       return res
         .status(400)
-        .json(errorResponse("approvalStatus must be 1 (Approved) or 2 (Rejected)"));
+        .json(errorResponse("approvalStatus must be 1 (Approved), 2 (Rejected) or 3 (Review)"));
     }
 
     const result = await requestApproval(requestId, approvalStatus, approvedBy, comment);

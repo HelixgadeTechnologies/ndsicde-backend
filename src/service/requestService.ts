@@ -97,7 +97,12 @@ export const deleteRequest = async (requestId: string) => {
   });
 };
 
-// ✅ Request Approval with Auto-Level Detection
+export enum ApprovalStatus {
+  APPROVED = 1,
+  REJECTED = 2,
+  REVIEW = 3,
+}
+
 export const requestApproval = async (
   requestId: string,
   approvalStatus: number,
@@ -105,72 +110,130 @@ export const requestApproval = async (
   comment?: string
 ) => {
   try {
-    // Fetch the request
-    const request = await prisma.request.findUnique({ where: { requestId } });
+    const request = await prisma.request.findUnique({
+      where: { requestId },
+    });
 
     if (!request) {
       throw new Error("Request not found");
     }
 
-    // Determine the next approval level based on existing approvals
     const approvalLevels: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
+    const levelMap = {
+      A: 1,
+      B: 2,
+      C: 3,
+      D: 4,
+    };
+
+    // 🔎 Detect current level
     let currentLevel: "A" | "B" | "C" | "D" | null = null;
 
     for (const level of approvalLevels) {
-      const approvalField = `approval_${level}` as keyof typeof request;
-      if (request[approvalField] === null || request[approvalField] === undefined) {
+      const field = `approval_${level}` as keyof typeof request;
+
+      if (request[field] === null || request[field] === undefined) {
         currentLevel = level;
         break;
       }
     }
 
     if (!currentLevel) {
-      throw new Error("All approval levels have already been processed");
+      throw new Error("All approval levels already processed");
     }
 
-    // Validate sequential approval (ensure previous levels are approved)
     const levelIndex = approvalLevels.indexOf(currentLevel);
+
+    // 🔒 Ensure previous level is approved
     if (levelIndex > 0) {
-      const previousLevel = approvalLevels[levelIndex - 1];
-      const previousApprovalField = `approval_${previousLevel}` as keyof typeof request;
-      if (request[previousApprovalField] !== 1) {
+      const prevLevel = approvalLevels[levelIndex - 1];
+      const prevField = `approval_${prevLevel}` as keyof typeof request;
+
+      if (request[prevField] !== ApprovalStatus.APPROVED) {
         throw new Error(
-          `Cannot approve at level ${currentLevel}. Previous level ${previousLevel} must be approved first.`
+          `Previous level ${prevLevel} must be approved first`
         );
       }
     }
 
-    // Determine the new status based on approval/rejection
-    let newStatus = request.status;
-    if (approvalStatus === 2) {
-      // Rejection
-      newStatus = "Rejected";
-    } else if (approvalStatus === 1 && currentLevel === "D") {
-      // Final approval
-      newStatus = "Approved";
-    } else if (approvalStatus === 1) {
-      // Intermediate approval
-      newStatus = "Pending";
+    // =====================================
+    // 🔁 HANDLE REVIEW (SMART RESET)
+    // =====================================
+    if (approvalStatus === ApprovalStatus.REVIEW) {
+      const resetData: any = {
+        status: "Under Review",
+        updateAt: new Date(),
+      };
+
+      // Loop through all levels
+      for (const level of approvalLevels) {
+        if (level === currentLevel) {
+          // ✅ Keep this level's info
+          resetData[`approval_${level}`] = ApprovalStatus.REVIEW;
+          resetData[`approvedBy_${level}`] = approvedBy;
+          resetData[`comment_${level}`] = comment || null;
+        } else {
+          // ❌ Clear others
+          resetData[`approval_${level}`] = null;
+          resetData[`approvedBy_${level}`] = null;
+          resetData[`comment_${level}`] = null;
+        }
+      }
+
+      const updated = await prisma.request.update({
+        where: { requestId },
+        data: resetData,
+      });
+
+      return updated;
     }
 
-    // Build the update data dynamically
-    const updateData: any = {
-      [`approval_${currentLevel}`]: approvalStatus,
-      [`approvedBy_${currentLevel}`]: approvedBy,
-      [`comment_${currentLevel}`]: comment || null,
-      status: newStatus,
-      updateAt: new Date(),
-    };
+    // =====================================
+    // ❌ HANDLE REJECTION
+    // =====================================
+    if (approvalStatus === ApprovalStatus.REJECTED) {
+      const updateData: any = {
+        [`approval_${currentLevel}`]: ApprovalStatus.REJECTED,
+        [`approvedBy_${currentLevel}`]: approvedBy,
+        [`comment_${currentLevel}`]: comment || null,
+        status: "Rejected",
+        updateAt: new Date(),
+      };
 
-    // Update the request
-    const updatedRequest = await prisma.request.update({
-      where: { requestId },
-      data: updateData,
-    });
+      return await prisma.request.update({
+        where: { requestId },
+        data: updateData,
+      });
+    }
 
-    return updatedRequest;
+    // =====================================
+    // ✅ HANDLE APPROVAL
+    // =====================================
+    if (approvalStatus === ApprovalStatus.APPROVED) {
+      const isFinalLevel = currentLevel === "D";
+
+      const updateData: any = {
+        [`approval_${currentLevel}`]: ApprovalStatus.APPROVED,
+        [`approvedBy_${currentLevel}`]: approvedBy,
+        [`comment_${currentLevel}`]: comment || null,
+        updateAt: new Date(),
+      };
+
+      if (isFinalLevel) {
+        updateData.status = "Approved";
+      } else {
+        updateData.status = `Layer ${levelMap[currentLevel]} Approved`;
+      }
+
+      return await prisma.request.update({
+        where: { requestId },
+        data: updateData,
+      });
+    }
+
+    throw new Error("Invalid approval status");
   } catch (error) {
-    console.log(error);
+    console.error("Approval Error:", error);
     throw error;
   }
 };

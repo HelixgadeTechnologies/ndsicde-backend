@@ -124,8 +124,31 @@ requestRouter.delete("/request/:id", deleteRequestController);
  * @swagger
  * /api/request/request/approve:
  *   post:
- *     summary: Approve or Reject a Request
- *     description: Process approval for a request. The service automatically detects which approval level (A-E) should be processed based on existing approvals. Approvals must happen sequentially.
+ *     summary: Approve, Reject or Send Request for Review
+ *     description: |
+ *       Processes an approval action on a Request record. The service **automatically detects**
+ *       the current pending approval level (A → B → C → D) based on existing approvals.
+ *
+ *       **Approval Levels (4 levels, sequential):**
+ *       - Level A — First approval
+ *       - Level B — Second approval (requires Level A = Approved)
+ *       - Level C — Third approval (requires Level B = Approved)
+ *       - Level D — Final approval (requires Level C = Approved)
+ *
+ *       **Approval Status Values:**
+ *       | Value | Meaning |
+ *       |-------|---------|
+ *       | `1`   | Approved |
+ *       | `2`   | Rejected |
+ *       | `3`   | Under Review (resets all other levels) |
+ *
+ *       **Status Transitions:**
+ *       - `1` at Level A → `"Layer 1 Approved"`
+ *       - `1` at Level B → `"Layer 2 Approved"`
+ *       - `1` at Level C → `"Layer 3 Approved"`
+ *       - `1` at Level D → `"Approved"` (final)
+ *       - `2` at any level → `"Rejected"`
+ *       - `3` at any level → `"Under Review"` (clears all other levels)
  *     tags: [Request]
  *     security:
  *       - bearerAuth: []
@@ -142,20 +165,21 @@ requestRouter.delete("/request/:id", deleteRequestController);
  *             properties:
  *               requestId:
  *                 type: string
- *                 description: Request ID to approve/reject
+ *                 format: uuid
+ *                 description: ID of the request record to process
  *                 example: "550e8400-e29b-41d4-a716-446655440000"
  *               approvalStatus:
  *                 type: number
- *                 enum: [1, 2]
- *                 description: 1 = Approved, 2 = Rejected
+ *                 enum: [1, 2, 3]
+ *                 description: "1 = Approved, 2 = Rejected, 3 = Under Review"
  *                 example: 1
  *               approvedBy:
  *                 type: string
- *                 description: User ID or name of the approver
- *                 example: "user-123"
+ *                 description: User ID or display name of the approver
+ *                 example: "user-uuid-or-name"
  *               comment:
  *                 type: string
- *                 description: Optional comment for the approval/rejection
+ *                 description: Optional comment or reason for this approval action
  *                 example: "Approved for budget allocation"
  *     responses:
  *       200:
@@ -163,9 +187,31 @@ requestRouter.delete("/request/:id", deleteRequestController);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Request'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Request approval processed successfully"
+ *                 data:
+ *                   $ref: '#/components/schemas/Request'
  *       400:
- *         description: Invalid request or validation error
+ *         description: Validation error or business rule violation (e.g. previous level not yet approved)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Previous level A must be approved first"
+ *       401:
+ *         description: Unauthorized — bearer token missing or invalid
  *       404:
  *         description: Request not found
  *       500:
