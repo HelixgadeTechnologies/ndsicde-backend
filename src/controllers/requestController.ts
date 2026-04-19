@@ -5,7 +5,7 @@ import {
   errorResponse,
   notFoundResponse,
 } from "../utils/responseHandler";
-import { IRequest } from "../interface/requestInterface";
+import { IRequest, ILineItem } from "../interface/requestInterface";
 import {
   createOrUpdateRequest,
   deleteRequest,
@@ -17,7 +17,7 @@ import {
   getRequestsByProjectId
 } from "../service/requestService";
 
-// ✅ Create or Update Request
+// ✅ Create or Update Request (with Line Items)
 export const createOrUpdateRequestController = async (
   req: Request,
   res: Response
@@ -27,6 +27,13 @@ export const createOrUpdateRequestController = async (
       isCreate: boolean;
       payload: IRequest;
     };
+
+    // Validate requestId is present when updating
+    if (!isCreate && !payload.requestId) {
+      return res
+        .status(400)
+        .json(errorResponse("requestId is required in payload when isCreate is false"));
+    }
 
     const result = await createOrUpdateRequest(payload, isCreate);
 

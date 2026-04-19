@@ -146,15 +146,17 @@ export const getBudgetTrends = async (
         const dateFilter = buildDateFilter(filter);
         const projectFilter = filter.projectId ? { projectId: filter.projectId } : {};
 
-        // Get all requests with budget data
+        // Get all requests with budget data (total is now on lineItems)
         const requests = await prisma.request.findMany({
             where: {
                 ...dateFilter,
                 ...projectFilter,
             },
             select: {
-                total: true,
                 createAt: true,
+                lineItems: {
+                    select: { totalBudget: true },
+                },
             },
         });
 
@@ -187,7 +189,8 @@ export const getBudgetTrends = async (
                 }
 
                 const data = monthlyData.get(monthKey)!;
-                data.budget += request.total || 0;
+                const requestTotal = request.lineItems.reduce((s: number, li: { totalBudget: number | null }) => s + (li.totalBudget || 0), 0);
+                data.budget += requestTotal;
             }
         });
 
@@ -368,8 +371,10 @@ export const getBudgetVsActuals = async (
                         ...dateFilter,
                     },
                     select: {
-                        total: true,
                         status: true,
+                        lineItems: {
+                            select: { totalBudget: true },
+                        },
                         retirement: {
                             where: dateFilter,
                             select: {
@@ -382,14 +387,14 @@ export const getBudgetVsActuals = async (
         });
 
         const budgetVsActuals: IBudgetVsActual[] = projects.map((project) => {
-            // Only sum approved requests
+            // Only sum approved requests (total now lives on lineItems)
             const approvedExpenses = project.request
-                .filter(r => r.status === "Approved")
-                .reduce((sum, r) => sum + (r.total || 0), 0);
+                .filter((r) => r.status === "Approved")
+                .reduce((sum: number, r: { status: string | null; lineItems: { totalBudget: number | null }[]; retirement: { actualCost: number | null }[] }) => sum + r.lineItems.reduce((s: number, li: { totalBudget: number | null }) => s + (li.totalBudget || 0), 0), 0);
 
             // Calculate actual expenses from all retirements across all requests
             const actualExpenses = project.request.reduce((sum, req) => {
-                const reqExpenses = req.retirement.reduce((reqSum, r) => reqSum + (r.actualCost || 0), 0);
+                const reqExpenses = req.retirement.reduce((reqSum: number, r: { actualCost: number | null }) => reqSum + (r.actualCost || 0), 0);
                 return sum + reqExpenses;
             }, 0);
 

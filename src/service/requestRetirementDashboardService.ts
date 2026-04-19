@@ -66,12 +66,12 @@ export const getRequestRetirementDashboardStats = async () => {
         prisma.request.count({ where: { status: "Pending" } }),
     ]);
 
-    // ── Total Approved Amount (sum of `total` on approved requests) ──
-    const approvedAmountAgg = await prisma.request.aggregate({
-        where: { status: "Approved" },
-        _sum: { total: true },
+    // ── Total Approved Amount (sum of lineItem totalBudget for approved requests) ──
+    const approvedAmountAgg = await prisma.lineItem.aggregate({
+        where: { request: { status: "Approved" } },
+        _sum: { totalBudget: true },
     });
-    const totalApprovedAmount = approvedAmountAgg._sum.total ?? 0;
+    const totalApprovedAmount = approvedAmountAgg._sum?.totalBudget ?? 0;
 
     // ── Total Retired Amount (sum of `actualCost` across all retirements) ──
     const retiredAmountAgg = await prisma.retirement.aggregate({

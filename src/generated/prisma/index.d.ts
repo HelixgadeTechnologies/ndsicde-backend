@@ -3609,12 +3609,12 @@ export namespace Prisma {
 
   export type RequestCountOutputType = {
     retirement: number
-    lineItem: number
+    lineItems: number
   }
 
   export type RequestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     retirement?: boolean | RequestCountOutputTypeCountRetirementArgs
-    lineItem?: boolean | RequestCountOutputTypeCountLineItemArgs
+    lineItems?: boolean | RequestCountOutputTypeCountLineItemsArgs
   }
 
   // Custom InputTypes
@@ -3638,7 +3638,7 @@ export namespace Prisma {
   /**
    * RequestCountOutputType without action
    */
-  export type RequestCountOutputTypeCountLineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type RequestCountOutputTypeCountLineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LineItemWhereInput
   }
 
@@ -28011,11 +28011,7 @@ export namespace Prisma {
 
   export type RequestAvgAggregateOutputType = {
     activityBudgetCode: number | null
-    quantity: number | null
-    frequency: number | null
-    unitCost: number | null
     budgetCode: number | null
-    total: number | null
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
@@ -28024,11 +28020,7 @@ export namespace Prisma {
 
   export type RequestSumAggregateOutputType = {
     activityBudgetCode: number | null
-    quantity: number | null
-    frequency: number | null
-    unitCost: number | null
     budgetCode: number | null
-    total: number | null
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
@@ -28045,12 +28037,7 @@ export namespace Prisma {
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    activityLineDescription: string | null
-    quantity: number | null
-    frequency: number | null
-    unitCost: number | null
     budgetCode: number | null
-    total: number | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28090,12 +28077,7 @@ export namespace Prisma {
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    activityLineDescription: string | null
-    quantity: number | null
-    frequency: number | null
-    unitCost: number | null
     budgetCode: number | null
-    total: number | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28135,12 +28117,7 @@ export namespace Prisma {
     activityPurposeDescription: number
     activityStartDate: number
     activityEndDate: number
-    activityLineDescription: number
-    quantity: number
-    frequency: number
-    unitCost: number
     budgetCode: number
-    total: number
     modeOfTransport: number
     driverName: number
     driversPhoneNumber: number
@@ -28174,11 +28151,7 @@ export namespace Prisma {
 
   export type RequestAvgAggregateInputType = {
     activityBudgetCode?: true
-    quantity?: true
-    frequency?: true
-    unitCost?: true
     budgetCode?: true
-    total?: true
     approval_A?: true
     approval_B?: true
     approval_C?: true
@@ -28187,11 +28160,7 @@ export namespace Prisma {
 
   export type RequestSumAggregateInputType = {
     activityBudgetCode?: true
-    quantity?: true
-    frequency?: true
-    unitCost?: true
     budgetCode?: true
-    total?: true
     approval_A?: true
     approval_B?: true
     approval_C?: true
@@ -28208,12 +28177,7 @@ export namespace Prisma {
     activityPurposeDescription?: true
     activityStartDate?: true
     activityEndDate?: true
-    activityLineDescription?: true
-    quantity?: true
-    frequency?: true
-    unitCost?: true
     budgetCode?: true
-    total?: true
     modeOfTransport?: true
     driverName?: true
     driversPhoneNumber?: true
@@ -28253,12 +28217,7 @@ export namespace Prisma {
     activityPurposeDescription?: true
     activityStartDate?: true
     activityEndDate?: true
-    activityLineDescription?: true
-    quantity?: true
-    frequency?: true
-    unitCost?: true
     budgetCode?: true
-    total?: true
     modeOfTransport?: true
     driverName?: true
     driversPhoneNumber?: true
@@ -28298,12 +28257,7 @@ export namespace Prisma {
     activityPurposeDescription?: true
     activityStartDate?: true
     activityEndDate?: true
-    activityLineDescription?: true
-    quantity?: true
-    frequency?: true
-    unitCost?: true
     budgetCode?: true
-    total?: true
     modeOfTransport?: true
     driverName?: true
     driversPhoneNumber?: true
@@ -28430,12 +28384,7 @@ export namespace Prisma {
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    activityLineDescription: string | null
-    quantity: number | null
-    frequency: number | null
-    unitCost: number | null
     budgetCode: number | null
-    total: number | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28494,12 +28443,7 @@ export namespace Prisma {
     activityPurposeDescription?: boolean
     activityStartDate?: boolean
     activityEndDate?: boolean
-    activityLineDescription?: boolean
-    quantity?: boolean
-    frequency?: boolean
-    unitCost?: boolean
     budgetCode?: boolean
-    total?: boolean
     modeOfTransport?: boolean
     driverName?: boolean
     driversPhoneNumber?: boolean
@@ -28531,7 +28475,7 @@ export namespace Prisma {
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
-    lineItem?: boolean | Request$lineItemArgs<ExtArgs>
+    lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["request"]>
 
@@ -28547,12 +28491,7 @@ export namespace Prisma {
     activityPurposeDescription?: boolean
     activityStartDate?: boolean
     activityEndDate?: boolean
-    activityLineDescription?: boolean
-    quantity?: boolean
-    frequency?: boolean
-    unitCost?: boolean
     budgetCode?: boolean
-    total?: boolean
     modeOfTransport?: boolean
     driverName?: boolean
     driversPhoneNumber?: boolean
@@ -28582,13 +28521,13 @@ export namespace Prisma {
     createdBy?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "budgetCode" | "total" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "status" | "createAt" | "updateAt" | "createdBy", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "status" | "createAt" | "updateAt" | "createdBy", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
-    lineItem?: boolean | Request$lineItemArgs<ExtArgs>
+    lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -28599,7 +28538,7 @@ export namespace Prisma {
       project: Prisma.$ProjectPayload<ExtArgs> | null
       user: Prisma.$UserPayload<ExtArgs> | null
       retirement: Prisma.$RetirementPayload<ExtArgs>[]
-      lineItem: Prisma.$LineItemPayload<ExtArgs>[]
+      lineItems: Prisma.$LineItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       requestId: string
@@ -28611,12 +28550,7 @@ export namespace Prisma {
       activityPurposeDescription: string | null
       activityStartDate: Date | null
       activityEndDate: Date | null
-      activityLineDescription: string | null
-      quantity: number | null
-      frequency: number | null
-      unitCost: number | null
       budgetCode: number | null
-      total: number | null
       modeOfTransport: string | null
       driverName: string | null
       driversPhoneNumber: string | null
@@ -28988,7 +28922,7 @@ export namespace Prisma {
     project<T extends Request$projectArgs<ExtArgs> = {}>(args?: Subset<T, Request$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     user<T extends Request$userArgs<ExtArgs> = {}>(args?: Subset<T, Request$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     retirement<T extends Request$retirementArgs<ExtArgs> = {}>(args?: Subset<T, Request$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    lineItem<T extends Request$lineItemArgs<ExtArgs> = {}>(args?: Subset<T, Request$lineItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lineItems<T extends Request$lineItemsArgs<ExtArgs> = {}>(args?: Subset<T, Request$lineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -29027,12 +28961,7 @@ export namespace Prisma {
     readonly activityPurposeDescription: FieldRef<"Request", 'String'>
     readonly activityStartDate: FieldRef<"Request", 'DateTime'>
     readonly activityEndDate: FieldRef<"Request", 'DateTime'>
-    readonly activityLineDescription: FieldRef<"Request", 'String'>
-    readonly quantity: FieldRef<"Request", 'Int'>
-    readonly frequency: FieldRef<"Request", 'Int'>
-    readonly unitCost: FieldRef<"Request", 'Int'>
     readonly budgetCode: FieldRef<"Request", 'Int'>
-    readonly total: FieldRef<"Request", 'Int'>
     readonly modeOfTransport: FieldRef<"Request", 'String'>
     readonly driverName: FieldRef<"Request", 'String'>
     readonly driversPhoneNumber: FieldRef<"Request", 'String'>
@@ -29489,9 +29418,9 @@ export namespace Prisma {
   }
 
   /**
-   * Request.lineItem
+   * Request.lineItems
    */
-  export type Request$lineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Request$lineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the LineItem
      */
@@ -29547,14 +29476,18 @@ export namespace Prisma {
     quantity: number | null
     frequency: number | null
     unitCost: number | null
-    total: number | null
+    totalBudget: number | null
+    totalSpent: number | null
+    variance: number | null
   }
 
   export type LineItemSumAggregateOutputType = {
     quantity: number | null
     frequency: number | null
     unitCost: number | null
-    total: number | null
+    totalBudget: number | null
+    totalSpent: number | null
+    variance: number | null
   }
 
   export type LineItemMinAggregateOutputType = {
@@ -29564,7 +29497,9 @@ export namespace Prisma {
     quantity: number | null
     frequency: number | null
     unitCost: number | null
-    total: number | null
+    totalBudget: number | null
+    totalSpent: number | null
+    variance: number | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -29576,7 +29511,9 @@ export namespace Prisma {
     quantity: number | null
     frequency: number | null
     unitCost: number | null
-    total: number | null
+    totalBudget: number | null
+    totalSpent: number | null
+    variance: number | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -29588,7 +29525,9 @@ export namespace Prisma {
     quantity: number
     frequency: number
     unitCost: number
-    total: number
+    totalBudget: number
+    totalSpent: number
+    variance: number
     createAt: number
     updateAt: number
     _all: number
@@ -29599,14 +29538,18 @@ export namespace Prisma {
     quantity?: true
     frequency?: true
     unitCost?: true
-    total?: true
+    totalBudget?: true
+    totalSpent?: true
+    variance?: true
   }
 
   export type LineItemSumAggregateInputType = {
     quantity?: true
     frequency?: true
     unitCost?: true
-    total?: true
+    totalBudget?: true
+    totalSpent?: true
+    variance?: true
   }
 
   export type LineItemMinAggregateInputType = {
@@ -29616,7 +29559,9 @@ export namespace Prisma {
     quantity?: true
     frequency?: true
     unitCost?: true
-    total?: true
+    totalBudget?: true
+    totalSpent?: true
+    variance?: true
     createAt?: true
     updateAt?: true
   }
@@ -29628,7 +29573,9 @@ export namespace Prisma {
     quantity?: true
     frequency?: true
     unitCost?: true
-    total?: true
+    totalBudget?: true
+    totalSpent?: true
+    variance?: true
     createAt?: true
     updateAt?: true
   }
@@ -29640,7 +29587,9 @@ export namespace Prisma {
     quantity?: true
     frequency?: true
     unitCost?: true
-    total?: true
+    totalBudget?: true
+    totalSpent?: true
+    variance?: true
     createAt?: true
     updateAt?: true
     _all?: true
@@ -29739,7 +29688,9 @@ export namespace Prisma {
     quantity: number | null
     frequency: number | null
     unitCost: number | null
-    total: number | null
+    totalBudget: number | null
+    totalSpent: number | null
+    variance: number | null
     createAt: Date | null
     updateAt: Date | null
     _count: LineItemCountAggregateOutputType | null
@@ -29770,7 +29721,9 @@ export namespace Prisma {
     quantity?: boolean
     frequency?: boolean
     unitCost?: boolean
-    total?: boolean
+    totalBudget?: boolean
+    totalSpent?: boolean
+    variance?: boolean
     createAt?: boolean
     updateAt?: boolean
     request?: boolean | RequestDefaultArgs<ExtArgs>
@@ -29785,12 +29738,14 @@ export namespace Prisma {
     quantity?: boolean
     frequency?: boolean
     unitCost?: boolean
-    total?: boolean
+    totalBudget?: boolean
+    totalSpent?: boolean
+    variance?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "description" | "quantity" | "frequency" | "unitCost" | "total" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
+  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "description" | "quantity" | "frequency" | "unitCost" | "totalBudget" | "totalSpent" | "variance" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
   export type LineItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | RequestDefaultArgs<ExtArgs>
   }
@@ -29807,7 +29762,9 @@ export namespace Prisma {
       quantity: number | null
       frequency: number | null
       unitCost: number | null
-      total: number | null
+      totalBudget: number | null
+      totalSpent: number | null
+      variance: number | null
       createAt: Date | null
       updateAt: Date | null
     }, ExtArgs["result"]["lineItem"]>
@@ -30186,7 +30143,9 @@ export namespace Prisma {
     readonly quantity: FieldRef<"LineItem", 'Int'>
     readonly frequency: FieldRef<"LineItem", 'Int'>
     readonly unitCost: FieldRef<"LineItem", 'Int'>
-    readonly total: FieldRef<"LineItem", 'Int'>
+    readonly totalBudget: FieldRef<"LineItem", 'Int'>
+    readonly totalSpent: FieldRef<"LineItem", 'Int'>
+    readonly variance: FieldRef<"LineItem", 'Int'>
     readonly createAt: FieldRef<"LineItem", 'DateTime'>
     readonly updateAt: FieldRef<"LineItem", 'DateTime'>
   }
@@ -30576,7 +30535,6 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
-    approval_D: number | null
   }
 
   export type RetirementSumAggregateOutputType = {
@@ -30588,7 +30546,6 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
-    approval_D: number | null
   }
 
   export type RetirementMinAggregateOutputType = {
@@ -30604,15 +30561,12 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
-    approval_D: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
-    approvedBy_D: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
-    comment_D: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -30633,15 +30587,12 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
-    approval_D: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
-    approvedBy_D: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
-    comment_D: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -30662,15 +30613,12 @@ export namespace Prisma {
     approval_A: number
     approval_B: number
     approval_C: number
-    approval_D: number
     approvedBy_A: number
     approvedBy_B: number
     approvedBy_C: number
-    approvedBy_D: number
     comment_A: number
     comment_B: number
     comment_C: number
-    comment_D: number
     requestId: number
     status: number
     createdBy: number
@@ -30689,7 +30637,6 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
-    approval_D?: true
   }
 
   export type RetirementSumAggregateInputType = {
@@ -30701,7 +30648,6 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
-    approval_D?: true
   }
 
   export type RetirementMinAggregateInputType = {
@@ -30717,15 +30663,12 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
-    approval_D?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
-    approvedBy_D?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
-    comment_D?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -30746,15 +30689,12 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
-    approval_D?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
-    approvedBy_D?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
-    comment_D?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -30775,15 +30715,12 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
-    approval_D?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
-    approvedBy_D?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
-    comment_D?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -30891,15 +30828,12 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
-    approval_D: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
-    approvedBy_D: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
-    comment_D: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -30939,15 +30873,12 @@ export namespace Prisma {
     approval_A?: boolean
     approval_B?: boolean
     approval_C?: boolean
-    approval_D?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
-    approvedBy_D?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
-    comment_D?: boolean
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
@@ -30972,15 +30903,12 @@ export namespace Prisma {
     approval_A?: boolean
     approval_B?: boolean
     approval_C?: boolean
-    approval_D?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
-    approvedBy_D?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
-    comment_D?: boolean
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
@@ -30988,7 +30916,7 @@ export namespace Prisma {
     updateAt?: boolean
   }
 
-  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
+  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
   export type RetirementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | Retirement$requestArgs<ExtArgs>
     user?: boolean | Retirement$userArgs<ExtArgs>
@@ -31013,15 +30941,12 @@ export namespace Prisma {
       approval_A: number | null
       approval_B: number | null
       approval_C: number | null
-      approval_D: number | null
       approvedBy_A: string | null
       approvedBy_B: string | null
       approvedBy_C: string | null
-      approvedBy_D: string | null
       comment_A: string | null
       comment_B: string | null
       comment_C: string | null
-      comment_D: string | null
       requestId: string | null
       status: string | null
       createdBy: string | null
@@ -31410,15 +31335,12 @@ export namespace Prisma {
     readonly approval_A: FieldRef<"Retirement", 'Int'>
     readonly approval_B: FieldRef<"Retirement", 'Int'>
     readonly approval_C: FieldRef<"Retirement", 'Int'>
-    readonly approval_D: FieldRef<"Retirement", 'Int'>
     readonly approvedBy_A: FieldRef<"Retirement", 'String'>
     readonly approvedBy_B: FieldRef<"Retirement", 'String'>
     readonly approvedBy_C: FieldRef<"Retirement", 'String'>
-    readonly approvedBy_D: FieldRef<"Retirement", 'String'>
     readonly comment_A: FieldRef<"Retirement", 'String'>
     readonly comment_B: FieldRef<"Retirement", 'String'>
     readonly comment_C: FieldRef<"Retirement", 'String'>
-    readonly comment_D: FieldRef<"Retirement", 'String'>
     readonly requestId: FieldRef<"Retirement", 'String'>
     readonly status: FieldRef<"Retirement", 'String'>
     readonly createdBy: FieldRef<"Retirement", 'String'>
@@ -33350,12 +33272,7 @@ export namespace Prisma {
     activityPurposeDescription: 'activityPurposeDescription',
     activityStartDate: 'activityStartDate',
     activityEndDate: 'activityEndDate',
-    activityLineDescription: 'activityLineDescription',
-    quantity: 'quantity',
-    frequency: 'frequency',
-    unitCost: 'unitCost',
     budgetCode: 'budgetCode',
-    total: 'total',
     modeOfTransport: 'modeOfTransport',
     driverName: 'driverName',
     driversPhoneNumber: 'driversPhoneNumber',
@@ -33395,7 +33312,9 @@ export namespace Prisma {
     quantity: 'quantity',
     frequency: 'frequency',
     unitCost: 'unitCost',
-    total: 'total',
+    totalBudget: 'totalBudget',
+    totalSpent: 'totalSpent',
+    variance: 'variance',
     createAt: 'createAt',
     updateAt: 'updateAt'
   };
@@ -33416,15 +33335,12 @@ export namespace Prisma {
     approval_A: 'approval_A',
     approval_B: 'approval_B',
     approval_C: 'approval_C',
-    approval_D: 'approval_D',
     approvedBy_A: 'approvedBy_A',
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
-    approvedBy_D: 'approvedBy_D',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
-    comment_D: 'comment_D',
     requestId: 'requestId',
     status: 'status',
     createdBy: 'createdBy',
@@ -33782,7 +33698,6 @@ export namespace Prisma {
     activityTitle: 'activityTitle',
     activityLocation: 'activityLocation',
     activityPurposeDescription: 'activityPurposeDescription',
-    activityLineDescription: 'activityLineDescription',
     modeOfTransport: 'modeOfTransport',
     driverName: 'driverName',
     driversPhoneNumber: 'driversPhoneNumber',
@@ -33825,11 +33740,9 @@ export namespace Prisma {
     approvedBy_A: 'approvedBy_A',
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
-    approvedBy_D: 'approvedBy_D',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
-    comment_D: 'comment_D',
     requestId: 'requestId',
     status: 'status',
     createdBy: 'createdBy'
@@ -35878,12 +35791,7 @@ export namespace Prisma {
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    activityLineDescription?: StringNullableFilter<"Request"> | string | null
-    quantity?: IntNullableFilter<"Request"> | number | null
-    frequency?: IntNullableFilter<"Request"> | number | null
-    unitCost?: IntNullableFilter<"Request"> | number | null
     budgetCode?: IntNullableFilter<"Request"> | number | null
-    total?: IntNullableFilter<"Request"> | number | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -35915,7 +35823,7 @@ export namespace Prisma {
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
-    lineItem?: LineItemListRelationFilter
+    lineItems?: LineItemListRelationFilter
   }
 
   export type RequestOrderByWithRelationInput = {
@@ -35928,12 +35836,7 @@ export namespace Prisma {
     activityPurposeDescription?: SortOrderInput | SortOrder
     activityStartDate?: SortOrderInput | SortOrder
     activityEndDate?: SortOrderInput | SortOrder
-    activityLineDescription?: SortOrderInput | SortOrder
-    quantity?: SortOrderInput | SortOrder
-    frequency?: SortOrderInput | SortOrder
-    unitCost?: SortOrderInput | SortOrder
     budgetCode?: SortOrderInput | SortOrder
-    total?: SortOrderInput | SortOrder
     modeOfTransport?: SortOrderInput | SortOrder
     driverName?: SortOrderInput | SortOrder
     driversPhoneNumber?: SortOrderInput | SortOrder
@@ -35965,7 +35868,7 @@ export namespace Prisma {
     project?: ProjectOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     retirement?: RetirementOrderByRelationAggregateInput
-    lineItem?: LineItemOrderByRelationAggregateInput
+    lineItems?: LineItemOrderByRelationAggregateInput
     _relevance?: RequestOrderByRelevanceInput
   }
 
@@ -35982,12 +35885,7 @@ export namespace Prisma {
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    activityLineDescription?: StringNullableFilter<"Request"> | string | null
-    quantity?: IntNullableFilter<"Request"> | number | null
-    frequency?: IntNullableFilter<"Request"> | number | null
-    unitCost?: IntNullableFilter<"Request"> | number | null
     budgetCode?: IntNullableFilter<"Request"> | number | null
-    total?: IntNullableFilter<"Request"> | number | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -36019,7 +35917,7 @@ export namespace Prisma {
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
-    lineItem?: LineItemListRelationFilter
+    lineItems?: LineItemListRelationFilter
   }, "requestId">
 
   export type RequestOrderByWithAggregationInput = {
@@ -36032,12 +35930,7 @@ export namespace Prisma {
     activityPurposeDescription?: SortOrderInput | SortOrder
     activityStartDate?: SortOrderInput | SortOrder
     activityEndDate?: SortOrderInput | SortOrder
-    activityLineDescription?: SortOrderInput | SortOrder
-    quantity?: SortOrderInput | SortOrder
-    frequency?: SortOrderInput | SortOrder
-    unitCost?: SortOrderInput | SortOrder
     budgetCode?: SortOrderInput | SortOrder
-    total?: SortOrderInput | SortOrder
     modeOfTransport?: SortOrderInput | SortOrder
     driverName?: SortOrderInput | SortOrder
     driversPhoneNumber?: SortOrderInput | SortOrder
@@ -36085,12 +35978,7 @@ export namespace Prisma {
     activityPurposeDescription?: StringNullableWithAggregatesFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
-    activityLineDescription?: StringNullableWithAggregatesFilter<"Request"> | string | null
-    quantity?: IntNullableWithAggregatesFilter<"Request"> | number | null
-    frequency?: IntNullableWithAggregatesFilter<"Request"> | number | null
-    unitCost?: IntNullableWithAggregatesFilter<"Request"> | number | null
     budgetCode?: IntNullableWithAggregatesFilter<"Request"> | number | null
-    total?: IntNullableWithAggregatesFilter<"Request"> | number | null
     modeOfTransport?: StringNullableWithAggregatesFilter<"Request"> | string | null
     driverName?: StringNullableWithAggregatesFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableWithAggregatesFilter<"Request"> | string | null
@@ -36130,7 +36018,9 @@ export namespace Prisma {
     quantity?: IntNullableFilter<"LineItem"> | number | null
     frequency?: IntNullableFilter<"LineItem"> | number | null
     unitCost?: IntNullableFilter<"LineItem"> | number | null
-    total?: IntNullableFilter<"LineItem"> | number | null
+    totalBudget?: IntNullableFilter<"LineItem"> | number | null
+    totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
@@ -36143,7 +36033,9 @@ export namespace Prisma {
     quantity?: SortOrderInput | SortOrder
     frequency?: SortOrderInput | SortOrder
     unitCost?: SortOrderInput | SortOrder
-    total?: SortOrderInput | SortOrder
+    totalBudget?: SortOrderInput | SortOrder
+    totalSpent?: SortOrderInput | SortOrder
+    variance?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     request?: RequestOrderByWithRelationInput
@@ -36160,7 +36052,9 @@ export namespace Prisma {
     quantity?: IntNullableFilter<"LineItem"> | number | null
     frequency?: IntNullableFilter<"LineItem"> | number | null
     unitCost?: IntNullableFilter<"LineItem"> | number | null
-    total?: IntNullableFilter<"LineItem"> | number | null
+    totalBudget?: IntNullableFilter<"LineItem"> | number | null
+    totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
@@ -36173,7 +36067,9 @@ export namespace Prisma {
     quantity?: SortOrderInput | SortOrder
     frequency?: SortOrderInput | SortOrder
     unitCost?: SortOrderInput | SortOrder
-    total?: SortOrderInput | SortOrder
+    totalBudget?: SortOrderInput | SortOrder
+    totalSpent?: SortOrderInput | SortOrder
+    variance?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: LineItemCountOrderByAggregateInput
@@ -36193,7 +36089,9 @@ export namespace Prisma {
     quantity?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     frequency?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     unitCost?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
-    total?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    totalBudget?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    totalSpent?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    variance?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
   }
@@ -36214,15 +36112,12 @@ export namespace Prisma {
     approval_A?: IntNullableFilter<"Retirement"> | number | null
     approval_B?: IntNullableFilter<"Retirement"> | number | null
     approval_C?: IntNullableFilter<"Retirement"> | number | null
-    approval_D?: IntNullableFilter<"Retirement"> | number | null
     approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
-    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
-    comment_D?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -36245,15 +36140,12 @@ export namespace Prisma {
     approval_A?: SortOrderInput | SortOrder
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
-    approval_D?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
-    approvedBy_D?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
-    comment_D?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -36280,15 +36172,12 @@ export namespace Prisma {
     approval_A?: IntNullableFilter<"Retirement"> | number | null
     approval_B?: IntNullableFilter<"Retirement"> | number | null
     approval_C?: IntNullableFilter<"Retirement"> | number | null
-    approval_D?: IntNullableFilter<"Retirement"> | number | null
     approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
-    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
-    comment_D?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -36311,15 +36200,12 @@ export namespace Prisma {
     approval_A?: SortOrderInput | SortOrder
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
-    approval_D?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
-    approvedBy_D?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
-    comment_D?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -36348,15 +36234,12 @@ export namespace Prisma {
     approval_A?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
     approval_B?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
     approval_C?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
-    approval_D?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
     approvedBy_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     approvedBy_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     approvedBy_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
-    approvedBy_D?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
-    comment_D?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     requestId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     status?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     createdBy?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
@@ -38656,12 +38539,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -38691,7 +38569,7 @@ export namespace Prisma {
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateInput = {
@@ -38704,12 +38582,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -38738,7 +38611,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUpdateInput = {
@@ -38750,12 +38623,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38785,7 +38653,7 @@ export namespace Prisma {
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateInput = {
@@ -38798,12 +38666,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38832,7 +38695,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateManyInput = {
@@ -38845,12 +38708,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -38889,12 +38747,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38932,12 +38785,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38973,10 +38821,12 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    request: RequestCreateNestedOneWithoutLineItemInput
+    request: RequestCreateNestedOneWithoutLineItemsInput
   }
 
   export type LineItemUncheckedCreateInput = {
@@ -38986,7 +38836,9 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -38997,10 +38849,12 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    request?: RequestUpdateOneRequiredWithoutLineItemNestedInput
+    request?: RequestUpdateOneRequiredWithoutLineItemsNestedInput
   }
 
   export type LineItemUncheckedUpdateInput = {
@@ -39010,7 +38864,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39022,7 +38878,9 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -39033,7 +38891,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39045,7 +38905,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39063,15 +38925,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -39092,15 +38951,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
@@ -39121,15 +38977,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39150,15 +39003,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39179,15 +39029,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
@@ -39208,15 +39055,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39235,15 +39079,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40950,12 +40791,7 @@ export namespace Prisma {
     activityPurposeDescription?: SortOrder
     activityStartDate?: SortOrder
     activityEndDate?: SortOrder
-    activityLineDescription?: SortOrder
-    quantity?: SortOrder
-    frequency?: SortOrder
-    unitCost?: SortOrder
     budgetCode?: SortOrder
-    total?: SortOrder
     modeOfTransport?: SortOrder
     driverName?: SortOrder
     driversPhoneNumber?: SortOrder
@@ -40987,11 +40823,7 @@ export namespace Prisma {
 
   export type RequestAvgOrderByAggregateInput = {
     activityBudgetCode?: SortOrder
-    quantity?: SortOrder
-    frequency?: SortOrder
-    unitCost?: SortOrder
     budgetCode?: SortOrder
-    total?: SortOrder
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
@@ -41008,12 +40840,7 @@ export namespace Prisma {
     activityPurposeDescription?: SortOrder
     activityStartDate?: SortOrder
     activityEndDate?: SortOrder
-    activityLineDescription?: SortOrder
-    quantity?: SortOrder
-    frequency?: SortOrder
-    unitCost?: SortOrder
     budgetCode?: SortOrder
-    total?: SortOrder
     modeOfTransport?: SortOrder
     driverName?: SortOrder
     driversPhoneNumber?: SortOrder
@@ -41053,12 +40880,7 @@ export namespace Prisma {
     activityPurposeDescription?: SortOrder
     activityStartDate?: SortOrder
     activityEndDate?: SortOrder
-    activityLineDescription?: SortOrder
-    quantity?: SortOrder
-    frequency?: SortOrder
-    unitCost?: SortOrder
     budgetCode?: SortOrder
-    total?: SortOrder
     modeOfTransport?: SortOrder
     driverName?: SortOrder
     driversPhoneNumber?: SortOrder
@@ -41090,11 +40912,7 @@ export namespace Prisma {
 
   export type RequestSumOrderByAggregateInput = {
     activityBudgetCode?: SortOrder
-    quantity?: SortOrder
-    frequency?: SortOrder
-    unitCost?: SortOrder
     budgetCode?: SortOrder
-    total?: SortOrder
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
@@ -41119,7 +40937,9 @@ export namespace Prisma {
     quantity?: SortOrder
     frequency?: SortOrder
     unitCost?: SortOrder
-    total?: SortOrder
+    totalBudget?: SortOrder
+    totalSpent?: SortOrder
+    variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -41128,7 +40948,9 @@ export namespace Prisma {
     quantity?: SortOrder
     frequency?: SortOrder
     unitCost?: SortOrder
-    total?: SortOrder
+    totalBudget?: SortOrder
+    totalSpent?: SortOrder
+    variance?: SortOrder
   }
 
   export type LineItemMaxOrderByAggregateInput = {
@@ -41138,7 +40960,9 @@ export namespace Prisma {
     quantity?: SortOrder
     frequency?: SortOrder
     unitCost?: SortOrder
-    total?: SortOrder
+    totalBudget?: SortOrder
+    totalSpent?: SortOrder
+    variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -41150,7 +40974,9 @@ export namespace Prisma {
     quantity?: SortOrder
     frequency?: SortOrder
     unitCost?: SortOrder
-    total?: SortOrder
+    totalBudget?: SortOrder
+    totalSpent?: SortOrder
+    variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -41159,7 +40985,9 @@ export namespace Prisma {
     quantity?: SortOrder
     frequency?: SortOrder
     unitCost?: SortOrder
-    total?: SortOrder
+    totalBudget?: SortOrder
+    totalSpent?: SortOrder
+    variance?: SortOrder
   }
 
   export type RequestNullableScalarRelationFilter = {
@@ -41186,15 +41014,12 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
-    approval_D?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
-    approvedBy_D?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
-    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -41211,7 +41036,6 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
-    approval_D?: SortOrder
   }
 
   export type RetirementMaxOrderByAggregateInput = {
@@ -41227,15 +41051,12 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
-    approval_D?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
-    approvedBy_D?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
-    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -41256,15 +41077,12 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
-    approval_D?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
-    approvedBy_D?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
-    comment_D?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -41281,7 +41099,6 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
-    approval_D?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -43437,18 +43254,18 @@ export namespace Prisma {
     deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
   }
 
-  export type RequestCreateNestedOneWithoutLineItemInput = {
-    create?: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
-    connectOrCreate?: RequestCreateOrConnectWithoutLineItemInput
+  export type RequestCreateNestedOneWithoutLineItemsInput = {
+    create?: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutLineItemsInput
     connect?: RequestWhereUniqueInput
   }
 
-  export type RequestUpdateOneRequiredWithoutLineItemNestedInput = {
-    create?: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
-    connectOrCreate?: RequestCreateOrConnectWithoutLineItemInput
-    upsert?: RequestUpsertWithoutLineItemInput
+  export type RequestUpdateOneRequiredWithoutLineItemsNestedInput = {
+    create?: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutLineItemsInput
+    upsert?: RequestUpsertWithoutLineItemsInput
     connect?: RequestWhereUniqueInput
-    update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutLineItemInput, RequestUpdateWithoutLineItemInput>, RequestUncheckedUpdateWithoutLineItemInput>
+    update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutLineItemsInput, RequestUpdateWithoutLineItemsInput>, RequestUncheckedUpdateWithoutLineItemsInput>
   }
 
   export type RequestCreateNestedOneWithoutRetirementInput = {
@@ -43807,12 +43624,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -43841,7 +43653,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutUserInput = {
@@ -43854,12 +43666,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -43887,7 +43694,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutUserInput = {
@@ -43913,15 +43720,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -43941,15 +43745,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     requestId?: string | null
     status?: string | null
     createAt?: Date | string | null
@@ -44090,12 +43891,7 @@ export namespace Prisma {
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    activityLineDescription?: StringNullableFilter<"Request"> | string | null
-    quantity?: IntNullableFilter<"Request"> | number | null
-    frequency?: IntNullableFilter<"Request"> | number | null
-    unitCost?: IntNullableFilter<"Request"> | number | null
     budgetCode?: IntNullableFilter<"Request"> | number | null
-    total?: IntNullableFilter<"Request"> | number | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -44157,15 +43953,12 @@ export namespace Prisma {
     approval_A?: IntNullableFilter<"Retirement"> | number | null
     approval_B?: IntNullableFilter<"Retirement"> | number | null
     approval_C?: IntNullableFilter<"Retirement"> | number | null
-    approval_D?: IntNullableFilter<"Retirement"> | number | null
     approvedBy_A?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_B?: StringNullableFilter<"Retirement"> | string | null
     approvedBy_C?: StringNullableFilter<"Retirement"> | string | null
-    approvedBy_D?: StringNullableFilter<"Retirement"> | string | null
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
-    comment_D?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -45425,12 +45218,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -45459,7 +45247,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutProjectInput = {
@@ -45472,12 +45260,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -45505,7 +45288,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutProjectInput = {
@@ -47312,12 +47095,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -47346,7 +47124,7 @@ export namespace Prisma {
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutOutputInput = {
@@ -47358,12 +47136,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -47392,7 +47165,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
-    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutOutputInput = {
@@ -48936,15 +48709,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -48964,15 +48734,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     status?: string | null
     createdBy?: string | null
     createAt?: Date | string | null
@@ -48995,7 +48762,9 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -49006,7 +48775,9 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -49228,12 +48999,14 @@ export namespace Prisma {
     quantity?: IntNullableFilter<"LineItem"> | number | null
     frequency?: IntNullableFilter<"LineItem"> | number | null
     unitCost?: IntNullableFilter<"LineItem"> | number | null
-    total?: IntNullableFilter<"LineItem"> | number | null
+    totalBudget?: IntNullableFilter<"LineItem"> | number | null
+    totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
   }
 
-  export type RequestCreateWithoutLineItemInput = {
+  export type RequestCreateWithoutLineItemsInput = {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
@@ -49242,12 +49015,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -49279,7 +49047,7 @@ export namespace Prisma {
     retirement?: RetirementCreateNestedManyWithoutRequestInput
   }
 
-  export type RequestUncheckedCreateWithoutLineItemInput = {
+  export type RequestUncheckedCreateWithoutLineItemsInput = {
     requestId?: string
     staff?: string | null
     outputId?: string | null
@@ -49289,12 +49057,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -49325,23 +49088,23 @@ export namespace Prisma {
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
   }
 
-  export type RequestCreateOrConnectWithoutLineItemInput = {
+  export type RequestCreateOrConnectWithoutLineItemsInput = {
     where: RequestWhereUniqueInput
-    create: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+    create: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
   }
 
-  export type RequestUpsertWithoutLineItemInput = {
-    update: XOR<RequestUpdateWithoutLineItemInput, RequestUncheckedUpdateWithoutLineItemInput>
-    create: XOR<RequestCreateWithoutLineItemInput, RequestUncheckedCreateWithoutLineItemInput>
+  export type RequestUpsertWithoutLineItemsInput = {
+    update: XOR<RequestUpdateWithoutLineItemsInput, RequestUncheckedUpdateWithoutLineItemsInput>
+    create: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
     where?: RequestWhereInput
   }
 
-  export type RequestUpdateToOneWithWhereWithoutLineItemInput = {
+  export type RequestUpdateToOneWithWhereWithoutLineItemsInput = {
     where?: RequestWhereInput
-    data: XOR<RequestUpdateWithoutLineItemInput, RequestUncheckedUpdateWithoutLineItemInput>
+    data: XOR<RequestUpdateWithoutLineItemsInput, RequestUncheckedUpdateWithoutLineItemsInput>
   }
 
-  export type RequestUpdateWithoutLineItemInput = {
+  export type RequestUpdateWithoutLineItemsInput = {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49350,12 +49113,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49387,7 +49145,7 @@ export namespace Prisma {
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
   }
 
-  export type RequestUncheckedUpdateWithoutLineItemInput = {
+  export type RequestUncheckedUpdateWithoutLineItemsInput = {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49397,12 +49155,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49442,12 +49195,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -49476,7 +49224,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
-    lineItem?: LineItemCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutRetirementInput = {
@@ -49489,12 +49237,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -49522,7 +49265,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
-    lineItem?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutRetirementInput = {
@@ -49607,12 +49350,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49641,7 +49379,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
-    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutRetirementInput = {
@@ -49654,12 +49392,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -49687,7 +49420,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
-    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type UserUpsertWithoutRetirementInput = {
@@ -49913,12 +49646,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -49960,15 +49688,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     requestId?: string | null
     status?: string | null
     createAt?: Date | string | null
@@ -50064,12 +49789,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50098,7 +49818,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutUserInput = {
@@ -50111,12 +49831,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50144,7 +49859,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutUserInput = {
@@ -50157,12 +49872,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -50204,15 +49914,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50232,15 +49939,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50260,15 +49964,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -50730,12 +50431,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51049,12 +50745,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51083,7 +50774,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutProjectInput = {
@@ -51096,12 +50787,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51129,7 +50815,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutProjectInput = {
@@ -51142,12 +50828,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51718,12 +51399,7 @@ export namespace Prisma {
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    activityLineDescription?: string | null
-    quantity?: number | null
-    frequency?: number | null
-    unitCost?: number | null
     budgetCode?: number | null
-    total?: number | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51812,12 +51488,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51846,7 +51517,7 @@ export namespace Prisma {
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutOutputInput = {
@@ -51858,12 +51529,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51892,7 +51558,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
-    lineItem?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutOutputInput = {
@@ -51904,12 +51570,7 @@ export namespace Prisma {
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: NullableIntFieldUpdateOperationsInput | number | null
-    frequency?: NullableIntFieldUpdateOperationsInput | number | null
-    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52152,15 +51813,12 @@ export namespace Prisma {
     approval_A?: number | null
     approval_B?: number | null
     approval_C?: number | null
-    approval_D?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
-    approvedBy_D?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
-    comment_D?: string | null
     status?: string | null
     createdBy?: string | null
     createAt?: Date | string | null
@@ -52173,7 +51831,9 @@ export namespace Prisma {
     quantity?: number | null
     frequency?: number | null
     unitCost?: number | null
-    total?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -52191,15 +51851,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52219,15 +51876,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52247,15 +51901,12 @@ export namespace Prisma {
     approval_A?: NullableIntFieldUpdateOperationsInput | number | null
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
-    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
-    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
-    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52268,7 +51919,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -52279,7 +51932,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -52290,7 +51945,9 @@ export namespace Prisma {
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
-    total?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

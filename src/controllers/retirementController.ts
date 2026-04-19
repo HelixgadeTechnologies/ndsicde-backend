@@ -4,7 +4,7 @@ import { createOrUpdateRetirement, deleteRetirement, getAllRetirements, getRetir
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
 
 
-// ✅ Create or Update Retirement
+// ✅ Create or Update Retirement (with LineItems)
 export const createOrUpdateRetirementController = async (
   req: Request,
   res: Response
@@ -14,6 +14,20 @@ export const createOrUpdateRetirementController = async (
       isCreate: boolean;
       payload: IRetirement;
     };
+
+    // Validate retirementId is present when updating
+    if (!isCreate && !payload.retirementId) {
+      return res
+        .status(400)
+        .json(errorResponse("retirementId is required in payload when isCreate is false"));
+    }
+
+    // Validate requestId is present when lineItems are provided
+    if (payload.lineItems && payload.lineItems.length > 0 && !payload.requestId) {
+      return res
+        .status(400)
+        .json(errorResponse("requestId is required in payload when lineItems are provided"));
+    }
 
     const result = await createOrUpdateRetirement(payload, isCreate);
 

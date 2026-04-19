@@ -423,6 +423,20 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+        LineItem: {
+          type: "object",
+          properties: {
+            lineItemId: { type: "string", format: "uuid" },
+            requestId: { type: "string", format: "uuid" },
+            description: { type: "string", example: "Venue hire" },
+            quantity: { type: "integer", example: 1 },
+            frequency: { type: "integer", example: 1 },
+            unitCost: { type: "integer", example: 50000 },
+            total: { type: "integer", example: 50000 },
+            createAt: { type: "string", format: "date-time" },
+            updateAt: { type: "string", format: "date-time" },
+          },
+        },
         Request: {
           type: "object",
           properties: {
@@ -540,6 +554,12 @@ const options: swaggerJSDoc.Options = {
             status: {
               type: "string",
               nullable: true,
+            },
+            lineItems: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/LineItem",
+              },
             },
           },
         },

@@ -17,8 +17,16 @@ const requestRouter: Router = Router();
  * @swagger
  * /api/request/request:
  *   post:
- *     summary: Create or Update a Request
- *     description: Use `isCreate = true` to create a new Request, and `isCreate = false` to update an existing one.
+ *     summary: Create or Update a Request (with Line Items)
+ *     description: |
+ *       Use `isCreate = true` to create a new Request, and `isCreate = false` to update an existing one.
+ *
+ *       **Line Items behaviour:**
+ *       - Pass an array of line items under `payload.lineItems`.
+ *       - On **create**: all line items are saved to the `lineitem` table linked to the new request.
+ *       - On **update**: existing line items for the request are **deleted and replaced** with the new array sent.
+ *       - If `lineItems` is empty or omitted, no line items are stored.
+ *       - `status` defaults to `"Pending"` on create if not provided.
  *     tags: [Request]
  *     security:
  *       - bearerAuth: []
@@ -28,19 +36,142 @@ const requestRouter: Router = Router();
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - isCreate
+ *               - payload
  *             properties:
  *               isCreate:
  *                 type: boolean
+ *                 description: true = create new request, false = update existing
  *                 example: true
  *               payload:
- *                 $ref: '#/components/schemas/Request'
+ *                 type: object
+ *                 properties:
+ *                   requestId:
+ *                     type: string
+ *                     format: uuid
+ *                     description: Required only when isCreate = false
+ *                     example: "550e8400-e29b-41d4-a716-446655440000"
+ *                   staff:
+ *                     type: string
+ *                     example: "John Doe"
+ *                   outputId:
+ *                     type: string
+ *                     format: uuid
+ *                   activityTitle:
+ *                     type: string
+ *                     example: "Community Training Workshop"
+ *                   activityBudgetCode:
+ *                     type: number
+ *                     example: 1001
+ *                   activityLocation:
+ *                     type: string
+ *                     example: "Port Harcourt"
+ *                   activityPurposeDescription:
+ *                     type: string
+ *                     example: "Training of community members on livelihood skills"
+ *                   activityStartDate:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-01T08:00:00Z"
+ *                   activityEndDate:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-03T17:00:00Z"
+ *                   budgetCode:
+ *                     type: number
+ *                     example: 2001
+ *                   modeOfTransport:
+ *                     type: string
+ *                     example: "Bus"
+ *                   driverName:
+ *                     type: string
+ *                     example: "Emeka Obi"
+ *                   driversPhoneNumber:
+ *                     type: string
+ *                     example: "08012345678"
+ *                   vehiclePlateNumber:
+ *                     type: string
+ *                     example: "RSH-312-AB"
+ *                   vehicleColor:
+ *                     type: string
+ *                     example: "White"
+ *                   departureTime:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-01T07:00:00Z"
+ *                   route:
+ *                     type: string
+ *                     example: "Port Harcourt → Aba → Umuahia"
+ *                   recipientPhoneNumber:
+ *                     type: string
+ *                     example: "08098765432"
+ *                   documentName:
+ *                     type: string
+ *                     example: "Budget_Breakdown.pdf"
+ *                   documentURL:
+ *                     type: string
+ *                     example: "https://storage.example.com/docs/Budget_Breakdown.pdf"
+ *                   projectId:
+ *                     type: string
+ *                     format: uuid
+ *                   createdBy:
+ *                     type: string
+ *                     format: uuid
+ *                     description: User ID of the staff creating the request
+ *                   status:
+ *                     type: string
+ *                     example: "Pending"
+ *                     description: Defaults to "Pending" on create if omitted
+ *                   lineItems:
+ *                     type: array
+ *                     description: Budget line items to be saved in the lineitem table
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         description:
+ *                           type: string
+ *                           example: "Venue hire"
+ *                         quantity:
+ *                           type: number
+ *                           example: 1
+ *                         frequency:
+ *                           type: number
+ *                           example: 2
+ *                         unitCost:
+ *                           type: number
+ *                           example: 50000
+ *                         totalBudget:
+ *                           type: number
+ *                           example: 100000
  *     responses:
  *       200:
- *         description: Request created/updated successfully
+ *         description: Request created/updated successfully with line items
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Request'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Request created successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     requestId:
+ *                       type: string
+ *                       format: uuid
+ *                     lineItems:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/LineItem'
+ *       400:
+ *         description: Validation error (e.g. missing requestId on update)
+ *       401:
+ *         description: Unauthorized
  *       500:
  *         description: Server error
  */

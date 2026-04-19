@@ -1,3 +1,5 @@
+import { ILineItem } from "./requestInterface";
+
 export interface IRetirement {
   retirementId: string;
   activityLineDescription?: string;
@@ -12,6 +14,7 @@ export interface IRetirement {
   status?: string;
   createAt?: Date;
   updateAt?: Date;
+  lineItems?: ILineItem[];
 }
 export interface IRetirementView {
   retirementId: string;
@@ -41,4 +44,6 @@ export interface IRetirementView {
   createAt?: Date;
   updateAt?: Date;
   projectName?: string;
+  projectId?: string;
+  lineItems?: ILineItem[];
 }

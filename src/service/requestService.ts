@@ -1,94 +1,169 @@
-import { IDataValidationStats, IRequest, IRequestView } from "../interface/requestInterface";
+import { IDataValidationStats, ILineItem, IRequest, IRequestView } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
 
-// ✅ Create or Update Request
+// ✅ Create or Update Request (with LineItems saved to lineitem table)
 export const createOrUpdateRequest = async (
   payload: IRequest,
   isCreate: boolean
 ) => {
+  const lineItems: ILineItem[] = payload.lineItems || [];
+
   if (isCreate) {
-    return await prisma.request.create({
-      data: {
-        staff: payload.staff,
-        outputId: payload.outputId,
-        activityTitle: payload.activityTitle,
-        activityBudgetCode: payload.activityBudgetCode,
-        activityLocation: payload.activityLocation,
-        activityPurposeDescription: payload.activityPurposeDescription,
-        activityStartDate: payload.activityStartDate,
-        activityEndDate: payload.activityEndDate,
-        activityLineDescription: payload.activityLineDescription,
-        quantity: payload.quantity,
-        frequency: payload.frequency,
-        unitCost: payload.unitCost,
-        budgetCode: payload.budgetCode,
-        total: payload.total,
-        modeOfTransport: payload.modeOfTransport,
-        driverName: payload.driverName,
-        driversPhoneNumber: payload.driversPhoneNumber,
-        vehiclePlateNumber: payload.vehiclePlateNumber,
-        vehicleColor: payload.vehicleColor,
-        departureTime: payload.departureTime,
-        route: payload.route,
-        recipientPhoneNumber: payload.recipientPhoneNumber,
-        documentName: payload.documentName,
-        documentURL: payload.documentURL,
-        projectId: payload.projectId,
-        status: payload.status,
-      },
+    // 🔀 Use a transaction to create request + line items atomically
+    return await prisma.$transaction(async (tx) => {
+      const newRequest = await tx.request.create({
+        data: {
+          staff: payload.staff,
+          outputId: payload.outputId,
+          activityTitle: payload.activityTitle,
+          activityBudgetCode: payload.activityBudgetCode,
+          activityLocation: payload.activityLocation,
+          activityPurposeDescription: payload.activityPurposeDescription,
+          activityStartDate: payload.activityStartDate,
+          activityEndDate: payload.activityEndDate,
+          budgetCode: payload.budgetCode,
+          modeOfTransport: payload.modeOfTransport,
+          driverName: payload.driverName,
+          driversPhoneNumber: payload.driversPhoneNumber,
+          vehiclePlateNumber: payload.vehiclePlateNumber,
+          vehicleColor: payload.vehicleColor,
+          departureTime: payload.departureTime,
+          route: payload.route,
+          recipientPhoneNumber: payload.recipientPhoneNumber,
+          documentName: payload.documentName,
+          documentURL: payload.documentURL,
+          projectId: payload.projectId,
+          createdBy: payload.createdBy,
+          status: payload.status ?? "Pending",
+        },
+      });
+
+      // ✅ Save each line item linked to the new request
+      if (lineItems.length > 0) {
+        await tx.lineItem.createMany({
+          data: lineItems.map((item) => ({
+            requestId: newRequest.requestId,
+            description: item.description,
+            quantity: item.quantity,
+            frequency: item.frequency,
+            unitCost: item.unitCost,
+            totalBudget: item.totalBudget,
+            totalSpent: null,
+            variance: null
+          })),
+        });
+      }
+
+      // Return request with its line items
+      return await tx.request.findUnique({
+        where: { requestId: newRequest.requestId },
+        include: { lineItems: true },
+      });
     });
   } else {
-    return await prisma.request.update({
-      where: { requestId: payload.requestId },
-      data: {
-        staff: payload.staff,
-        outputId: payload.outputId,
-        activityTitle: payload.activityTitle,
-        activityBudgetCode: payload.activityBudgetCode,
-        activityLocation: payload.activityLocation,
-        activityPurposeDescription: payload.activityPurposeDescription,
-        activityStartDate: payload.activityStartDate,
-        activityEndDate: payload.activityEndDate,
-        activityLineDescription: payload.activityLineDescription,
-        quantity: payload.quantity,
-        frequency: payload.frequency,
-        unitCost: payload.unitCost,
-        budgetCode: payload.budgetCode,
-        total: payload.total,
-        modeOfTransport: payload.modeOfTransport,
-        driverName: payload.driverName,
-        driversPhoneNumber: payload.driversPhoneNumber,
-        vehiclePlateNumber: payload.vehiclePlateNumber,
-        vehicleColor: payload.vehicleColor,
-        departureTime: payload.departureTime,
-        route: payload.route,
-        recipientPhoneNumber: payload.recipientPhoneNumber,
-        documentName: payload.documentName,
-        documentURL: payload.documentURL,
-        projectId: payload.projectId,
-        status: payload.status,
-        updateAt: new Date(),
-      },
+    if (!payload.requestId) {
+      throw new Error("requestId is required for update");
+    }
+
+    // 🔀 Transaction: update request + replace all line items
+    return await prisma.$transaction(async (tx) => {
+      await tx.request.update({
+        where: { requestId: payload.requestId },
+        data: {
+          staff: payload.staff,
+          outputId: payload.outputId,
+          activityTitle: payload.activityTitle,
+          activityBudgetCode: payload.activityBudgetCode,
+          activityLocation: payload.activityLocation,
+          activityPurposeDescription: payload.activityPurposeDescription,
+          activityStartDate: payload.activityStartDate,
+          activityEndDate: payload.activityEndDate,
+          budgetCode: payload.budgetCode,
+          modeOfTransport: payload.modeOfTransport,
+          driverName: payload.driverName,
+          driversPhoneNumber: payload.driversPhoneNumber,
+          vehiclePlateNumber: payload.vehiclePlateNumber,
+          vehicleColor: payload.vehicleColor,
+          departureTime: payload.departureTime,
+          route: payload.route,
+          recipientPhoneNumber: payload.recipientPhoneNumber,
+          documentName: payload.documentName,
+          documentURL: payload.documentURL,
+          projectId: payload.projectId,
+          createdBy: payload.createdBy,
+          status: payload.status,
+          updateAt: new Date(),
+        },
+      });
+
+      // ✅ Replace line items: delete old ones and re-insert
+      await tx.lineItem.deleteMany({
+        where: { requestId: payload.requestId },
+      });
+
+      if (lineItems.length > 0) {
+        await tx.lineItem.createMany({
+          data: lineItems.map((item) => ({
+            requestId: payload.requestId!,
+            description: item.description,
+            quantity: item.quantity,
+            frequency: item.frequency,
+            unitCost: item.unitCost,
+            totalBudget: item.totalBudget,
+            totalSpent: null,
+            variance: null,
+          })),
+        });
+      }
+
+      // Return updated request with its line items
+      return await tx.request.findUnique({
+        where: { requestId: payload.requestId },
+        include: { lineItems: true },
+      });
     });
   }
 };
 
-// ✅ Get all Requests (from view)
+
+// ✅ Get all Requests (from view) — with line items
 export const getAllRequests = async (): Promise<IRequestView[]> => {
-  return await prisma.$queryRaw<IRequestView[]>`
+  const requests = await prisma.$queryRaw<IRequestView[]>`
     SELECT * FROM request_view
   `;
+
+  if (requests.length === 0) return [];
+
+  // Fetch all line items in one query and group by requestId
+  const requestIds = requests.map((r) => r.requestId);
+  const allLineItems = await prisma.lineItem.findMany({
+    where: { requestId: { in: requestIds } },
+  });
+
+  // Attach line items to their parent request
+  return requests.map((r) => ({
+    ...r,
+    lineItems: allLineItems.filter((li) => li.requestId === r.requestId),
+  }));
 };
 
-// ✅ Get Request by ID (from view)
+// ✅ Get Request by ID (from view) — with line items
 export const getRequestById = async (
   requestId: string
 ): Promise<IRequestView | null> => {
   const result = await prisma.$queryRaw<IRequestView[]>`
-    SELECT * FROM request_view WHERE "requestId" = ${requestId}
+    SELECT * FROM request_view WHERE requestId = ${requestId}
   `;
-  return result.length > 0 ? result[0] : null;
+
+  if (result.length === 0) return null;
+
+  const lineItems = await prisma.lineItem.findMany({
+    where: { requestId },
+  });
+
+  return { ...result[0], lineItems };
 };
+
 
 // ✅ Delete Request
 export const deleteRequest = async (requestId: string) => {
@@ -373,6 +448,7 @@ export const getRequestsWithDateFilter = async (
             projectName: true,
           },
         },
+        lineItems: true,
       },
       orderBy: {
         createAt: 'desc',
@@ -398,6 +474,7 @@ export const getRequestsByProjectId = async (projectId: string) => {
           },
         },
         retirement: true,
+        lineItems: true,
       },
       orderBy: {
         createAt: 'desc',

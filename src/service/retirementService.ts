@@ -1,54 +1,152 @@
 import { IRetirement, IRetirementView } from "../interface/retirementInterface";
+import { ILineItem } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
 
-// ✅ Create or Update Retirement
+// ✅ Create or Update Retirement (with LineItems)
 export const createOrUpdateRetirement = async (
   payload: IRetirement,
   isCreate: boolean
 ) => {
+  const lineItems: ILineItem[] = payload.lineItems || [];
+
   if (isCreate) {
-    return await prisma.retirement.create({
-      data: {
-        activityLineDescription: payload.activityLineDescription,
-        quantity: payload.quantity,
-        frequency: payload.frequency,
-        unitCost: payload.unitCost,
-        actualCost: payload.actualCost,
-        totalBudget: payload.totalBudget,
-        documentName: payload.documentName,
-        documentURL: payload.documentURL,
-        requestId: payload.requestId,
-        status: payload.status,
-      },
+    return await prisma.$transaction(async (tx) => {
+      // 1️⃣ Create the retirement record
+      const newRetirement = await tx.retirement.create({
+        data: {
+          activityLineDescription: payload.activityLineDescription,
+          quantity: payload.quantity,
+          frequency: payload.frequency,
+          unitCost: payload.unitCost,
+          actualCost: payload.actualCost,
+          totalBudget: payload.totalBudget,
+          documentName: payload.documentName,
+          documentURL: payload.documentURL,
+          requestId: payload.requestId,
+          status: payload.status ?? "Pending",
+        },
+      });
+
+      // 2️⃣ Upsert each line item (update totalSpent & variance on existing rows)
+      if (lineItems.length > 0 && payload.requestId) {
+        for (const item of lineItems) {
+          if (item.lineItemId) {
+            // Update existing line item
+            await tx.lineItem.update({
+              where: { lineItemId: item.lineItemId },
+              data: {
+                totalSpent: item.totalSpent ?? null,
+                variance: item.variance ?? null,
+                updateAt: new Date(),
+              },
+            });
+          } else {
+            // Create a new line item linked to the request
+            await tx.lineItem.create({
+              data: {
+                requestId: payload.requestId!,
+                description: item.description ?? null,
+                quantity: item.quantity ?? null,
+                frequency: item.frequency ?? null,
+                unitCost: item.unitCost ?? null,
+                totalBudget: item.totalBudget ?? null,
+                totalSpent: item.totalSpent ?? null,
+                variance: item.variance ?? null,
+              },
+            });
+          }
+        }
+      }
+
+      // 3️⃣ Return retirement + updated line items
+      const updatedLineItems = payload.requestId
+        ? await tx.lineItem.findMany({ where: { requestId: payload.requestId } })
+        : [];
+
+      return { ...newRetirement, lineItems: updatedLineItems };
     });
   } else {
     if (!payload.retirementId) {
       throw new Error("retirementId is required for update");
     }
-    return await prisma.retirement.update({
-      where: { retirementId: payload.retirementId },
-      data: {
-        activityLineDescription: payload.activityLineDescription,
-        quantity: payload.quantity,
-        frequency: payload.frequency,
-        unitCost: payload.unitCost,
-        actualCost: payload.actualCost,
-        totalBudget: payload.totalBudget,
-        documentName: payload.documentName,
-        documentURL: payload.documentURL,
-        requestId: payload.requestId,
-        status: payload.status,
-        updateAt: new Date(),
-      },
+
+    return await prisma.$transaction(async (tx) => {
+      // 1️⃣ Update the retirement record
+      const updatedRetirement = await tx.retirement.update({
+        where: { retirementId: payload.retirementId },
+        data: {
+          activityLineDescription: payload.activityLineDescription,
+          quantity: payload.quantity,
+          frequency: payload.frequency,
+          unitCost: payload.unitCost,
+          actualCost: payload.actualCost,
+          totalBudget: payload.totalBudget,
+          documentName: payload.documentName,
+          documentURL: payload.documentURL,
+          requestId: payload.requestId,
+          status: payload.status,
+          updateAt: new Date(),
+        },
+      });
+
+      // 2️⃣ Upsert each line item (update totalSpent & variance on existing rows)
+      if (lineItems.length > 0 && payload.requestId) {
+        for (const item of lineItems) {
+          if (item.lineItemId) {
+            // Update existing line item
+            await tx.lineItem.update({
+              where: { lineItemId: item.lineItemId },
+              data: {
+                totalSpent: item.totalSpent ?? null,
+                variance: item.variance ?? null,
+                updateAt: new Date(),
+              },
+            });
+          } else {
+            // Create a new line item linked to the request
+            await tx.lineItem.create({
+              data: {
+                requestId: payload.requestId!,
+                description: item.description ?? null,
+                quantity: item.quantity ?? null,
+                frequency: item.frequency ?? null,
+                unitCost: item.unitCost ?? null,
+                totalBudget: item.totalBudget ?? null,
+                totalSpent: item.totalSpent ?? null,
+                variance: item.variance ?? null,
+              },
+            });
+          }
+        }
+      }
+
+      // 3️⃣ Return retirement + updated line items
+      const updatedLineItems = payload.requestId
+        ? await tx.lineItem.findMany({ where: { requestId: payload.requestId } })
+        : [];
+
+      return { ...updatedRetirement, lineItems: updatedLineItems };
     });
   }
 };
 
 // ✅ Get All Retirements (from view)
 export const getAllRetirements = async (): Promise<IRetirementView[]> => {
-  return await prisma.$queryRaw<IRetirementView[]>`
+  const retirements = await prisma.$queryRaw<IRetirementView[]>`
     SELECT * FROM retirement_view
   `;
+
+  // Attach line items for each retirement via requestId
+  const enriched = await Promise.all(
+    retirements.map(async (retirement) => {
+      const lineItems = retirement.requestId
+        ? await prisma.lineItem.findMany({ where: { requestId: retirement.requestId } })
+        : [];
+      return { ...retirement, lineItems };
+    })
+  );
+
+  return enriched;
 };
 
 // ✅ Get Retirement by ID (from view)
@@ -58,7 +156,17 @@ export const getRetirementById = async (
   const result = await prisma.$queryRaw<IRetirementView[]>`
     SELECT * FROM retirement_view WHERE retirementId = ${retirementId}
   `;
-  return result.length > 0 ? result[0] : null;
+
+  if (result.length === 0) return null;
+
+  const retirement = result[0];
+
+  // Attach line items via requestId
+  const lineItems = retirement.requestId
+    ? await prisma.lineItem.findMany({ where: { requestId: retirement.requestId } })
+    : [];
+
+  return { ...retirement, lineItems };
 };
 
 // ✅ Delete Retirement

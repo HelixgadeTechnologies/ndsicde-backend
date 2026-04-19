@@ -8,11 +8,19 @@ const retirementRouter: Router = Router();
  * @swagger
  * /api/retirement/retirement:
  *   post:
- *     summary: Create or Update a Retirement
+ *     summary: Create or Update a Retirement (with Line Items)
  *     description: |
  *       This endpoint is used for **both creating and updating** a Retirement record.
  *       - When `isCreate` is `true`, a new Retirement is created.
  *       - When `isCreate` is `false`, the existing Retirement will be updated using the `retirementId` inside the payload.
+ *
+ *       **Line Items behaviour:**
+ *       - Pass an array of line items under `payload.lineItems` (these are rows in the `lineitem` table linked to the associated `requestId`).
+ *       - Each item with a `lineItemId` will have its `totalSpent` and `variance` **updated** on the existing row.
+ *       - Each item **without** a `lineItemId` will be **created** as a new line item linked to the request.
+ *       - If `lineItems` is empty or omitted, no line item changes are made.
+ *       - `requestId` is required in the payload when `lineItems` are provided.
+ *       - `status` defaults to `"Pending"` on create if not provided.
  *     tags: [Retirement]
  *     security:
  *       - bearerAuth: []
@@ -22,17 +30,137 @@ const retirementRouter: Router = Router();
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - isCreate
+ *               - payload
  *             properties:
  *               isCreate:
  *                 type: boolean
+ *                 description: true = create new retirement, false = update existing
  *                 example: true
  *               payload:
- *                 $ref: '#/components/schemas/Retirement'
+ *                 type: object
+ *                 properties:
+ *                   retirementId:
+ *                     type: string
+ *                     format: uuid
+ *                     description: Required only when isCreate = false
+ *                     example: "550e8400-e29b-41d4-a716-446655440000"
+ *                   requestId:
+ *                     type: string
+ *                     format: uuid
+ *                     description: The associated request. Required when lineItems are provided.
+ *                     example: "7a3f881c-12bc-4d4f-a901-1234567890ab"
+ *                   activityLineDescription:
+ *                     type: string
+ *                     example: "Fuel purchase for field trip"
+ *                   quantity:
+ *                     type: number
+ *                     example: 1
+ *                   frequency:
+ *                     type: number
+ *                     example: 1
+ *                   unitCost:
+ *                     type: number
+ *                     example: 15000
+ *                   actualCost:
+ *                     type: number
+ *                     example: 14500
+ *                   totalBudget:
+ *                     type: number
+ *                     example: 15000
+ *                   documentName:
+ *                     type: string
+ *                     example: "Receipt_FuelPurchase.pdf"
+ *                   documentURL:
+ *                     type: string
+ *                     example: "https://storage.example.com/docs/Receipt_FuelPurchase.pdf"
+ *                   status:
+ *                     type: string
+ *                     example: "Pending"
+ *                     description: Defaults to "Pending" on create if omitted
+ *                   lineItems:
+ *                     type: array
+ *                     description: |
+ *                       Line items linked to the associated request.
+ *                       - Provide `lineItemId` to update an existing row (only `totalSpent` and `variance` are updated).
+ *                       - Omit `lineItemId` to create a new line item row.
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         lineItemId:
+ *                           type: string
+ *                           format: uuid
+ *                           description: ID of an existing line item to update. Omit to create a new one.
+ *                           example: "abc12345-0000-0000-0000-000000000001"
+ *                         description:
+ *                           type: string
+ *                           example: "Venue hire"
+ *                         quantity:
+ *                           type: number
+ *                           example: 1
+ *                         frequency:
+ *                           type: number
+ *                           example: 2
+ *                         unitCost:
+ *                           type: number
+ *                           example: 50000
+ *                         totalBudget:
+ *                           type: number
+ *                           example: 100000
+ *                         totalSpent:
+ *                           type: number
+ *                           example: 95000
+ *                           description: Actual amount spent against this line item
+ *                         variance:
+ *                           type: number
+ *                           example: 5000
+ *                           description: Difference between budget and actual spend (totalBudget - totalSpent)
  *     responses:
  *       200:
- *         description: Retirement created or updated successfully
+ *         description: Retirement created or updated successfully with line items
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Retirement created successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     retirementId:
+ *                       type: string
+ *                       format: uuid
+ *                     requestId:
+ *                       type: string
+ *                       format: uuid
+ *                     status:
+ *                       type: string
+ *                       example: "Pending"
+ *                     lineItems:
+ *                       type: array
+ *                       description: All line items linked to the associated request after the operation
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           lineItemId:
+ *                             type: string
+ *                             format: uuid
+ *                           description:
+ *                             type: string
+ *                           totalBudget:
+ *                             type: number
+ *                           totalSpent:
+ *                             type: number
+ *                           variance:
+ *                             type: number
  *       400:
- *         description: Invalid request
+ *         description: Validation error (e.g. missing retirementId on update, missing requestId when lineItems provided)
  *       401:
  *         description: Unauthorized
  *       500:
@@ -44,18 +172,107 @@ retirementRouter.post("/retirement", createOrUpdateRetirementController);
  * @swagger
  * /api/retirement/retirements:
  *   get:
- *     summary: Get all Retirements
- *     description: Retrieve a list of all Retirement records.
+ *     summary: Get all Retirements (with Line Items)
+ *     description: Retrieve a list of all Retirement records. Each record includes a `lineItems` array of all line items linked to the retirement's associated request.
  *     tags: [Retirement]
  *     responses:
  *       200:
- *         description: List of retirements
+ *         description: List of retirements, each enriched with their line items
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Retirement'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Retirements fetched successfully"
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       retirementId:
+ *                         type: string
+ *                         format: uuid
+ *                       requestId:
+ *                         type: string
+ *                         format: uuid
+ *                       activityLineDescription:
+ *                         type: string
+ *                       quantity:
+ *                         type: number
+ *                       frequency:
+ *                         type: number
+ *                       unitCost:
+ *                         type: number
+ *                       actualCost:
+ *                         type: number
+ *                       totalBudget:
+ *                         type: number
+ *                       documentName:
+ *                         type: string
+ *                       documentURL:
+ *                         type: string
+ *                       status:
+ *                         type: string
+ *                         example: "Pending"
+ *                       activityTitle:
+ *                         type: string
+ *                       projectName:
+ *                         type: string
+ *                       projectId:
+ *                         type: string
+ *                         format: uuid
+ *                       approval_A:
+ *                         type: number
+ *                       approval_B:
+ *                         type: number
+ *                       approval_C:
+ *                         type: number
+ *                       approvedBy_A:
+ *                         type: string
+ *                       approvedBy_B:
+ *                         type: string
+ *                       approvedBy_C:
+ *                         type: string
+ *                       comment_A:
+ *                         type: string
+ *                       comment_B:
+ *                         type: string
+ *                       comment_C:
+ *                         type: string
+ *                       createAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updateAt:
+ *                         type: string
+ *                         format: date-time
+ *                       lineItems:
+ *                         type: array
+ *                         description: All line items linked to this retirement's associated request
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             lineItemId:
+ *                               type: string
+ *                               format: uuid
+ *                             description:
+ *                               type: string
+ *                             quantity:
+ *                               type: number
+ *                             frequency:
+ *                               type: number
+ *                             unitCost:
+ *                               type: number
+ *                             totalBudget:
+ *                               type: number
+ *                             totalSpent:
+ *                               type: number
+ *                             variance:
+ *                               type: number
  *       500:
  *         description: Server error
  */
@@ -65,8 +282,8 @@ retirementRouter.get("/retirements", getRetirements);
  * @swagger
  * /api/retirement/retirement/{retirementId}:
  *   get:
- *     summary: Get Retirement by ID
- *     description: Retrieve a single Retirement record by its `retirementId`.
+ *     summary: Get Retirement by ID (with Line Items)
+ *     description: Retrieve a single Retirement record by its `retirementId`, enriched with all line items linked to its associated request.
  *     tags: [Retirement]
  *     parameters:
  *       - name: retirementId
@@ -75,13 +292,100 @@ retirementRouter.get("/retirements", getRetirements);
  *         schema:
  *           type: string
  *           format: uuid
+ *         description: The UUID of the retirement record to retrieve
  *     responses:
  *       200:
- *         description: Retirement found
+ *         description: Retirement found, enriched with line items
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Retirement'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: "Retirement fetched successfully"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     retirementId:
+ *                       type: string
+ *                       format: uuid
+ *                     requestId:
+ *                       type: string
+ *                       format: uuid
+ *                     activityLineDescription:
+ *                       type: string
+ *                     quantity:
+ *                       type: number
+ *                     frequency:
+ *                       type: number
+ *                     unitCost:
+ *                       type: number
+ *                     actualCost:
+ *                       type: number
+ *                     totalBudget:
+ *                       type: number
+ *                     documentName:
+ *                       type: string
+ *                     documentURL:
+ *                       type: string
+ *                     status:
+ *                       type: string
+ *                       example: "Pending"
+ *                     activityTitle:
+ *                       type: string
+ *                     projectName:
+ *                       type: string
+ *                     approval_A:
+ *                       type: number
+ *                     approval_B:
+ *                       type: number
+ *                     approval_C:
+ *                       type: number
+ *                     approvedBy_A:
+ *                       type: string
+ *                     approvedBy_B:
+ *                       type: string
+ *                     approvedBy_C:
+ *                       type: string
+ *                     comment_A:
+ *                       type: string
+ *                     comment_B:
+ *                       type: string
+ *                     comment_C:
+ *                       type: string
+ *                     createAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updateAt:
+ *                       type: string
+ *                       format: date-time
+ *                     lineItems:
+ *                       type: array
+ *                       description: All line items linked to this retirement's associated request
+ *                       items:
+ *                         type: object
+ *                         properties:
+ *                           lineItemId:
+ *                             type: string
+ *                             format: uuid
+ *                           description:
+ *                             type: string
+ *                           quantity:
+ *                             type: number
+ *                           frequency:
+ *                             type: number
+ *                           unitCost:
+ *                             type: number
+ *                           totalBudget:
+ *                             type: number
+ *                           totalSpent:
+ *                             type: number
+ *                           variance:
+ *                             type: number
  *       404:
  *         description: Retirement not found
  *       500:

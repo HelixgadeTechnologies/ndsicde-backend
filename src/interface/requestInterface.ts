@@ -8,12 +8,7 @@ export interface IRequest {
   activityPurposeDescription?: string;
   activityStartDate?: Date;
   activityEndDate?: Date;
-  activityLineDescription?: string;
-  quantity?: number;
-  frequency?: number;
-  unitCost?: number;
   budgetCode?: number;
-  total?: number;
   modeOfTransport?: string;
   driverName?: string;
   driversPhoneNumber?: string;
@@ -24,23 +19,41 @@ export interface IRequest {
   recipientPhoneNumber?: string;
   documentName?: string;
   documentURL?: string;
-  approval_A?: number;
-  approval_B?: number;
-  approval_C?: number;
-  approval_D?: number;
-  approval_E?: number;
-  approvedBy_A?: string;
-  approvedBy_B?: string;
-  approvedBy_C?: string;
-  approvedBy_D?: string;
-  approvedBy_E?: string;
   projectId?: string;
   status?: string;
   createAt?: Date;
   updateAt?: Date;
   createdBy?: string;
+  lineItems?: Array<ILineItem>
+
+  // Approval fields , ignore these when creating a request
+  approval_A?: number;
+  approval_B?: number;
+  approval_C?: number;
+  approval_D?: number;
+  approvedBy_A?: string;
+  approvedBy_B?: string;
+  approvedBy_C?: string;
+  approvedBy_D?: string;
+  comment_A?: string;
+  comment_B?: string;
+  comment_C?: string;
+  comment_D?: string;
 }
 
+export interface ILineItem {
+  lineItemId?: string | null;
+  requestId?: string | null;
+  description?: string | null;
+  quantity?: number | null;
+  frequency?: number | null;
+  unitCost?: number | null;
+  totalBudget?: number | null;
+  totalSpent?: number | null;
+  variance?: number | null;
+  createAt?: Date | null;
+  updateAt?: Date | null;
+}
 export interface IRequestView {
   requestId: string;
   staff?: string;
@@ -78,6 +91,11 @@ export interface IRequestView {
   approvedBy_C?: string;
   approvedBy_D?: string;
   approvedBy_E?: string;
+  comment_A?: string;
+  comment_B?: string;
+  comment_C?: string;
+  comment_D?: string;
+  lineItems?: Array<ILineItem>
   projectId?: string;
   projectName?: string;
   status?: string;

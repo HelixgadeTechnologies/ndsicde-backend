@@ -448,12 +448,7 @@ model Request {
   activityPurposeDescription String?
   activityStartDate          DateTime?
   activityEndDate            DateTime?
-  activityLineDescription    String?
-  quantity                   Int?
-  frequency                  Int?
-  unitCost                   Int?
   budgetCode                 Int?
-  total                      Int?
   modeOfTransport            String?
   driverName                 String?
   driversPhoneNumber         String?
@@ -484,20 +479,22 @@ model Request {
   user                       User?        @relation(fields: [createdBy], references: [userId])
   createdBy                  String?
   retirement                 Retirement[]
-  lineItem                   LineItem[]
+  lineItems                  LineItem[]
 
   @@map("request")
 }
 
 model LineItem {
-  lineItemId String @id @default(uuid())
-  requestId  String
-  request    Request  @relation(fields: [requestId], references: [requestId])
+  lineItemId  String    @id @default(uuid())
+  requestId   String
+  request     Request   @relation(fields: [requestId], references: [requestId])
   description String?
   quantity    Int?
   frequency   Int?
   unitCost    Int?
-  total       Int?
+  totalBudget Int?
+  totalSpent  Int?
+  variance    Int?
   createAt    DateTime? @default(now())
   updateAt    DateTime? @default(now())
 
