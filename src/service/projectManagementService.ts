@@ -149,6 +149,16 @@ export const getAllTeamMember = async () => {
   return teamMembers;
 };
 
+// Get team member by project id (from view)
+export const getTeamMemberByProjectId = async (
+  projectId: string
+): Promise<ITeamMemberView[]> => {
+  const rows: ITeamMemberView[] = await prisma.$queryRaw`
+    SELECT * FROM team_member_view WHERE "projectId" = ${projectId}
+  `;
+  return rows;
+};
+
 export const deleteTeamMember = async (teamMemberId: string) => {
   return await prisma.teamMember.delete({
     where: { teamMemberId },
@@ -201,6 +211,17 @@ export const getPartnerByEmail = async (email: string) => {
     where: { email },
   });
 };
+
+// Get partner by project id (from view)
+export const getPartnerByProjectId = async (
+  projectId: string
+): Promise<IPartnerView[]> => {
+  const rows: IPartnerView[] = await prisma.$queryRaw`
+    SELECT * FROM partner_view WHERE "projectId" = ${projectId}
+  `;
+  return rows;
+};
+
 // Delete Partner
 export const deletePartner = async (partnerId: string) => {
   return await prisma.partner.delete({
@@ -730,6 +751,16 @@ export const getActivityById = async (id: string): Promise<IActivityView | null>
   return result.length > 0 ? result[0] : null;
 };
 
+// ✅ Get Activity by Project Id (from view)
+export const getActivityByProjectId = async (
+  projectId: string
+): Promise<IActivityView[]> => {
+  const rows: IActivityView[] = await prisma.$queryRaw`
+    SELECT * FROM activity_view WHERE projectId = ${projectId}
+  `;
+  return rows;
+};
+
 // ✅ Delete Activity
 export const deleteActivity = async (id: string) => {
   return await prisma.activity.delete({
@@ -841,6 +872,16 @@ export const getLogicalFrameworkById = async (
     SELECT * FROM logical_framework_view WHERE logicalFrameworkId = ${id}
   `;
   return result.length > 0 ? result[0] : null;
+};
+
+// ✅ Get LogicalFramework by Project Id (from view)
+export const getLogicalFrameworkByProjectId = async (
+  projectId: string
+): Promise<ILogicalFrameworkView[]> => {
+  const rows: ILogicalFrameworkView[] = await prisma.$queryRaw`
+    SELECT * FROM logical_framework_view WHERE "projectId" = ${projectId}
+  `;
+  return rows;
 };
 
 // ✅ Delete LogicalFramework

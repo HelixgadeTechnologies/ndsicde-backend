@@ -48,6 +48,10 @@ import {
   getResultDashboardFullDataController,
   getResultDashboardKpiSectionDataController,
   getImpactByProjectIdController,
+  getActivityByProjectIdController,
+  getLogicalFrameworkByProjectIdController,
+  getTeamMemberByProjectIdController,
+  getPartnerByProjectIdController,
   removeIndicatorReport,
   removeProject,
   saveOutcomeController,
@@ -1705,6 +1709,110 @@ projectManagementRouter.get(
 projectManagementRouter.get(
   "/outputs/project/:projectId",
   getOutputByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/activities/project/{projectId}:
+ *   get:
+ *     summary: Get Activity by project ID
+ *     tags: [ACTIVITY]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Activity retrieved successfully
+ *       404:
+ *         description: Activity not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/activities/project/:projectId",
+  getActivityByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/logicalframeworks/project/{projectId}:
+ *   get:
+ *     summary: Get Logical Framework by project ID
+ *     tags: [LOGICAL FRAMEWORK]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Logical Framework retrieved successfully
+ *       404:
+ *         description: Logical Framework not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/logicalframeworks/project/:projectId",
+  getLogicalFrameworkByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/team-members/project/{projectId}:
+ *   get:
+ *     summary: Get Team Members by project ID
+ *     tags: [TEAM MEMBER]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Team Members retrieved successfully
+ *       404:
+ *         description: Team Members not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/team-members/project/:projectId",
+  getTeamMemberByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/partners/project/{projectId}:
+ *   get:
+ *     summary: Get Partners by project ID
+ *     tags: [PARTNERS]
+ *     parameters:
+ *       - in: path
+ *         name: projectId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the project
+ *     responses:
+ *       200:
+ *         description: Partners retrieved successfully
+ *       404:
+ *         description: Partners not found
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/partners/project/:projectId",
+  getPartnerByProjectIdController
 );
 
 export default projectManagementRouter;

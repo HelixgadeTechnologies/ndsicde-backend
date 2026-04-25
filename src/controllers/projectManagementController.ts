@@ -43,6 +43,10 @@ import {
   getImpactByProjectIdView,
   getOutcomeViewByProjectId,
   getOutputByProjectId,
+  getActivityByProjectId,
+  getLogicalFrameworkByProjectId,
+  getTeamMemberByProjectId,
+  getPartnerByProjectId,
   saveIndicatorReport,
   saveOutcome,
   saveProject,
@@ -988,6 +992,62 @@ export const getOutputByProjectIdController = async (req: Request, res: Response
     return res
       .status(200)
       .json(successResponse("Output retrieved successfully", output));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get activity by project id (from view)
+export const getActivityByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const activities = await getActivityByProjectId(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Activities retrieved successfully", activities));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get logical framework by project id (from view)
+export const getLogicalFrameworkByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const logicalFramework = await getLogicalFrameworkByProjectId(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Logical framework retrieved successfully", logicalFramework));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get team member by project id (from view)
+export const getTeamMemberByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const teamMembers = await getTeamMemberByProjectId(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Team members retrieved successfully", teamMembers));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+// ✅ Get partner by project id (from view)
+export const getPartnerByProjectIdController = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const partners = await getPartnerByProjectId(projectId);
+
+    return res
+      .status(200)
+      .json(successResponse("Partners retrieved successfully", partners));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
   }
