@@ -591,6 +591,17 @@ export async function getProjectActivityDashboardData(projectId: string) {
         const actualCost = report?.actualCost ?? 0;
         const pctComplete = report?.percentageCompletion ?? 0;
 
+        // ── Line Item totals for burn rate ────────────────────────────────────
+        const lineItemTotalBudget = activity.lineItem.reduce(
+            (sum, li) => sum + (li.totalBudget ?? 0), 0
+        );
+        const lineItemTotalSpent = activity.lineItem.reduce(
+            (sum, li) => sum + (li.totalSpent ?? 0), 0
+        );
+        const lineItemBurnRate = lineItemTotalBudget > 0
+            ? Number(((lineItemTotalSpent / lineItemTotalBudget) * 100).toFixed(2))
+            : 0;
+
         const totalPlannedDays = (plannedStart && plannedEnd)
             ? daysBetween(plannedStart, plannedEnd)
             : 0;
@@ -661,6 +672,11 @@ export async function getProjectActivityDashboardData(projectId: string) {
 
             // Burn rate
             burnRate: burnRatePct,
+
+            // Line Item financial data (for burn rate chart)
+            lineItemTotalBudget,
+            lineItemTotalSpent,
+            lineItemBurnRate,
 
             // Time analysis
             implementationTimeAnalysis: timeStatus,
@@ -746,26 +762,34 @@ export async function getProjectActivityDashboardData(projectId: string) {
 
     const IMPLEMENTATION_TIME_ANALYSIS = { chart: itaChart, table: itaTable };
 
-    // ── 6. BURN_RATE – per output ─────────────────────────────────────────────
-    const burnRateOutputMap = new Map<string, { outputStatement: string; sumActualCost: number; sumBudget: number }>();
+    // ── 6. BURN_RATE – per output (based on LineItem totalBudget & totalSpent) ─
+    const burnRateOutputMap = new Map<string, {
+        outputStatement: string;
+        sumLineItemBudget: number;
+        sumLineItemSpent: number;
+    }>();
 
     for (const act of activityData) {
         const key = act.outputId || "no-output";
         if (!burnRateOutputMap.has(key)) {
-            burnRateOutputMap.set(key, { outputStatement: act.outputStatement, sumActualCost: 0, sumBudget: 0 });
+            burnRateOutputMap.set(key, {
+                outputStatement:   act.outputStatement,
+                sumLineItemBudget: 0,
+                sumLineItemSpent:  0,
+            });
         }
         const entry = burnRateOutputMap.get(key)!;
-        entry.sumActualCost += act.actualCost;
-        entry.sumBudget     += act.budgetAtCompletion;
+        entry.sumLineItemBudget += act.lineItemTotalBudget;
+        entry.sumLineItemSpent  += act.lineItemTotalSpent;
     }
 
     const BURN_RATE = Array.from(burnRateOutputMap.entries()).map(([outputId, val]) => ({
         outputId,
-        outputStatement: val.outputStatement,
-        sumActualCost:   val.sumActualCost,
-        sumBudget:       val.sumBudget,
-        burnRate:        val.sumBudget > 0
-            ? Number(((val.sumActualCost / val.sumBudget) * 100).toFixed(2))
+        outputStatement:   val.outputStatement,
+        totalBudget:       val.sumLineItemBudget,
+        totalSpent:        val.sumLineItemSpent,
+        burnRate:          val.sumLineItemBudget > 0
+            ? Number(((val.sumLineItemSpent / val.sumLineItemBudget) * 100).toFixed(2))
             : 0,
     }));
 
