@@ -573,11 +573,11 @@ export const getAllOutcomesView = async (): Promise<IOutcomeView[]> => {
 // Get By Project ID
 export const getOutcomeViewByProjectId = async (
   projectId: string
-): Promise<IOutcomeView | null> => {
+): Promise<IOutcomeView[]> => {
   const results = await prisma.$queryRaw<IOutcomeView[]>`
     SELECT * FROM outcome_view WHERE projectId = ${projectId}
   `;
-  return results.length > 0 ? results[0] : null;
+  return results;
 };
 // Get By ID
 export const getOutcomeViewById = async (
@@ -645,11 +645,11 @@ export const getAllOutputs = async (): Promise<IOutputView[]> => {
 // ✅ Get Output by Project Id (from view)
 export const getOutputByProjectId = async (
   projectId: string
-): Promise<IOutputView | null> => {
+): Promise<IOutputView[]> => {
   const rows: IOutputView[] = await prisma.$queryRaw`
     SELECT * FROM output_view WHERE "projectId" = ${projectId}
   `;
-  return rows.length > 0 ? rows[0] : null;
+  return rows;
 };
 // ✅ Get Output by Id (from view)
 export const getOutputById = async (

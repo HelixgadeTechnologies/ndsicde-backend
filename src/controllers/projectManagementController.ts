@@ -873,10 +873,10 @@ export const getOrgKpiDashboardDataController = async (req: Request, res: Respon
       strategicObjectiveId,
       resultLevel,
       kpiId,
-      startDate:          startDate ? new Date(startDate) : undefined,
-      endDate:            endDate   ? new Date(endDate)   : undefined,
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
       disaggregationType,
-      year:               year      ? parseInt(year)       : undefined,
+      year: year ? parseInt(year) : undefined,
     });
 
     return res
@@ -936,10 +936,10 @@ export const getResultDashboardKpiSectionDataController = async (req: Request, r
       strategicObjectiveId,
       resultLevel,
       indicatorId,
-      startDate:  startDate ? new Date(startDate) : undefined,
-      endDate:    endDate   ? new Date(endDate)   : undefined,
+      startDate: startDate ? new Date(startDate) : undefined,
+      endDate: endDate ? new Date(endDate) : undefined,
       disaggregationType,
-      year:       year ? parseInt(year) : undefined,
+      year: year ? parseInt(year) : undefined,
     });
 
     return res
@@ -956,7 +956,7 @@ export const getImpactByProjectIdController = async (req: Request, res: Response
   try {
     const { projectId } = req.params;
     const impacts = await getImpactByProjectIdView(projectId);
-    
+
     return res
       .status(200)
       .json(successResponse("Impacts retrieved successfully", impacts));
@@ -970,11 +970,7 @@ export const getOutcomeByProjectIdController = async (req: Request, res: Respons
   try {
     const { projectId } = req.params;
     const outcome = await getOutcomeViewByProjectId(projectId);
-    
-    if (!outcome) {
-      return res.status(404).json(notFoundResponse("Outcome not found", null));
-    }
-    
+
     return res
       .status(200)
       .json(successResponse("Outcome retrieved successfully", outcome));
@@ -988,15 +984,11 @@ export const getOutputByProjectIdController = async (req: Request, res: Response
   try {
     const { projectId } = req.params;
     const output = await getOutputByProjectId(projectId);
-    
-    if (!output) {
-      return res.status(404).json(notFoundResponse("Output not found", null));
-    }
-    
+
     return res
       .status(200)
       .json(successResponse("Output retrieved successfully", output));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
   }
-};
+};
