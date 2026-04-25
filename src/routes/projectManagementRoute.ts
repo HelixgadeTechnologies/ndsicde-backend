@@ -52,6 +52,7 @@ import {
   getLogicalFrameworkByProjectIdController,
   getTeamMemberByProjectIdController,
   getPartnerByProjectIdController,
+  getIndicatorByResultTypeIdController,
   removeIndicatorReport,
   removeProject,
   saveOutcomeController,
@@ -1813,6 +1814,30 @@ projectManagementRouter.get(
 projectManagementRouter.get(
   "/partners/project/:projectId",
   getPartnerByProjectIdController
+);
+
+/**
+ * @swagger
+ * /api/projectManagement/indicators/resultType/{resultTypeId}:
+ *   get:
+ *     summary: Get indicators by result type ID
+ *     tags: [INDICATOER]
+ *     parameters:
+ *       - in: path
+ *         name: resultTypeId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the result type
+ *     responses:
+ *       200:
+ *         description: Indicators retrieved successfully
+ *       500:
+ *         description: Server error
+ */
+projectManagementRouter.get(
+  "/indicators/resultType/:resultTypeId",
+  getIndicatorByResultTypeIdController
 );
 
 export default projectManagementRouter;

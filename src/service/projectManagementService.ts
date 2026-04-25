@@ -412,6 +412,19 @@ export const getIndicatorByIdView = async (
   return indicator as any;
 };
 
+// get indicator by result type id
+export const getIndicatorByResultTypeId = async (resultTypeId: string): Promise<
+  IIndicatorWithDisaggregation[]
+> => {
+  // Fetch related reports for all indicators
+  const indicators = await prisma.indicator.findMany({
+    where: { resultTypeId },
+    include: { IndicatorDisaggregation: true }
+  });
+
+  return indicators as any;
+};
+
 // Delete Indicator
 export const deleteIndicator = async (indicatorId: string) => {
   await prisma.indicatorReport.deleteMany({ where: { indicatorId } });

@@ -47,6 +47,7 @@ import {
   getLogicalFrameworkByProjectId,
   getTeamMemberByProjectId,
   getPartnerByProjectId,
+  getIndicatorByResultTypeId,
   saveIndicatorReport,
   saveOutcome,
   saveProject,
@@ -1050,5 +1051,15 @@ export const getPartnerByProjectIdController = async (req: Request, res: Respons
       .json(successResponse("Partners retrieved successfully", partners));
   } catch (error: any) {
     return res.status(500).json(errorResponse(error.message));
+  }
+};
+
+export const getIndicatorByResultTypeIdController = async (req: Request, res: Response) => {
+  const { resultTypeId } = req.params;
+  try {
+    const indicators = await getIndicatorByResultTypeId(resultTypeId);
+    res.status(200).json(successResponse("Indicators retrieved successfully", indicators));
+  } catch (error: any) {
+    res.status(500).json(errorResponse(error.message));
   }
 };
