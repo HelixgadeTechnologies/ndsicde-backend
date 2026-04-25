@@ -51,6 +51,7 @@ export interface ILineItem {
   totalBudget?: number | null;
   totalSpent?: number | null;
   variance?: number | null;
+  activityId?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
 }

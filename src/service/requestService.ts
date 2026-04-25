@@ -49,7 +49,8 @@ export const createOrUpdateRequest = async (
             unitCost: item.unitCost,
             totalBudget: item.totalBudget,
             totalSpent: null,
-            variance: null
+            variance: null,
+            activityId: item.activityId || null,
           })),
         });
       }
@@ -112,6 +113,7 @@ export const createOrUpdateRequest = async (
             totalBudget: item.totalBudget,
             totalSpent: null,
             variance: null,
+            activityId: item.activityId || null,
           })),
         });
       }

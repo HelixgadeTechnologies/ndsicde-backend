@@ -93,6 +93,11 @@ const retirementRouter: Router = Router();
  *                           format: uuid
  *                           description: ID of an existing line item to update. Omit to create a new one.
  *                           example: "abc12345-0000-0000-0000-000000000001"
+ *                         activityId:
+ *                           type: string
+ *                           format: uuid
+ *                           description: ID of the activity this line item is for. Omit to create a new one.
+ *                           example: "abc12345-0000-0000-0000-000000000002"
  *                         description:
  *                           type: string
  *                           example: "Venue hire"
@@ -149,6 +154,9 @@ const retirementRouter: Router = Router();
  *                         type: object
  *                         properties:
  *                           lineItemId:
+ *                             type: string
+ *                             format: uuid
+ *                           activityId:
  *                             type: string
  *                             format: uuid
  *                           description:
@@ -257,6 +265,9 @@ retirementRouter.post("/retirement", createOrUpdateRetirementController);
  *                           type: object
  *                           properties:
  *                             lineItemId:
+ *                               type: string
+ *                               format: uuid
+ *                             activityId:
  *                               type: string
  *                               format: uuid
  *                             description:
@@ -370,6 +381,9 @@ retirementRouter.get("/retirements", getRetirements);
  *                         type: object
  *                         properties:
  *                           lineItemId:
+ *                             type: string
+ *                             format: uuid
+ *                           activityId:
  *                             type: string
  *                             format: uuid
  *                           description:

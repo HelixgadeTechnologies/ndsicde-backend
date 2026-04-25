@@ -3578,10 +3578,12 @@ export namespace Prisma {
 
   export type ActivityCountOutputType = {
     activityReport: number
+    lineItem: number
   }
 
   export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activityReport?: boolean | ActivityCountOutputTypeCountActivityReportArgs
+    lineItem?: boolean | ActivityCountOutputTypeCountLineItemArgs
   }
 
   // Custom InputTypes
@@ -3600,6 +3602,13 @@ export namespace Prisma {
    */
   export type ActivityCountOutputTypeCountActivityReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ActivityReportWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountLineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LineItemWhereInput
   }
 
 
@@ -25132,6 +25141,7 @@ export namespace Prisma {
     output?: boolean | Activity$outputArgs<ExtArgs>
     project?: boolean | Activity$projectArgs<ExtArgs>
     activityReport?: boolean | Activity$activityReportArgs<ExtArgs>
+    lineItem?: boolean | Activity$lineItemArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activity"]>
 
@@ -25159,6 +25169,7 @@ export namespace Prisma {
     output?: boolean | Activity$outputArgs<ExtArgs>
     project?: boolean | Activity$projectArgs<ExtArgs>
     activityReport?: boolean | Activity$activityReportArgs<ExtArgs>
+    lineItem?: boolean | Activity$lineItemArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -25168,6 +25179,7 @@ export namespace Prisma {
       output: Prisma.$OutputPayload<ExtArgs> | null
       project: Prisma.$ProjectPayload<ExtArgs> | null
       activityReport: Prisma.$ActivityReportPayload<ExtArgs>[]
+      lineItem: Prisma.$LineItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       activityId: string
@@ -25527,6 +25539,7 @@ export namespace Prisma {
     output<T extends Activity$outputArgs<ExtArgs> = {}>(args?: Subset<T, Activity$outputArgs<ExtArgs>>): Prisma__OutputClient<$Result.GetResult<Prisma.$OutputPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     project<T extends Activity$projectArgs<ExtArgs> = {}>(args?: Subset<T, Activity$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     activityReport<T extends Activity$activityReportArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activityReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    lineItem<T extends Activity$lineItemArgs<ExtArgs> = {}>(args?: Subset<T, Activity$lineItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25977,6 +25990,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ActivityReportScalarFieldEnum | ActivityReportScalarFieldEnum[]
+  }
+
+  /**
+   * Activity.lineItem
+   */
+  export type Activity$lineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LineItem
+     */
+    select?: LineItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LineItem
+     */
+    omit?: LineItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LineItemInclude<ExtArgs> | null
+    where?: LineItemWhereInput
+    orderBy?: LineItemOrderByWithRelationInput | LineItemOrderByWithRelationInput[]
+    cursor?: LineItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LineItemScalarFieldEnum | LineItemScalarFieldEnum[]
   }
 
   /**
@@ -29493,6 +29530,7 @@ export namespace Prisma {
   export type LineItemMinAggregateOutputType = {
     lineItemId: string | null
     requestId: string | null
+    activityId: string | null
     description: string | null
     quantity: number | null
     frequency: number | null
@@ -29507,6 +29545,7 @@ export namespace Prisma {
   export type LineItemMaxAggregateOutputType = {
     lineItemId: string | null
     requestId: string | null
+    activityId: string | null
     description: string | null
     quantity: number | null
     frequency: number | null
@@ -29521,6 +29560,7 @@ export namespace Prisma {
   export type LineItemCountAggregateOutputType = {
     lineItemId: number
     requestId: number
+    activityId: number
     description: number
     quantity: number
     frequency: number
@@ -29555,6 +29595,7 @@ export namespace Prisma {
   export type LineItemMinAggregateInputType = {
     lineItemId?: true
     requestId?: true
+    activityId?: true
     description?: true
     quantity?: true
     frequency?: true
@@ -29569,6 +29610,7 @@ export namespace Prisma {
   export type LineItemMaxAggregateInputType = {
     lineItemId?: true
     requestId?: true
+    activityId?: true
     description?: true
     quantity?: true
     frequency?: true
@@ -29583,6 +29625,7 @@ export namespace Prisma {
   export type LineItemCountAggregateInputType = {
     lineItemId?: true
     requestId?: true
+    activityId?: true
     description?: true
     quantity?: true
     frequency?: true
@@ -29684,6 +29727,7 @@ export namespace Prisma {
   export type LineItemGroupByOutputType = {
     lineItemId: string
     requestId: string
+    activityId: string | null
     description: string | null
     quantity: number | null
     frequency: number | null
@@ -29717,6 +29761,7 @@ export namespace Prisma {
   export type LineItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     lineItemId?: boolean
     requestId?: boolean
+    activityId?: boolean
     description?: boolean
     quantity?: boolean
     frequency?: boolean
@@ -29727,6 +29772,7 @@ export namespace Prisma {
     createAt?: boolean
     updateAt?: boolean
     request?: boolean | RequestDefaultArgs<ExtArgs>
+    activity?: boolean | LineItem$activityArgs<ExtArgs>
   }, ExtArgs["result"]["lineItem"]>
 
 
@@ -29734,6 +29780,7 @@ export namespace Prisma {
   export type LineItemSelectScalar = {
     lineItemId?: boolean
     requestId?: boolean
+    activityId?: boolean
     description?: boolean
     quantity?: boolean
     frequency?: boolean
@@ -29745,19 +29792,22 @@ export namespace Prisma {
     updateAt?: boolean
   }
 
-  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "description" | "quantity" | "frequency" | "unitCost" | "totalBudget" | "totalSpent" | "variance" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
+  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "activityId" | "description" | "quantity" | "frequency" | "unitCost" | "totalBudget" | "totalSpent" | "variance" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
   export type LineItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | RequestDefaultArgs<ExtArgs>
+    activity?: boolean | LineItem$activityArgs<ExtArgs>
   }
 
   export type $LineItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "LineItem"
     objects: {
       request: Prisma.$RequestPayload<ExtArgs>
+      activity: Prisma.$ActivityPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       lineItemId: string
       requestId: string
+      activityId: string | null
       description: string | null
       quantity: number | null
       frequency: number | null
@@ -30108,6 +30158,7 @@ export namespace Prisma {
   export interface Prisma__LineItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     request<T extends RequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RequestDefaultArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    activity<T extends LineItem$activityArgs<ExtArgs> = {}>(args?: Subset<T, LineItem$activityArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30139,6 +30190,7 @@ export namespace Prisma {
   interface LineItemFieldRefs {
     readonly lineItemId: FieldRef<"LineItem", 'String'>
     readonly requestId: FieldRef<"LineItem", 'String'>
+    readonly activityId: FieldRef<"LineItem", 'String'>
     readonly description: FieldRef<"LineItem", 'String'>
     readonly quantity: FieldRef<"LineItem", 'Int'>
     readonly frequency: FieldRef<"LineItem", 'Int'>
@@ -30493,6 +30545,25 @@ export namespace Prisma {
      * Limit how many LineItems to delete.
      */
     limit?: number
+  }
+
+  /**
+   * LineItem.activity
+   */
+  export type LineItem$activityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
   }
 
   /**
@@ -33308,6 +33379,7 @@ export namespace Prisma {
   export const LineItemScalarFieldEnum: {
     lineItemId: 'lineItemId',
     requestId: 'requestId',
+    activityId: 'activityId',
     description: 'description',
     quantity: 'quantity',
     frequency: 'frequency',
@@ -33726,6 +33798,7 @@ export namespace Prisma {
   export const LineItemOrderByRelevanceFieldEnum: {
     lineItemId: 'lineItemId',
     requestId: 'requestId',
+    activityId: 'activityId',
     description: 'description'
   };
 
@@ -35551,6 +35624,7 @@ export namespace Prisma {
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     activityReport?: ActivityReportListRelationFilter
+    lineItem?: LineItemListRelationFilter
   }
 
   export type ActivityOrderByWithRelationInput = {
@@ -35571,6 +35645,7 @@ export namespace Prisma {
     output?: OutputOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
     activityReport?: ActivityReportOrderByRelationAggregateInput
+    lineItem?: LineItemOrderByRelationAggregateInput
     _relevance?: ActivityOrderByRelevanceInput
   }
 
@@ -35595,6 +35670,7 @@ export namespace Prisma {
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     activityReport?: ActivityReportListRelationFilter
+    lineItem?: LineItemListRelationFilter
   }, "activityId">
 
   export type ActivityOrderByWithAggregationInput = {
@@ -36014,6 +36090,7 @@ export namespace Prisma {
     NOT?: LineItemWhereInput | LineItemWhereInput[]
     lineItemId?: StringFilter<"LineItem"> | string
     requestId?: StringFilter<"LineItem"> | string
+    activityId?: StringNullableFilter<"LineItem"> | string | null
     description?: StringNullableFilter<"LineItem"> | string | null
     quantity?: IntNullableFilter<"LineItem"> | number | null
     frequency?: IntNullableFilter<"LineItem"> | number | null
@@ -36024,11 +36101,13 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
   }
 
   export type LineItemOrderByWithRelationInput = {
     lineItemId?: SortOrder
     requestId?: SortOrder
+    activityId?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     quantity?: SortOrderInput | SortOrder
     frequency?: SortOrderInput | SortOrder
@@ -36039,6 +36118,7 @@ export namespace Prisma {
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     request?: RequestOrderByWithRelationInput
+    activity?: ActivityOrderByWithRelationInput
     _relevance?: LineItemOrderByRelevanceInput
   }
 
@@ -36048,6 +36128,7 @@ export namespace Prisma {
     OR?: LineItemWhereInput[]
     NOT?: LineItemWhereInput | LineItemWhereInput[]
     requestId?: StringFilter<"LineItem"> | string
+    activityId?: StringNullableFilter<"LineItem"> | string | null
     description?: StringNullableFilter<"LineItem"> | string | null
     quantity?: IntNullableFilter<"LineItem"> | number | null
     frequency?: IntNullableFilter<"LineItem"> | number | null
@@ -36058,11 +36139,13 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
   }, "lineItemId">
 
   export type LineItemOrderByWithAggregationInput = {
     lineItemId?: SortOrder
     requestId?: SortOrder
+    activityId?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     quantity?: SortOrderInput | SortOrder
     frequency?: SortOrderInput | SortOrder
@@ -36085,6 +36168,7 @@ export namespace Prisma {
     NOT?: LineItemScalarWhereWithAggregatesInput | LineItemScalarWhereWithAggregatesInput[]
     lineItemId?: StringWithAggregatesFilter<"LineItem"> | string
     requestId?: StringWithAggregatesFilter<"LineItem"> | string
+    activityId?: StringNullableWithAggregatesFilter<"LineItem"> | string | null
     description?: StringNullableWithAggregatesFilter<"LineItem"> | string | null
     quantity?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     frequency?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
@@ -38280,6 +38364,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutActivityInput
     project?: ProjectCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateInput = {
@@ -38298,6 +38383,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUpdateInput = {
@@ -38316,6 +38402,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutActivityNestedInput
     project?: ProjectUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
@@ -38334,6 +38421,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityCreateManyInput = {
@@ -38827,11 +38915,13 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     request: RequestCreateNestedOneWithoutLineItemsInput
+    activity?: ActivityCreateNestedOneWithoutLineItemInput
   }
 
   export type LineItemUncheckedCreateInput = {
     lineItemId?: string
     requestId: string
+    activityId?: string | null
     description?: string | null
     quantity?: number | null
     frequency?: number | null
@@ -38855,11 +38945,13 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     request?: RequestUpdateOneRequiredWithoutLineItemsNestedInput
+    activity?: ActivityUpdateOneWithoutLineItemNestedInput
   }
 
   export type LineItemUncheckedUpdateInput = {
     lineItemId?: StringFieldUpdateOperationsInput | string
     requestId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
@@ -38874,6 +38966,7 @@ export namespace Prisma {
   export type LineItemCreateManyInput = {
     lineItemId?: string
     requestId: string
+    activityId?: string | null
     description?: string | null
     quantity?: number | null
     frequency?: number | null
@@ -38901,6 +38994,7 @@ export namespace Prisma {
   export type LineItemUncheckedUpdateManyInput = {
     lineItemId?: StringFieldUpdateOperationsInput | string
     requestId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
@@ -40604,7 +40698,17 @@ export namespace Prisma {
     none?: ActivityReportWhereInput
   }
 
+  export type LineItemListRelationFilter = {
+    every?: LineItemWhereInput
+    some?: LineItemWhereInput
+    none?: LineItemWhereInput
+  }
+
   export type ActivityReportOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LineItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40765,16 +40869,6 @@ export namespace Prisma {
     updateAt?: SortOrder
   }
 
-  export type LineItemListRelationFilter = {
-    every?: LineItemWhereInput
-    some?: LineItemWhereInput
-    none?: LineItemWhereInput
-  }
-
-  export type LineItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type RequestOrderByRelevanceInput = {
     fields: RequestOrderByRelevanceFieldEnum | RequestOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -40933,6 +41027,7 @@ export namespace Prisma {
   export type LineItemCountOrderByAggregateInput = {
     lineItemId?: SortOrder
     requestId?: SortOrder
+    activityId?: SortOrder
     description?: SortOrder
     quantity?: SortOrder
     frequency?: SortOrder
@@ -40956,6 +41051,7 @@ export namespace Prisma {
   export type LineItemMaxOrderByAggregateInput = {
     lineItemId?: SortOrder
     requestId?: SortOrder
+    activityId?: SortOrder
     description?: SortOrder
     quantity?: SortOrder
     frequency?: SortOrder
@@ -40970,6 +41066,7 @@ export namespace Prisma {
   export type LineItemMinOrderByAggregateInput = {
     lineItemId?: SortOrder
     requestId?: SortOrder
+    activityId?: SortOrder
     description?: SortOrder
     quantity?: SortOrder
     frequency?: SortOrder
@@ -43035,11 +43132,25 @@ export namespace Prisma {
     connect?: ActivityReportWhereUniqueInput | ActivityReportWhereUniqueInput[]
   }
 
+  export type LineItemCreateNestedManyWithoutActivityInput = {
+    create?: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput> | LineItemCreateWithoutActivityInput[] | LineItemUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutActivityInput | LineItemCreateOrConnectWithoutActivityInput[]
+    createMany?: LineItemCreateManyActivityInputEnvelope
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+  }
+
   export type ActivityReportUncheckedCreateNestedManyWithoutActivityInput = {
     create?: XOR<ActivityReportCreateWithoutActivityInput, ActivityReportUncheckedCreateWithoutActivityInput> | ActivityReportCreateWithoutActivityInput[] | ActivityReportUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ActivityReportCreateOrConnectWithoutActivityInput | ActivityReportCreateOrConnectWithoutActivityInput[]
     createMany?: ActivityReportCreateManyActivityInputEnvelope
     connect?: ActivityReportWhereUniqueInput | ActivityReportWhereUniqueInput[]
+  }
+
+  export type LineItemUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput> | LineItemCreateWithoutActivityInput[] | LineItemUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutActivityInput | LineItemCreateOrConnectWithoutActivityInput[]
+    createMany?: LineItemCreateManyActivityInputEnvelope
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
   }
 
   export type OutputUpdateOneWithoutActivityNestedInput = {
@@ -43076,6 +43187,20 @@ export namespace Prisma {
     deleteMany?: ActivityReportScalarWhereInput | ActivityReportScalarWhereInput[]
   }
 
+  export type LineItemUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput> | LineItemCreateWithoutActivityInput[] | LineItemUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutActivityInput | LineItemCreateOrConnectWithoutActivityInput[]
+    upsert?: LineItemUpsertWithWhereUniqueWithoutActivityInput | LineItemUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: LineItemCreateManyActivityInputEnvelope
+    set?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    disconnect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    delete?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    update?: LineItemUpdateWithWhereUniqueWithoutActivityInput | LineItemUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: LineItemUpdateManyWithWhereWithoutActivityInput | LineItemUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+  }
+
   export type ActivityReportUncheckedUpdateManyWithoutActivityNestedInput = {
     create?: XOR<ActivityReportCreateWithoutActivityInput, ActivityReportUncheckedCreateWithoutActivityInput> | ActivityReportCreateWithoutActivityInput[] | ActivityReportUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ActivityReportCreateOrConnectWithoutActivityInput | ActivityReportCreateOrConnectWithoutActivityInput[]
@@ -43088,6 +43213,20 @@ export namespace Prisma {
     update?: ActivityReportUpdateWithWhereUniqueWithoutActivityInput | ActivityReportUpdateWithWhereUniqueWithoutActivityInput[]
     updateMany?: ActivityReportUpdateManyWithWhereWithoutActivityInput | ActivityReportUpdateManyWithWhereWithoutActivityInput[]
     deleteMany?: ActivityReportScalarWhereInput | ActivityReportScalarWhereInput[]
+  }
+
+  export type LineItemUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput> | LineItemCreateWithoutActivityInput[] | LineItemUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: LineItemCreateOrConnectWithoutActivityInput | LineItemCreateOrConnectWithoutActivityInput[]
+    upsert?: LineItemUpsertWithWhereUniqueWithoutActivityInput | LineItemUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: LineItemCreateManyActivityInputEnvelope
+    set?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    disconnect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    delete?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+    update?: LineItemUpdateWithWhereUniqueWithoutActivityInput | LineItemUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: LineItemUpdateManyWithWhereWithoutActivityInput | LineItemUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
   }
 
   export type ActivityCreateNestedOneWithoutActivityReportInput = {
@@ -43260,12 +43399,28 @@ export namespace Prisma {
     connect?: RequestWhereUniqueInput
   }
 
+  export type ActivityCreateNestedOneWithoutLineItemInput = {
+    create?: XOR<ActivityCreateWithoutLineItemInput, ActivityUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutLineItemInput
+    connect?: ActivityWhereUniqueInput
+  }
+
   export type RequestUpdateOneRequiredWithoutLineItemsNestedInput = {
     create?: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
     connectOrCreate?: RequestCreateOrConnectWithoutLineItemsInput
     upsert?: RequestUpsertWithoutLineItemsInput
     connect?: RequestWhereUniqueInput
     update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutLineItemsInput, RequestUpdateWithoutLineItemsInput>, RequestUncheckedUpdateWithoutLineItemsInput>
+  }
+
+  export type ActivityUpdateOneWithoutLineItemNestedInput = {
+    create?: XOR<ActivityCreateWithoutLineItemInput, ActivityUncheckedCreateWithoutLineItemInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutLineItemInput
+    upsert?: ActivityUpsertWithoutLineItemInput
+    disconnect?: ActivityWhereInput | boolean
+    delete?: ActivityWhereInput | boolean
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutLineItemInput, ActivityUpdateWithoutLineItemInput>, ActivityUncheckedUpdateWithoutLineItemInput>
   }
 
   export type RequestCreateNestedOneWithoutRetirementInput = {
@@ -45154,6 +45309,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     output?: OutputCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutProjectInput = {
@@ -45171,6 +45327,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutProjectInput = {
@@ -47057,6 +47214,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     project?: ProjectCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutOutputInput = {
@@ -47074,6 +47232,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutOutputInput = {
@@ -48208,6 +48367,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LineItemCreateWithoutActivityInput = {
+    lineItemId?: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    request: RequestCreateNestedOneWithoutLineItemsInput
+  }
+
+  export type LineItemUncheckedCreateWithoutActivityInput = {
+    lineItemId?: string
+    requestId: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type LineItemCreateOrConnectWithoutActivityInput = {
+    where: LineItemWhereUniqueInput
+    create: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput>
+  }
+
+  export type LineItemCreateManyActivityInputEnvelope = {
+    data: LineItemCreateManyActivityInput | LineItemCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OutputUpsertWithoutActivityInput = {
     update: XOR<OutputUpdateWithoutActivityInput, OutputUncheckedUpdateWithoutActivityInput>
     create: XOR<OutputCreateWithoutActivityInput, OutputUncheckedCreateWithoutActivityInput>
@@ -48341,6 +48538,40 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"ActivityReport"> | Date | string | null
   }
 
+  export type LineItemUpsertWithWhereUniqueWithoutActivityInput = {
+    where: LineItemWhereUniqueInput
+    update: XOR<LineItemUpdateWithoutActivityInput, LineItemUncheckedUpdateWithoutActivityInput>
+    create: XOR<LineItemCreateWithoutActivityInput, LineItemUncheckedCreateWithoutActivityInput>
+  }
+
+  export type LineItemUpdateWithWhereUniqueWithoutActivityInput = {
+    where: LineItemWhereUniqueInput
+    data: XOR<LineItemUpdateWithoutActivityInput, LineItemUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type LineItemUpdateManyWithWhereWithoutActivityInput = {
+    where: LineItemScalarWhereInput
+    data: XOR<LineItemUpdateManyMutationInput, LineItemUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type LineItemScalarWhereInput = {
+    AND?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+    OR?: LineItemScalarWhereInput[]
+    NOT?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+    lineItemId?: StringFilter<"LineItem"> | string
+    requestId?: StringFilter<"LineItem"> | string
+    activityId?: StringNullableFilter<"LineItem"> | string | null
+    description?: StringNullableFilter<"LineItem"> | string | null
+    quantity?: IntNullableFilter<"LineItem"> | number | null
+    frequency?: IntNullableFilter<"LineItem"> | number | null
+    unitCost?: IntNullableFilter<"LineItem"> | number | null
+    totalBudget?: IntNullableFilter<"LineItem"> | number | null
+    totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    variance?: IntNullableFilter<"LineItem"> | number | null
+    createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
+  }
+
   export type ActivityCreateWithoutActivityReportInput = {
     activityId?: string
     activityStatement?: string | null
@@ -48356,6 +48587,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     output?: OutputCreateNestedOneWithoutActivityInput
     project?: ProjectCreateNestedOneWithoutActivityInput
+    lineItem?: LineItemCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutActivityReportInput = {
@@ -48373,6 +48605,7 @@ export namespace Prisma {
     projectId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutActivityReportInput = {
@@ -48406,6 +48639,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     output?: OutputUpdateOneWithoutActivityNestedInput
     project?: ProjectUpdateOneWithoutActivityNestedInput
+    lineItem?: LineItemUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutActivityReportInput = {
@@ -48423,6 +48657,7 @@ export namespace Prisma {
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ProjectCreateWithoutLogicalFrameworkInput = {
@@ -48767,10 +49002,12 @@ export namespace Prisma {
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    activity?: ActivityCreateNestedOneWithoutLineItemInput
   }
 
   export type LineItemUncheckedCreateWithoutRequestInput = {
     lineItemId?: string
+    activityId?: string | null
     description?: string | null
     quantity?: number | null
     frequency?: number | null
@@ -48989,23 +49226,6 @@ export namespace Prisma {
     data: XOR<LineItemUpdateManyMutationInput, LineItemUncheckedUpdateManyWithoutRequestInput>
   }
 
-  export type LineItemScalarWhereInput = {
-    AND?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
-    OR?: LineItemScalarWhereInput[]
-    NOT?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
-    lineItemId?: StringFilter<"LineItem"> | string
-    requestId?: StringFilter<"LineItem"> | string
-    description?: StringNullableFilter<"LineItem"> | string | null
-    quantity?: IntNullableFilter<"LineItem"> | number | null
-    frequency?: IntNullableFilter<"LineItem"> | number | null
-    unitCost?: IntNullableFilter<"LineItem"> | number | null
-    totalBudget?: IntNullableFilter<"LineItem"> | number | null
-    totalSpent?: IntNullableFilter<"LineItem"> | number | null
-    variance?: IntNullableFilter<"LineItem"> | number | null
-    createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
-  }
-
   export type RequestCreateWithoutLineItemsInput = {
     requestId?: string
     staff?: string | null
@@ -49091,6 +49311,47 @@ export namespace Prisma {
   export type RequestCreateOrConnectWithoutLineItemsInput = {
     where: RequestWhereUniqueInput
     create: XOR<RequestCreateWithoutLineItemsInput, RequestUncheckedCreateWithoutLineItemsInput>
+  }
+
+  export type ActivityCreateWithoutLineItemInput = {
+    activityId?: string
+    activityStatement?: string | null
+    activityTotalBudget?: number | null
+    responsiblePerson?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    activityFrequency?: number | null
+    subActivity?: string | null
+    descriptionAction?: string | null
+    deliveryDate?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    output?: OutputCreateNestedOneWithoutActivityInput
+    project?: ProjectCreateNestedOneWithoutActivityInput
+    activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutLineItemInput = {
+    activityId?: string
+    activityStatement?: string | null
+    outputId?: string | null
+    activityTotalBudget?: number | null
+    responsiblePerson?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    activityFrequency?: number | null
+    subActivity?: string | null
+    descriptionAction?: string | null
+    deliveryDate?: Date | string | null
+    projectId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutLineItemInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutLineItemInput, ActivityUncheckedCreateWithoutLineItemInput>
   }
 
   export type RequestUpsertWithoutLineItemsInput = {
@@ -49184,6 +49445,53 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
+  export type ActivityUpsertWithoutLineItemInput = {
+    update: XOR<ActivityUpdateWithoutLineItemInput, ActivityUncheckedUpdateWithoutLineItemInput>
+    create: XOR<ActivityCreateWithoutLineItemInput, ActivityUncheckedCreateWithoutLineItemInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutLineItemInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutLineItemInput, ActivityUncheckedUpdateWithoutLineItemInput>
+  }
+
+  export type ActivityUpdateWithoutLineItemInput = {
+    activityId?: StringFieldUpdateOperationsInput | string
+    activityStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTotalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    responsiblePerson?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityFrequency?: NullableIntFieldUpdateOperationsInput | number | null
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
+    descriptionAction?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    output?: OutputUpdateOneWithoutActivityNestedInput
+    project?: ProjectUpdateOneWithoutActivityNestedInput
+    activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutLineItemInput = {
+    activityId?: StringFieldUpdateOperationsInput | string
+    activityStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTotalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    responsiblePerson?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityFrequency?: NullableIntFieldUpdateOperationsInput | number | null
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
+    descriptionAction?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type RequestCreateWithoutRetirementInput = {
@@ -50677,6 +50985,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     output?: OutputUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutProjectInput = {
@@ -50694,6 +51003,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutProjectInput = {
@@ -51444,6 +51754,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     project?: ProjectUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutOutputInput = {
@@ -51461,6 +51772,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutOutputInput = {
@@ -51767,6 +52079,20 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
+  export type LineItemCreateManyActivityInput = {
+    lineItemId?: string
+    requestId: string
+    description?: string | null
+    quantity?: number | null
+    frequency?: number | null
+    unitCost?: number | null
+    totalBudget?: number | null
+    totalSpent?: number | null
+    variance?: number | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
   export type ActivityReportUpdateWithoutActivityInput = {
     activityReportId?: StringFieldUpdateOperationsInput | string
     percentageCompletion?: NullableIntFieldUpdateOperationsInput | number | null
@@ -51800,6 +52126,48 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type LineItemUpdateWithoutActivityInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    request?: RequestUpdateOneRequiredWithoutLineItemsNestedInput
+  }
+
+  export type LineItemUncheckedUpdateWithoutActivityInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type LineItemUncheckedUpdateManyWithoutActivityInput = {
+    lineItemId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: NullableIntFieldUpdateOperationsInput | number | null
+    frequency?: NullableIntFieldUpdateOperationsInput | number | null
+    unitCost?: NullableIntFieldUpdateOperationsInput | number | null
+    totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    variance?: NullableIntFieldUpdateOperationsInput | number | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type RetirementCreateManyRequestInput = {
     retirementId?: string
     activityLineDescription?: string | null
@@ -51827,6 +52195,7 @@ export namespace Prisma {
 
   export type LineItemCreateManyRequestInput = {
     lineItemId?: string
+    activityId?: string | null
     description?: string | null
     quantity?: number | null
     frequency?: number | null
@@ -51924,10 +52293,12 @@ export namespace Prisma {
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activity?: ActivityUpdateOneWithoutLineItemNestedInput
   }
 
   export type LineItemUncheckedUpdateWithoutRequestInput = {
     lineItemId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null
@@ -51941,6 +52312,7 @@ export namespace Prisma {
 
   export type LineItemUncheckedUpdateManyWithoutRequestInput = {
     lineItemId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: NullableIntFieldUpdateOperationsInput | number | null
     frequency?: NullableIntFieldUpdateOperationsInput | number | null

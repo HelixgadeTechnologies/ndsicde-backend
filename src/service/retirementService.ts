@@ -52,6 +52,7 @@ export const createOrUpdateRetirement = async (
                 totalBudget: item.totalBudget ?? null,
                 totalSpent: item.totalSpent ?? null,
                 variance: item.variance ?? null,
+                activityId: item.activityId || null,
               },
             });
           }
@@ -114,6 +115,7 @@ export const createOrUpdateRetirement = async (
                 totalBudget: item.totalBudget ?? null,
                 totalSpent: item.totalSpent ?? null,
                 variance: item.variance ?? null,
+                activityId: item.activityId || null,
               },
             });
           }

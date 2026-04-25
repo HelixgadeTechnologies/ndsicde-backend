@@ -551,6 +551,7 @@ export async function getProjectActivityDashboardData(projectId: string) {
             activityReport: {
                 orderBy: { createAt: "desc" },
             },
+            lineItem:true
         },
     });
 

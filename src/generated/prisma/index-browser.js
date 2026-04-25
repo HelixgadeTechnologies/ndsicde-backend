@@ -457,6 +457,7 @@ exports.Prisma.RequestScalarFieldEnum = {
 exports.Prisma.LineItemScalarFieldEnum = {
   lineItemId: 'lineItemId',
   requestId: 'requestId',
+  activityId: 'activityId',
   description: 'description',
   quantity: 'quantity',
   frequency: 'frequency',
@@ -788,6 +789,7 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
 exports.Prisma.LineItemOrderByRelevanceFieldEnum = {
   lineItemId: 'lineItemId',
   requestId: 'requestId',
+  activityId: 'activityId',
   description: 'description'
 };
 

@@ -144,6 +144,11 @@ const requestRouter: Router = Router();
  *                         totalBudget:
  *                           type: number
  *                           example: 100000
+ *                         activityId:
+ *                           type: string
+ *                           format: uuid
+ *                           description: ID of the activity this line item is for. Omit to create a new one.
+ *                           example: "abc12345-0000-0000-0000-000000000002"
  *     responses:
  *       200:
  *         description: Request created/updated successfully with line items

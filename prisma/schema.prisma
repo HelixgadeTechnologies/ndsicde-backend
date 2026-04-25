@@ -404,6 +404,7 @@ model Activity {
   createAt            DateTime?        @default(now())
   updateAt            DateTime?        @default(now())
   activityReport      ActivityReport[]
+  lineItem            LineItem[]
 
   @@map("activity")
 }
@@ -485,18 +486,20 @@ model Request {
 }
 
 model LineItem {
-  lineItemId  String    @id @default(uuid())
-  requestId   String
-  request     Request   @relation(fields: [requestId], references: [requestId])
-  description String?
-  quantity    Int?
-  frequency   Int?
-  unitCost    Int?
-  totalBudget Int?
-  totalSpent  Int?
-  variance    Int?
-  createAt    DateTime? @default(now())
-  updateAt    DateTime? @default(now())
+  lineItemId   String     @id @default(uuid())
+  requestId    String
+  request      Request    @relation(fields: [requestId], references: [requestId])
+  activity     Activity?  @relation(fields: [activityId], references: [activityId])
+  activityId   String?
+  description  String?
+  quantity     Int?
+  frequency    Int?
+  unitCost     Int?
+  totalBudget  Int?
+  totalSpent   Int?
+  variance     Int?
+  createAt     DateTime?  @default(now())
+  updateAt     DateTime?  @default(now())
 
   @@map("lineitem")
 }

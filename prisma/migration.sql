@@ -77,3 +77,23 @@ CREATE TABLE `indicator_report_disaggregation` (
     PRIMARY KEY (`indicatorReportDisaggregationId`),
     CONSTRAINT `indicator_report_disaggregation_indicatorReportId_fkey` FOREIGN KEY (`indicatorReportId`) REFERENCES `indicator_report`(`indicatorReportId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Add activityId FK to lineitem table
+-- ─────────────────────────────────────────────────────────────────────────────
+
+-- 1. Add the activityId column (nullable)
+ALTER TABLE `lineitem`
+  ADD COLUMN `activityId` VARCHAR(191) NULL;
+
+-- 2. Add an index for query performance
+ALTER TABLE `lineitem`
+  ADD INDEX `lineitem_activityId_idx` (`activityId`);
+
+-- 3. Add the foreign key constraint
+ALTER TABLE `lineitem`
+  ADD CONSTRAINT `lineitem_activityId_fkey`
+  FOREIGN KEY (`activityId`)
+  REFERENCES `activity` (`activityId`)
+  ON DELETE SET NULL
+  ON UPDATE CASCADE;
