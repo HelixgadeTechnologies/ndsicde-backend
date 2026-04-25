@@ -1821,7 +1821,7 @@ projectManagementRouter.get(
  * /api/projectManagement/indicators/resultType/{resultTypeId}:
  *   get:
  *     summary: Get indicators by result type ID
- *     tags: [INDICATOER]
+ *     tags: [INDICATOR]
  *     parameters:
  *       - in: path
  *         name: resultTypeId
