@@ -617,8 +617,8 @@ export async function getProjectActivityDashboardData(projectId: string) {
             ? Math.min(100, Number(((totalDaysSpent / totalPlannedDays) * 100).toFixed(2)))
             : 0;
 
-        const earnedValue  = Number((bac * (pctComplete / 100)).toFixed(2));
-        const plannedValue = Number((bac * (percentageDaysSpent / 100)).toFixed(2));
+        const earnedValue  = Number((bac * pctComplete).toFixed(2));
+        const plannedValue = Number((pctComplete * percentageDaysSpent).toFixed(2));
         const costVariance     = Number((earnedValue - actualCost).toFixed(2));
         const scheduleVariance = Number((earnedValue - plannedValue).toFixed(2));
 
