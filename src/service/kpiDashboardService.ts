@@ -707,66 +707,88 @@ export async function getProjectActivityDashboardData(projectId: string) {
             : 0,
     }));
 
-    // ── 4. ACTIVITY_TABLE – table view (Activity Statement, Target Frequency,
-    //       Actual Frequency, Performance %, Status) ──────────────────────────
-    const ACTIVITY_TABLE = activityData.map((a) => ({
-        activityId:        a.activityId,
-        activityStatement: a.activityStatement,
-        targetFrequency:   a.targetFrequency,
-        actualFrequency:   a.actualFrequency,
-        performance:       a.percentageCompletion,  // latest report's % completion
-        status:            a.implementationTimeAnalysis,
+    // ── 4. ACTIVITY_TABLE – grouped by output statement ──────────────────────
+    const activityTableMap = new Map<string, {
+        outputStatement: string;
+        activities: object[];
+    }>();
+
+    for (const a of activityData) {
+        const key = a.outputId || "no-output";
+        if (!activityTableMap.has(key)) {
+            activityTableMap.set(key, {
+                outputStatement: a.outputStatement,
+                activities:      [],
+            });
+        }
+        activityTableMap.get(key)!.activities.push({
+            activityId:        a.activityId,
+            activityStatement: a.activityStatement,
+            targetFrequency:   a.targetFrequency,
+            actualFrequency:   a.actualFrequency,
+            performance:       a.percentageCompletion,
+            status:            a.implementationTimeAnalysis,
+        });
+    }
+
+    const ACTIVITY_TABLE = Array.from(activityTableMap.entries()).map(([outputId, val]) => ({
+        outputId,
+        outputStatement: val.outputStatement,
+        activityCount:   val.activities.length,
+        activities:      val.activities,
     }));
 
-    // ── 5. IMPLEMENTATION_TIME_ANALYSIS – chart + table ───────────────────────
-    const outputChartMap = new Map<string, { outputStatement: string; totalPlannedDays: number; totalActualDays: number; count: number }>();
+
+    // ── 5. IMPLEMENTATION_TIME_ANALYSIS – grouped by output statement ──────────
+    const itaOutputMap = new Map<string, {
+        outputStatement: string;
+        totalPlannedDays: number;
+        totalActualDays: number;
+        activities: object[];
+    }>();
 
     for (const act of activityData) {
         const key = act.outputId || "no-output";
-        if (!outputChartMap.has(key)) {
-            outputChartMap.set(key, {
-                outputStatement: act.outputStatement,
+        if (!itaOutputMap.has(key)) {
+            itaOutputMap.set(key, {
+                outputStatement:  act.outputStatement,
                 totalPlannedDays: 0,
-                totalActualDays: 0,
-                count: 0,
+                totalActualDays:  0,
+                activities:       [],
             });
         }
-        const entry = outputChartMap.get(key)!;
+        const entry = itaOutputMap.get(key)!;
         entry.totalPlannedDays += act.totalPlannedDays;
         entry.totalActualDays  += act.totalDaysSpent;
-        entry.count += 1;
+        entry.activities.push({
+            activityId:             act.activityId,
+            activityDescription:    act.activityStatement,
+            totalPlannedDays:       act.totalPlannedDays,
+            totalActivitySpentDays: act.totalDaysSpent,
+            percentageDaysSpent:    act.percentageDaysSpent,
+            earnedValue:            act.earnedValue,
+            plannedValue:           act.plannedValue,
+            status:                 act.implementationTimeAnalysis,
+            costVariance:           act.costVariance,
+            scheduleVariance:       act.scheduleVariance,
+        });
     }
 
-    const itaChart = Array.from(outputChartMap.entries()).map(([outputId, val]) => ({
+    const IMPLEMENTATION_TIME_ANALYSIS = Array.from(itaOutputMap.entries()).map(([outputId, val]) => ({
         outputId,
-        outputStatement:   val.outputStatement,
-        totalPlannedDays:  val.totalPlannedDays,
-        totalActualDays:   val.totalActualDays,
-        activityCount:     val.count,
+        outputStatement:  val.outputStatement,
+        totalPlannedDays: val.totalPlannedDays,
+        totalActualDays:  val.totalActualDays,
+        activityCount:    val.activities.length,
+        activities:       val.activities,
     }));
 
-    const itaTable = activityData.map((a) => ({
-        activityId:           a.activityId,
-        activityDescription:  a.activityStatement,
-        outputId:             a.outputId,
-        outputStatement:      a.outputStatement,
-        totalPlannedDays:     a.totalPlannedDays,
-        totalActivitySpentDays: a.totalDaysSpent,
-        percentageDaysSpent:  a.percentageDaysSpent,
-        earnedValue:          a.earnedValue,
-        plannedValue:         a.plannedValue,
-        status:               a.implementationTimeAnalysis,
-        costVariance:         a.costVariance,
-        scheduleVariance:     a.scheduleVariance,
-    }));
-
-    const IMPLEMENTATION_TIME_ANALYSIS = { chart: itaChart, table: itaTable };
-
-    // ── 6. BURN_RATE – per output (based on LineItem totalBudget & totalSpent) ─
+    // ── 6. BURN_RATE – grouped by output statement (LineItem totalBudget & totalSpent) ─
     const burnRateOutputMap = new Map<string, {
         outputStatement: string;
         sumLineItemBudget: number;
         sumLineItemSpent: number;
+        activities: object[];
     }>();
 
     for (const act of activityData) {
@@ -776,25 +798,77 @@ export async function getProjectActivityDashboardData(projectId: string) {
                 outputStatement:   act.outputStatement,
                 sumLineItemBudget: 0,
                 sumLineItemSpent:  0,
+                activities:        [],
             });
         }
         const entry = burnRateOutputMap.get(key)!;
         entry.sumLineItemBudget += act.lineItemTotalBudget;
         entry.sumLineItemSpent  += act.lineItemTotalSpent;
+        entry.activities.push({
+            activityId:          act.activityId,
+            activityStatement:   act.activityStatement,
+            totalBudget:         act.lineItemTotalBudget,
+            totalSpent:          act.lineItemTotalSpent,
+            burnRate:            act.lineItemBurnRate,
+        });
     }
 
     const BURN_RATE = Array.from(burnRateOutputMap.entries()).map(([outputId, val]) => ({
         outputId,
-        outputStatement:   val.outputStatement,
-        totalBudget:       val.sumLineItemBudget,
-        totalSpent:        val.sumLineItemSpent,
-        burnRate:          val.sumLineItemBudget > 0
+        outputStatement: val.outputStatement,
+        totalBudget:     val.sumLineItemBudget,
+        totalSpent:      val.sumLineItemSpent,
+        burnRate:        val.sumLineItemBudget > 0
             ? Number(((val.sumLineItemSpent / val.sumLineItemBudget) * 100).toFixed(2))
             : 0,
+        activities:      val.activities,
     }));
 
-    // ── 7. ACTIVITY_FINANCIAL_DATA – full per-activity EVM data ──────────────
-    const ACTIVITY_FINANCIAL_DATA = activityData;
+    // ── 7. ACTIVITY_FINANCIAL_DATA – grouped by output statement ─────────────
+    const financialOutputMap = new Map<string, {
+        outputStatement: string;
+        activities: object[];
+    }>();
+
+    for (const act of activityData) {
+        const key = act.outputId || "no-output";
+        if (!financialOutputMap.has(key)) {
+            financialOutputMap.set(key, {
+                outputStatement: act.outputStatement,
+                activities:      [],
+            });
+        }
+        financialOutputMap.get(key)!.activities.push({
+            activityId:               act.activityId,
+            activityStatement:        act.activityStatement,
+            targetFrequency:          act.targetFrequency,
+            actualFrequency:          act.actualFrequency,
+            budgetAtCompletion:       act.budgetAtCompletion,
+            actualCost:               act.actualCost,
+            percentageCompletion:     act.percentageCompletion,
+            earnedValue:              act.earnedValue,
+            plannedValue:             act.plannedValue,
+            costVariance:             act.costVariance,
+            scheduleVariance:         act.scheduleVariance,
+            costPerformanceIndex:     act.costPerformanceIndex,
+            schedulePerformanceIndex: act.schedulePerformanceIndex,
+            costPerformanceStatus:    act.costPerformanceStatus,
+            schedulePerformanceStatus: act.schedulePerformanceStatus,
+            lineItemTotalBudget:      act.lineItemTotalBudget,
+            lineItemTotalSpent:       act.lineItemTotalSpent,
+            lineItemBurnRate:         act.lineItemBurnRate,
+            burnRate:                 act.burnRate,
+            implementationTimeAnalysis: act.implementationTimeAnalysis,
+        });
+    }
+
+    const ACTIVITY_FINANCIAL_DATA = Array.from(financialOutputMap.entries()).map(([outputId, val]) => ({
+        outputId,
+        outputStatement: val.outputStatement,
+        activityCount:   val.activities.length,
+        activities:      val.activities,
+    }));
+
 
     // ── 8. PROJECT_BUDGET_PERFORMANCE_SUMMARY ────────────────────────────────
     const onBudget      = activityData.filter((a) => a.costPerformanceStatus === "BUDGET AS PLANNED" || a.costPerformanceStatus === "UNDER BUDGET").length;
