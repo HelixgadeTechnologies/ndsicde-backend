@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createOrUpdateRetirementController, getRetirement, getRetirements, removeRetirement, approveRetirementController } from "../controllers/retirementController";
+import { createOrUpdateRetirementController, getRetirement, getRetirements, removeRetirement, approveRetirementController, getRetirementByProject } from "../controllers/retirementController";
 
 const retirementRouter: Router = Router();
 
@@ -518,4 +518,30 @@ retirementRouter.delete("/retirement/:retirementId", removeRetirement);
  */
 retirementRouter.post("/retirement/approve", approveRetirementController);
 
+/**
+ * @swagger
+ * /api/retirement/retirement/project/{projectId}:
+ *   get:
+ *     summary: Get Retirements by Project ID (with Line Items)
+ *     description: Retrieve all Retirement records linked to a specific `projectId`, enriched with line items.
+ *     tags: [Retirement]
+ *     parameters:
+ *       - name: projectId
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *         description: The UUID of the project
+ *     responses:
+ *       200:
+ *         description: List of retirements found for the project
+ *       404:
+ *         description: No retirements found for this project
+ *       500:
+ *         description: Server error
+ */
+retirementRouter.get("/retirement/project/:projectId", getRetirementByProject);
+
 export default retirementRouter;
+

@@ -169,6 +169,32 @@ export const getRetirementById = async (
   return { ...retirement, lineItems };
 };
 
+// get retirement by project id
+export const getRetirementByProjectId = async (
+  projectId: string
+): Promise<IRetirementView[] | null> => {
+  const rows: IRetirementView[] = await prisma.$queryRaw`
+    SELECT * FROM retirement_view WHERE "projectId" = ${projectId}
+  `;
+  if (rows.length === 0) return null;
+
+  // Map over each retirement and attach line items via requestId
+  const retirementsWithLineItems = await Promise.all(
+    rows.map(async (retirement) => {
+      const lineItems = retirement.requestId
+        ? await prisma.lineItem.findMany({
+            where: { requestId: retirement.requestId },
+          })
+        : [];
+      return { ...retirement, lineItems };
+    })
+  );
+
+  return retirementsWithLineItems;
+};
+
+
+
 // ✅ Delete Retirement
 export const deleteRetirement = async (retirementId: string) => {
   return await prisma.retirement.delete({

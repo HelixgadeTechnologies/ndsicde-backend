@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { IRetirement } from "../interface/retirementInterface";
-import { createOrUpdateRetirement, deleteRetirement, getAllRetirements, getRetirementById, approveRetirement } from "../service/retirementService";
+import { createOrUpdateRetirement, deleteRetirement, getAllRetirements, getRetirementById, approveRetirement, getRetirementByProjectId } from "../service/retirementService";
 import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
 
 
@@ -133,3 +133,24 @@ export const approveRetirementController = async (
     return res.status(400).json(errorResponse(error.message));
   }
 };
+
+// ✅ Get Retirement by Project ID
+export const getRetirementByProject = async (req: Request, res: Response) => {
+  try {
+    const { projectId } = req.params;
+    const results = await getRetirementByProjectId(projectId);
+
+    if (!results || results.length === 0) {
+      return res
+        .status(404)
+        .json(notFoundResponse("No retirements found for this project", null));
+    }
+
+    return res
+      .status(200)
+      .json(successResponse("Retirements fetched successfully", results));
+  } catch (error: any) {
+    return res.status(500).json(errorResponse(error.message));
+  }
+};
+
