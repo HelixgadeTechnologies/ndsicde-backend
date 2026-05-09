@@ -144,6 +144,7 @@ const options: swaggerJSDoc.Options = {
                     example: "Male"
                   },
                   target: { type: "number", example: 100 },
+                  baseline: { type: "number", example: 50 },
                 },
               },
             },

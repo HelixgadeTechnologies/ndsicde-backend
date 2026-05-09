@@ -20937,10 +20937,12 @@ export namespace Prisma {
 
   export type IndicatorDisaggregationAvgAggregateOutputType = {
     target: number | null
+    baseline: number | null
   }
 
   export type IndicatorDisaggregationSumAggregateOutputType = {
     target: number | null
+    baseline: number | null
   }
 
   export type IndicatorDisaggregationMinAggregateOutputType = {
@@ -20949,6 +20951,7 @@ export namespace Prisma {
     type: string | null
     category: string | null
     target: number | null
+    baseline: number | null
   }
 
   export type IndicatorDisaggregationMaxAggregateOutputType = {
@@ -20957,6 +20960,7 @@ export namespace Prisma {
     type: string | null
     category: string | null
     target: number | null
+    baseline: number | null
   }
 
   export type IndicatorDisaggregationCountAggregateOutputType = {
@@ -20965,16 +20969,19 @@ export namespace Prisma {
     type: number
     category: number
     target: number
+    baseline: number
     _all: number
   }
 
 
   export type IndicatorDisaggregationAvgAggregateInputType = {
     target?: true
+    baseline?: true
   }
 
   export type IndicatorDisaggregationSumAggregateInputType = {
     target?: true
+    baseline?: true
   }
 
   export type IndicatorDisaggregationMinAggregateInputType = {
@@ -20983,6 +20990,7 @@ export namespace Prisma {
     type?: true
     category?: true
     target?: true
+    baseline?: true
   }
 
   export type IndicatorDisaggregationMaxAggregateInputType = {
@@ -20991,6 +20999,7 @@ export namespace Prisma {
     type?: true
     category?: true
     target?: true
+    baseline?: true
   }
 
   export type IndicatorDisaggregationCountAggregateInputType = {
@@ -20999,6 +21008,7 @@ export namespace Prisma {
     type?: true
     category?: true
     target?: true
+    baseline?: true
     _all?: true
   }
 
@@ -21094,6 +21104,7 @@ export namespace Prisma {
     type: string
     category: string
     target: number | null
+    baseline: number | null
     _count: IndicatorDisaggregationCountAggregateOutputType | null
     _avg: IndicatorDisaggregationAvgAggregateOutputType | null
     _sum: IndicatorDisaggregationSumAggregateOutputType | null
@@ -21121,6 +21132,7 @@ export namespace Prisma {
     type?: boolean
     category?: boolean
     target?: boolean
+    baseline?: boolean
     indicator?: boolean | IndicatorDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["indicatorDisaggregation"]>
 
@@ -21132,9 +21144,10 @@ export namespace Prisma {
     type?: boolean
     category?: boolean
     target?: boolean
+    baseline?: boolean
   }
 
-  export type IndicatorDisaggregationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorDisaggregationId" | "indicatorId" | "type" | "category" | "target", ExtArgs["result"]["indicatorDisaggregation"]>
+  export type IndicatorDisaggregationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorDisaggregationId" | "indicatorId" | "type" | "category" | "target" | "baseline", ExtArgs["result"]["indicatorDisaggregation"]>
   export type IndicatorDisaggregationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     indicator?: boolean | IndicatorDefaultArgs<ExtArgs>
   }
@@ -21150,6 +21163,7 @@ export namespace Prisma {
       type: string
       category: string
       target: number | null
+      baseline: number | null
     }, ExtArgs["result"]["indicatorDisaggregation"]>
     composites: {}
   }
@@ -21525,6 +21539,7 @@ export namespace Prisma {
     readonly type: FieldRef<"IndicatorDisaggregation", 'String'>
     readonly category: FieldRef<"IndicatorDisaggregation", 'String'>
     readonly target: FieldRef<"IndicatorDisaggregation", 'Int'>
+    readonly baseline: FieldRef<"IndicatorDisaggregation", 'Int'>
   }
     
 
@@ -34299,7 +34314,8 @@ export namespace Prisma {
     indicatorId: 'indicatorId',
     type: 'type',
     category: 'category',
-    target: 'target'
+    target: 'target',
+    baseline: 'baseline'
   };
 
   export type IndicatorDisaggregationScalarFieldEnum = (typeof IndicatorDisaggregationScalarFieldEnum)[keyof typeof IndicatorDisaggregationScalarFieldEnum]
@@ -36406,6 +36422,7 @@ export namespace Prisma {
     type?: StringFilter<"IndicatorDisaggregation"> | string
     category?: StringFilter<"IndicatorDisaggregation"> | string
     target?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
     indicator?: XOR<IndicatorScalarRelationFilter, IndicatorWhereInput>
   }
 
@@ -36415,6 +36432,7 @@ export namespace Prisma {
     type?: SortOrder
     category?: SortOrder
     target?: SortOrderInput | SortOrder
+    baseline?: SortOrderInput | SortOrder
     indicator?: IndicatorOrderByWithRelationInput
     _relevance?: IndicatorDisaggregationOrderByRelevanceInput
   }
@@ -36428,6 +36446,7 @@ export namespace Prisma {
     type?: StringFilter<"IndicatorDisaggregation"> | string
     category?: StringFilter<"IndicatorDisaggregation"> | string
     target?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
     indicator?: XOR<IndicatorScalarRelationFilter, IndicatorWhereInput>
   }, "indicatorDisaggregationId">
 
@@ -36437,6 +36456,7 @@ export namespace Prisma {
     type?: SortOrder
     category?: SortOrder
     target?: SortOrderInput | SortOrder
+    baseline?: SortOrderInput | SortOrder
     _count?: IndicatorDisaggregationCountOrderByAggregateInput
     _avg?: IndicatorDisaggregationAvgOrderByAggregateInput
     _max?: IndicatorDisaggregationMaxOrderByAggregateInput
@@ -36453,6 +36473,7 @@ export namespace Prisma {
     type?: StringWithAggregatesFilter<"IndicatorDisaggregation"> | string
     category?: StringWithAggregatesFilter<"IndicatorDisaggregation"> | string
     target?: IntNullableWithAggregatesFilter<"IndicatorDisaggregation"> | number | null
+    baseline?: IntNullableWithAggregatesFilter<"IndicatorDisaggregation"> | number | null
   }
 
   export type IndicatorReportWhereInput = {
@@ -39191,6 +39212,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
     indicator: IndicatorCreateNestedOneWithoutIndicatorDisaggregationInput
   }
 
@@ -39200,6 +39222,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
   }
 
   export type IndicatorDisaggregationUpdateInput = {
@@ -39207,6 +39230,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
     indicator?: IndicatorUpdateOneRequiredWithoutIndicatorDisaggregationNestedInput
   }
 
@@ -39216,6 +39240,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorDisaggregationCreateManyInput = {
@@ -39224,6 +39249,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
   }
 
   export type IndicatorDisaggregationUpdateManyMutationInput = {
@@ -39231,6 +39257,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorDisaggregationUncheckedUpdateManyInput = {
@@ -39239,6 +39266,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorReportCreateInput = {
@@ -41685,10 +41713,12 @@ export namespace Prisma {
     type?: SortOrder
     category?: SortOrder
     target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type IndicatorDisaggregationAvgOrderByAggregateInput = {
     target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type IndicatorDisaggregationMaxOrderByAggregateInput = {
@@ -41697,6 +41727,7 @@ export namespace Prisma {
     type?: SortOrder
     category?: SortOrder
     target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type IndicatorDisaggregationMinOrderByAggregateInput = {
@@ -41705,10 +41736,12 @@ export namespace Prisma {
     type?: SortOrder
     category?: SortOrder
     target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type IndicatorDisaggregationSumOrderByAggregateInput = {
     target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type IndicatorNullableScalarRelationFilter = {
@@ -48862,6 +48895,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
   }
 
   export type IndicatorDisaggregationUncheckedCreateWithoutIndicatorInput = {
@@ -48869,6 +48903,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
   }
 
   export type IndicatorDisaggregationCreateOrConnectWithoutIndicatorInput = {
@@ -48951,6 +48986,7 @@ export namespace Prisma {
     type?: StringFilter<"IndicatorDisaggregation"> | string
     category?: StringFilter<"IndicatorDisaggregation"> | string
     target?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
   }
 
   export type IndicatorCreateWithoutIndicatorDisaggregationInput = {
@@ -53372,6 +53408,7 @@ export namespace Prisma {
     type: string
     category: string
     target?: number | null
+    baseline?: number | null
   }
 
   export type IndicatorReportUpdateWithoutIndicatorInput = {
@@ -53434,6 +53471,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorDisaggregationUncheckedUpdateWithoutIndicatorInput = {
@@ -53441,6 +53479,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorInput = {
@@ -53448,6 +53487,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IndicatorReportCommentCreateManyIndicatorReportInput = {

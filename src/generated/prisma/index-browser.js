@@ -339,7 +339,8 @@ exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
   indicatorId: 'indicatorId',
   type: 'type',
   category: 'category',
-  target: 'target'
+  target: 'target',
+  baseline: 'baseline'
 };
 
 exports.Prisma.IndicatorReportScalarFieldEnum = {

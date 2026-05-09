@@ -141,6 +141,7 @@ export interface IIndicatorDisaggregation {
   type: string;
   category: string;
   target: number;
+  baseline: number;
 }
 
 export interface IIndicatorReportDisaggregation {
@@ -181,6 +182,7 @@ export interface IIndicatorWithDisaggregation {
     type: string;     // e.g., "gender", "state", "age"
     category: string; // e.g., "Male", "Lagos", "18-25"
     target?: number | null;
+    baseline?: number | null;
   }[];
 
 }

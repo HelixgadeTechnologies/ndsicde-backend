@@ -327,6 +327,7 @@ export const createOrUpdateIndicator = async (
                 type: disaggregation.type.toUpperCase(),
                 category: disaggregation.category.toLowerCase(),
                 target: disaggregation.target,
+                baseline: disaggregation.baseline,
               },
             });
           })
@@ -372,6 +373,7 @@ export const createOrUpdateIndicator = async (
                 type: disaggregation.type.toUpperCase(),
                 category: disaggregation.category.toLowerCase(),
                 target: disaggregation.target,
+                baseline: disaggregation.baseline,
               },
             });
           })

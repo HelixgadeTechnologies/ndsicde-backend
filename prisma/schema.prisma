@@ -329,7 +329,8 @@ model IndicatorDisaggregation {
   type     String // "gender", "state", "age"
   category String // "Male", "Lagos", "18-25"
 
-  target Int? // optional per breakdown target
+  target       Int? // optional per breakdown target
+  baseline     Int?
 
   @@map("indicator_disaggregation")
 }
