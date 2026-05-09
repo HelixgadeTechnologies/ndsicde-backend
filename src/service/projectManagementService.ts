@@ -826,6 +826,11 @@ export const getActivityByProjectId = async (
 
 // ✅ Delete Activity
 export const deleteActivity = async (id: string) => {
+  // Delete existing sub-activities
+  await prisma.subActivities.deleteMany({
+    where: { activityId: id },
+  });
+
   return await prisma.activity.delete({
     where: { activityId: id },
   });
