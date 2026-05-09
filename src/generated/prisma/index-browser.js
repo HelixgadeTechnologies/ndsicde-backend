@@ -343,6 +343,13 @@ exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
   baseline: 'baseline'
 };
 
+exports.Prisma.PeriodicTargetScalarFieldEnum = {
+  periodicTargetId: 'periodicTargetId',
+  indicatorId: 'indicatorId',
+  target: 'target',
+  targetDate: 'targetDate'
+};
+
 exports.Prisma.IndicatorReportScalarFieldEnum = {
   indicatorReportId: 'indicatorReportId',
   indicatorSource: 'indicatorSource',
@@ -714,6 +721,11 @@ exports.Prisma.IndicatorDisaggregationOrderByRelevanceFieldEnum = {
   category: 'category'
 };
 
+exports.Prisma.PeriodicTargetOrderByRelevanceFieldEnum = {
+  periodicTargetId: 'periodicTargetId',
+  indicatorId: 'indicatorId'
+};
+
 exports.Prisma.IndicatorReportOrderByRelevanceFieldEnum = {
   indicatorReportId: 'indicatorReportId',
   indicatorSource: 'indicatorSource',
@@ -853,6 +865,7 @@ exports.Prisma.ModelName = {
   Output: 'Output',
   Indicator: 'Indicator',
   IndicatorDisaggregation: 'IndicatorDisaggregation',
+  PeriodicTarget: 'PeriodicTarget',
   IndicatorReport: 'IndicatorReport',
   IndicatorReportDisaggregation: 'IndicatorReportDisaggregation',
   IndicatorReportComment: 'IndicatorReportComment',

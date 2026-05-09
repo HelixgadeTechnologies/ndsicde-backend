@@ -1,6 +1,6 @@
+import { Express } from "express";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { Express } from "express";
 
 // Swagger configuration
 const options: swaggerJSDoc.Options = {
@@ -145,6 +145,18 @@ const options: swaggerJSDoc.Options = {
                   },
                   target: { type: "number", example: 100 },
                   baseline: { type: "number", example: 50 },
+                },
+              },
+            },
+            PeriodicTarget: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  periodicTargetId: { type: "string" },
+                  indicatorId: { type: "string" },
+                  target: { type: "number", example: 100 },
+                  targetDate: { type: "string", format: "date-time" },
                 },
               },
             },

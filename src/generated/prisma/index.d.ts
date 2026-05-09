@@ -99,6 +99,11 @@ export type Indicator = $Result.DefaultSelection<Prisma.$IndicatorPayload>
  */
 export type IndicatorDisaggregation = $Result.DefaultSelection<Prisma.$IndicatorDisaggregationPayload>
 /**
+ * Model PeriodicTarget
+ * 
+ */
+export type PeriodicTarget = $Result.DefaultSelection<Prisma.$PeriodicTargetPayload>
+/**
  * Model IndicatorReport
  * 
  */
@@ -444,6 +449,16 @@ export class PrismaClient<
     * ```
     */
   get indicatorDisaggregation(): Prisma.IndicatorDisaggregationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.periodicTarget`: Exposes CRUD operations for the **PeriodicTarget** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PeriodicTargets
+    * const periodicTargets = await prisma.periodicTarget.findMany()
+    * ```
+    */
+  get periodicTarget(): Prisma.PeriodicTargetDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.indicatorReport`: Exposes CRUD operations for the **IndicatorReport** model.
@@ -1005,6 +1020,7 @@ export namespace Prisma {
     Output: 'Output',
     Indicator: 'Indicator',
     IndicatorDisaggregation: 'IndicatorDisaggregation',
+    PeriodicTarget: 'PeriodicTarget',
     IndicatorReport: 'IndicatorReport',
     IndicatorReportDisaggregation: 'IndicatorReportDisaggregation',
     IndicatorReportComment: 'IndicatorReportComment',
@@ -1031,7 +1047,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2157,6 +2173,72 @@ export namespace Prisma {
           }
         }
       }
+      PeriodicTarget: {
+        payload: Prisma.$PeriodicTargetPayload<ExtArgs>
+        fields: Prisma.PeriodicTargetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PeriodicTargetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PeriodicTargetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          findFirst: {
+            args: Prisma.PeriodicTargetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PeriodicTargetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          findMany: {
+            args: Prisma.PeriodicTargetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>[]
+          }
+          create: {
+            args: Prisma.PeriodicTargetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          createMany: {
+            args: Prisma.PeriodicTargetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PeriodicTargetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          update: {
+            args: Prisma.PeriodicTargetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          deleteMany: {
+            args: Prisma.PeriodicTargetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PeriodicTargetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PeriodicTargetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeriodicTargetPayload>
+          }
+          aggregate: {
+            args: Prisma.PeriodicTargetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePeriodicTarget>
+          }
+          groupBy: {
+            args: Prisma.PeriodicTargetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PeriodicTargetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PeriodicTargetCountArgs<ExtArgs>
+            result: $Utils.Optional<PeriodicTargetCountAggregateOutputType> | number
+          }
+        }
+      }
       IndicatorReport: {
         payload: Prisma.$IndicatorReportPayload<ExtArgs>
         fields: Prisma.IndicatorReportFieldRefs
@@ -3008,6 +3090,7 @@ export namespace Prisma {
     output?: OutputOmit
     indicator?: IndicatorOmit
     indicatorDisaggregation?: IndicatorDisaggregationOmit
+    periodicTarget?: PeriodicTargetOmit
     indicatorReport?: IndicatorReportOmit
     indicatorReportDisaggregation?: IndicatorReportDisaggregationOmit
     indicatorReportComment?: IndicatorReportCommentOmit
@@ -3582,11 +3665,13 @@ export namespace Prisma {
   export type IndicatorCountOutputType = {
     IndicatorReport: number
     IndicatorDisaggregation: number
+    PeriodicTarget: number
   }
 
   export type IndicatorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     IndicatorReport?: boolean | IndicatorCountOutputTypeCountIndicatorReportArgs
     IndicatorDisaggregation?: boolean | IndicatorCountOutputTypeCountIndicatorDisaggregationArgs
+    PeriodicTarget?: boolean | IndicatorCountOutputTypeCountPeriodicTargetArgs
   }
 
   // Custom InputTypes
@@ -3612,6 +3697,13 @@ export namespace Prisma {
    */
   export type IndicatorCountOutputTypeCountIndicatorDisaggregationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: IndicatorDisaggregationWhereInput
+  }
+
+  /**
+   * IndicatorCountOutputType without action
+   */
+  export type IndicatorCountOutputTypeCountPeriodicTargetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PeriodicTargetWhereInput
   }
 
 
@@ -20028,6 +20120,7 @@ export namespace Prisma {
     ResultType?: boolean | Indicator$ResultTypeArgs<ExtArgs>
     IndicatorReport?: boolean | Indicator$IndicatorReportArgs<ExtArgs>
     IndicatorDisaggregation?: boolean | Indicator$IndicatorDisaggregationArgs<ExtArgs>
+    PeriodicTarget?: boolean | Indicator$PeriodicTargetArgs<ExtArgs>
     _count?: boolean | IndicatorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["indicator"]>
 
@@ -20063,6 +20156,7 @@ export namespace Prisma {
     ResultType?: boolean | Indicator$ResultTypeArgs<ExtArgs>
     IndicatorReport?: boolean | Indicator$IndicatorReportArgs<ExtArgs>
     IndicatorDisaggregation?: boolean | Indicator$IndicatorDisaggregationArgs<ExtArgs>
+    PeriodicTarget?: boolean | Indicator$PeriodicTargetArgs<ExtArgs>
     _count?: boolean | IndicatorCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -20072,6 +20166,7 @@ export namespace Prisma {
       ResultType: Prisma.$ResultTypePayload<ExtArgs> | null
       IndicatorReport: Prisma.$IndicatorReportPayload<ExtArgs>[]
       IndicatorDisaggregation: Prisma.$IndicatorDisaggregationPayload<ExtArgs>[]
+      PeriodicTarget: Prisma.$PeriodicTargetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       indicatorId: string
@@ -20439,6 +20534,7 @@ export namespace Prisma {
     ResultType<T extends Indicator$ResultTypeArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$ResultTypeArgs<ExtArgs>>): Prisma__ResultTypeClient<$Result.GetResult<Prisma.$ResultTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     IndicatorReport<T extends Indicator$IndicatorReportArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$IndicatorReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     IndicatorDisaggregation<T extends Indicator$IndicatorDisaggregationArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$IndicatorDisaggregationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorDisaggregationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    PeriodicTarget<T extends Indicator$PeriodicTargetArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$PeriodicTargetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20902,6 +20998,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: IndicatorDisaggregationScalarFieldEnum | IndicatorDisaggregationScalarFieldEnum[]
+  }
+
+  /**
+   * Indicator.PeriodicTarget
+   */
+  export type Indicator$PeriodicTargetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    where?: PeriodicTargetWhereInput
+    orderBy?: PeriodicTargetOrderByWithRelationInput | PeriodicTargetOrderByWithRelationInput[]
+    cursor?: PeriodicTargetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PeriodicTargetScalarFieldEnum | PeriodicTargetScalarFieldEnum[]
   }
 
   /**
@@ -21903,6 +22023,963 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: IndicatorDisaggregationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PeriodicTarget
+   */
+
+  export type AggregatePeriodicTarget = {
+    _count: PeriodicTargetCountAggregateOutputType | null
+    _avg: PeriodicTargetAvgAggregateOutputType | null
+    _sum: PeriodicTargetSumAggregateOutputType | null
+    _min: PeriodicTargetMinAggregateOutputType | null
+    _max: PeriodicTargetMaxAggregateOutputType | null
+  }
+
+  export type PeriodicTargetAvgAggregateOutputType = {
+    target: number | null
+  }
+
+  export type PeriodicTargetSumAggregateOutputType = {
+    target: number | null
+  }
+
+  export type PeriodicTargetMinAggregateOutputType = {
+    periodicTargetId: string | null
+    indicatorId: string | null
+    target: number | null
+    targetDate: Date | null
+  }
+
+  export type PeriodicTargetMaxAggregateOutputType = {
+    periodicTargetId: string | null
+    indicatorId: string | null
+    target: number | null
+    targetDate: Date | null
+  }
+
+  export type PeriodicTargetCountAggregateOutputType = {
+    periodicTargetId: number
+    indicatorId: number
+    target: number
+    targetDate: number
+    _all: number
+  }
+
+
+  export type PeriodicTargetAvgAggregateInputType = {
+    target?: true
+  }
+
+  export type PeriodicTargetSumAggregateInputType = {
+    target?: true
+  }
+
+  export type PeriodicTargetMinAggregateInputType = {
+    periodicTargetId?: true
+    indicatorId?: true
+    target?: true
+    targetDate?: true
+  }
+
+  export type PeriodicTargetMaxAggregateInputType = {
+    periodicTargetId?: true
+    indicatorId?: true
+    target?: true
+    targetDate?: true
+  }
+
+  export type PeriodicTargetCountAggregateInputType = {
+    periodicTargetId?: true
+    indicatorId?: true
+    target?: true
+    targetDate?: true
+    _all?: true
+  }
+
+  export type PeriodicTargetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PeriodicTarget to aggregate.
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PeriodicTargets to fetch.
+     */
+    orderBy?: PeriodicTargetOrderByWithRelationInput | PeriodicTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PeriodicTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PeriodicTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PeriodicTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PeriodicTargets
+    **/
+    _count?: true | PeriodicTargetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PeriodicTargetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PeriodicTargetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PeriodicTargetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PeriodicTargetMaxAggregateInputType
+  }
+
+  export type GetPeriodicTargetAggregateType<T extends PeriodicTargetAggregateArgs> = {
+        [P in keyof T & keyof AggregatePeriodicTarget]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePeriodicTarget[P]>
+      : GetScalarType<T[P], AggregatePeriodicTarget[P]>
+  }
+
+
+
+
+  export type PeriodicTargetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PeriodicTargetWhereInput
+    orderBy?: PeriodicTargetOrderByWithAggregationInput | PeriodicTargetOrderByWithAggregationInput[]
+    by: PeriodicTargetScalarFieldEnum[] | PeriodicTargetScalarFieldEnum
+    having?: PeriodicTargetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PeriodicTargetCountAggregateInputType | true
+    _avg?: PeriodicTargetAvgAggregateInputType
+    _sum?: PeriodicTargetSumAggregateInputType
+    _min?: PeriodicTargetMinAggregateInputType
+    _max?: PeriodicTargetMaxAggregateInputType
+  }
+
+  export type PeriodicTargetGroupByOutputType = {
+    periodicTargetId: string
+    indicatorId: string
+    target: number | null
+    targetDate: Date | null
+    _count: PeriodicTargetCountAggregateOutputType | null
+    _avg: PeriodicTargetAvgAggregateOutputType | null
+    _sum: PeriodicTargetSumAggregateOutputType | null
+    _min: PeriodicTargetMinAggregateOutputType | null
+    _max: PeriodicTargetMaxAggregateOutputType | null
+  }
+
+  type GetPeriodicTargetGroupByPayload<T extends PeriodicTargetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PeriodicTargetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PeriodicTargetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PeriodicTargetGroupByOutputType[P]>
+            : GetScalarType<T[P], PeriodicTargetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PeriodicTargetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    periodicTargetId?: boolean
+    indicatorId?: boolean
+    target?: boolean
+    targetDate?: boolean
+    indicator?: boolean | IndicatorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["periodicTarget"]>
+
+
+
+  export type PeriodicTargetSelectScalar = {
+    periodicTargetId?: boolean
+    indicatorId?: boolean
+    target?: boolean
+    targetDate?: boolean
+  }
+
+  export type PeriodicTargetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"periodicTargetId" | "indicatorId" | "target" | "targetDate", ExtArgs["result"]["periodicTarget"]>
+  export type PeriodicTargetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    indicator?: boolean | IndicatorDefaultArgs<ExtArgs>
+  }
+
+  export type $PeriodicTargetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PeriodicTarget"
+    objects: {
+      indicator: Prisma.$IndicatorPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      periodicTargetId: string
+      indicatorId: string
+      target: number | null
+      targetDate: Date | null
+    }, ExtArgs["result"]["periodicTarget"]>
+    composites: {}
+  }
+
+  type PeriodicTargetGetPayload<S extends boolean | null | undefined | PeriodicTargetDefaultArgs> = $Result.GetResult<Prisma.$PeriodicTargetPayload, S>
+
+  type PeriodicTargetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PeriodicTargetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PeriodicTargetCountAggregateInputType | true
+    }
+
+  export interface PeriodicTargetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PeriodicTarget'], meta: { name: 'PeriodicTarget' } }
+    /**
+     * Find zero or one PeriodicTarget that matches the filter.
+     * @param {PeriodicTargetFindUniqueArgs} args - Arguments to find a PeriodicTarget
+     * @example
+     * // Get one PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PeriodicTargetFindUniqueArgs>(args: SelectSubset<T, PeriodicTargetFindUniqueArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PeriodicTarget that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PeriodicTargetFindUniqueOrThrowArgs} args - Arguments to find a PeriodicTarget
+     * @example
+     * // Get one PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PeriodicTargetFindUniqueOrThrowArgs>(args: SelectSubset<T, PeriodicTargetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PeriodicTarget that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetFindFirstArgs} args - Arguments to find a PeriodicTarget
+     * @example
+     * // Get one PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PeriodicTargetFindFirstArgs>(args?: SelectSubset<T, PeriodicTargetFindFirstArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PeriodicTarget that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetFindFirstOrThrowArgs} args - Arguments to find a PeriodicTarget
+     * @example
+     * // Get one PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PeriodicTargetFindFirstOrThrowArgs>(args?: SelectSubset<T, PeriodicTargetFindFirstOrThrowArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PeriodicTargets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PeriodicTargets
+     * const periodicTargets = await prisma.periodicTarget.findMany()
+     * 
+     * // Get first 10 PeriodicTargets
+     * const periodicTargets = await prisma.periodicTarget.findMany({ take: 10 })
+     * 
+     * // Only select the `periodicTargetId`
+     * const periodicTargetWithPeriodicTargetIdOnly = await prisma.periodicTarget.findMany({ select: { periodicTargetId: true } })
+     * 
+     */
+    findMany<T extends PeriodicTargetFindManyArgs>(args?: SelectSubset<T, PeriodicTargetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PeriodicTarget.
+     * @param {PeriodicTargetCreateArgs} args - Arguments to create a PeriodicTarget.
+     * @example
+     * // Create one PeriodicTarget
+     * const PeriodicTarget = await prisma.periodicTarget.create({
+     *   data: {
+     *     // ... data to create a PeriodicTarget
+     *   }
+     * })
+     * 
+     */
+    create<T extends PeriodicTargetCreateArgs>(args: SelectSubset<T, PeriodicTargetCreateArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PeriodicTargets.
+     * @param {PeriodicTargetCreateManyArgs} args - Arguments to create many PeriodicTargets.
+     * @example
+     * // Create many PeriodicTargets
+     * const periodicTarget = await prisma.periodicTarget.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PeriodicTargetCreateManyArgs>(args?: SelectSubset<T, PeriodicTargetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PeriodicTarget.
+     * @param {PeriodicTargetDeleteArgs} args - Arguments to delete one PeriodicTarget.
+     * @example
+     * // Delete one PeriodicTarget
+     * const PeriodicTarget = await prisma.periodicTarget.delete({
+     *   where: {
+     *     // ... filter to delete one PeriodicTarget
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PeriodicTargetDeleteArgs>(args: SelectSubset<T, PeriodicTargetDeleteArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PeriodicTarget.
+     * @param {PeriodicTargetUpdateArgs} args - Arguments to update one PeriodicTarget.
+     * @example
+     * // Update one PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PeriodicTargetUpdateArgs>(args: SelectSubset<T, PeriodicTargetUpdateArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PeriodicTargets.
+     * @param {PeriodicTargetDeleteManyArgs} args - Arguments to filter PeriodicTargets to delete.
+     * @example
+     * // Delete a few PeriodicTargets
+     * const { count } = await prisma.periodicTarget.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PeriodicTargetDeleteManyArgs>(args?: SelectSubset<T, PeriodicTargetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PeriodicTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PeriodicTargets
+     * const periodicTarget = await prisma.periodicTarget.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PeriodicTargetUpdateManyArgs>(args: SelectSubset<T, PeriodicTargetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PeriodicTarget.
+     * @param {PeriodicTargetUpsertArgs} args - Arguments to update or create a PeriodicTarget.
+     * @example
+     * // Update or create a PeriodicTarget
+     * const periodicTarget = await prisma.periodicTarget.upsert({
+     *   create: {
+     *     // ... data to create a PeriodicTarget
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PeriodicTarget we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PeriodicTargetUpsertArgs>(args: SelectSubset<T, PeriodicTargetUpsertArgs<ExtArgs>>): Prisma__PeriodicTargetClient<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PeriodicTargets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetCountArgs} args - Arguments to filter PeriodicTargets to count.
+     * @example
+     * // Count the number of PeriodicTargets
+     * const count = await prisma.periodicTarget.count({
+     *   where: {
+     *     // ... the filter for the PeriodicTargets we want to count
+     *   }
+     * })
+    **/
+    count<T extends PeriodicTargetCountArgs>(
+      args?: Subset<T, PeriodicTargetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PeriodicTargetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PeriodicTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PeriodicTargetAggregateArgs>(args: Subset<T, PeriodicTargetAggregateArgs>): Prisma.PrismaPromise<GetPeriodicTargetAggregateType<T>>
+
+    /**
+     * Group by PeriodicTarget.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PeriodicTargetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PeriodicTargetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PeriodicTargetGroupByArgs['orderBy'] }
+        : { orderBy?: PeriodicTargetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PeriodicTargetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPeriodicTargetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PeriodicTarget model
+   */
+  readonly fields: PeriodicTargetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PeriodicTarget.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PeriodicTargetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    indicator<T extends IndicatorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorDefaultArgs<ExtArgs>>): Prisma__IndicatorClient<$Result.GetResult<Prisma.$IndicatorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PeriodicTarget model
+   */
+  interface PeriodicTargetFieldRefs {
+    readonly periodicTargetId: FieldRef<"PeriodicTarget", 'String'>
+    readonly indicatorId: FieldRef<"PeriodicTarget", 'String'>
+    readonly target: FieldRef<"PeriodicTarget", 'Int'>
+    readonly targetDate: FieldRef<"PeriodicTarget", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PeriodicTarget findUnique
+   */
+  export type PeriodicTargetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PeriodicTarget to fetch.
+     */
+    where: PeriodicTargetWhereUniqueInput
+  }
+
+  /**
+   * PeriodicTarget findUniqueOrThrow
+   */
+  export type PeriodicTargetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PeriodicTarget to fetch.
+     */
+    where: PeriodicTargetWhereUniqueInput
+  }
+
+  /**
+   * PeriodicTarget findFirst
+   */
+  export type PeriodicTargetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PeriodicTarget to fetch.
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PeriodicTargets to fetch.
+     */
+    orderBy?: PeriodicTargetOrderByWithRelationInput | PeriodicTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PeriodicTargets.
+     */
+    cursor?: PeriodicTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PeriodicTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PeriodicTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PeriodicTargets.
+     */
+    distinct?: PeriodicTargetScalarFieldEnum | PeriodicTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PeriodicTarget findFirstOrThrow
+   */
+  export type PeriodicTargetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PeriodicTarget to fetch.
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PeriodicTargets to fetch.
+     */
+    orderBy?: PeriodicTargetOrderByWithRelationInput | PeriodicTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PeriodicTargets.
+     */
+    cursor?: PeriodicTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PeriodicTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PeriodicTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PeriodicTargets.
+     */
+    distinct?: PeriodicTargetScalarFieldEnum | PeriodicTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PeriodicTarget findMany
+   */
+  export type PeriodicTargetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter, which PeriodicTargets to fetch.
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PeriodicTargets to fetch.
+     */
+    orderBy?: PeriodicTargetOrderByWithRelationInput | PeriodicTargetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PeriodicTargets.
+     */
+    cursor?: PeriodicTargetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PeriodicTargets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PeriodicTargets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PeriodicTargets.
+     */
+    distinct?: PeriodicTargetScalarFieldEnum | PeriodicTargetScalarFieldEnum[]
+  }
+
+  /**
+   * PeriodicTarget create
+   */
+  export type PeriodicTargetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PeriodicTarget.
+     */
+    data: XOR<PeriodicTargetCreateInput, PeriodicTargetUncheckedCreateInput>
+  }
+
+  /**
+   * PeriodicTarget createMany
+   */
+  export type PeriodicTargetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PeriodicTargets.
+     */
+    data: PeriodicTargetCreateManyInput | PeriodicTargetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PeriodicTarget update
+   */
+  export type PeriodicTargetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PeriodicTarget.
+     */
+    data: XOR<PeriodicTargetUpdateInput, PeriodicTargetUncheckedUpdateInput>
+    /**
+     * Choose, which PeriodicTarget to update.
+     */
+    where: PeriodicTargetWhereUniqueInput
+  }
+
+  /**
+   * PeriodicTarget updateMany
+   */
+  export type PeriodicTargetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PeriodicTargets.
+     */
+    data: XOR<PeriodicTargetUpdateManyMutationInput, PeriodicTargetUncheckedUpdateManyInput>
+    /**
+     * Filter which PeriodicTargets to update
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * Limit how many PeriodicTargets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PeriodicTarget upsert
+   */
+  export type PeriodicTargetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PeriodicTarget to update in case it exists.
+     */
+    where: PeriodicTargetWhereUniqueInput
+    /**
+     * In case the PeriodicTarget found by the `where` argument doesn't exist, create a new PeriodicTarget with this data.
+     */
+    create: XOR<PeriodicTargetCreateInput, PeriodicTargetUncheckedCreateInput>
+    /**
+     * In case the PeriodicTarget was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PeriodicTargetUpdateInput, PeriodicTargetUncheckedUpdateInput>
+  }
+
+  /**
+   * PeriodicTarget delete
+   */
+  export type PeriodicTargetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
+    /**
+     * Filter which PeriodicTarget to delete.
+     */
+    where: PeriodicTargetWhereUniqueInput
+  }
+
+  /**
+   * PeriodicTarget deleteMany
+   */
+  export type PeriodicTargetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PeriodicTargets to delete
+     */
+    where?: PeriodicTargetWhereInput
+    /**
+     * Limit how many PeriodicTargets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PeriodicTarget without action
+   */
+  export type PeriodicTargetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PeriodicTarget
+     */
+    select?: PeriodicTargetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PeriodicTarget
+     */
+    omit?: PeriodicTargetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PeriodicTargetInclude<ExtArgs> | null
   }
 
 
@@ -34321,6 +35398,16 @@ export namespace Prisma {
   export type IndicatorDisaggregationScalarFieldEnum = (typeof IndicatorDisaggregationScalarFieldEnum)[keyof typeof IndicatorDisaggregationScalarFieldEnum]
 
 
+  export const PeriodicTargetScalarFieldEnum: {
+    periodicTargetId: 'periodicTargetId',
+    indicatorId: 'indicatorId',
+    target: 'target',
+    targetDate: 'targetDate'
+  };
+
+  export type PeriodicTargetScalarFieldEnum = (typeof PeriodicTargetScalarFieldEnum)[keyof typeof PeriodicTargetScalarFieldEnum]
+
+
   export const IndicatorReportScalarFieldEnum: {
     indicatorReportId: 'indicatorReportId',
     indicatorSource: 'indicatorSource',
@@ -34780,6 +35867,14 @@ export namespace Prisma {
   };
 
   export type IndicatorDisaggregationOrderByRelevanceFieldEnum = (typeof IndicatorDisaggregationOrderByRelevanceFieldEnum)[keyof typeof IndicatorDisaggregationOrderByRelevanceFieldEnum]
+
+
+  export const PeriodicTargetOrderByRelevanceFieldEnum: {
+    periodicTargetId: 'periodicTargetId',
+    indicatorId: 'indicatorId'
+  };
+
+  export type PeriodicTargetOrderByRelevanceFieldEnum = (typeof PeriodicTargetOrderByRelevanceFieldEnum)[keyof typeof PeriodicTargetOrderByRelevanceFieldEnum]
 
 
   export const IndicatorReportOrderByRelevanceFieldEnum: {
@@ -36293,6 +37388,7 @@ export namespace Prisma {
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
     IndicatorReport?: IndicatorReportListRelationFilter
     IndicatorDisaggregation?: IndicatorDisaggregationListRelationFilter
+    PeriodicTarget?: PeriodicTargetListRelationFilter
   }
 
   export type IndicatorOrderByWithRelationInput = {
@@ -36321,6 +37417,7 @@ export namespace Prisma {
     ResultType?: ResultTypeOrderByWithRelationInput
     IndicatorReport?: IndicatorReportOrderByRelationAggregateInput
     IndicatorDisaggregation?: IndicatorDisaggregationOrderByRelationAggregateInput
+    PeriodicTarget?: PeriodicTargetOrderByRelationAggregateInput
     _relevance?: IndicatorOrderByRelevanceInput
   }
 
@@ -36353,6 +37450,7 @@ export namespace Prisma {
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
     IndicatorReport?: IndicatorReportListRelationFilter
     IndicatorDisaggregation?: IndicatorDisaggregationListRelationFilter
+    PeriodicTarget?: PeriodicTargetListRelationFilter
   }, "indicatorId">
 
   export type IndicatorOrderByWithAggregationInput = {
@@ -36474,6 +37572,59 @@ export namespace Prisma {
     category?: StringWithAggregatesFilter<"IndicatorDisaggregation"> | string
     target?: IntNullableWithAggregatesFilter<"IndicatorDisaggregation"> | number | null
     baseline?: IntNullableWithAggregatesFilter<"IndicatorDisaggregation"> | number | null
+  }
+
+  export type PeriodicTargetWhereInput = {
+    AND?: PeriodicTargetWhereInput | PeriodicTargetWhereInput[]
+    OR?: PeriodicTargetWhereInput[]
+    NOT?: PeriodicTargetWhereInput | PeriodicTargetWhereInput[]
+    periodicTargetId?: StringFilter<"PeriodicTarget"> | string
+    indicatorId?: StringFilter<"PeriodicTarget"> | string
+    target?: IntNullableFilter<"PeriodicTarget"> | number | null
+    targetDate?: DateTimeNullableFilter<"PeriodicTarget"> | Date | string | null
+    indicator?: XOR<IndicatorScalarRelationFilter, IndicatorWhereInput>
+  }
+
+  export type PeriodicTargetOrderByWithRelationInput = {
+    periodicTargetId?: SortOrder
+    indicatorId?: SortOrder
+    target?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    indicator?: IndicatorOrderByWithRelationInput
+    _relevance?: PeriodicTargetOrderByRelevanceInput
+  }
+
+  export type PeriodicTargetWhereUniqueInput = Prisma.AtLeast<{
+    periodicTargetId?: string
+    AND?: PeriodicTargetWhereInput | PeriodicTargetWhereInput[]
+    OR?: PeriodicTargetWhereInput[]
+    NOT?: PeriodicTargetWhereInput | PeriodicTargetWhereInput[]
+    indicatorId?: StringFilter<"PeriodicTarget"> | string
+    target?: IntNullableFilter<"PeriodicTarget"> | number | null
+    targetDate?: DateTimeNullableFilter<"PeriodicTarget"> | Date | string | null
+    indicator?: XOR<IndicatorScalarRelationFilter, IndicatorWhereInput>
+  }, "periodicTargetId">
+
+  export type PeriodicTargetOrderByWithAggregationInput = {
+    periodicTargetId?: SortOrder
+    indicatorId?: SortOrder
+    target?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    _count?: PeriodicTargetCountOrderByAggregateInput
+    _avg?: PeriodicTargetAvgOrderByAggregateInput
+    _max?: PeriodicTargetMaxOrderByAggregateInput
+    _min?: PeriodicTargetMinOrderByAggregateInput
+    _sum?: PeriodicTargetSumOrderByAggregateInput
+  }
+
+  export type PeriodicTargetScalarWhereWithAggregatesInput = {
+    AND?: PeriodicTargetScalarWhereWithAggregatesInput | PeriodicTargetScalarWhereWithAggregatesInput[]
+    OR?: PeriodicTargetScalarWhereWithAggregatesInput[]
+    NOT?: PeriodicTargetScalarWhereWithAggregatesInput | PeriodicTargetScalarWhereWithAggregatesInput[]
+    periodicTargetId?: StringWithAggregatesFilter<"PeriodicTarget"> | string
+    indicatorId?: StringWithAggregatesFilter<"PeriodicTarget"> | string
+    target?: IntNullableWithAggregatesFilter<"PeriodicTarget"> | number | null
+    targetDate?: DateTimeNullableWithAggregatesFilter<"PeriodicTarget"> | Date | string | null
   }
 
   export type IndicatorReportWhereInput = {
@@ -39050,6 +40201,7 @@ export namespace Prisma {
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorUncheckedCreateInput = {
@@ -39077,6 +40229,7 @@ export namespace Prisma {
     resultTypeId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorUpdateInput = {
@@ -39104,6 +40257,7 @@ export namespace Prisma {
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorUncheckedUpdateInput = {
@@ -39131,6 +40285,7 @@ export namespace Prisma {
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorCreateManyInput = {
@@ -39267,6 +40422,54 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PeriodicTargetCreateInput = {
+    periodicTargetId?: string
+    target?: number | null
+    targetDate?: Date | string | null
+    indicator: IndicatorCreateNestedOneWithoutPeriodicTargetInput
+  }
+
+  export type PeriodicTargetUncheckedCreateInput = {
+    periodicTargetId?: string
+    indicatorId: string
+    target?: number | null
+    targetDate?: Date | string | null
+  }
+
+  export type PeriodicTargetUpdateInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    indicator?: IndicatorUpdateOneRequiredWithoutPeriodicTargetNestedInput
+  }
+
+  export type PeriodicTargetUncheckedUpdateInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PeriodicTargetCreateManyInput = {
+    periodicTargetId?: string
+    indicatorId: string
+    target?: number | null
+    targetDate?: Date | string | null
+  }
+
+  export type PeriodicTargetUpdateManyMutationInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PeriodicTargetUncheckedUpdateManyInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IndicatorReportCreateInput = {
@@ -41601,7 +42804,17 @@ export namespace Prisma {
     none?: IndicatorDisaggregationWhereInput
   }
 
+  export type PeriodicTargetListRelationFilter = {
+    every?: PeriodicTargetWhereInput
+    some?: PeriodicTargetWhereInput
+    none?: PeriodicTargetWhereInput
+  }
+
   export type IndicatorDisaggregationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PeriodicTargetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41742,6 +42955,41 @@ export namespace Prisma {
   export type IndicatorDisaggregationSumOrderByAggregateInput = {
     target?: SortOrder
     baseline?: SortOrder
+  }
+
+  export type PeriodicTargetOrderByRelevanceInput = {
+    fields: PeriodicTargetOrderByRelevanceFieldEnum | PeriodicTargetOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PeriodicTargetCountOrderByAggregateInput = {
+    periodicTargetId?: SortOrder
+    indicatorId?: SortOrder
+    target?: SortOrder
+    targetDate?: SortOrder
+  }
+
+  export type PeriodicTargetAvgOrderByAggregateInput = {
+    target?: SortOrder
+  }
+
+  export type PeriodicTargetMaxOrderByAggregateInput = {
+    periodicTargetId?: SortOrder
+    indicatorId?: SortOrder
+    target?: SortOrder
+    targetDate?: SortOrder
+  }
+
+  export type PeriodicTargetMinOrderByAggregateInput = {
+    periodicTargetId?: SortOrder
+    indicatorId?: SortOrder
+    target?: SortOrder
+    targetDate?: SortOrder
+  }
+
+  export type PeriodicTargetSumOrderByAggregateInput = {
+    target?: SortOrder
   }
 
   export type IndicatorNullableScalarRelationFilter = {
@@ -44130,6 +45378,13 @@ export namespace Prisma {
     connect?: IndicatorDisaggregationWhereUniqueInput | IndicatorDisaggregationWhereUniqueInput[]
   }
 
+  export type PeriodicTargetCreateNestedManyWithoutIndicatorInput = {
+    create?: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput> | PeriodicTargetCreateWithoutIndicatorInput[] | PeriodicTargetUncheckedCreateWithoutIndicatorInput[]
+    connectOrCreate?: PeriodicTargetCreateOrConnectWithoutIndicatorInput | PeriodicTargetCreateOrConnectWithoutIndicatorInput[]
+    createMany?: PeriodicTargetCreateManyIndicatorInputEnvelope
+    connect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+  }
+
   export type IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput = {
     create?: XOR<IndicatorReportCreateWithoutIndicatorInput, IndicatorReportUncheckedCreateWithoutIndicatorInput> | IndicatorReportCreateWithoutIndicatorInput[] | IndicatorReportUncheckedCreateWithoutIndicatorInput[]
     connectOrCreate?: IndicatorReportCreateOrConnectWithoutIndicatorInput | IndicatorReportCreateOrConnectWithoutIndicatorInput[]
@@ -44142,6 +45397,13 @@ export namespace Prisma {
     connectOrCreate?: IndicatorDisaggregationCreateOrConnectWithoutIndicatorInput | IndicatorDisaggregationCreateOrConnectWithoutIndicatorInput[]
     createMany?: IndicatorDisaggregationCreateManyIndicatorInputEnvelope
     connect?: IndicatorDisaggregationWhereUniqueInput | IndicatorDisaggregationWhereUniqueInput[]
+  }
+
+  export type PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput = {
+    create?: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput> | PeriodicTargetCreateWithoutIndicatorInput[] | PeriodicTargetUncheckedCreateWithoutIndicatorInput[]
+    connectOrCreate?: PeriodicTargetCreateOrConnectWithoutIndicatorInput | PeriodicTargetCreateOrConnectWithoutIndicatorInput[]
+    createMany?: PeriodicTargetCreateManyIndicatorInputEnvelope
+    connect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
   }
 
   export type ResultTypeUpdateOneWithoutIndicatorNestedInput = {
@@ -44182,6 +45444,20 @@ export namespace Prisma {
     deleteMany?: IndicatorDisaggregationScalarWhereInput | IndicatorDisaggregationScalarWhereInput[]
   }
 
+  export type PeriodicTargetUpdateManyWithoutIndicatorNestedInput = {
+    create?: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput> | PeriodicTargetCreateWithoutIndicatorInput[] | PeriodicTargetUncheckedCreateWithoutIndicatorInput[]
+    connectOrCreate?: PeriodicTargetCreateOrConnectWithoutIndicatorInput | PeriodicTargetCreateOrConnectWithoutIndicatorInput[]
+    upsert?: PeriodicTargetUpsertWithWhereUniqueWithoutIndicatorInput | PeriodicTargetUpsertWithWhereUniqueWithoutIndicatorInput[]
+    createMany?: PeriodicTargetCreateManyIndicatorInputEnvelope
+    set?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    disconnect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    delete?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    connect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    update?: PeriodicTargetUpdateWithWhereUniqueWithoutIndicatorInput | PeriodicTargetUpdateWithWhereUniqueWithoutIndicatorInput[]
+    updateMany?: PeriodicTargetUpdateManyWithWhereWithoutIndicatorInput | PeriodicTargetUpdateManyWithWhereWithoutIndicatorInput[]
+    deleteMany?: PeriodicTargetScalarWhereInput | PeriodicTargetScalarWhereInput[]
+  }
+
   export type IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput = {
     create?: XOR<IndicatorReportCreateWithoutIndicatorInput, IndicatorReportUncheckedCreateWithoutIndicatorInput> | IndicatorReportCreateWithoutIndicatorInput[] | IndicatorReportUncheckedCreateWithoutIndicatorInput[]
     connectOrCreate?: IndicatorReportCreateOrConnectWithoutIndicatorInput | IndicatorReportCreateOrConnectWithoutIndicatorInput[]
@@ -44210,6 +45486,20 @@ export namespace Prisma {
     deleteMany?: IndicatorDisaggregationScalarWhereInput | IndicatorDisaggregationScalarWhereInput[]
   }
 
+  export type PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput = {
+    create?: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput> | PeriodicTargetCreateWithoutIndicatorInput[] | PeriodicTargetUncheckedCreateWithoutIndicatorInput[]
+    connectOrCreate?: PeriodicTargetCreateOrConnectWithoutIndicatorInput | PeriodicTargetCreateOrConnectWithoutIndicatorInput[]
+    upsert?: PeriodicTargetUpsertWithWhereUniqueWithoutIndicatorInput | PeriodicTargetUpsertWithWhereUniqueWithoutIndicatorInput[]
+    createMany?: PeriodicTargetCreateManyIndicatorInputEnvelope
+    set?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    disconnect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    delete?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    connect?: PeriodicTargetWhereUniqueInput | PeriodicTargetWhereUniqueInput[]
+    update?: PeriodicTargetUpdateWithWhereUniqueWithoutIndicatorInput | PeriodicTargetUpdateWithWhereUniqueWithoutIndicatorInput[]
+    updateMany?: PeriodicTargetUpdateManyWithWhereWithoutIndicatorInput | PeriodicTargetUpdateManyWithWhereWithoutIndicatorInput[]
+    deleteMany?: PeriodicTargetScalarWhereInput | PeriodicTargetScalarWhereInput[]
+  }
+
   export type IndicatorCreateNestedOneWithoutIndicatorDisaggregationInput = {
     create?: XOR<IndicatorCreateWithoutIndicatorDisaggregationInput, IndicatorUncheckedCreateWithoutIndicatorDisaggregationInput>
     connectOrCreate?: IndicatorCreateOrConnectWithoutIndicatorDisaggregationInput
@@ -44222,6 +45512,20 @@ export namespace Prisma {
     upsert?: IndicatorUpsertWithoutIndicatorDisaggregationInput
     connect?: IndicatorWhereUniqueInput
     update?: XOR<XOR<IndicatorUpdateToOneWithWhereWithoutIndicatorDisaggregationInput, IndicatorUpdateWithoutIndicatorDisaggregationInput>, IndicatorUncheckedUpdateWithoutIndicatorDisaggregationInput>
+  }
+
+  export type IndicatorCreateNestedOneWithoutPeriodicTargetInput = {
+    create?: XOR<IndicatorCreateWithoutPeriodicTargetInput, IndicatorUncheckedCreateWithoutPeriodicTargetInput>
+    connectOrCreate?: IndicatorCreateOrConnectWithoutPeriodicTargetInput
+    connect?: IndicatorWhereUniqueInput
+  }
+
+  export type IndicatorUpdateOneRequiredWithoutPeriodicTargetNestedInput = {
+    create?: XOR<IndicatorCreateWithoutPeriodicTargetInput, IndicatorUncheckedCreateWithoutPeriodicTargetInput>
+    connectOrCreate?: IndicatorCreateOrConnectWithoutPeriodicTargetInput
+    upsert?: IndicatorUpsertWithoutPeriodicTargetInput
+    connect?: IndicatorWhereUniqueInput
+    update?: XOR<XOR<IndicatorUpdateToOneWithWhereWithoutPeriodicTargetInput, IndicatorUpdateWithoutPeriodicTargetInput>, IndicatorUncheckedUpdateWithoutPeriodicTargetInput>
   }
 
   export type IndicatorCreateNestedOneWithoutIndicatorReportInput = {
@@ -47672,6 +48976,7 @@ export namespace Prisma {
     result?: string | null
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorUncheckedCreateWithoutResultTypeInput = {
@@ -47698,6 +49003,7 @@ export namespace Prisma {
     result?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorCreateOrConnectWithoutResultTypeInput = {
@@ -48916,6 +50222,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PeriodicTargetCreateWithoutIndicatorInput = {
+    periodicTargetId?: string
+    target?: number | null
+    targetDate?: Date | string | null
+  }
+
+  export type PeriodicTargetUncheckedCreateWithoutIndicatorInput = {
+    periodicTargetId?: string
+    target?: number | null
+    targetDate?: Date | string | null
+  }
+
+  export type PeriodicTargetCreateOrConnectWithoutIndicatorInput = {
+    where: PeriodicTargetWhereUniqueInput
+    create: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput>
+  }
+
+  export type PeriodicTargetCreateManyIndicatorInputEnvelope = {
+    data: PeriodicTargetCreateManyIndicatorInput | PeriodicTargetCreateManyIndicatorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ResultTypeUpsertWithoutIndicatorInput = {
     update: XOR<ResultTypeUpdateWithoutIndicatorInput, ResultTypeUncheckedUpdateWithoutIndicatorInput>
     create: XOR<ResultTypeCreateWithoutIndicatorInput, ResultTypeUncheckedCreateWithoutIndicatorInput>
@@ -48989,6 +50317,32 @@ export namespace Prisma {
     baseline?: IntNullableFilter<"IndicatorDisaggregation"> | number | null
   }
 
+  export type PeriodicTargetUpsertWithWhereUniqueWithoutIndicatorInput = {
+    where: PeriodicTargetWhereUniqueInput
+    update: XOR<PeriodicTargetUpdateWithoutIndicatorInput, PeriodicTargetUncheckedUpdateWithoutIndicatorInput>
+    create: XOR<PeriodicTargetCreateWithoutIndicatorInput, PeriodicTargetUncheckedCreateWithoutIndicatorInput>
+  }
+
+  export type PeriodicTargetUpdateWithWhereUniqueWithoutIndicatorInput = {
+    where: PeriodicTargetWhereUniqueInput
+    data: XOR<PeriodicTargetUpdateWithoutIndicatorInput, PeriodicTargetUncheckedUpdateWithoutIndicatorInput>
+  }
+
+  export type PeriodicTargetUpdateManyWithWhereWithoutIndicatorInput = {
+    where: PeriodicTargetScalarWhereInput
+    data: XOR<PeriodicTargetUpdateManyMutationInput, PeriodicTargetUncheckedUpdateManyWithoutIndicatorInput>
+  }
+
+  export type PeriodicTargetScalarWhereInput = {
+    AND?: PeriodicTargetScalarWhereInput | PeriodicTargetScalarWhereInput[]
+    OR?: PeriodicTargetScalarWhereInput[]
+    NOT?: PeriodicTargetScalarWhereInput | PeriodicTargetScalarWhereInput[]
+    periodicTargetId?: StringFilter<"PeriodicTarget"> | string
+    indicatorId?: StringFilter<"PeriodicTarget"> | string
+    target?: IntNullableFilter<"PeriodicTarget"> | number | null
+    targetDate?: DateTimeNullableFilter<"PeriodicTarget"> | Date | string | null
+  }
+
   export type IndicatorCreateWithoutIndicatorDisaggregationInput = {
     indicatorId?: string
     indicatorSource?: string | null
@@ -49013,6 +50367,7 @@ export namespace Prisma {
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorUncheckedCreateWithoutIndicatorDisaggregationInput = {
@@ -49039,6 +50394,7 @@ export namespace Prisma {
     result?: string | null
     resultTypeId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorCreateOrConnectWithoutIndicatorDisaggregationInput = {
@@ -49081,6 +50437,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorUncheckedUpdateWithoutIndicatorDisaggregationInput = {
@@ -49107,6 +50464,131 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
+  }
+
+  export type IndicatorCreateWithoutPeriodicTargetInput = {
+    indicatorId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    statement?: string | null
+    linkKpiToSdnOrgKpi?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    result?: string | null
+    ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
+    IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
+  }
+
+  export type IndicatorUncheckedCreateWithoutPeriodicTargetInput = {
+    indicatorId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    statement?: string | null
+    linkKpiToSdnOrgKpi?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    result?: string | null
+    resultTypeId?: string | null
+    IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
+  }
+
+  export type IndicatorCreateOrConnectWithoutPeriodicTargetInput = {
+    where: IndicatorWhereUniqueInput
+    create: XOR<IndicatorCreateWithoutPeriodicTargetInput, IndicatorUncheckedCreateWithoutPeriodicTargetInput>
+  }
+
+  export type IndicatorUpsertWithoutPeriodicTargetInput = {
+    update: XOR<IndicatorUpdateWithoutPeriodicTargetInput, IndicatorUncheckedUpdateWithoutPeriodicTargetInput>
+    create: XOR<IndicatorCreateWithoutPeriodicTargetInput, IndicatorUncheckedCreateWithoutPeriodicTargetInput>
+    where?: IndicatorWhereInput
+  }
+
+  export type IndicatorUpdateToOneWithWhereWithoutPeriodicTargetInput = {
+    where?: IndicatorWhereInput
+    data: XOR<IndicatorUpdateWithoutPeriodicTargetInput, IndicatorUncheckedUpdateWithoutPeriodicTargetInput>
+  }
+
+  export type IndicatorUpdateWithoutPeriodicTargetInput = {
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
+  }
+
+  export type IndicatorUncheckedUpdateWithoutPeriodicTargetInput = {
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorCreateWithoutIndicatorReportInput = {
@@ -49133,6 +50615,7 @@ export namespace Prisma {
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorUncheckedCreateWithoutIndicatorReportInput = {
@@ -49159,6 +50642,7 @@ export namespace Prisma {
     result?: string | null
     resultTypeId?: string | null
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
 
   export type IndicatorCreateOrConnectWithoutIndicatorReportInput = {
@@ -49272,6 +50756,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorUncheckedUpdateWithoutIndicatorReportInput = {
@@ -49298,6 +50783,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
   }
 
   export type ResultTypeUpsertWithoutIndicatorReportInput = {
@@ -52951,6 +54437,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorUncheckedUpdateWithoutResultTypeInput = {
@@ -52977,6 +54464,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
   }
 
   export type IndicatorUncheckedUpdateManyWithoutResultTypeInput = {
@@ -53411,6 +54899,12 @@ export namespace Prisma {
     baseline?: number | null
   }
 
+  export type PeriodicTargetCreateManyIndicatorInput = {
+    periodicTargetId?: string
+    target?: number | null
+    targetDate?: Date | string | null
+  }
+
   export type IndicatorReportUpdateWithoutIndicatorInput = {
     indicatorReportId?: StringFieldUpdateOperationsInput | string
     indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53488,6 +54982,24 @@ export namespace Prisma {
     category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PeriodicTargetUpdateWithoutIndicatorInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PeriodicTargetUncheckedUpdateWithoutIndicatorInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PeriodicTargetUncheckedUpdateManyWithoutIndicatorInput = {
+    periodicTargetId?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IndicatorReportCommentCreateManyIndicatorReportInput = {

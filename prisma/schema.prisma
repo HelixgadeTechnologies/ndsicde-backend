@@ -317,7 +317,7 @@ model Indicator {
   resultTypeId            String?
   IndicatorReport         IndicatorReport[]
   IndicatorDisaggregation IndicatorDisaggregation[]
-
+  PeriodicTarget          PeriodicTarget[]
   @@map("indicator")
 }
 
@@ -333,6 +333,17 @@ model IndicatorDisaggregation {
   baseline     Int?
 
   @@map("indicator_disaggregation")
+}
+
+// Periodic target
+model PeriodicTarget {
+  periodicTargetId String @id @default(uuid())
+  indicatorId      String
+  indicator        Indicator @relation(fields: [indicatorId], references: [indicatorId])
+  target       Int? // optional per breakdown target
+  targetDate    DateTime?
+
+  @@map("periodic_target")
 }
 
 //indicator report

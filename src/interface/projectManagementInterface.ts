@@ -133,6 +133,7 @@ export interface IIndicator {
   updateAt?: Date | null;
   impactId?: string | null;
   IndicatorDisaggregation?: IIndicatorDisaggregation[];
+  PeriodicTarget?: IPeriodicTarget[];
 }
 
 export interface IIndicatorDisaggregation {
@@ -151,6 +152,15 @@ export interface IIndicatorReportDisaggregation {
   category: string;
   actual: number;
 }
+
+// Periodic target
+export interface IPeriodicTarget {
+  periodicTargetId: string;
+  indicatorId: string;
+  target: number | null;
+  targetDate: Date | null;
+}
+
 export interface IIndicatorWithDisaggregation {
   indicatorId: string;
   indicatorSource?: string | null;
@@ -183,6 +193,13 @@ export interface IIndicatorWithDisaggregation {
     category: string; // e.g., "Male", "Lagos", "18-25"
     target?: number | null;
     baseline?: number | null;
+  }[];
+  // Included relation
+  PeriodicTarget: {
+    periodicTargetId: string;
+    indicatorId: string;
+    target?: number | null;
+    targetDate: Date | null;
   }[];
 
 }
@@ -220,6 +237,7 @@ export interface IIndicatorView {
   resultResponsiblePerson?: string | null;
   resultProjectId?: string | null;
   IndicatorDisaggregation?: IIndicatorDisaggregation[];
+  PeriodicTarget?: IPeriodicTarget[];
   IndicatorReport?: IIndicatorReport[];
 }
 

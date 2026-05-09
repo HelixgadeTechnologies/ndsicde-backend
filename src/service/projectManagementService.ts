@@ -333,6 +333,21 @@ export const createOrUpdateIndicator = async (
           })
         );
       }
+
+      // Create periodic target
+      if (payload.PeriodicTarget) {
+        await Promise.all(
+          payload.PeriodicTarget.map(async (periodicTarget) => {
+            await prisma.periodicTarget.create({
+              data: {
+                indicatorId: indicator.indicatorId,
+                target: periodicTarget.target,
+                targetDate: periodicTarget.targetDate,
+              },
+            });
+          })
+        );
+      }
       return indicator;
     } else {
       // IF isCreate === false
@@ -374,6 +389,21 @@ export const createOrUpdateIndicator = async (
                 category: disaggregation.category.toLowerCase(),
                 target: disaggregation.target,
                 baseline: disaggregation.baseline,
+              },
+            });
+          })
+        );
+      }
+      // Update periodic target
+      if (payload.PeriodicTarget) {
+        await Promise.all(
+          payload.PeriodicTarget.map(async (periodicTarget) => {
+            await prisma.periodicTarget.update({
+              where: { periodicTargetId: periodicTarget.periodicTargetId },
+              data: {
+                indicatorId: indicator.indicatorId,
+                target: periodicTarget.target,
+                targetDate: periodicTarget.targetDate,
               },
             });
           })
