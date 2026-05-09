@@ -119,6 +119,11 @@ export type IndicatorReportComment = $Result.DefaultSelection<Prisma.$IndicatorR
  */
 export type Activity = $Result.DefaultSelection<Prisma.$ActivityPayload>
 /**
+ * Model SubActivities
+ * 
+ */
+export type SubActivities = $Result.DefaultSelection<Prisma.$SubActivitiesPayload>
+/**
  * Model ActivityReport
  * 
  */
@@ -479,6 +484,16 @@ export class PrismaClient<
     * ```
     */
   get activity(): Prisma.ActivityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.subActivities`: Exposes CRUD operations for the **SubActivities** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SubActivities
+    * const subActivities = await prisma.subActivities.findMany()
+    * ```
+    */
+  get subActivities(): Prisma.SubActivitiesDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.activityReport`: Exposes CRUD operations for the **ActivityReport** model.
@@ -994,6 +1009,7 @@ export namespace Prisma {
     IndicatorReportDisaggregation: 'IndicatorReportDisaggregation',
     IndicatorReportComment: 'IndicatorReportComment',
     Activity: 'Activity',
+    SubActivities: 'SubActivities',
     ActivityReport: 'ActivityReport',
     LogicalFramework: 'LogicalFramework',
     Request: 'Request',
@@ -1015,7 +1031,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2405,6 +2421,72 @@ export namespace Prisma {
           }
         }
       }
+      SubActivities: {
+        payload: Prisma.$SubActivitiesPayload<ExtArgs>
+        fields: Prisma.SubActivitiesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubActivitiesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubActivitiesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          findFirst: {
+            args: Prisma.SubActivitiesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubActivitiesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          findMany: {
+            args: Prisma.SubActivitiesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>[]
+          }
+          create: {
+            args: Prisma.SubActivitiesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          createMany: {
+            args: Prisma.SubActivitiesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SubActivitiesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          update: {
+            args: Prisma.SubActivitiesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          deleteMany: {
+            args: Prisma.SubActivitiesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubActivitiesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SubActivitiesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubActivitiesPayload>
+          }
+          aggregate: {
+            args: Prisma.SubActivitiesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubActivities>
+          }
+          groupBy: {
+            args: Prisma.SubActivitiesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubActivitiesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubActivitiesCountArgs<ExtArgs>
+            result: $Utils.Optional<SubActivitiesCountAggregateOutputType> | number
+          }
+        }
+      }
       ActivityReport: {
         payload: Prisma.$ActivityReportPayload<ExtArgs>
         fields: Prisma.ActivityReportFieldRefs
@@ -2930,6 +3012,7 @@ export namespace Prisma {
     indicatorReportDisaggregation?: IndicatorReportDisaggregationOmit
     indicatorReportComment?: IndicatorReportCommentOmit
     activity?: ActivityOmit
+    subActivities?: SubActivitiesOmit
     activityReport?: ActivityReportOmit
     logicalFramework?: LogicalFrameworkOmit
     request?: RequestOmit
@@ -3579,11 +3662,13 @@ export namespace Prisma {
   export type ActivityCountOutputType = {
     activityReport: number
     lineItem: number
+    subActivities: number
   }
 
   export type ActivityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     activityReport?: boolean | ActivityCountOutputTypeCountActivityReportArgs
     lineItem?: boolean | ActivityCountOutputTypeCountLineItemArgs
+    subActivities?: boolean | ActivityCountOutputTypeCountSubActivitiesArgs
   }
 
   // Custom InputTypes
@@ -3609,6 +3694,13 @@ export namespace Prisma {
    */
   export type ActivityCountOutputTypeCountLineItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LineItemWhereInput
+  }
+
+  /**
+   * ActivityCountOutputType without action
+   */
+  export type ActivityCountOutputTypeCountSubActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubActivitiesWhereInput
   }
 
 
@@ -25142,6 +25234,7 @@ export namespace Prisma {
     project?: boolean | Activity$projectArgs<ExtArgs>
     activityReport?: boolean | Activity$activityReportArgs<ExtArgs>
     lineItem?: boolean | Activity$lineItemArgs<ExtArgs>
+    subActivities?: boolean | Activity$subActivitiesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["activity"]>
 
@@ -25170,6 +25263,7 @@ export namespace Prisma {
     project?: boolean | Activity$projectArgs<ExtArgs>
     activityReport?: boolean | Activity$activityReportArgs<ExtArgs>
     lineItem?: boolean | Activity$lineItemArgs<ExtArgs>
+    subActivities?: boolean | Activity$subActivitiesArgs<ExtArgs>
     _count?: boolean | ActivityCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -25180,6 +25274,7 @@ export namespace Prisma {
       project: Prisma.$ProjectPayload<ExtArgs> | null
       activityReport: Prisma.$ActivityReportPayload<ExtArgs>[]
       lineItem: Prisma.$LineItemPayload<ExtArgs>[]
+      subActivities: Prisma.$SubActivitiesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       activityId: string
@@ -25540,6 +25635,7 @@ export namespace Prisma {
     project<T extends Activity$projectArgs<ExtArgs> = {}>(args?: Subset<T, Activity$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     activityReport<T extends Activity$activityReportArgs<ExtArgs> = {}>(args?: Subset<T, Activity$activityReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActivityReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lineItem<T extends Activity$lineItemArgs<ExtArgs> = {}>(args?: Subset<T, Activity$lineItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    subActivities<T extends Activity$subActivitiesArgs<ExtArgs> = {}>(args?: Subset<T, Activity$subActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26017,6 +26113,30 @@ export namespace Prisma {
   }
 
   /**
+   * Activity.subActivities
+   */
+  export type Activity$subActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    where?: SubActivitiesWhereInput
+    orderBy?: SubActivitiesOrderByWithRelationInput | SubActivitiesOrderByWithRelationInput[]
+    cursor?: SubActivitiesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubActivitiesScalarFieldEnum | SubActivitiesScalarFieldEnum[]
+  }
+
+  /**
    * Activity without action
    */
   export type ActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26032,6 +26152,948 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ActivityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SubActivities
+   */
+
+  export type AggregateSubActivities = {
+    _count: SubActivitiesCountAggregateOutputType | null
+    _min: SubActivitiesMinAggregateOutputType | null
+    _max: SubActivitiesMaxAggregateOutputType | null
+  }
+
+  export type SubActivitiesMinAggregateOutputType = {
+    subActivitiesId: string | null
+    activityId: string | null
+    description: string | null
+    activityDate: Date | null
+  }
+
+  export type SubActivitiesMaxAggregateOutputType = {
+    subActivitiesId: string | null
+    activityId: string | null
+    description: string | null
+    activityDate: Date | null
+  }
+
+  export type SubActivitiesCountAggregateOutputType = {
+    subActivitiesId: number
+    activityId: number
+    description: number
+    activityDate: number
+    _all: number
+  }
+
+
+  export type SubActivitiesMinAggregateInputType = {
+    subActivitiesId?: true
+    activityId?: true
+    description?: true
+    activityDate?: true
+  }
+
+  export type SubActivitiesMaxAggregateInputType = {
+    subActivitiesId?: true
+    activityId?: true
+    description?: true
+    activityDate?: true
+  }
+
+  export type SubActivitiesCountAggregateInputType = {
+    subActivitiesId?: true
+    activityId?: true
+    description?: true
+    activityDate?: true
+    _all?: true
+  }
+
+  export type SubActivitiesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubActivities to aggregate.
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubActivities to fetch.
+     */
+    orderBy?: SubActivitiesOrderByWithRelationInput | SubActivitiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubActivitiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SubActivities
+    **/
+    _count?: true | SubActivitiesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubActivitiesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubActivitiesMaxAggregateInputType
+  }
+
+  export type GetSubActivitiesAggregateType<T extends SubActivitiesAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubActivities]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubActivities[P]>
+      : GetScalarType<T[P], AggregateSubActivities[P]>
+  }
+
+
+
+
+  export type SubActivitiesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubActivitiesWhereInput
+    orderBy?: SubActivitiesOrderByWithAggregationInput | SubActivitiesOrderByWithAggregationInput[]
+    by: SubActivitiesScalarFieldEnum[] | SubActivitiesScalarFieldEnum
+    having?: SubActivitiesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubActivitiesCountAggregateInputType | true
+    _min?: SubActivitiesMinAggregateInputType
+    _max?: SubActivitiesMaxAggregateInputType
+  }
+
+  export type SubActivitiesGroupByOutputType = {
+    subActivitiesId: string
+    activityId: string | null
+    description: string | null
+    activityDate: Date | null
+    _count: SubActivitiesCountAggregateOutputType | null
+    _min: SubActivitiesMinAggregateOutputType | null
+    _max: SubActivitiesMaxAggregateOutputType | null
+  }
+
+  type GetSubActivitiesGroupByPayload<T extends SubActivitiesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubActivitiesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubActivitiesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubActivitiesGroupByOutputType[P]>
+            : GetScalarType<T[P], SubActivitiesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubActivitiesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    subActivitiesId?: boolean
+    activityId?: boolean
+    description?: boolean
+    activityDate?: boolean
+    activity?: boolean | SubActivities$activityArgs<ExtArgs>
+  }, ExtArgs["result"]["subActivities"]>
+
+
+
+  export type SubActivitiesSelectScalar = {
+    subActivitiesId?: boolean
+    activityId?: boolean
+    description?: boolean
+    activityDate?: boolean
+  }
+
+  export type SubActivitiesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"subActivitiesId" | "activityId" | "description" | "activityDate", ExtArgs["result"]["subActivities"]>
+  export type SubActivitiesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    activity?: boolean | SubActivities$activityArgs<ExtArgs>
+  }
+
+  export type $SubActivitiesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SubActivities"
+    objects: {
+      activity: Prisma.$ActivityPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      subActivitiesId: string
+      activityId: string | null
+      description: string | null
+      activityDate: Date | null
+    }, ExtArgs["result"]["subActivities"]>
+    composites: {}
+  }
+
+  type SubActivitiesGetPayload<S extends boolean | null | undefined | SubActivitiesDefaultArgs> = $Result.GetResult<Prisma.$SubActivitiesPayload, S>
+
+  type SubActivitiesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubActivitiesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubActivitiesCountAggregateInputType | true
+    }
+
+  export interface SubActivitiesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SubActivities'], meta: { name: 'SubActivities' } }
+    /**
+     * Find zero or one SubActivities that matches the filter.
+     * @param {SubActivitiesFindUniqueArgs} args - Arguments to find a SubActivities
+     * @example
+     * // Get one SubActivities
+     * const subActivities = await prisma.subActivities.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubActivitiesFindUniqueArgs>(args: SelectSubset<T, SubActivitiesFindUniqueArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SubActivities that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubActivitiesFindUniqueOrThrowArgs} args - Arguments to find a SubActivities
+     * @example
+     * // Get one SubActivities
+     * const subActivities = await prisma.subActivities.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubActivitiesFindUniqueOrThrowArgs>(args: SelectSubset<T, SubActivitiesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SubActivities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesFindFirstArgs} args - Arguments to find a SubActivities
+     * @example
+     * // Get one SubActivities
+     * const subActivities = await prisma.subActivities.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubActivitiesFindFirstArgs>(args?: SelectSubset<T, SubActivitiesFindFirstArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SubActivities that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesFindFirstOrThrowArgs} args - Arguments to find a SubActivities
+     * @example
+     * // Get one SubActivities
+     * const subActivities = await prisma.subActivities.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubActivitiesFindFirstOrThrowArgs>(args?: SelectSubset<T, SubActivitiesFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SubActivities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SubActivities
+     * const subActivities = await prisma.subActivities.findMany()
+     * 
+     * // Get first 10 SubActivities
+     * const subActivities = await prisma.subActivities.findMany({ take: 10 })
+     * 
+     * // Only select the `subActivitiesId`
+     * const subActivitiesWithSubActivitiesIdOnly = await prisma.subActivities.findMany({ select: { subActivitiesId: true } })
+     * 
+     */
+    findMany<T extends SubActivitiesFindManyArgs>(args?: SelectSubset<T, SubActivitiesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SubActivities.
+     * @param {SubActivitiesCreateArgs} args - Arguments to create a SubActivities.
+     * @example
+     * // Create one SubActivities
+     * const SubActivities = await prisma.subActivities.create({
+     *   data: {
+     *     // ... data to create a SubActivities
+     *   }
+     * })
+     * 
+     */
+    create<T extends SubActivitiesCreateArgs>(args: SelectSubset<T, SubActivitiesCreateArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SubActivities.
+     * @param {SubActivitiesCreateManyArgs} args - Arguments to create many SubActivities.
+     * @example
+     * // Create many SubActivities
+     * const subActivities = await prisma.subActivities.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SubActivitiesCreateManyArgs>(args?: SelectSubset<T, SubActivitiesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SubActivities.
+     * @param {SubActivitiesDeleteArgs} args - Arguments to delete one SubActivities.
+     * @example
+     * // Delete one SubActivities
+     * const SubActivities = await prisma.subActivities.delete({
+     *   where: {
+     *     // ... filter to delete one SubActivities
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SubActivitiesDeleteArgs>(args: SelectSubset<T, SubActivitiesDeleteArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SubActivities.
+     * @param {SubActivitiesUpdateArgs} args - Arguments to update one SubActivities.
+     * @example
+     * // Update one SubActivities
+     * const subActivities = await prisma.subActivities.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SubActivitiesUpdateArgs>(args: SelectSubset<T, SubActivitiesUpdateArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SubActivities.
+     * @param {SubActivitiesDeleteManyArgs} args - Arguments to filter SubActivities to delete.
+     * @example
+     * // Delete a few SubActivities
+     * const { count } = await prisma.subActivities.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SubActivitiesDeleteManyArgs>(args?: SelectSubset<T, SubActivitiesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SubActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SubActivities
+     * const subActivities = await prisma.subActivities.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SubActivitiesUpdateManyArgs>(args: SelectSubset<T, SubActivitiesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SubActivities.
+     * @param {SubActivitiesUpsertArgs} args - Arguments to update or create a SubActivities.
+     * @example
+     * // Update or create a SubActivities
+     * const subActivities = await prisma.subActivities.upsert({
+     *   create: {
+     *     // ... data to create a SubActivities
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SubActivities we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubActivitiesUpsertArgs>(args: SelectSubset<T, SubActivitiesUpsertArgs<ExtArgs>>): Prisma__SubActivitiesClient<$Result.GetResult<Prisma.$SubActivitiesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SubActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesCountArgs} args - Arguments to filter SubActivities to count.
+     * @example
+     * // Count the number of SubActivities
+     * const count = await prisma.subActivities.count({
+     *   where: {
+     *     // ... the filter for the SubActivities we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubActivitiesCountArgs>(
+      args?: Subset<T, SubActivitiesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubActivitiesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SubActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubActivitiesAggregateArgs>(args: Subset<T, SubActivitiesAggregateArgs>): Prisma.PrismaPromise<GetSubActivitiesAggregateType<T>>
+
+    /**
+     * Group by SubActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubActivitiesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubActivitiesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubActivitiesGroupByArgs['orderBy'] }
+        : { orderBy?: SubActivitiesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubActivitiesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubActivitiesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SubActivities model
+   */
+  readonly fields: SubActivitiesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SubActivities.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubActivitiesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    activity<T extends SubActivities$activityArgs<ExtArgs> = {}>(args?: Subset<T, SubActivities$activityArgs<ExtArgs>>): Prisma__ActivityClient<$Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SubActivities model
+   */
+  interface SubActivitiesFieldRefs {
+    readonly subActivitiesId: FieldRef<"SubActivities", 'String'>
+    readonly activityId: FieldRef<"SubActivities", 'String'>
+    readonly description: FieldRef<"SubActivities", 'String'>
+    readonly activityDate: FieldRef<"SubActivities", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SubActivities findUnique
+   */
+  export type SubActivitiesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter, which SubActivities to fetch.
+     */
+    where: SubActivitiesWhereUniqueInput
+  }
+
+  /**
+   * SubActivities findUniqueOrThrow
+   */
+  export type SubActivitiesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter, which SubActivities to fetch.
+     */
+    where: SubActivitiesWhereUniqueInput
+  }
+
+  /**
+   * SubActivities findFirst
+   */
+  export type SubActivitiesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter, which SubActivities to fetch.
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubActivities to fetch.
+     */
+    orderBy?: SubActivitiesOrderByWithRelationInput | SubActivitiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubActivities.
+     */
+    cursor?: SubActivitiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubActivities.
+     */
+    distinct?: SubActivitiesScalarFieldEnum | SubActivitiesScalarFieldEnum[]
+  }
+
+  /**
+   * SubActivities findFirstOrThrow
+   */
+  export type SubActivitiesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter, which SubActivities to fetch.
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubActivities to fetch.
+     */
+    orderBy?: SubActivitiesOrderByWithRelationInput | SubActivitiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubActivities.
+     */
+    cursor?: SubActivitiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubActivities.
+     */
+    distinct?: SubActivitiesScalarFieldEnum | SubActivitiesScalarFieldEnum[]
+  }
+
+  /**
+   * SubActivities findMany
+   */
+  export type SubActivitiesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter, which SubActivities to fetch.
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubActivities to fetch.
+     */
+    orderBy?: SubActivitiesOrderByWithRelationInput | SubActivitiesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SubActivities.
+     */
+    cursor?: SubActivitiesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubActivities.
+     */
+    distinct?: SubActivitiesScalarFieldEnum | SubActivitiesScalarFieldEnum[]
+  }
+
+  /**
+   * SubActivities create
+   */
+  export type SubActivitiesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SubActivities.
+     */
+    data?: XOR<SubActivitiesCreateInput, SubActivitiesUncheckedCreateInput>
+  }
+
+  /**
+   * SubActivities createMany
+   */
+  export type SubActivitiesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SubActivities.
+     */
+    data: SubActivitiesCreateManyInput | SubActivitiesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SubActivities update
+   */
+  export type SubActivitiesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SubActivities.
+     */
+    data: XOR<SubActivitiesUpdateInput, SubActivitiesUncheckedUpdateInput>
+    /**
+     * Choose, which SubActivities to update.
+     */
+    where: SubActivitiesWhereUniqueInput
+  }
+
+  /**
+   * SubActivities updateMany
+   */
+  export type SubActivitiesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SubActivities.
+     */
+    data: XOR<SubActivitiesUpdateManyMutationInput, SubActivitiesUncheckedUpdateManyInput>
+    /**
+     * Filter which SubActivities to update
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * Limit how many SubActivities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SubActivities upsert
+   */
+  export type SubActivitiesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SubActivities to update in case it exists.
+     */
+    where: SubActivitiesWhereUniqueInput
+    /**
+     * In case the SubActivities found by the `where` argument doesn't exist, create a new SubActivities with this data.
+     */
+    create: XOR<SubActivitiesCreateInput, SubActivitiesUncheckedCreateInput>
+    /**
+     * In case the SubActivities was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubActivitiesUpdateInput, SubActivitiesUncheckedUpdateInput>
+  }
+
+  /**
+   * SubActivities delete
+   */
+  export type SubActivitiesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
+    /**
+     * Filter which SubActivities to delete.
+     */
+    where: SubActivitiesWhereUniqueInput
+  }
+
+  /**
+   * SubActivities deleteMany
+   */
+  export type SubActivitiesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubActivities to delete
+     */
+    where?: SubActivitiesWhereInput
+    /**
+     * Limit how many SubActivities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SubActivities.activity
+   */
+  export type SubActivities$activityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity
+     */
+    select?: ActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity
+     */
+    omit?: ActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ActivityInclude<ExtArgs> | null
+    where?: ActivityWhereInput
+  }
+
+  /**
+   * SubActivities without action
+   */
+  export type SubActivitiesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubActivities
+     */
+    select?: SubActivitiesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubActivities
+     */
+    omit?: SubActivitiesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubActivitiesInclude<ExtArgs> | null
   }
 
 
@@ -33306,6 +34368,16 @@ export namespace Prisma {
   export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
 
 
+  export const SubActivitiesScalarFieldEnum: {
+    subActivitiesId: 'subActivitiesId',
+    activityId: 'activityId',
+    description: 'description',
+    activityDate: 'activityDate'
+  };
+
+  export type SubActivitiesScalarFieldEnum = (typeof SubActivitiesScalarFieldEnum)[keyof typeof SubActivitiesScalarFieldEnum]
+
+
   export const ActivityReportScalarFieldEnum: {
     activityReportId: 'activityReportId',
     activityId: 'activityId',
@@ -33742,6 +34814,15 @@ export namespace Prisma {
   };
 
   export type ActivityOrderByRelevanceFieldEnum = (typeof ActivityOrderByRelevanceFieldEnum)[keyof typeof ActivityOrderByRelevanceFieldEnum]
+
+
+  export const SubActivitiesOrderByRelevanceFieldEnum: {
+    subActivitiesId: 'subActivitiesId',
+    activityId: 'activityId',
+    description: 'description'
+  };
+
+  export type SubActivitiesOrderByRelevanceFieldEnum = (typeof SubActivitiesOrderByRelevanceFieldEnum)[keyof typeof SubActivitiesOrderByRelevanceFieldEnum]
 
 
   export const ActivityReportOrderByRelevanceFieldEnum: {
@@ -35625,6 +36706,7 @@ export namespace Prisma {
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     activityReport?: ActivityReportListRelationFilter
     lineItem?: LineItemListRelationFilter
+    subActivities?: SubActivitiesListRelationFilter
   }
 
   export type ActivityOrderByWithRelationInput = {
@@ -35646,6 +36728,7 @@ export namespace Prisma {
     project?: ProjectOrderByWithRelationInput
     activityReport?: ActivityReportOrderByRelationAggregateInput
     lineItem?: LineItemOrderByRelationAggregateInput
+    subActivities?: SubActivitiesOrderByRelationAggregateInput
     _relevance?: ActivityOrderByRelevanceInput
   }
 
@@ -35671,6 +36754,7 @@ export namespace Prisma {
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     activityReport?: ActivityReportListRelationFilter
     lineItem?: LineItemListRelationFilter
+    subActivities?: SubActivitiesListRelationFilter
   }, "activityId">
 
   export type ActivityOrderByWithAggregationInput = {
@@ -35713,6 +36797,57 @@ export namespace Prisma {
     projectId?: StringNullableWithAggregatesFilter<"Activity"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Activity"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Activity"> | Date | string | null
+  }
+
+  export type SubActivitiesWhereInput = {
+    AND?: SubActivitiesWhereInput | SubActivitiesWhereInput[]
+    OR?: SubActivitiesWhereInput[]
+    NOT?: SubActivitiesWhereInput | SubActivitiesWhereInput[]
+    subActivitiesId?: StringFilter<"SubActivities"> | string
+    activityId?: StringNullableFilter<"SubActivities"> | string | null
+    description?: StringNullableFilter<"SubActivities"> | string | null
+    activityDate?: DateTimeNullableFilter<"SubActivities"> | Date | string | null
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
+  }
+
+  export type SubActivitiesOrderByWithRelationInput = {
+    subActivitiesId?: SortOrder
+    activityId?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    activityDate?: SortOrderInput | SortOrder
+    activity?: ActivityOrderByWithRelationInput
+    _relevance?: SubActivitiesOrderByRelevanceInput
+  }
+
+  export type SubActivitiesWhereUniqueInput = Prisma.AtLeast<{
+    subActivitiesId?: string
+    AND?: SubActivitiesWhereInput | SubActivitiesWhereInput[]
+    OR?: SubActivitiesWhereInput[]
+    NOT?: SubActivitiesWhereInput | SubActivitiesWhereInput[]
+    activityId?: StringNullableFilter<"SubActivities"> | string | null
+    description?: StringNullableFilter<"SubActivities"> | string | null
+    activityDate?: DateTimeNullableFilter<"SubActivities"> | Date | string | null
+    activity?: XOR<ActivityNullableScalarRelationFilter, ActivityWhereInput> | null
+  }, "subActivitiesId">
+
+  export type SubActivitiesOrderByWithAggregationInput = {
+    subActivitiesId?: SortOrder
+    activityId?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    activityDate?: SortOrderInput | SortOrder
+    _count?: SubActivitiesCountOrderByAggregateInput
+    _max?: SubActivitiesMaxOrderByAggregateInput
+    _min?: SubActivitiesMinOrderByAggregateInput
+  }
+
+  export type SubActivitiesScalarWhereWithAggregatesInput = {
+    AND?: SubActivitiesScalarWhereWithAggregatesInput | SubActivitiesScalarWhereWithAggregatesInput[]
+    OR?: SubActivitiesScalarWhereWithAggregatesInput[]
+    NOT?: SubActivitiesScalarWhereWithAggregatesInput | SubActivitiesScalarWhereWithAggregatesInput[]
+    subActivitiesId?: StringWithAggregatesFilter<"SubActivities"> | string
+    activityId?: StringNullableWithAggregatesFilter<"SubActivities"> | string | null
+    description?: StringNullableWithAggregatesFilter<"SubActivities"> | string | null
+    activityDate?: DateTimeNullableWithAggregatesFilter<"SubActivities"> | Date | string | null
   }
 
   export type ActivityReportWhereInput = {
@@ -38365,6 +39500,7 @@ export namespace Prisma {
     project?: ProjectCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
     lineItem?: LineItemCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateInput = {
@@ -38384,6 +39520,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
     lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUpdateInput = {
@@ -38403,6 +39540,7 @@ export namespace Prisma {
     project?: ProjectUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateInput = {
@@ -38422,6 +39560,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityCreateManyInput = {
@@ -38471,6 +39610,54 @@ export namespace Prisma {
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesCreateInput = {
+    subActivitiesId?: string
+    description?: string | null
+    activityDate?: Date | string | null
+    activity?: ActivityCreateNestedOneWithoutSubActivitiesInput
+  }
+
+  export type SubActivitiesUncheckedCreateInput = {
+    subActivitiesId?: string
+    activityId?: string | null
+    description?: string | null
+    activityDate?: Date | string | null
+  }
+
+  export type SubActivitiesUpdateInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activity?: ActivityUpdateOneWithoutSubActivitiesNestedInput
+  }
+
+  export type SubActivitiesUncheckedUpdateInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesCreateManyInput = {
+    subActivitiesId?: string
+    activityId?: string | null
+    description?: string | null
+    activityDate?: Date | string | null
+  }
+
+  export type SubActivitiesUpdateManyMutationInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesUncheckedUpdateManyInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    activityId?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ActivityReportCreateInput = {
@@ -40704,11 +41891,21 @@ export namespace Prisma {
     none?: LineItemWhereInput
   }
 
+  export type SubActivitiesListRelationFilter = {
+    every?: SubActivitiesWhereInput
+    some?: SubActivitiesWhereInput
+    none?: SubActivitiesWhereInput
+  }
+
   export type ActivityReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type LineItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SubActivitiesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40782,6 +41979,33 @@ export namespace Prisma {
   export type ActivityNullableScalarRelationFilter = {
     is?: ActivityWhereInput | null
     isNot?: ActivityWhereInput | null
+  }
+
+  export type SubActivitiesOrderByRelevanceInput = {
+    fields: SubActivitiesOrderByRelevanceFieldEnum | SubActivitiesOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type SubActivitiesCountOrderByAggregateInput = {
+    subActivitiesId?: SortOrder
+    activityId?: SortOrder
+    description?: SortOrder
+    activityDate?: SortOrder
+  }
+
+  export type SubActivitiesMaxOrderByAggregateInput = {
+    subActivitiesId?: SortOrder
+    activityId?: SortOrder
+    description?: SortOrder
+    activityDate?: SortOrder
+  }
+
+  export type SubActivitiesMinOrderByAggregateInput = {
+    subActivitiesId?: SortOrder
+    activityId?: SortOrder
+    description?: SortOrder
+    activityDate?: SortOrder
   }
 
   export type ActivityReportOrderByRelevanceInput = {
@@ -43139,6 +44363,13 @@ export namespace Prisma {
     connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
   }
 
+  export type SubActivitiesCreateNestedManyWithoutActivityInput = {
+    create?: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput> | SubActivitiesCreateWithoutActivityInput[] | SubActivitiesUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: SubActivitiesCreateOrConnectWithoutActivityInput | SubActivitiesCreateOrConnectWithoutActivityInput[]
+    createMany?: SubActivitiesCreateManyActivityInputEnvelope
+    connect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+  }
+
   export type ActivityReportUncheckedCreateNestedManyWithoutActivityInput = {
     create?: XOR<ActivityReportCreateWithoutActivityInput, ActivityReportUncheckedCreateWithoutActivityInput> | ActivityReportCreateWithoutActivityInput[] | ActivityReportUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ActivityReportCreateOrConnectWithoutActivityInput | ActivityReportCreateOrConnectWithoutActivityInput[]
@@ -43151,6 +44382,13 @@ export namespace Prisma {
     connectOrCreate?: LineItemCreateOrConnectWithoutActivityInput | LineItemCreateOrConnectWithoutActivityInput[]
     createMany?: LineItemCreateManyActivityInputEnvelope
     connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+  }
+
+  export type SubActivitiesUncheckedCreateNestedManyWithoutActivityInput = {
+    create?: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput> | SubActivitiesCreateWithoutActivityInput[] | SubActivitiesUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: SubActivitiesCreateOrConnectWithoutActivityInput | SubActivitiesCreateOrConnectWithoutActivityInput[]
+    createMany?: SubActivitiesCreateManyActivityInputEnvelope
+    connect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
   }
 
   export type OutputUpdateOneWithoutActivityNestedInput = {
@@ -43201,6 +44439,20 @@ export namespace Prisma {
     deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
   }
 
+  export type SubActivitiesUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput> | SubActivitiesCreateWithoutActivityInput[] | SubActivitiesUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: SubActivitiesCreateOrConnectWithoutActivityInput | SubActivitiesCreateOrConnectWithoutActivityInput[]
+    upsert?: SubActivitiesUpsertWithWhereUniqueWithoutActivityInput | SubActivitiesUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: SubActivitiesCreateManyActivityInputEnvelope
+    set?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    disconnect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    delete?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    connect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    update?: SubActivitiesUpdateWithWhereUniqueWithoutActivityInput | SubActivitiesUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: SubActivitiesUpdateManyWithWhereWithoutActivityInput | SubActivitiesUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: SubActivitiesScalarWhereInput | SubActivitiesScalarWhereInput[]
+  }
+
   export type ActivityReportUncheckedUpdateManyWithoutActivityNestedInput = {
     create?: XOR<ActivityReportCreateWithoutActivityInput, ActivityReportUncheckedCreateWithoutActivityInput> | ActivityReportCreateWithoutActivityInput[] | ActivityReportUncheckedCreateWithoutActivityInput[]
     connectOrCreate?: ActivityReportCreateOrConnectWithoutActivityInput | ActivityReportCreateOrConnectWithoutActivityInput[]
@@ -43227,6 +44479,36 @@ export namespace Prisma {
     update?: LineItemUpdateWithWhereUniqueWithoutActivityInput | LineItemUpdateWithWhereUniqueWithoutActivityInput[]
     updateMany?: LineItemUpdateManyWithWhereWithoutActivityInput | LineItemUpdateManyWithWhereWithoutActivityInput[]
     deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+  }
+
+  export type SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput = {
+    create?: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput> | SubActivitiesCreateWithoutActivityInput[] | SubActivitiesUncheckedCreateWithoutActivityInput[]
+    connectOrCreate?: SubActivitiesCreateOrConnectWithoutActivityInput | SubActivitiesCreateOrConnectWithoutActivityInput[]
+    upsert?: SubActivitiesUpsertWithWhereUniqueWithoutActivityInput | SubActivitiesUpsertWithWhereUniqueWithoutActivityInput[]
+    createMany?: SubActivitiesCreateManyActivityInputEnvelope
+    set?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    disconnect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    delete?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    connect?: SubActivitiesWhereUniqueInput | SubActivitiesWhereUniqueInput[]
+    update?: SubActivitiesUpdateWithWhereUniqueWithoutActivityInput | SubActivitiesUpdateWithWhereUniqueWithoutActivityInput[]
+    updateMany?: SubActivitiesUpdateManyWithWhereWithoutActivityInput | SubActivitiesUpdateManyWithWhereWithoutActivityInput[]
+    deleteMany?: SubActivitiesScalarWhereInput | SubActivitiesScalarWhereInput[]
+  }
+
+  export type ActivityCreateNestedOneWithoutSubActivitiesInput = {
+    create?: XOR<ActivityCreateWithoutSubActivitiesInput, ActivityUncheckedCreateWithoutSubActivitiesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutSubActivitiesInput
+    connect?: ActivityWhereUniqueInput
+  }
+
+  export type ActivityUpdateOneWithoutSubActivitiesNestedInput = {
+    create?: XOR<ActivityCreateWithoutSubActivitiesInput, ActivityUncheckedCreateWithoutSubActivitiesInput>
+    connectOrCreate?: ActivityCreateOrConnectWithoutSubActivitiesInput
+    upsert?: ActivityUpsertWithoutSubActivitiesInput
+    disconnect?: ActivityWhereInput | boolean
+    delete?: ActivityWhereInput | boolean
+    connect?: ActivityWhereUniqueInput
+    update?: XOR<XOR<ActivityUpdateToOneWithWhereWithoutSubActivitiesInput, ActivityUpdateWithoutSubActivitiesInput>, ActivityUncheckedUpdateWithoutSubActivitiesInput>
   }
 
   export type ActivityCreateNestedOneWithoutActivityReportInput = {
@@ -45310,6 +46592,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
     lineItem?: LineItemCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutProjectInput = {
@@ -45328,6 +46611,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
     lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutProjectInput = {
@@ -47215,6 +48499,7 @@ export namespace Prisma {
     project?: ProjectCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
     lineItem?: LineItemCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutOutputInput = {
@@ -47233,6 +48518,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
     lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutOutputInput = {
@@ -48405,6 +49691,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SubActivitiesCreateWithoutActivityInput = {
+    subActivitiesId?: string
+    description?: string | null
+    activityDate?: Date | string | null
+  }
+
+  export type SubActivitiesUncheckedCreateWithoutActivityInput = {
+    subActivitiesId?: string
+    description?: string | null
+    activityDate?: Date | string | null
+  }
+
+  export type SubActivitiesCreateOrConnectWithoutActivityInput = {
+    where: SubActivitiesWhereUniqueInput
+    create: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput>
+  }
+
+  export type SubActivitiesCreateManyActivityInputEnvelope = {
+    data: SubActivitiesCreateManyActivityInput | SubActivitiesCreateManyActivityInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OutputUpsertWithoutActivityInput = {
     update: XOR<OutputUpdateWithoutActivityInput, OutputUncheckedUpdateWithoutActivityInput>
     create: XOR<OutputCreateWithoutActivityInput, OutputUncheckedCreateWithoutActivityInput>
@@ -48572,6 +49880,124 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
   }
 
+  export type SubActivitiesUpsertWithWhereUniqueWithoutActivityInput = {
+    where: SubActivitiesWhereUniqueInput
+    update: XOR<SubActivitiesUpdateWithoutActivityInput, SubActivitiesUncheckedUpdateWithoutActivityInput>
+    create: XOR<SubActivitiesCreateWithoutActivityInput, SubActivitiesUncheckedCreateWithoutActivityInput>
+  }
+
+  export type SubActivitiesUpdateWithWhereUniqueWithoutActivityInput = {
+    where: SubActivitiesWhereUniqueInput
+    data: XOR<SubActivitiesUpdateWithoutActivityInput, SubActivitiesUncheckedUpdateWithoutActivityInput>
+  }
+
+  export type SubActivitiesUpdateManyWithWhereWithoutActivityInput = {
+    where: SubActivitiesScalarWhereInput
+    data: XOR<SubActivitiesUpdateManyMutationInput, SubActivitiesUncheckedUpdateManyWithoutActivityInput>
+  }
+
+  export type SubActivitiesScalarWhereInput = {
+    AND?: SubActivitiesScalarWhereInput | SubActivitiesScalarWhereInput[]
+    OR?: SubActivitiesScalarWhereInput[]
+    NOT?: SubActivitiesScalarWhereInput | SubActivitiesScalarWhereInput[]
+    subActivitiesId?: StringFilter<"SubActivities"> | string
+    activityId?: StringNullableFilter<"SubActivities"> | string | null
+    description?: StringNullableFilter<"SubActivities"> | string | null
+    activityDate?: DateTimeNullableFilter<"SubActivities"> | Date | string | null
+  }
+
+  export type ActivityCreateWithoutSubActivitiesInput = {
+    activityId?: string
+    activityStatement?: string | null
+    activityTotalBudget?: number | null
+    responsiblePerson?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    activityFrequency?: number | null
+    subActivity?: string | null
+    descriptionAction?: string | null
+    deliveryDate?: Date | string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    output?: OutputCreateNestedOneWithoutActivityInput
+    project?: ProjectCreateNestedOneWithoutActivityInput
+    activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityUncheckedCreateWithoutSubActivitiesInput = {
+    activityId?: string
+    activityStatement?: string | null
+    outputId?: string | null
+    activityTotalBudget?: number | null
+    responsiblePerson?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    activityFrequency?: number | null
+    subActivity?: string | null
+    descriptionAction?: string | null
+    deliveryDate?: Date | string | null
+    projectId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+    lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
+  }
+
+  export type ActivityCreateOrConnectWithoutSubActivitiesInput = {
+    where: ActivityWhereUniqueInput
+    create: XOR<ActivityCreateWithoutSubActivitiesInput, ActivityUncheckedCreateWithoutSubActivitiesInput>
+  }
+
+  export type ActivityUpsertWithoutSubActivitiesInput = {
+    update: XOR<ActivityUpdateWithoutSubActivitiesInput, ActivityUncheckedUpdateWithoutSubActivitiesInput>
+    create: XOR<ActivityCreateWithoutSubActivitiesInput, ActivityUncheckedCreateWithoutSubActivitiesInput>
+    where?: ActivityWhereInput
+  }
+
+  export type ActivityUpdateToOneWithWhereWithoutSubActivitiesInput = {
+    where?: ActivityWhereInput
+    data: XOR<ActivityUpdateWithoutSubActivitiesInput, ActivityUncheckedUpdateWithoutSubActivitiesInput>
+  }
+
+  export type ActivityUpdateWithoutSubActivitiesInput = {
+    activityId?: StringFieldUpdateOperationsInput | string
+    activityStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTotalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    responsiblePerson?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityFrequency?: NullableIntFieldUpdateOperationsInput | number | null
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
+    descriptionAction?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    output?: OutputUpdateOneWithoutActivityNestedInput
+    project?: ProjectUpdateOneWithoutActivityNestedInput
+    activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUpdateManyWithoutActivityNestedInput
+  }
+
+  export type ActivityUncheckedUpdateWithoutSubActivitiesInput = {
+    activityId?: StringFieldUpdateOperationsInput | string
+    activityStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTotalBudget?: NullableIntFieldUpdateOperationsInput | number | null
+    responsiblePerson?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityFrequency?: NullableIntFieldUpdateOperationsInput | number | null
+    subActivity?: NullableStringFieldUpdateOperationsInput | string | null
+    descriptionAction?: NullableStringFieldUpdateOperationsInput | string | null
+    deliveryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
+    lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
+  }
+
   export type ActivityCreateWithoutActivityReportInput = {
     activityId?: string
     activityStatement?: string | null
@@ -48588,6 +50014,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutActivityInput
     project?: ProjectCreateNestedOneWithoutActivityInput
     lineItem?: LineItemCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutActivityReportInput = {
@@ -48606,6 +50033,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     lineItem?: LineItemUncheckedCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutActivityReportInput = {
@@ -48640,6 +50068,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutActivityNestedInput
     project?: ProjectUpdateOneWithoutActivityNestedInput
     lineItem?: LineItemUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutActivityReportInput = {
@@ -48658,6 +50087,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ProjectCreateWithoutLogicalFrameworkInput = {
@@ -49329,6 +50759,7 @@ export namespace Prisma {
     output?: OutputCreateNestedOneWithoutActivityInput
     project?: ProjectCreateNestedOneWithoutActivityInput
     activityReport?: ActivityReportCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityUncheckedCreateWithoutLineItemInput = {
@@ -49347,6 +50778,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     activityReport?: ActivityReportUncheckedCreateNestedManyWithoutActivityInput
+    subActivities?: SubActivitiesUncheckedCreateNestedManyWithoutActivityInput
   }
 
   export type ActivityCreateOrConnectWithoutLineItemInput = {
@@ -49474,6 +50906,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutActivityNestedInput
     project?: ProjectUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutLineItemInput = {
@@ -49492,6 +50925,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type RequestCreateWithoutRetirementInput = {
@@ -50986,6 +52420,7 @@ export namespace Prisma {
     output?: OutputUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutProjectInput = {
@@ -51004,6 +52439,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutProjectInput = {
@@ -51755,6 +53191,7 @@ export namespace Prisma {
     project?: ProjectUpdateOneWithoutActivityNestedInput
     activityReport?: ActivityReportUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateWithoutOutputInput = {
@@ -51773,6 +53210,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityReport?: ActivityReportUncheckedUpdateManyWithoutActivityNestedInput
     lineItem?: LineItemUncheckedUpdateManyWithoutActivityNestedInput
+    subActivities?: SubActivitiesUncheckedUpdateManyWithoutActivityNestedInput
   }
 
   export type ActivityUncheckedUpdateManyWithoutOutputInput = {
@@ -52093,6 +53531,12 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
+  export type SubActivitiesCreateManyActivityInput = {
+    subActivitiesId?: string
+    description?: string | null
+    activityDate?: Date | string | null
+  }
+
   export type ActivityReportUpdateWithoutActivityInput = {
     activityReportId?: StringFieldUpdateOperationsInput | string
     percentageCompletion?: NullableIntFieldUpdateOperationsInput | number | null
@@ -52166,6 +53610,24 @@ export namespace Prisma {
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesUpdateWithoutActivityInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesUncheckedUpdateWithoutActivityInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SubActivitiesUncheckedUpdateManyWithoutActivityInput = {
+    subActivitiesId?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    activityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RetirementCreateManyRequestInput = {

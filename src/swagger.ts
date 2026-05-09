@@ -345,6 +345,39 @@ const options: swaggerJSDoc.Options = {
               nullable: true,
               description: "ID of the related project",
             },
+            subActivities: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/SubActivities",
+              },
+            },
+          },
+        },
+        SubActivities: {
+          type: "object",
+          properties: {
+            subActivitiesId: {
+              type: "string",
+              format: "uuid",
+              description: "Unique ID of the sub-activity",
+            },
+            activityId: {
+              type: "string",
+              format: "uuid",
+              nullable: true,
+              description: "ID of the related activity",
+            },
+            description: {
+              type: "string",
+              nullable: true,
+              description: "Description of the sub-activity",
+            },
+            activityDate: {
+              type: "string",
+              format: "date-time",
+              nullable: true,
+              description: "Date of the sub-activity",
+            },
           },
         },
         ActivityReport: {

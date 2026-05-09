@@ -393,6 +393,13 @@ exports.Prisma.ActivityScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.SubActivitiesScalarFieldEnum = {
+  subActivitiesId: 'subActivitiesId',
+  activityId: 'activityId',
+  description: 'description',
+  activityDate: 'activityDate'
+};
+
 exports.Prisma.ActivityReportScalarFieldEnum = {
   activityReportId: 'activityReportId',
   activityId: 'activityId',
@@ -744,6 +751,12 @@ exports.Prisma.ActivityOrderByRelevanceFieldEnum = {
   projectId: 'projectId'
 };
 
+exports.Prisma.SubActivitiesOrderByRelevanceFieldEnum = {
+  subActivitiesId: 'subActivitiesId',
+  activityId: 'activityId',
+  description: 'description'
+};
+
 exports.Prisma.ActivityReportOrderByRelevanceFieldEnum = {
   activityReportId: 'activityReportId',
   activityId: 'activityId',
@@ -843,6 +856,7 @@ exports.Prisma.ModelName = {
   IndicatorReportDisaggregation: 'IndicatorReportDisaggregation',
   IndicatorReportComment: 'IndicatorReportComment',
   Activity: 'Activity',
+  SubActivities: 'SubActivities',
   ActivityReport: 'ActivityReport',
   LogicalFramework: 'LogicalFramework',
   Request: 'Request',

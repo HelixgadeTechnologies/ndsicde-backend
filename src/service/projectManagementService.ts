@@ -709,7 +709,7 @@ export const createOrUpdateActivity = async (
   isCreate: boolean
 ) => {
   if (isCreate) {
-    return await prisma.activity.create({
+    const newActivity = await prisma.activity.create({
       data: {
         activityStatement: payload.activityStatement,
         outputId: payload.outputId,
@@ -724,12 +724,29 @@ export const createOrUpdateActivity = async (
         projectId: payload.projectId,
       },
     });
+
+    if (payload.subActivities && payload.subActivities.length > 0) {
+      await prisma.subActivities.createMany({
+        data: payload.subActivities.map((sub) => ({
+          activityId: newActivity.activityId,
+          description: sub.description,
+          activityDate: sub.activityDate,
+        })),
+      });
+    }
+
+    return newActivity;
   } else {
     if (!payload.activityId) {
       throw new Error("activityId is required for update");
     }
 
-    return await prisma.activity.update({
+    // Delete existing sub-activities
+    await prisma.subActivities.deleteMany({
+      where: { activityId: payload.activityId },
+    });
+
+    const updatedActivity = await prisma.activity.update({
       where: { activityId: payload.activityId },
       data: {
         activityStatement: payload.activityStatement,
@@ -746,14 +763,33 @@ export const createOrUpdateActivity = async (
         updateAt: new Date(),
       },
     });
+
+    if (payload.subActivities && payload.subActivities.length > 0) {
+      await prisma.subActivities.createMany({
+        data: payload.subActivities.map((sub) => ({
+          activityId: updatedActivity.activityId,
+          description: sub.description,
+          activityDate: sub.activityDate,
+        })),
+      });
+    }
+
+    return updatedActivity;
   }
 };
 
 // ✅ Get all Activities (from view)
 export const getAllActivities = async (): Promise<IActivityView[]> => {
-  return await prisma.$queryRaw<IActivityView[]>`
+  const activities = await prisma.$queryRaw<IActivityView[]>`
     SELECT * FROM activity_view
   `;
+  const subActivities = await prisma.subActivities.findMany({
+    where: { activityId: { in: activities.map(a => a.activityId) } },
+  });
+  return activities.map(activity => ({
+    ...activity,
+    subActivities: subActivities.filter(sub => sub.activityId === activity.activityId)
+  }));
 };
 
 // ✅ Get Activity by Id (from view)
@@ -761,7 +797,15 @@ export const getActivityById = async (id: string): Promise<IActivityView | null>
   const result = await prisma.$queryRaw<IActivityView[]>`
     SELECT * FROM activity_view WHERE activityId = ${id}
   `;
-  return result.length > 0 ? result[0] : null;
+  if (result.length === 0) return null;
+  const activity = result[0];
+  const subActivities = await prisma.subActivities.findMany({
+    where: { activityId: id },
+  });
+  return {
+    ...activity,
+    subActivities
+  };
 };
 
 // ✅ Get Activity by Project Id (from view)
@@ -771,7 +815,13 @@ export const getActivityByProjectId = async (
   const rows: IActivityView[] = await prisma.$queryRaw`
     SELECT * FROM activity_view WHERE projectId = ${projectId}
   `;
-  return rows;
+  const subActivities = await prisma.subActivities.findMany({
+    where: { activityId: { in: rows.map(a => a.activityId) } },
+  });
+  return rows.map(activity => ({
+    ...activity,
+    subActivities: subActivities.filter(sub => sub.activityId === activity.activityId)
+  }));
 };
 
 // ✅ Delete Activity

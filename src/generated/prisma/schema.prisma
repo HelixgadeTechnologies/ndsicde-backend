@@ -405,8 +405,19 @@ model Activity {
   updateAt            DateTime?        @default(now())
   activityReport      ActivityReport[]
   lineItem            LineItem[]
+  subActivities       SubActivities[]
 
   @@map("activity")
+}
+
+model SubActivities {
+  subActivitiesId String    @id @default(uuid())
+  activityId      String?
+  activity        Activity? @relation(fields: [activityId], references: [activityId])
+  description     String?
+  activityDate    DateTime?
+
+  @@map("subactivities")
 }
 
 model ActivityReport {

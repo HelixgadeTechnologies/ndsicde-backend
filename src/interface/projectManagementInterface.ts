@@ -360,9 +360,17 @@ export interface IActivity {
   subActivity?: string;
   descriptionAction?: string;
   deliveryDate?: Date;
+  subActivities?: ISubActivities[];
   projectId?: string;
   createAt?: Date;
   updateAt?: Date;
+}
+
+export interface ISubActivities {
+  subActivitiesId: string;
+  activityId?: string | null;
+  description?: string | null;
+  activityDate?: Date | null;
 }
 
 export interface IActivityView {
@@ -380,6 +388,7 @@ export interface IActivityView {
   deliveryDate?: Date;
   projectId?: string;
   projectName?: string; // from Project table
+  subActivities?: ISubActivities[];
   createAt?: Date;
   updateAt?: Date;
 }
