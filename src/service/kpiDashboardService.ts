@@ -361,7 +361,7 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
         entry.kpiCount += 1;
 
         const agg    = kpiAggMap.get(kpi.kpiId)!;
-        const target = parseFloat(kpi.target ?? "0");
+        const target = kpi.cumulativeTarget ?? 0;
         const perf   = target > 0 ? (agg.totalActual / target) * 100 : 0;
         entry.totalPerformance += perf;
     }
@@ -384,12 +384,12 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
 
     const KPI_TABLE_DATA = kpis.map((kpi) => {
         const agg    = kpiAggMap.get(kpi.kpiId)!;
-        const target = parseFloat(kpi.target   ?? "0");
-        const base   = parseFloat(kpi.baseLine ?? "0");
+        const target = kpi.cumulativeTarget ?? 0;
+        const base   = kpi.cumulativeTarget ?? 0;
         const perf   = target > 0 ? Number(((agg.totalActual / target) * 100).toFixed(2)) : 0;
         return {
             kpiId:             kpi.kpiId,
-            code:              kpi.specificAreas ?? "",
+            code:              kpi.specificArea ?? "",
             statement:         kpi.statement    ?? "",
             thematicArea:      kpi.strategicObjective?.thematicAreas ?? "",
             strategicObjective: kpi.strategicObjective?.statement   ?? "",
@@ -410,8 +410,8 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
 
     for (const kpi of kpis) {
         const agg = kpiAggMap.get(kpi.kpiId)!;
-        totalTarget   += parseFloat(kpi.target   ?? "0");
-        totalBaseline += parseFloat(kpi.baseLine ?? "0");
+        totalTarget   += kpi.cumulativeTarget   ?? 0;
+        totalBaseline += kpi.cumulativeTarget ?? 0;
         for (const [k, v] of agg.monthlyActuals)   allMonthlyMap.set(k, (allMonthlyMap.get(k)   ?? 0) + v);
         for (const [k, v] of agg.quarterlyActuals) allQuarterlyMap.set(k, (allQuarterlyMap.get(k) ?? 0) + v);
     }
@@ -452,11 +452,11 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
     // ── 7. PROJECT_INDICATOR_PERFORMANCE ─────────────────────────────────────
     const kpiPerformances = kpis.map((kpi) => {
         const agg    = kpiAggMap.get(kpi.kpiId)!;
-        const target = parseFloat(kpi.target ?? "0");
+        const target = kpi.cumulativeTarget ?? 0;
         const perf   = target > 0 ? Number(((agg.totalActual / target) * 100).toFixed(2)) : 0;
         return {
             kpiId:      kpi.kpiId,
-            code:       kpi.specificAreas ?? "",
+            code:       kpi.specificArea ?? "",
             statement:  kpi.statement    ?? "",
             actual:     agg.totalActual,
             target,

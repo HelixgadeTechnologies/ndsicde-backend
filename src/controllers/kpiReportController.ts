@@ -5,10 +5,6 @@ import {
     getKpiTypeDistribution,
     getKpiRecentSubmissions,
     getAssignedKpiList,
-    getKpiReportById,
-    createOrUpdateKpiReport,
-    deleteKpiReport,
-    IKpiReportPayload,
 } from "../service/kpiReportService";
 
 // ─────────────────────────────────────────────────────────────
@@ -110,66 +106,6 @@ export const getKpiRecentSubmissionsController = async (
             endDate: endDate as string | undefined,
         });
         res.status(200).json({ success: true, message: "Submissions fetched", data });
-    } catch (error: any) {
-        res.status(500).json({ success: false, message: error.message, error: "An error occurred" });
-    }
-};
-
-// ─────────────────────────────────────────────
-// GET /api/kpi-report/report/:id
-// ─────────────────────────────────────────────
-export const getKpiReportByIdController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const { id } = req.params;
-        const data = await getKpiReportById(id);
-        if (!data) {
-            res.status(404).json({ success: false, message: "KPI Report not found" });
-            return;
-        }
-        res.status(200).json({ success: true, message: "KPI Report fetched", data });
-    } catch (error: any) {
-        res.status(500).json({ success: false, message: error.message, error: "An error occurred" });
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// POST /api/kpi-report/report  (create or update)
-// ─────────────────────────────────────────────────────────────
-export const createOrUpdateKpiReportController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const { isCreate, payload }: { isCreate: boolean; payload: IKpiReportPayload } = req.body;
-        if (typeof isCreate !== "boolean") {
-            res.status(400).json({ success: false, message: "isCreate (boolean) is required" });
-            return;
-        }
-        const data = await createOrUpdateKpiReport(payload, isCreate);
-        res.status(isCreate ? 201 : 200).json({
-            success: true,
-            message: isCreate ? "KPI Report created" : "KPI Report updated",
-            data,
-        });
-    } catch (error: any) {
-        res.status(500).json({ success: false, message: error.message, error: "An error occurred" });
-    }
-};
-
-// ─────────────────────────────────────────────────────────────
-// DELETE /api/kpi-report/report/:id
-// ─────────────────────────────────────────────────────────────
-export const deleteKpiReportController = async (
-    req: Request,
-    res: Response
-) => {
-    try {
-        const { id } = req.params;
-        await deleteKpiReport(id);
-        res.status(200).json({ success: true, message: "KPI Report deleted" });
     } catch (error: any) {
         res.status(500).json({ success: false, message: error.message, error: "An error occurred" });
     }

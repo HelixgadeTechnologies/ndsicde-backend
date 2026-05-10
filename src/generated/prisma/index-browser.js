@@ -183,49 +183,30 @@ exports.Prisma.KpiScalarFieldEnum = {
   kpiId: 'kpiId',
   statement: 'statement',
   definition: 'definition',
-  type: 'type',
-  specificAreas: 'specificAreas',
+  specificArea: 'specificArea',
   unitOfMeasure: 'unitOfMeasure',
   itemInMeasure: 'itemInMeasure',
-  disaggregation: 'disaggregation',
-  baseLine: 'baseLine',
-  target: 'target',
+  baseLineDate: 'baseLineDate',
+  cumulativeValue: 'cumulativeValue',
+  baselineNarrative: 'baselineNarrative',
+  targetDate: 'targetDate',
+  cumulativeTarget: 'cumulativeTarget',
+  targetNarrative: 'targetNarrative',
+  targetType: 'targetType',
+  responsiblePersons: 'responsiblePersons',
+  type: 'type',
   strategicObjectiveId: 'strategicObjectiveId',
   createAt: 'createAt',
   updateAt: 'updateAt'
 };
 
-exports.Prisma.KpiAssignmentScalarFieldEnum = {
-  kpiAssignmentId: 'kpiAssignmentId',
+exports.Prisma.KpiDisaggregationScalarFieldEnum = {
+  kpiDisaggregationId: 'kpiDisaggregationId',
   kpiId: 'kpiId',
-  projectId: 'projectId',
-  assignedToId: 'assignedToId',
-  assignedAt: 'assignedAt'
-};
-
-exports.Prisma.KpiReportScalarFieldEnum = {
-  kpiReportId: 'kpiReportId',
-  projectId: 'projectId',
-  userId: 'userId',
-  strategicObjectiveId: 'strategicObjectiveId',
-  kpiName: 'kpiName',
-  kpiType: 'kpiType',
-  baseline: 'baseline',
+  type: 'type',
+  category: 'category',
   target: 'target',
-  actualValue: 'actualValue',
-  status: 'status',
-  observation: 'observation',
-  evidence: 'evidence',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.KpiReviewScalarFieldEnum = {
-  kpiReviewId: 'kpiReviewId',
-  kpiReportId: 'kpiReportId',
-  comment: 'comment',
-  reviewedBy: 'reviewedBy',
-  reviewedAt: 'reviewedAt'
+  baseline: 'baseline'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
@@ -332,6 +313,26 @@ exports.Prisma.IndicatorScalarFieldEnum = {
   updateAt: 'updateAt',
   result: 'result',
   resultTypeId: 'resultTypeId'
+};
+
+exports.Prisma.NewKpiScalarFieldEnum = {
+  newKpiId: 'newKpiId',
+  statement: 'statement',
+  definition: 'definition',
+  specificArea: 'specificArea',
+  unitOfMeasure: 'unitOfMeasure',
+  itemInMeasure: 'itemInMeasure',
+  baseLineDate: 'baseLineDate',
+  cumulativeValue: 'cumulativeValue',
+  baselineNarrative: 'baselineNarrative',
+  targetDate: 'targetDate',
+  cumulativeTarget: 'cumulativeTarget',
+  targetNarrative: 'targetNarrative',
+  targetType: 'targetType',
+  responsiblePersons: 'responsiblePersons',
+  kpiType: 'kpiType',
+  createAt: 'createAt',
+  updateAt: 'updateAt'
 };
 
 exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
@@ -592,40 +593,22 @@ exports.Prisma.KpiOrderByRelevanceFieldEnum = {
   kpiId: 'kpiId',
   statement: 'statement',
   definition: 'definition',
-  type: 'type',
-  specificAreas: 'specificAreas',
+  specificArea: 'specificArea',
   unitOfMeasure: 'unitOfMeasure',
   itemInMeasure: 'itemInMeasure',
-  disaggregation: 'disaggregation',
-  baseLine: 'baseLine',
-  target: 'target',
+  baselineNarrative: 'baselineNarrative',
+  targetNarrative: 'targetNarrative',
+  targetType: 'targetType',
+  responsiblePersons: 'responsiblePersons',
+  type: 'type',
   strategicObjectiveId: 'strategicObjectiveId'
 };
 
-exports.Prisma.KpiAssignmentOrderByRelevanceFieldEnum = {
-  kpiAssignmentId: 'kpiAssignmentId',
+exports.Prisma.KpiDisaggregationOrderByRelevanceFieldEnum = {
+  kpiDisaggregationId: 'kpiDisaggregationId',
   kpiId: 'kpiId',
-  projectId: 'projectId',
-  assignedToId: 'assignedToId'
-};
-
-exports.Prisma.KpiReportOrderByRelevanceFieldEnum = {
-  kpiReportId: 'kpiReportId',
-  projectId: 'projectId',
-  userId: 'userId',
-  strategicObjectiveId: 'strategicObjectiveId',
-  kpiName: 'kpiName',
-  kpiType: 'kpiType',
-  status: 'status',
-  observation: 'observation',
-  evidence: 'evidence'
-};
-
-exports.Prisma.KpiReviewOrderByRelevanceFieldEnum = {
-  kpiReviewId: 'kpiReviewId',
-  kpiReportId: 'kpiReportId',
-  comment: 'comment',
-  reviewedBy: 'reviewedBy'
+  type: 'type',
+  category: 'category'
 };
 
 exports.Prisma.ProjectOrderByRelevanceFieldEnum = {
@@ -712,6 +695,20 @@ exports.Prisma.IndicatorOrderByRelevanceFieldEnum = {
   responsiblePersons: 'responsiblePersons',
   result: 'result',
   resultTypeId: 'resultTypeId'
+};
+
+exports.Prisma.NewKpiOrderByRelevanceFieldEnum = {
+  newKpiId: 'newKpiId',
+  statement: 'statement',
+  definition: 'definition',
+  specificArea: 'specificArea',
+  unitOfMeasure: 'unitOfMeasure',
+  itemInMeasure: 'itemInMeasure',
+  baselineNarrative: 'baselineNarrative',
+  targetNarrative: 'targetNarrative',
+  targetType: 'targetType',
+  responsiblePersons: 'responsiblePersons',
+  kpiType: 'kpiType'
 };
 
 exports.Prisma.IndicatorDisaggregationOrderByRelevanceFieldEnum = {
@@ -853,9 +850,7 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   StrategicObjective: 'StrategicObjective',
   Kpi: 'Kpi',
-  KpiAssignment: 'KpiAssignment',
-  KpiReport: 'KpiReport',
-  KpiReview: 'KpiReview',
+  KpiDisaggregation: 'KpiDisaggregation',
   Project: 'Project',
   TeamMember: 'TeamMember',
   Partner: 'Partner',
@@ -864,6 +859,7 @@ exports.Prisma.ModelName = {
   Outcome: 'Outcome',
   Output: 'Output',
   Indicator: 'Indicator',
+  NewKpi: 'NewKpi',
   IndicatorDisaggregation: 'IndicatorDisaggregation',
   PeriodicTarget: 'PeriodicTarget',
   IndicatorReport: 'IndicatorReport',

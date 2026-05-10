@@ -39,20 +39,10 @@ export type StrategicObjective = $Result.DefaultSelection<Prisma.$StrategicObjec
  */
 export type Kpi = $Result.DefaultSelection<Prisma.$KpiPayload>
 /**
- * Model KpiAssignment
+ * Model KpiDisaggregation
  * 
  */
-export type KpiAssignment = $Result.DefaultSelection<Prisma.$KpiAssignmentPayload>
-/**
- * Model KpiReport
- * 
- */
-export type KpiReport = $Result.DefaultSelection<Prisma.$KpiReportPayload>
-/**
- * Model KpiReview
- * 
- */
-export type KpiReview = $Result.DefaultSelection<Prisma.$KpiReviewPayload>
+export type KpiDisaggregation = $Result.DefaultSelection<Prisma.$KpiDisaggregationPayload>
 /**
  * Model Project
  * 
@@ -93,6 +83,11 @@ export type Output = $Result.DefaultSelection<Prisma.$OutputPayload>
  * 
  */
 export type Indicator = $Result.DefaultSelection<Prisma.$IndicatorPayload>
+/**
+ * Model NewKpi
+ * 
+ */
+export type NewKpi = $Result.DefaultSelection<Prisma.$NewKpiPayload>
 /**
  * Model IndicatorDisaggregation
  * 
@@ -331,34 +326,14 @@ export class PrismaClient<
   get kpi(): Prisma.KpiDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.kpiAssignment`: Exposes CRUD operations for the **KpiAssignment** model.
+   * `prisma.kpiDisaggregation`: Exposes CRUD operations for the **KpiDisaggregation** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more KpiAssignments
-    * const kpiAssignments = await prisma.kpiAssignment.findMany()
+    * // Fetch zero or more KpiDisaggregations
+    * const kpiDisaggregations = await prisma.kpiDisaggregation.findMany()
     * ```
     */
-  get kpiAssignment(): Prisma.KpiAssignmentDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.kpiReport`: Exposes CRUD operations for the **KpiReport** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more KpiReports
-    * const kpiReports = await prisma.kpiReport.findMany()
-    * ```
-    */
-  get kpiReport(): Prisma.KpiReportDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.kpiReview`: Exposes CRUD operations for the **KpiReview** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more KpiReviews
-    * const kpiReviews = await prisma.kpiReview.findMany()
-    * ```
-    */
-  get kpiReview(): Prisma.KpiReviewDelegate<ExtArgs, ClientOptions>;
+  get kpiDisaggregation(): Prisma.KpiDisaggregationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.project`: Exposes CRUD operations for the **Project** model.
@@ -439,6 +414,16 @@ export class PrismaClient<
     * ```
     */
   get indicator(): Prisma.IndicatorDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.newKpi`: Exposes CRUD operations for the **NewKpi** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more NewKpis
+    * const newKpis = await prisma.newKpi.findMany()
+    * ```
+    */
+  get newKpi(): Prisma.NewKpiDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.indicatorDisaggregation`: Exposes CRUD operations for the **IndicatorDisaggregation** model.
@@ -1008,9 +993,7 @@ export namespace Prisma {
     Role: 'Role',
     StrategicObjective: 'StrategicObjective',
     Kpi: 'Kpi',
-    KpiAssignment: 'KpiAssignment',
-    KpiReport: 'KpiReport',
-    KpiReview: 'KpiReview',
+    KpiDisaggregation: 'KpiDisaggregation',
     Project: 'Project',
     TeamMember: 'TeamMember',
     Partner: 'Partner',
@@ -1019,6 +1002,7 @@ export namespace Prisma {
     Outcome: 'Outcome',
     Output: 'Output',
     Indicator: 'Indicator',
+    NewKpi: 'NewKpi',
     IndicatorDisaggregation: 'IndicatorDisaggregation',
     PeriodicTarget: 'PeriodicTarget',
     IndicatorReport: 'IndicatorReport',
@@ -1047,7 +1031,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiAssignment" | "kpiReport" | "kpiReview" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "newKpi" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1381,201 +1365,69 @@ export namespace Prisma {
           }
         }
       }
-      KpiAssignment: {
-        payload: Prisma.$KpiAssignmentPayload<ExtArgs>
-        fields: Prisma.KpiAssignmentFieldRefs
+      KpiDisaggregation: {
+        payload: Prisma.$KpiDisaggregationPayload<ExtArgs>
+        fields: Prisma.KpiDisaggregationFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.KpiAssignmentFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload> | null
+            args: Prisma.KpiDisaggregationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.KpiAssignmentFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           findFirst: {
-            args: Prisma.KpiAssignmentFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload> | null
+            args: Prisma.KpiDisaggregationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.KpiAssignmentFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           findMany: {
-            args: Prisma.KpiAssignmentFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>[]
+            args: Prisma.KpiDisaggregationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>[]
           }
           create: {
-            args: Prisma.KpiAssignmentCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           createMany: {
-            args: Prisma.KpiAssignmentCreateManyArgs<ExtArgs>
+            args: Prisma.KpiDisaggregationCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.KpiAssignmentDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           update: {
-            args: Prisma.KpiAssignmentUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           deleteMany: {
-            args: Prisma.KpiAssignmentDeleteManyArgs<ExtArgs>
+            args: Prisma.KpiDisaggregationDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.KpiAssignmentUpdateManyArgs<ExtArgs>
+            args: Prisma.KpiDisaggregationUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.KpiAssignmentUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiAssignmentPayload>
+            args: Prisma.KpiDisaggregationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KpiDisaggregationPayload>
           }
           aggregate: {
-            args: Prisma.KpiAssignmentAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateKpiAssignment>
+            args: Prisma.KpiDisaggregationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKpiDisaggregation>
           }
           groupBy: {
-            args: Prisma.KpiAssignmentGroupByArgs<ExtArgs>
-            result: $Utils.Optional<KpiAssignmentGroupByOutputType>[]
+            args: Prisma.KpiDisaggregationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KpiDisaggregationGroupByOutputType>[]
           }
           count: {
-            args: Prisma.KpiAssignmentCountArgs<ExtArgs>
-            result: $Utils.Optional<KpiAssignmentCountAggregateOutputType> | number
-          }
-        }
-      }
-      KpiReport: {
-        payload: Prisma.$KpiReportPayload<ExtArgs>
-        fields: Prisma.KpiReportFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.KpiReportFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.KpiReportFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          findFirst: {
-            args: Prisma.KpiReportFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.KpiReportFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          findMany: {
-            args: Prisma.KpiReportFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>[]
-          }
-          create: {
-            args: Prisma.KpiReportCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          createMany: {
-            args: Prisma.KpiReportCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.KpiReportDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          update: {
-            args: Prisma.KpiReportUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          deleteMany: {
-            args: Prisma.KpiReportDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.KpiReportUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.KpiReportUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReportPayload>
-          }
-          aggregate: {
-            args: Prisma.KpiReportAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateKpiReport>
-          }
-          groupBy: {
-            args: Prisma.KpiReportGroupByArgs<ExtArgs>
-            result: $Utils.Optional<KpiReportGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.KpiReportCountArgs<ExtArgs>
-            result: $Utils.Optional<KpiReportCountAggregateOutputType> | number
-          }
-        }
-      }
-      KpiReview: {
-        payload: Prisma.$KpiReviewPayload<ExtArgs>
-        fields: Prisma.KpiReviewFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.KpiReviewFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.KpiReviewFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          findFirst: {
-            args: Prisma.KpiReviewFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.KpiReviewFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          findMany: {
-            args: Prisma.KpiReviewFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>[]
-          }
-          create: {
-            args: Prisma.KpiReviewCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          createMany: {
-            args: Prisma.KpiReviewCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.KpiReviewDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          update: {
-            args: Prisma.KpiReviewUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          deleteMany: {
-            args: Prisma.KpiReviewDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.KpiReviewUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.KpiReviewUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$KpiReviewPayload>
-          }
-          aggregate: {
-            args: Prisma.KpiReviewAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateKpiReview>
-          }
-          groupBy: {
-            args: Prisma.KpiReviewGroupByArgs<ExtArgs>
-            result: $Utils.Optional<KpiReviewGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.KpiReviewCountArgs<ExtArgs>
-            result: $Utils.Optional<KpiReviewCountAggregateOutputType> | number
+            args: Prisma.KpiDisaggregationCountArgs<ExtArgs>
+            result: $Utils.Optional<KpiDisaggregationCountAggregateOutputType> | number
           }
         }
       }
@@ -2104,6 +1956,72 @@ export namespace Prisma {
           count: {
             args: Prisma.IndicatorCountArgs<ExtArgs>
             result: $Utils.Optional<IndicatorCountAggregateOutputType> | number
+          }
+        }
+      }
+      NewKpi: {
+        payload: Prisma.$NewKpiPayload<ExtArgs>
+        fields: Prisma.NewKpiFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NewKpiFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NewKpiFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          findFirst: {
+            args: Prisma.NewKpiFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NewKpiFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          findMany: {
+            args: Prisma.NewKpiFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>[]
+          }
+          create: {
+            args: Prisma.NewKpiCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          createMany: {
+            args: Prisma.NewKpiCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.NewKpiDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          update: {
+            args: Prisma.NewKpiUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          deleteMany: {
+            args: Prisma.NewKpiDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NewKpiUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.NewKpiUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
+          }
+          aggregate: {
+            args: Prisma.NewKpiAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNewKpi>
+          }
+          groupBy: {
+            args: Prisma.NewKpiGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NewKpiGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NewKpiCountArgs<ExtArgs>
+            result: $Utils.Optional<NewKpiCountAggregateOutputType> | number
           }
         }
       }
@@ -3078,9 +2996,7 @@ export namespace Prisma {
     role?: RoleOmit
     strategicObjective?: StrategicObjectiveOmit
     kpi?: KpiOmit
-    kpiAssignment?: KpiAssignmentOmit
-    kpiReport?: KpiReportOmit
-    kpiReview?: KpiReviewOmit
+    kpiDisaggregation?: KpiDisaggregationOmit
     project?: ProjectOmit
     teamMember?: TeamMemberOmit
     partner?: PartnerOmit
@@ -3089,6 +3005,7 @@ export namespace Prisma {
     outcome?: OutcomeOmit
     output?: OutputOmit
     indicator?: IndicatorOmit
+    newKpi?: NewKpiOmit
     indicatorDisaggregation?: IndicatorDisaggregationOmit
     periodicTarget?: PeriodicTargetOmit
     indicatorReport?: IndicatorReportOmit
@@ -3182,14 +3099,12 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    kpiReport: number
     partner: number
     request: number
     retirement: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    kpiReport?: boolean | UserCountOutputTypeCountKpiReportArgs
     partner?: boolean | UserCountOutputTypeCountPartnerArgs
     request?: boolean | UserCountOutputTypeCountRequestArgs
     retirement?: boolean | UserCountOutputTypeCountRetirementArgs
@@ -3204,13 +3119,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountKpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReportWhereInput
   }
 
   /**
@@ -3273,13 +3181,11 @@ export namespace Prisma {
   export type StrategicObjectiveCountOutputType = {
     kpi: number
     project: number
-    kpiReport: number
   }
 
   export type StrategicObjectiveCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpi?: boolean | StrategicObjectiveCountOutputTypeCountKpiArgs
     project?: boolean | StrategicObjectiveCountOutputTypeCountProjectArgs
-    kpiReport?: boolean | StrategicObjectiveCountOutputTypeCountKpiReportArgs
   }
 
   // Custom InputTypes
@@ -3307,24 +3213,17 @@ export namespace Prisma {
     where?: ProjectWhereInput
   }
 
-  /**
-   * StrategicObjectiveCountOutputType without action
-   */
-  export type StrategicObjectiveCountOutputTypeCountKpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReportWhereInput
-  }
-
 
   /**
    * Count Type KpiCountOutputType
    */
 
   export type KpiCountOutputType = {
-    kpiAssignment: number
+    kpiDisaggregation: number
   }
 
   export type KpiCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    kpiAssignment?: boolean | KpiCountOutputTypeCountKpiAssignmentArgs
+    kpiDisaggregation?: boolean | KpiCountOutputTypeCountKpiDisaggregationArgs
   }
 
   // Custom InputTypes
@@ -3341,39 +3240,8 @@ export namespace Prisma {
   /**
    * KpiCountOutputType without action
    */
-  export type KpiCountOutputTypeCountKpiAssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiAssignmentWhereInput
-  }
-
-
-  /**
-   * Count Type KpiReportCountOutputType
-   */
-
-  export type KpiReportCountOutputType = {
-    kpiReview: number
-  }
-
-  export type KpiReportCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    kpiReview?: boolean | KpiReportCountOutputTypeCountKpiReviewArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * KpiReportCountOutputType without action
-   */
-  export type KpiReportCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReportCountOutputType
-     */
-    select?: KpiReportCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * KpiReportCountOutputType without action
-   */
-  export type KpiReportCountOutputTypeCountKpiReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReviewWhereInput
+  export type KpiCountOutputTypeCountKpiDisaggregationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KpiDisaggregationWhereInput
   }
 
 
@@ -3391,7 +3259,6 @@ export namespace Prisma {
     logicalFramework: number
     request: number
     report: number
-    kpiReport: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3404,7 +3271,6 @@ export namespace Prisma {
     logicalFramework?: boolean | ProjectCountOutputTypeCountLogicalFrameworkArgs
     request?: boolean | ProjectCountOutputTypeCountRequestArgs
     report?: boolean | ProjectCountOutputTypeCountReportArgs
-    kpiReport?: boolean | ProjectCountOutputTypeCountKpiReportArgs
   }
 
   // Custom InputTypes
@@ -3479,13 +3345,6 @@ export namespace Prisma {
    */
   export type ProjectCountOutputTypeCountReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReportWhereInput
-  }
-
-  /**
-   * ProjectCountOutputType without action
-   */
-  export type ProjectCountOutputTypeCountKpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReportWhereInput
   }
 
 
@@ -4125,7 +3984,6 @@ export namespace Prisma {
     createAt?: boolean
     updateAt?: boolean
     role?: boolean | User$roleArgs<ExtArgs>
-    kpiReport?: boolean | User$kpiReportArgs<ExtArgs>
     partner?: boolean | User$partnerArgs<ExtArgs>
     request?: boolean | User$requestArgs<ExtArgs>
     retirement?: boolean | User$retirementArgs<ExtArgs>
@@ -4160,7 +4018,6 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "fullName" | "email" | "address" | "phoneNumber" | "roleId" | "status" | "assignedProjectId" | "department" | "community" | "state" | "localGovernmentArea" | "password" | "profilePic" | "profilePicMimeType" | "signature" | "signatureMimeType" | "loginLast" | "createAt" | "updateAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | User$roleArgs<ExtArgs>
-    kpiReport?: boolean | User$kpiReportArgs<ExtArgs>
     partner?: boolean | User$partnerArgs<ExtArgs>
     request?: boolean | User$requestArgs<ExtArgs>
     retirement?: boolean | User$retirementArgs<ExtArgs>
@@ -4171,7 +4028,6 @@ export namespace Prisma {
     name: "User"
     objects: {
       role: Prisma.$RolePayload<ExtArgs> | null
-      kpiReport: Prisma.$KpiReportPayload<ExtArgs>[]
       partner: Prisma.$PartnerPayload<ExtArgs>[]
       request: Prisma.$RequestPayload<ExtArgs>[]
       retirement: Prisma.$RetirementPayload<ExtArgs>[]
@@ -4538,7 +4394,6 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     role<T extends User$roleArgs<ExtArgs> = {}>(args?: Subset<T, User$roleArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    kpiReport<T extends User$kpiReportArgs<ExtArgs> = {}>(args?: Subset<T, User$kpiReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     partner<T extends User$partnerArgs<ExtArgs> = {}>(args?: Subset<T, User$partnerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     request<T extends User$requestArgs<ExtArgs> = {}>(args?: Subset<T, User$requestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     retirement<T extends User$retirementArgs<ExtArgs> = {}>(args?: Subset<T, User$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4955,30 +4810,6 @@ export namespace Prisma {
      */
     include?: RoleInclude<ExtArgs> | null
     where?: RoleWhereInput
-  }
-
-  /**
-   * User.kpiReport
-   */
-  export type User$kpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    where?: KpiReportWhereInput
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    cursor?: KpiReportWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
   }
 
   /**
@@ -7211,7 +7042,6 @@ export namespace Prisma {
     updateAt?: boolean
     kpi?: boolean | StrategicObjective$kpiArgs<ExtArgs>
     project?: boolean | StrategicObjective$projectArgs<ExtArgs>
-    kpiReport?: boolean | StrategicObjective$kpiReportArgs<ExtArgs>
     _count?: boolean | StrategicObjectiveCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["strategicObjective"]>
 
@@ -7231,7 +7061,6 @@ export namespace Prisma {
   export type StrategicObjectiveInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpi?: boolean | StrategicObjective$kpiArgs<ExtArgs>
     project?: boolean | StrategicObjective$projectArgs<ExtArgs>
-    kpiReport?: boolean | StrategicObjective$kpiReportArgs<ExtArgs>
     _count?: boolean | StrategicObjectiveCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7240,7 +7069,6 @@ export namespace Prisma {
     objects: {
       kpi: Prisma.$KpiPayload<ExtArgs>[]
       project: Prisma.$ProjectPayload<ExtArgs>[]
-      kpiReport: Prisma.$KpiReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       strategicObjectiveId: string
@@ -7592,7 +7420,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     kpi<T extends StrategicObjective$kpiArgs<ExtArgs> = {}>(args?: Subset<T, StrategicObjective$kpiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     project<T extends StrategicObjective$projectArgs<ExtArgs> = {}>(args?: Subset<T, StrategicObjective$projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    kpiReport<T extends StrategicObjective$kpiReportArgs<ExtArgs> = {}>(args?: Subset<T, StrategicObjective$kpiReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8025,30 +7852,6 @@ export namespace Prisma {
   }
 
   /**
-   * StrategicObjective.kpiReport
-   */
-  export type StrategicObjective$kpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    where?: KpiReportWhereInput
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    cursor?: KpiReportWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
-  }
-
-  /**
    * StrategicObjective without action
    */
   export type StrategicObjectiveDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8073,21 +7876,38 @@ export namespace Prisma {
 
   export type AggregateKpi = {
     _count: KpiCountAggregateOutputType | null
+    _avg: KpiAvgAggregateOutputType | null
+    _sum: KpiSumAggregateOutputType | null
     _min: KpiMinAggregateOutputType | null
     _max: KpiMaxAggregateOutputType | null
+  }
+
+  export type KpiAvgAggregateOutputType = {
+    cumulativeValue: number | null
+    cumulativeTarget: number | null
+  }
+
+  export type KpiSumAggregateOutputType = {
+    cumulativeValue: number | null
+    cumulativeTarget: number | null
   }
 
   export type KpiMinAggregateOutputType = {
     kpiId: string | null
     statement: string | null
     definition: string | null
-    type: string | null
-    specificAreas: string | null
+    specificArea: string | null
     unitOfMeasure: string | null
     itemInMeasure: string | null
-    disaggregation: string | null
-    baseLine: string | null
-    target: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    type: string | null
     strategicObjectiveId: string | null
     createAt: Date | null
     updateAt: Date | null
@@ -8097,13 +7917,18 @@ export namespace Prisma {
     kpiId: string | null
     statement: string | null
     definition: string | null
-    type: string | null
-    specificAreas: string | null
+    specificArea: string | null
     unitOfMeasure: string | null
     itemInMeasure: string | null
-    disaggregation: string | null
-    baseLine: string | null
-    target: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    type: string | null
     strategicObjectiveId: string | null
     createAt: Date | null
     updateAt: Date | null
@@ -8113,13 +7938,18 @@ export namespace Prisma {
     kpiId: number
     statement: number
     definition: number
-    type: number
-    specificAreas: number
+    specificArea: number
     unitOfMeasure: number
     itemInMeasure: number
-    disaggregation: number
-    baseLine: number
-    target: number
+    baseLineDate: number
+    cumulativeValue: number
+    baselineNarrative: number
+    targetDate: number
+    cumulativeTarget: number
+    targetNarrative: number
+    targetType: number
+    responsiblePersons: number
+    type: number
     strategicObjectiveId: number
     createAt: number
     updateAt: number
@@ -8127,17 +7957,32 @@ export namespace Prisma {
   }
 
 
+  export type KpiAvgAggregateInputType = {
+    cumulativeValue?: true
+    cumulativeTarget?: true
+  }
+
+  export type KpiSumAggregateInputType = {
+    cumulativeValue?: true
+    cumulativeTarget?: true
+  }
+
   export type KpiMinAggregateInputType = {
     kpiId?: true
     statement?: true
     definition?: true
-    type?: true
-    specificAreas?: true
+    specificArea?: true
     unitOfMeasure?: true
     itemInMeasure?: true
-    disaggregation?: true
-    baseLine?: true
-    target?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    type?: true
     strategicObjectiveId?: true
     createAt?: true
     updateAt?: true
@@ -8147,13 +7992,18 @@ export namespace Prisma {
     kpiId?: true
     statement?: true
     definition?: true
-    type?: true
-    specificAreas?: true
+    specificArea?: true
     unitOfMeasure?: true
     itemInMeasure?: true
-    disaggregation?: true
-    baseLine?: true
-    target?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    type?: true
     strategicObjectiveId?: true
     createAt?: true
     updateAt?: true
@@ -8163,13 +8013,18 @@ export namespace Prisma {
     kpiId?: true
     statement?: true
     definition?: true
-    type?: true
-    specificAreas?: true
+    specificArea?: true
     unitOfMeasure?: true
     itemInMeasure?: true
-    disaggregation?: true
-    baseLine?: true
-    target?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    type?: true
     strategicObjectiveId?: true
     createAt?: true
     updateAt?: true
@@ -8214,6 +8069,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: KpiAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: KpiSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: KpiMinAggregateInputType
@@ -8244,6 +8111,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: KpiCountAggregateInputType | true
+    _avg?: KpiAvgAggregateInputType
+    _sum?: KpiSumAggregateInputType
     _min?: KpiMinAggregateInputType
     _max?: KpiMaxAggregateInputType
   }
@@ -8252,17 +8121,24 @@ export namespace Prisma {
     kpiId: string
     statement: string | null
     definition: string | null
-    type: string | null
-    specificAreas: string | null
+    specificArea: string | null
     unitOfMeasure: string | null
     itemInMeasure: string | null
-    disaggregation: string | null
-    baseLine: string | null
-    target: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    type: string | null
     strategicObjectiveId: string | null
     createAt: Date | null
     updateAt: Date | null
     _count: KpiCountAggregateOutputType | null
+    _avg: KpiAvgAggregateOutputType | null
+    _sum: KpiSumAggregateOutputType | null
     _min: KpiMinAggregateOutputType | null
     _max: KpiMaxAggregateOutputType | null
   }
@@ -8285,18 +8161,23 @@ export namespace Prisma {
     kpiId?: boolean
     statement?: boolean
     definition?: boolean
-    type?: boolean
-    specificAreas?: boolean
+    specificArea?: boolean
     unitOfMeasure?: boolean
     itemInMeasure?: boolean
-    disaggregation?: boolean
-    baseLine?: boolean
-    target?: boolean
+    baseLineDate?: boolean
+    cumulativeValue?: boolean
+    baselineNarrative?: boolean
+    targetDate?: boolean
+    cumulativeTarget?: boolean
+    targetNarrative?: boolean
+    targetType?: boolean
+    responsiblePersons?: boolean
+    type?: boolean
     strategicObjectiveId?: boolean
     createAt?: boolean
     updateAt?: boolean
     strategicObjective?: boolean | Kpi$strategicObjectiveArgs<ExtArgs>
-    kpiAssignment?: boolean | Kpi$kpiAssignmentArgs<ExtArgs>
+    kpiDisaggregation?: boolean | Kpi$kpiDisaggregationArgs<ExtArgs>
     _count?: boolean | KpiCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["kpi"]>
 
@@ -8306,22 +8187,27 @@ export namespace Prisma {
     kpiId?: boolean
     statement?: boolean
     definition?: boolean
-    type?: boolean
-    specificAreas?: boolean
+    specificArea?: boolean
     unitOfMeasure?: boolean
     itemInMeasure?: boolean
-    disaggregation?: boolean
-    baseLine?: boolean
-    target?: boolean
+    baseLineDate?: boolean
+    cumulativeValue?: boolean
+    baselineNarrative?: boolean
+    targetDate?: boolean
+    cumulativeTarget?: boolean
+    targetNarrative?: boolean
+    targetType?: boolean
+    responsiblePersons?: boolean
+    type?: boolean
     strategicObjectiveId?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type KpiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiId" | "statement" | "definition" | "type" | "specificAreas" | "unitOfMeasure" | "itemInMeasure" | "disaggregation" | "baseLine" | "target" | "strategicObjectiveId" | "createAt" | "updateAt", ExtArgs["result"]["kpi"]>
+  export type KpiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiId" | "statement" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "type" | "strategicObjectiveId" | "createAt" | "updateAt", ExtArgs["result"]["kpi"]>
   export type KpiInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     strategicObjective?: boolean | Kpi$strategicObjectiveArgs<ExtArgs>
-    kpiAssignment?: boolean | Kpi$kpiAssignmentArgs<ExtArgs>
+    kpiDisaggregation?: boolean | Kpi$kpiDisaggregationArgs<ExtArgs>
     _count?: boolean | KpiCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -8329,19 +8215,24 @@ export namespace Prisma {
     name: "Kpi"
     objects: {
       strategicObjective: Prisma.$StrategicObjectivePayload<ExtArgs> | null
-      kpiAssignment: Prisma.$KpiAssignmentPayload<ExtArgs>[]
+      kpiDisaggregation: Prisma.$KpiDisaggregationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       kpiId: string
       statement: string | null
       definition: string | null
-      type: string | null
-      specificAreas: string | null
+      specificArea: string | null
       unitOfMeasure: string | null
       itemInMeasure: string | null
-      disaggregation: string | null
-      baseLine: string | null
-      target: string | null
+      baseLineDate: Date | null
+      cumulativeValue: number | null
+      baselineNarrative: string | null
+      targetDate: Date | null
+      cumulativeTarget: number | null
+      targetNarrative: string | null
+      targetType: string | null
+      responsiblePersons: string | null
+      type: string | null
       strategicObjectiveId: string | null
       createAt: Date | null
       updateAt: Date | null
@@ -8686,7 +8577,7 @@ export namespace Prisma {
   export interface Prisma__KpiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     strategicObjective<T extends Kpi$strategicObjectiveArgs<ExtArgs> = {}>(args?: Subset<T, Kpi$strategicObjectiveArgs<ExtArgs>>): Prisma__StrategicObjectiveClient<$Result.GetResult<Prisma.$StrategicObjectivePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    kpiAssignment<T extends Kpi$kpiAssignmentArgs<ExtArgs> = {}>(args?: Subset<T, Kpi$kpiAssignmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    kpiDisaggregation<T extends Kpi$kpiDisaggregationArgs<ExtArgs> = {}>(args?: Subset<T, Kpi$kpiDisaggregationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8719,13 +8610,18 @@ export namespace Prisma {
     readonly kpiId: FieldRef<"Kpi", 'String'>
     readonly statement: FieldRef<"Kpi", 'String'>
     readonly definition: FieldRef<"Kpi", 'String'>
-    readonly type: FieldRef<"Kpi", 'String'>
-    readonly specificAreas: FieldRef<"Kpi", 'String'>
+    readonly specificArea: FieldRef<"Kpi", 'String'>
     readonly unitOfMeasure: FieldRef<"Kpi", 'String'>
     readonly itemInMeasure: FieldRef<"Kpi", 'String'>
-    readonly disaggregation: FieldRef<"Kpi", 'String'>
-    readonly baseLine: FieldRef<"Kpi", 'String'>
-    readonly target: FieldRef<"Kpi", 'String'>
+    readonly baseLineDate: FieldRef<"Kpi", 'DateTime'>
+    readonly cumulativeValue: FieldRef<"Kpi", 'Int'>
+    readonly baselineNarrative: FieldRef<"Kpi", 'String'>
+    readonly targetDate: FieldRef<"Kpi", 'DateTime'>
+    readonly cumulativeTarget: FieldRef<"Kpi", 'Int'>
+    readonly targetNarrative: FieldRef<"Kpi", 'String'>
+    readonly targetType: FieldRef<"Kpi", 'String'>
+    readonly responsiblePersons: FieldRef<"Kpi", 'String'>
+    readonly type: FieldRef<"Kpi", 'String'>
     readonly strategicObjectiveId: FieldRef<"Kpi", 'String'>
     readonly createAt: FieldRef<"Kpi", 'DateTime'>
     readonly updateAt: FieldRef<"Kpi", 'DateTime'>
@@ -9096,27 +8992,27 @@ export namespace Prisma {
   }
 
   /**
-   * Kpi.kpiAssignment
+   * Kpi.kpiDisaggregation
    */
-  export type Kpi$kpiAssignmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Kpi$kpiDisaggregationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
-    where?: KpiAssignmentWhereInput
-    orderBy?: KpiAssignmentOrderByWithRelationInput | KpiAssignmentOrderByWithRelationInput[]
-    cursor?: KpiAssignmentWhereUniqueInput
+    include?: KpiDisaggregationInclude<ExtArgs> | null
+    where?: KpiDisaggregationWhereInput
+    orderBy?: KpiDisaggregationOrderByWithRelationInput | KpiDisaggregationOrderByWithRelationInput[]
+    cursor?: KpiDisaggregationWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: KpiAssignmentScalarFieldEnum | KpiAssignmentScalarFieldEnum[]
+    distinct?: KpiDisaggregationScalarFieldEnum | KpiDisaggregationScalarFieldEnum[]
   }
 
   /**
@@ -9139,335 +9035,383 @@ export namespace Prisma {
 
 
   /**
-   * Model KpiAssignment
+   * Model KpiDisaggregation
    */
 
-  export type AggregateKpiAssignment = {
-    _count: KpiAssignmentCountAggregateOutputType | null
-    _min: KpiAssignmentMinAggregateOutputType | null
-    _max: KpiAssignmentMaxAggregateOutputType | null
+  export type AggregateKpiDisaggregation = {
+    _count: KpiDisaggregationCountAggregateOutputType | null
+    _avg: KpiDisaggregationAvgAggregateOutputType | null
+    _sum: KpiDisaggregationSumAggregateOutputType | null
+    _min: KpiDisaggregationMinAggregateOutputType | null
+    _max: KpiDisaggregationMaxAggregateOutputType | null
   }
 
-  export type KpiAssignmentMinAggregateOutputType = {
-    kpiAssignmentId: string | null
+  export type KpiDisaggregationAvgAggregateOutputType = {
+    target: number | null
+    baseline: number | null
+  }
+
+  export type KpiDisaggregationSumAggregateOutputType = {
+    target: number | null
+    baseline: number | null
+  }
+
+  export type KpiDisaggregationMinAggregateOutputType = {
+    kpiDisaggregationId: string | null
     kpiId: string | null
-    projectId: string | null
-    assignedToId: string | null
-    assignedAt: Date | null
+    type: string | null
+    category: string | null
+    target: number | null
+    baseline: number | null
   }
 
-  export type KpiAssignmentMaxAggregateOutputType = {
-    kpiAssignmentId: string | null
+  export type KpiDisaggregationMaxAggregateOutputType = {
+    kpiDisaggregationId: string | null
     kpiId: string | null
-    projectId: string | null
-    assignedToId: string | null
-    assignedAt: Date | null
+    type: string | null
+    category: string | null
+    target: number | null
+    baseline: number | null
   }
 
-  export type KpiAssignmentCountAggregateOutputType = {
-    kpiAssignmentId: number
+  export type KpiDisaggregationCountAggregateOutputType = {
+    kpiDisaggregationId: number
     kpiId: number
-    projectId: number
-    assignedToId: number
-    assignedAt: number
+    type: number
+    category: number
+    target: number
+    baseline: number
     _all: number
   }
 
 
-  export type KpiAssignmentMinAggregateInputType = {
-    kpiAssignmentId?: true
-    kpiId?: true
-    projectId?: true
-    assignedToId?: true
-    assignedAt?: true
+  export type KpiDisaggregationAvgAggregateInputType = {
+    target?: true
+    baseline?: true
   }
 
-  export type KpiAssignmentMaxAggregateInputType = {
-    kpiAssignmentId?: true
-    kpiId?: true
-    projectId?: true
-    assignedToId?: true
-    assignedAt?: true
+  export type KpiDisaggregationSumAggregateInputType = {
+    target?: true
+    baseline?: true
   }
 
-  export type KpiAssignmentCountAggregateInputType = {
-    kpiAssignmentId?: true
+  export type KpiDisaggregationMinAggregateInputType = {
+    kpiDisaggregationId?: true
     kpiId?: true
-    projectId?: true
-    assignedToId?: true
-    assignedAt?: true
+    type?: true
+    category?: true
+    target?: true
+    baseline?: true
+  }
+
+  export type KpiDisaggregationMaxAggregateInputType = {
+    kpiDisaggregationId?: true
+    kpiId?: true
+    type?: true
+    category?: true
+    target?: true
+    baseline?: true
+  }
+
+  export type KpiDisaggregationCountAggregateInputType = {
+    kpiDisaggregationId?: true
+    kpiId?: true
+    type?: true
+    category?: true
+    target?: true
+    baseline?: true
     _all?: true
   }
 
-  export type KpiAssignmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which KpiAssignment to aggregate.
+     * Filter which KpiDisaggregation to aggregate.
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KpiAssignments to fetch.
+     * Determine the order of KpiDisaggregations to fetch.
      */
-    orderBy?: KpiAssignmentOrderByWithRelationInput | KpiAssignmentOrderByWithRelationInput[]
+    orderBy?: KpiDisaggregationOrderByWithRelationInput | KpiDisaggregationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: KpiAssignmentWhereUniqueInput
+    cursor?: KpiDisaggregationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KpiAssignments from the position of the cursor.
+     * Take `±n` KpiDisaggregations from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KpiAssignments.
+     * Skip the first `n` KpiDisaggregations.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned KpiAssignments
+     * Count returned KpiDisaggregations
     **/
-    _count?: true | KpiAssignmentCountAggregateInputType
+    _count?: true | KpiDisaggregationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: KpiDisaggregationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: KpiDisaggregationSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: KpiAssignmentMinAggregateInputType
+    _min?: KpiDisaggregationMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: KpiAssignmentMaxAggregateInputType
+    _max?: KpiDisaggregationMaxAggregateInputType
   }
 
-  export type GetKpiAssignmentAggregateType<T extends KpiAssignmentAggregateArgs> = {
-        [P in keyof T & keyof AggregateKpiAssignment]: P extends '_count' | 'count'
+  export type GetKpiDisaggregationAggregateType<T extends KpiDisaggregationAggregateArgs> = {
+        [P in keyof T & keyof AggregateKpiDisaggregation]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateKpiAssignment[P]>
-      : GetScalarType<T[P], AggregateKpiAssignment[P]>
+        : GetScalarType<T[P], AggregateKpiDisaggregation[P]>
+      : GetScalarType<T[P], AggregateKpiDisaggregation[P]>
   }
 
 
 
 
-  export type KpiAssignmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiAssignmentWhereInput
-    orderBy?: KpiAssignmentOrderByWithAggregationInput | KpiAssignmentOrderByWithAggregationInput[]
-    by: KpiAssignmentScalarFieldEnum[] | KpiAssignmentScalarFieldEnum
-    having?: KpiAssignmentScalarWhereWithAggregatesInput
+  export type KpiDisaggregationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KpiDisaggregationWhereInput
+    orderBy?: KpiDisaggregationOrderByWithAggregationInput | KpiDisaggregationOrderByWithAggregationInput[]
+    by: KpiDisaggregationScalarFieldEnum[] | KpiDisaggregationScalarFieldEnum
+    having?: KpiDisaggregationScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: KpiAssignmentCountAggregateInputType | true
-    _min?: KpiAssignmentMinAggregateInputType
-    _max?: KpiAssignmentMaxAggregateInputType
+    _count?: KpiDisaggregationCountAggregateInputType | true
+    _avg?: KpiDisaggregationAvgAggregateInputType
+    _sum?: KpiDisaggregationSumAggregateInputType
+    _min?: KpiDisaggregationMinAggregateInputType
+    _max?: KpiDisaggregationMaxAggregateInputType
   }
 
-  export type KpiAssignmentGroupByOutputType = {
-    kpiAssignmentId: string
+  export type KpiDisaggregationGroupByOutputType = {
+    kpiDisaggregationId: string
     kpiId: string
-    projectId: string | null
-    assignedToId: string | null
-    assignedAt: Date
-    _count: KpiAssignmentCountAggregateOutputType | null
-    _min: KpiAssignmentMinAggregateOutputType | null
-    _max: KpiAssignmentMaxAggregateOutputType | null
+    type: string
+    category: string
+    target: number | null
+    baseline: number | null
+    _count: KpiDisaggregationCountAggregateOutputType | null
+    _avg: KpiDisaggregationAvgAggregateOutputType | null
+    _sum: KpiDisaggregationSumAggregateOutputType | null
+    _min: KpiDisaggregationMinAggregateOutputType | null
+    _max: KpiDisaggregationMaxAggregateOutputType | null
   }
 
-  type GetKpiAssignmentGroupByPayload<T extends KpiAssignmentGroupByArgs> = Prisma.PrismaPromise<
+  type GetKpiDisaggregationGroupByPayload<T extends KpiDisaggregationGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<KpiAssignmentGroupByOutputType, T['by']> &
+      PickEnumerable<KpiDisaggregationGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof KpiAssignmentGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof KpiDisaggregationGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], KpiAssignmentGroupByOutputType[P]>
-            : GetScalarType<T[P], KpiAssignmentGroupByOutputType[P]>
+              : GetScalarType<T[P], KpiDisaggregationGroupByOutputType[P]>
+            : GetScalarType<T[P], KpiDisaggregationGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type KpiAssignmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    kpiAssignmentId?: boolean
+  export type KpiDisaggregationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    kpiDisaggregationId?: boolean
     kpiId?: boolean
-    projectId?: boolean
-    assignedToId?: boolean
-    assignedAt?: boolean
+    type?: boolean
+    category?: boolean
+    target?: boolean
+    baseline?: boolean
     kpi?: boolean | KpiDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["kpiAssignment"]>
+  }, ExtArgs["result"]["kpiDisaggregation"]>
 
 
 
-  export type KpiAssignmentSelectScalar = {
-    kpiAssignmentId?: boolean
+  export type KpiDisaggregationSelectScalar = {
+    kpiDisaggregationId?: boolean
     kpiId?: boolean
-    projectId?: boolean
-    assignedToId?: boolean
-    assignedAt?: boolean
+    type?: boolean
+    category?: boolean
+    target?: boolean
+    baseline?: boolean
   }
 
-  export type KpiAssignmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiAssignmentId" | "kpiId" | "projectId" | "assignedToId" | "assignedAt", ExtArgs["result"]["kpiAssignment"]>
-  export type KpiAssignmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiDisaggregationId" | "kpiId" | "type" | "category" | "target" | "baseline", ExtArgs["result"]["kpiDisaggregation"]>
+  export type KpiDisaggregationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpi?: boolean | KpiDefaultArgs<ExtArgs>
   }
 
-  export type $KpiAssignmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "KpiAssignment"
+  export type $KpiDisaggregationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "KpiDisaggregation"
     objects: {
       kpi: Prisma.$KpiPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      kpiAssignmentId: string
+      kpiDisaggregationId: string
       kpiId: string
-      projectId: string | null
-      assignedToId: string | null
-      assignedAt: Date
-    }, ExtArgs["result"]["kpiAssignment"]>
+      type: string
+      category: string
+      target: number | null
+      baseline: number | null
+    }, ExtArgs["result"]["kpiDisaggregation"]>
     composites: {}
   }
 
-  type KpiAssignmentGetPayload<S extends boolean | null | undefined | KpiAssignmentDefaultArgs> = $Result.GetResult<Prisma.$KpiAssignmentPayload, S>
+  type KpiDisaggregationGetPayload<S extends boolean | null | undefined | KpiDisaggregationDefaultArgs> = $Result.GetResult<Prisma.$KpiDisaggregationPayload, S>
 
-  type KpiAssignmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<KpiAssignmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: KpiAssignmentCountAggregateInputType | true
+  type KpiDisaggregationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KpiDisaggregationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KpiDisaggregationCountAggregateInputType | true
     }
 
-  export interface KpiAssignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KpiAssignment'], meta: { name: 'KpiAssignment' } }
+  export interface KpiDisaggregationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KpiDisaggregation'], meta: { name: 'KpiDisaggregation' } }
     /**
-     * Find zero or one KpiAssignment that matches the filter.
-     * @param {KpiAssignmentFindUniqueArgs} args - Arguments to find a KpiAssignment
+     * Find zero or one KpiDisaggregation that matches the filter.
+     * @param {KpiDisaggregationFindUniqueArgs} args - Arguments to find a KpiDisaggregation
      * @example
-     * // Get one KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.findUnique({
+     * // Get one KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends KpiAssignmentFindUniqueArgs>(args: SelectSubset<T, KpiAssignmentFindUniqueArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends KpiDisaggregationFindUniqueArgs>(args: SelectSubset<T, KpiDisaggregationFindUniqueArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one KpiAssignment that matches the filter or throw an error with `error.code='P2025'`
+     * Find one KpiDisaggregation that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {KpiAssignmentFindUniqueOrThrowArgs} args - Arguments to find a KpiAssignment
+     * @param {KpiDisaggregationFindUniqueOrThrowArgs} args - Arguments to find a KpiDisaggregation
      * @example
-     * // Get one KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.findUniqueOrThrow({
+     * // Get one KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends KpiAssignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, KpiAssignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends KpiDisaggregationFindUniqueOrThrowArgs>(args: SelectSubset<T, KpiDisaggregationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first KpiAssignment that matches the filter.
+     * Find the first KpiDisaggregation that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentFindFirstArgs} args - Arguments to find a KpiAssignment
+     * @param {KpiDisaggregationFindFirstArgs} args - Arguments to find a KpiDisaggregation
      * @example
-     * // Get one KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.findFirst({
+     * // Get one KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends KpiAssignmentFindFirstArgs>(args?: SelectSubset<T, KpiAssignmentFindFirstArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends KpiDisaggregationFindFirstArgs>(args?: SelectSubset<T, KpiDisaggregationFindFirstArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first KpiAssignment that matches the filter or
+     * Find the first KpiDisaggregation that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentFindFirstOrThrowArgs} args - Arguments to find a KpiAssignment
+     * @param {KpiDisaggregationFindFirstOrThrowArgs} args - Arguments to find a KpiDisaggregation
      * @example
-     * // Get one KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.findFirstOrThrow({
+     * // Get one KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends KpiAssignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, KpiAssignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends KpiDisaggregationFindFirstOrThrowArgs>(args?: SelectSubset<T, KpiDisaggregationFindFirstOrThrowArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more KpiAssignments that matches the filter.
+     * Find zero or more KpiDisaggregations that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {KpiDisaggregationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all KpiAssignments
-     * const kpiAssignments = await prisma.kpiAssignment.findMany()
+     * // Get all KpiDisaggregations
+     * const kpiDisaggregations = await prisma.kpiDisaggregation.findMany()
      * 
-     * // Get first 10 KpiAssignments
-     * const kpiAssignments = await prisma.kpiAssignment.findMany({ take: 10 })
+     * // Get first 10 KpiDisaggregations
+     * const kpiDisaggregations = await prisma.kpiDisaggregation.findMany({ take: 10 })
      * 
-     * // Only select the `kpiAssignmentId`
-     * const kpiAssignmentWithKpiAssignmentIdOnly = await prisma.kpiAssignment.findMany({ select: { kpiAssignmentId: true } })
+     * // Only select the `kpiDisaggregationId`
+     * const kpiDisaggregationWithKpiDisaggregationIdOnly = await prisma.kpiDisaggregation.findMany({ select: { kpiDisaggregationId: true } })
      * 
      */
-    findMany<T extends KpiAssignmentFindManyArgs>(args?: SelectSubset<T, KpiAssignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends KpiDisaggregationFindManyArgs>(args?: SelectSubset<T, KpiDisaggregationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a KpiAssignment.
-     * @param {KpiAssignmentCreateArgs} args - Arguments to create a KpiAssignment.
+     * Create a KpiDisaggregation.
+     * @param {KpiDisaggregationCreateArgs} args - Arguments to create a KpiDisaggregation.
      * @example
-     * // Create one KpiAssignment
-     * const KpiAssignment = await prisma.kpiAssignment.create({
+     * // Create one KpiDisaggregation
+     * const KpiDisaggregation = await prisma.kpiDisaggregation.create({
      *   data: {
-     *     // ... data to create a KpiAssignment
+     *     // ... data to create a KpiDisaggregation
      *   }
      * })
      * 
      */
-    create<T extends KpiAssignmentCreateArgs>(args: SelectSubset<T, KpiAssignmentCreateArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends KpiDisaggregationCreateArgs>(args: SelectSubset<T, KpiDisaggregationCreateArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many KpiAssignments.
-     * @param {KpiAssignmentCreateManyArgs} args - Arguments to create many KpiAssignments.
+     * Create many KpiDisaggregations.
+     * @param {KpiDisaggregationCreateManyArgs} args - Arguments to create many KpiDisaggregations.
      * @example
-     * // Create many KpiAssignments
-     * const kpiAssignment = await prisma.kpiAssignment.createMany({
+     * // Create many KpiDisaggregations
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends KpiAssignmentCreateManyArgs>(args?: SelectSubset<T, KpiAssignmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends KpiDisaggregationCreateManyArgs>(args?: SelectSubset<T, KpiDisaggregationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a KpiAssignment.
-     * @param {KpiAssignmentDeleteArgs} args - Arguments to delete one KpiAssignment.
+     * Delete a KpiDisaggregation.
+     * @param {KpiDisaggregationDeleteArgs} args - Arguments to delete one KpiDisaggregation.
      * @example
-     * // Delete one KpiAssignment
-     * const KpiAssignment = await prisma.kpiAssignment.delete({
+     * // Delete one KpiDisaggregation
+     * const KpiDisaggregation = await prisma.kpiDisaggregation.delete({
      *   where: {
-     *     // ... filter to delete one KpiAssignment
+     *     // ... filter to delete one KpiDisaggregation
      *   }
      * })
      * 
      */
-    delete<T extends KpiAssignmentDeleteArgs>(args: SelectSubset<T, KpiAssignmentDeleteArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends KpiDisaggregationDeleteArgs>(args: SelectSubset<T, KpiDisaggregationDeleteArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one KpiAssignment.
-     * @param {KpiAssignmentUpdateArgs} args - Arguments to update one KpiAssignment.
+     * Update one KpiDisaggregation.
+     * @param {KpiDisaggregationUpdateArgs} args - Arguments to update one KpiDisaggregation.
      * @example
-     * // Update one KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.update({
+     * // Update one KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -9477,30 +9421,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends KpiAssignmentUpdateArgs>(args: SelectSubset<T, KpiAssignmentUpdateArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends KpiDisaggregationUpdateArgs>(args: SelectSubset<T, KpiDisaggregationUpdateArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more KpiAssignments.
-     * @param {KpiAssignmentDeleteManyArgs} args - Arguments to filter KpiAssignments to delete.
+     * Delete zero or more KpiDisaggregations.
+     * @param {KpiDisaggregationDeleteManyArgs} args - Arguments to filter KpiDisaggregations to delete.
      * @example
-     * // Delete a few KpiAssignments
-     * const { count } = await prisma.kpiAssignment.deleteMany({
+     * // Delete a few KpiDisaggregations
+     * const { count } = await prisma.kpiDisaggregation.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends KpiAssignmentDeleteManyArgs>(args?: SelectSubset<T, KpiAssignmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends KpiDisaggregationDeleteManyArgs>(args?: SelectSubset<T, KpiDisaggregationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more KpiAssignments.
+     * Update zero or more KpiDisaggregations.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {KpiDisaggregationUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many KpiAssignments
-     * const kpiAssignment = await prisma.kpiAssignment.updateMany({
+     * // Update many KpiDisaggregations
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -9510,56 +9454,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends KpiAssignmentUpdateManyArgs>(args: SelectSubset<T, KpiAssignmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends KpiDisaggregationUpdateManyArgs>(args: SelectSubset<T, KpiDisaggregationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one KpiAssignment.
-     * @param {KpiAssignmentUpsertArgs} args - Arguments to update or create a KpiAssignment.
+     * Create or update one KpiDisaggregation.
+     * @param {KpiDisaggregationUpsertArgs} args - Arguments to update or create a KpiDisaggregation.
      * @example
-     * // Update or create a KpiAssignment
-     * const kpiAssignment = await prisma.kpiAssignment.upsert({
+     * // Update or create a KpiDisaggregation
+     * const kpiDisaggregation = await prisma.kpiDisaggregation.upsert({
      *   create: {
-     *     // ... data to create a KpiAssignment
+     *     // ... data to create a KpiDisaggregation
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the KpiAssignment we want to update
+     *     // ... the filter for the KpiDisaggregation we want to update
      *   }
      * })
      */
-    upsert<T extends KpiAssignmentUpsertArgs>(args: SelectSubset<T, KpiAssignmentUpsertArgs<ExtArgs>>): Prisma__KpiAssignmentClient<$Result.GetResult<Prisma.$KpiAssignmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends KpiDisaggregationUpsertArgs>(args: SelectSubset<T, KpiDisaggregationUpsertArgs<ExtArgs>>): Prisma__KpiDisaggregationClient<$Result.GetResult<Prisma.$KpiDisaggregationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of KpiAssignments.
+     * Count the number of KpiDisaggregations.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentCountArgs} args - Arguments to filter KpiAssignments to count.
+     * @param {KpiDisaggregationCountArgs} args - Arguments to filter KpiDisaggregations to count.
      * @example
-     * // Count the number of KpiAssignments
-     * const count = await prisma.kpiAssignment.count({
+     * // Count the number of KpiDisaggregations
+     * const count = await prisma.kpiDisaggregation.count({
      *   where: {
-     *     // ... the filter for the KpiAssignments we want to count
+     *     // ... the filter for the KpiDisaggregations we want to count
      *   }
      * })
     **/
-    count<T extends KpiAssignmentCountArgs>(
-      args?: Subset<T, KpiAssignmentCountArgs>,
+    count<T extends KpiDisaggregationCountArgs>(
+      args?: Subset<T, KpiDisaggregationCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], KpiAssignmentCountAggregateOutputType>
+          : GetScalarType<T['select'], KpiDisaggregationCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a KpiAssignment.
+     * Allows you to perform aggregations operations on a KpiDisaggregation.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {KpiDisaggregationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -9579,13 +9523,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends KpiAssignmentAggregateArgs>(args: Subset<T, KpiAssignmentAggregateArgs>): Prisma.PrismaPromise<GetKpiAssignmentAggregateType<T>>
+    aggregate<T extends KpiDisaggregationAggregateArgs>(args: Subset<T, KpiDisaggregationAggregateArgs>): Prisma.PrismaPromise<GetKpiDisaggregationAggregateType<T>>
 
     /**
-     * Group by KpiAssignment.
+     * Group by KpiDisaggregation.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiAssignmentGroupByArgs} args - Group by arguments.
+     * @param {KpiDisaggregationGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -9600,14 +9544,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends KpiAssignmentGroupByArgs,
+      T extends KpiDisaggregationGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: KpiAssignmentGroupByArgs['orderBy'] }
-        : { orderBy?: KpiAssignmentGroupByArgs['orderBy'] },
+        ? { orderBy: KpiDisaggregationGroupByArgs['orderBy'] }
+        : { orderBy?: KpiDisaggregationGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -9656,20 +9600,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, KpiAssignmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKpiAssignmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, KpiDisaggregationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKpiDisaggregationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the KpiAssignment model
+   * Fields of the KpiDisaggregation model
    */
-  readonly fields: KpiAssignmentFieldRefs;
+  readonly fields: KpiDisaggregationFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for KpiAssignment.
+   * The delegate class that acts as a "Promise-like" for KpiDisaggregation.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__KpiAssignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__KpiDisaggregationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     kpi<T extends KpiDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KpiDefaultArgs<ExtArgs>>): Prisma__KpiClient<$Result.GetResult<Prisma.$KpiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -9698,2481 +9642,378 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the KpiAssignment model
+   * Fields of the KpiDisaggregation model
    */
-  interface KpiAssignmentFieldRefs {
-    readonly kpiAssignmentId: FieldRef<"KpiAssignment", 'String'>
-    readonly kpiId: FieldRef<"KpiAssignment", 'String'>
-    readonly projectId: FieldRef<"KpiAssignment", 'String'>
-    readonly assignedToId: FieldRef<"KpiAssignment", 'String'>
-    readonly assignedAt: FieldRef<"KpiAssignment", 'DateTime'>
+  interface KpiDisaggregationFieldRefs {
+    readonly kpiDisaggregationId: FieldRef<"KpiDisaggregation", 'String'>
+    readonly kpiId: FieldRef<"KpiDisaggregation", 'String'>
+    readonly type: FieldRef<"KpiDisaggregation", 'String'>
+    readonly category: FieldRef<"KpiDisaggregation", 'String'>
+    readonly target: FieldRef<"KpiDisaggregation", 'Int'>
+    readonly baseline: FieldRef<"KpiDisaggregation", 'Int'>
   }
     
 
   // Custom InputTypes
   /**
-   * KpiAssignment findUnique
+   * KpiDisaggregation findUnique
    */
-  export type KpiAssignmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter, which KpiAssignment to fetch.
+     * Filter, which KpiDisaggregation to fetch.
      */
-    where: KpiAssignmentWhereUniqueInput
+    where: KpiDisaggregationWhereUniqueInput
   }
 
   /**
-   * KpiAssignment findUniqueOrThrow
+   * KpiDisaggregation findUniqueOrThrow
    */
-  export type KpiAssignmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter, which KpiAssignment to fetch.
+     * Filter, which KpiDisaggregation to fetch.
      */
-    where: KpiAssignmentWhereUniqueInput
+    where: KpiDisaggregationWhereUniqueInput
   }
 
   /**
-   * KpiAssignment findFirst
+   * KpiDisaggregation findFirst
    */
-  export type KpiAssignmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter, which KpiAssignment to fetch.
+     * Filter, which KpiDisaggregation to fetch.
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KpiAssignments to fetch.
+     * Determine the order of KpiDisaggregations to fetch.
      */
-    orderBy?: KpiAssignmentOrderByWithRelationInput | KpiAssignmentOrderByWithRelationInput[]
+    orderBy?: KpiDisaggregationOrderByWithRelationInput | KpiDisaggregationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for KpiAssignments.
+     * Sets the position for searching for KpiDisaggregations.
      */
-    cursor?: KpiAssignmentWhereUniqueInput
+    cursor?: KpiDisaggregationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KpiAssignments from the position of the cursor.
+     * Take `±n` KpiDisaggregations from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KpiAssignments.
+     * Skip the first `n` KpiDisaggregations.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of KpiAssignments.
+     * Filter by unique combinations of KpiDisaggregations.
      */
-    distinct?: KpiAssignmentScalarFieldEnum | KpiAssignmentScalarFieldEnum[]
+    distinct?: KpiDisaggregationScalarFieldEnum | KpiDisaggregationScalarFieldEnum[]
   }
 
   /**
-   * KpiAssignment findFirstOrThrow
+   * KpiDisaggregation findFirstOrThrow
    */
-  export type KpiAssignmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter, which KpiAssignment to fetch.
+     * Filter, which KpiDisaggregation to fetch.
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KpiAssignments to fetch.
+     * Determine the order of KpiDisaggregations to fetch.
      */
-    orderBy?: KpiAssignmentOrderByWithRelationInput | KpiAssignmentOrderByWithRelationInput[]
+    orderBy?: KpiDisaggregationOrderByWithRelationInput | KpiDisaggregationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for KpiAssignments.
+     * Sets the position for searching for KpiDisaggregations.
      */
-    cursor?: KpiAssignmentWhereUniqueInput
+    cursor?: KpiDisaggregationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KpiAssignments from the position of the cursor.
+     * Take `±n` KpiDisaggregations from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KpiAssignments.
+     * Skip the first `n` KpiDisaggregations.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of KpiAssignments.
+     * Filter by unique combinations of KpiDisaggregations.
      */
-    distinct?: KpiAssignmentScalarFieldEnum | KpiAssignmentScalarFieldEnum[]
+    distinct?: KpiDisaggregationScalarFieldEnum | KpiDisaggregationScalarFieldEnum[]
   }
 
   /**
-   * KpiAssignment findMany
+   * KpiDisaggregation findMany
    */
-  export type KpiAssignmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter, which KpiAssignments to fetch.
+     * Filter, which KpiDisaggregations to fetch.
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of KpiAssignments to fetch.
+     * Determine the order of KpiDisaggregations to fetch.
      */
-    orderBy?: KpiAssignmentOrderByWithRelationInput | KpiAssignmentOrderByWithRelationInput[]
+    orderBy?: KpiDisaggregationOrderByWithRelationInput | KpiDisaggregationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing KpiAssignments.
+     * Sets the position for listing KpiDisaggregations.
      */
-    cursor?: KpiAssignmentWhereUniqueInput
+    cursor?: KpiDisaggregationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` KpiAssignments from the position of the cursor.
+     * Take `±n` KpiDisaggregations from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` KpiAssignments.
+     * Skip the first `n` KpiDisaggregations.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of KpiAssignments.
+     * Filter by unique combinations of KpiDisaggregations.
      */
-    distinct?: KpiAssignmentScalarFieldEnum | KpiAssignmentScalarFieldEnum[]
+    distinct?: KpiDisaggregationScalarFieldEnum | KpiDisaggregationScalarFieldEnum[]
   }
 
   /**
-   * KpiAssignment create
+   * KpiDisaggregation create
    */
-  export type KpiAssignmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * The data needed to create a KpiAssignment.
+     * The data needed to create a KpiDisaggregation.
      */
-    data: XOR<KpiAssignmentCreateInput, KpiAssignmentUncheckedCreateInput>
+    data: XOR<KpiDisaggregationCreateInput, KpiDisaggregationUncheckedCreateInput>
   }
 
   /**
-   * KpiAssignment createMany
+   * KpiDisaggregation createMany
    */
-  export type KpiAssignmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many KpiAssignments.
+     * The data used to create many KpiDisaggregations.
      */
-    data: KpiAssignmentCreateManyInput | KpiAssignmentCreateManyInput[]
+    data: KpiDisaggregationCreateManyInput | KpiDisaggregationCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * KpiAssignment update
+   * KpiDisaggregation update
    */
-  export type KpiAssignmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * The data needed to update a KpiAssignment.
+     * The data needed to update a KpiDisaggregation.
      */
-    data: XOR<KpiAssignmentUpdateInput, KpiAssignmentUncheckedUpdateInput>
+    data: XOR<KpiDisaggregationUpdateInput, KpiDisaggregationUncheckedUpdateInput>
     /**
-     * Choose, which KpiAssignment to update.
+     * Choose, which KpiDisaggregation to update.
      */
-    where: KpiAssignmentWhereUniqueInput
+    where: KpiDisaggregationWhereUniqueInput
   }
 
   /**
-   * KpiAssignment updateMany
+   * KpiDisaggregation updateMany
    */
-  export type KpiAssignmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update KpiAssignments.
+     * The data used to update KpiDisaggregations.
      */
-    data: XOR<KpiAssignmentUpdateManyMutationInput, KpiAssignmentUncheckedUpdateManyInput>
+    data: XOR<KpiDisaggregationUpdateManyMutationInput, KpiDisaggregationUncheckedUpdateManyInput>
     /**
-     * Filter which KpiAssignments to update
+     * Filter which KpiDisaggregations to update
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
-     * Limit how many KpiAssignments to update.
+     * Limit how many KpiDisaggregations to update.
      */
     limit?: number
   }
 
   /**
-   * KpiAssignment upsert
+   * KpiDisaggregation upsert
    */
-  export type KpiAssignmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * The filter to search for the KpiAssignment to update in case it exists.
+     * The filter to search for the KpiDisaggregation to update in case it exists.
      */
-    where: KpiAssignmentWhereUniqueInput
+    where: KpiDisaggregationWhereUniqueInput
     /**
-     * In case the KpiAssignment found by the `where` argument doesn't exist, create a new KpiAssignment with this data.
+     * In case the KpiDisaggregation found by the `where` argument doesn't exist, create a new KpiDisaggregation with this data.
      */
-    create: XOR<KpiAssignmentCreateInput, KpiAssignmentUncheckedCreateInput>
+    create: XOR<KpiDisaggregationCreateInput, KpiDisaggregationUncheckedCreateInput>
     /**
-     * In case the KpiAssignment was found with the provided `where` argument, update it with this data.
+     * In case the KpiDisaggregation was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<KpiAssignmentUpdateInput, KpiAssignmentUncheckedUpdateInput>
+    update: XOR<KpiDisaggregationUpdateInput, KpiDisaggregationUncheckedUpdateInput>
   }
 
   /**
-   * KpiAssignment delete
+   * KpiDisaggregation delete
    */
-  export type KpiAssignmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
     /**
-     * Filter which KpiAssignment to delete.
+     * Filter which KpiDisaggregation to delete.
      */
-    where: KpiAssignmentWhereUniqueInput
+    where: KpiDisaggregationWhereUniqueInput
   }
 
   /**
-   * KpiAssignment deleteMany
+   * KpiDisaggregation deleteMany
    */
-  export type KpiAssignmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which KpiAssignments to delete
+     * Filter which KpiDisaggregations to delete
      */
-    where?: KpiAssignmentWhereInput
+    where?: KpiDisaggregationWhereInput
     /**
-     * Limit how many KpiAssignments to delete.
+     * Limit how many KpiDisaggregations to delete.
      */
     limit?: number
   }
 
   /**
-   * KpiAssignment without action
+   * KpiDisaggregation without action
    */
-  export type KpiAssignmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KpiDisaggregationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the KpiAssignment
+     * Select specific fields to fetch from the KpiDisaggregation
      */
-    select?: KpiAssignmentSelect<ExtArgs> | null
+    select?: KpiDisaggregationSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the KpiAssignment
+     * Omit specific fields from the KpiDisaggregation
      */
-    omit?: KpiAssignmentOmit<ExtArgs> | null
+    omit?: KpiDisaggregationOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: KpiAssignmentInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model KpiReport
-   */
-
-  export type AggregateKpiReport = {
-    _count: KpiReportCountAggregateOutputType | null
-    _avg: KpiReportAvgAggregateOutputType | null
-    _sum: KpiReportSumAggregateOutputType | null
-    _min: KpiReportMinAggregateOutputType | null
-    _max: KpiReportMaxAggregateOutputType | null
-  }
-
-  export type KpiReportAvgAggregateOutputType = {
-    baseline: number | null
-    target: number | null
-    actualValue: number | null
-  }
-
-  export type KpiReportSumAggregateOutputType = {
-    baseline: number | null
-    target: number | null
-    actualValue: number | null
-  }
-
-  export type KpiReportMinAggregateOutputType = {
-    kpiReportId: string | null
-    projectId: string | null
-    userId: string | null
-    strategicObjectiveId: string | null
-    kpiName: string | null
-    kpiType: string | null
-    baseline: number | null
-    target: number | null
-    actualValue: number | null
-    status: string | null
-    observation: string | null
-    evidence: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type KpiReportMaxAggregateOutputType = {
-    kpiReportId: string | null
-    projectId: string | null
-    userId: string | null
-    strategicObjectiveId: string | null
-    kpiName: string | null
-    kpiType: string | null
-    baseline: number | null
-    target: number | null
-    actualValue: number | null
-    status: string | null
-    observation: string | null
-    evidence: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type KpiReportCountAggregateOutputType = {
-    kpiReportId: number
-    projectId: number
-    userId: number
-    strategicObjectiveId: number
-    kpiName: number
-    kpiType: number
-    baseline: number
-    target: number
-    actualValue: number
-    status: number
-    observation: number
-    evidence: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type KpiReportAvgAggregateInputType = {
-    baseline?: true
-    target?: true
-    actualValue?: true
-  }
-
-  export type KpiReportSumAggregateInputType = {
-    baseline?: true
-    target?: true
-    actualValue?: true
-  }
-
-  export type KpiReportMinAggregateInputType = {
-    kpiReportId?: true
-    projectId?: true
-    userId?: true
-    strategicObjectiveId?: true
-    kpiName?: true
-    kpiType?: true
-    baseline?: true
-    target?: true
-    actualValue?: true
-    status?: true
-    observation?: true
-    evidence?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type KpiReportMaxAggregateInputType = {
-    kpiReportId?: true
-    projectId?: true
-    userId?: true
-    strategicObjectiveId?: true
-    kpiName?: true
-    kpiType?: true
-    baseline?: true
-    target?: true
-    actualValue?: true
-    status?: true
-    observation?: true
-    evidence?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type KpiReportCountAggregateInputType = {
-    kpiReportId?: true
-    projectId?: true
-    userId?: true
-    strategicObjectiveId?: true
-    kpiName?: true
-    kpiType?: true
-    baseline?: true
-    target?: true
-    actualValue?: true
-    status?: true
-    observation?: true
-    evidence?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type KpiReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which KpiReport to aggregate.
-     */
-    where?: KpiReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReports to fetch.
-     */
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: KpiReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned KpiReports
-    **/
-    _count?: true | KpiReportCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: KpiReportAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: KpiReportSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: KpiReportMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: KpiReportMaxAggregateInputType
-  }
-
-  export type GetKpiReportAggregateType<T extends KpiReportAggregateArgs> = {
-        [P in keyof T & keyof AggregateKpiReport]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateKpiReport[P]>
-      : GetScalarType<T[P], AggregateKpiReport[P]>
-  }
-
-
-
-
-  export type KpiReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReportWhereInput
-    orderBy?: KpiReportOrderByWithAggregationInput | KpiReportOrderByWithAggregationInput[]
-    by: KpiReportScalarFieldEnum[] | KpiReportScalarFieldEnum
-    having?: KpiReportScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: KpiReportCountAggregateInputType | true
-    _avg?: KpiReportAvgAggregateInputType
-    _sum?: KpiReportSumAggregateInputType
-    _min?: KpiReportMinAggregateInputType
-    _max?: KpiReportMaxAggregateInputType
-  }
-
-  export type KpiReportGroupByOutputType = {
-    kpiReportId: string
-    projectId: string | null
-    userId: string | null
-    strategicObjectiveId: string | null
-    kpiName: string | null
-    kpiType: string | null
-    baseline: number | null
-    target: number | null
-    actualValue: number | null
-    status: string | null
-    observation: string | null
-    evidence: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: KpiReportCountAggregateOutputType | null
-    _avg: KpiReportAvgAggregateOutputType | null
-    _sum: KpiReportSumAggregateOutputType | null
-    _min: KpiReportMinAggregateOutputType | null
-    _max: KpiReportMaxAggregateOutputType | null
-  }
-
-  type GetKpiReportGroupByPayload<T extends KpiReportGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<KpiReportGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof KpiReportGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], KpiReportGroupByOutputType[P]>
-            : GetScalarType<T[P], KpiReportGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type KpiReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    kpiReportId?: boolean
-    projectId?: boolean
-    userId?: boolean
-    strategicObjectiveId?: boolean
-    kpiName?: boolean
-    kpiType?: boolean
-    baseline?: boolean
-    target?: boolean
-    actualValue?: boolean
-    status?: boolean
-    observation?: boolean
-    evidence?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    project?: boolean | KpiReport$projectArgs<ExtArgs>
-    user?: boolean | KpiReport$userArgs<ExtArgs>
-    strategicObjective?: boolean | KpiReport$strategicObjectiveArgs<ExtArgs>
-    kpiReview?: boolean | KpiReport$kpiReviewArgs<ExtArgs>
-    _count?: boolean | KpiReportCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["kpiReport"]>
-
-
-
-  export type KpiReportSelectScalar = {
-    kpiReportId?: boolean
-    projectId?: boolean
-    userId?: boolean
-    strategicObjectiveId?: boolean
-    kpiName?: boolean
-    kpiType?: boolean
-    baseline?: boolean
-    target?: boolean
-    actualValue?: boolean
-    status?: boolean
-    observation?: boolean
-    evidence?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type KpiReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiReportId" | "projectId" | "userId" | "strategicObjectiveId" | "kpiName" | "kpiType" | "baseline" | "target" | "actualValue" | "status" | "observation" | "evidence" | "createdAt" | "updatedAt", ExtArgs["result"]["kpiReport"]>
-  export type KpiReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    project?: boolean | KpiReport$projectArgs<ExtArgs>
-    user?: boolean | KpiReport$userArgs<ExtArgs>
-    strategicObjective?: boolean | KpiReport$strategicObjectiveArgs<ExtArgs>
-    kpiReview?: boolean | KpiReport$kpiReviewArgs<ExtArgs>
-    _count?: boolean | KpiReportCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $KpiReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "KpiReport"
-    objects: {
-      project: Prisma.$ProjectPayload<ExtArgs> | null
-      user: Prisma.$UserPayload<ExtArgs> | null
-      strategicObjective: Prisma.$StrategicObjectivePayload<ExtArgs> | null
-      kpiReview: Prisma.$KpiReviewPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      kpiReportId: string
-      projectId: string | null
-      userId: string | null
-      strategicObjectiveId: string | null
-      kpiName: string | null
-      kpiType: string | null
-      baseline: number | null
-      target: number | null
-      actualValue: number | null
-      status: string | null
-      observation: string | null
-      evidence: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["kpiReport"]>
-    composites: {}
-  }
-
-  type KpiReportGetPayload<S extends boolean | null | undefined | KpiReportDefaultArgs> = $Result.GetResult<Prisma.$KpiReportPayload, S>
-
-  type KpiReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<KpiReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: KpiReportCountAggregateInputType | true
-    }
-
-  export interface KpiReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KpiReport'], meta: { name: 'KpiReport' } }
-    /**
-     * Find zero or one KpiReport that matches the filter.
-     * @param {KpiReportFindUniqueArgs} args - Arguments to find a KpiReport
-     * @example
-     * // Get one KpiReport
-     * const kpiReport = await prisma.kpiReport.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends KpiReportFindUniqueArgs>(args: SelectSubset<T, KpiReportFindUniqueArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one KpiReport that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {KpiReportFindUniqueOrThrowArgs} args - Arguments to find a KpiReport
-     * @example
-     * // Get one KpiReport
-     * const kpiReport = await prisma.kpiReport.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends KpiReportFindUniqueOrThrowArgs>(args: SelectSubset<T, KpiReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first KpiReport that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportFindFirstArgs} args - Arguments to find a KpiReport
-     * @example
-     * // Get one KpiReport
-     * const kpiReport = await prisma.kpiReport.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends KpiReportFindFirstArgs>(args?: SelectSubset<T, KpiReportFindFirstArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first KpiReport that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportFindFirstOrThrowArgs} args - Arguments to find a KpiReport
-     * @example
-     * // Get one KpiReport
-     * const kpiReport = await prisma.kpiReport.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends KpiReportFindFirstOrThrowArgs>(args?: SelectSubset<T, KpiReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more KpiReports that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all KpiReports
-     * const kpiReports = await prisma.kpiReport.findMany()
-     * 
-     * // Get first 10 KpiReports
-     * const kpiReports = await prisma.kpiReport.findMany({ take: 10 })
-     * 
-     * // Only select the `kpiReportId`
-     * const kpiReportWithKpiReportIdOnly = await prisma.kpiReport.findMany({ select: { kpiReportId: true } })
-     * 
-     */
-    findMany<T extends KpiReportFindManyArgs>(args?: SelectSubset<T, KpiReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a KpiReport.
-     * @param {KpiReportCreateArgs} args - Arguments to create a KpiReport.
-     * @example
-     * // Create one KpiReport
-     * const KpiReport = await prisma.kpiReport.create({
-     *   data: {
-     *     // ... data to create a KpiReport
-     *   }
-     * })
-     * 
-     */
-    create<T extends KpiReportCreateArgs>(args: SelectSubset<T, KpiReportCreateArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many KpiReports.
-     * @param {KpiReportCreateManyArgs} args - Arguments to create many KpiReports.
-     * @example
-     * // Create many KpiReports
-     * const kpiReport = await prisma.kpiReport.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends KpiReportCreateManyArgs>(args?: SelectSubset<T, KpiReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a KpiReport.
-     * @param {KpiReportDeleteArgs} args - Arguments to delete one KpiReport.
-     * @example
-     * // Delete one KpiReport
-     * const KpiReport = await prisma.kpiReport.delete({
-     *   where: {
-     *     // ... filter to delete one KpiReport
-     *   }
-     * })
-     * 
-     */
-    delete<T extends KpiReportDeleteArgs>(args: SelectSubset<T, KpiReportDeleteArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one KpiReport.
-     * @param {KpiReportUpdateArgs} args - Arguments to update one KpiReport.
-     * @example
-     * // Update one KpiReport
-     * const kpiReport = await prisma.kpiReport.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends KpiReportUpdateArgs>(args: SelectSubset<T, KpiReportUpdateArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more KpiReports.
-     * @param {KpiReportDeleteManyArgs} args - Arguments to filter KpiReports to delete.
-     * @example
-     * // Delete a few KpiReports
-     * const { count } = await prisma.kpiReport.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends KpiReportDeleteManyArgs>(args?: SelectSubset<T, KpiReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more KpiReports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many KpiReports
-     * const kpiReport = await prisma.kpiReport.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends KpiReportUpdateManyArgs>(args: SelectSubset<T, KpiReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one KpiReport.
-     * @param {KpiReportUpsertArgs} args - Arguments to update or create a KpiReport.
-     * @example
-     * // Update or create a KpiReport
-     * const kpiReport = await prisma.kpiReport.upsert({
-     *   create: {
-     *     // ... data to create a KpiReport
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the KpiReport we want to update
-     *   }
-     * })
-     */
-    upsert<T extends KpiReportUpsertArgs>(args: SelectSubset<T, KpiReportUpsertArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of KpiReports.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportCountArgs} args - Arguments to filter KpiReports to count.
-     * @example
-     * // Count the number of KpiReports
-     * const count = await prisma.kpiReport.count({
-     *   where: {
-     *     // ... the filter for the KpiReports we want to count
-     *   }
-     * })
-    **/
-    count<T extends KpiReportCountArgs>(
-      args?: Subset<T, KpiReportCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], KpiReportCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a KpiReport.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends KpiReportAggregateArgs>(args: Subset<T, KpiReportAggregateArgs>): Prisma.PrismaPromise<GetKpiReportAggregateType<T>>
-
-    /**
-     * Group by KpiReport.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReportGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends KpiReportGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: KpiReportGroupByArgs['orderBy'] }
-        : { orderBy?: KpiReportGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, KpiReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKpiReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the KpiReport model
-   */
-  readonly fields: KpiReportFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for KpiReport.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__KpiReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    project<T extends KpiReport$projectArgs<ExtArgs> = {}>(args?: Subset<T, KpiReport$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    user<T extends KpiReport$userArgs<ExtArgs> = {}>(args?: Subset<T, KpiReport$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    strategicObjective<T extends KpiReport$strategicObjectiveArgs<ExtArgs> = {}>(args?: Subset<T, KpiReport$strategicObjectiveArgs<ExtArgs>>): Prisma__StrategicObjectiveClient<$Result.GetResult<Prisma.$StrategicObjectivePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    kpiReview<T extends KpiReport$kpiReviewArgs<ExtArgs> = {}>(args?: Subset<T, KpiReport$kpiReviewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the KpiReport model
-   */
-  interface KpiReportFieldRefs {
-    readonly kpiReportId: FieldRef<"KpiReport", 'String'>
-    readonly projectId: FieldRef<"KpiReport", 'String'>
-    readonly userId: FieldRef<"KpiReport", 'String'>
-    readonly strategicObjectiveId: FieldRef<"KpiReport", 'String'>
-    readonly kpiName: FieldRef<"KpiReport", 'String'>
-    readonly kpiType: FieldRef<"KpiReport", 'String'>
-    readonly baseline: FieldRef<"KpiReport", 'Int'>
-    readonly target: FieldRef<"KpiReport", 'Int'>
-    readonly actualValue: FieldRef<"KpiReport", 'Int'>
-    readonly status: FieldRef<"KpiReport", 'String'>
-    readonly observation: FieldRef<"KpiReport", 'String'>
-    readonly evidence: FieldRef<"KpiReport", 'String'>
-    readonly createdAt: FieldRef<"KpiReport", 'DateTime'>
-    readonly updatedAt: FieldRef<"KpiReport", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * KpiReport findUnique
-   */
-  export type KpiReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReport to fetch.
-     */
-    where: KpiReportWhereUniqueInput
-  }
-
-  /**
-   * KpiReport findUniqueOrThrow
-   */
-  export type KpiReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReport to fetch.
-     */
-    where: KpiReportWhereUniqueInput
-  }
-
-  /**
-   * KpiReport findFirst
-   */
-  export type KpiReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReport to fetch.
-     */
-    where?: KpiReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReports to fetch.
-     */
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for KpiReports.
-     */
-    cursor?: KpiReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReports.
-     */
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReport findFirstOrThrow
-   */
-  export type KpiReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReport to fetch.
-     */
-    where?: KpiReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReports to fetch.
-     */
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for KpiReports.
-     */
-    cursor?: KpiReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReports.
-     */
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReport findMany
-   */
-  export type KpiReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReports to fetch.
-     */
-    where?: KpiReportWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReports to fetch.
-     */
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing KpiReports.
-     */
-    cursor?: KpiReportWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReports from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReports.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReports.
-     */
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReport create
-   */
-  export type KpiReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * The data needed to create a KpiReport.
-     */
-    data?: XOR<KpiReportCreateInput, KpiReportUncheckedCreateInput>
-  }
-
-  /**
-   * KpiReport createMany
-   */
-  export type KpiReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many KpiReports.
-     */
-    data: KpiReportCreateManyInput | KpiReportCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * KpiReport update
-   */
-  export type KpiReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * The data needed to update a KpiReport.
-     */
-    data: XOR<KpiReportUpdateInput, KpiReportUncheckedUpdateInput>
-    /**
-     * Choose, which KpiReport to update.
-     */
-    where: KpiReportWhereUniqueInput
-  }
-
-  /**
-   * KpiReport updateMany
-   */
-  export type KpiReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update KpiReports.
-     */
-    data: XOR<KpiReportUpdateManyMutationInput, KpiReportUncheckedUpdateManyInput>
-    /**
-     * Filter which KpiReports to update
-     */
-    where?: KpiReportWhereInput
-    /**
-     * Limit how many KpiReports to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * KpiReport upsert
-   */
-  export type KpiReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * The filter to search for the KpiReport to update in case it exists.
-     */
-    where: KpiReportWhereUniqueInput
-    /**
-     * In case the KpiReport found by the `where` argument doesn't exist, create a new KpiReport with this data.
-     */
-    create: XOR<KpiReportCreateInput, KpiReportUncheckedCreateInput>
-    /**
-     * In case the KpiReport was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<KpiReportUpdateInput, KpiReportUncheckedUpdateInput>
-  }
-
-  /**
-   * KpiReport delete
-   */
-  export type KpiReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    /**
-     * Filter which KpiReport to delete.
-     */
-    where: KpiReportWhereUniqueInput
-  }
-
-  /**
-   * KpiReport deleteMany
-   */
-  export type KpiReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which KpiReports to delete
-     */
-    where?: KpiReportWhereInput
-    /**
-     * Limit how many KpiReports to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * KpiReport.project
-   */
-  export type KpiReport$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    where?: ProjectWhereInput
-  }
-
-  /**
-   * KpiReport.user
-   */
-  export type KpiReport$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UserInclude<ExtArgs> | null
-    where?: UserWhereInput
-  }
-
-  /**
-   * KpiReport.strategicObjective
-   */
-  export type KpiReport$strategicObjectiveArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StrategicObjective
-     */
-    select?: StrategicObjectiveSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StrategicObjective
-     */
-    omit?: StrategicObjectiveOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StrategicObjectiveInclude<ExtArgs> | null
-    where?: StrategicObjectiveWhereInput
-  }
-
-  /**
-   * KpiReport.kpiReview
-   */
-  export type KpiReport$kpiReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    where?: KpiReviewWhereInput
-    orderBy?: KpiReviewOrderByWithRelationInput | KpiReviewOrderByWithRelationInput[]
-    cursor?: KpiReviewWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: KpiReviewScalarFieldEnum | KpiReviewScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReport without action
-   */
-  export type KpiReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model KpiReview
-   */
-
-  export type AggregateKpiReview = {
-    _count: KpiReviewCountAggregateOutputType | null
-    _min: KpiReviewMinAggregateOutputType | null
-    _max: KpiReviewMaxAggregateOutputType | null
-  }
-
-  export type KpiReviewMinAggregateOutputType = {
-    kpiReviewId: string | null
-    kpiReportId: string | null
-    comment: string | null
-    reviewedBy: string | null
-    reviewedAt: Date | null
-  }
-
-  export type KpiReviewMaxAggregateOutputType = {
-    kpiReviewId: string | null
-    kpiReportId: string | null
-    comment: string | null
-    reviewedBy: string | null
-    reviewedAt: Date | null
-  }
-
-  export type KpiReviewCountAggregateOutputType = {
-    kpiReviewId: number
-    kpiReportId: number
-    comment: number
-    reviewedBy: number
-    reviewedAt: number
-    _all: number
-  }
-
-
-  export type KpiReviewMinAggregateInputType = {
-    kpiReviewId?: true
-    kpiReportId?: true
-    comment?: true
-    reviewedBy?: true
-    reviewedAt?: true
-  }
-
-  export type KpiReviewMaxAggregateInputType = {
-    kpiReviewId?: true
-    kpiReportId?: true
-    comment?: true
-    reviewedBy?: true
-    reviewedAt?: true
-  }
-
-  export type KpiReviewCountAggregateInputType = {
-    kpiReviewId?: true
-    kpiReportId?: true
-    comment?: true
-    reviewedBy?: true
-    reviewedAt?: true
-    _all?: true
-  }
-
-  export type KpiReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which KpiReview to aggregate.
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReviews to fetch.
-     */
-    orderBy?: KpiReviewOrderByWithRelationInput | KpiReviewOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: KpiReviewWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReviews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReviews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned KpiReviews
-    **/
-    _count?: true | KpiReviewCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: KpiReviewMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: KpiReviewMaxAggregateInputType
-  }
-
-  export type GetKpiReviewAggregateType<T extends KpiReviewAggregateArgs> = {
-        [P in keyof T & keyof AggregateKpiReview]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateKpiReview[P]>
-      : GetScalarType<T[P], AggregateKpiReview[P]>
-  }
-
-
-
-
-  export type KpiReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: KpiReviewWhereInput
-    orderBy?: KpiReviewOrderByWithAggregationInput | KpiReviewOrderByWithAggregationInput[]
-    by: KpiReviewScalarFieldEnum[] | KpiReviewScalarFieldEnum
-    having?: KpiReviewScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: KpiReviewCountAggregateInputType | true
-    _min?: KpiReviewMinAggregateInputType
-    _max?: KpiReviewMaxAggregateInputType
-  }
-
-  export type KpiReviewGroupByOutputType = {
-    kpiReviewId: string
-    kpiReportId: string
-    comment: string | null
-    reviewedBy: string | null
-    reviewedAt: Date
-    _count: KpiReviewCountAggregateOutputType | null
-    _min: KpiReviewMinAggregateOutputType | null
-    _max: KpiReviewMaxAggregateOutputType | null
-  }
-
-  type GetKpiReviewGroupByPayload<T extends KpiReviewGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<KpiReviewGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof KpiReviewGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], KpiReviewGroupByOutputType[P]>
-            : GetScalarType<T[P], KpiReviewGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type KpiReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    kpiReviewId?: boolean
-    kpiReportId?: boolean
-    comment?: boolean
-    reviewedBy?: boolean
-    reviewedAt?: boolean
-    kpiReport?: boolean | KpiReportDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["kpiReview"]>
-
-
-
-  export type KpiReviewSelectScalar = {
-    kpiReviewId?: boolean
-    kpiReportId?: boolean
-    comment?: boolean
-    reviewedBy?: boolean
-    reviewedAt?: boolean
-  }
-
-  export type KpiReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"kpiReviewId" | "kpiReportId" | "comment" | "reviewedBy" | "reviewedAt", ExtArgs["result"]["kpiReview"]>
-  export type KpiReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    kpiReport?: boolean | KpiReportDefaultArgs<ExtArgs>
-  }
-
-  export type $KpiReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "KpiReview"
-    objects: {
-      kpiReport: Prisma.$KpiReportPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      kpiReviewId: string
-      kpiReportId: string
-      comment: string | null
-      reviewedBy: string | null
-      reviewedAt: Date
-    }, ExtArgs["result"]["kpiReview"]>
-    composites: {}
-  }
-
-  type KpiReviewGetPayload<S extends boolean | null | undefined | KpiReviewDefaultArgs> = $Result.GetResult<Prisma.$KpiReviewPayload, S>
-
-  type KpiReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<KpiReviewFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: KpiReviewCountAggregateInputType | true
-    }
-
-  export interface KpiReviewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['KpiReview'], meta: { name: 'KpiReview' } }
-    /**
-     * Find zero or one KpiReview that matches the filter.
-     * @param {KpiReviewFindUniqueArgs} args - Arguments to find a KpiReview
-     * @example
-     * // Get one KpiReview
-     * const kpiReview = await prisma.kpiReview.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends KpiReviewFindUniqueArgs>(args: SelectSubset<T, KpiReviewFindUniqueArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one KpiReview that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {KpiReviewFindUniqueOrThrowArgs} args - Arguments to find a KpiReview
-     * @example
-     * // Get one KpiReview
-     * const kpiReview = await prisma.kpiReview.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends KpiReviewFindUniqueOrThrowArgs>(args: SelectSubset<T, KpiReviewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first KpiReview that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewFindFirstArgs} args - Arguments to find a KpiReview
-     * @example
-     * // Get one KpiReview
-     * const kpiReview = await prisma.kpiReview.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends KpiReviewFindFirstArgs>(args?: SelectSubset<T, KpiReviewFindFirstArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first KpiReview that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewFindFirstOrThrowArgs} args - Arguments to find a KpiReview
-     * @example
-     * // Get one KpiReview
-     * const kpiReview = await prisma.kpiReview.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends KpiReviewFindFirstOrThrowArgs>(args?: SelectSubset<T, KpiReviewFindFirstOrThrowArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more KpiReviews that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all KpiReviews
-     * const kpiReviews = await prisma.kpiReview.findMany()
-     * 
-     * // Get first 10 KpiReviews
-     * const kpiReviews = await prisma.kpiReview.findMany({ take: 10 })
-     * 
-     * // Only select the `kpiReviewId`
-     * const kpiReviewWithKpiReviewIdOnly = await prisma.kpiReview.findMany({ select: { kpiReviewId: true } })
-     * 
-     */
-    findMany<T extends KpiReviewFindManyArgs>(args?: SelectSubset<T, KpiReviewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a KpiReview.
-     * @param {KpiReviewCreateArgs} args - Arguments to create a KpiReview.
-     * @example
-     * // Create one KpiReview
-     * const KpiReview = await prisma.kpiReview.create({
-     *   data: {
-     *     // ... data to create a KpiReview
-     *   }
-     * })
-     * 
-     */
-    create<T extends KpiReviewCreateArgs>(args: SelectSubset<T, KpiReviewCreateArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many KpiReviews.
-     * @param {KpiReviewCreateManyArgs} args - Arguments to create many KpiReviews.
-     * @example
-     * // Create many KpiReviews
-     * const kpiReview = await prisma.kpiReview.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends KpiReviewCreateManyArgs>(args?: SelectSubset<T, KpiReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a KpiReview.
-     * @param {KpiReviewDeleteArgs} args - Arguments to delete one KpiReview.
-     * @example
-     * // Delete one KpiReview
-     * const KpiReview = await prisma.kpiReview.delete({
-     *   where: {
-     *     // ... filter to delete one KpiReview
-     *   }
-     * })
-     * 
-     */
-    delete<T extends KpiReviewDeleteArgs>(args: SelectSubset<T, KpiReviewDeleteArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one KpiReview.
-     * @param {KpiReviewUpdateArgs} args - Arguments to update one KpiReview.
-     * @example
-     * // Update one KpiReview
-     * const kpiReview = await prisma.kpiReview.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends KpiReviewUpdateArgs>(args: SelectSubset<T, KpiReviewUpdateArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more KpiReviews.
-     * @param {KpiReviewDeleteManyArgs} args - Arguments to filter KpiReviews to delete.
-     * @example
-     * // Delete a few KpiReviews
-     * const { count } = await prisma.kpiReview.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends KpiReviewDeleteManyArgs>(args?: SelectSubset<T, KpiReviewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more KpiReviews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many KpiReviews
-     * const kpiReview = await prisma.kpiReview.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends KpiReviewUpdateManyArgs>(args: SelectSubset<T, KpiReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one KpiReview.
-     * @param {KpiReviewUpsertArgs} args - Arguments to update or create a KpiReview.
-     * @example
-     * // Update or create a KpiReview
-     * const kpiReview = await prisma.kpiReview.upsert({
-     *   create: {
-     *     // ... data to create a KpiReview
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the KpiReview we want to update
-     *   }
-     * })
-     */
-    upsert<T extends KpiReviewUpsertArgs>(args: SelectSubset<T, KpiReviewUpsertArgs<ExtArgs>>): Prisma__KpiReviewClient<$Result.GetResult<Prisma.$KpiReviewPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of KpiReviews.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewCountArgs} args - Arguments to filter KpiReviews to count.
-     * @example
-     * // Count the number of KpiReviews
-     * const count = await prisma.kpiReview.count({
-     *   where: {
-     *     // ... the filter for the KpiReviews we want to count
-     *   }
-     * })
-    **/
-    count<T extends KpiReviewCountArgs>(
-      args?: Subset<T, KpiReviewCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], KpiReviewCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a KpiReview.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends KpiReviewAggregateArgs>(args: Subset<T, KpiReviewAggregateArgs>): Prisma.PrismaPromise<GetKpiReviewAggregateType<T>>
-
-    /**
-     * Group by KpiReview.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {KpiReviewGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends KpiReviewGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: KpiReviewGroupByArgs['orderBy'] }
-        : { orderBy?: KpiReviewGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, KpiReviewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKpiReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the KpiReview model
-   */
-  readonly fields: KpiReviewFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for KpiReview.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__KpiReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    kpiReport<T extends KpiReportDefaultArgs<ExtArgs> = {}>(args?: Subset<T, KpiReportDefaultArgs<ExtArgs>>): Prisma__KpiReportClient<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the KpiReview model
-   */
-  interface KpiReviewFieldRefs {
-    readonly kpiReviewId: FieldRef<"KpiReview", 'String'>
-    readonly kpiReportId: FieldRef<"KpiReview", 'String'>
-    readonly comment: FieldRef<"KpiReview", 'String'>
-    readonly reviewedBy: FieldRef<"KpiReview", 'String'>
-    readonly reviewedAt: FieldRef<"KpiReview", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * KpiReview findUnique
-   */
-  export type KpiReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReview to fetch.
-     */
-    where: KpiReviewWhereUniqueInput
-  }
-
-  /**
-   * KpiReview findUniqueOrThrow
-   */
-  export type KpiReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReview to fetch.
-     */
-    where: KpiReviewWhereUniqueInput
-  }
-
-  /**
-   * KpiReview findFirst
-   */
-  export type KpiReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReview to fetch.
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReviews to fetch.
-     */
-    orderBy?: KpiReviewOrderByWithRelationInput | KpiReviewOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for KpiReviews.
-     */
-    cursor?: KpiReviewWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReviews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReviews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReviews.
-     */
-    distinct?: KpiReviewScalarFieldEnum | KpiReviewScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReview findFirstOrThrow
-   */
-  export type KpiReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReview to fetch.
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReviews to fetch.
-     */
-    orderBy?: KpiReviewOrderByWithRelationInput | KpiReviewOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for KpiReviews.
-     */
-    cursor?: KpiReviewWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReviews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReviews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReviews.
-     */
-    distinct?: KpiReviewScalarFieldEnum | KpiReviewScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReview findMany
-   */
-  export type KpiReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter, which KpiReviews to fetch.
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of KpiReviews to fetch.
-     */
-    orderBy?: KpiReviewOrderByWithRelationInput | KpiReviewOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing KpiReviews.
-     */
-    cursor?: KpiReviewWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` KpiReviews from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` KpiReviews.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of KpiReviews.
-     */
-    distinct?: KpiReviewScalarFieldEnum | KpiReviewScalarFieldEnum[]
-  }
-
-  /**
-   * KpiReview create
-   */
-  export type KpiReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * The data needed to create a KpiReview.
-     */
-    data: XOR<KpiReviewCreateInput, KpiReviewUncheckedCreateInput>
-  }
-
-  /**
-   * KpiReview createMany
-   */
-  export type KpiReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many KpiReviews.
-     */
-    data: KpiReviewCreateManyInput | KpiReviewCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * KpiReview update
-   */
-  export type KpiReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * The data needed to update a KpiReview.
-     */
-    data: XOR<KpiReviewUpdateInput, KpiReviewUncheckedUpdateInput>
-    /**
-     * Choose, which KpiReview to update.
-     */
-    where: KpiReviewWhereUniqueInput
-  }
-
-  /**
-   * KpiReview updateMany
-   */
-  export type KpiReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update KpiReviews.
-     */
-    data: XOR<KpiReviewUpdateManyMutationInput, KpiReviewUncheckedUpdateManyInput>
-    /**
-     * Filter which KpiReviews to update
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * Limit how many KpiReviews to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * KpiReview upsert
-   */
-  export type KpiReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * The filter to search for the KpiReview to update in case it exists.
-     */
-    where: KpiReviewWhereUniqueInput
-    /**
-     * In case the KpiReview found by the `where` argument doesn't exist, create a new KpiReview with this data.
-     */
-    create: XOR<KpiReviewCreateInput, KpiReviewUncheckedCreateInput>
-    /**
-     * In case the KpiReview was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<KpiReviewUpdateInput, KpiReviewUncheckedUpdateInput>
-  }
-
-  /**
-   * KpiReview delete
-   */
-  export type KpiReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
-    /**
-     * Filter which KpiReview to delete.
-     */
-    where: KpiReviewWhereUniqueInput
-  }
-
-  /**
-   * KpiReview deleteMany
-   */
-  export type KpiReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which KpiReviews to delete
-     */
-    where?: KpiReviewWhereInput
-    /**
-     * Limit how many KpiReviews to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * KpiReview without action
-   */
-  export type KpiReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReview
-     */
-    select?: KpiReviewSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReview
-     */
-    omit?: KpiReviewOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReviewInclude<ExtArgs> | null
+    include?: KpiDisaggregationInclude<ExtArgs> | null
   }
 
 
@@ -12430,7 +10271,6 @@ export namespace Prisma {
     logicalFramework?: boolean | Project$logicalFrameworkArgs<ExtArgs>
     request?: boolean | Project$requestArgs<ExtArgs>
     report?: boolean | Project$reportArgs<ExtArgs>
-    kpiReport?: boolean | Project$kpiReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -12466,7 +10306,6 @@ export namespace Prisma {
     logicalFramework?: boolean | Project$logicalFrameworkArgs<ExtArgs>
     request?: boolean | Project$requestArgs<ExtArgs>
     report?: boolean | Project$reportArgs<ExtArgs>
-    kpiReport?: boolean | Project$kpiReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -12483,7 +10322,6 @@ export namespace Prisma {
       logicalFramework: Prisma.$LogicalFrameworkPayload<ExtArgs>[]
       request: Prisma.$RequestPayload<ExtArgs>[]
       report: Prisma.$ReportPayload<ExtArgs>[]
-      kpiReport: Prisma.$KpiReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       projectId: string
@@ -12851,7 +10689,6 @@ export namespace Prisma {
     logicalFramework<T extends Project$logicalFrameworkArgs<ExtArgs> = {}>(args?: Subset<T, Project$logicalFrameworkArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogicalFrameworkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     request<T extends Project$requestArgs<ExtArgs> = {}>(args?: Subset<T, Project$requestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     report<T extends Project$reportArgs<ExtArgs> = {}>(args?: Subset<T, Project$reportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    kpiReport<T extends Project$kpiReportArgs<ExtArgs> = {}>(args?: Subset<T, Project$kpiReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13476,30 +11313,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReportScalarFieldEnum | ReportScalarFieldEnum[]
-  }
-
-  /**
-   * Project.kpiReport
-   */
-  export type Project$kpiReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the KpiReport
-     */
-    select?: KpiReportSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the KpiReport
-     */
-    omit?: KpiReportOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: KpiReportInclude<ExtArgs> | null
-    where?: KpiReportWhereInput
-    orderBy?: KpiReportOrderByWithRelationInput | KpiReportOrderByWithRelationInput[]
-    cursor?: KpiReportWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: KpiReportScalarFieldEnum | KpiReportScalarFieldEnum[]
   }
 
   /**
@@ -21040,6 +18853,1063 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: IndicatorInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model NewKpi
+   */
+
+  export type AggregateNewKpi = {
+    _count: NewKpiCountAggregateOutputType | null
+    _avg: NewKpiAvgAggregateOutputType | null
+    _sum: NewKpiSumAggregateOutputType | null
+    _min: NewKpiMinAggregateOutputType | null
+    _max: NewKpiMaxAggregateOutputType | null
+  }
+
+  export type NewKpiAvgAggregateOutputType = {
+    cumulativeValue: number | null
+    cumulativeTarget: number | null
+  }
+
+  export type NewKpiSumAggregateOutputType = {
+    cumulativeValue: number | null
+    cumulativeTarget: number | null
+  }
+
+  export type NewKpiMinAggregateOutputType = {
+    newKpiId: string | null
+    statement: string | null
+    definition: string | null
+    specificArea: string | null
+    unitOfMeasure: string | null
+    itemInMeasure: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    kpiType: string | null
+    createAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type NewKpiMaxAggregateOutputType = {
+    newKpiId: string | null
+    statement: string | null
+    definition: string | null
+    specificArea: string | null
+    unitOfMeasure: string | null
+    itemInMeasure: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    kpiType: string | null
+    createAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type NewKpiCountAggregateOutputType = {
+    newKpiId: number
+    statement: number
+    definition: number
+    specificArea: number
+    unitOfMeasure: number
+    itemInMeasure: number
+    baseLineDate: number
+    cumulativeValue: number
+    baselineNarrative: number
+    targetDate: number
+    cumulativeTarget: number
+    targetNarrative: number
+    targetType: number
+    responsiblePersons: number
+    kpiType: number
+    createAt: number
+    updateAt: number
+    _all: number
+  }
+
+
+  export type NewKpiAvgAggregateInputType = {
+    cumulativeValue?: true
+    cumulativeTarget?: true
+  }
+
+  export type NewKpiSumAggregateInputType = {
+    cumulativeValue?: true
+    cumulativeTarget?: true
+  }
+
+  export type NewKpiMinAggregateInputType = {
+    newKpiId?: true
+    statement?: true
+    definition?: true
+    specificArea?: true
+    unitOfMeasure?: true
+    itemInMeasure?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    kpiType?: true
+    createAt?: true
+    updateAt?: true
+  }
+
+  export type NewKpiMaxAggregateInputType = {
+    newKpiId?: true
+    statement?: true
+    definition?: true
+    specificArea?: true
+    unitOfMeasure?: true
+    itemInMeasure?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    kpiType?: true
+    createAt?: true
+    updateAt?: true
+  }
+
+  export type NewKpiCountAggregateInputType = {
+    newKpiId?: true
+    statement?: true
+    definition?: true
+    specificArea?: true
+    unitOfMeasure?: true
+    itemInMeasure?: true
+    baseLineDate?: true
+    cumulativeValue?: true
+    baselineNarrative?: true
+    targetDate?: true
+    cumulativeTarget?: true
+    targetNarrative?: true
+    targetType?: true
+    responsiblePersons?: true
+    kpiType?: true
+    createAt?: true
+    updateAt?: true
+    _all?: true
+  }
+
+  export type NewKpiAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewKpi to aggregate.
+     */
+    where?: NewKpiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewKpis to fetch.
+     */
+    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NewKpiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewKpis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewKpis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned NewKpis
+    **/
+    _count?: true | NewKpiCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NewKpiAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NewKpiSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NewKpiMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NewKpiMaxAggregateInputType
+  }
+
+  export type GetNewKpiAggregateType<T extends NewKpiAggregateArgs> = {
+        [P in keyof T & keyof AggregateNewKpi]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNewKpi[P]>
+      : GetScalarType<T[P], AggregateNewKpi[P]>
+  }
+
+
+
+
+  export type NewKpiGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NewKpiWhereInput
+    orderBy?: NewKpiOrderByWithAggregationInput | NewKpiOrderByWithAggregationInput[]
+    by: NewKpiScalarFieldEnum[] | NewKpiScalarFieldEnum
+    having?: NewKpiScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NewKpiCountAggregateInputType | true
+    _avg?: NewKpiAvgAggregateInputType
+    _sum?: NewKpiSumAggregateInputType
+    _min?: NewKpiMinAggregateInputType
+    _max?: NewKpiMaxAggregateInputType
+  }
+
+  export type NewKpiGroupByOutputType = {
+    newKpiId: string
+    statement: string | null
+    definition: string | null
+    specificArea: string | null
+    unitOfMeasure: string | null
+    itemInMeasure: string | null
+    baseLineDate: Date | null
+    cumulativeValue: number | null
+    baselineNarrative: string | null
+    targetDate: Date | null
+    cumulativeTarget: number | null
+    targetNarrative: string | null
+    targetType: string | null
+    responsiblePersons: string | null
+    kpiType: string | null
+    createAt: Date | null
+    updateAt: Date | null
+    _count: NewKpiCountAggregateOutputType | null
+    _avg: NewKpiAvgAggregateOutputType | null
+    _sum: NewKpiSumAggregateOutputType | null
+    _min: NewKpiMinAggregateOutputType | null
+    _max: NewKpiMaxAggregateOutputType | null
+  }
+
+  type GetNewKpiGroupByPayload<T extends NewKpiGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NewKpiGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NewKpiGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NewKpiGroupByOutputType[P]>
+            : GetScalarType<T[P], NewKpiGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NewKpiSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    newKpiId?: boolean
+    statement?: boolean
+    definition?: boolean
+    specificArea?: boolean
+    unitOfMeasure?: boolean
+    itemInMeasure?: boolean
+    baseLineDate?: boolean
+    cumulativeValue?: boolean
+    baselineNarrative?: boolean
+    targetDate?: boolean
+    cumulativeTarget?: boolean
+    targetNarrative?: boolean
+    targetType?: boolean
+    responsiblePersons?: boolean
+    kpiType?: boolean
+    createAt?: boolean
+    updateAt?: boolean
+  }, ExtArgs["result"]["newKpi"]>
+
+
+
+  export type NewKpiSelectScalar = {
+    newKpiId?: boolean
+    statement?: boolean
+    definition?: boolean
+    specificArea?: boolean
+    unitOfMeasure?: boolean
+    itemInMeasure?: boolean
+    baseLineDate?: boolean
+    cumulativeValue?: boolean
+    baselineNarrative?: boolean
+    targetDate?: boolean
+    cumulativeTarget?: boolean
+    targetNarrative?: boolean
+    targetType?: boolean
+    responsiblePersons?: boolean
+    kpiType?: boolean
+    createAt?: boolean
+    updateAt?: boolean
+  }
+
+  export type NewKpiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"newKpiId" | "statement" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "kpiType" | "createAt" | "updateAt", ExtArgs["result"]["newKpi"]>
+
+  export type $NewKpiPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "NewKpi"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      newKpiId: string
+      statement: string | null
+      definition: string | null
+      specificArea: string | null
+      unitOfMeasure: string | null
+      itemInMeasure: string | null
+      baseLineDate: Date | null
+      cumulativeValue: number | null
+      baselineNarrative: string | null
+      targetDate: Date | null
+      cumulativeTarget: number | null
+      targetNarrative: string | null
+      targetType: string | null
+      responsiblePersons: string | null
+      kpiType: string | null
+      createAt: Date | null
+      updateAt: Date | null
+    }, ExtArgs["result"]["newKpi"]>
+    composites: {}
+  }
+
+  type NewKpiGetPayload<S extends boolean | null | undefined | NewKpiDefaultArgs> = $Result.GetResult<Prisma.$NewKpiPayload, S>
+
+  type NewKpiCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NewKpiFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NewKpiCountAggregateInputType | true
+    }
+
+  export interface NewKpiDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewKpi'], meta: { name: 'NewKpi' } }
+    /**
+     * Find zero or one NewKpi that matches the filter.
+     * @param {NewKpiFindUniqueArgs} args - Arguments to find a NewKpi
+     * @example
+     * // Get one NewKpi
+     * const newKpi = await prisma.newKpi.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NewKpiFindUniqueArgs>(args: SelectSubset<T, NewKpiFindUniqueArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one NewKpi that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NewKpiFindUniqueOrThrowArgs} args - Arguments to find a NewKpi
+     * @example
+     * // Get one NewKpi
+     * const newKpi = await prisma.newKpi.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NewKpiFindUniqueOrThrowArgs>(args: SelectSubset<T, NewKpiFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewKpi that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiFindFirstArgs} args - Arguments to find a NewKpi
+     * @example
+     * // Get one NewKpi
+     * const newKpi = await prisma.newKpi.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NewKpiFindFirstArgs>(args?: SelectSubset<T, NewKpiFindFirstArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first NewKpi that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiFindFirstOrThrowArgs} args - Arguments to find a NewKpi
+     * @example
+     * // Get one NewKpi
+     * const newKpi = await prisma.newKpi.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NewKpiFindFirstOrThrowArgs>(args?: SelectSubset<T, NewKpiFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more NewKpis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all NewKpis
+     * const newKpis = await prisma.newKpi.findMany()
+     * 
+     * // Get first 10 NewKpis
+     * const newKpis = await prisma.newKpi.findMany({ take: 10 })
+     * 
+     * // Only select the `newKpiId`
+     * const newKpiWithNewKpiIdOnly = await prisma.newKpi.findMany({ select: { newKpiId: true } })
+     * 
+     */
+    findMany<T extends NewKpiFindManyArgs>(args?: SelectSubset<T, NewKpiFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a NewKpi.
+     * @param {NewKpiCreateArgs} args - Arguments to create a NewKpi.
+     * @example
+     * // Create one NewKpi
+     * const NewKpi = await prisma.newKpi.create({
+     *   data: {
+     *     // ... data to create a NewKpi
+     *   }
+     * })
+     * 
+     */
+    create<T extends NewKpiCreateArgs>(args: SelectSubset<T, NewKpiCreateArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many NewKpis.
+     * @param {NewKpiCreateManyArgs} args - Arguments to create many NewKpis.
+     * @example
+     * // Create many NewKpis
+     * const newKpi = await prisma.newKpi.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NewKpiCreateManyArgs>(args?: SelectSubset<T, NewKpiCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a NewKpi.
+     * @param {NewKpiDeleteArgs} args - Arguments to delete one NewKpi.
+     * @example
+     * // Delete one NewKpi
+     * const NewKpi = await prisma.newKpi.delete({
+     *   where: {
+     *     // ... filter to delete one NewKpi
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NewKpiDeleteArgs>(args: SelectSubset<T, NewKpiDeleteArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one NewKpi.
+     * @param {NewKpiUpdateArgs} args - Arguments to update one NewKpi.
+     * @example
+     * // Update one NewKpi
+     * const newKpi = await prisma.newKpi.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NewKpiUpdateArgs>(args: SelectSubset<T, NewKpiUpdateArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more NewKpis.
+     * @param {NewKpiDeleteManyArgs} args - Arguments to filter NewKpis to delete.
+     * @example
+     * // Delete a few NewKpis
+     * const { count } = await prisma.newKpi.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NewKpiDeleteManyArgs>(args?: SelectSubset<T, NewKpiDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more NewKpis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many NewKpis
+     * const newKpi = await prisma.newKpi.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NewKpiUpdateManyArgs>(args: SelectSubset<T, NewKpiUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one NewKpi.
+     * @param {NewKpiUpsertArgs} args - Arguments to update or create a NewKpi.
+     * @example
+     * // Update or create a NewKpi
+     * const newKpi = await prisma.newKpi.upsert({
+     *   create: {
+     *     // ... data to create a NewKpi
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the NewKpi we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NewKpiUpsertArgs>(args: SelectSubset<T, NewKpiUpsertArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of NewKpis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiCountArgs} args - Arguments to filter NewKpis to count.
+     * @example
+     * // Count the number of NewKpis
+     * const count = await prisma.newKpi.count({
+     *   where: {
+     *     // ... the filter for the NewKpis we want to count
+     *   }
+     * })
+    **/
+    count<T extends NewKpiCountArgs>(
+      args?: Subset<T, NewKpiCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NewKpiCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a NewKpi.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NewKpiAggregateArgs>(args: Subset<T, NewKpiAggregateArgs>): Prisma.PrismaPromise<GetNewKpiAggregateType<T>>
+
+    /**
+     * Group by NewKpi.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NewKpiGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NewKpiGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NewKpiGroupByArgs['orderBy'] }
+        : { orderBy?: NewKpiGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NewKpiGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewKpiGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the NewKpi model
+   */
+  readonly fields: NewKpiFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for NewKpi.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NewKpiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the NewKpi model
+   */
+  interface NewKpiFieldRefs {
+    readonly newKpiId: FieldRef<"NewKpi", 'String'>
+    readonly statement: FieldRef<"NewKpi", 'String'>
+    readonly definition: FieldRef<"NewKpi", 'String'>
+    readonly specificArea: FieldRef<"NewKpi", 'String'>
+    readonly unitOfMeasure: FieldRef<"NewKpi", 'String'>
+    readonly itemInMeasure: FieldRef<"NewKpi", 'String'>
+    readonly baseLineDate: FieldRef<"NewKpi", 'DateTime'>
+    readonly cumulativeValue: FieldRef<"NewKpi", 'Int'>
+    readonly baselineNarrative: FieldRef<"NewKpi", 'String'>
+    readonly targetDate: FieldRef<"NewKpi", 'DateTime'>
+    readonly cumulativeTarget: FieldRef<"NewKpi", 'Int'>
+    readonly targetNarrative: FieldRef<"NewKpi", 'String'>
+    readonly targetType: FieldRef<"NewKpi", 'String'>
+    readonly responsiblePersons: FieldRef<"NewKpi", 'String'>
+    readonly kpiType: FieldRef<"NewKpi", 'String'>
+    readonly createAt: FieldRef<"NewKpi", 'DateTime'>
+    readonly updateAt: FieldRef<"NewKpi", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * NewKpi findUnique
+   */
+  export type NewKpiFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter, which NewKpi to fetch.
+     */
+    where: NewKpiWhereUniqueInput
+  }
+
+  /**
+   * NewKpi findUniqueOrThrow
+   */
+  export type NewKpiFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter, which NewKpi to fetch.
+     */
+    where: NewKpiWhereUniqueInput
+  }
+
+  /**
+   * NewKpi findFirst
+   */
+  export type NewKpiFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter, which NewKpi to fetch.
+     */
+    where?: NewKpiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewKpis to fetch.
+     */
+    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewKpis.
+     */
+    cursor?: NewKpiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewKpis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewKpis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewKpis.
+     */
+    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
+  }
+
+  /**
+   * NewKpi findFirstOrThrow
+   */
+  export type NewKpiFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter, which NewKpi to fetch.
+     */
+    where?: NewKpiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewKpis to fetch.
+     */
+    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for NewKpis.
+     */
+    cursor?: NewKpiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewKpis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewKpis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewKpis.
+     */
+    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
+  }
+
+  /**
+   * NewKpi findMany
+   */
+  export type NewKpiFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter, which NewKpis to fetch.
+     */
+    where?: NewKpiWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of NewKpis to fetch.
+     */
+    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing NewKpis.
+     */
+    cursor?: NewKpiWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` NewKpis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` NewKpis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of NewKpis.
+     */
+    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
+  }
+
+  /**
+   * NewKpi create
+   */
+  export type NewKpiCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * The data needed to create a NewKpi.
+     */
+    data?: XOR<NewKpiCreateInput, NewKpiUncheckedCreateInput>
+  }
+
+  /**
+   * NewKpi createMany
+   */
+  export type NewKpiCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many NewKpis.
+     */
+    data: NewKpiCreateManyInput | NewKpiCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * NewKpi update
+   */
+  export type NewKpiUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * The data needed to update a NewKpi.
+     */
+    data: XOR<NewKpiUpdateInput, NewKpiUncheckedUpdateInput>
+    /**
+     * Choose, which NewKpi to update.
+     */
+    where: NewKpiWhereUniqueInput
+  }
+
+  /**
+   * NewKpi updateMany
+   */
+  export type NewKpiUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update NewKpis.
+     */
+    data: XOR<NewKpiUpdateManyMutationInput, NewKpiUncheckedUpdateManyInput>
+    /**
+     * Filter which NewKpis to update
+     */
+    where?: NewKpiWhereInput
+    /**
+     * Limit how many NewKpis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewKpi upsert
+   */
+  export type NewKpiUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * The filter to search for the NewKpi to update in case it exists.
+     */
+    where: NewKpiWhereUniqueInput
+    /**
+     * In case the NewKpi found by the `where` argument doesn't exist, create a new NewKpi with this data.
+     */
+    create: XOR<NewKpiCreateInput, NewKpiUncheckedCreateInput>
+    /**
+     * In case the NewKpi was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NewKpiUpdateInput, NewKpiUncheckedUpdateInput>
+  }
+
+  /**
+   * NewKpi delete
+   */
+  export type NewKpiDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
+    /**
+     * Filter which NewKpi to delete.
+     */
+    where: NewKpiWhereUniqueInput
+  }
+
+  /**
+   * NewKpi deleteMany
+   */
+  export type NewKpiDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which NewKpis to delete
+     */
+    where?: NewKpiWhereInput
+    /**
+     * Limit how many NewKpis to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * NewKpi without action
+   */
+  export type NewKpiDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NewKpi
+     */
+    select?: NewKpiSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the NewKpi
+     */
+    omit?: NewKpiOmit<ExtArgs> | null
   }
 
 
@@ -35199,13 +34069,18 @@ export namespace Prisma {
     kpiId: 'kpiId',
     statement: 'statement',
     definition: 'definition',
-    type: 'type',
-    specificAreas: 'specificAreas',
+    specificArea: 'specificArea',
     unitOfMeasure: 'unitOfMeasure',
     itemInMeasure: 'itemInMeasure',
-    disaggregation: 'disaggregation',
-    baseLine: 'baseLine',
-    target: 'target',
+    baseLineDate: 'baseLineDate',
+    cumulativeValue: 'cumulativeValue',
+    baselineNarrative: 'baselineNarrative',
+    targetDate: 'targetDate',
+    cumulativeTarget: 'cumulativeTarget',
+    targetNarrative: 'targetNarrative',
+    targetType: 'targetType',
+    responsiblePersons: 'responsiblePersons',
+    type: 'type',
     strategicObjectiveId: 'strategicObjectiveId',
     createAt: 'createAt',
     updateAt: 'updateAt'
@@ -35214,46 +34089,16 @@ export namespace Prisma {
   export type KpiScalarFieldEnum = (typeof KpiScalarFieldEnum)[keyof typeof KpiScalarFieldEnum]
 
 
-  export const KpiAssignmentScalarFieldEnum: {
-    kpiAssignmentId: 'kpiAssignmentId',
+  export const KpiDisaggregationScalarFieldEnum: {
+    kpiDisaggregationId: 'kpiDisaggregationId',
     kpiId: 'kpiId',
-    projectId: 'projectId',
-    assignedToId: 'assignedToId',
-    assignedAt: 'assignedAt'
-  };
-
-  export type KpiAssignmentScalarFieldEnum = (typeof KpiAssignmentScalarFieldEnum)[keyof typeof KpiAssignmentScalarFieldEnum]
-
-
-  export const KpiReportScalarFieldEnum: {
-    kpiReportId: 'kpiReportId',
-    projectId: 'projectId',
-    userId: 'userId',
-    strategicObjectiveId: 'strategicObjectiveId',
-    kpiName: 'kpiName',
-    kpiType: 'kpiType',
-    baseline: 'baseline',
+    type: 'type',
+    category: 'category',
     target: 'target',
-    actualValue: 'actualValue',
-    status: 'status',
-    observation: 'observation',
-    evidence: 'evidence',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    baseline: 'baseline'
   };
 
-  export type KpiReportScalarFieldEnum = (typeof KpiReportScalarFieldEnum)[keyof typeof KpiReportScalarFieldEnum]
-
-
-  export const KpiReviewScalarFieldEnum: {
-    kpiReviewId: 'kpiReviewId',
-    kpiReportId: 'kpiReportId',
-    comment: 'comment',
-    reviewedBy: 'reviewedBy',
-    reviewedAt: 'reviewedAt'
-  };
-
-  export type KpiReviewScalarFieldEnum = (typeof KpiReviewScalarFieldEnum)[keyof typeof KpiReviewScalarFieldEnum]
+  export type KpiDisaggregationScalarFieldEnum = (typeof KpiDisaggregationScalarFieldEnum)[keyof typeof KpiDisaggregationScalarFieldEnum]
 
 
   export const ProjectScalarFieldEnum: {
@@ -35384,6 +34229,29 @@ export namespace Prisma {
   };
 
   export type IndicatorScalarFieldEnum = (typeof IndicatorScalarFieldEnum)[keyof typeof IndicatorScalarFieldEnum]
+
+
+  export const NewKpiScalarFieldEnum: {
+    newKpiId: 'newKpiId',
+    statement: 'statement',
+    definition: 'definition',
+    specificArea: 'specificArea',
+    unitOfMeasure: 'unitOfMeasure',
+    itemInMeasure: 'itemInMeasure',
+    baseLineDate: 'baseLineDate',
+    cumulativeValue: 'cumulativeValue',
+    baselineNarrative: 'baselineNarrative',
+    targetDate: 'targetDate',
+    cumulativeTarget: 'cumulativeTarget',
+    targetNarrative: 'targetNarrative',
+    targetType: 'targetType',
+    responsiblePersons: 'responsiblePersons',
+    kpiType: 'kpiType',
+    createAt: 'createAt',
+    updateAt: 'updateAt'
+  };
+
+  export type NewKpiScalarFieldEnum = (typeof NewKpiScalarFieldEnum)[keyof typeof NewKpiScalarFieldEnum]
 
 
   export const IndicatorDisaggregationScalarFieldEnum: {
@@ -35701,52 +34569,28 @@ export namespace Prisma {
     kpiId: 'kpiId',
     statement: 'statement',
     definition: 'definition',
-    type: 'type',
-    specificAreas: 'specificAreas',
+    specificArea: 'specificArea',
     unitOfMeasure: 'unitOfMeasure',
     itemInMeasure: 'itemInMeasure',
-    disaggregation: 'disaggregation',
-    baseLine: 'baseLine',
-    target: 'target',
+    baselineNarrative: 'baselineNarrative',
+    targetNarrative: 'targetNarrative',
+    targetType: 'targetType',
+    responsiblePersons: 'responsiblePersons',
+    type: 'type',
     strategicObjectiveId: 'strategicObjectiveId'
   };
 
   export type KpiOrderByRelevanceFieldEnum = (typeof KpiOrderByRelevanceFieldEnum)[keyof typeof KpiOrderByRelevanceFieldEnum]
 
 
-  export const KpiAssignmentOrderByRelevanceFieldEnum: {
-    kpiAssignmentId: 'kpiAssignmentId',
+  export const KpiDisaggregationOrderByRelevanceFieldEnum: {
+    kpiDisaggregationId: 'kpiDisaggregationId',
     kpiId: 'kpiId',
-    projectId: 'projectId',
-    assignedToId: 'assignedToId'
+    type: 'type',
+    category: 'category'
   };
 
-  export type KpiAssignmentOrderByRelevanceFieldEnum = (typeof KpiAssignmentOrderByRelevanceFieldEnum)[keyof typeof KpiAssignmentOrderByRelevanceFieldEnum]
-
-
-  export const KpiReportOrderByRelevanceFieldEnum: {
-    kpiReportId: 'kpiReportId',
-    projectId: 'projectId',
-    userId: 'userId',
-    strategicObjectiveId: 'strategicObjectiveId',
-    kpiName: 'kpiName',
-    kpiType: 'kpiType',
-    status: 'status',
-    observation: 'observation',
-    evidence: 'evidence'
-  };
-
-  export type KpiReportOrderByRelevanceFieldEnum = (typeof KpiReportOrderByRelevanceFieldEnum)[keyof typeof KpiReportOrderByRelevanceFieldEnum]
-
-
-  export const KpiReviewOrderByRelevanceFieldEnum: {
-    kpiReviewId: 'kpiReviewId',
-    kpiReportId: 'kpiReportId',
-    comment: 'comment',
-    reviewedBy: 'reviewedBy'
-  };
-
-  export type KpiReviewOrderByRelevanceFieldEnum = (typeof KpiReviewOrderByRelevanceFieldEnum)[keyof typeof KpiReviewOrderByRelevanceFieldEnum]
+  export type KpiDisaggregationOrderByRelevanceFieldEnum = (typeof KpiDisaggregationOrderByRelevanceFieldEnum)[keyof typeof KpiDisaggregationOrderByRelevanceFieldEnum]
 
 
   export const ProjectOrderByRelevanceFieldEnum: {
@@ -35857,6 +34701,23 @@ export namespace Prisma {
   };
 
   export type IndicatorOrderByRelevanceFieldEnum = (typeof IndicatorOrderByRelevanceFieldEnum)[keyof typeof IndicatorOrderByRelevanceFieldEnum]
+
+
+  export const NewKpiOrderByRelevanceFieldEnum: {
+    newKpiId: 'newKpiId',
+    statement: 'statement',
+    definition: 'definition',
+    specificArea: 'specificArea',
+    unitOfMeasure: 'unitOfMeasure',
+    itemInMeasure: 'itemInMeasure',
+    baselineNarrative: 'baselineNarrative',
+    targetNarrative: 'targetNarrative',
+    targetType: 'targetType',
+    responsiblePersons: 'responsiblePersons',
+    kpiType: 'kpiType'
+  };
+
+  export type NewKpiOrderByRelevanceFieldEnum = (typeof NewKpiOrderByRelevanceFieldEnum)[keyof typeof NewKpiOrderByRelevanceFieldEnum]
 
 
   export const IndicatorDisaggregationOrderByRelevanceFieldEnum: {
@@ -36098,7 +34959,6 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: XOR<RoleNullableScalarRelationFilter, RoleWhereInput> | null
-    kpiReport?: KpiReportListRelationFilter
     partner?: PartnerListRelationFilter
     request?: RequestListRelationFilter
     retirement?: RetirementListRelationFilter
@@ -36126,7 +34986,6 @@ export namespace Prisma {
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     role?: RoleOrderByWithRelationInput
-    kpiReport?: KpiReportOrderByRelationAggregateInput
     partner?: PartnerOrderByRelationAggregateInput
     request?: RequestOrderByRelationAggregateInput
     retirement?: RetirementOrderByRelationAggregateInput
@@ -36158,7 +35017,6 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
     role?: XOR<RoleNullableScalarRelationFilter, RoleWhereInput> | null
-    kpiReport?: KpiReportListRelationFilter
     partner?: PartnerListRelationFilter
     request?: RequestListRelationFilter
     retirement?: RetirementListRelationFilter
@@ -36388,7 +35246,6 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     kpi?: KpiListRelationFilter
     project?: ProjectListRelationFilter
-    kpiReport?: KpiReportListRelationFilter
   }
 
   export type StrategicObjectiveOrderByWithRelationInput = {
@@ -36401,7 +35258,6 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     kpi?: KpiOrderByRelationAggregateInput
     project?: ProjectOrderByRelationAggregateInput
-    kpiReport?: KpiReportOrderByRelationAggregateInput
     _relevance?: StrategicObjectiveOrderByRelevanceInput
   }
 
@@ -36418,7 +35274,6 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     kpi?: KpiListRelationFilter
     project?: ProjectListRelationFilter
-    kpiReport?: KpiReportListRelationFilter
   }, "strategicObjectiveId">
 
   export type StrategicObjectiveOrderByWithAggregationInput = {
@@ -36454,36 +35309,46 @@ export namespace Prisma {
     kpiId?: StringFilter<"Kpi"> | string
     statement?: StringNullableFilter<"Kpi"> | string | null
     definition?: StringNullableFilter<"Kpi"> | string | null
-    type?: StringNullableFilter<"Kpi"> | string | null
-    specificAreas?: StringNullableFilter<"Kpi"> | string | null
+    specificArea?: StringNullableFilter<"Kpi"> | string | null
     unitOfMeasure?: StringNullableFilter<"Kpi"> | string | null
     itemInMeasure?: StringNullableFilter<"Kpi"> | string | null
-    disaggregation?: StringNullableFilter<"Kpi"> | string | null
-    baseLine?: StringNullableFilter<"Kpi"> | string | null
-    target?: StringNullableFilter<"Kpi"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"Kpi"> | number | null
+    baselineNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"Kpi"> | number | null
+    targetNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetType?: StringNullableFilter<"Kpi"> | string | null
+    responsiblePersons?: StringNullableFilter<"Kpi"> | string | null
+    type?: StringNullableFilter<"Kpi"> | string | null
     strategicObjectiveId?: StringNullableFilter<"Kpi"> | string | null
     createAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
     strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
-    kpiAssignment?: KpiAssignmentListRelationFilter
+    kpiDisaggregation?: KpiDisaggregationListRelationFilter
   }
 
   export type KpiOrderByWithRelationInput = {
     kpiId?: SortOrder
     statement?: SortOrderInput | SortOrder
     definition?: SortOrderInput | SortOrder
-    type?: SortOrderInput | SortOrder
-    specificAreas?: SortOrderInput | SortOrder
+    specificArea?: SortOrderInput | SortOrder
     unitOfMeasure?: SortOrderInput | SortOrder
     itemInMeasure?: SortOrderInput | SortOrder
-    disaggregation?: SortOrderInput | SortOrder
-    baseLine?: SortOrderInput | SortOrder
-    target?: SortOrderInput | SortOrder
+    baseLineDate?: SortOrderInput | SortOrder
+    cumulativeValue?: SortOrderInput | SortOrder
+    baselineNarrative?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    cumulativeTarget?: SortOrderInput | SortOrder
+    targetNarrative?: SortOrderInput | SortOrder
+    targetType?: SortOrderInput | SortOrder
+    responsiblePersons?: SortOrderInput | SortOrder
+    type?: SortOrderInput | SortOrder
     strategicObjectiveId?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     strategicObjective?: StrategicObjectiveOrderByWithRelationInput
-    kpiAssignment?: KpiAssignmentOrderByRelationAggregateInput
+    kpiDisaggregation?: KpiDisaggregationOrderByRelationAggregateInput
     _relevance?: KpiOrderByRelevanceInput
   }
 
@@ -36494,37 +35359,49 @@ export namespace Prisma {
     NOT?: KpiWhereInput | KpiWhereInput[]
     statement?: StringNullableFilter<"Kpi"> | string | null
     definition?: StringNullableFilter<"Kpi"> | string | null
-    type?: StringNullableFilter<"Kpi"> | string | null
-    specificAreas?: StringNullableFilter<"Kpi"> | string | null
+    specificArea?: StringNullableFilter<"Kpi"> | string | null
     unitOfMeasure?: StringNullableFilter<"Kpi"> | string | null
     itemInMeasure?: StringNullableFilter<"Kpi"> | string | null
-    disaggregation?: StringNullableFilter<"Kpi"> | string | null
-    baseLine?: StringNullableFilter<"Kpi"> | string | null
-    target?: StringNullableFilter<"Kpi"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"Kpi"> | number | null
+    baselineNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"Kpi"> | number | null
+    targetNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetType?: StringNullableFilter<"Kpi"> | string | null
+    responsiblePersons?: StringNullableFilter<"Kpi"> | string | null
+    type?: StringNullableFilter<"Kpi"> | string | null
     strategicObjectiveId?: StringNullableFilter<"Kpi"> | string | null
     createAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
     strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
-    kpiAssignment?: KpiAssignmentListRelationFilter
+    kpiDisaggregation?: KpiDisaggregationListRelationFilter
   }, "kpiId">
 
   export type KpiOrderByWithAggregationInput = {
     kpiId?: SortOrder
     statement?: SortOrderInput | SortOrder
     definition?: SortOrderInput | SortOrder
-    type?: SortOrderInput | SortOrder
-    specificAreas?: SortOrderInput | SortOrder
+    specificArea?: SortOrderInput | SortOrder
     unitOfMeasure?: SortOrderInput | SortOrder
     itemInMeasure?: SortOrderInput | SortOrder
-    disaggregation?: SortOrderInput | SortOrder
-    baseLine?: SortOrderInput | SortOrder
-    target?: SortOrderInput | SortOrder
+    baseLineDate?: SortOrderInput | SortOrder
+    cumulativeValue?: SortOrderInput | SortOrder
+    baselineNarrative?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    cumulativeTarget?: SortOrderInput | SortOrder
+    targetNarrative?: SortOrderInput | SortOrder
+    targetType?: SortOrderInput | SortOrder
+    responsiblePersons?: SortOrderInput | SortOrder
+    type?: SortOrderInput | SortOrder
     strategicObjectiveId?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: KpiCountOrderByAggregateInput
+    _avg?: KpiAvgOrderByAggregateInput
     _max?: KpiMaxOrderByAggregateInput
     _min?: KpiMinOrderByAggregateInput
+    _sum?: KpiSumOrderByAggregateInput
   }
 
   export type KpiScalarWhereWithAggregatesInput = {
@@ -36534,240 +35411,84 @@ export namespace Prisma {
     kpiId?: StringWithAggregatesFilter<"Kpi"> | string
     statement?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
     definition?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
-    type?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
-    specificAreas?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    specificArea?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
     unitOfMeasure?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
     itemInMeasure?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
-    disaggregation?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
-    baseLine?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
-    target?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    baseLineDate?: DateTimeNullableWithAggregatesFilter<"Kpi"> | Date | string | null
+    cumulativeValue?: IntNullableWithAggregatesFilter<"Kpi"> | number | null
+    baselineNarrative?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    targetDate?: DateTimeNullableWithAggregatesFilter<"Kpi"> | Date | string | null
+    cumulativeTarget?: IntNullableWithAggregatesFilter<"Kpi"> | number | null
+    targetNarrative?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    targetType?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    responsiblePersons?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
+    type?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
     strategicObjectiveId?: StringNullableWithAggregatesFilter<"Kpi"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Kpi"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Kpi"> | Date | string | null
   }
 
-  export type KpiAssignmentWhereInput = {
-    AND?: KpiAssignmentWhereInput | KpiAssignmentWhereInput[]
-    OR?: KpiAssignmentWhereInput[]
-    NOT?: KpiAssignmentWhereInput | KpiAssignmentWhereInput[]
-    kpiAssignmentId?: StringFilter<"KpiAssignment"> | string
-    kpiId?: StringFilter<"KpiAssignment"> | string
-    projectId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedToId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedAt?: DateTimeFilter<"KpiAssignment"> | Date | string
+  export type KpiDisaggregationWhereInput = {
+    AND?: KpiDisaggregationWhereInput | KpiDisaggregationWhereInput[]
+    OR?: KpiDisaggregationWhereInput[]
+    NOT?: KpiDisaggregationWhereInput | KpiDisaggregationWhereInput[]
+    kpiDisaggregationId?: StringFilter<"KpiDisaggregation"> | string
+    kpiId?: StringFilter<"KpiDisaggregation"> | string
+    type?: StringFilter<"KpiDisaggregation"> | string
+    category?: StringFilter<"KpiDisaggregation"> | string
+    target?: IntNullableFilter<"KpiDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"KpiDisaggregation"> | number | null
     kpi?: XOR<KpiScalarRelationFilter, KpiWhereInput>
   }
 
-  export type KpiAssignmentOrderByWithRelationInput = {
-    kpiAssignmentId?: SortOrder
+  export type KpiDisaggregationOrderByWithRelationInput = {
+    kpiDisaggregationId?: SortOrder
     kpiId?: SortOrder
-    projectId?: SortOrderInput | SortOrder
-    assignedToId?: SortOrderInput | SortOrder
-    assignedAt?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    target?: SortOrderInput | SortOrder
+    baseline?: SortOrderInput | SortOrder
     kpi?: KpiOrderByWithRelationInput
-    _relevance?: KpiAssignmentOrderByRelevanceInput
+    _relevance?: KpiDisaggregationOrderByRelevanceInput
   }
 
-  export type KpiAssignmentWhereUniqueInput = Prisma.AtLeast<{
-    kpiAssignmentId?: string
-    AND?: KpiAssignmentWhereInput | KpiAssignmentWhereInput[]
-    OR?: KpiAssignmentWhereInput[]
-    NOT?: KpiAssignmentWhereInput | KpiAssignmentWhereInput[]
-    kpiId?: StringFilter<"KpiAssignment"> | string
-    projectId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedToId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedAt?: DateTimeFilter<"KpiAssignment"> | Date | string
+  export type KpiDisaggregationWhereUniqueInput = Prisma.AtLeast<{
+    kpiDisaggregationId?: string
+    AND?: KpiDisaggregationWhereInput | KpiDisaggregationWhereInput[]
+    OR?: KpiDisaggregationWhereInput[]
+    NOT?: KpiDisaggregationWhereInput | KpiDisaggregationWhereInput[]
+    kpiId?: StringFilter<"KpiDisaggregation"> | string
+    type?: StringFilter<"KpiDisaggregation"> | string
+    category?: StringFilter<"KpiDisaggregation"> | string
+    target?: IntNullableFilter<"KpiDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"KpiDisaggregation"> | number | null
     kpi?: XOR<KpiScalarRelationFilter, KpiWhereInput>
-  }, "kpiAssignmentId">
+  }, "kpiDisaggregationId">
 
-  export type KpiAssignmentOrderByWithAggregationInput = {
-    kpiAssignmentId?: SortOrder
+  export type KpiDisaggregationOrderByWithAggregationInput = {
+    kpiDisaggregationId?: SortOrder
     kpiId?: SortOrder
-    projectId?: SortOrderInput | SortOrder
-    assignedToId?: SortOrderInput | SortOrder
-    assignedAt?: SortOrder
-    _count?: KpiAssignmentCountOrderByAggregateInput
-    _max?: KpiAssignmentMaxOrderByAggregateInput
-    _min?: KpiAssignmentMinOrderByAggregateInput
-  }
-
-  export type KpiAssignmentScalarWhereWithAggregatesInput = {
-    AND?: KpiAssignmentScalarWhereWithAggregatesInput | KpiAssignmentScalarWhereWithAggregatesInput[]
-    OR?: KpiAssignmentScalarWhereWithAggregatesInput[]
-    NOT?: KpiAssignmentScalarWhereWithAggregatesInput | KpiAssignmentScalarWhereWithAggregatesInput[]
-    kpiAssignmentId?: StringWithAggregatesFilter<"KpiAssignment"> | string
-    kpiId?: StringWithAggregatesFilter<"KpiAssignment"> | string
-    projectId?: StringNullableWithAggregatesFilter<"KpiAssignment"> | string | null
-    assignedToId?: StringNullableWithAggregatesFilter<"KpiAssignment"> | string | null
-    assignedAt?: DateTimeWithAggregatesFilter<"KpiAssignment"> | Date | string
-  }
-
-  export type KpiReportWhereInput = {
-    AND?: KpiReportWhereInput | KpiReportWhereInput[]
-    OR?: KpiReportWhereInput[]
-    NOT?: KpiReportWhereInput | KpiReportWhereInput[]
-    kpiReportId?: StringFilter<"KpiReport"> | string
-    projectId?: StringNullableFilter<"KpiReport"> | string | null
-    userId?: StringNullableFilter<"KpiReport"> | string | null
-    strategicObjectiveId?: StringNullableFilter<"KpiReport"> | string | null
-    kpiName?: StringNullableFilter<"KpiReport"> | string | null
-    kpiType?: StringNullableFilter<"KpiReport"> | string | null
-    baseline?: IntNullableFilter<"KpiReport"> | number | null
-    target?: IntNullableFilter<"KpiReport"> | number | null
-    actualValue?: IntNullableFilter<"KpiReport"> | number | null
-    status?: StringNullableFilter<"KpiReport"> | string | null
-    observation?: StringNullableFilter<"KpiReport"> | string | null
-    evidence?: StringNullableFilter<"KpiReport"> | string | null
-    createdAt?: DateTimeFilter<"KpiReport"> | Date | string
-    updatedAt?: DateTimeFilter<"KpiReport"> | Date | string
-    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
-    kpiReview?: KpiReviewListRelationFilter
-  }
-
-  export type KpiReportOrderByWithRelationInput = {
-    kpiReportId?: SortOrder
-    projectId?: SortOrderInput | SortOrder
-    userId?: SortOrderInput | SortOrder
-    strategicObjectiveId?: SortOrderInput | SortOrder
-    kpiName?: SortOrderInput | SortOrder
-    kpiType?: SortOrderInput | SortOrder
-    baseline?: SortOrderInput | SortOrder
+    type?: SortOrder
+    category?: SortOrder
     target?: SortOrderInput | SortOrder
-    actualValue?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
-    observation?: SortOrderInput | SortOrder
-    evidence?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    project?: ProjectOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-    strategicObjective?: StrategicObjectiveOrderByWithRelationInput
-    kpiReview?: KpiReviewOrderByRelationAggregateInput
-    _relevance?: KpiReportOrderByRelevanceInput
-  }
-
-  export type KpiReportWhereUniqueInput = Prisma.AtLeast<{
-    kpiReportId?: string
-    AND?: KpiReportWhereInput | KpiReportWhereInput[]
-    OR?: KpiReportWhereInput[]
-    NOT?: KpiReportWhereInput | KpiReportWhereInput[]
-    projectId?: StringNullableFilter<"KpiReport"> | string | null
-    userId?: StringNullableFilter<"KpiReport"> | string | null
-    strategicObjectiveId?: StringNullableFilter<"KpiReport"> | string | null
-    kpiName?: StringNullableFilter<"KpiReport"> | string | null
-    kpiType?: StringNullableFilter<"KpiReport"> | string | null
-    baseline?: IntNullableFilter<"KpiReport"> | number | null
-    target?: IntNullableFilter<"KpiReport"> | number | null
-    actualValue?: IntNullableFilter<"KpiReport"> | number | null
-    status?: StringNullableFilter<"KpiReport"> | string | null
-    observation?: StringNullableFilter<"KpiReport"> | string | null
-    evidence?: StringNullableFilter<"KpiReport"> | string | null
-    createdAt?: DateTimeFilter<"KpiReport"> | Date | string
-    updatedAt?: DateTimeFilter<"KpiReport"> | Date | string
-    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
-    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-    strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
-    kpiReview?: KpiReviewListRelationFilter
-  }, "kpiReportId">
-
-  export type KpiReportOrderByWithAggregationInput = {
-    kpiReportId?: SortOrder
-    projectId?: SortOrderInput | SortOrder
-    userId?: SortOrderInput | SortOrder
-    strategicObjectiveId?: SortOrderInput | SortOrder
-    kpiName?: SortOrderInput | SortOrder
-    kpiType?: SortOrderInput | SortOrder
     baseline?: SortOrderInput | SortOrder
-    target?: SortOrderInput | SortOrder
-    actualValue?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
-    observation?: SortOrderInput | SortOrder
-    evidence?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: KpiReportCountOrderByAggregateInput
-    _avg?: KpiReportAvgOrderByAggregateInput
-    _max?: KpiReportMaxOrderByAggregateInput
-    _min?: KpiReportMinOrderByAggregateInput
-    _sum?: KpiReportSumOrderByAggregateInput
+    _count?: KpiDisaggregationCountOrderByAggregateInput
+    _avg?: KpiDisaggregationAvgOrderByAggregateInput
+    _max?: KpiDisaggregationMaxOrderByAggregateInput
+    _min?: KpiDisaggregationMinOrderByAggregateInput
+    _sum?: KpiDisaggregationSumOrderByAggregateInput
   }
 
-  export type KpiReportScalarWhereWithAggregatesInput = {
-    AND?: KpiReportScalarWhereWithAggregatesInput | KpiReportScalarWhereWithAggregatesInput[]
-    OR?: KpiReportScalarWhereWithAggregatesInput[]
-    NOT?: KpiReportScalarWhereWithAggregatesInput | KpiReportScalarWhereWithAggregatesInput[]
-    kpiReportId?: StringWithAggregatesFilter<"KpiReport"> | string
-    projectId?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    userId?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    strategicObjectiveId?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    kpiName?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    kpiType?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    baseline?: IntNullableWithAggregatesFilter<"KpiReport"> | number | null
-    target?: IntNullableWithAggregatesFilter<"KpiReport"> | number | null
-    actualValue?: IntNullableWithAggregatesFilter<"KpiReport"> | number | null
-    status?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    observation?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    evidence?: StringNullableWithAggregatesFilter<"KpiReport"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"KpiReport"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"KpiReport"> | Date | string
-  }
-
-  export type KpiReviewWhereInput = {
-    AND?: KpiReviewWhereInput | KpiReviewWhereInput[]
-    OR?: KpiReviewWhereInput[]
-    NOT?: KpiReviewWhereInput | KpiReviewWhereInput[]
-    kpiReviewId?: StringFilter<"KpiReview"> | string
-    kpiReportId?: StringFilter<"KpiReview"> | string
-    comment?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedBy?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedAt?: DateTimeFilter<"KpiReview"> | Date | string
-    kpiReport?: XOR<KpiReportScalarRelationFilter, KpiReportWhereInput>
-  }
-
-  export type KpiReviewOrderByWithRelationInput = {
-    kpiReviewId?: SortOrder
-    kpiReportId?: SortOrder
-    comment?: SortOrderInput | SortOrder
-    reviewedBy?: SortOrderInput | SortOrder
-    reviewedAt?: SortOrder
-    kpiReport?: KpiReportOrderByWithRelationInput
-    _relevance?: KpiReviewOrderByRelevanceInput
-  }
-
-  export type KpiReviewWhereUniqueInput = Prisma.AtLeast<{
-    kpiReviewId?: string
-    AND?: KpiReviewWhereInput | KpiReviewWhereInput[]
-    OR?: KpiReviewWhereInput[]
-    NOT?: KpiReviewWhereInput | KpiReviewWhereInput[]
-    kpiReportId?: StringFilter<"KpiReview"> | string
-    comment?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedBy?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedAt?: DateTimeFilter<"KpiReview"> | Date | string
-    kpiReport?: XOR<KpiReportScalarRelationFilter, KpiReportWhereInput>
-  }, "kpiReviewId">
-
-  export type KpiReviewOrderByWithAggregationInput = {
-    kpiReviewId?: SortOrder
-    kpiReportId?: SortOrder
-    comment?: SortOrderInput | SortOrder
-    reviewedBy?: SortOrderInput | SortOrder
-    reviewedAt?: SortOrder
-    _count?: KpiReviewCountOrderByAggregateInput
-    _max?: KpiReviewMaxOrderByAggregateInput
-    _min?: KpiReviewMinOrderByAggregateInput
-  }
-
-  export type KpiReviewScalarWhereWithAggregatesInput = {
-    AND?: KpiReviewScalarWhereWithAggregatesInput | KpiReviewScalarWhereWithAggregatesInput[]
-    OR?: KpiReviewScalarWhereWithAggregatesInput[]
-    NOT?: KpiReviewScalarWhereWithAggregatesInput | KpiReviewScalarWhereWithAggregatesInput[]
-    kpiReviewId?: StringWithAggregatesFilter<"KpiReview"> | string
-    kpiReportId?: StringWithAggregatesFilter<"KpiReview"> | string
-    comment?: StringNullableWithAggregatesFilter<"KpiReview"> | string | null
-    reviewedBy?: StringNullableWithAggregatesFilter<"KpiReview"> | string | null
-    reviewedAt?: DateTimeWithAggregatesFilter<"KpiReview"> | Date | string
+  export type KpiDisaggregationScalarWhereWithAggregatesInput = {
+    AND?: KpiDisaggregationScalarWhereWithAggregatesInput | KpiDisaggregationScalarWhereWithAggregatesInput[]
+    OR?: KpiDisaggregationScalarWhereWithAggregatesInput[]
+    NOT?: KpiDisaggregationScalarWhereWithAggregatesInput | KpiDisaggregationScalarWhereWithAggregatesInput[]
+    kpiDisaggregationId?: StringWithAggregatesFilter<"KpiDisaggregation"> | string
+    kpiId?: StringWithAggregatesFilter<"KpiDisaggregation"> | string
+    type?: StringWithAggregatesFilter<"KpiDisaggregation"> | string
+    category?: StringWithAggregatesFilter<"KpiDisaggregation"> | string
+    target?: IntNullableWithAggregatesFilter<"KpiDisaggregation"> | number | null
+    baseline?: IntNullableWithAggregatesFilter<"KpiDisaggregation"> | number | null
   }
 
   export type ProjectWhereInput = {
@@ -36799,7 +35520,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkListRelationFilter
     request?: RequestListRelationFilter
     report?: ReportListRelationFilter
-    kpiReport?: KpiReportListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -36828,7 +35548,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkOrderByRelationAggregateInput
     request?: RequestOrderByRelationAggregateInput
     report?: ReportOrderByRelationAggregateInput
-    kpiReport?: KpiReportOrderByRelationAggregateInput
     _relevance?: ProjectOrderByRelevanceInput
   }
 
@@ -36861,7 +35580,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkListRelationFilter
     request?: RequestListRelationFilter
     report?: ReportListRelationFilter
-    kpiReport?: KpiReportListRelationFilter
   }, "projectId">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -37509,6 +36227,121 @@ export namespace Prisma {
     updateAt?: DateTimeNullableWithAggregatesFilter<"Indicator"> | Date | string | null
     result?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
     resultTypeId?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
+  }
+
+  export type NewKpiWhereInput = {
+    AND?: NewKpiWhereInput | NewKpiWhereInput[]
+    OR?: NewKpiWhereInput[]
+    NOT?: NewKpiWhereInput | NewKpiWhereInput[]
+    newKpiId?: StringFilter<"NewKpi"> | string
+    statement?: StringNullableFilter<"NewKpi"> | string | null
+    definition?: StringNullableFilter<"NewKpi"> | string | null
+    specificArea?: StringNullableFilter<"NewKpi"> | string | null
+    unitOfMeasure?: StringNullableFilter<"NewKpi"> | string | null
+    itemInMeasure?: StringNullableFilter<"NewKpi"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"NewKpi"> | number | null
+    baselineNarrative?: StringNullableFilter<"NewKpi"> | string | null
+    targetDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"NewKpi"> | number | null
+    targetNarrative?: StringNullableFilter<"NewKpi"> | string | null
+    targetType?: StringNullableFilter<"NewKpi"> | string | null
+    responsiblePersons?: StringNullableFilter<"NewKpi"> | string | null
+    kpiType?: StringNullableFilter<"NewKpi"> | string | null
+    createAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+  }
+
+  export type NewKpiOrderByWithRelationInput = {
+    newKpiId?: SortOrder
+    statement?: SortOrderInput | SortOrder
+    definition?: SortOrderInput | SortOrder
+    specificArea?: SortOrderInput | SortOrder
+    unitOfMeasure?: SortOrderInput | SortOrder
+    itemInMeasure?: SortOrderInput | SortOrder
+    baseLineDate?: SortOrderInput | SortOrder
+    cumulativeValue?: SortOrderInput | SortOrder
+    baselineNarrative?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    cumulativeTarget?: SortOrderInput | SortOrder
+    targetNarrative?: SortOrderInput | SortOrder
+    targetType?: SortOrderInput | SortOrder
+    responsiblePersons?: SortOrderInput | SortOrder
+    kpiType?: SortOrderInput | SortOrder
+    createAt?: SortOrderInput | SortOrder
+    updateAt?: SortOrderInput | SortOrder
+    _relevance?: NewKpiOrderByRelevanceInput
+  }
+
+  export type NewKpiWhereUniqueInput = Prisma.AtLeast<{
+    newKpiId?: string
+    AND?: NewKpiWhereInput | NewKpiWhereInput[]
+    OR?: NewKpiWhereInput[]
+    NOT?: NewKpiWhereInput | NewKpiWhereInput[]
+    statement?: StringNullableFilter<"NewKpi"> | string | null
+    definition?: StringNullableFilter<"NewKpi"> | string | null
+    specificArea?: StringNullableFilter<"NewKpi"> | string | null
+    unitOfMeasure?: StringNullableFilter<"NewKpi"> | string | null
+    itemInMeasure?: StringNullableFilter<"NewKpi"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"NewKpi"> | number | null
+    baselineNarrative?: StringNullableFilter<"NewKpi"> | string | null
+    targetDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"NewKpi"> | number | null
+    targetNarrative?: StringNullableFilter<"NewKpi"> | string | null
+    targetType?: StringNullableFilter<"NewKpi"> | string | null
+    responsiblePersons?: StringNullableFilter<"NewKpi"> | string | null
+    kpiType?: StringNullableFilter<"NewKpi"> | string | null
+    createAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
+  }, "newKpiId">
+
+  export type NewKpiOrderByWithAggregationInput = {
+    newKpiId?: SortOrder
+    statement?: SortOrderInput | SortOrder
+    definition?: SortOrderInput | SortOrder
+    specificArea?: SortOrderInput | SortOrder
+    unitOfMeasure?: SortOrderInput | SortOrder
+    itemInMeasure?: SortOrderInput | SortOrder
+    baseLineDate?: SortOrderInput | SortOrder
+    cumulativeValue?: SortOrderInput | SortOrder
+    baselineNarrative?: SortOrderInput | SortOrder
+    targetDate?: SortOrderInput | SortOrder
+    cumulativeTarget?: SortOrderInput | SortOrder
+    targetNarrative?: SortOrderInput | SortOrder
+    targetType?: SortOrderInput | SortOrder
+    responsiblePersons?: SortOrderInput | SortOrder
+    kpiType?: SortOrderInput | SortOrder
+    createAt?: SortOrderInput | SortOrder
+    updateAt?: SortOrderInput | SortOrder
+    _count?: NewKpiCountOrderByAggregateInput
+    _avg?: NewKpiAvgOrderByAggregateInput
+    _max?: NewKpiMaxOrderByAggregateInput
+    _min?: NewKpiMinOrderByAggregateInput
+    _sum?: NewKpiSumOrderByAggregateInput
+  }
+
+  export type NewKpiScalarWhereWithAggregatesInput = {
+    AND?: NewKpiScalarWhereWithAggregatesInput | NewKpiScalarWhereWithAggregatesInput[]
+    OR?: NewKpiScalarWhereWithAggregatesInput[]
+    NOT?: NewKpiScalarWhereWithAggregatesInput | NewKpiScalarWhereWithAggregatesInput[]
+    newKpiId?: StringWithAggregatesFilter<"NewKpi"> | string
+    statement?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    definition?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    specificArea?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    unitOfMeasure?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    itemInMeasure?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    baseLineDate?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
+    cumulativeValue?: IntNullableWithAggregatesFilter<"NewKpi"> | number | null
+    baselineNarrative?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    targetDate?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
+    cumulativeTarget?: IntNullableWithAggregatesFilter<"NewKpi"> | number | null
+    targetNarrative?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    targetType?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    responsiblePersons?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    kpiType?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
+    createAt?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
+    updateAt?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
   }
 
   export type IndicatorDisaggregationWhereInput = {
@@ -38777,7 +37610,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
-    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
     request?: RequestCreateNestedManyWithoutUserInput
     retirement?: RetirementCreateNestedManyWithoutUserInput
@@ -38804,7 +37636,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
     request?: RequestUncheckedCreateNestedManyWithoutUserInput
     retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
@@ -38831,7 +37662,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
     request?: RequestUpdateManyWithoutUserNestedInput
     retirement?: RetirementUpdateManyWithoutUserNestedInput
@@ -38858,7 +37688,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
     request?: RequestUncheckedUpdateManyWithoutUserNestedInput
     retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
@@ -39128,7 +37957,6 @@ export namespace Prisma {
     updateAt?: Date | string | null
     kpi?: KpiCreateNestedManyWithoutStrategicObjectiveInput
     project?: ProjectCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUncheckedCreateInput = {
@@ -39141,7 +37969,6 @@ export namespace Prisma {
     updateAt?: Date | string | null
     kpi?: KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput
     project?: ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUpdateInput = {
@@ -39154,7 +37981,6 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUpdateManyWithoutStrategicObjectiveNestedInput
     project?: ProjectUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveUncheckedUpdateInput = {
@@ -39167,7 +37993,6 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
     project?: ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveCreateManyInput = {
@@ -39204,81 +38029,106 @@ export namespace Prisma {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiInput
-    kpiAssignment?: KpiAssignmentCreateNestedManyWithoutKpiInput
+    kpiDisaggregation?: KpiDisaggregationCreateNestedManyWithoutKpiInput
   }
 
   export type KpiUncheckedCreateInput = {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiAssignment?: KpiAssignmentUncheckedCreateNestedManyWithoutKpiInput
+    kpiDisaggregation?: KpiDisaggregationUncheckedCreateNestedManyWithoutKpiInput
   }
 
   export type KpiUpdateInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiNestedInput
-    kpiAssignment?: KpiAssignmentUpdateManyWithoutKpiNestedInput
+    kpiDisaggregation?: KpiDisaggregationUpdateManyWithoutKpiNestedInput
   }
 
   export type KpiUncheckedUpdateInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiAssignment?: KpiAssignmentUncheckedUpdateManyWithoutKpiNestedInput
+    kpiDisaggregation?: KpiDisaggregationUncheckedUpdateManyWithoutKpiNestedInput
   }
 
   export type KpiCreateManyInput = {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -39288,13 +38138,18 @@ export namespace Prisma {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39303,246 +38158,83 @@ export namespace Prisma {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type KpiAssignmentCreateInput = {
-    kpiAssignmentId?: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
-    kpi: KpiCreateNestedOneWithoutKpiAssignmentInput
+  export type KpiDisaggregationCreateInput = {
+    kpiDisaggregationId?: string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
+    kpi: KpiCreateNestedOneWithoutKpiDisaggregationInput
   }
 
-  export type KpiAssignmentUncheckedCreateInput = {
-    kpiAssignmentId?: string
+  export type KpiDisaggregationUncheckedCreateInput = {
+    kpiDisaggregationId?: string
     kpiId: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
   }
 
-  export type KpiAssignmentUpdateInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpi?: KpiUpdateOneRequiredWithoutKpiAssignmentNestedInput
+  export type KpiDisaggregationUpdateInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
+    kpi?: KpiUpdateOneRequiredWithoutKpiDisaggregationNestedInput
   }
 
-  export type KpiAssignmentUncheckedUpdateInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
+  export type KpiDisaggregationUncheckedUpdateInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
     kpiId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type KpiAssignmentCreateManyInput = {
-    kpiAssignmentId?: string
+  export type KpiDisaggregationCreateManyInput = {
+    kpiDisaggregationId?: string
     kpiId: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
   }
 
-  export type KpiAssignmentUpdateManyMutationInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type KpiDisaggregationUpdateManyMutationInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type KpiAssignmentUncheckedUpdateManyInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
+  export type KpiDisaggregationUncheckedUpdateManyInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
     kpiId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReportCreateInput = {
-    kpiReportId?: string
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutKpiReportInput
-    user?: UserCreateNestedOneWithoutKpiReportInput
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiReportInput
-    kpiReview?: KpiReviewCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportUncheckedCreateInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    userId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    kpiReview?: KpiReviewUncheckedCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportUpdateInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutKpiReportNestedInput
-    user?: UserUpdateOneWithoutKpiReportNestedInput
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiReportNestedInput
-    kpiReview?: KpiReviewUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
     baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpiReview?: KpiReviewUncheckedUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportCreateManyInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    userId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type KpiReportUpdateManyMutationInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReportUncheckedUpdateManyInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewCreateInput = {
-    kpiReviewId?: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-    kpiReport: KpiReportCreateNestedOneWithoutKpiReviewInput
-  }
-
-  export type KpiReviewUncheckedCreateInput = {
-    kpiReviewId?: string
-    kpiReportId: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-  }
-
-  export type KpiReviewUpdateInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpiReport?: KpiReportUpdateOneRequiredWithoutKpiReviewNestedInput
-  }
-
-  export type KpiReviewUncheckedUpdateInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewCreateManyInput = {
-    kpiReviewId?: string
-    kpiReportId: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-  }
-
-  export type KpiReviewUpdateManyMutationInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewUncheckedUpdateManyInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectCreateInput = {
@@ -39570,7 +38262,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -39598,7 +38289,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -39626,7 +38316,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -39654,7 +38343,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -40360,6 +39048,146 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type NewKpiCreateInput = {
+    newKpiId?: string
+    statement?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    kpiType?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type NewKpiUncheckedCreateInput = {
+    newKpiId?: string
+    statement?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    kpiType?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type NewKpiUpdateInput = {
+    newKpiId?: StringFieldUpdateOperationsInput | string
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NewKpiUncheckedUpdateInput = {
+    newKpiId?: StringFieldUpdateOperationsInput | string
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NewKpiCreateManyInput = {
+    newKpiId?: string
+    statement?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    kpiType?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+  }
+
+  export type NewKpiUpdateManyMutationInput = {
+    newKpiId?: StringFieldUpdateOperationsInput | string
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type NewKpiUncheckedUpdateManyInput = {
+    newKpiId?: StringFieldUpdateOperationsInput | string
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IndicatorDisaggregationCreateInput = {
@@ -41789,12 +40617,6 @@ export namespace Prisma {
     isNot?: RoleWhereInput | null
   }
 
-  export type KpiReportListRelationFilter = {
-    every?: KpiReportWhereInput
-    some?: KpiReportWhereInput
-    none?: KpiReportWhereInput
-  }
-
   export type PartnerListRelationFilter = {
     every?: PartnerWhereInput
     some?: PartnerWhereInput
@@ -41816,10 +40638,6 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type KpiReportOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type PartnerOrderByRelationAggregateInput = {
@@ -42128,18 +40946,29 @@ export namespace Prisma {
     updateAt?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type StrategicObjectiveNullableScalarRelationFilter = {
     is?: StrategicObjectiveWhereInput | null
     isNot?: StrategicObjectiveWhereInput | null
   }
 
-  export type KpiAssignmentListRelationFilter = {
-    every?: KpiAssignmentWhereInput
-    some?: KpiAssignmentWhereInput
-    none?: KpiAssignmentWhereInput
+  export type KpiDisaggregationListRelationFilter = {
+    every?: KpiDisaggregationWhereInput
+    some?: KpiDisaggregationWhereInput
+    none?: KpiDisaggregationWhereInput
   }
 
-  export type KpiAssignmentOrderByRelationAggregateInput = {
+  export type KpiDisaggregationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -42153,29 +40982,44 @@ export namespace Prisma {
     kpiId?: SortOrder
     statement?: SortOrder
     definition?: SortOrder
-    type?: SortOrder
-    specificAreas?: SortOrder
+    specificArea?: SortOrder
     unitOfMeasure?: SortOrder
     itemInMeasure?: SortOrder
-    disaggregation?: SortOrder
-    baseLine?: SortOrder
-    target?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    type?: SortOrder
     strategicObjectiveId?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type KpiAvgOrderByAggregateInput = {
+    cumulativeValue?: SortOrder
+    cumulativeTarget?: SortOrder
   }
 
   export type KpiMaxOrderByAggregateInput = {
     kpiId?: SortOrder
     statement?: SortOrder
     definition?: SortOrder
-    type?: SortOrder
-    specificAreas?: SortOrder
+    specificArea?: SortOrder
     unitOfMeasure?: SortOrder
     itemInMeasure?: SortOrder
-    disaggregation?: SortOrder
-    baseLine?: SortOrder
-    target?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    type?: SortOrder
     strategicObjectiveId?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -42185,176 +41029,26 @@ export namespace Prisma {
     kpiId?: SortOrder
     statement?: SortOrder
     definition?: SortOrder
-    type?: SortOrder
-    specificAreas?: SortOrder
+    specificArea?: SortOrder
     unitOfMeasure?: SortOrder
     itemInMeasure?: SortOrder
-    disaggregation?: SortOrder
-    baseLine?: SortOrder
-    target?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    type?: SortOrder
     strategicObjectiveId?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type KpiScalarRelationFilter = {
-    is?: KpiWhereInput
-    isNot?: KpiWhereInput
-  }
-
-  export type KpiAssignmentOrderByRelevanceInput = {
-    fields: KpiAssignmentOrderByRelevanceFieldEnum | KpiAssignmentOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type KpiAssignmentCountOrderByAggregateInput = {
-    kpiAssignmentId?: SortOrder
-    kpiId?: SortOrder
-    projectId?: SortOrder
-    assignedToId?: SortOrder
-    assignedAt?: SortOrder
-  }
-
-  export type KpiAssignmentMaxOrderByAggregateInput = {
-    kpiAssignmentId?: SortOrder
-    kpiId?: SortOrder
-    projectId?: SortOrder
-    assignedToId?: SortOrder
-    assignedAt?: SortOrder
-  }
-
-  export type KpiAssignmentMinOrderByAggregateInput = {
-    kpiAssignmentId?: SortOrder
-    kpiId?: SortOrder
-    projectId?: SortOrder
-    assignedToId?: SortOrder
-    assignedAt?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type ProjectNullableScalarRelationFilter = {
-    is?: ProjectWhereInput | null
-    isNot?: ProjectWhereInput | null
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type KpiReviewListRelationFilter = {
-    every?: KpiReviewWhereInput
-    some?: KpiReviewWhereInput
-    none?: KpiReviewWhereInput
-  }
-
-  export type KpiReviewOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type KpiReportOrderByRelevanceInput = {
-    fields: KpiReportOrderByRelevanceFieldEnum | KpiReportOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type KpiReportCountOrderByAggregateInput = {
-    kpiReportId?: SortOrder
-    projectId?: SortOrder
-    userId?: SortOrder
-    strategicObjectiveId?: SortOrder
-    kpiName?: SortOrder
-    kpiType?: SortOrder
-    baseline?: SortOrder
-    target?: SortOrder
-    actualValue?: SortOrder
-    status?: SortOrder
-    observation?: SortOrder
-    evidence?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type KpiReportAvgOrderByAggregateInput = {
-    baseline?: SortOrder
-    target?: SortOrder
-    actualValue?: SortOrder
-  }
-
-  export type KpiReportMaxOrderByAggregateInput = {
-    kpiReportId?: SortOrder
-    projectId?: SortOrder
-    userId?: SortOrder
-    strategicObjectiveId?: SortOrder
-    kpiName?: SortOrder
-    kpiType?: SortOrder
-    baseline?: SortOrder
-    target?: SortOrder
-    actualValue?: SortOrder
-    status?: SortOrder
-    observation?: SortOrder
-    evidence?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type KpiReportMinOrderByAggregateInput = {
-    kpiReportId?: SortOrder
-    projectId?: SortOrder
-    userId?: SortOrder
-    strategicObjectiveId?: SortOrder
-    kpiName?: SortOrder
-    kpiType?: SortOrder
-    baseline?: SortOrder
-    target?: SortOrder
-    actualValue?: SortOrder
-    status?: SortOrder
-    observation?: SortOrder
-    evidence?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type KpiReportSumOrderByAggregateInput = {
-    baseline?: SortOrder
-    target?: SortOrder
-    actualValue?: SortOrder
+  export type KpiSumOrderByAggregateInput = {
+    cumulativeValue?: SortOrder
+    cumulativeTarget?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -42373,39 +41067,52 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type KpiReportScalarRelationFilter = {
-    is?: KpiReportWhereInput
-    isNot?: KpiReportWhereInput
+  export type KpiScalarRelationFilter = {
+    is?: KpiWhereInput
+    isNot?: KpiWhereInput
   }
 
-  export type KpiReviewOrderByRelevanceInput = {
-    fields: KpiReviewOrderByRelevanceFieldEnum | KpiReviewOrderByRelevanceFieldEnum[]
+  export type KpiDisaggregationOrderByRelevanceInput = {
+    fields: KpiDisaggregationOrderByRelevanceFieldEnum | KpiDisaggregationOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
   }
 
-  export type KpiReviewCountOrderByAggregateInput = {
-    kpiReviewId?: SortOrder
-    kpiReportId?: SortOrder
-    comment?: SortOrder
-    reviewedBy?: SortOrder
-    reviewedAt?: SortOrder
+  export type KpiDisaggregationCountOrderByAggregateInput = {
+    kpiDisaggregationId?: SortOrder
+    kpiId?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    target?: SortOrder
+    baseline?: SortOrder
   }
 
-  export type KpiReviewMaxOrderByAggregateInput = {
-    kpiReviewId?: SortOrder
-    kpiReportId?: SortOrder
-    comment?: SortOrder
-    reviewedBy?: SortOrder
-    reviewedAt?: SortOrder
+  export type KpiDisaggregationAvgOrderByAggregateInput = {
+    target?: SortOrder
+    baseline?: SortOrder
   }
 
-  export type KpiReviewMinOrderByAggregateInput = {
-    kpiReviewId?: SortOrder
-    kpiReportId?: SortOrder
-    comment?: SortOrder
-    reviewedBy?: SortOrder
-    reviewedAt?: SortOrder
+  export type KpiDisaggregationMaxOrderByAggregateInput = {
+    kpiDisaggregationId?: SortOrder
+    kpiId?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    target?: SortOrder
+    baseline?: SortOrder
+  }
+
+  export type KpiDisaggregationMinOrderByAggregateInput = {
+    kpiDisaggregationId?: SortOrder
+    kpiId?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    target?: SortOrder
+    baseline?: SortOrder
+  }
+
+  export type KpiDisaggregationSumOrderByAggregateInput = {
+    target?: SortOrder
+    baseline?: SortOrder
   }
 
   export type TeamMemberListRelationFilter = {
@@ -42538,6 +41245,11 @@ export namespace Prisma {
     updateAt?: SortOrder
   }
 
+  export type ProjectNullableScalarRelationFilter = {
+    is?: ProjectWhereInput | null
+    isNot?: ProjectWhereInput | null
+  }
+
   export type TeamMemberOrderByRelevanceInput = {
     fields: TeamMemberOrderByRelevanceFieldEnum | TeamMemberOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -42575,6 +41287,11 @@ export namespace Prisma {
     projectId?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type PartnerOrderByRelevanceInput = {
@@ -42905,6 +41622,82 @@ export namespace Prisma {
   }
 
   export type IndicatorSumOrderByAggregateInput = {
+    cumulativeValue?: SortOrder
+    cumulativeTarget?: SortOrder
+  }
+
+  export type NewKpiOrderByRelevanceInput = {
+    fields: NewKpiOrderByRelevanceFieldEnum | NewKpiOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type NewKpiCountOrderByAggregateInput = {
+    newKpiId?: SortOrder
+    statement?: SortOrder
+    definition?: SortOrder
+    specificArea?: SortOrder
+    unitOfMeasure?: SortOrder
+    itemInMeasure?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    kpiType?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type NewKpiAvgOrderByAggregateInput = {
+    cumulativeValue?: SortOrder
+    cumulativeTarget?: SortOrder
+  }
+
+  export type NewKpiMaxOrderByAggregateInput = {
+    newKpiId?: SortOrder
+    statement?: SortOrder
+    definition?: SortOrder
+    specificArea?: SortOrder
+    unitOfMeasure?: SortOrder
+    itemInMeasure?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    kpiType?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type NewKpiMinOrderByAggregateInput = {
+    newKpiId?: SortOrder
+    statement?: SortOrder
+    definition?: SortOrder
+    specificArea?: SortOrder
+    unitOfMeasure?: SortOrder
+    itemInMeasure?: SortOrder
+    baseLineDate?: SortOrder
+    cumulativeValue?: SortOrder
+    baselineNarrative?: SortOrder
+    targetDate?: SortOrder
+    cumulativeTarget?: SortOrder
+    targetNarrative?: SortOrder
+    targetType?: SortOrder
+    responsiblePersons?: SortOrder
+    kpiType?: SortOrder
+    createAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type NewKpiSumOrderByAggregateInput = {
     cumulativeValue?: SortOrder
     cumulativeTarget?: SortOrder
   }
@@ -43714,6 +42507,17 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type ReportOrderByRelevanceInput = {
     fields: ReportOrderByRelevanceFieldEnum | ReportOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -43812,17 +42616,24 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type RoleCreateNestedOneWithoutUsersInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
     connect?: RoleWhereUniqueInput
-  }
-
-  export type KpiReportCreateNestedManyWithoutUserInput = {
-    create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
-    createMany?: KpiReportCreateManyUserInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
   }
 
   export type PartnerCreateNestedManyWithoutUserInput = {
@@ -43844,13 +42655,6 @@ export namespace Prisma {
     connectOrCreate?: RetirementCreateOrConnectWithoutUserInput | RetirementCreateOrConnectWithoutUserInput[]
     createMany?: RetirementCreateManyUserInputEnvelope
     connect?: RetirementWhereUniqueInput | RetirementWhereUniqueInput[]
-  }
-
-  export type KpiReportUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
-    createMany?: KpiReportCreateManyUserInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
   }
 
   export type PartnerUncheckedCreateNestedManyWithoutUserInput = {
@@ -43896,20 +42700,6 @@ export namespace Prisma {
     update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutUsersInput, RoleUpdateWithoutUsersInput>, RoleUncheckedUpdateWithoutUsersInput>
   }
 
-  export type KpiReportUpdateManyWithoutUserNestedInput = {
-    create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutUserInput | KpiReportUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: KpiReportCreateManyUserInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutUserInput | KpiReportUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutUserInput | KpiReportUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-  }
-
   export type PartnerUpdateManyWithoutUserNestedInput = {
     create?: XOR<PartnerCreateWithoutUserInput, PartnerUncheckedCreateWithoutUserInput> | PartnerCreateWithoutUserInput[] | PartnerUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PartnerCreateOrConnectWithoutUserInput | PartnerCreateOrConnectWithoutUserInput[]
@@ -43950,20 +42740,6 @@ export namespace Prisma {
     update?: RetirementUpdateWithWhereUniqueWithoutUserInput | RetirementUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: RetirementUpdateManyWithWhereWithoutUserInput | RetirementUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: RetirementScalarWhereInput | RetirementScalarWhereInput[]
-  }
-
-  export type KpiReportUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput> | KpiReportCreateWithoutUserInput[] | KpiReportUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutUserInput | KpiReportCreateOrConnectWithoutUserInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutUserInput | KpiReportUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: KpiReportCreateManyUserInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutUserInput | KpiReportUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutUserInput | KpiReportUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
   }
 
   export type PartnerUncheckedUpdateManyWithoutUserNestedInput = {
@@ -44068,13 +42844,6 @@ export namespace Prisma {
     connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
   }
 
-  export type KpiReportCreateNestedManyWithoutStrategicObjectiveInput = {
-    create?: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput> | KpiReportCreateWithoutStrategicObjectiveInput[] | KpiReportUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutStrategicObjectiveInput | KpiReportCreateOrConnectWithoutStrategicObjectiveInput[]
-    createMany?: KpiReportCreateManyStrategicObjectiveInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-  }
-
   export type KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput = {
     create?: XOR<KpiCreateWithoutStrategicObjectiveInput, KpiUncheckedCreateWithoutStrategicObjectiveInput> | KpiCreateWithoutStrategicObjectiveInput[] | KpiUncheckedCreateWithoutStrategicObjectiveInput[]
     connectOrCreate?: KpiCreateOrConnectWithoutStrategicObjectiveInput | KpiCreateOrConnectWithoutStrategicObjectiveInput[]
@@ -44087,13 +42856,6 @@ export namespace Prisma {
     connectOrCreate?: ProjectCreateOrConnectWithoutStrategicObjectiveInput | ProjectCreateOrConnectWithoutStrategicObjectiveInput[]
     createMany?: ProjectCreateManyStrategicObjectiveInputEnvelope
     connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-  }
-
-  export type KpiReportUncheckedCreateNestedManyWithoutStrategicObjectiveInput = {
-    create?: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput> | KpiReportCreateWithoutStrategicObjectiveInput[] | KpiReportUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutStrategicObjectiveInput | KpiReportCreateOrConnectWithoutStrategicObjectiveInput[]
-    createMany?: KpiReportCreateManyStrategicObjectiveInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
   }
 
   export type KpiUpdateManyWithoutStrategicObjectiveNestedInput = {
@@ -44124,20 +42886,6 @@ export namespace Prisma {
     deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
   }
 
-  export type KpiReportUpdateManyWithoutStrategicObjectiveNestedInput = {
-    create?: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput> | KpiReportCreateWithoutStrategicObjectiveInput[] | KpiReportUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutStrategicObjectiveInput | KpiReportCreateOrConnectWithoutStrategicObjectiveInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutStrategicObjectiveInput | KpiReportUpsertWithWhereUniqueWithoutStrategicObjectiveInput[]
-    createMany?: KpiReportCreateManyStrategicObjectiveInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutStrategicObjectiveInput | KpiReportUpdateWithWhereUniqueWithoutStrategicObjectiveInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutStrategicObjectiveInput | KpiReportUpdateManyWithWhereWithoutStrategicObjectiveInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-  }
-
   export type KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput = {
     create?: XOR<KpiCreateWithoutStrategicObjectiveInput, KpiUncheckedCreateWithoutStrategicObjectiveInput> | KpiCreateWithoutStrategicObjectiveInput[] | KpiUncheckedCreateWithoutStrategicObjectiveInput[]
     connectOrCreate?: KpiCreateOrConnectWithoutStrategicObjectiveInput | KpiCreateOrConnectWithoutStrategicObjectiveInput[]
@@ -44166,38 +42914,32 @@ export namespace Prisma {
     deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
   }
 
-  export type KpiReportUncheckedUpdateManyWithoutStrategicObjectiveNestedInput = {
-    create?: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput> | KpiReportCreateWithoutStrategicObjectiveInput[] | KpiReportUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutStrategicObjectiveInput | KpiReportCreateOrConnectWithoutStrategicObjectiveInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutStrategicObjectiveInput | KpiReportUpsertWithWhereUniqueWithoutStrategicObjectiveInput[]
-    createMany?: KpiReportCreateManyStrategicObjectiveInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutStrategicObjectiveInput | KpiReportUpdateWithWhereUniqueWithoutStrategicObjectiveInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutStrategicObjectiveInput | KpiReportUpdateManyWithWhereWithoutStrategicObjectiveInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-  }
-
   export type StrategicObjectiveCreateNestedOneWithoutKpiInput = {
     create?: XOR<StrategicObjectiveCreateWithoutKpiInput, StrategicObjectiveUncheckedCreateWithoutKpiInput>
     connectOrCreate?: StrategicObjectiveCreateOrConnectWithoutKpiInput
     connect?: StrategicObjectiveWhereUniqueInput
   }
 
-  export type KpiAssignmentCreateNestedManyWithoutKpiInput = {
-    create?: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput> | KpiAssignmentCreateWithoutKpiInput[] | KpiAssignmentUncheckedCreateWithoutKpiInput[]
-    connectOrCreate?: KpiAssignmentCreateOrConnectWithoutKpiInput | KpiAssignmentCreateOrConnectWithoutKpiInput[]
-    createMany?: KpiAssignmentCreateManyKpiInputEnvelope
-    connect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
+  export type KpiDisaggregationCreateNestedManyWithoutKpiInput = {
+    create?: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput> | KpiDisaggregationCreateWithoutKpiInput[] | KpiDisaggregationUncheckedCreateWithoutKpiInput[]
+    connectOrCreate?: KpiDisaggregationCreateOrConnectWithoutKpiInput | KpiDisaggregationCreateOrConnectWithoutKpiInput[]
+    createMany?: KpiDisaggregationCreateManyKpiInputEnvelope
+    connect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
   }
 
-  export type KpiAssignmentUncheckedCreateNestedManyWithoutKpiInput = {
-    create?: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput> | KpiAssignmentCreateWithoutKpiInput[] | KpiAssignmentUncheckedCreateWithoutKpiInput[]
-    connectOrCreate?: KpiAssignmentCreateOrConnectWithoutKpiInput | KpiAssignmentCreateOrConnectWithoutKpiInput[]
-    createMany?: KpiAssignmentCreateManyKpiInputEnvelope
-    connect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
+  export type KpiDisaggregationUncheckedCreateNestedManyWithoutKpiInput = {
+    create?: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput> | KpiDisaggregationCreateWithoutKpiInput[] | KpiDisaggregationUncheckedCreateWithoutKpiInput[]
+    connectOrCreate?: KpiDisaggregationCreateOrConnectWithoutKpiInput | KpiDisaggregationCreateOrConnectWithoutKpiInput[]
+    createMany?: KpiDisaggregationCreateManyKpiInputEnvelope
+    connect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type StrategicObjectiveUpdateOneWithoutKpiNestedInput = {
@@ -44210,162 +42952,46 @@ export namespace Prisma {
     update?: XOR<XOR<StrategicObjectiveUpdateToOneWithWhereWithoutKpiInput, StrategicObjectiveUpdateWithoutKpiInput>, StrategicObjectiveUncheckedUpdateWithoutKpiInput>
   }
 
-  export type KpiAssignmentUpdateManyWithoutKpiNestedInput = {
-    create?: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput> | KpiAssignmentCreateWithoutKpiInput[] | KpiAssignmentUncheckedCreateWithoutKpiInput[]
-    connectOrCreate?: KpiAssignmentCreateOrConnectWithoutKpiInput | KpiAssignmentCreateOrConnectWithoutKpiInput[]
-    upsert?: KpiAssignmentUpsertWithWhereUniqueWithoutKpiInput | KpiAssignmentUpsertWithWhereUniqueWithoutKpiInput[]
-    createMany?: KpiAssignmentCreateManyKpiInputEnvelope
-    set?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    disconnect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    delete?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    connect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    update?: KpiAssignmentUpdateWithWhereUniqueWithoutKpiInput | KpiAssignmentUpdateWithWhereUniqueWithoutKpiInput[]
-    updateMany?: KpiAssignmentUpdateManyWithWhereWithoutKpiInput | KpiAssignmentUpdateManyWithWhereWithoutKpiInput[]
-    deleteMany?: KpiAssignmentScalarWhereInput | KpiAssignmentScalarWhereInput[]
+  export type KpiDisaggregationUpdateManyWithoutKpiNestedInput = {
+    create?: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput> | KpiDisaggregationCreateWithoutKpiInput[] | KpiDisaggregationUncheckedCreateWithoutKpiInput[]
+    connectOrCreate?: KpiDisaggregationCreateOrConnectWithoutKpiInput | KpiDisaggregationCreateOrConnectWithoutKpiInput[]
+    upsert?: KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput | KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput[]
+    createMany?: KpiDisaggregationCreateManyKpiInputEnvelope
+    set?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    disconnect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    delete?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    connect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    update?: KpiDisaggregationUpdateWithWhereUniqueWithoutKpiInput | KpiDisaggregationUpdateWithWhereUniqueWithoutKpiInput[]
+    updateMany?: KpiDisaggregationUpdateManyWithWhereWithoutKpiInput | KpiDisaggregationUpdateManyWithWhereWithoutKpiInput[]
+    deleteMany?: KpiDisaggregationScalarWhereInput | KpiDisaggregationScalarWhereInput[]
   }
 
-  export type KpiAssignmentUncheckedUpdateManyWithoutKpiNestedInput = {
-    create?: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput> | KpiAssignmentCreateWithoutKpiInput[] | KpiAssignmentUncheckedCreateWithoutKpiInput[]
-    connectOrCreate?: KpiAssignmentCreateOrConnectWithoutKpiInput | KpiAssignmentCreateOrConnectWithoutKpiInput[]
-    upsert?: KpiAssignmentUpsertWithWhereUniqueWithoutKpiInput | KpiAssignmentUpsertWithWhereUniqueWithoutKpiInput[]
-    createMany?: KpiAssignmentCreateManyKpiInputEnvelope
-    set?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    disconnect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    delete?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    connect?: KpiAssignmentWhereUniqueInput | KpiAssignmentWhereUniqueInput[]
-    update?: KpiAssignmentUpdateWithWhereUniqueWithoutKpiInput | KpiAssignmentUpdateWithWhereUniqueWithoutKpiInput[]
-    updateMany?: KpiAssignmentUpdateManyWithWhereWithoutKpiInput | KpiAssignmentUpdateManyWithWhereWithoutKpiInput[]
-    deleteMany?: KpiAssignmentScalarWhereInput | KpiAssignmentScalarWhereInput[]
+  export type KpiDisaggregationUncheckedUpdateManyWithoutKpiNestedInput = {
+    create?: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput> | KpiDisaggregationCreateWithoutKpiInput[] | KpiDisaggregationUncheckedCreateWithoutKpiInput[]
+    connectOrCreate?: KpiDisaggregationCreateOrConnectWithoutKpiInput | KpiDisaggregationCreateOrConnectWithoutKpiInput[]
+    upsert?: KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput | KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput[]
+    createMany?: KpiDisaggregationCreateManyKpiInputEnvelope
+    set?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    disconnect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    delete?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    connect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
+    update?: KpiDisaggregationUpdateWithWhereUniqueWithoutKpiInput | KpiDisaggregationUpdateWithWhereUniqueWithoutKpiInput[]
+    updateMany?: KpiDisaggregationUpdateManyWithWhereWithoutKpiInput | KpiDisaggregationUpdateManyWithWhereWithoutKpiInput[]
+    deleteMany?: KpiDisaggregationScalarWhereInput | KpiDisaggregationScalarWhereInput[]
   }
 
-  export type KpiCreateNestedOneWithoutKpiAssignmentInput = {
-    create?: XOR<KpiCreateWithoutKpiAssignmentInput, KpiUncheckedCreateWithoutKpiAssignmentInput>
-    connectOrCreate?: KpiCreateOrConnectWithoutKpiAssignmentInput
+  export type KpiCreateNestedOneWithoutKpiDisaggregationInput = {
+    create?: XOR<KpiCreateWithoutKpiDisaggregationInput, KpiUncheckedCreateWithoutKpiDisaggregationInput>
+    connectOrCreate?: KpiCreateOrConnectWithoutKpiDisaggregationInput
     connect?: KpiWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type KpiUpdateOneRequiredWithoutKpiAssignmentNestedInput = {
-    create?: XOR<KpiCreateWithoutKpiAssignmentInput, KpiUncheckedCreateWithoutKpiAssignmentInput>
-    connectOrCreate?: KpiCreateOrConnectWithoutKpiAssignmentInput
-    upsert?: KpiUpsertWithoutKpiAssignmentInput
+  export type KpiUpdateOneRequiredWithoutKpiDisaggregationNestedInput = {
+    create?: XOR<KpiCreateWithoutKpiDisaggregationInput, KpiUncheckedCreateWithoutKpiDisaggregationInput>
+    connectOrCreate?: KpiCreateOrConnectWithoutKpiDisaggregationInput
+    upsert?: KpiUpsertWithoutKpiDisaggregationInput
     connect?: KpiWhereUniqueInput
-    update?: XOR<XOR<KpiUpdateToOneWithWhereWithoutKpiAssignmentInput, KpiUpdateWithoutKpiAssignmentInput>, KpiUncheckedUpdateWithoutKpiAssignmentInput>
-  }
-
-  export type ProjectCreateNestedOneWithoutKpiReportInput = {
-    create?: XOR<ProjectCreateWithoutKpiReportInput, ProjectUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutKpiReportInput
-    connect?: ProjectWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutKpiReportInput = {
-    create?: XOR<UserCreateWithoutKpiReportInput, UserUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: UserCreateOrConnectWithoutKpiReportInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type StrategicObjectiveCreateNestedOneWithoutKpiReportInput = {
-    create?: XOR<StrategicObjectiveCreateWithoutKpiReportInput, StrategicObjectiveUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: StrategicObjectiveCreateOrConnectWithoutKpiReportInput
-    connect?: StrategicObjectiveWhereUniqueInput
-  }
-
-  export type KpiReviewCreateNestedManyWithoutKpiReportInput = {
-    create?: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput> | KpiReviewCreateWithoutKpiReportInput[] | KpiReviewUncheckedCreateWithoutKpiReportInput[]
-    connectOrCreate?: KpiReviewCreateOrConnectWithoutKpiReportInput | KpiReviewCreateOrConnectWithoutKpiReportInput[]
-    createMany?: KpiReviewCreateManyKpiReportInputEnvelope
-    connect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-  }
-
-  export type KpiReviewUncheckedCreateNestedManyWithoutKpiReportInput = {
-    create?: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput> | KpiReviewCreateWithoutKpiReportInput[] | KpiReviewUncheckedCreateWithoutKpiReportInput[]
-    connectOrCreate?: KpiReviewCreateOrConnectWithoutKpiReportInput | KpiReviewCreateOrConnectWithoutKpiReportInput[]
-    createMany?: KpiReviewCreateManyKpiReportInputEnvelope
-    connect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type ProjectUpdateOneWithoutKpiReportNestedInput = {
-    create?: XOR<ProjectCreateWithoutKpiReportInput, ProjectUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: ProjectCreateOrConnectWithoutKpiReportInput
-    upsert?: ProjectUpsertWithoutKpiReportInput
-    disconnect?: ProjectWhereInput | boolean
-    delete?: ProjectWhereInput | boolean
-    connect?: ProjectWhereUniqueInput
-    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutKpiReportInput, ProjectUpdateWithoutKpiReportInput>, ProjectUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type UserUpdateOneWithoutKpiReportNestedInput = {
-    create?: XOR<UserCreateWithoutKpiReportInput, UserUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: UserCreateOrConnectWithoutKpiReportInput
-    upsert?: UserUpsertWithoutKpiReportInput
-    disconnect?: UserWhereInput | boolean
-    delete?: UserWhereInput | boolean
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutKpiReportInput, UserUpdateWithoutKpiReportInput>, UserUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type StrategicObjectiveUpdateOneWithoutKpiReportNestedInput = {
-    create?: XOR<StrategicObjectiveCreateWithoutKpiReportInput, StrategicObjectiveUncheckedCreateWithoutKpiReportInput>
-    connectOrCreate?: StrategicObjectiveCreateOrConnectWithoutKpiReportInput
-    upsert?: StrategicObjectiveUpsertWithoutKpiReportInput
-    disconnect?: StrategicObjectiveWhereInput | boolean
-    delete?: StrategicObjectiveWhereInput | boolean
-    connect?: StrategicObjectiveWhereUniqueInput
-    update?: XOR<XOR<StrategicObjectiveUpdateToOneWithWhereWithoutKpiReportInput, StrategicObjectiveUpdateWithoutKpiReportInput>, StrategicObjectiveUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type KpiReviewUpdateManyWithoutKpiReportNestedInput = {
-    create?: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput> | KpiReviewCreateWithoutKpiReportInput[] | KpiReviewUncheckedCreateWithoutKpiReportInput[]
-    connectOrCreate?: KpiReviewCreateOrConnectWithoutKpiReportInput | KpiReviewCreateOrConnectWithoutKpiReportInput[]
-    upsert?: KpiReviewUpsertWithWhereUniqueWithoutKpiReportInput | KpiReviewUpsertWithWhereUniqueWithoutKpiReportInput[]
-    createMany?: KpiReviewCreateManyKpiReportInputEnvelope
-    set?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    disconnect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    delete?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    connect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    update?: KpiReviewUpdateWithWhereUniqueWithoutKpiReportInput | KpiReviewUpdateWithWhereUniqueWithoutKpiReportInput[]
-    updateMany?: KpiReviewUpdateManyWithWhereWithoutKpiReportInput | KpiReviewUpdateManyWithWhereWithoutKpiReportInput[]
-    deleteMany?: KpiReviewScalarWhereInput | KpiReviewScalarWhereInput[]
-  }
-
-  export type KpiReviewUncheckedUpdateManyWithoutKpiReportNestedInput = {
-    create?: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput> | KpiReviewCreateWithoutKpiReportInput[] | KpiReviewUncheckedCreateWithoutKpiReportInput[]
-    connectOrCreate?: KpiReviewCreateOrConnectWithoutKpiReportInput | KpiReviewCreateOrConnectWithoutKpiReportInput[]
-    upsert?: KpiReviewUpsertWithWhereUniqueWithoutKpiReportInput | KpiReviewUpsertWithWhereUniqueWithoutKpiReportInput[]
-    createMany?: KpiReviewCreateManyKpiReportInputEnvelope
-    set?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    disconnect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    delete?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    connect?: KpiReviewWhereUniqueInput | KpiReviewWhereUniqueInput[]
-    update?: KpiReviewUpdateWithWhereUniqueWithoutKpiReportInput | KpiReviewUpdateWithWhereUniqueWithoutKpiReportInput[]
-    updateMany?: KpiReviewUpdateManyWithWhereWithoutKpiReportInput | KpiReviewUpdateManyWithWhereWithoutKpiReportInput[]
-    deleteMany?: KpiReviewScalarWhereInput | KpiReviewScalarWhereInput[]
-  }
-
-  export type KpiReportCreateNestedOneWithoutKpiReviewInput = {
-    create?: XOR<KpiReportCreateWithoutKpiReviewInput, KpiReportUncheckedCreateWithoutKpiReviewInput>
-    connectOrCreate?: KpiReportCreateOrConnectWithoutKpiReviewInput
-    connect?: KpiReportWhereUniqueInput
-  }
-
-  export type KpiReportUpdateOneRequiredWithoutKpiReviewNestedInput = {
-    create?: XOR<KpiReportCreateWithoutKpiReviewInput, KpiReportUncheckedCreateWithoutKpiReviewInput>
-    connectOrCreate?: KpiReportCreateOrConnectWithoutKpiReviewInput
-    upsert?: KpiReportUpsertWithoutKpiReviewInput
-    connect?: KpiReportWhereUniqueInput
-    update?: XOR<XOR<KpiReportUpdateToOneWithWhereWithoutKpiReviewInput, KpiReportUpdateWithoutKpiReviewInput>, KpiReportUncheckedUpdateWithoutKpiReviewInput>
+    update?: XOR<XOR<KpiUpdateToOneWithWhereWithoutKpiDisaggregationInput, KpiUpdateWithoutKpiDisaggregationInput>, KpiUncheckedUpdateWithoutKpiDisaggregationInput>
   }
 
   export type StrategicObjectiveCreateNestedOneWithoutProjectInput = {
@@ -44437,13 +43063,6 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
-  export type KpiReportCreateNestedManyWithoutProjectInput = {
-    create?: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput> | KpiReportCreateWithoutProjectInput[] | KpiReportUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutProjectInput | KpiReportCreateOrConnectWithoutProjectInput[]
-    createMany?: KpiReportCreateManyProjectInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-  }
-
   export type TeamMemberUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<TeamMemberCreateWithoutProjectInput, TeamMemberUncheckedCreateWithoutProjectInput> | TeamMemberCreateWithoutProjectInput[] | TeamMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TeamMemberCreateOrConnectWithoutProjectInput | TeamMemberCreateOrConnectWithoutProjectInput[]
@@ -44505,13 +43124,6 @@ export namespace Prisma {
     connectOrCreate?: ReportCreateOrConnectWithoutProjectInput | ReportCreateOrConnectWithoutProjectInput[]
     createMany?: ReportCreateManyProjectInputEnvelope
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
-  }
-
-  export type KpiReportUncheckedCreateNestedManyWithoutProjectInput = {
-    create?: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput> | KpiReportCreateWithoutProjectInput[] | KpiReportUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutProjectInput | KpiReportCreateOrConnectWithoutProjectInput[]
-    createMany?: KpiReportCreateManyProjectInputEnvelope
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
   }
 
   export type StrategicObjectiveUpdateOneWithoutProjectNestedInput = {
@@ -44650,20 +43262,6 @@ export namespace Prisma {
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
   }
 
-  export type KpiReportUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput> | KpiReportCreateWithoutProjectInput[] | KpiReportUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutProjectInput | KpiReportCreateOrConnectWithoutProjectInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutProjectInput | KpiReportUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: KpiReportCreateManyProjectInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutProjectInput | KpiReportUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutProjectInput | KpiReportUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-  }
-
   export type TeamMemberUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<TeamMemberCreateWithoutProjectInput, TeamMemberUncheckedCreateWithoutProjectInput> | TeamMemberCreateWithoutProjectInput[] | TeamMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TeamMemberCreateOrConnectWithoutProjectInput | TeamMemberCreateOrConnectWithoutProjectInput[]
@@ -44788,20 +43386,6 @@ export namespace Prisma {
     update?: ReportUpdateWithWhereUniqueWithoutProjectInput | ReportUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: ReportUpdateManyWithWhereWithoutProjectInput | ReportUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
-  }
-
-  export type KpiReportUncheckedUpdateManyWithoutProjectNestedInput = {
-    create?: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput> | KpiReportCreateWithoutProjectInput[] | KpiReportUncheckedCreateWithoutProjectInput[]
-    connectOrCreate?: KpiReportCreateOrConnectWithoutProjectInput | KpiReportCreateOrConnectWithoutProjectInput[]
-    upsert?: KpiReportUpsertWithWhereUniqueWithoutProjectInput | KpiReportUpsertWithWhereUniqueWithoutProjectInput[]
-    createMany?: KpiReportCreateManyProjectInputEnvelope
-    set?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    disconnect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    delete?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    connect?: KpiReportWhereUniqueInput | KpiReportWhereUniqueInput[]
-    update?: KpiReportUpdateWithWhereUniqueWithoutProjectInput | KpiReportUpdateWithWhereUniqueWithoutProjectInput[]
-    updateMany?: KpiReportUpdateManyWithWhereWithoutProjectInput | KpiReportUpdateManyWithWhereWithoutProjectInput[]
-    deleteMany?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
   }
 
   export type ProjectCreateNestedOneWithoutTeamMemberInput = {
@@ -46088,6 +44672,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
   export type ProjectUpdateOneWithoutReportNestedInput = {
     create?: XOR<ProjectCreateWithoutReportInput, ProjectUncheckedCreateWithoutReportInput>
     connectOrCreate?: ProjectCreateOrConnectWithoutReportInput
@@ -46224,31 +44812,6 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -46276,6 +44839,17 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -46290,6 +44864,20 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type RoleCreateWithoutUsersInput = {
@@ -46313,50 +44901,6 @@ export namespace Prisma {
   export type RoleCreateOrConnectWithoutUsersInput = {
     where: RoleWhereUniqueInput
     create: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
-  }
-
-  export type KpiReportCreateWithoutUserInput = {
-    kpiReportId?: string
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutKpiReportInput
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiReportInput
-    kpiReview?: KpiReviewCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportUncheckedCreateWithoutUserInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    kpiReview?: KpiReviewUncheckedCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportCreateOrConnectWithoutUserInput = {
-    where: KpiReportWhereUniqueInput
-    create: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput>
-  }
-
-  export type KpiReportCreateManyUserInputEnvelope = {
-    data: KpiReportCreateManyUserInput | KpiReportCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type PartnerCreateWithoutUserInput = {
@@ -46570,42 +45114,6 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type KpiReportUpsertWithWhereUniqueWithoutUserInput = {
-    where: KpiReportWhereUniqueInput
-    update: XOR<KpiReportUpdateWithoutUserInput, KpiReportUncheckedUpdateWithoutUserInput>
-    create: XOR<KpiReportCreateWithoutUserInput, KpiReportUncheckedCreateWithoutUserInput>
-  }
-
-  export type KpiReportUpdateWithWhereUniqueWithoutUserInput = {
-    where: KpiReportWhereUniqueInput
-    data: XOR<KpiReportUpdateWithoutUserInput, KpiReportUncheckedUpdateWithoutUserInput>
-  }
-
-  export type KpiReportUpdateManyWithWhereWithoutUserInput = {
-    where: KpiReportScalarWhereInput
-    data: XOR<KpiReportUpdateManyMutationInput, KpiReportUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type KpiReportScalarWhereInput = {
-    AND?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-    OR?: KpiReportScalarWhereInput[]
-    NOT?: KpiReportScalarWhereInput | KpiReportScalarWhereInput[]
-    kpiReportId?: StringFilter<"KpiReport"> | string
-    projectId?: StringNullableFilter<"KpiReport"> | string | null
-    userId?: StringNullableFilter<"KpiReport"> | string | null
-    strategicObjectiveId?: StringNullableFilter<"KpiReport"> | string | null
-    kpiName?: StringNullableFilter<"KpiReport"> | string | null
-    kpiType?: StringNullableFilter<"KpiReport"> | string | null
-    baseline?: IntNullableFilter<"KpiReport"> | number | null
-    target?: IntNullableFilter<"KpiReport"> | number | null
-    actualValue?: IntNullableFilter<"KpiReport"> | number | null
-    status?: StringNullableFilter<"KpiReport"> | string | null
-    observation?: StringNullableFilter<"KpiReport"> | string | null
-    evidence?: StringNullableFilter<"KpiReport"> | string | null
-    createdAt?: DateTimeFilter<"KpiReport"> | Date | string
-    updatedAt?: DateTimeFilter<"KpiReport"> | Date | string
-  }
-
   export type PartnerUpsertWithWhereUniqueWithoutUserInput = {
     where: PartnerWhereUniqueInput
     update: XOR<PartnerUpdateWithoutUserInput, PartnerUncheckedUpdateWithoutUserInput>
@@ -46760,7 +45268,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
     request?: RequestCreateNestedManyWithoutUserInput
     retirement?: RetirementCreateNestedManyWithoutUserInput
@@ -46786,7 +45293,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
     request?: RequestUncheckedCreateNestedManyWithoutUserInput
     retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
@@ -46848,32 +45354,42 @@ export namespace Prisma {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiAssignment?: KpiAssignmentCreateNestedManyWithoutKpiInput
+    kpiDisaggregation?: KpiDisaggregationCreateNestedManyWithoutKpiInput
   }
 
   export type KpiUncheckedCreateWithoutStrategicObjectiveInput = {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiAssignment?: KpiAssignmentUncheckedCreateNestedManyWithoutKpiInput
+    kpiDisaggregation?: KpiDisaggregationUncheckedCreateNestedManyWithoutKpiInput
   }
 
   export type KpiCreateOrConnectWithoutStrategicObjectiveInput = {
@@ -46910,7 +45426,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutStrategicObjectiveInput = {
@@ -46937,7 +45452,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutStrategicObjectiveInput = {
@@ -46947,50 +45461,6 @@ export namespace Prisma {
 
   export type ProjectCreateManyStrategicObjectiveInputEnvelope = {
     data: ProjectCreateManyStrategicObjectiveInput | ProjectCreateManyStrategicObjectiveInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type KpiReportCreateWithoutStrategicObjectiveInput = {
-    kpiReportId?: string
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutKpiReportInput
-    user?: UserCreateNestedOneWithoutKpiReportInput
-    kpiReview?: KpiReviewCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportUncheckedCreateWithoutStrategicObjectiveInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    userId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    kpiReview?: KpiReviewUncheckedCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportCreateOrConnectWithoutStrategicObjectiveInput = {
-    where: KpiReportWhereUniqueInput
-    create: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput>
-  }
-
-  export type KpiReportCreateManyStrategicObjectiveInputEnvelope = {
-    data: KpiReportCreateManyStrategicObjectiveInput | KpiReportCreateManyStrategicObjectiveInput[]
     skipDuplicates?: boolean
   }
 
@@ -47017,13 +45487,18 @@ export namespace Prisma {
     kpiId?: StringFilter<"Kpi"> | string
     statement?: StringNullableFilter<"Kpi"> | string | null
     definition?: StringNullableFilter<"Kpi"> | string | null
-    type?: StringNullableFilter<"Kpi"> | string | null
-    specificAreas?: StringNullableFilter<"Kpi"> | string | null
+    specificArea?: StringNullableFilter<"Kpi"> | string | null
     unitOfMeasure?: StringNullableFilter<"Kpi"> | string | null
     itemInMeasure?: StringNullableFilter<"Kpi"> | string | null
-    disaggregation?: StringNullableFilter<"Kpi"> | string | null
-    baseLine?: StringNullableFilter<"Kpi"> | string | null
-    target?: StringNullableFilter<"Kpi"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"Kpi"> | number | null
+    baselineNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetDate?: DateTimeNullableFilter<"Kpi"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"Kpi"> | number | null
+    targetNarrative?: StringNullableFilter<"Kpi"> | string | null
+    targetType?: StringNullableFilter<"Kpi"> | string | null
+    responsiblePersons?: StringNullableFilter<"Kpi"> | string | null
+    type?: StringNullableFilter<"Kpi"> | string | null
     strategicObjectiveId?: StringNullableFilter<"Kpi"> | string | null
     createAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
@@ -47066,22 +45541,6 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Project"> | Date | string | null
   }
 
-  export type KpiReportUpsertWithWhereUniqueWithoutStrategicObjectiveInput = {
-    where: KpiReportWhereUniqueInput
-    update: XOR<KpiReportUpdateWithoutStrategicObjectiveInput, KpiReportUncheckedUpdateWithoutStrategicObjectiveInput>
-    create: XOR<KpiReportCreateWithoutStrategicObjectiveInput, KpiReportUncheckedCreateWithoutStrategicObjectiveInput>
-  }
-
-  export type KpiReportUpdateWithWhereUniqueWithoutStrategicObjectiveInput = {
-    where: KpiReportWhereUniqueInput
-    data: XOR<KpiReportUpdateWithoutStrategicObjectiveInput, KpiReportUncheckedUpdateWithoutStrategicObjectiveInput>
-  }
-
-  export type KpiReportUpdateManyWithWhereWithoutStrategicObjectiveInput = {
-    where: KpiReportScalarWhereInput
-    data: XOR<KpiReportUpdateManyMutationInput, KpiReportUncheckedUpdateManyWithoutStrategicObjectiveInput>
-  }
-
   export type StrategicObjectiveCreateWithoutKpiInput = {
     strategicObjectiveId?: string
     statement?: string | null
@@ -47091,7 +45550,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     project?: ProjectCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUncheckedCreateWithoutKpiInput = {
@@ -47103,7 +45561,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     project?: ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveCreateOrConnectWithoutKpiInput = {
@@ -47111,27 +45568,29 @@ export namespace Prisma {
     create: XOR<StrategicObjectiveCreateWithoutKpiInput, StrategicObjectiveUncheckedCreateWithoutKpiInput>
   }
 
-  export type KpiAssignmentCreateWithoutKpiInput = {
-    kpiAssignmentId?: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
+  export type KpiDisaggregationCreateWithoutKpiInput = {
+    kpiDisaggregationId?: string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
   }
 
-  export type KpiAssignmentUncheckedCreateWithoutKpiInput = {
-    kpiAssignmentId?: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
+  export type KpiDisaggregationUncheckedCreateWithoutKpiInput = {
+    kpiDisaggregationId?: string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
   }
 
-  export type KpiAssignmentCreateOrConnectWithoutKpiInput = {
-    where: KpiAssignmentWhereUniqueInput
-    create: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput>
+  export type KpiDisaggregationCreateOrConnectWithoutKpiInput = {
+    where: KpiDisaggregationWhereUniqueInput
+    create: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput>
   }
 
-  export type KpiAssignmentCreateManyKpiInputEnvelope = {
-    data: KpiAssignmentCreateManyKpiInput | KpiAssignmentCreateManyKpiInput[]
+  export type KpiDisaggregationCreateManyKpiInputEnvelope = {
+    data: KpiDisaggregationCreateManyKpiInput | KpiDisaggregationCreateManyKpiInput[]
     skipDuplicates?: boolean
   }
 
@@ -47155,7 +45614,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     project?: ProjectUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveUncheckedUpdateWithoutKpiInput = {
@@ -47167,557 +45625,134 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     project?: ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
-  export type KpiAssignmentUpsertWithWhereUniqueWithoutKpiInput = {
-    where: KpiAssignmentWhereUniqueInput
-    update: XOR<KpiAssignmentUpdateWithoutKpiInput, KpiAssignmentUncheckedUpdateWithoutKpiInput>
-    create: XOR<KpiAssignmentCreateWithoutKpiInput, KpiAssignmentUncheckedCreateWithoutKpiInput>
+  export type KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput = {
+    where: KpiDisaggregationWhereUniqueInput
+    update: XOR<KpiDisaggregationUpdateWithoutKpiInput, KpiDisaggregationUncheckedUpdateWithoutKpiInput>
+    create: XOR<KpiDisaggregationCreateWithoutKpiInput, KpiDisaggregationUncheckedCreateWithoutKpiInput>
   }
 
-  export type KpiAssignmentUpdateWithWhereUniqueWithoutKpiInput = {
-    where: KpiAssignmentWhereUniqueInput
-    data: XOR<KpiAssignmentUpdateWithoutKpiInput, KpiAssignmentUncheckedUpdateWithoutKpiInput>
+  export type KpiDisaggregationUpdateWithWhereUniqueWithoutKpiInput = {
+    where: KpiDisaggregationWhereUniqueInput
+    data: XOR<KpiDisaggregationUpdateWithoutKpiInput, KpiDisaggregationUncheckedUpdateWithoutKpiInput>
   }
 
-  export type KpiAssignmentUpdateManyWithWhereWithoutKpiInput = {
-    where: KpiAssignmentScalarWhereInput
-    data: XOR<KpiAssignmentUpdateManyMutationInput, KpiAssignmentUncheckedUpdateManyWithoutKpiInput>
+  export type KpiDisaggregationUpdateManyWithWhereWithoutKpiInput = {
+    where: KpiDisaggregationScalarWhereInput
+    data: XOR<KpiDisaggregationUpdateManyMutationInput, KpiDisaggregationUncheckedUpdateManyWithoutKpiInput>
   }
 
-  export type KpiAssignmentScalarWhereInput = {
-    AND?: KpiAssignmentScalarWhereInput | KpiAssignmentScalarWhereInput[]
-    OR?: KpiAssignmentScalarWhereInput[]
-    NOT?: KpiAssignmentScalarWhereInput | KpiAssignmentScalarWhereInput[]
-    kpiAssignmentId?: StringFilter<"KpiAssignment"> | string
-    kpiId?: StringFilter<"KpiAssignment"> | string
-    projectId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedToId?: StringNullableFilter<"KpiAssignment"> | string | null
-    assignedAt?: DateTimeFilter<"KpiAssignment"> | Date | string
+  export type KpiDisaggregationScalarWhereInput = {
+    AND?: KpiDisaggregationScalarWhereInput | KpiDisaggregationScalarWhereInput[]
+    OR?: KpiDisaggregationScalarWhereInput[]
+    NOT?: KpiDisaggregationScalarWhereInput | KpiDisaggregationScalarWhereInput[]
+    kpiDisaggregationId?: StringFilter<"KpiDisaggregation"> | string
+    kpiId?: StringFilter<"KpiDisaggregation"> | string
+    type?: StringFilter<"KpiDisaggregation"> | string
+    category?: StringFilter<"KpiDisaggregation"> | string
+    target?: IntNullableFilter<"KpiDisaggregation"> | number | null
+    baseline?: IntNullableFilter<"KpiDisaggregation"> | number | null
   }
 
-  export type KpiCreateWithoutKpiAssignmentInput = {
+  export type KpiCreateWithoutKpiDisaggregationInput = {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiInput
   }
 
-  export type KpiUncheckedCreateWithoutKpiAssignmentInput = {
+  export type KpiUncheckedCreateWithoutKpiDisaggregationInput = {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
 
-  export type KpiCreateOrConnectWithoutKpiAssignmentInput = {
+  export type KpiCreateOrConnectWithoutKpiDisaggregationInput = {
     where: KpiWhereUniqueInput
-    create: XOR<KpiCreateWithoutKpiAssignmentInput, KpiUncheckedCreateWithoutKpiAssignmentInput>
+    create: XOR<KpiCreateWithoutKpiDisaggregationInput, KpiUncheckedCreateWithoutKpiDisaggregationInput>
   }
 
-  export type KpiUpsertWithoutKpiAssignmentInput = {
-    update: XOR<KpiUpdateWithoutKpiAssignmentInput, KpiUncheckedUpdateWithoutKpiAssignmentInput>
-    create: XOR<KpiCreateWithoutKpiAssignmentInput, KpiUncheckedCreateWithoutKpiAssignmentInput>
+  export type KpiUpsertWithoutKpiDisaggregationInput = {
+    update: XOR<KpiUpdateWithoutKpiDisaggregationInput, KpiUncheckedUpdateWithoutKpiDisaggregationInput>
+    create: XOR<KpiCreateWithoutKpiDisaggregationInput, KpiUncheckedCreateWithoutKpiDisaggregationInput>
     where?: KpiWhereInput
   }
 
-  export type KpiUpdateToOneWithWhereWithoutKpiAssignmentInput = {
+  export type KpiUpdateToOneWithWhereWithoutKpiDisaggregationInput = {
     where?: KpiWhereInput
-    data: XOR<KpiUpdateWithoutKpiAssignmentInput, KpiUncheckedUpdateWithoutKpiAssignmentInput>
+    data: XOR<KpiUpdateWithoutKpiDisaggregationInput, KpiUncheckedUpdateWithoutKpiDisaggregationInput>
   }
 
-  export type KpiUpdateWithoutKpiAssignmentInput = {
+  export type KpiUpdateWithoutKpiDisaggregationInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiNestedInput
   }
 
-  export type KpiUncheckedUpdateWithoutKpiAssignmentInput = {
+  export type KpiUncheckedUpdateWithoutKpiDisaggregationInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ProjectCreateWithoutKpiReportInput = {
-    projectId?: string
-    projectName?: string | null
-    budgetCurrency?: string | null
-    totalBudgetAmount?: string | null
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    country?: string | null
-    state?: string | null
-    localGovernment?: string | null
-    community?: string | null
-    thematicAreasOrPillar?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
-    teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
-    partner?: PartnerCreateNestedManyWithoutProjectInput
-    impact?: ImpactCreateNestedManyWithoutProjectInput
-    outcome?: OutcomeCreateNestedManyWithoutProjectInput
-    output?: OutputCreateNestedManyWithoutProjectInput
-    activity?: ActivityCreateNestedManyWithoutProjectInput
-    logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
-    request?: RequestCreateNestedManyWithoutProjectInput
-    report?: ReportCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUncheckedCreateWithoutKpiReportInput = {
-    projectId?: string
-    projectName?: string | null
-    budgetCurrency?: string | null
-    totalBudgetAmount?: string | null
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    country?: string | null
-    state?: string | null
-    localGovernment?: string | null
-    community?: string | null
-    thematicAreasOrPillar?: string | null
-    status?: string | null
-    strategicObjectiveId?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    teamMember?: TeamMemberUncheckedCreateNestedManyWithoutProjectInput
-    partner?: PartnerUncheckedCreateNestedManyWithoutProjectInput
-    impact?: ImpactUncheckedCreateNestedManyWithoutProjectInput
-    outcome?: OutcomeUncheckedCreateNestedManyWithoutProjectInput
-    output?: OutputUncheckedCreateNestedManyWithoutProjectInput
-    activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
-    logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
-    request?: RequestUncheckedCreateNestedManyWithoutProjectInput
-    report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectCreateOrConnectWithoutKpiReportInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutKpiReportInput, ProjectUncheckedCreateWithoutKpiReportInput>
-  }
-
-  export type UserCreateWithoutKpiReportInput = {
-    userId?: string
-    fullName?: string | null
-    email?: string | null
-    address?: string | null
-    phoneNumber?: string | null
-    status?: string | null
-    assignedProjectId?: string | null
-    department?: string | null
-    community?: string | null
-    state?: string | null
-    localGovernmentArea?: string | null
-    password?: string | null
-    profilePic?: string | null
-    profilePicMimeType?: string | null
-    signature?: string | null
-    signatureMimeType?: string | null
-    loginLast?: Date | string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    role?: RoleCreateNestedOneWithoutUsersInput
-    partner?: PartnerCreateNestedManyWithoutUserInput
-    request?: RequestCreateNestedManyWithoutUserInput
-    retirement?: RetirementCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutKpiReportInput = {
-    userId?: string
-    fullName?: string | null
-    email?: string | null
-    address?: string | null
-    phoneNumber?: string | null
-    roleId?: string | null
-    status?: string | null
-    assignedProjectId?: string | null
-    department?: string | null
-    community?: string | null
-    state?: string | null
-    localGovernmentArea?: string | null
-    password?: string | null
-    profilePic?: string | null
-    profilePicMimeType?: string | null
-    signature?: string | null
-    signatureMimeType?: string | null
-    loginLast?: Date | string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
-    request?: RequestUncheckedCreateNestedManyWithoutUserInput
-    retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutKpiReportInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutKpiReportInput, UserUncheckedCreateWithoutKpiReportInput>
-  }
-
-  export type StrategicObjectiveCreateWithoutKpiReportInput = {
-    strategicObjectiveId?: string
-    statement?: string | null
-    thematicAreas?: string | null
-    pillarLead?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    kpi?: KpiCreateNestedManyWithoutStrategicObjectiveInput
-    project?: ProjectCreateNestedManyWithoutStrategicObjectiveInput
-  }
-
-  export type StrategicObjectiveUncheckedCreateWithoutKpiReportInput = {
-    strategicObjectiveId?: string
-    statement?: string | null
-    thematicAreas?: string | null
-    pillarLead?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    kpi?: KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-    project?: ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-  }
-
-  export type StrategicObjectiveCreateOrConnectWithoutKpiReportInput = {
-    where: StrategicObjectiveWhereUniqueInput
-    create: XOR<StrategicObjectiveCreateWithoutKpiReportInput, StrategicObjectiveUncheckedCreateWithoutKpiReportInput>
-  }
-
-  export type KpiReviewCreateWithoutKpiReportInput = {
-    kpiReviewId?: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-  }
-
-  export type KpiReviewUncheckedCreateWithoutKpiReportInput = {
-    kpiReviewId?: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-  }
-
-  export type KpiReviewCreateOrConnectWithoutKpiReportInput = {
-    where: KpiReviewWhereUniqueInput
-    create: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput>
-  }
-
-  export type KpiReviewCreateManyKpiReportInputEnvelope = {
-    data: KpiReviewCreateManyKpiReportInput | KpiReviewCreateManyKpiReportInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProjectUpsertWithoutKpiReportInput = {
-    update: XOR<ProjectUpdateWithoutKpiReportInput, ProjectUncheckedUpdateWithoutKpiReportInput>
-    create: XOR<ProjectCreateWithoutKpiReportInput, ProjectUncheckedCreateWithoutKpiReportInput>
-    where?: ProjectWhereInput
-  }
-
-  export type ProjectUpdateToOneWithWhereWithoutKpiReportInput = {
-    where?: ProjectWhereInput
-    data: XOR<ProjectUpdateWithoutKpiReportInput, ProjectUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type ProjectUpdateWithoutKpiReportInput = {
-    projectId?: StringFieldUpdateOperationsInput | string
-    projectName?: NullableStringFieldUpdateOperationsInput | string | null
-    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
-    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
-    teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
-    partner?: PartnerUpdateManyWithoutProjectNestedInput
-    impact?: ImpactUpdateManyWithoutProjectNestedInput
-    outcome?: OutcomeUpdateManyWithoutProjectNestedInput
-    output?: OutputUpdateManyWithoutProjectNestedInput
-    activity?: ActivityUpdateManyWithoutProjectNestedInput
-    logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
-    request?: RequestUpdateManyWithoutProjectNestedInput
-    report?: ReportUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutKpiReportInput = {
-    projectId?: StringFieldUpdateOperationsInput | string
-    projectName?: NullableStringFieldUpdateOperationsInput | string | null
-    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
-    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    teamMember?: TeamMemberUncheckedUpdateManyWithoutProjectNestedInput
-    partner?: PartnerUncheckedUpdateManyWithoutProjectNestedInput
-    impact?: ImpactUncheckedUpdateManyWithoutProjectNestedInput
-    outcome?: OutcomeUncheckedUpdateManyWithoutProjectNestedInput
-    output?: OutputUncheckedUpdateManyWithoutProjectNestedInput
-    activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
-    logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
-    request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
-    report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type UserUpsertWithoutKpiReportInput = {
-    update: XOR<UserUpdateWithoutKpiReportInput, UserUncheckedUpdateWithoutKpiReportInput>
-    create: XOR<UserCreateWithoutKpiReportInput, UserUncheckedCreateWithoutKpiReportInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutKpiReportInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutKpiReportInput, UserUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type UserUpdateWithoutKpiReportInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
-    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    signature?: NullableStringFieldUpdateOperationsInput | string | null
-    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    role?: RoleUpdateOneWithoutUsersNestedInput
-    partner?: PartnerUpdateManyWithoutUserNestedInput
-    request?: RequestUpdateManyWithoutUserNestedInput
-    retirement?: RetirementUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutKpiReportInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
-    roleId?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedProjectId?: NullableStringFieldUpdateOperationsInput | string | null
-    department?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernmentArea?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    profilePic?: NullableStringFieldUpdateOperationsInput | string | null
-    profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    signature?: NullableStringFieldUpdateOperationsInput | string | null
-    signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
-    loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
-    request?: RequestUncheckedUpdateManyWithoutUserNestedInput
-    retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type StrategicObjectiveUpsertWithoutKpiReportInput = {
-    update: XOR<StrategicObjectiveUpdateWithoutKpiReportInput, StrategicObjectiveUncheckedUpdateWithoutKpiReportInput>
-    create: XOR<StrategicObjectiveCreateWithoutKpiReportInput, StrategicObjectiveUncheckedCreateWithoutKpiReportInput>
-    where?: StrategicObjectiveWhereInput
-  }
-
-  export type StrategicObjectiveUpdateToOneWithWhereWithoutKpiReportInput = {
-    where?: StrategicObjectiveWhereInput
-    data: XOR<StrategicObjectiveUpdateWithoutKpiReportInput, StrategicObjectiveUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type StrategicObjectiveUpdateWithoutKpiReportInput = {
-    strategicObjectiveId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreas?: NullableStringFieldUpdateOperationsInput | string | null
-    pillarLead?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpi?: KpiUpdateManyWithoutStrategicObjectiveNestedInput
-    project?: ProjectUpdateManyWithoutStrategicObjectiveNestedInput
-  }
-
-  export type StrategicObjectiveUncheckedUpdateWithoutKpiReportInput = {
-    strategicObjectiveId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreas?: NullableStringFieldUpdateOperationsInput | string | null
-    pillarLead?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpi?: KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-    project?: ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-  }
-
-  export type KpiReviewUpsertWithWhereUniqueWithoutKpiReportInput = {
-    where: KpiReviewWhereUniqueInput
-    update: XOR<KpiReviewUpdateWithoutKpiReportInput, KpiReviewUncheckedUpdateWithoutKpiReportInput>
-    create: XOR<KpiReviewCreateWithoutKpiReportInput, KpiReviewUncheckedCreateWithoutKpiReportInput>
-  }
-
-  export type KpiReviewUpdateWithWhereUniqueWithoutKpiReportInput = {
-    where: KpiReviewWhereUniqueInput
-    data: XOR<KpiReviewUpdateWithoutKpiReportInput, KpiReviewUncheckedUpdateWithoutKpiReportInput>
-  }
-
-  export type KpiReviewUpdateManyWithWhereWithoutKpiReportInput = {
-    where: KpiReviewScalarWhereInput
-    data: XOR<KpiReviewUpdateManyMutationInput, KpiReviewUncheckedUpdateManyWithoutKpiReportInput>
-  }
-
-  export type KpiReviewScalarWhereInput = {
-    AND?: KpiReviewScalarWhereInput | KpiReviewScalarWhereInput[]
-    OR?: KpiReviewScalarWhereInput[]
-    NOT?: KpiReviewScalarWhereInput | KpiReviewScalarWhereInput[]
-    kpiReviewId?: StringFilter<"KpiReview"> | string
-    kpiReportId?: StringFilter<"KpiReview"> | string
-    comment?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedBy?: StringNullableFilter<"KpiReview"> | string | null
-    reviewedAt?: DateTimeFilter<"KpiReview"> | Date | string
-  }
-
-  export type KpiReportCreateWithoutKpiReviewInput = {
-    kpiReportId?: string
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project?: ProjectCreateNestedOneWithoutKpiReportInput
-    user?: UserCreateNestedOneWithoutKpiReportInput
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiReportInput
-  }
-
-  export type KpiReportUncheckedCreateWithoutKpiReviewInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    userId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type KpiReportCreateOrConnectWithoutKpiReviewInput = {
-    where: KpiReportWhereUniqueInput
-    create: XOR<KpiReportCreateWithoutKpiReviewInput, KpiReportUncheckedCreateWithoutKpiReviewInput>
-  }
-
-  export type KpiReportUpsertWithoutKpiReviewInput = {
-    update: XOR<KpiReportUpdateWithoutKpiReviewInput, KpiReportUncheckedUpdateWithoutKpiReviewInput>
-    create: XOR<KpiReportCreateWithoutKpiReviewInput, KpiReportUncheckedCreateWithoutKpiReviewInput>
-    where?: KpiReportWhereInput
-  }
-
-  export type KpiReportUpdateToOneWithWhereWithoutKpiReviewInput = {
-    where?: KpiReportWhereInput
-    data: XOR<KpiReportUpdateWithoutKpiReviewInput, KpiReportUncheckedUpdateWithoutKpiReviewInput>
-  }
-
-  export type KpiReportUpdateWithoutKpiReviewInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutKpiReportNestedInput
-    user?: UserUpdateOneWithoutKpiReportNestedInput
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateWithoutKpiReviewInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StrategicObjectiveCreateWithoutProjectInput = {
@@ -47729,7 +45764,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpi?: KpiCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUncheckedCreateWithoutProjectInput = {
@@ -47741,7 +45775,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpi?: KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveCreateOrConnectWithoutProjectInput = {
@@ -48127,50 +46160,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type KpiReportCreateWithoutProjectInput = {
-    kpiReportId?: string
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user?: UserCreateNestedOneWithoutKpiReportInput
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutKpiReportInput
-    kpiReview?: KpiReviewCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportUncheckedCreateWithoutProjectInput = {
-    kpiReportId?: string
-    userId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    kpiReview?: KpiReviewUncheckedCreateNestedManyWithoutKpiReportInput
-  }
-
-  export type KpiReportCreateOrConnectWithoutProjectInput = {
-    where: KpiReportWhereUniqueInput
-    create: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput>
-  }
-
-  export type KpiReportCreateManyProjectInputEnvelope = {
-    data: KpiReportCreateManyProjectInput | KpiReportCreateManyProjectInput[]
-    skipDuplicates?: boolean
-  }
-
   export type StrategicObjectiveUpsertWithoutProjectInput = {
     update: XOR<StrategicObjectiveUpdateWithoutProjectInput, StrategicObjectiveUncheckedUpdateWithoutProjectInput>
     create: XOR<StrategicObjectiveCreateWithoutProjectInput, StrategicObjectiveUncheckedCreateWithoutProjectInput>
@@ -48191,7 +46180,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveUncheckedUpdateWithoutProjectInput = {
@@ -48203,7 +46191,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type TeamMemberUpsertWithWhereUniqueWithoutProjectInput = {
@@ -48464,22 +46451,6 @@ export namespace Prisma {
     updateAt?: DateTimeFilter<"Report"> | Date | string
   }
 
-  export type KpiReportUpsertWithWhereUniqueWithoutProjectInput = {
-    where: KpiReportWhereUniqueInput
-    update: XOR<KpiReportUpdateWithoutProjectInput, KpiReportUncheckedUpdateWithoutProjectInput>
-    create: XOR<KpiReportCreateWithoutProjectInput, KpiReportUncheckedCreateWithoutProjectInput>
-  }
-
-  export type KpiReportUpdateWithWhereUniqueWithoutProjectInput = {
-    where: KpiReportWhereUniqueInput
-    data: XOR<KpiReportUpdateWithoutProjectInput, KpiReportUncheckedUpdateWithoutProjectInput>
-  }
-
-  export type KpiReportUpdateManyWithWhereWithoutProjectInput = {
-    where: KpiReportScalarWhereInput
-    data: XOR<KpiReportUpdateManyMutationInput, KpiReportUncheckedUpdateManyWithoutProjectInput>
-  }
-
   export type ProjectCreateWithoutTeamMemberInput = {
     projectId?: string
     projectName?: string | null
@@ -48504,7 +46475,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutTeamMemberInput = {
@@ -48531,7 +46501,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutTeamMemberInput = {
@@ -48574,7 +46543,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTeamMemberInput = {
@@ -48601,7 +46569,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserCreateWithoutPartnerInput = {
@@ -48625,7 +46592,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
-    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     request?: RequestCreateNestedManyWithoutUserInput
     retirement?: RetirementCreateNestedManyWithoutUserInput
   }
@@ -48651,7 +46617,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     request?: RequestUncheckedCreateNestedManyWithoutUserInput
     retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
@@ -48685,7 +46650,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutPartnerInput = {
@@ -48712,7 +46676,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutPartnerInput = {
@@ -48752,7 +46715,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     request?: RequestUpdateManyWithoutUserNestedInput
     retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
@@ -48778,7 +46740,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     request?: RequestUncheckedUpdateManyWithoutUserNestedInput
     retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -48818,7 +46779,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutPartnerInput = {
@@ -48845,7 +46805,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ImpactCreateWithoutResultTypeInput = {
@@ -49217,7 +47176,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutImpactInput = {
@@ -49244,7 +47202,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutImpactInput = {
@@ -49346,7 +47303,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutImpactInput = {
@@ -49373,7 +47329,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutImpactInput = {
@@ -49472,7 +47427,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutOutcomeInput = {
@@ -49499,7 +47453,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutOutcomeInput = {
@@ -49634,7 +47587,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutOutcomeInput = {
@@ -49661,7 +47613,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutOutcomeInput = {
@@ -49764,7 +47715,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutOutputInput = {
@@ -49791,7 +47741,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutOutputInput = {
@@ -50034,7 +47983,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutOutputInput = {
@@ -50061,7 +48009,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutOutputInput = {
@@ -51108,7 +49055,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutActivityInput = {
@@ -51135,7 +49081,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutActivityInput = {
@@ -51307,7 +49252,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutActivityInput = {
@@ -51334,7 +49278,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ActivityReportUpsertWithWhereUniqueWithoutActivityInput = {
@@ -51636,7 +49579,6 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutLogicalFrameworkInput = {
@@ -51663,7 +49605,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutLogicalFrameworkInput = {
@@ -51706,7 +49647,6 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutLogicalFrameworkInput = {
@@ -51733,7 +49673,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type OutputCreateWithoutRequestInput = {
@@ -51791,7 +49730,6 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutRequestInput = {
@@ -51818,7 +49756,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutRequestInput = {
@@ -51847,7 +49784,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
-    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
     retirement?: RetirementCreateNestedManyWithoutUserInput
   }
@@ -51873,7 +49809,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
     retirement?: RetirementUncheckedCreateNestedManyWithoutUserInput
   }
@@ -52053,7 +49988,6 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutRequestInput = {
@@ -52080,7 +50014,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutRequestInput = {
@@ -52115,7 +50048,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
     retirement?: RetirementUpdateManyWithoutUserNestedInput
   }
@@ -52141,7 +50073,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
     retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -52558,7 +50489,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     role?: RoleCreateNestedOneWithoutUsersInput
-    kpiReport?: KpiReportCreateNestedManyWithoutUserInput
     partner?: PartnerCreateNestedManyWithoutUserInput
     request?: RequestCreateNestedManyWithoutUserInput
   }
@@ -52584,7 +50514,6 @@ export namespace Prisma {
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutUserInput
     partner?: PartnerUncheckedCreateNestedManyWithoutUserInput
     request?: RequestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -52719,7 +50648,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     role?: RoleUpdateOneWithoutUsersNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
     request?: RequestUpdateManyWithoutUserNestedInput
   }
@@ -52745,7 +50673,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
     request?: RequestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -52774,7 +50701,6 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutReportInput = {
@@ -52801,7 +50727,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
-    kpiReport?: KpiReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutReportInput = {
@@ -52844,7 +50769,6 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutReportInput = {
@@ -52871,23 +50795,6 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type KpiReportCreateManyUserInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type PartnerCreateManyUserInput = {
@@ -52962,56 +50869,6 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-  }
-
-  export type KpiReportUpdateWithoutUserInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutKpiReportNestedInput
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiReportNestedInput
-    kpiReview?: KpiReviewUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateWithoutUserInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpiReview?: KpiReviewUncheckedUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateManyWithoutUserInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PartnerUpdateWithoutUserInput = {
@@ -53282,7 +51139,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUpdateManyWithoutUserNestedInput
     partner?: PartnerUpdateManyWithoutUserNestedInput
     request?: RequestUpdateManyWithoutUserNestedInput
     retirement?: RetirementUpdateManyWithoutUserNestedInput
@@ -53308,7 +51164,6 @@ export namespace Prisma {
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutUserNestedInput
     partner?: PartnerUncheckedUpdateManyWithoutUserNestedInput
     request?: RequestUncheckedUpdateManyWithoutUserNestedInput
     retirement?: RetirementUncheckedUpdateManyWithoutUserNestedInput
@@ -53340,13 +51195,18 @@ export namespace Prisma {
     kpiId?: string
     statement?: string | null
     definition?: string | null
-    type?: string | null
-    specificAreas?: string | null
+    specificArea?: string | null
     unitOfMeasure?: string | null
     itemInMeasure?: string | null
-    disaggregation?: string | null
-    baseLine?: string | null
-    target?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    type?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -53368,65 +51228,64 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
-  export type KpiReportCreateManyStrategicObjectiveInput = {
-    kpiReportId?: string
-    projectId?: string | null
-    userId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type KpiUpdateWithoutStrategicObjectiveInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiAssignment?: KpiAssignmentUpdateManyWithoutKpiNestedInput
+    kpiDisaggregation?: KpiDisaggregationUpdateManyWithoutKpiNestedInput
   }
 
   export type KpiUncheckedUpdateWithoutStrategicObjectiveInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpiAssignment?: KpiAssignmentUncheckedUpdateManyWithoutKpiNestedInput
+    kpiDisaggregation?: KpiDisaggregationUncheckedUpdateManyWithoutKpiNestedInput
   }
 
   export type KpiUncheckedUpdateManyWithoutStrategicObjectiveInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
     definition?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: NullableStringFieldUpdateOperationsInput | string | null
-    specificAreas?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
     unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
     itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    disaggregation?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLine?: NullableStringFieldUpdateOperationsInput | string | null
-    target?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -53455,7 +51314,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutStrategicObjectiveInput = {
@@ -53482,7 +51340,6 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-    kpiReport?: KpiReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutStrategicObjectiveInput = {
@@ -53502,110 +51359,36 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type KpiReportUpdateWithoutStrategicObjectiveInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
+  export type KpiDisaggregationCreateManyKpiInput = {
+    kpiDisaggregationId?: string
+    type: string
+    category: string
+    target?: number | null
+    baseline?: number | null
+  }
+
+  export type KpiDisaggregationUpdateWithoutKpiInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneWithoutKpiReportNestedInput
-    user?: UserUpdateOneWithoutKpiReportNestedInput
-    kpiReview?: KpiReviewUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateWithoutStrategicObjectiveInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
     baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpiReview?: KpiReviewUncheckedUpdateManyWithoutKpiReportNestedInput
   }
 
-  export type KpiReportUncheckedUpdateManyWithoutStrategicObjectiveInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
+  export type KpiDisaggregationUncheckedUpdateWithoutKpiInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    target?: NullableIntFieldUpdateOperationsInput | number | null
     baseline?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type KpiDisaggregationUncheckedUpdateManyWithoutKpiInput = {
+    kpiDisaggregationId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiAssignmentCreateManyKpiInput = {
-    kpiAssignmentId?: string
-    projectId?: string | null
-    assignedToId?: string | null
-    assignedAt?: Date | string
-  }
-
-  export type KpiAssignmentUpdateWithoutKpiInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiAssignmentUncheckedUpdateWithoutKpiInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiAssignmentUncheckedUpdateManyWithoutKpiInput = {
-    kpiAssignmentId?: StringFieldUpdateOperationsInput | string
-    projectId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewCreateManyKpiReportInput = {
-    kpiReviewId?: string
-    comment?: string | null
-    reviewedBy?: string | null
-    reviewedAt?: Date | string
-  }
-
-  export type KpiReviewUpdateWithoutKpiReportInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewUncheckedUpdateWithoutKpiReportInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReviewUncheckedUpdateManyWithoutKpiReportInput = {
-    kpiReviewId?: StringFieldUpdateOperationsInput | string
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    reviewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    baseline?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type TeamMemberCreateManyProjectInput = {
@@ -53741,22 +51524,6 @@ export namespace Prisma {
     budgetUtilization?: number | null
     createAt?: Date | string
     updateAt?: Date | string
-  }
-
-  export type KpiReportCreateManyProjectInput = {
-    kpiReportId?: string
-    userId?: string | null
-    strategicObjectiveId?: string | null
-    kpiName?: string | null
-    kpiType?: string | null
-    baseline?: number | null
-    target?: number | null
-    actualValue?: number | null
-    status?: string | null
-    observation?: string | null
-    evidence?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type TeamMemberUpdateWithoutProjectInput = {
@@ -54180,56 +51947,6 @@ export namespace Prisma {
     budgetUtilization?: NullableFloatFieldUpdateOperationsInput | number | null
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type KpiReportUpdateWithoutProjectInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneWithoutKpiReportNestedInput
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutKpiReportNestedInput
-    kpiReview?: KpiReviewUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateWithoutProjectInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    kpiReview?: KpiReviewUncheckedUpdateManyWithoutKpiReportNestedInput
-  }
-
-  export type KpiReportUncheckedUpdateManyWithoutProjectInput = {
-    kpiReportId?: StringFieldUpdateOperationsInput | string
-    userId?: NullableStringFieldUpdateOperationsInput | string | null
-    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiName?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    baseline?: NullableIntFieldUpdateOperationsInput | number | null
-    target?: NullableIntFieldUpdateOperationsInput | number | null
-    actualValue?: NullableIntFieldUpdateOperationsInput | number | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    observation?: NullableStringFieldUpdateOperationsInput | string | null
-    evidence?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ImpactCreateManyResultTypeInput = {

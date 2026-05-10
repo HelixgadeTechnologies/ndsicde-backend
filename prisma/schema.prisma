@@ -36,7 +36,6 @@ model User {
   loginLast           DateTime?
   createAt            DateTime?    @default(now())
   updateAt            DateTime?    @default(now())
-  kpiReport           KpiReport[]
   partner             Partner[]
   request             Request[]
   retirement          Retirement[]
@@ -85,77 +84,45 @@ model StrategicObjective {
   updateAt             DateTime?   @default(now())
   kpi                  Kpi[]
   project              Project[]
-  kpiReport            KpiReport[]
 
   @@map("strategic_objective")
 }
 
 model Kpi {
   kpiId                String              @id @default(uuid())
-  statement            String?
-  definition           String?
+  statement               String?
+  definition              String?
+  specificArea            String?
+  unitOfMeasure           String?
+  itemInMeasure           String?
+  baseLineDate            DateTime?
+  cumulativeValue         Int?
+  baselineNarrative       String?
+  targetDate              DateTime?
+  cumulativeTarget        Int?
+  targetNarrative         String?
+  targetType              String?
+  responsiblePersons      String?
   type                 String?
-  specificAreas        String?
-  unitOfMeasure        String?
-  itemInMeasure        String?
-  disaggregation       String?
-  baseLine             String?
-  target               String?
   strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
   strategicObjectiveId String?
-  createAt             DateTime?           @default(now())
-  updateAt             DateTime?           @default(now())
-
-  kpiAssignment KpiAssignment[]
+  createAt                DateTime?                 @default(now())
+  updateAt                DateTime?                 @default(now())
+  kpiDisaggregation       KpiDisaggregation[]
 
   @@map("kpi")
 }
 
-model KpiAssignment {
-  kpiAssignmentId String @id @default(uuid())
-  kpi             Kpi    @relation(fields: [kpiId], references: [kpiId])
-  kpiId           String
+model KpiDisaggregation {
+  kpiDisaggregationId String    @id @default(uuid())
+  kpiId               String
+  kpi                 Kpi       @relation(fields: [kpiId], references: [kpiId])
+  type                String
+  category            String
+  target              Int?
+  baseline            Int?
 
-  projectId    String?
-  assignedToId String? // user / staff
-  assignedAt   DateTime @default(now())
-
-  @@map("kpiassignment")
-}
-
-model KpiReport {
-  kpiReportId          String              @id @default(uuid())
-  projectId            String?
-  project              Project?            @relation(fields: [projectId], references: [projectId])
-  user                 User?               @relation(fields: [userId], references: [userId])
-  userId               String?
-  strategicObjectiveId String?
-  strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
-  kpiName              String?
-  kpiType              String? // Output | Outcome | Impact
-  baseline             Int?
-  target               Int?
-  actualValue          Int?
-  status               String? // Pending | Approved | Rejected
-  observation          String?
-  evidence             String?
-  createdAt            DateTime            @default(now())
-  updatedAt            DateTime            @default(now())
-  kpiReview            KpiReview[]
-
-  @@map("kpireport")
-}
-
-model KpiReview {
-  kpiReviewId String    @id @default(uuid())
-  kpiReport   KpiReport @relation(fields: [kpiReportId], references: [kpiReportId])
-  kpiReportId String
-
-  comment    String?
-  reviewedBy String?
-  reviewedAt DateTime @default(now())
-
-  @@map("kpireview")
+  @@map("kpi_disaggregation")
 }
 
 model Project {
@@ -184,7 +151,6 @@ model Project {
   logicalFramework      LogicalFramework[]
   request               Request[]
   report                Report[]
-  kpiReport             KpiReport[]
 
   @@map("project")
 }

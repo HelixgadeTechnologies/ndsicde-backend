@@ -35,4 +35,5 @@ export const prisma = globalThis.prisma ?? prismaClientSingleton();
 
 if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
 
-export type { Prisma, Role, User, Project, StrategicObjective, Kpi, KpiReport, Partner } from "../generated/prisma";
+export type { Kpi, Partner, Prisma, Project, Role, StrategicObjective, User } from "../generated/prisma";
+

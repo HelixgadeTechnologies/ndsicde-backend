@@ -43,54 +43,16 @@ export const deleteStrategicObjective = async (
   strategicObjectiveId: string
 ) => {
   return await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
-    // Step 1: Find all KPIs linked to this strategic objective
-    const kpis = await tx.kpi.findMany({
+    // Step 1: Delete the KPIs
+    await tx.kpi.deleteMany({
       where: { strategicObjectiveId },
-      select: { kpiId: true },
-    });
-    const kpiIds = kpis.map((k: { kpiId: string }) => k.kpiId);
-
-    // Step 2: Find KpiReports linked directly to this strategic objective
-    const kpiReports = await tx.kpiReport.findMany({
-      where: { strategicObjectiveId },
-      select: { kpiReportId: true },
-    });
-    const kpiReportIds = kpiReports.map((r: { kpiReportId: string }) => r.kpiReportId);
-
-    // Step 3: Delete KpiReviews for those KpiReports
-    if (kpiReportIds.length > 0) {
-      await tx.kpiReview.deleteMany({
-        where: { kpiReportId: { in: kpiReportIds } },
-      });
-
-      // Step 4: Delete KpiReports
-      await tx.kpiReport.deleteMany({
-        where: { strategicObjectiveId },
-      });
-    }
-
-    if (kpiIds.length > 0) {
-      // Step 5: Delete KpiAssignments
-      await tx.kpiAssignment.deleteMany({
-        where: { kpiId: { in: kpiIds } },
-      });
-
-      // Step 6: Delete the KPIs
-      await tx.kpi.deleteMany({
-        where: { strategicObjectiveId },
-      });
-    }
-
-    // Step 7: Nullify strategicObjectiveId on linked Projects (don't delete them)
-    await tx.project.updateMany({
-      where: { strategicObjectiveId },
-      data: { strategicObjectiveId: null },
     });
 
-    // Step 8: Delete the strategic objective
+    // Step 2: Delete the strategic objective
     return await tx.strategicObjective.delete({
       where: { strategicObjectiveId },
     });
+
   });
 };
 
@@ -127,32 +89,63 @@ export const saveKpi = async (data: IKpi, isCreate: boolean) => {
       data: {
         statement: data.statement ?? null,
         definition: data.definition ?? null,
-        type: data.type ?? null,
-        specificAreas: data.specificAreas ?? null,
+        specificArea: data.specificArea ?? null,
         unitOfMeasure: data.unitOfMeasure ?? null,
         itemInMeasure: data.itemInMeasure ?? null,
-        disaggregation: data.disaggregation ?? null,
-        baseLine: data.baseLine ?? null,
-        target: data.target ?? null,
+        baseLineDate: data.baseLineDate ?? null,
+        cumulativeValue: data.cumulativeValue ?? null,
+        baselineNarrative: data.baselineNarrative ?? null,
+        targetDate: data.targetDate ?? null,
+        cumulativeTarget: data.cumulativeTarget ?? null,
+        targetNarrative: data.targetNarrative ?? null,
+        targetType: data.targetType ?? null,
+        responsiblePersons: data.responsiblePersons ?? null,
+        type: data.type ?? null,
         strategicObjectiveId: data.strategicObjectiveId ?? null,
+        kpiDisaggregation: {
+          create: data.kpiDisaggregation?.map(d => ({
+            type: d.type || "",
+            category: d.category || "",
+            target: d.target,
+            baseline: d.baseline
+          })) || []
+        }
       },
     });
   }
+
+  // Delete existing disaggregations first
+  await prisma.kpiDisaggregation.deleteMany({
+    where: { kpiId: data.kpiId }
+  });
 
   return prisma.kpi.update({
     where: { kpiId: data.kpiId },
     data: {
       statement: data.statement ?? null,
       definition: data.definition ?? null,
-      type: data.type ?? null,
-      specificAreas: data.specificAreas ?? null,
+      specificArea: data.specificArea ?? null,
       unitOfMeasure: data.unitOfMeasure ?? null,
       itemInMeasure: data.itemInMeasure ?? null,
-      disaggregation: data.disaggregation ?? null,
-      baseLine: data.baseLine ?? null,
-      target: data.target ?? null,
+      baseLineDate: data.baseLineDate ?? null,
+      cumulativeValue: data.cumulativeValue ?? null,
+      baselineNarrative: data.baselineNarrative ?? null,
+      targetDate: data.targetDate ?? null,
+      cumulativeTarget: data.cumulativeTarget ?? null,
+      targetNarrative: data.targetNarrative ?? null,
+      targetType: data.targetType ?? null,
+      responsiblePersons: data.responsiblePersons ?? null,
+      type: data.type ?? null,
       strategicObjectiveId: data.strategicObjectiveId ?? null,
       updateAt: new Date(),
+      kpiDisaggregation: {
+        create: data.kpiDisaggregation?.map(d => ({
+          type: d.type || "",
+          category: d.category || "",
+          target: d.target,
+          baseline: d.baseline
+        })) || []
+      }
     },
   });
 };

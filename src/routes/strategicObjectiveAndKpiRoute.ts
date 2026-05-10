@@ -163,22 +163,47 @@ strategicObjectiveRouter.get(
  *                     type: string
  *                   definition:
  *                     type: string
- *                   type:
- *                     type: string
- *                   specificAreas:
+ *                   specificArea:
  *                     type: string
  *                   unitOfMeasure:
  *                     type: string
  *                   itemInMeasure:
  *                     type: string
- *                   disaggregation:
+ *                   baseLineDate:
  *                     type: string
- *                   baseLine:
+ *                     format: date-time
+ *                   cumulativeValue:
+ *                     type: number
+ *                   baselineNarrative:
  *                     type: string
- *                   target:
+ *                   targetDate:
+ *                     type: string
+ *                     format: date-time
+ *                   cumulativeTarget:
+ *                     type: number
+ *                   targetNarrative:
+ *                     type: string
+ *                   targetType:
+ *                     type: string
+ *                   responsiblePersons:
+ *                     type: string
+ *                   type:
  *                     type: string
  *                   strategicObjectiveId:
  *                     type: string
+ *                   kpiDisaggregation:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         type:
+ *                           type: string
+ *                         category:
+ *                           type: string
+ *                         target:
+ *                           type: number
+ *                         baseline:
+ *                           type: number
  *     responses:
  *       201:
  *         description: Created

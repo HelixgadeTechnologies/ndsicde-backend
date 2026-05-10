@@ -1,67 +1,98 @@
 import { prisma } from "../lib/prisma";
 
 // ─────────────────────────────────────────────────────────────
-// HELPERS
-// ─────────────────────────────────────────────────────────────
-function buildDateFilter(startDate?: string, endDate?: string) {
-    if (!startDate && !endDate) return {};
-    const filter: any = {};
-    if (startDate) filter.gte = new Date(startDate);
-    if (endDate) filter.lte = new Date(endDate);
-    return { createdAt: filter };
-}
-
-function buildProjectFilter(projectId?: string) {
-    if (!projectId || projectId === "All") return {};
-    return { projectId };
-}
-
-// ─────────────────────────────────────────────────────────────
 // 1. STAT CARDS
 // ─────────────────────────────────────────────────────────────
 export const getKpiDashboardStats = async (
-    userId?: string,
-    projectId?: string
+    _userId?: string,
+    _projectId?: string
 ) => {
-    const baseWhere: any = {};
-    if (userId) baseWhere.userId = userId;
-    if (projectId && projectId !== "All") baseWhere.projectId = projectId;
-
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-    // Total assigned KPIs
-    const totalAssignedKpis = await prisma.kpiReport.count({ where: baseWhere });
-
-    // Distinct project count
-    const projectGroups = await prisma.kpiReport.groupBy({
-        by: ["projectId"],
-        where: { ...baseWhere, projectId: { not: null } },
-    });
-    const acrossProjects = projectGroups.length;
-
-    // Pending Updates (pending + submitted within last 7 days)
-    const pendingUpdates = await prisma.kpiReport.count({
+    // Total assigned KPIs = IndicatorReport entries from Survey Data with a linked orgKpiId
+    const totalAssignedKpis = await prisma.indicatorReport.count({
         where: {
-            ...baseWhere,
-            status: "Pending",
-            createdAt: { gte: sevenDaysAgo },
+            indicatorSource: "Survey Data",
+            orgKpiId: { not: null },
         },
     });
 
-    // Achieved Targets: actualValue >= target
-    const allReports = await prisma.kpiReport.findMany({
-        where: { ...baseWhere, actualValue: { not: null }, target: { not: null } },
-        select: { actualValue: true, target: true },
+    // Distinct projects linked via: IndicatorReport → ResultType → Impact/Outcome/Output → Project
+    const reportResultTypes = await prisma.indicatorReport.findMany({
+        where: {
+            indicatorSource: "Survey Data",
+            orgKpiId: { not: null },
+            resultTypeId: { not: null },
+        },
+        select: { resultTypeId: true },
     });
 
-    const achievedTargets = allReports.filter(
-        (r) => (r.actualValue ?? 0) >= (r.target ?? 0)
-    ).length;
+    const resultTypeIds = [
+        ...new Set(reportResultTypes.map((r) => r.resultTypeId as string)),
+    ];
+
+    const [impactProjects, outcomeProjects, outputProjects] = await Promise.all([
+        prisma.impact.findMany({
+            where: { resultTypeId: { in: resultTypeIds }, projectId: { not: null } },
+            select: { projectId: true },
+        }),
+        prisma.outcome.findMany({
+            where: { resultTypeId: { in: resultTypeIds }, projectId: { not: null } },
+            select: { projectId: true },
+        }),
+        prisma.output.findMany({
+            where: { resultTypeId: { in: resultTypeIds }, projectId: { not: null } },
+            select: { projectId: true },
+        }),
+    ]);
+
+    const distinctProjectIds = new Set([
+        ...impactProjects.map((i) => i.projectId),
+        ...outcomeProjects.map((o) => o.projectId),
+        ...outputProjects.map((o) => o.projectId),
+    ]);
+    const acrossProjects = distinctProjectIds.size;
+
+    // Pending Updates from IndicatorReport
+    const pendingUpdates = await prisma.indicatorReport.count({
+        where: {
+            status: "PENDING",
+            createAt: { gte: sevenDaysAgo },
+        },
+    });
+
+    // Fetch all Indicators that have a cumulative target
+    const indicators = await prisma.indicator.findMany({
+        where: { cumulativeTarget: { not: null } },
+        select: { orgKpiId: true, cumulativeTarget: true },
+    });
+
+    // Actual values come from IndicatorReport (Survey Data) matched by orgKpiId
+    const surveyReports = await prisma.indicatorReport.findMany({
+        where: { indicatorSource: "Survey Data" },
+        select: { orgKpiId: true, cumulativeActual: true },
+    });
+
+    // Sum cumulativeActual per orgKpiId
+    const actualByOrgKpiId: Record<string, number> = {};
+    for (const report of surveyReports) {
+        if (report.orgKpiId) {
+            actualByOrgKpiId[report.orgKpiId] =
+                (actualByOrgKpiId[report.orgKpiId] ?? 0) +
+                Number(report.cumulativeActual ?? 0);
+        }
+    }
+
+    // Achieved Targets: summed actual >= cumulativeTarget
+    const achievedTargets = indicators.filter((ind) => {
+        const actual = actualByOrgKpiId[ind.orgKpiId ?? ""] ?? 0;
+        return actual >= (ind.cumulativeTarget ?? 0);
+    }).length;
 
     const successRate =
-        allReports.length > 0
-            ? Number(((achievedTargets / allReports.length) * 100).toFixed(1))
+        indicators.length > 0
+            ? Number(((achievedTargets / indicators.length) * 100).toFixed(1))
             : 0;
 
     return {
@@ -81,48 +112,62 @@ export const getKpiPerformanceChart = async (filters?: {
     startDate?: string;
     endDate?: string;
 }) => {
-    const where: any = {
-        ...buildProjectFilter(filters?.projectId),
-        ...buildDateFilter(filters?.startDate, filters?.endDate),
-    };
-
-    // Default: last 6 months if no date filter
-    if (!filters?.startDate && !filters?.endDate) {
+    // Build date filter against IndicatorReport.createAt
+    const dateWhere: any = {};
+    if (filters?.startDate || filters?.endDate) {
+        dateWhere.createAt = {};
+        if (filters?.startDate) dateWhere.createAt.gte = new Date(filters.startDate);
+        if (filters?.endDate) dateWhere.createAt.lte = new Date(filters.endDate);
+    } else {
         const sixMonthsAgo = new Date();
         sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
         sixMonthsAgo.setDate(1);
-        where.createdAt = { gte: sixMonthsAgo };
+        dateWhere.createAt = { gte: sixMonthsAgo };
     }
 
-    const reports = await prisma.kpiReport.findMany({
-        where,
-        select: { actualValue: true, target: true, createdAt: true },
-        orderBy: { createdAt: "asc" },
+    // Fetch Survey Data reports with their orgKpiId and createAt for monthly grouping
+    const indicatorReports = await prisma.indicatorReport.findMany({
+        where: {
+            indicatorSource: "Survey Data",
+            orgKpiId: { not: null },
+            ...dateWhere,
+        },
+        select: { orgKpiId: true, cumulativeActual: true, createAt: true },
+        orderBy: { createAt: "asc" },
     });
 
-    // Group by month
-    const monthMap: Record<
-        string,
-        { totalActual: number; totalTarget: number; count: number }
-    > = {};
+    // Fetch cumulativeTarget from Kpi table for each distinct orgKpiId
+    const distinctOrgKpiIds = [...new Set(
+        indicatorReports.map((r) => r.orgKpiId as string)
+    )];
 
-    for (const r of reports) {
-        const key = r.createdAt.toLocaleString("default", {
+    const kpis = await prisma.kpi.findMany({
+        where: { kpiId: { in: distinctOrgKpiIds } },
+        select: { kpiId: true, cumulativeTarget: true },
+    });
+
+    const targetByKpiId: Record<string, number> = {};
+    for (const kpi of kpis) {
+        targetByKpiId[kpi.kpiId] = kpi.cumulativeTarget ?? 0;
+    }
+
+    // Group by month — sum cumulativeActual and corresponding cumulativeTarget
+    const monthMap: Record<string, { totalActual: number; totalTarget: number }> = {};
+
+    for (const r of indicatorReports) {
+        const key = (r.createAt as Date).toLocaleString("default", {
             month: "short",
             year: "numeric",
         });
-        if (!monthMap[key]) {
-            monthMap[key] = { totalActual: 0, totalTarget: 0, count: 0 };
-        }
-        monthMap[key].totalActual += r.actualValue ?? 0;
-        monthMap[key].totalTarget += r.target ?? 0;
-        monthMap[key].count += 1;
+        if (!monthMap[key]) monthMap[key] = { totalActual: 0, totalTarget: 0 };
+        monthMap[key].totalActual += Number(r.cumulativeActual ?? 0);
+        monthMap[key].totalTarget += targetByKpiId[r.orgKpiId as string] ?? 0;
     }
 
     return Object.entries(monthMap).map(([month, data]) => ({
         month,
-        actual: data.count > 0 ? Math.round(data.totalActual / data.count) : 0,
-        target: data.count > 0 ? Math.round(data.totalTarget / data.count) : 0,
+        actual: Math.round(data.totalActual),
+        target: Math.round(data.totalTarget),
     }));
 };
 
@@ -134,33 +179,55 @@ export const getKpiTypeDistribution = async (filters?: {
     startDate?: string;
     endDate?: string;
 }) => {
-    const where: any = {
-        ...buildProjectFilter(filters?.projectId),
-        ...buildDateFilter(filters?.startDate, filters?.endDate),
-        kpiType: { not: null },
-    };
+    // Build date filter against IndicatorReport.createAt
+    const dateWhere: any = {};
+    if (filters?.startDate || filters?.endDate) {
+        dateWhere.createAt = {};
+        if (filters?.startDate) dateWhere.createAt.gte = new Date(filters.startDate);
+        if (filters?.endDate) dateWhere.createAt.lte = new Date(filters.endDate);
+    }
 
-    const groups = await prisma.kpiReport.groupBy({
-        by: ["kpiType"],
-        where,
-        _count: { _all: true },
+    // Get all Survey Data reports with their orgKpiId
+    const indicatorReports = await prisma.indicatorReport.findMany({
+        where: {
+            indicatorSource: "Survey Data",
+            orgKpiId: { not: null },
+            ...dateWhere,
+        },
+        select: { orgKpiId: true },
     });
 
-    // Note: The variable `groupReports` is not defined in the current context.
-    // Assuming `groupReports` was intended to be `groups` and the calculation
-    // is meant to be added here, though its purpose isn't directly used in the
-    // subsequent return statement for this function.
-    // If `groupReports` refers to a different data structure, this line might
-    // cause a runtime error.
-    const groupProgress = groups.reduce((sum: number, g: any) => sum + (g.indicator?.cumulativeTarget ? (Number(g.cumulativeActual) / Number(g.indicator.cumulativeTarget)) * 100 : 0), 0) / groups.length;
+    if (indicatorReports.length === 0) return [];
 
-    const total = groups.reduce((sum, g) => sum + g._count._all, 0);
+    // Lookup Kpi.type for each distinct orgKpiId
+    const distinctOrgKpiIds = [
+        ...new Set(indicatorReports.map((r) => r.orgKpiId as string)),
+    ];
 
-    return groups.map((g) => ({
-        type: g.kpiType,
-        count: g._count._all,
-        percentage:
-            total > 0 ? Number(((g._count._all / total) * 100).toFixed(1)) : 0,
+    const kpis = await prisma.kpi.findMany({
+        where: { kpiId: { in: distinctOrgKpiIds }, type: { not: null } },
+        select: { kpiId: true, type: true },
+    });
+
+    const typeByKpiId: Record<string, string> = {};
+    for (const kpi of kpis) {
+        typeByKpiId[kpi.kpiId] = kpi.type as string;
+    }
+
+    // Count reports per KPI type
+    const typeCountMap: Record<string, number> = {};
+    for (const r of indicatorReports) {
+        const kpiType = typeByKpiId[r.orgKpiId as string];
+        if (!kpiType) continue;
+        typeCountMap[kpiType] = (typeCountMap[kpiType] ?? 0) + 1;
+    }
+
+    const total = Object.values(typeCountMap).reduce((sum, c) => sum + c, 0);
+
+    return Object.entries(typeCountMap).map(([type, count]) => ({
+        type,
+        count,
+        percentage: total > 0 ? Number(((count / total) * 100).toFixed(1)) : 0,
     }));
 };
 
@@ -175,49 +242,111 @@ export const getKpiRecentSubmissions = async (filters?: {
     endDate?: string;
 }) => {
     const where: any = {
-        ...buildProjectFilter(filters?.projectId),
-        ...buildDateFilter(filters?.startDate, filters?.endDate),
+        indicatorSource: "Survey Data",
+        orgKpiId: { not: null },
     };
 
-    if (filters?.status && filters.status !== "All") {
-        where.status = filters.status;
+    if (filters?.status && filters.status !== "All") where.status = filters.status;
+    if (filters?.search) where.indicatorStatement = { contains: filters.search };
+    if (filters?.startDate || filters?.endDate) {
+        where.createAt = {};
+        if (filters?.startDate) where.createAt.gte = new Date(filters.startDate);
+        if (filters?.endDate) where.createAt.lte = new Date(filters.endDate);
     }
 
-    if (filters?.search) {
-        where.kpiName = { contains: filters.search };
+    // IndicatorReport has no direct projectId — resolve via Project → Impact/Outcome/Output → ResultType
+    if (filters?.projectId && filters.projectId !== "All") {
+        const [impacts, outcomes, outputs] = await Promise.all([
+            prisma.impact.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+            prisma.outcome.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+            prisma.output.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+        ]);
+
+        const resultTypeIds = [
+            ...new Set([
+                ...impacts.map((i) => i.resultTypeId as string),
+                ...outcomes.map((o) => o.resultTypeId as string),
+                ...outputs.map((o) => o.resultTypeId as string),
+            ]),
+        ];
+
+        where.resultTypeId = { in: resultTypeIds };
     }
 
-    return await prisma.kpiReport.findMany({
+    const reports = await prisma.indicatorReport.findMany({
         where,
         select: {
-            kpiReportId: true,
-            kpiName: true,
-            kpiType: true,
+            indicatorReportId: true,
+            indicatorStatement: true,
+            orgKpiId: true,
             status: true,
-            baseline: true,
-            target: true,
-            actualValue: true,
-            observation: true,
-            evidence: true,
-            createdAt: true,
-            updatedAt: true,
-            project: { select: { projectId: true, projectName: true } },
-            user: { select: { userId: true, fullName: true, email: true } },
-            strategicObjective: {
-                select: { strategicObjectiveId: true, statement: true },
-            },
-            kpiReview: {
+            cumulativeActual: true,
+            actualNarrative: true,
+            attachmentUrl: true,
+            createAt: true,
+            updateAt: true,
+            indicatorReportComment: {
                 select: {
-                    kpiReviewId: true,
+                    indicatorReportCommentId: true,
                     comment: true,
-                    reviewedBy: true,
-                    reviewedAt: true,
+                    createAt: true,
                 },
-                orderBy: { reviewedAt: "desc" },
+                orderBy: { createAt: "desc" },
                 take: 1,
             },
         },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createAt: "desc" },
+    });
+
+    if (reports.length === 0) return [];
+
+    // Enrich with Kpi data: type, baseline, target, strategicObjective
+    const distinctOrgKpiIds = [
+        ...new Set(reports.map((r) => r.orgKpiId as string)),
+    ];
+
+    const kpis = await prisma.kpi.findMany({
+        where: { kpiId: { in: distinctOrgKpiIds } },
+        select: {
+            kpiId: true,
+            type: true,
+            cumulativeValue: true,
+            cumulativeTarget: true,
+            strategicObjective: {
+                select: { strategicObjectiveId: true, statement: true },
+            },
+        },
+    });
+
+    const kpiMap: Record<string, (typeof kpis)[0]> = {};
+    for (const kpi of kpis) kpiMap[kpi.kpiId] = kpi;
+
+    return reports.map((r) => {
+        const kpi = kpiMap[r.orgKpiId as string];
+        return {
+            indicatorReportId: r.indicatorReportId,
+            kpiName: r.indicatorStatement,
+            kpiType: kpi?.type ?? null,
+            status: r.status,
+            baseline: kpi?.cumulativeValue ?? null,
+            target: kpi?.cumulativeTarget ?? null,
+            actualValue: r.cumulativeActual,
+            observation: r.actualNarrative,
+            evidence: r.attachmentUrl,
+            createdAt: r.createAt,
+            updatedAt: r.updateAt,
+            strategicObjective: kpi?.strategicObjective ?? null,
+            kpiReview: r.indicatorReportComment[0] ?? null,
+        };
     });
 };
 
@@ -233,119 +362,94 @@ export const getAssignedKpiList = async (filters?: {
     endDate?: string;
 }) => {
     const where: any = {
-        ...buildProjectFilter(filters?.projectId),
-        ...buildDateFilter(filters?.startDate, filters?.endDate),
+        indicatorSource: "Survey Data",
+        orgKpiId: { not: null },
     };
 
-    if (filters?.userId) where.userId = filters.userId;
     if (filters?.status && filters.status !== "All") where.status = filters.status;
-    if (filters?.search) where.kpiName = { contains: filters.search };
+    if (filters?.search) where.indicatorStatement = { contains: filters.search };
+    if (filters?.startDate || filters?.endDate) {
+        where.createAt = {};
+        if (filters?.startDate) where.createAt.gte = new Date(filters.startDate);
+        if (filters?.endDate) where.createAt.lte = new Date(filters.endDate);
+    }
 
-    return await prisma.kpiReport.findMany({
+    // IndicatorReport has no direct projectId — resolve via Project → Impact/Outcome/Output → ResultType
+    if (filters?.projectId && filters.projectId !== "All") {
+        const [impacts, outcomes, outputs] = await Promise.all([
+            prisma.impact.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+            prisma.outcome.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+            prisma.output.findMany({
+                where: { projectId: filters.projectId, resultTypeId: { not: null } },
+                select: { resultTypeId: true },
+            }),
+        ]);
+
+        const resultTypeIds = [
+            ...new Set([
+                ...impacts.map((i) => i.resultTypeId as string),
+                ...outcomes.map((o) => o.resultTypeId as string),
+                ...outputs.map((o) => o.resultTypeId as string),
+            ]),
+        ];
+
+        where.resultTypeId = { in: resultTypeIds };
+    }
+
+    const reports = await prisma.indicatorReport.findMany({
         where,
         select: {
-            kpiReportId: true,
-            kpiName: true,
-            kpiType: true,
-            baseline: true,
-            target: true,
-            actualValue: true,
+            indicatorReportId: true,
+            indicatorStatement: true,
+            orgKpiId: true,
             status: true,
-            createdAt: true,
-            project: { select: { projectId: true, projectName: true } },
-            strategicObjective: { select: { strategicObjectiveId: true, statement: true } },
+            cumulativeActual: true,
+            createAt: true,
         },
-        orderBy: { createdAt: "desc" },
+        orderBy: { createAt: "desc" },
     });
-};
 
-// ─────────────────────────────────────────────────────────────
-// 4c. GET SINGLE KPI REPORT BY ID (for edit/view)
-// ─────────────────────────────────────────────────────────────
-export const getKpiReportById = async (kpiReportId: string) => {
-    return await prisma.kpiReport.findUnique({
-        where: { kpiReportId },
+    if (reports.length === 0) return [];
+
+    // Enrich with Kpi: type, baseline, target, strategicObjective
+    const distinctOrgKpiIds = [
+        ...new Set(reports.map((r) => r.orgKpiId as string)),
+    ];
+
+    const kpis = await prisma.kpi.findMany({
+        where: { kpiId: { in: distinctOrgKpiIds } },
         select: {
-            kpiReportId: true,
-            kpiName: true,
-            kpiType: true,
-            baseline: true,
-            target: true,
-            actualValue: true,
-            status: true,
-            observation: true,
-            evidence: true,
-            createdAt: true,
-            updatedAt: true,
-            project: { select: { projectId: true, projectName: true } },
-            user: { select: { userId: true, fullName: true, email: true } },
-            strategicObjective: { select: { strategicObjectiveId: true, statement: true } },
-            kpiReview: {
-                select: { kpiReviewId: true, comment: true, reviewedBy: true, reviewedAt: true },
-                orderBy: { reviewedAt: "desc" },
+            kpiId: true,
+            type: true,
+            cumulativeValue: true,
+            cumulativeTarget: true,
+            strategicObjective: {
+                select: { strategicObjectiveId: true, statement: true },
             },
         },
     });
-};
 
-// ─────────────────────────────────────────────────────────────
-// 5. CREATE / UPDATE KPI REPORT
-// ─────────────────────────────────────────────────────────────
-export interface IKpiReportPayload {
-    kpiReportId?: string;
-    projectId?: string;
-    userId?: string;
-    strategicObjectiveId?: string;
-    kpiName?: string;
-    kpiType?: string;
-    baseline?: number;
-    target?: number;
-    actualValue?: number;
-    status?: string;
-    observation?: string;
-    evidence?: string;
-}
+    const kpiMap: Record<string, (typeof kpis)[0]> = {};
+    for (const kpi of kpis) kpiMap[kpi.kpiId] = kpi;
 
-export const createOrUpdateKpiReport = async (
-    payload: IKpiReportPayload,
-    isCreate: boolean
-) => {
-    // Use undefined instead of null for optional fields to let Prisma handle them
-    const data = {
-        projectId: payload.projectId ?? undefined,
-        userId: payload.userId ?? undefined,
-        strategicObjectiveId: payload.strategicObjectiveId ?? undefined,
-        kpiName: payload.kpiName ?? undefined,
-        kpiType: payload.kpiType ?? undefined,
-        baseline: payload.baseline ?? undefined,
-        target: payload.target ?? undefined,
-        actualValue: payload.actualValue ?? undefined,
-        status: payload.status ?? undefined,
-        observation: payload.observation ?? undefined,
-        evidence: payload.evidence ?? undefined,
-    };
-
-    if (isCreate) {
-        return await prisma.kpiReport.create({ data });
-    }
-
-    if (!payload.kpiReportId) {
-        throw new Error("kpiReportId is required for update");
-    }
-
-    return await prisma.kpiReport.update({
-        where: { kpiReportId: payload.kpiReportId },
-        data: { ...data, updatedAt: new Date() },
-    });
-};
-
-// ─────────────────────────────────────────────────────────────
-// 6. DELETE KPI REPORT
-// ─────────────────────────────────────────────────────────────
-export const deleteKpiReport = async (kpiReportId: string) => {
-    return await prisma.$transaction(async (tx) => {
-        // Delete child KpiReview records first
-        await tx.kpiReview.deleteMany({ where: { kpiReportId } });
-        return await tx.kpiReport.delete({ where: { kpiReportId } });
+    return reports.map((r) => {
+        const kpi = kpiMap[r.orgKpiId as string];
+        return {
+            indicatorReportId: r.indicatorReportId,
+            kpiName: r.indicatorStatement,
+            kpiType: kpi?.type ?? null,
+            baseline: kpi?.cumulativeValue ?? null,
+            target: kpi?.cumulativeTarget ?? null,
+            actualValue: r.cumulativeActual,
+            status: r.status,
+            createdAt: r.createAt,
+            strategicObjective: kpi?.strategicObjective ?? null,
+        };
     });
 };
