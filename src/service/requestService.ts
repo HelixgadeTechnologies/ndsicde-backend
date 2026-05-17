@@ -236,7 +236,7 @@ export const requestApproval = async (
     // =====================================
     if (approvalStatus === ApprovalStatus.REVIEW) {
       const resetData: any = {
-        status:       "Under Review",
+        status:       "InReview",
         approvalStep: 0,
         updateAt:     new Date(),
       };
@@ -284,7 +284,7 @@ export const requestApproval = async (
           [`approvedBy_${currentLevel}`]: approvedBy,
           [`comment_${currentLevel}`]:    comment || null,
           approvalStep: LEVEL_NUMBER[currentLevel],
-          status:       isFinalLevel ? "Approved" : `Layer ${LEVEL_NUMBER[currentLevel]} Approved`,
+          status:       isFinalLevel ? "Approved" : "InReview",
           updateAt:     new Date(),
         },
       });

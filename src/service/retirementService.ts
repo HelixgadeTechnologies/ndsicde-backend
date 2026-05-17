@@ -262,7 +262,7 @@ export const approveRetirement = async (
     // =====================================
     if (approvalStatus === ApprovalStatus.REVIEW) {
       const resetData: any = {
-        status:       "Under Review",
+        status:       "InReview",
         approvalStep: 0,
         updateAt:     new Date(),
       };
@@ -311,7 +311,7 @@ export const approveRetirement = async (
           [`comment_${currentLevel}`]:    comment || null,
           approvalStep:  RETIREMENT_LEVEL_NUMBER[currentLevel],
           needJournalId: isFinalLevel,
-          status:        isFinalLevel ? "Approved" : `Layer ${RETIREMENT_LEVEL_NUMBER[currentLevel]} Approved`,
+          status:        isFinalLevel ? "Approved" : `InReview`,
           updateAt:      new Date(),
         },
       });
