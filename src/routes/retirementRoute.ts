@@ -409,7 +409,7 @@ retirementRouter.get("/retirement/:retirementId", getRetirement);
 
 /**
  * @swagger
- * /api/retirement/retirement{retirementId}:
+ * /api/retirement/{retirementId}:
  *   delete:
  *     summary: Delete Retirement
  *     description: Delete a Retirement record by its `retirementId`.
@@ -433,7 +433,7 @@ retirementRouter.get("/retirement/:retirementId", getRetirement);
  *       500:
  *         description: Server error
  */
-retirementRouter.delete("/retirement/:retirementId", removeRetirement);
+retirementRouter.delete("/:retirementId", removeRetirement);
 
 /**
  * @swagger

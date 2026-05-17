@@ -84,11 +84,6 @@ export type Output = $Result.DefaultSelection<Prisma.$OutputPayload>
  */
 export type Indicator = $Result.DefaultSelection<Prisma.$IndicatorPayload>
 /**
- * Model NewKpi
- * 
- */
-export type NewKpi = $Result.DefaultSelection<Prisma.$NewKpiPayload>
-/**
  * Model IndicatorDisaggregation
  * 
  */
@@ -414,16 +409,6 @@ export class PrismaClient<
     * ```
     */
   get indicator(): Prisma.IndicatorDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.newKpi`: Exposes CRUD operations for the **NewKpi** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more NewKpis
-    * const newKpis = await prisma.newKpi.findMany()
-    * ```
-    */
-  get newKpi(): Prisma.NewKpiDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.indicatorDisaggregation`: Exposes CRUD operations for the **IndicatorDisaggregation** model.
@@ -1002,7 +987,6 @@ export namespace Prisma {
     Outcome: 'Outcome',
     Output: 'Output',
     Indicator: 'Indicator',
-    NewKpi: 'NewKpi',
     IndicatorDisaggregation: 'IndicatorDisaggregation',
     PeriodicTarget: 'PeriodicTarget',
     IndicatorReport: 'IndicatorReport',
@@ -1031,7 +1015,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "newKpi" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1956,72 +1940,6 @@ export namespace Prisma {
           count: {
             args: Prisma.IndicatorCountArgs<ExtArgs>
             result: $Utils.Optional<IndicatorCountAggregateOutputType> | number
-          }
-        }
-      }
-      NewKpi: {
-        payload: Prisma.$NewKpiPayload<ExtArgs>
-        fields: Prisma.NewKpiFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.NewKpiFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.NewKpiFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          findFirst: {
-            args: Prisma.NewKpiFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.NewKpiFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          findMany: {
-            args: Prisma.NewKpiFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>[]
-          }
-          create: {
-            args: Prisma.NewKpiCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          createMany: {
-            args: Prisma.NewKpiCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.NewKpiDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          update: {
-            args: Prisma.NewKpiUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          deleteMany: {
-            args: Prisma.NewKpiDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.NewKpiUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.NewKpiUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NewKpiPayload>
-          }
-          aggregate: {
-            args: Prisma.NewKpiAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNewKpi>
-          }
-          groupBy: {
-            args: Prisma.NewKpiGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NewKpiGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.NewKpiCountArgs<ExtArgs>
-            result: $Utils.Optional<NewKpiCountAggregateOutputType> | number
           }
         }
       }
@@ -3005,7 +2923,6 @@ export namespace Prisma {
     outcome?: OutcomeOmit
     output?: OutputOmit
     indicator?: IndicatorOmit
-    newKpi?: NewKpiOmit
     indicatorDisaggregation?: IndicatorDisaggregationOmit
     periodicTarget?: PeriodicTargetOmit
     indicatorReport?: IndicatorReportOmit
@@ -18857,1063 +18774,6 @@ export namespace Prisma {
 
 
   /**
-   * Model NewKpi
-   */
-
-  export type AggregateNewKpi = {
-    _count: NewKpiCountAggregateOutputType | null
-    _avg: NewKpiAvgAggregateOutputType | null
-    _sum: NewKpiSumAggregateOutputType | null
-    _min: NewKpiMinAggregateOutputType | null
-    _max: NewKpiMaxAggregateOutputType | null
-  }
-
-  export type NewKpiAvgAggregateOutputType = {
-    cumulativeValue: number | null
-    cumulativeTarget: number | null
-  }
-
-  export type NewKpiSumAggregateOutputType = {
-    cumulativeValue: number | null
-    cumulativeTarget: number | null
-  }
-
-  export type NewKpiMinAggregateOutputType = {
-    newKpiId: string | null
-    statement: string | null
-    definition: string | null
-    specificArea: string | null
-    unitOfMeasure: string | null
-    itemInMeasure: string | null
-    baseLineDate: Date | null
-    cumulativeValue: number | null
-    baselineNarrative: string | null
-    targetDate: Date | null
-    cumulativeTarget: number | null
-    targetNarrative: string | null
-    targetType: string | null
-    responsiblePersons: string | null
-    kpiType: string | null
-    createAt: Date | null
-    updateAt: Date | null
-  }
-
-  export type NewKpiMaxAggregateOutputType = {
-    newKpiId: string | null
-    statement: string | null
-    definition: string | null
-    specificArea: string | null
-    unitOfMeasure: string | null
-    itemInMeasure: string | null
-    baseLineDate: Date | null
-    cumulativeValue: number | null
-    baselineNarrative: string | null
-    targetDate: Date | null
-    cumulativeTarget: number | null
-    targetNarrative: string | null
-    targetType: string | null
-    responsiblePersons: string | null
-    kpiType: string | null
-    createAt: Date | null
-    updateAt: Date | null
-  }
-
-  export type NewKpiCountAggregateOutputType = {
-    newKpiId: number
-    statement: number
-    definition: number
-    specificArea: number
-    unitOfMeasure: number
-    itemInMeasure: number
-    baseLineDate: number
-    cumulativeValue: number
-    baselineNarrative: number
-    targetDate: number
-    cumulativeTarget: number
-    targetNarrative: number
-    targetType: number
-    responsiblePersons: number
-    kpiType: number
-    createAt: number
-    updateAt: number
-    _all: number
-  }
-
-
-  export type NewKpiAvgAggregateInputType = {
-    cumulativeValue?: true
-    cumulativeTarget?: true
-  }
-
-  export type NewKpiSumAggregateInputType = {
-    cumulativeValue?: true
-    cumulativeTarget?: true
-  }
-
-  export type NewKpiMinAggregateInputType = {
-    newKpiId?: true
-    statement?: true
-    definition?: true
-    specificArea?: true
-    unitOfMeasure?: true
-    itemInMeasure?: true
-    baseLineDate?: true
-    cumulativeValue?: true
-    baselineNarrative?: true
-    targetDate?: true
-    cumulativeTarget?: true
-    targetNarrative?: true
-    targetType?: true
-    responsiblePersons?: true
-    kpiType?: true
-    createAt?: true
-    updateAt?: true
-  }
-
-  export type NewKpiMaxAggregateInputType = {
-    newKpiId?: true
-    statement?: true
-    definition?: true
-    specificArea?: true
-    unitOfMeasure?: true
-    itemInMeasure?: true
-    baseLineDate?: true
-    cumulativeValue?: true
-    baselineNarrative?: true
-    targetDate?: true
-    cumulativeTarget?: true
-    targetNarrative?: true
-    targetType?: true
-    responsiblePersons?: true
-    kpiType?: true
-    createAt?: true
-    updateAt?: true
-  }
-
-  export type NewKpiCountAggregateInputType = {
-    newKpiId?: true
-    statement?: true
-    definition?: true
-    specificArea?: true
-    unitOfMeasure?: true
-    itemInMeasure?: true
-    baseLineDate?: true
-    cumulativeValue?: true
-    baselineNarrative?: true
-    targetDate?: true
-    cumulativeTarget?: true
-    targetNarrative?: true
-    targetType?: true
-    responsiblePersons?: true
-    kpiType?: true
-    createAt?: true
-    updateAt?: true
-    _all?: true
-  }
-
-  export type NewKpiAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewKpi to aggregate.
-     */
-    where?: NewKpiWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewKpis to fetch.
-     */
-    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: NewKpiWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewKpis from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewKpis.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned NewKpis
-    **/
-    _count?: true | NewKpiCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: NewKpiAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: NewKpiSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: NewKpiMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: NewKpiMaxAggregateInputType
-  }
-
-  export type GetNewKpiAggregateType<T extends NewKpiAggregateArgs> = {
-        [P in keyof T & keyof AggregateNewKpi]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateNewKpi[P]>
-      : GetScalarType<T[P], AggregateNewKpi[P]>
-  }
-
-
-
-
-  export type NewKpiGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NewKpiWhereInput
-    orderBy?: NewKpiOrderByWithAggregationInput | NewKpiOrderByWithAggregationInput[]
-    by: NewKpiScalarFieldEnum[] | NewKpiScalarFieldEnum
-    having?: NewKpiScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: NewKpiCountAggregateInputType | true
-    _avg?: NewKpiAvgAggregateInputType
-    _sum?: NewKpiSumAggregateInputType
-    _min?: NewKpiMinAggregateInputType
-    _max?: NewKpiMaxAggregateInputType
-  }
-
-  export type NewKpiGroupByOutputType = {
-    newKpiId: string
-    statement: string | null
-    definition: string | null
-    specificArea: string | null
-    unitOfMeasure: string | null
-    itemInMeasure: string | null
-    baseLineDate: Date | null
-    cumulativeValue: number | null
-    baselineNarrative: string | null
-    targetDate: Date | null
-    cumulativeTarget: number | null
-    targetNarrative: string | null
-    targetType: string | null
-    responsiblePersons: string | null
-    kpiType: string | null
-    createAt: Date | null
-    updateAt: Date | null
-    _count: NewKpiCountAggregateOutputType | null
-    _avg: NewKpiAvgAggregateOutputType | null
-    _sum: NewKpiSumAggregateOutputType | null
-    _min: NewKpiMinAggregateOutputType | null
-    _max: NewKpiMaxAggregateOutputType | null
-  }
-
-  type GetNewKpiGroupByPayload<T extends NewKpiGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<NewKpiGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof NewKpiGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], NewKpiGroupByOutputType[P]>
-            : GetScalarType<T[P], NewKpiGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type NewKpiSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    newKpiId?: boolean
-    statement?: boolean
-    definition?: boolean
-    specificArea?: boolean
-    unitOfMeasure?: boolean
-    itemInMeasure?: boolean
-    baseLineDate?: boolean
-    cumulativeValue?: boolean
-    baselineNarrative?: boolean
-    targetDate?: boolean
-    cumulativeTarget?: boolean
-    targetNarrative?: boolean
-    targetType?: boolean
-    responsiblePersons?: boolean
-    kpiType?: boolean
-    createAt?: boolean
-    updateAt?: boolean
-  }, ExtArgs["result"]["newKpi"]>
-
-
-
-  export type NewKpiSelectScalar = {
-    newKpiId?: boolean
-    statement?: boolean
-    definition?: boolean
-    specificArea?: boolean
-    unitOfMeasure?: boolean
-    itemInMeasure?: boolean
-    baseLineDate?: boolean
-    cumulativeValue?: boolean
-    baselineNarrative?: boolean
-    targetDate?: boolean
-    cumulativeTarget?: boolean
-    targetNarrative?: boolean
-    targetType?: boolean
-    responsiblePersons?: boolean
-    kpiType?: boolean
-    createAt?: boolean
-    updateAt?: boolean
-  }
-
-  export type NewKpiOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"newKpiId" | "statement" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "kpiType" | "createAt" | "updateAt", ExtArgs["result"]["newKpi"]>
-
-  export type $NewKpiPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "NewKpi"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      newKpiId: string
-      statement: string | null
-      definition: string | null
-      specificArea: string | null
-      unitOfMeasure: string | null
-      itemInMeasure: string | null
-      baseLineDate: Date | null
-      cumulativeValue: number | null
-      baselineNarrative: string | null
-      targetDate: Date | null
-      cumulativeTarget: number | null
-      targetNarrative: string | null
-      targetType: string | null
-      responsiblePersons: string | null
-      kpiType: string | null
-      createAt: Date | null
-      updateAt: Date | null
-    }, ExtArgs["result"]["newKpi"]>
-    composites: {}
-  }
-
-  type NewKpiGetPayload<S extends boolean | null | undefined | NewKpiDefaultArgs> = $Result.GetResult<Prisma.$NewKpiPayload, S>
-
-  type NewKpiCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<NewKpiFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: NewKpiCountAggregateInputType | true
-    }
-
-  export interface NewKpiDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NewKpi'], meta: { name: 'NewKpi' } }
-    /**
-     * Find zero or one NewKpi that matches the filter.
-     * @param {NewKpiFindUniqueArgs} args - Arguments to find a NewKpi
-     * @example
-     * // Get one NewKpi
-     * const newKpi = await prisma.newKpi.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends NewKpiFindUniqueArgs>(args: SelectSubset<T, NewKpiFindUniqueArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one NewKpi that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {NewKpiFindUniqueOrThrowArgs} args - Arguments to find a NewKpi
-     * @example
-     * // Get one NewKpi
-     * const newKpi = await prisma.newKpi.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends NewKpiFindUniqueOrThrowArgs>(args: SelectSubset<T, NewKpiFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewKpi that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiFindFirstArgs} args - Arguments to find a NewKpi
-     * @example
-     * // Get one NewKpi
-     * const newKpi = await prisma.newKpi.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends NewKpiFindFirstArgs>(args?: SelectSubset<T, NewKpiFindFirstArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first NewKpi that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiFindFirstOrThrowArgs} args - Arguments to find a NewKpi
-     * @example
-     * // Get one NewKpi
-     * const newKpi = await prisma.newKpi.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends NewKpiFindFirstOrThrowArgs>(args?: SelectSubset<T, NewKpiFindFirstOrThrowArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more NewKpis that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all NewKpis
-     * const newKpis = await prisma.newKpi.findMany()
-     * 
-     * // Get first 10 NewKpis
-     * const newKpis = await prisma.newKpi.findMany({ take: 10 })
-     * 
-     * // Only select the `newKpiId`
-     * const newKpiWithNewKpiIdOnly = await prisma.newKpi.findMany({ select: { newKpiId: true } })
-     * 
-     */
-    findMany<T extends NewKpiFindManyArgs>(args?: SelectSubset<T, NewKpiFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a NewKpi.
-     * @param {NewKpiCreateArgs} args - Arguments to create a NewKpi.
-     * @example
-     * // Create one NewKpi
-     * const NewKpi = await prisma.newKpi.create({
-     *   data: {
-     *     // ... data to create a NewKpi
-     *   }
-     * })
-     * 
-     */
-    create<T extends NewKpiCreateArgs>(args: SelectSubset<T, NewKpiCreateArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many NewKpis.
-     * @param {NewKpiCreateManyArgs} args - Arguments to create many NewKpis.
-     * @example
-     * // Create many NewKpis
-     * const newKpi = await prisma.newKpi.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends NewKpiCreateManyArgs>(args?: SelectSubset<T, NewKpiCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a NewKpi.
-     * @param {NewKpiDeleteArgs} args - Arguments to delete one NewKpi.
-     * @example
-     * // Delete one NewKpi
-     * const NewKpi = await prisma.newKpi.delete({
-     *   where: {
-     *     // ... filter to delete one NewKpi
-     *   }
-     * })
-     * 
-     */
-    delete<T extends NewKpiDeleteArgs>(args: SelectSubset<T, NewKpiDeleteArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one NewKpi.
-     * @param {NewKpiUpdateArgs} args - Arguments to update one NewKpi.
-     * @example
-     * // Update one NewKpi
-     * const newKpi = await prisma.newKpi.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends NewKpiUpdateArgs>(args: SelectSubset<T, NewKpiUpdateArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more NewKpis.
-     * @param {NewKpiDeleteManyArgs} args - Arguments to filter NewKpis to delete.
-     * @example
-     * // Delete a few NewKpis
-     * const { count } = await prisma.newKpi.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends NewKpiDeleteManyArgs>(args?: SelectSubset<T, NewKpiDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more NewKpis.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many NewKpis
-     * const newKpi = await prisma.newKpi.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends NewKpiUpdateManyArgs>(args: SelectSubset<T, NewKpiUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one NewKpi.
-     * @param {NewKpiUpsertArgs} args - Arguments to update or create a NewKpi.
-     * @example
-     * // Update or create a NewKpi
-     * const newKpi = await prisma.newKpi.upsert({
-     *   create: {
-     *     // ... data to create a NewKpi
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the NewKpi we want to update
-     *   }
-     * })
-     */
-    upsert<T extends NewKpiUpsertArgs>(args: SelectSubset<T, NewKpiUpsertArgs<ExtArgs>>): Prisma__NewKpiClient<$Result.GetResult<Prisma.$NewKpiPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of NewKpis.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiCountArgs} args - Arguments to filter NewKpis to count.
-     * @example
-     * // Count the number of NewKpis
-     * const count = await prisma.newKpi.count({
-     *   where: {
-     *     // ... the filter for the NewKpis we want to count
-     *   }
-     * })
-    **/
-    count<T extends NewKpiCountArgs>(
-      args?: Subset<T, NewKpiCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], NewKpiCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a NewKpi.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends NewKpiAggregateArgs>(args: Subset<T, NewKpiAggregateArgs>): Prisma.PrismaPromise<GetNewKpiAggregateType<T>>
-
-    /**
-     * Group by NewKpi.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {NewKpiGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends NewKpiGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NewKpiGroupByArgs['orderBy'] }
-        : { orderBy?: NewKpiGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, NewKpiGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNewKpiGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the NewKpi model
-   */
-  readonly fields: NewKpiFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for NewKpi.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__NewKpiClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the NewKpi model
-   */
-  interface NewKpiFieldRefs {
-    readonly newKpiId: FieldRef<"NewKpi", 'String'>
-    readonly statement: FieldRef<"NewKpi", 'String'>
-    readonly definition: FieldRef<"NewKpi", 'String'>
-    readonly specificArea: FieldRef<"NewKpi", 'String'>
-    readonly unitOfMeasure: FieldRef<"NewKpi", 'String'>
-    readonly itemInMeasure: FieldRef<"NewKpi", 'String'>
-    readonly baseLineDate: FieldRef<"NewKpi", 'DateTime'>
-    readonly cumulativeValue: FieldRef<"NewKpi", 'Int'>
-    readonly baselineNarrative: FieldRef<"NewKpi", 'String'>
-    readonly targetDate: FieldRef<"NewKpi", 'DateTime'>
-    readonly cumulativeTarget: FieldRef<"NewKpi", 'Int'>
-    readonly targetNarrative: FieldRef<"NewKpi", 'String'>
-    readonly targetType: FieldRef<"NewKpi", 'String'>
-    readonly responsiblePersons: FieldRef<"NewKpi", 'String'>
-    readonly kpiType: FieldRef<"NewKpi", 'String'>
-    readonly createAt: FieldRef<"NewKpi", 'DateTime'>
-    readonly updateAt: FieldRef<"NewKpi", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * NewKpi findUnique
-   */
-  export type NewKpiFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter, which NewKpi to fetch.
-     */
-    where: NewKpiWhereUniqueInput
-  }
-
-  /**
-   * NewKpi findUniqueOrThrow
-   */
-  export type NewKpiFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter, which NewKpi to fetch.
-     */
-    where: NewKpiWhereUniqueInput
-  }
-
-  /**
-   * NewKpi findFirst
-   */
-  export type NewKpiFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter, which NewKpi to fetch.
-     */
-    where?: NewKpiWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewKpis to fetch.
-     */
-    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewKpis.
-     */
-    cursor?: NewKpiWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewKpis from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewKpis.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewKpis.
-     */
-    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
-  }
-
-  /**
-   * NewKpi findFirstOrThrow
-   */
-  export type NewKpiFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter, which NewKpi to fetch.
-     */
-    where?: NewKpiWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewKpis to fetch.
-     */
-    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for NewKpis.
-     */
-    cursor?: NewKpiWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewKpis from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewKpis.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewKpis.
-     */
-    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
-  }
-
-  /**
-   * NewKpi findMany
-   */
-  export type NewKpiFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter, which NewKpis to fetch.
-     */
-    where?: NewKpiWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of NewKpis to fetch.
-     */
-    orderBy?: NewKpiOrderByWithRelationInput | NewKpiOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing NewKpis.
-     */
-    cursor?: NewKpiWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` NewKpis from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` NewKpis.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of NewKpis.
-     */
-    distinct?: NewKpiScalarFieldEnum | NewKpiScalarFieldEnum[]
-  }
-
-  /**
-   * NewKpi create
-   */
-  export type NewKpiCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * The data needed to create a NewKpi.
-     */
-    data?: XOR<NewKpiCreateInput, NewKpiUncheckedCreateInput>
-  }
-
-  /**
-   * NewKpi createMany
-   */
-  export type NewKpiCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many NewKpis.
-     */
-    data: NewKpiCreateManyInput | NewKpiCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * NewKpi update
-   */
-  export type NewKpiUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * The data needed to update a NewKpi.
-     */
-    data: XOR<NewKpiUpdateInput, NewKpiUncheckedUpdateInput>
-    /**
-     * Choose, which NewKpi to update.
-     */
-    where: NewKpiWhereUniqueInput
-  }
-
-  /**
-   * NewKpi updateMany
-   */
-  export type NewKpiUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update NewKpis.
-     */
-    data: XOR<NewKpiUpdateManyMutationInput, NewKpiUncheckedUpdateManyInput>
-    /**
-     * Filter which NewKpis to update
-     */
-    where?: NewKpiWhereInput
-    /**
-     * Limit how many NewKpis to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewKpi upsert
-   */
-  export type NewKpiUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * The filter to search for the NewKpi to update in case it exists.
-     */
-    where: NewKpiWhereUniqueInput
-    /**
-     * In case the NewKpi found by the `where` argument doesn't exist, create a new NewKpi with this data.
-     */
-    create: XOR<NewKpiCreateInput, NewKpiUncheckedCreateInput>
-    /**
-     * In case the NewKpi was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<NewKpiUpdateInput, NewKpiUncheckedUpdateInput>
-  }
-
-  /**
-   * NewKpi delete
-   */
-  export type NewKpiDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-    /**
-     * Filter which NewKpi to delete.
-     */
-    where: NewKpiWhereUniqueInput
-  }
-
-  /**
-   * NewKpi deleteMany
-   */
-  export type NewKpiDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which NewKpis to delete
-     */
-    where?: NewKpiWhereInput
-    /**
-     * Limit how many NewKpis to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * NewKpi without action
-   */
-  export type NewKpiDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the NewKpi
-     */
-    select?: NewKpiSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the NewKpi
-     */
-    omit?: NewKpiOmit<ExtArgs> | null
-  }
-
-
-  /**
    * Model IndicatorDisaggregation
    */
 
@@ -29077,6 +27937,8 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
+    approval_E: number | null
+    approvalStep: number | null
   }
 
   export type RequestSumAggregateOutputType = {
@@ -29086,6 +27948,8 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
+    approval_E: number | null
+    approvalStep: number | null
   }
 
   export type RequestMinAggregateOutputType = {
@@ -29114,18 +27978,23 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
+    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
+    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
+    comment_E: string | null
+    approvalStep: number | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
     createdBy: string | null
+    isJourneyManagementRequired: boolean | null
   }
 
   export type RequestMaxAggregateOutputType = {
@@ -29154,18 +28023,23 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
+    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
+    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
+    comment_E: string | null
+    approvalStep: number | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
     createdBy: string | null
+    isJourneyManagementRequired: boolean | null
   }
 
   export type RequestCountAggregateOutputType = {
@@ -29194,18 +28068,23 @@ export namespace Prisma {
     approval_B: number
     approval_C: number
     approval_D: number
+    approval_E: number
     approvedBy_A: number
     approvedBy_B: number
     approvedBy_C: number
     approvedBy_D: number
+    approvedBy_E: number
     comment_A: number
     comment_B: number
     comment_C: number
     comment_D: number
+    comment_E: number
+    approvalStep: number
     status: number
     createAt: number
     updateAt: number
     createdBy: number
+    isJourneyManagementRequired: number
     _all: number
   }
 
@@ -29217,6 +28096,8 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
+    approval_E?: true
+    approvalStep?: true
   }
 
   export type RequestSumAggregateInputType = {
@@ -29226,6 +28107,8 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
+    approval_E?: true
+    approvalStep?: true
   }
 
   export type RequestMinAggregateInputType = {
@@ -29254,18 +28137,23 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
+    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
+    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
+    comment_E?: true
+    approvalStep?: true
     status?: true
     createAt?: true
     updateAt?: true
     createdBy?: true
+    isJourneyManagementRequired?: true
   }
 
   export type RequestMaxAggregateInputType = {
@@ -29294,18 +28182,23 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
+    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
+    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
+    comment_E?: true
+    approvalStep?: true
     status?: true
     createAt?: true
     updateAt?: true
     createdBy?: true
+    isJourneyManagementRequired?: true
   }
 
   export type RequestCountAggregateInputType = {
@@ -29334,18 +28227,23 @@ export namespace Prisma {
     approval_B?: true
     approval_C?: true
     approval_D?: true
+    approval_E?: true
     approvedBy_A?: true
     approvedBy_B?: true
     approvedBy_C?: true
     approvedBy_D?: true
+    approvedBy_E?: true
     comment_A?: true
     comment_B?: true
     comment_C?: true
     comment_D?: true
+    comment_E?: true
+    approvalStep?: true
     status?: true
     createAt?: true
     updateAt?: true
     createdBy?: true
+    isJourneyManagementRequired?: true
     _all?: true
   }
 
@@ -29461,18 +28359,23 @@ export namespace Prisma {
     approval_B: number | null
     approval_C: number | null
     approval_D: number | null
+    approval_E: number | null
     approvedBy_A: string | null
     approvedBy_B: string | null
     approvedBy_C: string | null
     approvedBy_D: string | null
+    approvedBy_E: string | null
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
     comment_D: string | null
+    comment_E: string | null
+    approvalStep: number | null
     status: string | null
     createAt: Date | null
     updateAt: Date | null
     createdBy: string | null
+    isJourneyManagementRequired: boolean
     _count: RequestCountAggregateOutputType | null
     _avg: RequestAvgAggregateOutputType | null
     _sum: RequestSumAggregateOutputType | null
@@ -29520,18 +28423,23 @@ export namespace Prisma {
     approval_B?: boolean
     approval_C?: boolean
     approval_D?: boolean
+    approval_E?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
     approvedBy_D?: boolean
+    approvedBy_E?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
     comment_D?: boolean
+    comment_E?: boolean
+    approvalStep?: boolean
     status?: boolean
     createAt?: boolean
     updateAt?: boolean
     createdBy?: boolean
+    isJourneyManagementRequired?: boolean
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
@@ -29568,21 +28476,26 @@ export namespace Prisma {
     approval_B?: boolean
     approval_C?: boolean
     approval_D?: boolean
+    approval_E?: boolean
     approvedBy_A?: boolean
     approvedBy_B?: boolean
     approvedBy_C?: boolean
     approvedBy_D?: boolean
+    approvedBy_E?: boolean
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
     comment_D?: boolean
+    comment_E?: boolean
+    approvalStep?: boolean
     status?: boolean
     createAt?: boolean
     updateAt?: boolean
     createdBy?: boolean
+    isJourneyManagementRequired?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "status" | "createAt" | "updateAt" | "createdBy", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
@@ -29627,18 +28540,23 @@ export namespace Prisma {
       approval_B: number | null
       approval_C: number | null
       approval_D: number | null
+      approval_E: number | null
       approvedBy_A: string | null
       approvedBy_B: string | null
       approvedBy_C: string | null
       approvedBy_D: string | null
+      approvedBy_E: string | null
       comment_A: string | null
       comment_B: string | null
       comment_C: string | null
       comment_D: string | null
+      comment_E: string | null
+      approvalStep: number | null
       status: string | null
       createAt: Date | null
       updateAt: Date | null
       createdBy: string | null
+      isJourneyManagementRequired: boolean
     }, ExtArgs["result"]["request"]>
     composites: {}
   }
@@ -30038,18 +28956,23 @@ export namespace Prisma {
     readonly approval_B: FieldRef<"Request", 'Int'>
     readonly approval_C: FieldRef<"Request", 'Int'>
     readonly approval_D: FieldRef<"Request", 'Int'>
+    readonly approval_E: FieldRef<"Request", 'Int'>
     readonly approvedBy_A: FieldRef<"Request", 'String'>
     readonly approvedBy_B: FieldRef<"Request", 'String'>
     readonly approvedBy_C: FieldRef<"Request", 'String'>
     readonly approvedBy_D: FieldRef<"Request", 'String'>
+    readonly approvedBy_E: FieldRef<"Request", 'String'>
     readonly comment_A: FieldRef<"Request", 'String'>
     readonly comment_B: FieldRef<"Request", 'String'>
     readonly comment_C: FieldRef<"Request", 'String'>
     readonly comment_D: FieldRef<"Request", 'String'>
+    readonly comment_E: FieldRef<"Request", 'String'>
+    readonly approvalStep: FieldRef<"Request", 'Int'>
     readonly status: FieldRef<"Request", 'String'>
     readonly createAt: FieldRef<"Request", 'DateTime'>
     readonly updateAt: FieldRef<"Request", 'DateTime'>
     readonly createdBy: FieldRef<"Request", 'String'>
+    readonly isJourneyManagementRequired: FieldRef<"Request", 'Boolean'>
   }
     
 
@@ -31630,6 +30553,7 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
+    approvalStep: number | null
   }
 
   export type RetirementSumAggregateOutputType = {
@@ -31641,6 +30565,7 @@ export namespace Prisma {
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
+    approvalStep: number | null
   }
 
   export type RetirementMinAggregateOutputType = {
@@ -31662,6 +30587,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalStep: number | null
+    needJournalId: boolean | null
+    journalId: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -31688,6 +30616,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalStep: number | null
+    needJournalId: boolean | null
+    journalId: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -31714,6 +30645,9 @@ export namespace Prisma {
     comment_A: number
     comment_B: number
     comment_C: number
+    approvalStep: number
+    needJournalId: number
+    journalId: number
     requestId: number
     status: number
     createdBy: number
@@ -31732,6 +30666,7 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
+    approvalStep?: true
   }
 
   export type RetirementSumAggregateInputType = {
@@ -31743,6 +30678,7 @@ export namespace Prisma {
     approval_A?: true
     approval_B?: true
     approval_C?: true
+    approvalStep?: true
   }
 
   export type RetirementMinAggregateInputType = {
@@ -31764,6 +30700,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalStep?: true
+    needJournalId?: true
+    journalId?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -31790,6 +30729,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalStep?: true
+    needJournalId?: true
+    journalId?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -31816,6 +30758,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalStep?: true
+    needJournalId?: true
+    journalId?: true
     requestId?: true
     status?: true
     createdBy?: true
@@ -31929,6 +30874,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalStep: number | null
+    needJournalId: boolean
+    journalId: string | null
     requestId: string | null
     status: string | null
     createdBy: string | null
@@ -31974,6 +30922,9 @@ export namespace Prisma {
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
+    approvalStep?: boolean
+    needJournalId?: boolean
+    journalId?: boolean
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
@@ -32004,6 +30955,9 @@ export namespace Prisma {
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
+    approvalStep?: boolean
+    needJournalId?: boolean
+    journalId?: boolean
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
@@ -32011,7 +30965,7 @@ export namespace Prisma {
     updateAt?: boolean
   }
 
-  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
+  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "approvalStep" | "needJournalId" | "journalId" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
   export type RetirementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | Retirement$requestArgs<ExtArgs>
     user?: boolean | Retirement$userArgs<ExtArgs>
@@ -32042,6 +30996,9 @@ export namespace Prisma {
       comment_A: string | null
       comment_B: string | null
       comment_C: string | null
+      approvalStep: number | null
+      needJournalId: boolean
+      journalId: string | null
       requestId: string | null
       status: string | null
       createdBy: string | null
@@ -32436,6 +31393,9 @@ export namespace Prisma {
     readonly comment_A: FieldRef<"Retirement", 'String'>
     readonly comment_B: FieldRef<"Retirement", 'String'>
     readonly comment_C: FieldRef<"Retirement", 'String'>
+    readonly approvalStep: FieldRef<"Retirement", 'Int'>
+    readonly needJournalId: FieldRef<"Retirement", 'Boolean'>
+    readonly journalId: FieldRef<"Retirement", 'String'>
     readonly requestId: FieldRef<"Retirement", 'String'>
     readonly status: FieldRef<"Retirement", 'String'>
     readonly createdBy: FieldRef<"Retirement", 'String'>
@@ -34231,29 +33191,6 @@ export namespace Prisma {
   export type IndicatorScalarFieldEnum = (typeof IndicatorScalarFieldEnum)[keyof typeof IndicatorScalarFieldEnum]
 
 
-  export const NewKpiScalarFieldEnum: {
-    newKpiId: 'newKpiId',
-    statement: 'statement',
-    definition: 'definition',
-    specificArea: 'specificArea',
-    unitOfMeasure: 'unitOfMeasure',
-    itemInMeasure: 'itemInMeasure',
-    baseLineDate: 'baseLineDate',
-    cumulativeValue: 'cumulativeValue',
-    baselineNarrative: 'baselineNarrative',
-    targetDate: 'targetDate',
-    cumulativeTarget: 'cumulativeTarget',
-    targetNarrative: 'targetNarrative',
-    targetType: 'targetType',
-    responsiblePersons: 'responsiblePersons',
-    kpiType: 'kpiType',
-    createAt: 'createAt',
-    updateAt: 'updateAt'
-  };
-
-  export type NewKpiScalarFieldEnum = (typeof NewKpiScalarFieldEnum)[keyof typeof NewKpiScalarFieldEnum]
-
-
   export const IndicatorDisaggregationScalarFieldEnum: {
     indicatorDisaggregationId: 'indicatorDisaggregationId',
     indicatorId: 'indicatorId',
@@ -34402,18 +33339,23 @@ export namespace Prisma {
     approval_B: 'approval_B',
     approval_C: 'approval_C',
     approval_D: 'approval_D',
+    approval_E: 'approval_E',
     approvedBy_A: 'approvedBy_A',
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
     approvedBy_D: 'approvedBy_D',
+    approvedBy_E: 'approvedBy_E',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
     comment_D: 'comment_D',
+    comment_E: 'comment_E',
+    approvalStep: 'approvalStep',
     status: 'status',
     createAt: 'createAt',
     updateAt: 'updateAt',
-    createdBy: 'createdBy'
+    createdBy: 'createdBy',
+    isJourneyManagementRequired: 'isJourneyManagementRequired'
   };
 
   export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
@@ -34456,6 +33398,9 @@ export namespace Prisma {
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
+    approvalStep: 'approvalStep',
+    needJournalId: 'needJournalId',
+    journalId: 'journalId',
     requestId: 'requestId',
     status: 'status',
     createdBy: 'createdBy',
@@ -34703,23 +33648,6 @@ export namespace Prisma {
   export type IndicatorOrderByRelevanceFieldEnum = (typeof IndicatorOrderByRelevanceFieldEnum)[keyof typeof IndicatorOrderByRelevanceFieldEnum]
 
 
-  export const NewKpiOrderByRelevanceFieldEnum: {
-    newKpiId: 'newKpiId',
-    statement: 'statement',
-    definition: 'definition',
-    specificArea: 'specificArea',
-    unitOfMeasure: 'unitOfMeasure',
-    itemInMeasure: 'itemInMeasure',
-    baselineNarrative: 'baselineNarrative',
-    targetNarrative: 'targetNarrative',
-    targetType: 'targetType',
-    responsiblePersons: 'responsiblePersons',
-    kpiType: 'kpiType'
-  };
-
-  export type NewKpiOrderByRelevanceFieldEnum = (typeof NewKpiOrderByRelevanceFieldEnum)[keyof typeof NewKpiOrderByRelevanceFieldEnum]
-
-
   export const IndicatorDisaggregationOrderByRelevanceFieldEnum: {
     indicatorDisaggregationId: 'indicatorDisaggregationId',
     indicatorId: 'indicatorId',
@@ -34837,10 +33765,12 @@ export namespace Prisma {
     approvedBy_B: 'approvedBy_B',
     approvedBy_C: 'approvedBy_C',
     approvedBy_D: 'approvedBy_D',
+    approvedBy_E: 'approvedBy_E',
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
     comment_D: 'comment_D',
+    comment_E: 'comment_E',
     status: 'status',
     createdBy: 'createdBy'
   };
@@ -34869,6 +33799,7 @@ export namespace Prisma {
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
+    journalId: 'journalId',
     requestId: 'requestId',
     status: 'status',
     createdBy: 'createdBy'
@@ -36229,121 +35160,6 @@ export namespace Prisma {
     resultTypeId?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
   }
 
-  export type NewKpiWhereInput = {
-    AND?: NewKpiWhereInput | NewKpiWhereInput[]
-    OR?: NewKpiWhereInput[]
-    NOT?: NewKpiWhereInput | NewKpiWhereInput[]
-    newKpiId?: StringFilter<"NewKpi"> | string
-    statement?: StringNullableFilter<"NewKpi"> | string | null
-    definition?: StringNullableFilter<"NewKpi"> | string | null
-    specificArea?: StringNullableFilter<"NewKpi"> | string | null
-    unitOfMeasure?: StringNullableFilter<"NewKpi"> | string | null
-    itemInMeasure?: StringNullableFilter<"NewKpi"> | string | null
-    baseLineDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    cumulativeValue?: IntNullableFilter<"NewKpi"> | number | null
-    baselineNarrative?: StringNullableFilter<"NewKpi"> | string | null
-    targetDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    cumulativeTarget?: IntNullableFilter<"NewKpi"> | number | null
-    targetNarrative?: StringNullableFilter<"NewKpi"> | string | null
-    targetType?: StringNullableFilter<"NewKpi"> | string | null
-    responsiblePersons?: StringNullableFilter<"NewKpi"> | string | null
-    kpiType?: StringNullableFilter<"NewKpi"> | string | null
-    createAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-  }
-
-  export type NewKpiOrderByWithRelationInput = {
-    newKpiId?: SortOrder
-    statement?: SortOrderInput | SortOrder
-    definition?: SortOrderInput | SortOrder
-    specificArea?: SortOrderInput | SortOrder
-    unitOfMeasure?: SortOrderInput | SortOrder
-    itemInMeasure?: SortOrderInput | SortOrder
-    baseLineDate?: SortOrderInput | SortOrder
-    cumulativeValue?: SortOrderInput | SortOrder
-    baselineNarrative?: SortOrderInput | SortOrder
-    targetDate?: SortOrderInput | SortOrder
-    cumulativeTarget?: SortOrderInput | SortOrder
-    targetNarrative?: SortOrderInput | SortOrder
-    targetType?: SortOrderInput | SortOrder
-    responsiblePersons?: SortOrderInput | SortOrder
-    kpiType?: SortOrderInput | SortOrder
-    createAt?: SortOrderInput | SortOrder
-    updateAt?: SortOrderInput | SortOrder
-    _relevance?: NewKpiOrderByRelevanceInput
-  }
-
-  export type NewKpiWhereUniqueInput = Prisma.AtLeast<{
-    newKpiId?: string
-    AND?: NewKpiWhereInput | NewKpiWhereInput[]
-    OR?: NewKpiWhereInput[]
-    NOT?: NewKpiWhereInput | NewKpiWhereInput[]
-    statement?: StringNullableFilter<"NewKpi"> | string | null
-    definition?: StringNullableFilter<"NewKpi"> | string | null
-    specificArea?: StringNullableFilter<"NewKpi"> | string | null
-    unitOfMeasure?: StringNullableFilter<"NewKpi"> | string | null
-    itemInMeasure?: StringNullableFilter<"NewKpi"> | string | null
-    baseLineDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    cumulativeValue?: IntNullableFilter<"NewKpi"> | number | null
-    baselineNarrative?: StringNullableFilter<"NewKpi"> | string | null
-    targetDate?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    cumulativeTarget?: IntNullableFilter<"NewKpi"> | number | null
-    targetNarrative?: StringNullableFilter<"NewKpi"> | string | null
-    targetType?: StringNullableFilter<"NewKpi"> | string | null
-    responsiblePersons?: StringNullableFilter<"NewKpi"> | string | null
-    kpiType?: StringNullableFilter<"NewKpi"> | string | null
-    createAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"NewKpi"> | Date | string | null
-  }, "newKpiId">
-
-  export type NewKpiOrderByWithAggregationInput = {
-    newKpiId?: SortOrder
-    statement?: SortOrderInput | SortOrder
-    definition?: SortOrderInput | SortOrder
-    specificArea?: SortOrderInput | SortOrder
-    unitOfMeasure?: SortOrderInput | SortOrder
-    itemInMeasure?: SortOrderInput | SortOrder
-    baseLineDate?: SortOrderInput | SortOrder
-    cumulativeValue?: SortOrderInput | SortOrder
-    baselineNarrative?: SortOrderInput | SortOrder
-    targetDate?: SortOrderInput | SortOrder
-    cumulativeTarget?: SortOrderInput | SortOrder
-    targetNarrative?: SortOrderInput | SortOrder
-    targetType?: SortOrderInput | SortOrder
-    responsiblePersons?: SortOrderInput | SortOrder
-    kpiType?: SortOrderInput | SortOrder
-    createAt?: SortOrderInput | SortOrder
-    updateAt?: SortOrderInput | SortOrder
-    _count?: NewKpiCountOrderByAggregateInput
-    _avg?: NewKpiAvgOrderByAggregateInput
-    _max?: NewKpiMaxOrderByAggregateInput
-    _min?: NewKpiMinOrderByAggregateInput
-    _sum?: NewKpiSumOrderByAggregateInput
-  }
-
-  export type NewKpiScalarWhereWithAggregatesInput = {
-    AND?: NewKpiScalarWhereWithAggregatesInput | NewKpiScalarWhereWithAggregatesInput[]
-    OR?: NewKpiScalarWhereWithAggregatesInput[]
-    NOT?: NewKpiScalarWhereWithAggregatesInput | NewKpiScalarWhereWithAggregatesInput[]
-    newKpiId?: StringWithAggregatesFilter<"NewKpi"> | string
-    statement?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    definition?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    specificArea?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    unitOfMeasure?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    itemInMeasure?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    baseLineDate?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
-    cumulativeValue?: IntNullableWithAggregatesFilter<"NewKpi"> | number | null
-    baselineNarrative?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    targetDate?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
-    cumulativeTarget?: IntNullableWithAggregatesFilter<"NewKpi"> | number | null
-    targetNarrative?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    targetType?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    responsiblePersons?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    kpiType?: StringNullableWithAggregatesFilter<"NewKpi"> | string | null
-    createAt?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
-    updateAt?: DateTimeNullableWithAggregatesFilter<"NewKpi"> | Date | string | null
-  }
-
   export type IndicatorDisaggregationWhereInput = {
     AND?: IndicatorDisaggregationWhereInput | IndicatorDisaggregationWhereInput[]
     OR?: IndicatorDisaggregationWhereInput[]
@@ -37023,18 +35839,23 @@ export namespace Prisma {
     approval_B?: IntNullableFilter<"Request"> | number | null
     approval_C?: IntNullableFilter<"Request"> | number | null
     approval_D?: IntNullableFilter<"Request"> | number | null
+    approval_E?: IntNullableFilter<"Request"> | number | null
     approvedBy_A?: StringNullableFilter<"Request"> | string | null
     approvedBy_B?: StringNullableFilter<"Request"> | string | null
     approvedBy_C?: StringNullableFilter<"Request"> | string | null
     approvedBy_D?: StringNullableFilter<"Request"> | string | null
+    approvedBy_E?: StringNullableFilter<"Request"> | string | null
     comment_A?: StringNullableFilter<"Request"> | string | null
     comment_B?: StringNullableFilter<"Request"> | string | null
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
+    comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
+    isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -37068,18 +35889,23 @@ export namespace Prisma {
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
     approval_D?: SortOrderInput | SortOrder
+    approval_E?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
     approvedBy_D?: SortOrderInput | SortOrder
+    approvedBy_E?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
+    comment_E?: SortOrderInput | SortOrder
+    approvalStep?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
+    isJourneyManagementRequired?: SortOrder
     output?: OutputOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -37117,18 +35943,23 @@ export namespace Prisma {
     approval_B?: IntNullableFilter<"Request"> | number | null
     approval_C?: IntNullableFilter<"Request"> | number | null
     approval_D?: IntNullableFilter<"Request"> | number | null
+    approval_E?: IntNullableFilter<"Request"> | number | null
     approvedBy_A?: StringNullableFilter<"Request"> | string | null
     approvedBy_B?: StringNullableFilter<"Request"> | string | null
     approvedBy_C?: StringNullableFilter<"Request"> | string | null
     approvedBy_D?: StringNullableFilter<"Request"> | string | null
+    approvedBy_E?: StringNullableFilter<"Request"> | string | null
     comment_A?: StringNullableFilter<"Request"> | string | null
     comment_B?: StringNullableFilter<"Request"> | string | null
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
+    comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
+    isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -37162,18 +35993,23 @@ export namespace Prisma {
     approval_B?: SortOrderInput | SortOrder
     approval_C?: SortOrderInput | SortOrder
     approval_D?: SortOrderInput | SortOrder
+    approval_E?: SortOrderInput | SortOrder
     approvedBy_A?: SortOrderInput | SortOrder
     approvedBy_B?: SortOrderInput | SortOrder
     approvedBy_C?: SortOrderInput | SortOrder
     approvedBy_D?: SortOrderInput | SortOrder
+    approvedBy_E?: SortOrderInput | SortOrder
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
+    comment_E?: SortOrderInput | SortOrder
+    approvalStep?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
+    isJourneyManagementRequired?: SortOrder
     _count?: RequestCountOrderByAggregateInput
     _avg?: RequestAvgOrderByAggregateInput
     _max?: RequestMaxOrderByAggregateInput
@@ -37210,18 +36046,23 @@ export namespace Prisma {
     approval_B?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approval_C?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approval_D?: IntNullableWithAggregatesFilter<"Request"> | number | null
+    approval_E?: IntNullableWithAggregatesFilter<"Request"> | number | null
     approvedBy_A?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_B?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_C?: StringNullableWithAggregatesFilter<"Request"> | string | null
     approvedBy_D?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    approvedBy_E?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_A?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_B?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_C?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_D?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    comment_E?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    approvalStep?: IntNullableWithAggregatesFilter<"Request"> | number | null
     status?: StringNullableWithAggregatesFilter<"Request"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     createdBy?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    isJourneyManagementRequired?: BoolWithAggregatesFilter<"Request"> | boolean
   }
 
   export type LineItemWhereInput = {
@@ -37342,6 +36183,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalStep?: IntNullableFilter<"Retirement"> | number | null
+    needJournalId?: BoolFilter<"Retirement"> | boolean
+    journalId?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -37370,6 +36214,9 @@ export namespace Prisma {
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
+    approvalStep?: SortOrderInput | SortOrder
+    needJournalId?: SortOrder
+    journalId?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -37402,6 +36249,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalStep?: IntNullableFilter<"Retirement"> | number | null
+    needJournalId?: BoolFilter<"Retirement"> | boolean
+    journalId?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -37430,6 +36280,9 @@ export namespace Prisma {
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
+    approvalStep?: SortOrderInput | SortOrder
+    needJournalId?: SortOrder
+    journalId?: SortOrderInput | SortOrder
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
@@ -37464,6 +36317,9 @@ export namespace Prisma {
     comment_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approvalStep?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
+    needJournalId?: BoolWithAggregatesFilter<"Retirement"> | boolean
+    journalId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     requestId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     status?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     createdBy?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
@@ -39050,146 +37906,6 @@ export namespace Prisma {
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type NewKpiCreateInput = {
-    newKpiId?: string
-    statement?: string | null
-    definition?: string | null
-    specificArea?: string | null
-    unitOfMeasure?: string | null
-    itemInMeasure?: string | null
-    baseLineDate?: Date | string | null
-    cumulativeValue?: number | null
-    baselineNarrative?: string | null
-    targetDate?: Date | string | null
-    cumulativeTarget?: number | null
-    targetNarrative?: string | null
-    targetType?: string | null
-    responsiblePersons?: string | null
-    kpiType?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-  }
-
-  export type NewKpiUncheckedCreateInput = {
-    newKpiId?: string
-    statement?: string | null
-    definition?: string | null
-    specificArea?: string | null
-    unitOfMeasure?: string | null
-    itemInMeasure?: string | null
-    baseLineDate?: Date | string | null
-    cumulativeValue?: number | null
-    baselineNarrative?: string | null
-    targetDate?: Date | string | null
-    cumulativeTarget?: number | null
-    targetNarrative?: string | null
-    targetType?: string | null
-    responsiblePersons?: string | null
-    kpiType?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-  }
-
-  export type NewKpiUpdateInput = {
-    newKpiId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    definition?: NullableStringFieldUpdateOperationsInput | string | null
-    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
-    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
-    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
-    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetType?: NullableStringFieldUpdateOperationsInput | string | null
-    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NewKpiUncheckedUpdateInput = {
-    newKpiId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    definition?: NullableStringFieldUpdateOperationsInput | string | null
-    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
-    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
-    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
-    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetType?: NullableStringFieldUpdateOperationsInput | string | null
-    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NewKpiCreateManyInput = {
-    newKpiId?: string
-    statement?: string | null
-    definition?: string | null
-    specificArea?: string | null
-    unitOfMeasure?: string | null
-    itemInMeasure?: string | null
-    baseLineDate?: Date | string | null
-    cumulativeValue?: number | null
-    baselineNarrative?: string | null
-    targetDate?: Date | string | null
-    cumulativeTarget?: number | null
-    targetNarrative?: string | null
-    targetType?: string | null
-    responsiblePersons?: string | null
-    kpiType?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-  }
-
-  export type NewKpiUpdateManyMutationInput = {
-    newKpiId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    definition?: NullableStringFieldUpdateOperationsInput | string | null
-    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
-    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
-    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
-    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetType?: NullableStringFieldUpdateOperationsInput | string | null
-    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type NewKpiUncheckedUpdateManyInput = {
-    newKpiId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    definition?: NullableStringFieldUpdateOperationsInput | string | null
-    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
-    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
-    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
-    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
-    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
-    targetType?: NullableStringFieldUpdateOperationsInput | string | null
-    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
-    kpiType?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
   export type IndicatorDisaggregationCreateInput = {
     indicatorDisaggregationId?: string
     type: string
@@ -39888,17 +38604,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -39932,18 +38653,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -39972,17 +38698,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -40016,18 +38747,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -40058,18 +38794,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
   }
 
   export type RequestUpdateManyMutationInput = {
@@ -40096,17 +38837,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type RequestUncheckedUpdateManyInput = {
@@ -40135,18 +38881,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LineItemCreateInput = {
@@ -40271,6 +39022,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -40297,6 +39051,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
@@ -40323,6 +39080,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40349,6 +39109,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40375,6 +39138,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
@@ -40401,6 +39167,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40425,6 +39194,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41626,82 +40398,6 @@ export namespace Prisma {
     cumulativeTarget?: SortOrder
   }
 
-  export type NewKpiOrderByRelevanceInput = {
-    fields: NewKpiOrderByRelevanceFieldEnum | NewKpiOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type NewKpiCountOrderByAggregateInput = {
-    newKpiId?: SortOrder
-    statement?: SortOrder
-    definition?: SortOrder
-    specificArea?: SortOrder
-    unitOfMeasure?: SortOrder
-    itemInMeasure?: SortOrder
-    baseLineDate?: SortOrder
-    cumulativeValue?: SortOrder
-    baselineNarrative?: SortOrder
-    targetDate?: SortOrder
-    cumulativeTarget?: SortOrder
-    targetNarrative?: SortOrder
-    targetType?: SortOrder
-    responsiblePersons?: SortOrder
-    kpiType?: SortOrder
-    createAt?: SortOrder
-    updateAt?: SortOrder
-  }
-
-  export type NewKpiAvgOrderByAggregateInput = {
-    cumulativeValue?: SortOrder
-    cumulativeTarget?: SortOrder
-  }
-
-  export type NewKpiMaxOrderByAggregateInput = {
-    newKpiId?: SortOrder
-    statement?: SortOrder
-    definition?: SortOrder
-    specificArea?: SortOrder
-    unitOfMeasure?: SortOrder
-    itemInMeasure?: SortOrder
-    baseLineDate?: SortOrder
-    cumulativeValue?: SortOrder
-    baselineNarrative?: SortOrder
-    targetDate?: SortOrder
-    cumulativeTarget?: SortOrder
-    targetNarrative?: SortOrder
-    targetType?: SortOrder
-    responsiblePersons?: SortOrder
-    kpiType?: SortOrder
-    createAt?: SortOrder
-    updateAt?: SortOrder
-  }
-
-  export type NewKpiMinOrderByAggregateInput = {
-    newKpiId?: SortOrder
-    statement?: SortOrder
-    definition?: SortOrder
-    specificArea?: SortOrder
-    unitOfMeasure?: SortOrder
-    itemInMeasure?: SortOrder
-    baseLineDate?: SortOrder
-    cumulativeValue?: SortOrder
-    baselineNarrative?: SortOrder
-    targetDate?: SortOrder
-    cumulativeTarget?: SortOrder
-    targetNarrative?: SortOrder
-    targetType?: SortOrder
-    responsiblePersons?: SortOrder
-    kpiType?: SortOrder
-    createAt?: SortOrder
-    updateAt?: SortOrder
-  }
-
-  export type NewKpiSumOrderByAggregateInput = {
-    cumulativeValue?: SortOrder
-    cumulativeTarget?: SortOrder
-  }
-
   export type IndicatorScalarRelationFilter = {
     is?: IndicatorWhereInput
     isNot?: IndicatorWhereInput
@@ -42167,6 +40863,11 @@ export namespace Prisma {
     updateAt?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type RequestOrderByRelevanceInput = {
     fields: RequestOrderByRelevanceFieldEnum | RequestOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -42199,18 +40900,23 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
+    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
+    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
+    comment_E?: SortOrder
+    approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
     createdBy?: SortOrder
+    isJourneyManagementRequired?: SortOrder
   }
 
   export type RequestAvgOrderByAggregateInput = {
@@ -42220,6 +40926,8 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
+    approval_E?: SortOrder
+    approvalStep?: SortOrder
   }
 
   export type RequestMaxOrderByAggregateInput = {
@@ -42248,18 +40956,23 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
+    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
+    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
+    comment_E?: SortOrder
+    approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
     createdBy?: SortOrder
+    isJourneyManagementRequired?: SortOrder
   }
 
   export type RequestMinOrderByAggregateInput = {
@@ -42288,18 +41001,23 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
+    approval_E?: SortOrder
     approvedBy_A?: SortOrder
     approvedBy_B?: SortOrder
     approvedBy_C?: SortOrder
     approvedBy_D?: SortOrder
+    approvedBy_E?: SortOrder
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
     comment_D?: SortOrder
+    comment_E?: SortOrder
+    approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
     createdBy?: SortOrder
+    isJourneyManagementRequired?: SortOrder
   }
 
   export type RequestSumOrderByAggregateInput = {
@@ -42309,6 +41027,16 @@ export namespace Prisma {
     approval_B?: SortOrder
     approval_C?: SortOrder
     approval_D?: SortOrder
+    approval_E?: SortOrder
+    approvalStep?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type RequestScalarRelationFilter = {
@@ -42415,6 +41143,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalStep?: SortOrder
+    needJournalId?: SortOrder
+    journalId?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -42431,6 +41162,7 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
+    approvalStep?: SortOrder
   }
 
   export type RetirementMaxOrderByAggregateInput = {
@@ -42452,6 +41184,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalStep?: SortOrder
+    needJournalId?: SortOrder
+    journalId?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -42478,6 +41213,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalStep?: SortOrder
+    needJournalId?: SortOrder
+    journalId?: SortOrder
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
@@ -42494,6 +41232,7 @@ export namespace Prisma {
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
+    approvalStep?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -44510,6 +43249,10 @@ export namespace Prisma {
     connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type OutputUpdateOneWithoutRequestNestedInput = {
     create?: XOR<OutputCreateWithoutRequestInput, OutputUncheckedCreateWithoutRequestInput>
     connectOrCreate?: OutputCreateOrConnectWithoutRequestInput
@@ -44839,6 +43582,19 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -44957,17 +43713,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -45000,17 +43761,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -45044,6 +43810,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -45069,6 +43838,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     requestId?: string | null
     status?: string | null
     createAt?: Date | string | null
@@ -45189,18 +43961,23 @@ export namespace Prisma {
     approval_B?: IntNullableFilter<"Request"> | number | null
     approval_C?: IntNullableFilter<"Request"> | number | null
     approval_D?: IntNullableFilter<"Request"> | number | null
+    approval_E?: IntNullableFilter<"Request"> | number | null
     approvedBy_A?: StringNullableFilter<"Request"> | string | null
     approvedBy_B?: StringNullableFilter<"Request"> | string | null
     approvedBy_C?: StringNullableFilter<"Request"> | string | null
     approvedBy_D?: StringNullableFilter<"Request"> | string | null
+    approvedBy_E?: StringNullableFilter<"Request"> | string | null
     comment_A?: StringNullableFilter<"Request"> | string | null
     comment_B?: StringNullableFilter<"Request"> | string | null
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
+    comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
+    isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
   }
 
   export type RetirementUpsertWithWhereUniqueWithoutUserInput = {
@@ -45241,6 +44018,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalStep?: IntNullableFilter<"Retirement"> | number | null
+    needJournalId?: BoolFilter<"Retirement"> | boolean
+    journalId?: StringNullableFilter<"Retirement"> | string | null
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
@@ -46044,17 +44824,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     output?: OutputCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -46086,18 +44871,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -47843,17 +46633,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -47885,18 +46680,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -49837,6 +48637,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -49862,6 +48665,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     status?: string | null
     createdBy?: string | null
     createAt?: Date | string | null
@@ -50133,17 +48939,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -50176,18 +48987,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
   }
 
@@ -50274,17 +49090,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -50317,18 +49138,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
   }
 
@@ -50405,17 +49231,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -50448,18 +49279,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
 
@@ -50558,17 +49394,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -50601,18 +49442,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
 
@@ -50833,17 +49679,22 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
   }
 
   export type RetirementCreateManyUserInput = {
@@ -50865,6 +49716,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     requestId?: string | null
     status?: string | null
     createAt?: Date | string | null
@@ -50925,17 +49779,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -50968,17 +49827,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -51009,17 +49873,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type RetirementUpdateWithoutUserInput = {
@@ -51041,6 +49910,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51066,6 +49938,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51091,6 +49966,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51493,18 +50371,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
   }
 
   export type ReportCreateManyProjectInput = {
@@ -51795,17 +50678,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     output?: OutputUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -51837,18 +50725,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -51878,18 +50771,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ReportUpdateWithoutProjectInput = {
@@ -52402,18 +51300,23 @@ export namespace Prisma {
     approval_B?: number | null
     approval_C?: number | null
     approval_D?: number | null
+    approval_E?: number | null
     approvedBy_A?: string | null
     approvedBy_B?: string | null
     approvedBy_C?: string | null
     approvedBy_D?: string | null
+    approvedBy_E?: string | null
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
     comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     createdBy?: string | null
+    isJourneyManagementRequired?: boolean
   }
 
   export type ActivityUpdateWithoutOutputInput = {
@@ -52494,17 +51397,22 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -52536,18 +51444,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -52577,18 +51490,23 @@ export namespace Prisma {
     approval_B?: NullableIntFieldUpdateOperationsInput | number | null
     approval_C?: NullableIntFieldUpdateOperationsInput | number | null
     approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
     approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
     approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IndicatorReportCreateManyIndicatorInput = {
@@ -52918,6 +51836,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalStep?: number | null
+    needJournalId?: boolean
+    journalId?: string | null
     status?: string | null
     createdBy?: string | null
     createAt?: Date | string | null
@@ -52957,6 +51878,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52982,6 +51906,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53007,6 +51934,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    needJournalId?: BoolFieldUpdateOperationsInput | boolean
+    journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

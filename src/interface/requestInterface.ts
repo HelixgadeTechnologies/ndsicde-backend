@@ -31,14 +31,19 @@ export interface IRequest {
   approval_B?: number;
   approval_C?: number;
   approval_D?: number;
+  approval_E?: number;
   approvedBy_A?: string;
   approvedBy_B?: string;
   approvedBy_C?: string;
   approvedBy_D?: string;
+  approvedBy_E?: string;
   comment_A?: string;
   comment_B?: string;
   comment_C?: string;
   comment_D?: string;
+  comment_E?: string;
+  approvalStep?: number;
+  isJourneyManagementRequired?: boolean;
 }
 
 export interface ILineItem {
@@ -96,6 +101,7 @@ export interface IRequestView {
   comment_B?: string;
   comment_C?: string;
   comment_D?: string;
+  comment_E?: string;
   lineItems?: Array<ILineItem>
   projectId?: string;
   projectName?: string;
@@ -103,10 +109,11 @@ export interface IRequestView {
   createAt?: Date;
   updateAt?: Date;
   createdBy?: string;
+  isJourneyManagementRequired?: boolean;
 }
 
 // Approval-related types and interfaces
-export type ApprovalLevel = 'A' | 'B' | 'C' | 'D';
+export type ApprovalLevel = 'A' | 'B' | 'C' | 'D' | 'E';
 
 export interface IApprovalRequest {
   requestId: string;

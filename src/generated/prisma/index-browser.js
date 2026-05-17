@@ -315,26 +315,6 @@ exports.Prisma.IndicatorScalarFieldEnum = {
   resultTypeId: 'resultTypeId'
 };
 
-exports.Prisma.NewKpiScalarFieldEnum = {
-  newKpiId: 'newKpiId',
-  statement: 'statement',
-  definition: 'definition',
-  specificArea: 'specificArea',
-  unitOfMeasure: 'unitOfMeasure',
-  itemInMeasure: 'itemInMeasure',
-  baseLineDate: 'baseLineDate',
-  cumulativeValue: 'cumulativeValue',
-  baselineNarrative: 'baselineNarrative',
-  targetDate: 'targetDate',
-  cumulativeTarget: 'cumulativeTarget',
-  targetNarrative: 'targetNarrative',
-  targetType: 'targetType',
-  responsiblePersons: 'responsiblePersons',
-  kpiType: 'kpiType',
-  createAt: 'createAt',
-  updateAt: 'updateAt'
-};
-
 exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
   indicatorDisaggregationId: 'indicatorDisaggregationId',
   indicatorId: 'indicatorId',
@@ -456,18 +436,23 @@ exports.Prisma.RequestScalarFieldEnum = {
   approval_B: 'approval_B',
   approval_C: 'approval_C',
   approval_D: 'approval_D',
+  approval_E: 'approval_E',
   approvedBy_A: 'approvedBy_A',
   approvedBy_B: 'approvedBy_B',
   approvedBy_C: 'approvedBy_C',
   approvedBy_D: 'approvedBy_D',
+  approvedBy_E: 'approvedBy_E',
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
   comment_D: 'comment_D',
+  comment_E: 'comment_E',
+  approvalStep: 'approvalStep',
   status: 'status',
   createAt: 'createAt',
   updateAt: 'updateAt',
-  createdBy: 'createdBy'
+  createdBy: 'createdBy',
+  isJourneyManagementRequired: 'isJourneyManagementRequired'
 };
 
 exports.Prisma.LineItemScalarFieldEnum = {
@@ -504,6 +489,9 @@ exports.Prisma.RetirementScalarFieldEnum = {
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
+  approvalStep: 'approvalStep',
+  needJournalId: 'needJournalId',
+  journalId: 'journalId',
   requestId: 'requestId',
   status: 'status',
   createdBy: 'createdBy',
@@ -697,20 +685,6 @@ exports.Prisma.IndicatorOrderByRelevanceFieldEnum = {
   resultTypeId: 'resultTypeId'
 };
 
-exports.Prisma.NewKpiOrderByRelevanceFieldEnum = {
-  newKpiId: 'newKpiId',
-  statement: 'statement',
-  definition: 'definition',
-  specificArea: 'specificArea',
-  unitOfMeasure: 'unitOfMeasure',
-  itemInMeasure: 'itemInMeasure',
-  baselineNarrative: 'baselineNarrative',
-  targetNarrative: 'targetNarrative',
-  targetType: 'targetType',
-  responsiblePersons: 'responsiblePersons',
-  kpiType: 'kpiType'
-};
-
 exports.Prisma.IndicatorDisaggregationOrderByRelevanceFieldEnum = {
   indicatorDisaggregationId: 'indicatorDisaggregationId',
   indicatorId: 'indicatorId',
@@ -801,10 +775,12 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
   approvedBy_B: 'approvedBy_B',
   approvedBy_C: 'approvedBy_C',
   approvedBy_D: 'approvedBy_D',
+  approvedBy_E: 'approvedBy_E',
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
   comment_D: 'comment_D',
+  comment_E: 'comment_E',
   status: 'status',
   createdBy: 'createdBy'
 };
@@ -827,6 +803,7 @@ exports.Prisma.RetirementOrderByRelevanceFieldEnum = {
   comment_A: 'comment_A',
   comment_B: 'comment_B',
   comment_C: 'comment_C',
+  journalId: 'journalId',
   requestId: 'requestId',
   status: 'status',
   createdBy: 'createdBy'
@@ -859,7 +836,6 @@ exports.Prisma.ModelName = {
   Outcome: 'Outcome',
   Output: 'Output',
   Indicator: 'Indicator',
-  NewKpi: 'NewKpi',
   IndicatorDisaggregation: 'IndicatorDisaggregation',
   PeriodicTarget: 'PeriodicTarget',
   IndicatorReport: 'IndicatorReport',

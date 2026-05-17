@@ -180,6 +180,16 @@ export enum ApprovalStatus {
   REVIEW = 3,
 }
 
+type ApprovalLevel = "A" | "B" | "C" | "D" | "E";
+
+// All possible columns — used when clearing fields on review reset
+const ALL_LEVELS: ApprovalLevel[] = ["A", "B", "C", "D", "E"];
+
+// Absolute position of each level — used for approvalStep regardless of skips
+const LEVEL_NUMBER: Record<ApprovalLevel, number> = {
+  A: 1, B: 2, C: 3, D: 4, E: 5,
+};
+
 export const requestApproval = async (
   requestId: string,
   approvalStatus: number,
@@ -187,99 +197,79 @@ export const requestApproval = async (
   comment?: string
 ) => {
   try {
-    const request = await prisma.request.findUnique({
-      where: { requestId },
-    });
+    const request = await prisma.request.findUnique({ where: { requestId } });
 
-    if (!request) {
-      throw new Error("Request not found");
-    }
+    if (!request) throw new Error("Request not found");
 
-    const approvalLevels: Array<"A" | "B" | "C" | "D"> = ["A", "B", "C", "D"];
-    const levelMap = {
-      A: 1,
-      B: 2,
-      C: 3,
-      D: 4,
-    };
+    // Level B (Journey Management) is skipped when isJourneyManagementRequired = true
+    const activeLevels: ApprovalLevel[] = request.isJourneyManagementRequired
+      ? ["A", "C", "D", "E"]
+      : ["A", "B", "C", "D", "E"];
 
-    // 🔎 Detect current level
-    let currentLevel: "A" | "B" | "C" | "D" | null = null;
-
-    for (const level of approvalLevels) {
+    // Detect the first unset active level
+    let currentLevel: ApprovalLevel | null = null;
+    for (const level of activeLevels) {
       const field = `approval_${level}` as keyof typeof request;
-
       if (request[field] === null || request[field] === undefined) {
         currentLevel = level;
         break;
       }
     }
 
-    if (!currentLevel) {
-      throw new Error("All approval levels already processed");
-    }
+    if (!currentLevel) throw new Error("All approval levels already processed");
 
-    const levelIndex = approvalLevels.indexOf(currentLevel);
+    const levelIndex = activeLevels.indexOf(currentLevel);
 
-    // 🔒 Ensure previous level is approved
+    // Ensure the previous active level is approved before proceeding
     if (levelIndex > 0) {
-      const prevLevel = approvalLevels[levelIndex - 1];
+      const prevLevel = activeLevels[levelIndex - 1];
       const prevField = `approval_${prevLevel}` as keyof typeof request;
-
       if (request[prevField] !== ApprovalStatus.APPROVED) {
-        throw new Error(
-          `Previous level ${prevLevel} must be approved first`
-        );
+        throw new Error(`Previous level ${prevLevel} must be approved first`);
       }
     }
+
+    const isFinalLevel = currentLevel === activeLevels[activeLevels.length - 1];
 
     // =====================================
     // 🔁 HANDLE REVIEW (SMART RESET)
     // =====================================
     if (approvalStatus === ApprovalStatus.REVIEW) {
       const resetData: any = {
-        status: "Under Review",
-        updateAt: new Date(),
+        status:       "Under Review",
+        approvalStep: 0,
+        updateAt:     new Date(),
       };
 
-      // Loop through all levels
-      for (const level of approvalLevels) {
+      for (const level of ALL_LEVELS) {
         if (level === currentLevel) {
-          // ✅ Keep this level's info
-          resetData[`approval_${level}`] = ApprovalStatus.REVIEW;
+          resetData[`approval_${level}`]   = ApprovalStatus.REVIEW;
           resetData[`approvedBy_${level}`] = approvedBy;
-          resetData[`comment_${level}`] = comment || null;
+          resetData[`comment_${level}`]    = comment || null;
         } else {
-          // ❌ Clear others
-          resetData[`approval_${level}`] = null;
+          resetData[`approval_${level}`]   = null;
           resetData[`approvedBy_${level}`] = null;
-          resetData[`comment_${level}`] = null;
+          resetData[`comment_${level}`]    = null;
         }
       }
 
-      const updated = await prisma.request.update({
-        where: { requestId },
-        data: resetData,
-      });
-
-      return updated;
+      return await prisma.request.update({ where: { requestId }, data: resetData });
     }
 
     // =====================================
     // ❌ HANDLE REJECTION
     // =====================================
     if (approvalStatus === ApprovalStatus.REJECTED) {
-      const updateData: any = {
-        [`approval_${currentLevel}`]: ApprovalStatus.REJECTED,
-        [`approvedBy_${currentLevel}`]: approvedBy,
-        [`comment_${currentLevel}`]: comment || null,
-        status: "Rejected",
-        updateAt: new Date(),
-      };
-
       return await prisma.request.update({
         where: { requestId },
-        data: updateData,
+        data: {
+          [`approval_${currentLevel}`]:   ApprovalStatus.REJECTED,
+          [`approvedBy_${currentLevel}`]: approvedBy,
+          [`comment_${currentLevel}`]:    comment || null,
+          approvalStep: LEVEL_NUMBER[currentLevel],
+          status:       "Rejected",
+          updateAt:     new Date(),
+        },
       });
     }
 
@@ -287,24 +277,16 @@ export const requestApproval = async (
     // ✅ HANDLE APPROVAL
     // =====================================
     if (approvalStatus === ApprovalStatus.APPROVED) {
-      const isFinalLevel = currentLevel === "D";
-
-      const updateData: any = {
-        [`approval_${currentLevel}`]: ApprovalStatus.APPROVED,
-        [`approvedBy_${currentLevel}`]: approvedBy,
-        [`comment_${currentLevel}`]: comment || null,
-        updateAt: new Date(),
-      };
-
-      if (isFinalLevel) {
-        updateData.status = "Approved";
-      } else {
-        updateData.status = `Layer ${levelMap[currentLevel]} Approved`;
-      }
-
       return await prisma.request.update({
         where: { requestId },
-        data: updateData,
+        data: {
+          [`approval_${currentLevel}`]:   ApprovalStatus.APPROVED,
+          [`approvedBy_${currentLevel}`]: approvedBy,
+          [`comment_${currentLevel}`]:    comment || null,
+          approvalStep: LEVEL_NUMBER[currentLevel],
+          status:       isFinalLevel ? "Approved" : `Layer ${LEVEL_NUMBER[currentLevel]} Approved`,
+          updateAt:     new Date(),
+        },
       });
     }
 
@@ -495,7 +477,10 @@ export const getRequestsByProjectId = async (projectId: string) => {
                 comment_A: true,
                 comment_B: true,
                 comment_C: true,
+                approvalStep: true,
                 requestId: true,
+                needJournalId: true,
+                journalId: true,
                 status: true,
                 createAt: true,
                 updateAt: true,

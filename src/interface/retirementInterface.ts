@@ -30,15 +30,15 @@ export interface IRetirementView {
   approval_A?: number;
   approval_B?: number;
   approval_C?: number;
-  approval_D?: number;
   approvedBy_A?: string;
   approvedBy_B?: string;
   approvedBy_C?: string;
-  approvedBy_D?: string;
   comment_A?: string;
   comment_B?: string;
   comment_C?: string;
-  comment_D?: string;
+  approvalStep?: number;
+  needJournalId?: boolean;
+  journalId?: string;
   activityTitle?: string;
   status?: string;
   createAt?: Date;

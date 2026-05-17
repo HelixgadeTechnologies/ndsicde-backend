@@ -199,9 +199,10 @@ export const getRetirementByProjectId = async (
 
 // ✅ Delete Retirement
 export const deleteRetirement = async (retirementId: string) => {
-  return await prisma.retirement.delete({
-    where: { retirementId },
-  });
+  const existing = await prisma.retirement.findUnique({ where: { retirementId } });
+  if (!existing) throw Object.assign(new Error("Retirement not found"), { statusCode: 404 });
+
+  return await prisma.retirement.delete({ where: { retirementId } });
 };
 
 export enum ApprovalStatus {
@@ -209,6 +210,14 @@ export enum ApprovalStatus {
   REJECTED = 2,
   REVIEW = 3,
 }
+
+type RetirementApprovalLevel = "A" | "B" | "C";
+
+const RETIREMENT_ALL_LEVELS: RetirementApprovalLevel[] = ["A", "B", "C"];
+
+const RETIREMENT_LEVEL_NUMBER: Record<RetirementApprovalLevel, number> = {
+  A: 1, B: 2, C: 3,
+};
 
 export const approveRetirement = async (
   retirementId: string,
@@ -221,75 +230,56 @@ export const approveRetirement = async (
       where: { retirementId },
     });
 
-    if (!retirement) {
-      throw new Error("Retirement not found");
-    }
+    if (!retirement) throw new Error("Retirement not found");
 
-    const approvalLevels: Array<"A" | "B" | "C"> = ["A", "B", "C"];
-
-    const levelMap = {
-      A: 1,
-      B: 2,
-      C: 3,
-    };
-
-    // 🔎 Detect current level
-    let currentLevel: "A" | "B" | "C" | null = null;
-
-    for (const level of approvalLevels) {
+    // Detect the first unset level
+    let currentLevel: RetirementApprovalLevel | null = null;
+    for (const level of RETIREMENT_ALL_LEVELS) {
       const field = `approval_${level}` as keyof typeof retirement;
-
       if (retirement[field] === null || retirement[field] === undefined) {
         currentLevel = level;
         break;
       }
     }
 
-    if (!currentLevel) {
-      throw new Error("All approval levels already processed");
-    }
+    if (!currentLevel) throw new Error("All approval levels already processed");
 
-    const levelIndex = approvalLevels.indexOf(currentLevel);
+    const levelIndex = RETIREMENT_ALL_LEVELS.indexOf(currentLevel);
 
-    // 🔒 Ensure previous level is approved
+    // Ensure the previous level is approved before proceeding
     if (levelIndex > 0) {
-      const prevLevel = approvalLevels[levelIndex - 1];
+      const prevLevel = RETIREMENT_ALL_LEVELS[levelIndex - 1];
       const prevField = `approval_${prevLevel}` as keyof typeof retirement;
-
       if (retirement[prevField] !== ApprovalStatus.APPROVED) {
-        throw new Error(
-          `Previous level ${prevLevel} must be approved first`
-        );
+        throw new Error(`Previous level ${prevLevel} must be approved first`);
       }
     }
+
+    const isFinalLevel = currentLevel === RETIREMENT_ALL_LEVELS[RETIREMENT_ALL_LEVELS.length - 1];
 
     // =====================================
     // 🔁 REVIEW (SMART RESET)
     // =====================================
     if (approvalStatus === ApprovalStatus.REVIEW) {
       const resetData: any = {
-        status: "Under Review",
-        updateAt: new Date(),
+        status:       "Under Review",
+        approvalStep: 0,
+        updateAt:     new Date(),
       };
 
-      for (const level of approvalLevels) {
+      for (const level of RETIREMENT_ALL_LEVELS) {
         if (level === currentLevel) {
-          // ✅ Keep this level
-          resetData[`approval_${level}`] = ApprovalStatus.REVIEW;
+          resetData[`approval_${level}`]   = ApprovalStatus.REVIEW;
           resetData[`approvedBy_${level}`] = approvedBy;
-          resetData[`comment_${level}`] = comment || null;
+          resetData[`comment_${level}`]    = comment || null;
         } else {
-          // ❌ Clear others
-          resetData[`approval_${level}`] = null;
+          resetData[`approval_${level}`]   = null;
           resetData[`approvedBy_${level}`] = null;
-          resetData[`comment_${level}`] = null;
+          resetData[`comment_${level}`]    = null;
         }
       }
 
-      return await prisma.retirement.update({
-        where: { retirementId },
-        data: resetData,
-      });
+      return await prisma.retirement.update({ where: { retirementId }, data: resetData });
     }
 
     // =====================================
@@ -299,11 +289,12 @@ export const approveRetirement = async (
       return await prisma.retirement.update({
         where: { retirementId },
         data: {
-          [`approval_${currentLevel}`]: ApprovalStatus.REJECTED,
+          [`approval_${currentLevel}`]:   ApprovalStatus.REJECTED,
           [`approvedBy_${currentLevel}`]: approvedBy,
-          [`comment_${currentLevel}`]: comment || null,
-          status: "Rejected",
-          updateAt: new Date(),
+          [`comment_${currentLevel}`]:    comment || null,
+          approvalStep: RETIREMENT_LEVEL_NUMBER[currentLevel],
+          status:       "Rejected",
+          updateAt:     new Date(),
         },
       });
     }
@@ -312,24 +303,17 @@ export const approveRetirement = async (
     // ✅ APPROVAL
     // =====================================
     if (approvalStatus === ApprovalStatus.APPROVED) {
-      const isFinalLevel = currentLevel === "C";
-
-      const updateData: any = {
-        [`approval_${currentLevel}`]: ApprovalStatus.APPROVED,
-        [`approvedBy_${currentLevel}`]: approvedBy,
-        [`comment_${currentLevel}`]: comment || null,
-        updateAt: new Date(),
-      };
-
-      if (isFinalLevel) {
-        updateData.status = "Approved";
-      } else {
-        updateData.status = `Layer ${levelMap[currentLevel]} Approved`;
-      }
-
       return await prisma.retirement.update({
         where: { retirementId },
-        data: updateData,
+        data: {
+          [`approval_${currentLevel}`]:   ApprovalStatus.APPROVED,
+          [`approvedBy_${currentLevel}`]: approvedBy,
+          [`comment_${currentLevel}`]:    comment || null,
+          approvalStep:  RETIREMENT_LEVEL_NUMBER[currentLevel],
+          needJournalId: isFinalLevel,
+          status:        isFinalLevel ? "Approved" : `Layer ${RETIREMENT_LEVEL_NUMBER[currentLevel]} Approved`,
+          updateAt:      new Date(),
+        },
       });
     }
 

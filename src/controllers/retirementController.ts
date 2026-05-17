@@ -92,7 +92,8 @@ export const removeRetirement = async (req: Request, res: Response) => {
       .status(200)
       .json(successResponse("Retirement deleted successfully", result));
   } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
+    const status = error.statusCode ?? 500;
+    return res.status(status).json(errorResponse(error.message));
   }
 };
 
