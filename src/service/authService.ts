@@ -216,7 +216,7 @@ export const loginUser = async (data: ILogin) => {
       });
     }
 
-    return jwt.sign(user[0], JWT_SECRET as string, { expiresIn: "2h" });
+    return jwt.sign(user[0], JWT_SECRET as string, { expiresIn: "48h" });
 
   } catch (error) {
     console.log(error, "Login Error");
