@@ -17,15 +17,15 @@ const requestRouter: Router = Router();
  * @swagger
  * /api/request/request:
  *   post:
- *     summary: Create or Update a Request (with Line Items)
+ *     summary: Create or Update a Request (with Line Items and Other Personnel)
  *     description: |
  *       Use `isCreate = true` to create a new Request, and `isCreate = false` to update an existing one.
  *
- *       **Line Items behaviour:**
- *       - Pass an array of line items under `payload.lineItems`.
- *       - On **create**: all line items are saved to the `lineitem` table linked to the new request.
- *       - On **update**: existing line items for the request are **deleted and replaced** with the new array sent.
- *       - If `lineItems` is empty or omitted, no line items are stored.
+ *       **Line Items & Other Personnel behaviour:**
+ *       - Pass arrays under `payload.lineItems` and `payload.otherPersonnel`.
+ *       - On **create**: both arrays are saved to their respective tables linked to the new request.
+ *       - On **update**: existing records for the request are **deleted and replaced** with the new arrays sent.
+ *       - If omitted, no corresponding records are stored.
  *       - `status` defaults to `"Pending"` on create if not provided.
  *     tags: [Request]
  *     security:
@@ -123,6 +123,68 @@ const requestRouter: Router = Router();
  *                     type: string
  *                     example: "Pending"
  *                     description: Defaults to "Pending" on create if omitted
+ *                   isJourneyManagementRequired:
+ *                     type: boolean
+ *                     example: false
+ *                   purposeOfTrip:
+ *                     type: string
+ *                     example: "Site inspection"
+ *                   vehicleMake:
+ *                     type: string
+ *                     example: "Toyota"
+ *                   vehicleModel:
+ *                     type: string
+ *                     example: "Hilux"
+ *                   departureDate:
+ *                     type: string
+ *                     format: date
+ *                     example: "2025-05-10"
+ *                   departureLocationAndTime:
+ *                     type: string
+ *                     example: "Abuja Office at 08:00 AM"
+ *                   destination:
+ *                     type: string
+ *                     example: "Lagos"
+ *                   contactPersonPhoneNumberAtDestination:
+ *                     type: string
+ *                     example: "08011223344"
+ *                   flightDepartureState:
+ *                     type: string
+ *                     example: "Abuja"
+ *                   flightDepartureTime:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-10T10:00:00Z"
+ *                   flightArrivalState:
+ *                     type: string
+ *                     example: "Lagos"
+ *                   flightArrivalTime:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-10T11:00:00Z"
+ *                   hotelAccommodationName:
+ *                     type: string
+ *                     example: "Transcorp Hilton"
+ *                   hotelAddress:
+ *                     type: string
+ *                     example: "1 Aguiyi Ironsi St, Maitama"
+ *                   returnDate:
+ *                     type: string
+ *                     format: date
+ *                     example: "2025-05-12"
+ *                   returnTime:
+ *                     type: string
+ *                     format: date-time
+ *                     example: "2025-05-12T14:00:00Z"
+ *                   airportDropoffOfficerName:
+ *                     type: string
+ *                     example: "John Dropoff"
+ *                   airportPickupOfficerName:
+ *                     type: string
+ *                     example: "Jane Pickup"
+ *                   budgetName:
+ *                     type: string
+ *                     example: "Q2 Travel Budget"
  *                   lineItems:
  *                     type: array
  *                     description: Budget line items to be saved in the lineitem table
@@ -149,10 +211,25 @@ const requestRouter: Router = Router();
  *                           format: uuid
  *                           description: ID of the activity this line item is for. Omit to create a new one.
  *                           example: "abc12345-0000-0000-0000-000000000002"
-
+ *                   otherPersonnel:
+ *                     type: array
+ *                     description: Other personnel travelling
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         name:
+ *                           type: string
+ *                           example: "Alice Smith"
+ *                         company:
+ *                           type: string
+ *                           example: "Acme Corp"
+ *                         phoneNumber:
+ *                           type: string
+ *                           example: "08099887766"
+ *
  *     responses:
  *       200:
- *         description: Request created/updated successfully with line items
+ *         description: Request created/updated successfully with line items and other personnel
  *         content:
  *           application/json:
  *             schema:
@@ -174,6 +251,10 @@ const requestRouter: Router = Router();
  *                       type: array
  *                       items:
  *                         $ref: '#/components/schemas/LineItem'
+ *                     otherPersonnel:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/OtherPersonnel'
  *       400:
  *         description: Validation error (e.g. missing requestId on update)
  *       401:
@@ -181,6 +262,7 @@ const requestRouter: Router = Router();
  *       500:
  *         description: Server error
  */
+
 requestRouter.post("/request", createOrUpdateRequestController);
 
 /**
