@@ -57,6 +57,7 @@ export interface ILineItem {
   totalSpent?: number | null;
   variance?: number | null;
   activityId?: string | null;
+  receiptURL?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
 }

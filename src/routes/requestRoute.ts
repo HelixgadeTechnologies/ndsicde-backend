@@ -149,6 +149,7 @@ const requestRouter: Router = Router();
  *                           format: uuid
  *                           description: ID of the activity this line item is for. Omit to create a new one.
  *                           example: "abc12345-0000-0000-0000-000000000002"
+
  *     responses:
  *       200:
  *         description: Request created/updated successfully with line items
@@ -263,13 +264,14 @@ requestRouter.delete("/request/:id", deleteRequestController);
  *     summary: Approve, Reject or Send Request for Review
  *     description: |
  *       Processes an approval action on a Request record. The service **automatically detects**
- *       the current pending approval level (A → B → C → D) based on existing approvals.
+ *       the current pending approval level (A → B → C → D → E) based on existing approvals.
  *
- *       **Approval Levels (4 levels, sequential):**
+ *       **Approval Levels (5 levels, sequential):**
  *       - Level A — First approval
  *       - Level B — Second approval (requires Level A = Approved)
  *       - Level C — Third approval (requires Level B = Approved)
- *       - Level D — Final approval (requires Level C = Approved)
+ *       - Level D — Fourth approval (requires Level C = Approved)
+ *       - Level E — Final approval (requires Level D = Approved)
  *
  *       **Approval Status Values:**
  *       | Value | Meaning |
@@ -282,7 +284,8 @@ requestRouter.delete("/request/:id", deleteRequestController);
  *       - `1` at Level A → `"Layer 1 Approved"`
  *       - `1` at Level B → `"Layer 2 Approved"`
  *       - `1` at Level C → `"Layer 3 Approved"`
- *       - `1` at Level D → `"Approved"` (final)
+ *       - `1` at Level D → `"Layer 4 Approved"`
+ *       - `1` at Level E → `"Approved"` (final)
  *       - `2` at any level → `"Rejected"`
  *       - `3` at any level → `"Under Review"` (clears all other levels)
  *     tags: [Request]

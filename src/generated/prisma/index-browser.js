@@ -465,6 +465,7 @@ exports.Prisma.LineItemScalarFieldEnum = {
   unitCost: 'unitCost',
   totalBudget: 'totalBudget',
   totalSpent: 'totalSpent',
+  receiptURL: 'receiptURL',
   variance: 'variance',
   createAt: 'createAt',
   updateAt: 'updateAt'
@@ -789,7 +790,8 @@ exports.Prisma.LineItemOrderByRelevanceFieldEnum = {
   lineItemId: 'lineItemId',
   requestId: 'requestId',
   activityId: 'activityId',
-  description: 'description'
+  description: 'description',
+  receiptURL: 'receiptURL'
 };
 
 exports.Prisma.RetirementOrderByRelevanceFieldEnum = {

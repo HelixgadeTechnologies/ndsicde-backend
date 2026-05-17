@@ -491,6 +491,7 @@ model LineItem {
   unitCost     Int?
   totalBudget  Int?
   totalSpent   Int?
+  receiptURL   String?
   variance     Int?
   createAt     DateTime?  @default(now())
   updateAt     DateTime?  @default(now())

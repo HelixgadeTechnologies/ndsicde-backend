@@ -29484,6 +29484,7 @@ export namespace Prisma {
     unitCost: number | null
     totalBudget: number | null
     totalSpent: number | null
+    receiptURL: string | null
     variance: number | null
     createAt: Date | null
     updateAt: Date | null
@@ -29499,6 +29500,7 @@ export namespace Prisma {
     unitCost: number | null
     totalBudget: number | null
     totalSpent: number | null
+    receiptURL: string | null
     variance: number | null
     createAt: Date | null
     updateAt: Date | null
@@ -29514,6 +29516,7 @@ export namespace Prisma {
     unitCost: number
     totalBudget: number
     totalSpent: number
+    receiptURL: number
     variance: number
     createAt: number
     updateAt: number
@@ -29549,6 +29552,7 @@ export namespace Prisma {
     unitCost?: true
     totalBudget?: true
     totalSpent?: true
+    receiptURL?: true
     variance?: true
     createAt?: true
     updateAt?: true
@@ -29564,6 +29568,7 @@ export namespace Prisma {
     unitCost?: true
     totalBudget?: true
     totalSpent?: true
+    receiptURL?: true
     variance?: true
     createAt?: true
     updateAt?: true
@@ -29579,6 +29584,7 @@ export namespace Prisma {
     unitCost?: true
     totalBudget?: true
     totalSpent?: true
+    receiptURL?: true
     variance?: true
     createAt?: true
     updateAt?: true
@@ -29681,6 +29687,7 @@ export namespace Prisma {
     unitCost: number | null
     totalBudget: number | null
     totalSpent: number | null
+    receiptURL: string | null
     variance: number | null
     createAt: Date | null
     updateAt: Date | null
@@ -29715,6 +29722,7 @@ export namespace Prisma {
     unitCost?: boolean
     totalBudget?: boolean
     totalSpent?: boolean
+    receiptURL?: boolean
     variance?: boolean
     createAt?: boolean
     updateAt?: boolean
@@ -29734,12 +29742,13 @@ export namespace Prisma {
     unitCost?: boolean
     totalBudget?: boolean
     totalSpent?: boolean
+    receiptURL?: boolean
     variance?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "activityId" | "description" | "quantity" | "frequency" | "unitCost" | "totalBudget" | "totalSpent" | "variance" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
+  export type LineItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"lineItemId" | "requestId" | "activityId" | "description" | "quantity" | "frequency" | "unitCost" | "totalBudget" | "totalSpent" | "receiptURL" | "variance" | "createAt" | "updateAt", ExtArgs["result"]["lineItem"]>
   export type LineItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | RequestDefaultArgs<ExtArgs>
     activity?: boolean | LineItem$activityArgs<ExtArgs>
@@ -29761,6 +29770,7 @@ export namespace Prisma {
       unitCost: number | null
       totalBudget: number | null
       totalSpent: number | null
+      receiptURL: string | null
       variance: number | null
       createAt: Date | null
       updateAt: Date | null
@@ -30144,6 +30154,7 @@ export namespace Prisma {
     readonly unitCost: FieldRef<"LineItem", 'Int'>
     readonly totalBudget: FieldRef<"LineItem", 'Int'>
     readonly totalSpent: FieldRef<"LineItem", 'Int'>
+    readonly receiptURL: FieldRef<"LineItem", 'String'>
     readonly variance: FieldRef<"LineItem", 'Int'>
     readonly createAt: FieldRef<"LineItem", 'DateTime'>
     readonly updateAt: FieldRef<"LineItem", 'DateTime'>
@@ -33371,6 +33382,7 @@ export namespace Prisma {
     unitCost: 'unitCost',
     totalBudget: 'totalBudget',
     totalSpent: 'totalSpent',
+    receiptURL: 'receiptURL',
     variance: 'variance',
     createAt: 'createAt',
     updateAt: 'updateAt'
@@ -33782,7 +33794,8 @@ export namespace Prisma {
     lineItemId: 'lineItemId',
     requestId: 'requestId',
     activityId: 'activityId',
-    description: 'description'
+    description: 'description',
+    receiptURL: 'receiptURL'
   };
 
   export type LineItemOrderByRelevanceFieldEnum = (typeof LineItemOrderByRelevanceFieldEnum)[keyof typeof LineItemOrderByRelevanceFieldEnum]
@@ -36078,6 +36091,7 @@ export namespace Prisma {
     unitCost?: IntNullableFilter<"LineItem"> | number | null
     totalBudget?: IntNullableFilter<"LineItem"> | number | null
     totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    receiptURL?: StringNullableFilter<"LineItem"> | string | null
     variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
@@ -36095,6 +36109,7 @@ export namespace Prisma {
     unitCost?: SortOrderInput | SortOrder
     totalBudget?: SortOrderInput | SortOrder
     totalSpent?: SortOrderInput | SortOrder
+    receiptURL?: SortOrderInput | SortOrder
     variance?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
@@ -36116,6 +36131,7 @@ export namespace Prisma {
     unitCost?: IntNullableFilter<"LineItem"> | number | null
     totalBudget?: IntNullableFilter<"LineItem"> | number | null
     totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    receiptURL?: StringNullableFilter<"LineItem"> | string | null
     variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
@@ -36133,6 +36149,7 @@ export namespace Prisma {
     unitCost?: SortOrderInput | SortOrder
     totalBudget?: SortOrderInput | SortOrder
     totalSpent?: SortOrderInput | SortOrder
+    receiptURL?: SortOrderInput | SortOrder
     variance?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
@@ -36156,6 +36173,7 @@ export namespace Prisma {
     unitCost?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     totalBudget?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     totalSpent?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
+    receiptURL?: StringNullableWithAggregatesFilter<"LineItem"> | string | null
     variance?: IntNullableWithAggregatesFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"LineItem"> | Date | string | null
@@ -38908,6 +38926,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38925,6 +38944,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38938,6 +38958,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38955,6 +38976,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38970,6 +38992,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38983,6 +39006,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38998,6 +39022,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41060,6 +41085,7 @@ export namespace Prisma {
     unitCost?: SortOrder
     totalBudget?: SortOrder
     totalSpent?: SortOrder
+    receiptURL?: SortOrder
     variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -41084,6 +41110,7 @@ export namespace Prisma {
     unitCost?: SortOrder
     totalBudget?: SortOrder
     totalSpent?: SortOrder
+    receiptURL?: SortOrder
     variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -41099,6 +41126,7 @@ export namespace Prisma {
     unitCost?: SortOrder
     totalBudget?: SortOrder
     totalSpent?: SortOrder
+    receiptURL?: SortOrder
     variance?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -47928,6 +47956,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -47943,6 +47972,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -48140,6 +48170,7 @@ export namespace Prisma {
     unitCost?: IntNullableFilter<"LineItem"> | number | null
     totalBudget?: IntNullableFilter<"LineItem"> | number | null
     totalSpent?: IntNullableFilter<"LineItem"> | number | null
+    receiptURL?: StringNullableFilter<"LineItem"> | string | null
     variance?: IntNullableFilter<"LineItem"> | number | null
     createAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"LineItem"> | Date | string | null
@@ -48692,6 +48723,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -48707,6 +48739,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -51713,6 +51746,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -51765,6 +51799,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51780,6 +51815,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51794,6 +51830,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51854,6 +51891,7 @@ export namespace Prisma {
     unitCost?: number | null
     totalBudget?: number | null
     totalSpent?: number | null
+    receiptURL?: string | null
     variance?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -51951,6 +51989,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51966,6 +52005,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51980,6 +52020,7 @@ export namespace Prisma {
     unitCost?: NullableIntFieldUpdateOperationsInput | number | null
     totalBudget?: NullableIntFieldUpdateOperationsInput | number | null
     totalSpent?: NullableIntFieldUpdateOperationsInput | number | null
+    receiptURL?: NullableStringFieldUpdateOperationsInput | string | null
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
