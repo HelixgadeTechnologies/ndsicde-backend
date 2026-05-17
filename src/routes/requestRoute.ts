@@ -531,6 +531,6 @@ requestRouter.post("/data-validation/list", getRequestsWithDateFilterController)
  *       500:
  *         description: Server error
  */
-requestRouter.get("/project/:projectId", getRequestsByProjectIdController);
+requestRouter.get("/getRequestByProjectId/:projectId",getRequestsByProjectIdController);
 
 export default requestRouter;

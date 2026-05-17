@@ -475,14 +475,38 @@ export const getRequestsByProjectId = async (projectId: string) => {
             projectName: true,
           },
         },
-        retirement: true,
+        retirement: {
+            select: {
+                retirementId: true,
+                activityLineDescription: true,
+                quantity: true,
+                frequency: true,
+                unitCost: true,
+                actualCost: true,
+                totalBudget: true,
+                documentName: true,
+                documentURL: true,
+                approval_A: true,
+                approval_B: true,
+                approval_C: true,
+                approvedBy_A: true,
+                approvedBy_B: true,
+                approvedBy_C: true,
+                comment_A: true,
+                comment_B: true,
+                comment_C: true,
+                requestId: true,
+                status: true,
+                createAt: true,
+                updateAt: true,
+            },
+        },
         lineItems: true,
       },
       orderBy: {
         createAt: 'desc',
       },
     });
-
     return requests;
   } catch (error) {
     console.log(error);
