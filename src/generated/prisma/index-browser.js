@@ -452,7 +452,33 @@ exports.Prisma.RequestScalarFieldEnum = {
   createAt: 'createAt',
   updateAt: 'updateAt',
   createdBy: 'createdBy',
-  isJourneyManagementRequired: 'isJourneyManagementRequired'
+  isJourneyManagementRequired: 'isJourneyManagementRequired',
+  purposeOfTrip: 'purposeOfTrip',
+  vehicleMake: 'vehicleMake',
+  vehicleModel: 'vehicleModel',
+  departureDate: 'departureDate',
+  departureLocationAndTime: 'departureLocationAndTime',
+  destination: 'destination',
+  contactPersonPhoneNumberAtDestination: 'contactPersonPhoneNumberAtDestination',
+  flightDepartureState: 'flightDepartureState',
+  flightDepartureTime: 'flightDepartureTime',
+  flightArrivalState: 'flightArrivalState',
+  flightArrivalTime: 'flightArrivalTime',
+  hotelAccommodationName: 'hotelAccommodationName',
+  hotelAddress: 'hotelAddress',
+  returnDate: 'returnDate',
+  returnTime: 'returnTime',
+  airportDropoffOfficerName: 'airportDropoffOfficerName',
+  airportPickupOfficerName: 'airportPickupOfficerName',
+  budgetName: 'budgetName'
+};
+
+exports.Prisma.OtherPersonnelScalarFieldEnum = {
+  otherPersonnelId: 'otherPersonnelId',
+  requestId: 'requestId',
+  name: 'name',
+  company: 'company',
+  phoneNumber: 'phoneNumber'
 };
 
 exports.Prisma.LineItemScalarFieldEnum = {
@@ -783,7 +809,31 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
   comment_D: 'comment_D',
   comment_E: 'comment_E',
   status: 'status',
-  createdBy: 'createdBy'
+  createdBy: 'createdBy',
+  purposeOfTrip: 'purposeOfTrip',
+  vehicleMake: 'vehicleMake',
+  vehicleModel: 'vehicleModel',
+  departureLocationAndTime: 'departureLocationAndTime',
+  destination: 'destination',
+  contactPersonPhoneNumberAtDestination: 'contactPersonPhoneNumberAtDestination',
+  flightDepartureState: 'flightDepartureState',
+  flightDepartureTime: 'flightDepartureTime',
+  flightArrivalState: 'flightArrivalState',
+  flightArrivalTime: 'flightArrivalTime',
+  hotelAccommodationName: 'hotelAccommodationName',
+  hotelAddress: 'hotelAddress',
+  returnTime: 'returnTime',
+  airportDropoffOfficerName: 'airportDropoffOfficerName',
+  airportPickupOfficerName: 'airportPickupOfficerName',
+  budgetName: 'budgetName'
+};
+
+exports.Prisma.OtherPersonnelOrderByRelevanceFieldEnum = {
+  otherPersonnelId: 'otherPersonnelId',
+  requestId: 'requestId',
+  name: 'name',
+  company: 'company',
+  phoneNumber: 'phoneNumber'
 };
 
 exports.Prisma.LineItemOrderByRelevanceFieldEnum = {
@@ -848,6 +898,7 @@ exports.Prisma.ModelName = {
   ActivityReport: 'ActivityReport',
   LogicalFramework: 'LogicalFramework',
   Request: 'Request',
+  OtherPersonnel: 'OtherPersonnel',
   LineItem: 'LineItem',
   Retirement: 'Retirement',
   Report: 'Report'

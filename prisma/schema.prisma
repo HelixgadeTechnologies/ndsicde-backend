@@ -472,11 +472,41 @@ model Request {
   updateAt                   DateTime?    @default(now())
   user                       User?        @relation(fields: [createdBy], references: [userId])
   createdBy                  String?
-  isJourneyManagementRequired Boolean      @default(false)
-  retirement                 Retirement[]
-  lineItems                  LineItem[]
+  isJourneyManagementRequired              Boolean        @default(false)
+  purposeOfTrip                            String?
+  vehicleMake                              String?
+  vehicleModel                             String?
+  departureDate                            DateTime?
+  departureLocationAndTime                 String?
+  destination                              String?
+  contactPersonPhoneNumberAtDestination    String?
+  flightDepartureState                     String?
+  flightDepartureTime                      String?
+  flightArrivalState                       String?
+  flightArrivalTime                        String?
+  hotelAccommodationName                   String?
+  hotelAddress                             String?
+  returnDate                               DateTime?
+  returnTime                               String?
+  airportDropoffOfficerName                String?
+  airportPickupOfficerName                 String?
+  budgetName                               String?
+  retirement                               Retirement[]
+  lineItems                                LineItem[]
+  otherPersonnel                           OtherPersonnel[]
 
   @@map("request")
+}
+
+model OtherPersonnel {
+  otherPersonnelId String   @id @default(uuid())
+  request          Request  @relation(fields: [requestId], references: [requestId])
+  requestId        String
+  name             String?
+  company          String?
+  phoneNumber      String?
+
+  @@map("other_personnel")
 }
 
 model LineItem {

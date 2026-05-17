@@ -1,15 +1,37 @@
-import { IDataValidationStats, ILineItem, IRequest, IRequestView } from "../interface/requestInterface";
+import { IDataValidationStats, ILineItem, IOtherPersonnel, IRequest, IRequestView } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
 
-// ✅ Create or Update Request (with LineItems saved to lineitem table)
+const JOURNEY_FIELDS = (payload: IRequest) => ({
+  isJourneyManagementRequired:           payload.isJourneyManagementRequired ?? false,
+  purposeOfTrip:                         payload.purposeOfTrip,
+  vehicleMake:                           payload.vehicleMake,
+  vehicleModel:                          payload.vehicleModel,
+  departureDate:                         payload.departureDate,
+  departureLocationAndTime:              payload.departureLocationAndTime,
+  destination:                           payload.destination,
+  contactPersonPhoneNumberAtDestination: payload.contactPersonPhoneNumberAtDestination,
+  flightDepartureState:                  payload.flightDepartureState,
+  flightDepartureTime:                   payload.flightDepartureTime,
+  flightArrivalState:                    payload.flightArrivalState,
+  flightArrivalTime:                     payload.flightArrivalTime,
+  hotelAccommodationName:                payload.hotelAccommodationName,
+  hotelAddress:                          payload.hotelAddress,
+  returnDate:                            payload.returnDate,
+  returnTime:                            payload.returnTime,
+  airportDropoffOfficerName:             payload.airportDropoffOfficerName,
+  airportPickupOfficerName:              payload.airportPickupOfficerName,
+  budgetName:                            payload.budgetName,
+});
+
+// ✅ Create or Update Request (with LineItems and OtherPersonnel)
 export const createOrUpdateRequest = async (
   payload: IRequest,
   isCreate: boolean
 ) => {
-  const lineItems: ILineItem[] = payload.lineItems || [];
+  const lineItems: ILineItem[]         = payload.lineItems       || [];
+  const otherPersonnel: IOtherPersonnel[] = payload.otherPersonnel || [];
 
   if (isCreate) {
-    // 🔀 Use a transaction to create request + line items atomically
     return await prisma.$transaction(async (tx) => {
       const newRequest = await tx.request.create({
         data: {
@@ -35,10 +57,10 @@ export const createOrUpdateRequest = async (
           projectId: payload.projectId,
           createdBy: payload.createdBy,
           status: payload.status ?? "Pending",
+          ...JOURNEY_FIELDS(payload),
         },
       });
 
-      // ✅ Save each line item linked to the new request
       if (lineItems.length > 0) {
         await tx.lineItem.createMany({
           data: lineItems.map((item) => ({
@@ -55,18 +77,25 @@ export const createOrUpdateRequest = async (
         });
       }
 
-      // Return request with its line items
+      if (otherPersonnel.length > 0) {
+        await tx.otherPersonnel.createMany({
+          data: otherPersonnel.map((p) => ({
+            requestId: newRequest.requestId,
+            name:        p.name        || null,
+            company:     p.company     || null,
+            phoneNumber: p.phoneNumber || null,
+          })),
+        });
+      }
+
       return await tx.request.findUnique({
         where: { requestId: newRequest.requestId },
-        include: { lineItems: true },
+        include: { lineItems: true, otherPersonnel: true },
       });
     });
   } else {
-    if (!payload.requestId) {
-      throw new Error("requestId is required for update");
-    }
+    if (!payload.requestId) throw new Error("requestId is required for update");
 
-    // 🔀 Transaction: update request + replace all line items
     return await prisma.$transaction(async (tx) => {
       await tx.request.update({
         where: { requestId: payload.requestId },
@@ -94,14 +123,12 @@ export const createOrUpdateRequest = async (
           createdBy: payload.createdBy,
           status: payload.status,
           updateAt: new Date(),
+          ...JOURNEY_FIELDS(payload),
         },
       });
 
-      // ✅ Replace line items: delete old ones and re-insert
-      await tx.lineItem.deleteMany({
-        where: { requestId: payload.requestId },
-      });
-
+      // Replace line items
+      await tx.lineItem.deleteMany({ where: { requestId: payload.requestId } });
       if (lineItems.length > 0) {
         await tx.lineItem.createMany({
           data: lineItems.map((item) => ({
@@ -118,17 +145,29 @@ export const createOrUpdateRequest = async (
         });
       }
 
-      // Return updated request with its line items
+      // Replace otherPersonnel
+      await tx.otherPersonnel.deleteMany({ where: { requestId: payload.requestId } });
+      if (otherPersonnel.length > 0) {
+        await tx.otherPersonnel.createMany({
+          data: otherPersonnel.map((p) => ({
+            requestId: payload.requestId!,
+            name:        p.name        || null,
+            company:     p.company     || null,
+            phoneNumber: p.phoneNumber || null,
+          })),
+        });
+      }
+
       return await tx.request.findUnique({
         where: { requestId: payload.requestId },
-        include: { lineItems: true },
+        include: { lineItems: true, otherPersonnel: true },
       });
     });
   }
 };
 
 
-// ✅ Get all Requests (from view) — with line items
+// ✅ Get all Requests (from view) — with line items and otherPersonnel
 export const getAllRequests = async (): Promise<IRequestView[]> => {
   const requests = await prisma.$queryRaw<IRequestView[]>`
     SELECT * FROM request_view
@@ -136,20 +175,21 @@ export const getAllRequests = async (): Promise<IRequestView[]> => {
 
   if (requests.length === 0) return [];
 
-  // Fetch all line items in one query and group by requestId
   const requestIds = requests.map((r) => r.requestId);
-  const allLineItems = await prisma.lineItem.findMany({
-    where: { requestId: { in: requestIds } },
-  });
 
-  // Attach line items to their parent request
+  const [allLineItems, allOtherPersonnel] = await Promise.all([
+    prisma.lineItem.findMany({ where: { requestId: { in: requestIds } } }),
+    prisma.otherPersonnel.findMany({ where: { requestId: { in: requestIds } } }),
+  ]);
+
   return requests.map((r) => ({
     ...r,
-    lineItems: allLineItems.filter((li) => li.requestId === r.requestId),
+    lineItems:      allLineItems.filter((li) => li.requestId === r.requestId),
+    otherPersonnel: allOtherPersonnel.filter((p) => p.requestId === r.requestId),
   }));
 };
 
-// ✅ Get Request by ID (from view) — with line items
+// ✅ Get Request by ID (from view) — with line items and otherPersonnel
 export const getRequestById = async (
   requestId: string
 ): Promise<IRequestView | null> => {
@@ -159,11 +199,12 @@ export const getRequestById = async (
 
   if (result.length === 0) return null;
 
-  const lineItems = await prisma.lineItem.findMany({
-    where: { requestId },
-  });
+  const [lineItems, otherPersonnel] = await Promise.all([
+    prisma.lineItem.findMany({ where: { requestId } }),
+    prisma.otherPersonnel.findMany({ where: { requestId } }),
+  ]);
 
-  return { ...result[0], lineItems };
+  return { ...result[0], lineItems, otherPersonnel };
 };
 
 

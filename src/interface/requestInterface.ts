@@ -1,3 +1,11 @@
+export interface IOtherPersonnel {
+  otherPersonnelId?: string;
+  requestId?: string;
+  name?: string | null;
+  company?: string | null;
+  phoneNumber?: string | null;
+}
+
 export interface IRequest {
   requestId: string;
   staff?: string;
@@ -24,9 +32,31 @@ export interface IRequest {
   createAt?: Date;
   updateAt?: Date;
   createdBy?: string;
-  lineItems?: Array<ILineItem>
+  lineItems?: Array<ILineItem>;
+  otherPersonnel?: Array<IOtherPersonnel>;
 
-  // Approval fields , ignore these when creating a request
+  // Journey management fields
+  isJourneyManagementRequired?: boolean;
+  purposeOfTrip?: string;
+  vehicleMake?: string;
+  vehicleModel?: string;
+  departureDate?: Date;
+  departureLocationAndTime?: string;
+  destination?: string;
+  contactPersonPhoneNumberAtDestination?: string;
+  flightDepartureState?: string;
+  flightDepartureTime?: string;
+  flightArrivalState?: string;
+  flightArrivalTime?: string;
+  hotelAccommodationName?: string;
+  hotelAddress?: string;
+  returnDate?: Date;
+  returnTime?: string;
+  airportDropoffOfficerName?: string;
+  airportPickupOfficerName?: string;
+  budgetName?: string;
+
+  // Approval fields — ignore when creating a request
   approval_A?: number;
   approval_B?: number;
   approval_C?: number;
@@ -43,7 +73,6 @@ export interface IRequest {
   comment_D?: string;
   comment_E?: string;
   approvalStep?: number;
-  isJourneyManagementRequired?: boolean;
 }
 
 export interface ILineItem {
@@ -103,14 +132,35 @@ export interface IRequestView {
   comment_C?: string;
   comment_D?: string;
   comment_E?: string;
-  lineItems?: Array<ILineItem>
+  lineItems?: Array<ILineItem>;
+  otherPersonnel?: Array<IOtherPersonnel>;
   projectId?: string;
   projectName?: string;
   status?: string;
   createAt?: Date;
   updateAt?: Date;
   createdBy?: string;
+
+  // Journey management fields
   isJourneyManagementRequired?: boolean;
+  purposeOfTrip?: string;
+  vehicleMake?: string;
+  vehicleModel?: string;
+  departureDate?: Date;
+  departureLocationAndTime?: string;
+  destination?: string;
+  contactPersonPhoneNumberAtDestination?: string;
+  flightDepartureState?: string;
+  flightDepartureTime?: string;
+  flightArrivalState?: string;
+  flightArrivalTime?: string;
+  hotelAccommodationName?: string;
+  hotelAddress?: string;
+  returnDate?: Date;
+  returnTime?: string;
+  airportDropoffOfficerName?: string;
+  airportPickupOfficerName?: string;
+  budgetName?: string;
 }
 
 // Approval-related types and interfaces

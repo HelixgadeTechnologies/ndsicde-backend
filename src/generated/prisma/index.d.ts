@@ -134,6 +134,11 @@ export type LogicalFramework = $Result.DefaultSelection<Prisma.$LogicalFramework
  */
 export type Request = $Result.DefaultSelection<Prisma.$RequestPayload>
 /**
+ * Model OtherPersonnel
+ * 
+ */
+export type OtherPersonnel = $Result.DefaultSelection<Prisma.$OtherPersonnelPayload>
+/**
  * Model LineItem
  * 
  */
@@ -509,6 +514,16 @@ export class PrismaClient<
     * ```
     */
   get request(): Prisma.RequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.otherPersonnel`: Exposes CRUD operations for the **OtherPersonnel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OtherPersonnels
+    * const otherPersonnels = await prisma.otherPersonnel.findMany()
+    * ```
+    */
+  get otherPersonnel(): Prisma.OtherPersonnelDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.lineItem`: Exposes CRUD operations for the **LineItem** model.
@@ -997,6 +1012,7 @@ export namespace Prisma {
     ActivityReport: 'ActivityReport',
     LogicalFramework: 'LogicalFramework',
     Request: 'Request',
+    OtherPersonnel: 'OtherPersonnel',
     LineItem: 'LineItem',
     Retirement: 'Retirement',
     Report: 'Report'
@@ -1015,7 +1031,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "otherPersonnel" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2603,6 +2619,72 @@ export namespace Prisma {
           }
         }
       }
+      OtherPersonnel: {
+        payload: Prisma.$OtherPersonnelPayload<ExtArgs>
+        fields: Prisma.OtherPersonnelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OtherPersonnelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OtherPersonnelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          findFirst: {
+            args: Prisma.OtherPersonnelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OtherPersonnelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          findMany: {
+            args: Prisma.OtherPersonnelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>[]
+          }
+          create: {
+            args: Prisma.OtherPersonnelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          createMany: {
+            args: Prisma.OtherPersonnelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.OtherPersonnelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          update: {
+            args: Prisma.OtherPersonnelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          deleteMany: {
+            args: Prisma.OtherPersonnelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OtherPersonnelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.OtherPersonnelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtherPersonnelPayload>
+          }
+          aggregate: {
+            args: Prisma.OtherPersonnelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOtherPersonnel>
+          }
+          groupBy: {
+            args: Prisma.OtherPersonnelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OtherPersonnelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OtherPersonnelCountArgs<ExtArgs>
+            result: $Utils.Optional<OtherPersonnelCountAggregateOutputType> | number
+          }
+        }
+      }
       LineItem: {
         payload: Prisma.$LineItemPayload<ExtArgs>
         fields: Prisma.LineItemFieldRefs
@@ -2933,6 +3015,7 @@ export namespace Prisma {
     activityReport?: ActivityReportOmit
     logicalFramework?: LogicalFrameworkOmit
     request?: RequestOmit
+    otherPersonnel?: OtherPersonnelOmit
     lineItem?: LineItemOmit
     retirement?: RetirementOmit
     report?: ReportOmit
@@ -3579,11 +3662,13 @@ export namespace Prisma {
   export type RequestCountOutputType = {
     retirement: number
     lineItems: number
+    otherPersonnel: number
   }
 
   export type RequestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     retirement?: boolean | RequestCountOutputTypeCountRetirementArgs
     lineItems?: boolean | RequestCountOutputTypeCountLineItemsArgs
+    otherPersonnel?: boolean | RequestCountOutputTypeCountOtherPersonnelArgs
   }
 
   // Custom InputTypes
@@ -3609,6 +3694,13 @@ export namespace Prisma {
    */
   export type RequestCountOutputTypeCountLineItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LineItemWhereInput
+  }
+
+  /**
+   * RequestCountOutputType without action
+   */
+  export type RequestCountOutputTypeCountOtherPersonnelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtherPersonnelWhereInput
   }
 
 
@@ -27995,6 +28087,24 @@ export namespace Prisma {
     updateAt: Date | null
     createdBy: string | null
     isJourneyManagementRequired: boolean | null
+    purposeOfTrip: string | null
+    vehicleMake: string | null
+    vehicleModel: string | null
+    departureDate: Date | null
+    departureLocationAndTime: string | null
+    destination: string | null
+    contactPersonPhoneNumberAtDestination: string | null
+    flightDepartureState: string | null
+    flightDepartureTime: string | null
+    flightArrivalState: string | null
+    flightArrivalTime: string | null
+    hotelAccommodationName: string | null
+    hotelAddress: string | null
+    returnDate: Date | null
+    returnTime: string | null
+    airportDropoffOfficerName: string | null
+    airportPickupOfficerName: string | null
+    budgetName: string | null
   }
 
   export type RequestMaxAggregateOutputType = {
@@ -28040,6 +28150,24 @@ export namespace Prisma {
     updateAt: Date | null
     createdBy: string | null
     isJourneyManagementRequired: boolean | null
+    purposeOfTrip: string | null
+    vehicleMake: string | null
+    vehicleModel: string | null
+    departureDate: Date | null
+    departureLocationAndTime: string | null
+    destination: string | null
+    contactPersonPhoneNumberAtDestination: string | null
+    flightDepartureState: string | null
+    flightDepartureTime: string | null
+    flightArrivalState: string | null
+    flightArrivalTime: string | null
+    hotelAccommodationName: string | null
+    hotelAddress: string | null
+    returnDate: Date | null
+    returnTime: string | null
+    airportDropoffOfficerName: string | null
+    airportPickupOfficerName: string | null
+    budgetName: string | null
   }
 
   export type RequestCountAggregateOutputType = {
@@ -28085,6 +28213,24 @@ export namespace Prisma {
     updateAt: number
     createdBy: number
     isJourneyManagementRequired: number
+    purposeOfTrip: number
+    vehicleMake: number
+    vehicleModel: number
+    departureDate: number
+    departureLocationAndTime: number
+    destination: number
+    contactPersonPhoneNumberAtDestination: number
+    flightDepartureState: number
+    flightDepartureTime: number
+    flightArrivalState: number
+    flightArrivalTime: number
+    hotelAccommodationName: number
+    hotelAddress: number
+    returnDate: number
+    returnTime: number
+    airportDropoffOfficerName: number
+    airportPickupOfficerName: number
+    budgetName: number
     _all: number
   }
 
@@ -28154,6 +28300,24 @@ export namespace Prisma {
     updateAt?: true
     createdBy?: true
     isJourneyManagementRequired?: true
+    purposeOfTrip?: true
+    vehicleMake?: true
+    vehicleModel?: true
+    departureDate?: true
+    departureLocationAndTime?: true
+    destination?: true
+    contactPersonPhoneNumberAtDestination?: true
+    flightDepartureState?: true
+    flightDepartureTime?: true
+    flightArrivalState?: true
+    flightArrivalTime?: true
+    hotelAccommodationName?: true
+    hotelAddress?: true
+    returnDate?: true
+    returnTime?: true
+    airportDropoffOfficerName?: true
+    airportPickupOfficerName?: true
+    budgetName?: true
   }
 
   export type RequestMaxAggregateInputType = {
@@ -28199,6 +28363,24 @@ export namespace Prisma {
     updateAt?: true
     createdBy?: true
     isJourneyManagementRequired?: true
+    purposeOfTrip?: true
+    vehicleMake?: true
+    vehicleModel?: true
+    departureDate?: true
+    departureLocationAndTime?: true
+    destination?: true
+    contactPersonPhoneNumberAtDestination?: true
+    flightDepartureState?: true
+    flightDepartureTime?: true
+    flightArrivalState?: true
+    flightArrivalTime?: true
+    hotelAccommodationName?: true
+    hotelAddress?: true
+    returnDate?: true
+    returnTime?: true
+    airportDropoffOfficerName?: true
+    airportPickupOfficerName?: true
+    budgetName?: true
   }
 
   export type RequestCountAggregateInputType = {
@@ -28244,6 +28426,24 @@ export namespace Prisma {
     updateAt?: true
     createdBy?: true
     isJourneyManagementRequired?: true
+    purposeOfTrip?: true
+    vehicleMake?: true
+    vehicleModel?: true
+    departureDate?: true
+    departureLocationAndTime?: true
+    destination?: true
+    contactPersonPhoneNumberAtDestination?: true
+    flightDepartureState?: true
+    flightDepartureTime?: true
+    flightArrivalState?: true
+    flightArrivalTime?: true
+    hotelAccommodationName?: true
+    hotelAddress?: true
+    returnDate?: true
+    returnTime?: true
+    airportDropoffOfficerName?: true
+    airportPickupOfficerName?: true
+    budgetName?: true
     _all?: true
   }
 
@@ -28376,6 +28576,24 @@ export namespace Prisma {
     updateAt: Date | null
     createdBy: string | null
     isJourneyManagementRequired: boolean
+    purposeOfTrip: string | null
+    vehicleMake: string | null
+    vehicleModel: string | null
+    departureDate: Date | null
+    departureLocationAndTime: string | null
+    destination: string | null
+    contactPersonPhoneNumberAtDestination: string | null
+    flightDepartureState: string | null
+    flightDepartureTime: string | null
+    flightArrivalState: string | null
+    flightArrivalTime: string | null
+    hotelAccommodationName: string | null
+    hotelAddress: string | null
+    returnDate: Date | null
+    returnTime: string | null
+    airportDropoffOfficerName: string | null
+    airportPickupOfficerName: string | null
+    budgetName: string | null
     _count: RequestCountAggregateOutputType | null
     _avg: RequestAvgAggregateOutputType | null
     _sum: RequestSumAggregateOutputType | null
@@ -28440,11 +28658,30 @@ export namespace Prisma {
     updateAt?: boolean
     createdBy?: boolean
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: boolean
+    vehicleMake?: boolean
+    vehicleModel?: boolean
+    departureDate?: boolean
+    departureLocationAndTime?: boolean
+    destination?: boolean
+    contactPersonPhoneNumberAtDestination?: boolean
+    flightDepartureState?: boolean
+    flightDepartureTime?: boolean
+    flightArrivalState?: boolean
+    flightArrivalTime?: boolean
+    hotelAccommodationName?: boolean
+    hotelAddress?: boolean
+    returnDate?: boolean
+    returnTime?: boolean
+    airportDropoffOfficerName?: boolean
+    airportPickupOfficerName?: boolean
+    budgetName?: boolean
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
     lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
+    otherPersonnel?: boolean | Request$otherPersonnelArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["request"]>
 
@@ -28493,15 +28730,34 @@ export namespace Prisma {
     updateAt?: boolean
     createdBy?: boolean
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: boolean
+    vehicleMake?: boolean
+    vehicleModel?: boolean
+    departureDate?: boolean
+    departureLocationAndTime?: boolean
+    destination?: boolean
+    contactPersonPhoneNumberAtDestination?: boolean
+    flightDepartureState?: boolean
+    flightDepartureTime?: boolean
+    flightArrivalState?: boolean
+    flightArrivalTime?: boolean
+    hotelAccommodationName?: boolean
+    hotelAddress?: boolean
+    returnDate?: boolean
+    returnTime?: boolean
+    airportDropoffOfficerName?: boolean
+    airportPickupOfficerName?: boolean
+    budgetName?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired" | "purposeOfTrip" | "vehicleMake" | "vehicleModel" | "departureDate" | "departureLocationAndTime" | "destination" | "contactPersonPhoneNumberAtDestination" | "flightDepartureState" | "flightDepartureTime" | "flightArrivalState" | "flightArrivalTime" | "hotelAccommodationName" | "hotelAddress" | "returnDate" | "returnTime" | "airportDropoffOfficerName" | "airportPickupOfficerName" | "budgetName", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
     retirement?: boolean | Request$retirementArgs<ExtArgs>
     lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
+    otherPersonnel?: boolean | Request$otherPersonnelArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -28513,6 +28769,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs> | null
       retirement: Prisma.$RetirementPayload<ExtArgs>[]
       lineItems: Prisma.$LineItemPayload<ExtArgs>[]
+      otherPersonnel: Prisma.$OtherPersonnelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       requestId: string
@@ -28557,6 +28814,24 @@ export namespace Prisma {
       updateAt: Date | null
       createdBy: string | null
       isJourneyManagementRequired: boolean
+      purposeOfTrip: string | null
+      vehicleMake: string | null
+      vehicleModel: string | null
+      departureDate: Date | null
+      departureLocationAndTime: string | null
+      destination: string | null
+      contactPersonPhoneNumberAtDestination: string | null
+      flightDepartureState: string | null
+      flightDepartureTime: string | null
+      flightArrivalState: string | null
+      flightArrivalTime: string | null
+      hotelAccommodationName: string | null
+      hotelAddress: string | null
+      returnDate: Date | null
+      returnTime: string | null
+      airportDropoffOfficerName: string | null
+      airportPickupOfficerName: string | null
+      budgetName: string | null
     }, ExtArgs["result"]["request"]>
     composites: {}
   }
@@ -28902,6 +29177,7 @@ export namespace Prisma {
     user<T extends Request$userArgs<ExtArgs> = {}>(args?: Subset<T, Request$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     retirement<T extends Request$retirementArgs<ExtArgs> = {}>(args?: Subset<T, Request$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lineItems<T extends Request$lineItemsArgs<ExtArgs> = {}>(args?: Subset<T, Request$lineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    otherPersonnel<T extends Request$otherPersonnelArgs<ExtArgs> = {}>(args?: Subset<T, Request$otherPersonnelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28973,6 +29249,24 @@ export namespace Prisma {
     readonly updateAt: FieldRef<"Request", 'DateTime'>
     readonly createdBy: FieldRef<"Request", 'String'>
     readonly isJourneyManagementRequired: FieldRef<"Request", 'Boolean'>
+    readonly purposeOfTrip: FieldRef<"Request", 'String'>
+    readonly vehicleMake: FieldRef<"Request", 'String'>
+    readonly vehicleModel: FieldRef<"Request", 'String'>
+    readonly departureDate: FieldRef<"Request", 'DateTime'>
+    readonly departureLocationAndTime: FieldRef<"Request", 'String'>
+    readonly destination: FieldRef<"Request", 'String'>
+    readonly contactPersonPhoneNumberAtDestination: FieldRef<"Request", 'String'>
+    readonly flightDepartureState: FieldRef<"Request", 'String'>
+    readonly flightDepartureTime: FieldRef<"Request", 'String'>
+    readonly flightArrivalState: FieldRef<"Request", 'String'>
+    readonly flightArrivalTime: FieldRef<"Request", 'String'>
+    readonly hotelAccommodationName: FieldRef<"Request", 'String'>
+    readonly hotelAddress: FieldRef<"Request", 'String'>
+    readonly returnDate: FieldRef<"Request", 'DateTime'>
+    readonly returnTime: FieldRef<"Request", 'String'>
+    readonly airportDropoffOfficerName: FieldRef<"Request", 'String'>
+    readonly airportPickupOfficerName: FieldRef<"Request", 'String'>
+    readonly budgetName: FieldRef<"Request", 'String'>
   }
     
 
@@ -29426,6 +29720,30 @@ export namespace Prisma {
   }
 
   /**
+   * Request.otherPersonnel
+   */
+  export type Request$otherPersonnelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    where?: OtherPersonnelWhereInput
+    orderBy?: OtherPersonnelOrderByWithRelationInput | OtherPersonnelOrderByWithRelationInput[]
+    cursor?: OtherPersonnelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OtherPersonnelScalarFieldEnum | OtherPersonnelScalarFieldEnum[]
+  }
+
+  /**
    * Request without action
    */
   export type RequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29441,6 +29759,940 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OtherPersonnel
+   */
+
+  export type AggregateOtherPersonnel = {
+    _count: OtherPersonnelCountAggregateOutputType | null
+    _min: OtherPersonnelMinAggregateOutputType | null
+    _max: OtherPersonnelMaxAggregateOutputType | null
+  }
+
+  export type OtherPersonnelMinAggregateOutputType = {
+    otherPersonnelId: string | null
+    requestId: string | null
+    name: string | null
+    company: string | null
+    phoneNumber: string | null
+  }
+
+  export type OtherPersonnelMaxAggregateOutputType = {
+    otherPersonnelId: string | null
+    requestId: string | null
+    name: string | null
+    company: string | null
+    phoneNumber: string | null
+  }
+
+  export type OtherPersonnelCountAggregateOutputType = {
+    otherPersonnelId: number
+    requestId: number
+    name: number
+    company: number
+    phoneNumber: number
+    _all: number
+  }
+
+
+  export type OtherPersonnelMinAggregateInputType = {
+    otherPersonnelId?: true
+    requestId?: true
+    name?: true
+    company?: true
+    phoneNumber?: true
+  }
+
+  export type OtherPersonnelMaxAggregateInputType = {
+    otherPersonnelId?: true
+    requestId?: true
+    name?: true
+    company?: true
+    phoneNumber?: true
+  }
+
+  export type OtherPersonnelCountAggregateInputType = {
+    otherPersonnelId?: true
+    requestId?: true
+    name?: true
+    company?: true
+    phoneNumber?: true
+    _all?: true
+  }
+
+  export type OtherPersonnelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtherPersonnel to aggregate.
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherPersonnels to fetch.
+     */
+    orderBy?: OtherPersonnelOrderByWithRelationInput | OtherPersonnelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OtherPersonnelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherPersonnels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherPersonnels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OtherPersonnels
+    **/
+    _count?: true | OtherPersonnelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OtherPersonnelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OtherPersonnelMaxAggregateInputType
+  }
+
+  export type GetOtherPersonnelAggregateType<T extends OtherPersonnelAggregateArgs> = {
+        [P in keyof T & keyof AggregateOtherPersonnel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOtherPersonnel[P]>
+      : GetScalarType<T[P], AggregateOtherPersonnel[P]>
+  }
+
+
+
+
+  export type OtherPersonnelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtherPersonnelWhereInput
+    orderBy?: OtherPersonnelOrderByWithAggregationInput | OtherPersonnelOrderByWithAggregationInput[]
+    by: OtherPersonnelScalarFieldEnum[] | OtherPersonnelScalarFieldEnum
+    having?: OtherPersonnelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OtherPersonnelCountAggregateInputType | true
+    _min?: OtherPersonnelMinAggregateInputType
+    _max?: OtherPersonnelMaxAggregateInputType
+  }
+
+  export type OtherPersonnelGroupByOutputType = {
+    otherPersonnelId: string
+    requestId: string
+    name: string | null
+    company: string | null
+    phoneNumber: string | null
+    _count: OtherPersonnelCountAggregateOutputType | null
+    _min: OtherPersonnelMinAggregateOutputType | null
+    _max: OtherPersonnelMaxAggregateOutputType | null
+  }
+
+  type GetOtherPersonnelGroupByPayload<T extends OtherPersonnelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OtherPersonnelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OtherPersonnelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OtherPersonnelGroupByOutputType[P]>
+            : GetScalarType<T[P], OtherPersonnelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OtherPersonnelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    otherPersonnelId?: boolean
+    requestId?: boolean
+    name?: boolean
+    company?: boolean
+    phoneNumber?: boolean
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["otherPersonnel"]>
+
+
+
+  export type OtherPersonnelSelectScalar = {
+    otherPersonnelId?: boolean
+    requestId?: boolean
+    name?: boolean
+    company?: boolean
+    phoneNumber?: boolean
+  }
+
+  export type OtherPersonnelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"otherPersonnelId" | "requestId" | "name" | "company" | "phoneNumber", ExtArgs["result"]["otherPersonnel"]>
+  export type OtherPersonnelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }
+
+  export type $OtherPersonnelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OtherPersonnel"
+    objects: {
+      request: Prisma.$RequestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      otherPersonnelId: string
+      requestId: string
+      name: string | null
+      company: string | null
+      phoneNumber: string | null
+    }, ExtArgs["result"]["otherPersonnel"]>
+    composites: {}
+  }
+
+  type OtherPersonnelGetPayload<S extends boolean | null | undefined | OtherPersonnelDefaultArgs> = $Result.GetResult<Prisma.$OtherPersonnelPayload, S>
+
+  type OtherPersonnelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OtherPersonnelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OtherPersonnelCountAggregateInputType | true
+    }
+
+  export interface OtherPersonnelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OtherPersonnel'], meta: { name: 'OtherPersonnel' } }
+    /**
+     * Find zero or one OtherPersonnel that matches the filter.
+     * @param {OtherPersonnelFindUniqueArgs} args - Arguments to find a OtherPersonnel
+     * @example
+     * // Get one OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OtherPersonnelFindUniqueArgs>(args: SelectSubset<T, OtherPersonnelFindUniqueArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OtherPersonnel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OtherPersonnelFindUniqueOrThrowArgs} args - Arguments to find a OtherPersonnel
+     * @example
+     * // Get one OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OtherPersonnelFindUniqueOrThrowArgs>(args: SelectSubset<T, OtherPersonnelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OtherPersonnel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelFindFirstArgs} args - Arguments to find a OtherPersonnel
+     * @example
+     * // Get one OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OtherPersonnelFindFirstArgs>(args?: SelectSubset<T, OtherPersonnelFindFirstArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OtherPersonnel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelFindFirstOrThrowArgs} args - Arguments to find a OtherPersonnel
+     * @example
+     * // Get one OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OtherPersonnelFindFirstOrThrowArgs>(args?: SelectSubset<T, OtherPersonnelFindFirstOrThrowArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OtherPersonnels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OtherPersonnels
+     * const otherPersonnels = await prisma.otherPersonnel.findMany()
+     * 
+     * // Get first 10 OtherPersonnels
+     * const otherPersonnels = await prisma.otherPersonnel.findMany({ take: 10 })
+     * 
+     * // Only select the `otherPersonnelId`
+     * const otherPersonnelWithOtherPersonnelIdOnly = await prisma.otherPersonnel.findMany({ select: { otherPersonnelId: true } })
+     * 
+     */
+    findMany<T extends OtherPersonnelFindManyArgs>(args?: SelectSubset<T, OtherPersonnelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OtherPersonnel.
+     * @param {OtherPersonnelCreateArgs} args - Arguments to create a OtherPersonnel.
+     * @example
+     * // Create one OtherPersonnel
+     * const OtherPersonnel = await prisma.otherPersonnel.create({
+     *   data: {
+     *     // ... data to create a OtherPersonnel
+     *   }
+     * })
+     * 
+     */
+    create<T extends OtherPersonnelCreateArgs>(args: SelectSubset<T, OtherPersonnelCreateArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OtherPersonnels.
+     * @param {OtherPersonnelCreateManyArgs} args - Arguments to create many OtherPersonnels.
+     * @example
+     * // Create many OtherPersonnels
+     * const otherPersonnel = await prisma.otherPersonnel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OtherPersonnelCreateManyArgs>(args?: SelectSubset<T, OtherPersonnelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a OtherPersonnel.
+     * @param {OtherPersonnelDeleteArgs} args - Arguments to delete one OtherPersonnel.
+     * @example
+     * // Delete one OtherPersonnel
+     * const OtherPersonnel = await prisma.otherPersonnel.delete({
+     *   where: {
+     *     // ... filter to delete one OtherPersonnel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OtherPersonnelDeleteArgs>(args: SelectSubset<T, OtherPersonnelDeleteArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OtherPersonnel.
+     * @param {OtherPersonnelUpdateArgs} args - Arguments to update one OtherPersonnel.
+     * @example
+     * // Update one OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OtherPersonnelUpdateArgs>(args: SelectSubset<T, OtherPersonnelUpdateArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OtherPersonnels.
+     * @param {OtherPersonnelDeleteManyArgs} args - Arguments to filter OtherPersonnels to delete.
+     * @example
+     * // Delete a few OtherPersonnels
+     * const { count } = await prisma.otherPersonnel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OtherPersonnelDeleteManyArgs>(args?: SelectSubset<T, OtherPersonnelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OtherPersonnels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OtherPersonnels
+     * const otherPersonnel = await prisma.otherPersonnel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OtherPersonnelUpdateManyArgs>(args: SelectSubset<T, OtherPersonnelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OtherPersonnel.
+     * @param {OtherPersonnelUpsertArgs} args - Arguments to update or create a OtherPersonnel.
+     * @example
+     * // Update or create a OtherPersonnel
+     * const otherPersonnel = await prisma.otherPersonnel.upsert({
+     *   create: {
+     *     // ... data to create a OtherPersonnel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OtherPersonnel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OtherPersonnelUpsertArgs>(args: SelectSubset<T, OtherPersonnelUpsertArgs<ExtArgs>>): Prisma__OtherPersonnelClient<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OtherPersonnels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelCountArgs} args - Arguments to filter OtherPersonnels to count.
+     * @example
+     * // Count the number of OtherPersonnels
+     * const count = await prisma.otherPersonnel.count({
+     *   where: {
+     *     // ... the filter for the OtherPersonnels we want to count
+     *   }
+     * })
+    **/
+    count<T extends OtherPersonnelCountArgs>(
+      args?: Subset<T, OtherPersonnelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OtherPersonnelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OtherPersonnel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OtherPersonnelAggregateArgs>(args: Subset<T, OtherPersonnelAggregateArgs>): Prisma.PrismaPromise<GetOtherPersonnelAggregateType<T>>
+
+    /**
+     * Group by OtherPersonnel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtherPersonnelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OtherPersonnelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OtherPersonnelGroupByArgs['orderBy'] }
+        : { orderBy?: OtherPersonnelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OtherPersonnelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtherPersonnelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OtherPersonnel model
+   */
+  readonly fields: OtherPersonnelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OtherPersonnel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OtherPersonnelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    request<T extends RequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RequestDefaultArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OtherPersonnel model
+   */
+  interface OtherPersonnelFieldRefs {
+    readonly otherPersonnelId: FieldRef<"OtherPersonnel", 'String'>
+    readonly requestId: FieldRef<"OtherPersonnel", 'String'>
+    readonly name: FieldRef<"OtherPersonnel", 'String'>
+    readonly company: FieldRef<"OtherPersonnel", 'String'>
+    readonly phoneNumber: FieldRef<"OtherPersonnel", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OtherPersonnel findUnique
+   */
+  export type OtherPersonnelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter, which OtherPersonnel to fetch.
+     */
+    where: OtherPersonnelWhereUniqueInput
+  }
+
+  /**
+   * OtherPersonnel findUniqueOrThrow
+   */
+  export type OtherPersonnelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter, which OtherPersonnel to fetch.
+     */
+    where: OtherPersonnelWhereUniqueInput
+  }
+
+  /**
+   * OtherPersonnel findFirst
+   */
+  export type OtherPersonnelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter, which OtherPersonnel to fetch.
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherPersonnels to fetch.
+     */
+    orderBy?: OtherPersonnelOrderByWithRelationInput | OtherPersonnelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtherPersonnels.
+     */
+    cursor?: OtherPersonnelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherPersonnels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherPersonnels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtherPersonnels.
+     */
+    distinct?: OtherPersonnelScalarFieldEnum | OtherPersonnelScalarFieldEnum[]
+  }
+
+  /**
+   * OtherPersonnel findFirstOrThrow
+   */
+  export type OtherPersonnelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter, which OtherPersonnel to fetch.
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherPersonnels to fetch.
+     */
+    orderBy?: OtherPersonnelOrderByWithRelationInput | OtherPersonnelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtherPersonnels.
+     */
+    cursor?: OtherPersonnelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherPersonnels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherPersonnels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtherPersonnels.
+     */
+    distinct?: OtherPersonnelScalarFieldEnum | OtherPersonnelScalarFieldEnum[]
+  }
+
+  /**
+   * OtherPersonnel findMany
+   */
+  export type OtherPersonnelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter, which OtherPersonnels to fetch.
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtherPersonnels to fetch.
+     */
+    orderBy?: OtherPersonnelOrderByWithRelationInput | OtherPersonnelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OtherPersonnels.
+     */
+    cursor?: OtherPersonnelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtherPersonnels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtherPersonnels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtherPersonnels.
+     */
+    distinct?: OtherPersonnelScalarFieldEnum | OtherPersonnelScalarFieldEnum[]
+  }
+
+  /**
+   * OtherPersonnel create
+   */
+  export type OtherPersonnelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OtherPersonnel.
+     */
+    data: XOR<OtherPersonnelCreateInput, OtherPersonnelUncheckedCreateInput>
+  }
+
+  /**
+   * OtherPersonnel createMany
+   */
+  export type OtherPersonnelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OtherPersonnels.
+     */
+    data: OtherPersonnelCreateManyInput | OtherPersonnelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OtherPersonnel update
+   */
+  export type OtherPersonnelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OtherPersonnel.
+     */
+    data: XOR<OtherPersonnelUpdateInput, OtherPersonnelUncheckedUpdateInput>
+    /**
+     * Choose, which OtherPersonnel to update.
+     */
+    where: OtherPersonnelWhereUniqueInput
+  }
+
+  /**
+   * OtherPersonnel updateMany
+   */
+  export type OtherPersonnelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OtherPersonnels.
+     */
+    data: XOR<OtherPersonnelUpdateManyMutationInput, OtherPersonnelUncheckedUpdateManyInput>
+    /**
+     * Filter which OtherPersonnels to update
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * Limit how many OtherPersonnels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OtherPersonnel upsert
+   */
+  export type OtherPersonnelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OtherPersonnel to update in case it exists.
+     */
+    where: OtherPersonnelWhereUniqueInput
+    /**
+     * In case the OtherPersonnel found by the `where` argument doesn't exist, create a new OtherPersonnel with this data.
+     */
+    create: XOR<OtherPersonnelCreateInput, OtherPersonnelUncheckedCreateInput>
+    /**
+     * In case the OtherPersonnel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OtherPersonnelUpdateInput, OtherPersonnelUncheckedUpdateInput>
+  }
+
+  /**
+   * OtherPersonnel delete
+   */
+  export type OtherPersonnelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
+    /**
+     * Filter which OtherPersonnel to delete.
+     */
+    where: OtherPersonnelWhereUniqueInput
+  }
+
+  /**
+   * OtherPersonnel deleteMany
+   */
+  export type OtherPersonnelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtherPersonnels to delete
+     */
+    where?: OtherPersonnelWhereInput
+    /**
+     * Limit how many OtherPersonnels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OtherPersonnel without action
+   */
+  export type OtherPersonnelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtherPersonnel
+     */
+    select?: OtherPersonnelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OtherPersonnel
+     */
+    omit?: OtherPersonnelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtherPersonnelInclude<ExtArgs> | null
   }
 
 
@@ -33366,10 +34618,39 @@ export namespace Prisma {
     createAt: 'createAt',
     updateAt: 'updateAt',
     createdBy: 'createdBy',
-    isJourneyManagementRequired: 'isJourneyManagementRequired'
+    isJourneyManagementRequired: 'isJourneyManagementRequired',
+    purposeOfTrip: 'purposeOfTrip',
+    vehicleMake: 'vehicleMake',
+    vehicleModel: 'vehicleModel',
+    departureDate: 'departureDate',
+    departureLocationAndTime: 'departureLocationAndTime',
+    destination: 'destination',
+    contactPersonPhoneNumberAtDestination: 'contactPersonPhoneNumberAtDestination',
+    flightDepartureState: 'flightDepartureState',
+    flightDepartureTime: 'flightDepartureTime',
+    flightArrivalState: 'flightArrivalState',
+    flightArrivalTime: 'flightArrivalTime',
+    hotelAccommodationName: 'hotelAccommodationName',
+    hotelAddress: 'hotelAddress',
+    returnDate: 'returnDate',
+    returnTime: 'returnTime',
+    airportDropoffOfficerName: 'airportDropoffOfficerName',
+    airportPickupOfficerName: 'airportPickupOfficerName',
+    budgetName: 'budgetName'
   };
 
   export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
+
+
+  export const OtherPersonnelScalarFieldEnum: {
+    otherPersonnelId: 'otherPersonnelId',
+    requestId: 'requestId',
+    name: 'name',
+    company: 'company',
+    phoneNumber: 'phoneNumber'
+  };
+
+  export type OtherPersonnelScalarFieldEnum = (typeof OtherPersonnelScalarFieldEnum)[keyof typeof OtherPersonnelScalarFieldEnum]
 
 
   export const LineItemScalarFieldEnum: {
@@ -33784,10 +35065,37 @@ export namespace Prisma {
     comment_D: 'comment_D',
     comment_E: 'comment_E',
     status: 'status',
-    createdBy: 'createdBy'
+    createdBy: 'createdBy',
+    purposeOfTrip: 'purposeOfTrip',
+    vehicleMake: 'vehicleMake',
+    vehicleModel: 'vehicleModel',
+    departureLocationAndTime: 'departureLocationAndTime',
+    destination: 'destination',
+    contactPersonPhoneNumberAtDestination: 'contactPersonPhoneNumberAtDestination',
+    flightDepartureState: 'flightDepartureState',
+    flightDepartureTime: 'flightDepartureTime',
+    flightArrivalState: 'flightArrivalState',
+    flightArrivalTime: 'flightArrivalTime',
+    hotelAccommodationName: 'hotelAccommodationName',
+    hotelAddress: 'hotelAddress',
+    returnTime: 'returnTime',
+    airportDropoffOfficerName: 'airportDropoffOfficerName',
+    airportPickupOfficerName: 'airportPickupOfficerName',
+    budgetName: 'budgetName'
   };
 
   export type RequestOrderByRelevanceFieldEnum = (typeof RequestOrderByRelevanceFieldEnum)[keyof typeof RequestOrderByRelevanceFieldEnum]
+
+
+  export const OtherPersonnelOrderByRelevanceFieldEnum: {
+    otherPersonnelId: 'otherPersonnelId',
+    requestId: 'requestId',
+    name: 'name',
+    company: 'company',
+    phoneNumber: 'phoneNumber'
+  };
+
+  export type OtherPersonnelOrderByRelevanceFieldEnum = (typeof OtherPersonnelOrderByRelevanceFieldEnum)[keyof typeof OtherPersonnelOrderByRelevanceFieldEnum]
 
 
   export const LineItemOrderByRelevanceFieldEnum: {
@@ -35869,11 +37177,30 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
     isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
+    purposeOfTrip?: StringNullableFilter<"Request"> | string | null
+    vehicleMake?: StringNullableFilter<"Request"> | string | null
+    vehicleModel?: StringNullableFilter<"Request"> | string | null
+    departureDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    departureLocationAndTime?: StringNullableFilter<"Request"> | string | null
+    destination?: StringNullableFilter<"Request"> | string | null
+    contactPersonPhoneNumberAtDestination?: StringNullableFilter<"Request"> | string | null
+    flightDepartureState?: StringNullableFilter<"Request"> | string | null
+    flightDepartureTime?: StringNullableFilter<"Request"> | string | null
+    flightArrivalState?: StringNullableFilter<"Request"> | string | null
+    flightArrivalTime?: StringNullableFilter<"Request"> | string | null
+    hotelAccommodationName?: StringNullableFilter<"Request"> | string | null
+    hotelAddress?: StringNullableFilter<"Request"> | string | null
+    returnDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    returnTime?: StringNullableFilter<"Request"> | string | null
+    airportDropoffOfficerName?: StringNullableFilter<"Request"> | string | null
+    airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
+    budgetName?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
     lineItems?: LineItemListRelationFilter
+    otherPersonnel?: OtherPersonnelListRelationFilter
   }
 
   export type RequestOrderByWithRelationInput = {
@@ -35919,11 +37246,30 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
     isJourneyManagementRequired?: SortOrder
+    purposeOfTrip?: SortOrderInput | SortOrder
+    vehicleMake?: SortOrderInput | SortOrder
+    vehicleModel?: SortOrderInput | SortOrder
+    departureDate?: SortOrderInput | SortOrder
+    departureLocationAndTime?: SortOrderInput | SortOrder
+    destination?: SortOrderInput | SortOrder
+    contactPersonPhoneNumberAtDestination?: SortOrderInput | SortOrder
+    flightDepartureState?: SortOrderInput | SortOrder
+    flightDepartureTime?: SortOrderInput | SortOrder
+    flightArrivalState?: SortOrderInput | SortOrder
+    flightArrivalTime?: SortOrderInput | SortOrder
+    hotelAccommodationName?: SortOrderInput | SortOrder
+    hotelAddress?: SortOrderInput | SortOrder
+    returnDate?: SortOrderInput | SortOrder
+    returnTime?: SortOrderInput | SortOrder
+    airportDropoffOfficerName?: SortOrderInput | SortOrder
+    airportPickupOfficerName?: SortOrderInput | SortOrder
+    budgetName?: SortOrderInput | SortOrder
     output?: OutputOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     retirement?: RetirementOrderByRelationAggregateInput
     lineItems?: LineItemOrderByRelationAggregateInput
+    otherPersonnel?: OtherPersonnelOrderByRelationAggregateInput
     _relevance?: RequestOrderByRelevanceInput
   }
 
@@ -35973,11 +37319,30 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
     isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
+    purposeOfTrip?: StringNullableFilter<"Request"> | string | null
+    vehicleMake?: StringNullableFilter<"Request"> | string | null
+    vehicleModel?: StringNullableFilter<"Request"> | string | null
+    departureDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    departureLocationAndTime?: StringNullableFilter<"Request"> | string | null
+    destination?: StringNullableFilter<"Request"> | string | null
+    contactPersonPhoneNumberAtDestination?: StringNullableFilter<"Request"> | string | null
+    flightDepartureState?: StringNullableFilter<"Request"> | string | null
+    flightDepartureTime?: StringNullableFilter<"Request"> | string | null
+    flightArrivalState?: StringNullableFilter<"Request"> | string | null
+    flightArrivalTime?: StringNullableFilter<"Request"> | string | null
+    hotelAccommodationName?: StringNullableFilter<"Request"> | string | null
+    hotelAddress?: StringNullableFilter<"Request"> | string | null
+    returnDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    returnTime?: StringNullableFilter<"Request"> | string | null
+    airportDropoffOfficerName?: StringNullableFilter<"Request"> | string | null
+    airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
+    budgetName?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     retirement?: RetirementListRelationFilter
     lineItems?: LineItemListRelationFilter
+    otherPersonnel?: OtherPersonnelListRelationFilter
   }, "requestId">
 
   export type RequestOrderByWithAggregationInput = {
@@ -36023,6 +37388,24 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
     isJourneyManagementRequired?: SortOrder
+    purposeOfTrip?: SortOrderInput | SortOrder
+    vehicleMake?: SortOrderInput | SortOrder
+    vehicleModel?: SortOrderInput | SortOrder
+    departureDate?: SortOrderInput | SortOrder
+    departureLocationAndTime?: SortOrderInput | SortOrder
+    destination?: SortOrderInput | SortOrder
+    contactPersonPhoneNumberAtDestination?: SortOrderInput | SortOrder
+    flightDepartureState?: SortOrderInput | SortOrder
+    flightDepartureTime?: SortOrderInput | SortOrder
+    flightArrivalState?: SortOrderInput | SortOrder
+    flightArrivalTime?: SortOrderInput | SortOrder
+    hotelAccommodationName?: SortOrderInput | SortOrder
+    hotelAddress?: SortOrderInput | SortOrder
+    returnDate?: SortOrderInput | SortOrder
+    returnTime?: SortOrderInput | SortOrder
+    airportDropoffOfficerName?: SortOrderInput | SortOrder
+    airportPickupOfficerName?: SortOrderInput | SortOrder
+    budgetName?: SortOrderInput | SortOrder
     _count?: RequestCountOrderByAggregateInput
     _avg?: RequestAvgOrderByAggregateInput
     _max?: RequestMaxOrderByAggregateInput
@@ -36076,6 +37459,80 @@ export namespace Prisma {
     updateAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     createdBy?: StringNullableWithAggregatesFilter<"Request"> | string | null
     isJourneyManagementRequired?: BoolWithAggregatesFilter<"Request"> | boolean
+    purposeOfTrip?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    vehicleMake?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    vehicleModel?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    departureDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    departureLocationAndTime?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    destination?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    contactPersonPhoneNumberAtDestination?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    flightDepartureState?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    flightDepartureTime?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    flightArrivalState?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    flightArrivalTime?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    hotelAccommodationName?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    hotelAddress?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    returnDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    returnTime?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    airportDropoffOfficerName?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    airportPickupOfficerName?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    budgetName?: StringNullableWithAggregatesFilter<"Request"> | string | null
+  }
+
+  export type OtherPersonnelWhereInput = {
+    AND?: OtherPersonnelWhereInput | OtherPersonnelWhereInput[]
+    OR?: OtherPersonnelWhereInput[]
+    NOT?: OtherPersonnelWhereInput | OtherPersonnelWhereInput[]
+    otherPersonnelId?: StringFilter<"OtherPersonnel"> | string
+    requestId?: StringFilter<"OtherPersonnel"> | string
+    name?: StringNullableFilter<"OtherPersonnel"> | string | null
+    company?: StringNullableFilter<"OtherPersonnel"> | string | null
+    phoneNumber?: StringNullableFilter<"OtherPersonnel"> | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }
+
+  export type OtherPersonnelOrderByWithRelationInput = {
+    otherPersonnelId?: SortOrder
+    requestId?: SortOrder
+    name?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    request?: RequestOrderByWithRelationInput
+    _relevance?: OtherPersonnelOrderByRelevanceInput
+  }
+
+  export type OtherPersonnelWhereUniqueInput = Prisma.AtLeast<{
+    otherPersonnelId?: string
+    AND?: OtherPersonnelWhereInput | OtherPersonnelWhereInput[]
+    OR?: OtherPersonnelWhereInput[]
+    NOT?: OtherPersonnelWhereInput | OtherPersonnelWhereInput[]
+    requestId?: StringFilter<"OtherPersonnel"> | string
+    name?: StringNullableFilter<"OtherPersonnel"> | string | null
+    company?: StringNullableFilter<"OtherPersonnel"> | string | null
+    phoneNumber?: StringNullableFilter<"OtherPersonnel"> | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }, "otherPersonnelId">
+
+  export type OtherPersonnelOrderByWithAggregationInput = {
+    otherPersonnelId?: SortOrder
+    requestId?: SortOrder
+    name?: SortOrderInput | SortOrder
+    company?: SortOrderInput | SortOrder
+    phoneNumber?: SortOrderInput | SortOrder
+    _count?: OtherPersonnelCountOrderByAggregateInput
+    _max?: OtherPersonnelMaxOrderByAggregateInput
+    _min?: OtherPersonnelMinOrderByAggregateInput
+  }
+
+  export type OtherPersonnelScalarWhereWithAggregatesInput = {
+    AND?: OtherPersonnelScalarWhereWithAggregatesInput | OtherPersonnelScalarWhereWithAggregatesInput[]
+    OR?: OtherPersonnelScalarWhereWithAggregatesInput[]
+    NOT?: OtherPersonnelScalarWhereWithAggregatesInput | OtherPersonnelScalarWhereWithAggregatesInput[]
+    otherPersonnelId?: StringWithAggregatesFilter<"OtherPersonnel"> | string
+    requestId?: StringWithAggregatesFilter<"OtherPersonnel"> | string
+    name?: StringNullableWithAggregatesFilter<"OtherPersonnel"> | string | null
+    company?: StringNullableWithAggregatesFilter<"OtherPersonnel"> | string | null
+    phoneNumber?: StringNullableWithAggregatesFilter<"OtherPersonnel"> | string | null
   }
 
   export type LineItemWhereInput = {
@@ -38638,11 +40095,30 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateInput = {
@@ -38688,8 +40164,27 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUpdateInput = {
@@ -38732,11 +40227,30 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateInput = {
@@ -38782,8 +40296,27 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateManyInput = {
@@ -38829,6 +40362,24 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
   }
 
   export type RequestUpdateManyMutationInput = {
@@ -38871,6 +40422,24 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RequestUncheckedUpdateManyInput = {
@@ -38916,6 +40485,79 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtherPersonnelCreateInput = {
+    otherPersonnelId?: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+    request: RequestCreateNestedOneWithoutOtherPersonnelInput
+  }
+
+  export type OtherPersonnelUncheckedCreateInput = {
+    otherPersonnelId?: string
+    requestId: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+  }
+
+  export type OtherPersonnelUpdateInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    request?: RequestUpdateOneRequiredWithoutOtherPersonnelNestedInput
+  }
+
+  export type OtherPersonnelUncheckedUpdateInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtherPersonnelCreateManyInput = {
+    otherPersonnelId?: string
+    requestId: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+  }
+
+  export type OtherPersonnelUpdateManyMutationInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtherPersonnelUncheckedUpdateManyInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LineItemCreateInput = {
@@ -40893,6 +42535,16 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type OtherPersonnelListRelationFilter = {
+    every?: OtherPersonnelWhereInput
+    some?: OtherPersonnelWhereInput
+    none?: OtherPersonnelWhereInput
+  }
+
+  export type OtherPersonnelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type RequestOrderByRelevanceInput = {
     fields: RequestOrderByRelevanceFieldEnum | RequestOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -40942,6 +42594,24 @@ export namespace Prisma {
     updateAt?: SortOrder
     createdBy?: SortOrder
     isJourneyManagementRequired?: SortOrder
+    purposeOfTrip?: SortOrder
+    vehicleMake?: SortOrder
+    vehicleModel?: SortOrder
+    departureDate?: SortOrder
+    departureLocationAndTime?: SortOrder
+    destination?: SortOrder
+    contactPersonPhoneNumberAtDestination?: SortOrder
+    flightDepartureState?: SortOrder
+    flightDepartureTime?: SortOrder
+    flightArrivalState?: SortOrder
+    flightArrivalTime?: SortOrder
+    hotelAccommodationName?: SortOrder
+    hotelAddress?: SortOrder
+    returnDate?: SortOrder
+    returnTime?: SortOrder
+    airportDropoffOfficerName?: SortOrder
+    airportPickupOfficerName?: SortOrder
+    budgetName?: SortOrder
   }
 
   export type RequestAvgOrderByAggregateInput = {
@@ -40998,6 +42668,24 @@ export namespace Prisma {
     updateAt?: SortOrder
     createdBy?: SortOrder
     isJourneyManagementRequired?: SortOrder
+    purposeOfTrip?: SortOrder
+    vehicleMake?: SortOrder
+    vehicleModel?: SortOrder
+    departureDate?: SortOrder
+    departureLocationAndTime?: SortOrder
+    destination?: SortOrder
+    contactPersonPhoneNumberAtDestination?: SortOrder
+    flightDepartureState?: SortOrder
+    flightDepartureTime?: SortOrder
+    flightArrivalState?: SortOrder
+    flightArrivalTime?: SortOrder
+    hotelAccommodationName?: SortOrder
+    hotelAddress?: SortOrder
+    returnDate?: SortOrder
+    returnTime?: SortOrder
+    airportDropoffOfficerName?: SortOrder
+    airportPickupOfficerName?: SortOrder
+    budgetName?: SortOrder
   }
 
   export type RequestMinOrderByAggregateInput = {
@@ -41043,6 +42731,24 @@ export namespace Prisma {
     updateAt?: SortOrder
     createdBy?: SortOrder
     isJourneyManagementRequired?: SortOrder
+    purposeOfTrip?: SortOrder
+    vehicleMake?: SortOrder
+    vehicleModel?: SortOrder
+    departureDate?: SortOrder
+    departureLocationAndTime?: SortOrder
+    destination?: SortOrder
+    contactPersonPhoneNumberAtDestination?: SortOrder
+    flightDepartureState?: SortOrder
+    flightDepartureTime?: SortOrder
+    flightArrivalState?: SortOrder
+    flightArrivalTime?: SortOrder
+    hotelAccommodationName?: SortOrder
+    hotelAddress?: SortOrder
+    returnDate?: SortOrder
+    returnTime?: SortOrder
+    airportDropoffOfficerName?: SortOrder
+    airportPickupOfficerName?: SortOrder
+    budgetName?: SortOrder
   }
 
   export type RequestSumOrderByAggregateInput = {
@@ -41067,6 +42773,36 @@ export namespace Prisma {
   export type RequestScalarRelationFilter = {
     is?: RequestWhereInput
     isNot?: RequestWhereInput
+  }
+
+  export type OtherPersonnelOrderByRelevanceInput = {
+    fields: OtherPersonnelOrderByRelevanceFieldEnum | OtherPersonnelOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type OtherPersonnelCountOrderByAggregateInput = {
+    otherPersonnelId?: SortOrder
+    requestId?: SortOrder
+    name?: SortOrder
+    company?: SortOrder
+    phoneNumber?: SortOrder
+  }
+
+  export type OtherPersonnelMaxOrderByAggregateInput = {
+    otherPersonnelId?: SortOrder
+    requestId?: SortOrder
+    name?: SortOrder
+    company?: SortOrder
+    phoneNumber?: SortOrder
+  }
+
+  export type OtherPersonnelMinOrderByAggregateInput = {
+    otherPersonnelId?: SortOrder
+    requestId?: SortOrder
+    name?: SortOrder
+    company?: SortOrder
+    phoneNumber?: SortOrder
   }
 
   export type LineItemOrderByRelevanceInput = {
@@ -43263,6 +44999,13 @@ export namespace Prisma {
     connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
   }
 
+  export type OtherPersonnelCreateNestedManyWithoutRequestInput = {
+    create?: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput> | OtherPersonnelCreateWithoutRequestInput[] | OtherPersonnelUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: OtherPersonnelCreateOrConnectWithoutRequestInput | OtherPersonnelCreateOrConnectWithoutRequestInput[]
+    createMany?: OtherPersonnelCreateManyRequestInputEnvelope
+    connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+  }
+
   export type RetirementUncheckedCreateNestedManyWithoutRequestInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -43275,6 +45018,13 @@ export namespace Prisma {
     connectOrCreate?: LineItemCreateOrConnectWithoutRequestInput | LineItemCreateOrConnectWithoutRequestInput[]
     createMany?: LineItemCreateManyRequestInputEnvelope
     connect?: LineItemWhereUniqueInput | LineItemWhereUniqueInput[]
+  }
+
+  export type OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput = {
+    create?: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput> | OtherPersonnelCreateWithoutRequestInput[] | OtherPersonnelUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: OtherPersonnelCreateOrConnectWithoutRequestInput | OtherPersonnelCreateOrConnectWithoutRequestInput[]
+    createMany?: OtherPersonnelCreateManyRequestInputEnvelope
+    connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -43339,6 +45089,20 @@ export namespace Prisma {
     deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
   }
 
+  export type OtherPersonnelUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput> | OtherPersonnelCreateWithoutRequestInput[] | OtherPersonnelUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: OtherPersonnelCreateOrConnectWithoutRequestInput | OtherPersonnelCreateOrConnectWithoutRequestInput[]
+    upsert?: OtherPersonnelUpsertWithWhereUniqueWithoutRequestInput | OtherPersonnelUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: OtherPersonnelCreateManyRequestInputEnvelope
+    set?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    disconnect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    delete?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    update?: OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput | OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: OtherPersonnelUpdateManyWithWhereWithoutRequestInput | OtherPersonnelUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
+  }
+
   export type RetirementUncheckedUpdateManyWithoutRequestNestedInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -43365,6 +45129,34 @@ export namespace Prisma {
     update?: LineItemUpdateWithWhereUniqueWithoutRequestInput | LineItemUpdateWithWhereUniqueWithoutRequestInput[]
     updateMany?: LineItemUpdateManyWithWhereWithoutRequestInput | LineItemUpdateManyWithWhereWithoutRequestInput[]
     deleteMany?: LineItemScalarWhereInput | LineItemScalarWhereInput[]
+  }
+
+  export type OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput> | OtherPersonnelCreateWithoutRequestInput[] | OtherPersonnelUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: OtherPersonnelCreateOrConnectWithoutRequestInput | OtherPersonnelCreateOrConnectWithoutRequestInput[]
+    upsert?: OtherPersonnelUpsertWithWhereUniqueWithoutRequestInput | OtherPersonnelUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: OtherPersonnelCreateManyRequestInputEnvelope
+    set?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    disconnect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    delete?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+    update?: OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput | OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: OtherPersonnelUpdateManyWithWhereWithoutRequestInput | OtherPersonnelUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
+  }
+
+  export type RequestCreateNestedOneWithoutOtherPersonnelInput = {
+    create?: XOR<RequestCreateWithoutOtherPersonnelInput, RequestUncheckedCreateWithoutOtherPersonnelInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutOtherPersonnelInput
+    connect?: RequestWhereUniqueInput
+  }
+
+  export type RequestUpdateOneRequiredWithoutOtherPersonnelNestedInput = {
+    create?: XOR<RequestCreateWithoutOtherPersonnelInput, RequestUncheckedCreateWithoutOtherPersonnelInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutOtherPersonnelInput
+    upsert?: RequestUpsertWithoutOtherPersonnelInput
+    connect?: RequestWhereUniqueInput
+    update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutOtherPersonnelInput, RequestUpdateWithoutOtherPersonnelInput>, RequestUncheckedUpdateWithoutOtherPersonnelInput>
   }
 
   export type RequestCreateNestedOneWithoutLineItemsInput = {
@@ -43757,10 +45549,29 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutUserInput = {
@@ -43805,8 +45616,27 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutUserInput = {
@@ -44006,6 +45836,24 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Request"> | Date | string | null
     createdBy?: StringNullableFilter<"Request"> | string | null
     isJourneyManagementRequired?: BoolFilter<"Request"> | boolean
+    purposeOfTrip?: StringNullableFilter<"Request"> | string | null
+    vehicleMake?: StringNullableFilter<"Request"> | string | null
+    vehicleModel?: StringNullableFilter<"Request"> | string | null
+    departureDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    departureLocationAndTime?: StringNullableFilter<"Request"> | string | null
+    destination?: StringNullableFilter<"Request"> | string | null
+    contactPersonPhoneNumberAtDestination?: StringNullableFilter<"Request"> | string | null
+    flightDepartureState?: StringNullableFilter<"Request"> | string | null
+    flightDepartureTime?: StringNullableFilter<"Request"> | string | null
+    flightArrivalState?: StringNullableFilter<"Request"> | string | null
+    flightArrivalTime?: StringNullableFilter<"Request"> | string | null
+    hotelAccommodationName?: StringNullableFilter<"Request"> | string | null
+    hotelAddress?: StringNullableFilter<"Request"> | string | null
+    returnDate?: DateTimeNullableFilter<"Request"> | Date | string | null
+    returnTime?: StringNullableFilter<"Request"> | string | null
+    airportDropoffOfficerName?: StringNullableFilter<"Request"> | string | null
+    airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
+    budgetName?: StringNullableFilter<"Request"> | string | null
   }
 
   export type RetirementUpsertWithWhereUniqueWithoutUserInput = {
@@ -44868,10 +46716,29 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutProjectInput = {
@@ -44916,8 +46783,27 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutProjectInput = {
@@ -46677,10 +48563,29 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutOutputInput = {
@@ -46725,8 +48630,27 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutOutputInput = {
@@ -48755,6 +50679,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OtherPersonnelCreateWithoutRequestInput = {
+    otherPersonnelId?: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+  }
+
+  export type OtherPersonnelUncheckedCreateWithoutRequestInput = {
+    otherPersonnelId?: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+  }
+
+  export type OtherPersonnelCreateOrConnectWithoutRequestInput = {
+    where: OtherPersonnelWhereUniqueInput
+    create: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput>
+  }
+
+  export type OtherPersonnelCreateManyRequestInputEnvelope = {
+    data: OtherPersonnelCreateManyRequestInput | OtherPersonnelCreateManyRequestInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OutputUpsertWithoutRequestInput = {
     update: XOR<OutputUpdateWithoutRequestInput, OutputUncheckedUpdateWithoutRequestInput>
     create: XOR<OutputCreateWithoutRequestInput, OutputUncheckedCreateWithoutRequestInput>
@@ -48948,6 +50896,309 @@ export namespace Prisma {
     data: XOR<LineItemUpdateManyMutationInput, LineItemUncheckedUpdateManyWithoutRequestInput>
   }
 
+  export type OtherPersonnelUpsertWithWhereUniqueWithoutRequestInput = {
+    where: OtherPersonnelWhereUniqueInput
+    update: XOR<OtherPersonnelUpdateWithoutRequestInput, OtherPersonnelUncheckedUpdateWithoutRequestInput>
+    create: XOR<OtherPersonnelCreateWithoutRequestInput, OtherPersonnelUncheckedCreateWithoutRequestInput>
+  }
+
+  export type OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput = {
+    where: OtherPersonnelWhereUniqueInput
+    data: XOR<OtherPersonnelUpdateWithoutRequestInput, OtherPersonnelUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type OtherPersonnelUpdateManyWithWhereWithoutRequestInput = {
+    where: OtherPersonnelScalarWhereInput
+    data: XOR<OtherPersonnelUpdateManyMutationInput, OtherPersonnelUncheckedUpdateManyWithoutRequestInput>
+  }
+
+  export type OtherPersonnelScalarWhereInput = {
+    AND?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
+    OR?: OtherPersonnelScalarWhereInput[]
+    NOT?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
+    otherPersonnelId?: StringFilter<"OtherPersonnel"> | string
+    requestId?: StringFilter<"OtherPersonnel"> | string
+    name?: StringNullableFilter<"OtherPersonnel"> | string | null
+    company?: StringNullableFilter<"OtherPersonnel"> | string | null
+    phoneNumber?: StringNullableFilter<"OtherPersonnel"> | string | null
+  }
+
+  export type RequestCreateWithoutOtherPersonnelInput = {
+    requestId?: string
+    staff?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    budgetCode?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approval_E?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    approvedBy_E?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
+    output?: OutputCreateNestedOneWithoutRequestInput
+    project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
+    retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestUncheckedCreateWithoutOtherPersonnelInput = {
+    requestId?: string
+    staff?: string | null
+    outputId?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: number | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    budgetCode?: number | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    projectId?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approval_E?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    approvedBy_E?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    createdBy?: string | null
+    isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
+    retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestCreateOrConnectWithoutOtherPersonnelInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutOtherPersonnelInput, RequestUncheckedCreateWithoutOtherPersonnelInput>
+  }
+
+  export type RequestUpsertWithoutOtherPersonnelInput = {
+    update: XOR<RequestUpdateWithoutOtherPersonnelInput, RequestUncheckedUpdateWithoutOtherPersonnelInput>
+    create: XOR<RequestCreateWithoutOtherPersonnelInput, RequestUncheckedCreateWithoutOtherPersonnelInput>
+    where?: RequestWhereInput
+  }
+
+  export type RequestUpdateToOneWithWhereWithoutOtherPersonnelInput = {
+    where?: RequestWhereInput
+    data: XOR<RequestUpdateWithoutOtherPersonnelInput, RequestUncheckedUpdateWithoutOtherPersonnelInput>
+  }
+
+  export type RequestUpdateWithoutOtherPersonnelInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
+    output?: OutputUpdateOneWithoutRequestNestedInput
+    project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
+    retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutOtherPersonnelInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
+    retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
   export type RequestCreateWithoutLineItemsInput = {
     requestId?: string
     staff?: string | null
@@ -48988,10 +51239,29 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutLineItemsInput = {
@@ -49037,7 +51307,26 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutLineItemsInput = {
@@ -49139,10 +51428,29 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutLineItemsInput = {
@@ -49188,7 +51496,26 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type ActivityUpsertWithoutLineItemInput = {
@@ -49280,10 +51607,29 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutRetirementInput = {
@@ -49329,7 +51675,26 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutRetirementInput = {
@@ -49443,10 +51808,29 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutRetirementInput = {
@@ -49492,7 +51876,26 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type UserUpsertWithoutRetirementInput = {
@@ -49728,6 +52131,24 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
   }
 
   export type RetirementCreateManyUserInput = {
@@ -49828,10 +52249,29 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutUserInput = {
@@ -49876,8 +52316,27 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutUserInput = {
@@ -49922,6 +52381,24 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RetirementUpdateWithoutUserInput = {
@@ -50421,6 +52898,24 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
   }
 
   export type ReportCreateManyProjectInput = {
@@ -50727,10 +53222,29 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutProjectInput = {
@@ -50775,8 +53289,27 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutProjectInput = {
@@ -50821,6 +53354,24 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReportUpdateWithoutProjectInput = {
@@ -51350,6 +53901,24 @@ export namespace Prisma {
     updateAt?: Date | string | null
     createdBy?: string | null
     isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
   }
 
   export type ActivityUpdateWithoutOutputInput = {
@@ -51446,10 +54015,29 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutOutputInput = {
@@ -51494,8 +54082,27 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutOutputInput = {
@@ -51540,6 +54147,24 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportCreateManyIndicatorInput = {
@@ -51897,6 +54522,13 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
+  export type OtherPersonnelCreateManyRequestInput = {
+    otherPersonnelId?: string
+    name?: string | null
+    company?: string | null
+    phoneNumber?: string | null
+  }
+
   export type RetirementUpdateWithoutRequestInput = {
     retirementId?: StringFieldUpdateOperationsInput | string
     activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52024,6 +54656,27 @@ export namespace Prisma {
     variance?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type OtherPersonnelUpdateWithoutRequestInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtherPersonnelUncheckedUpdateWithoutRequestInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type OtherPersonnelUncheckedUpdateManyWithoutRequestInput = {
+    otherPersonnelId?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
