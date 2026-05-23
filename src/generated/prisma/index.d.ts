@@ -3180,12 +3180,10 @@ export namespace Prisma {
 
   export type StrategicObjectiveCountOutputType = {
     kpi: number
-    project: number
   }
 
   export type StrategicObjectiveCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpi?: boolean | StrategicObjectiveCountOutputTypeCountKpiArgs
-    project?: boolean | StrategicObjectiveCountOutputTypeCountProjectArgs
   }
 
   // Custom InputTypes
@@ -3204,13 +3202,6 @@ export namespace Prisma {
    */
   export type StrategicObjectiveCountOutputTypeCountKpiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KpiWhereInput
-  }
-
-  /**
-   * StrategicObjectiveCountOutputType without action
-   */
-  export type StrategicObjectiveCountOutputTypeCountProjectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectWhereInput
   }
 
 
@@ -3259,6 +3250,8 @@ export namespace Prisma {
     logicalFramework: number
     request: number
     report: number
+    indicator: number
+    indicatorReport: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3271,6 +3264,8 @@ export namespace Prisma {
     logicalFramework?: boolean | ProjectCountOutputTypeCountLogicalFrameworkArgs
     request?: boolean | ProjectCountOutputTypeCountRequestArgs
     report?: boolean | ProjectCountOutputTypeCountReportArgs
+    indicator?: boolean | ProjectCountOutputTypeCountIndicatorArgs
+    indicatorReport?: boolean | ProjectCountOutputTypeCountIndicatorReportArgs
   }
 
   // Custom InputTypes
@@ -3345,6 +3340,20 @@ export namespace Prisma {
    */
   export type ProjectCountOutputTypeCountReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReportWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountIndicatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IndicatorWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountIndicatorReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IndicatorReportWhereInput
   }
 
 
@@ -7050,7 +7059,6 @@ export namespace Prisma {
     createAt?: boolean
     updateAt?: boolean
     kpi?: boolean | StrategicObjective$kpiArgs<ExtArgs>
-    project?: boolean | StrategicObjective$projectArgs<ExtArgs>
     _count?: boolean | StrategicObjectiveCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["strategicObjective"]>
 
@@ -7069,7 +7077,6 @@ export namespace Prisma {
   export type StrategicObjectiveOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"strategicObjectiveId" | "statement" | "thematicAreas" | "pillarLead" | "status" | "createAt" | "updateAt", ExtArgs["result"]["strategicObjective"]>
   export type StrategicObjectiveInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kpi?: boolean | StrategicObjective$kpiArgs<ExtArgs>
-    project?: boolean | StrategicObjective$projectArgs<ExtArgs>
     _count?: boolean | StrategicObjectiveCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7077,7 +7084,6 @@ export namespace Prisma {
     name: "StrategicObjective"
     objects: {
       kpi: Prisma.$KpiPayload<ExtArgs>[]
-      project: Prisma.$ProjectPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       strategicObjectiveId: string
@@ -7428,7 +7434,6 @@ export namespace Prisma {
   export interface Prisma__StrategicObjectiveClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     kpi<T extends StrategicObjective$kpiArgs<ExtArgs> = {}>(args?: Subset<T, StrategicObjective$kpiArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KpiPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    project<T extends StrategicObjective$projectArgs<ExtArgs> = {}>(args?: Subset<T, StrategicObjective$projectArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7834,30 +7839,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: KpiScalarFieldEnum | KpiScalarFieldEnum[]
-  }
-
-  /**
-   * StrategicObjective.project
-   */
-  export type StrategicObjective$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Project
-     */
-    select?: ProjectSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Project
-     */
-    omit?: ProjectOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProjectInclude<ExtArgs> | null
-    where?: ProjectWhereInput
-    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
-    cursor?: ProjectWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
   }
 
   /**
@@ -10270,7 +10251,6 @@ export namespace Prisma {
     strategicObjectiveId?: boolean
     createAt?: boolean
     updateAt?: boolean
-    strategicObjective?: boolean | Project$strategicObjectiveArgs<ExtArgs>
     teamMember?: boolean | Project$teamMemberArgs<ExtArgs>
     partner?: boolean | Project$partnerArgs<ExtArgs>
     impact?: boolean | Project$impactArgs<ExtArgs>
@@ -10280,6 +10260,8 @@ export namespace Prisma {
     logicalFramework?: boolean | Project$logicalFrameworkArgs<ExtArgs>
     request?: boolean | Project$requestArgs<ExtArgs>
     report?: boolean | Project$reportArgs<ExtArgs>
+    indicator?: boolean | Project$indicatorArgs<ExtArgs>
+    indicatorReport?: boolean | Project$indicatorReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -10305,7 +10287,6 @@ export namespace Prisma {
 
   export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"projectId" | "projectName" | "budgetCurrency" | "totalBudgetAmount" | "startDate" | "endDate" | "country" | "state" | "localGovernment" | "community" | "thematicAreasOrPillar" | "status" | "strategicObjectiveId" | "createAt" | "updateAt", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    strategicObjective?: boolean | Project$strategicObjectiveArgs<ExtArgs>
     teamMember?: boolean | Project$teamMemberArgs<ExtArgs>
     partner?: boolean | Project$partnerArgs<ExtArgs>
     impact?: boolean | Project$impactArgs<ExtArgs>
@@ -10315,13 +10296,14 @@ export namespace Prisma {
     logicalFramework?: boolean | Project$logicalFrameworkArgs<ExtArgs>
     request?: boolean | Project$requestArgs<ExtArgs>
     report?: boolean | Project$reportArgs<ExtArgs>
+    indicator?: boolean | Project$indicatorArgs<ExtArgs>
+    indicatorReport?: boolean | Project$indicatorReportArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Project"
     objects: {
-      strategicObjective: Prisma.$StrategicObjectivePayload<ExtArgs> | null
       teamMember: Prisma.$TeamMemberPayload<ExtArgs>[]
       partner: Prisma.$PartnerPayload<ExtArgs>[]
       impact: Prisma.$ImpactPayload<ExtArgs>[]
@@ -10331,6 +10313,8 @@ export namespace Prisma {
       logicalFramework: Prisma.$LogicalFrameworkPayload<ExtArgs>[]
       request: Prisma.$RequestPayload<ExtArgs>[]
       report: Prisma.$ReportPayload<ExtArgs>[]
+      indicator: Prisma.$IndicatorPayload<ExtArgs>[]
+      indicatorReport: Prisma.$IndicatorReportPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       projectId: string
@@ -10688,7 +10672,6 @@ export namespace Prisma {
    */
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    strategicObjective<T extends Project$strategicObjectiveArgs<ExtArgs> = {}>(args?: Subset<T, Project$strategicObjectiveArgs<ExtArgs>>): Prisma__StrategicObjectiveClient<$Result.GetResult<Prisma.$StrategicObjectivePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     teamMember<T extends Project$teamMemberArgs<ExtArgs> = {}>(args?: Subset<T, Project$teamMemberArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     partner<T extends Project$partnerArgs<ExtArgs> = {}>(args?: Subset<T, Project$partnerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     impact<T extends Project$impactArgs<ExtArgs> = {}>(args?: Subset<T, Project$impactArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImpactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -10698,6 +10681,8 @@ export namespace Prisma {
     logicalFramework<T extends Project$logicalFrameworkArgs<ExtArgs> = {}>(args?: Subset<T, Project$logicalFrameworkArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogicalFrameworkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     request<T extends Project$requestArgs<ExtArgs> = {}>(args?: Subset<T, Project$requestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     report<T extends Project$reportArgs<ExtArgs> = {}>(args?: Subset<T, Project$reportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    indicator<T extends Project$indicatorArgs<ExtArgs> = {}>(args?: Subset<T, Project$indicatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    indicatorReport<T extends Project$indicatorReportArgs<ExtArgs> = {}>(args?: Subset<T, Project$indicatorReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11090,25 +11075,6 @@ export namespace Prisma {
   }
 
   /**
-   * Project.strategicObjective
-   */
-  export type Project$strategicObjectiveArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the StrategicObjective
-     */
-    select?: StrategicObjectiveSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the StrategicObjective
-     */
-    omit?: StrategicObjectiveOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: StrategicObjectiveInclude<ExtArgs> | null
-    where?: StrategicObjectiveWhereInput
-  }
-
-  /**
    * Project.teamMember
    */
   export type Project$teamMemberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11322,6 +11288,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReportScalarFieldEnum | ReportScalarFieldEnum[]
+  }
+
+  /**
+   * Project.indicator
+   */
+  export type Project$indicatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Indicator
+     */
+    select?: IndicatorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Indicator
+     */
+    omit?: IndicatorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IndicatorInclude<ExtArgs> | null
+    where?: IndicatorWhereInput
+    orderBy?: IndicatorOrderByWithRelationInput | IndicatorOrderByWithRelationInput[]
+    cursor?: IndicatorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IndicatorScalarFieldEnum | IndicatorScalarFieldEnum[]
+  }
+
+  /**
+   * Project.indicatorReport
+   */
+  export type Project$indicatorReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IndicatorReport
+     */
+    select?: IndicatorReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the IndicatorReport
+     */
+    omit?: IndicatorReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IndicatorReportInclude<ExtArgs> | null
+    where?: IndicatorReportWhereInput
+    orderBy?: IndicatorReportOrderByWithRelationInput | IndicatorReportOrderByWithRelationInput[]
+    cursor?: IndicatorReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IndicatorReportScalarFieldEnum | IndicatorReportScalarFieldEnum[]
   }
 
   /**
@@ -17646,6 +17660,7 @@ export namespace Prisma {
     updateAt: Date | null
     result: string | null
     resultTypeId: string | null
+    projectId: string | null
   }
 
   export type IndicatorMaxAggregateOutputType = {
@@ -17671,6 +17686,7 @@ export namespace Prisma {
     updateAt: Date | null
     result: string | null
     resultTypeId: string | null
+    projectId: string | null
   }
 
   export type IndicatorCountAggregateOutputType = {
@@ -17696,6 +17712,7 @@ export namespace Prisma {
     updateAt: number
     result: number
     resultTypeId: number
+    projectId: number
     _all: number
   }
 
@@ -17733,6 +17750,7 @@ export namespace Prisma {
     updateAt?: true
     result?: true
     resultTypeId?: true
+    projectId?: true
   }
 
   export type IndicatorMaxAggregateInputType = {
@@ -17758,6 +17776,7 @@ export namespace Prisma {
     updateAt?: true
     result?: true
     resultTypeId?: true
+    projectId?: true
   }
 
   export type IndicatorCountAggregateInputType = {
@@ -17783,6 +17802,7 @@ export namespace Prisma {
     updateAt?: true
     result?: true
     resultTypeId?: true
+    projectId?: true
     _all?: true
   }
 
@@ -17895,6 +17915,7 @@ export namespace Prisma {
     updateAt: Date | null
     result: string | null
     resultTypeId: string | null
+    projectId: string | null
     _count: IndicatorCountAggregateOutputType | null
     _avg: IndicatorAvgAggregateOutputType | null
     _sum: IndicatorSumAggregateOutputType | null
@@ -17939,7 +17960,9 @@ export namespace Prisma {
     updateAt?: boolean
     result?: boolean
     resultTypeId?: boolean
+    projectId?: boolean
     ResultType?: boolean | Indicator$ResultTypeArgs<ExtArgs>
+    project?: boolean | Indicator$projectArgs<ExtArgs>
     IndicatorReport?: boolean | Indicator$IndicatorReportArgs<ExtArgs>
     IndicatorDisaggregation?: boolean | Indicator$IndicatorDisaggregationArgs<ExtArgs>
     PeriodicTarget?: boolean | Indicator$PeriodicTargetArgs<ExtArgs>
@@ -17971,11 +17994,13 @@ export namespace Prisma {
     updateAt?: boolean
     result?: boolean
     resultTypeId?: boolean
+    projectId?: boolean
   }
 
-  export type IndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "statement" | "linkKpiToSdnOrgKpi" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "createAt" | "updateAt" | "result" | "resultTypeId", ExtArgs["result"]["indicator"]>
+  export type IndicatorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "statement" | "linkKpiToSdnOrgKpi" | "definition" | "specificArea" | "unitOfMeasure" | "itemInMeasure" | "baseLineDate" | "cumulativeValue" | "baselineNarrative" | "targetDate" | "cumulativeTarget" | "targetNarrative" | "targetType" | "responsiblePersons" | "createAt" | "updateAt" | "result" | "resultTypeId" | "projectId", ExtArgs["result"]["indicator"]>
   export type IndicatorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ResultType?: boolean | Indicator$ResultTypeArgs<ExtArgs>
+    project?: boolean | Indicator$projectArgs<ExtArgs>
     IndicatorReport?: boolean | Indicator$IndicatorReportArgs<ExtArgs>
     IndicatorDisaggregation?: boolean | Indicator$IndicatorDisaggregationArgs<ExtArgs>
     PeriodicTarget?: boolean | Indicator$PeriodicTargetArgs<ExtArgs>
@@ -17986,6 +18011,7 @@ export namespace Prisma {
     name: "Indicator"
     objects: {
       ResultType: Prisma.$ResultTypePayload<ExtArgs> | null
+      project: Prisma.$ProjectPayload<ExtArgs> | null
       IndicatorReport: Prisma.$IndicatorReportPayload<ExtArgs>[]
       IndicatorDisaggregation: Prisma.$IndicatorDisaggregationPayload<ExtArgs>[]
       PeriodicTarget: Prisma.$PeriodicTargetPayload<ExtArgs>[]
@@ -18013,6 +18039,7 @@ export namespace Prisma {
       updateAt: Date | null
       result: string | null
       resultTypeId: string | null
+      projectId: string | null
     }, ExtArgs["result"]["indicator"]>
     composites: {}
   }
@@ -18354,6 +18381,7 @@ export namespace Prisma {
   export interface Prisma__IndicatorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ResultType<T extends Indicator$ResultTypeArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$ResultTypeArgs<ExtArgs>>): Prisma__ResultTypeClient<$Result.GetResult<Prisma.$ResultTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    project<T extends Indicator$projectArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     IndicatorReport<T extends Indicator$IndicatorReportArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$IndicatorReportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     IndicatorDisaggregation<T extends Indicator$IndicatorDisaggregationArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$IndicatorDisaggregationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorDisaggregationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     PeriodicTarget<T extends Indicator$PeriodicTargetArgs<ExtArgs> = {}>(args?: Subset<T, Indicator$PeriodicTargetArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PeriodicTargetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -18408,6 +18436,7 @@ export namespace Prisma {
     readonly updateAt: FieldRef<"Indicator", 'DateTime'>
     readonly result: FieldRef<"Indicator", 'String'>
     readonly resultTypeId: FieldRef<"Indicator", 'String'>
+    readonly projectId: FieldRef<"Indicator", 'String'>
   }
     
 
@@ -18772,6 +18801,25 @@ export namespace Prisma {
      */
     include?: ResultTypeInclude<ExtArgs> | null
     where?: ResultTypeWhereInput
+  }
+
+  /**
+   * Indicator.project
+   */
+  export type Indicator$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
   }
 
   /**
@@ -20831,6 +20879,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    projectId: string | null
   }
 
   export type IndicatorReportMaxAggregateOutputType = {
@@ -20849,6 +20898,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    projectId: string | null
   }
 
   export type IndicatorReportCountAggregateOutputType = {
@@ -20867,6 +20917,7 @@ export namespace Prisma {
     updateAt: number
     indicatorId: number
     resultTypeId: number
+    projectId: number
     _all: number
   }
 
@@ -20887,6 +20938,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    projectId?: true
   }
 
   export type IndicatorReportMaxAggregateInputType = {
@@ -20905,6 +20957,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    projectId?: true
   }
 
   export type IndicatorReportCountAggregateInputType = {
@@ -20923,6 +20976,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    projectId?: true
     _all?: true
   }
 
@@ -21014,6 +21068,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    projectId: string | null
     _count: IndicatorReportCountAggregateOutputType | null
     _min: IndicatorReportMinAggregateOutputType | null
     _max: IndicatorReportMaxAggregateOutputType | null
@@ -21049,8 +21104,10 @@ export namespace Prisma {
     updateAt?: boolean
     indicatorId?: boolean
     resultTypeId?: boolean
+    projectId?: boolean
     indicator?: boolean | IndicatorReport$indicatorArgs<ExtArgs>
     ResultType?: boolean | IndicatorReport$ResultTypeArgs<ExtArgs>
+    project?: boolean | IndicatorReport$projectArgs<ExtArgs>
     indicatorReportComment?: boolean | IndicatorReport$indicatorReportCommentArgs<ExtArgs>
     IndicatorReportDisaggregation?: boolean | IndicatorReport$IndicatorReportDisaggregationArgs<ExtArgs>
     _count?: boolean | IndicatorReportCountOutputTypeDefaultArgs<ExtArgs>
@@ -21074,12 +21131,14 @@ export namespace Prisma {
     updateAt?: boolean
     indicatorId?: boolean
     resultTypeId?: boolean
+    projectId?: boolean
   }
 
-  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId", ExtArgs["result"]["indicatorReport"]>
+  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId" | "projectId", ExtArgs["result"]["indicatorReport"]>
   export type IndicatorReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     indicator?: boolean | IndicatorReport$indicatorArgs<ExtArgs>
     ResultType?: boolean | IndicatorReport$ResultTypeArgs<ExtArgs>
+    project?: boolean | IndicatorReport$projectArgs<ExtArgs>
     indicatorReportComment?: boolean | IndicatorReport$indicatorReportCommentArgs<ExtArgs>
     IndicatorReportDisaggregation?: boolean | IndicatorReport$IndicatorReportDisaggregationArgs<ExtArgs>
     _count?: boolean | IndicatorReportCountOutputTypeDefaultArgs<ExtArgs>
@@ -21090,6 +21149,7 @@ export namespace Prisma {
     objects: {
       indicator: Prisma.$IndicatorPayload<ExtArgs> | null
       ResultType: Prisma.$ResultTypePayload<ExtArgs> | null
+      project: Prisma.$ProjectPayload<ExtArgs> | null
       indicatorReportComment: Prisma.$IndicatorReportCommentPayload<ExtArgs>[]
       IndicatorReportDisaggregation: Prisma.$IndicatorReportDisaggregationPayload<ExtArgs>[]
     }
@@ -21109,6 +21169,7 @@ export namespace Prisma {
       updateAt: Date | null
       indicatorId: string | null
       resultTypeId: string | null
+      projectId: string | null
     }, ExtArgs["result"]["indicatorReport"]>
     composites: {}
   }
@@ -21451,6 +21512,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     indicator<T extends IndicatorReport$indicatorArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorReport$indicatorArgs<ExtArgs>>): Prisma__IndicatorClient<$Result.GetResult<Prisma.$IndicatorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ResultType<T extends IndicatorReport$ResultTypeArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorReport$ResultTypeArgs<ExtArgs>>): Prisma__ResultTypeClient<$Result.GetResult<Prisma.$ResultTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    project<T extends IndicatorReport$projectArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorReport$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     indicatorReportComment<T extends IndicatorReport$indicatorReportCommentArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorReport$indicatorReportCommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorReportCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     IndicatorReportDisaggregation<T extends IndicatorReport$IndicatorReportDisaggregationArgs<ExtArgs> = {}>(args?: Subset<T, IndicatorReport$IndicatorReportDisaggregationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IndicatorReportDisaggregationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -21497,6 +21559,7 @@ export namespace Prisma {
     readonly updateAt: FieldRef<"IndicatorReport", 'DateTime'>
     readonly indicatorId: FieldRef<"IndicatorReport", 'String'>
     readonly resultTypeId: FieldRef<"IndicatorReport", 'String'>
+    readonly projectId: FieldRef<"IndicatorReport", 'String'>
   }
     
 
@@ -21880,6 +21943,25 @@ export namespace Prisma {
      */
     include?: ResultTypeInclude<ExtArgs> | null
     where?: ResultTypeWhereInput
+  }
+
+  /**
+   * IndicatorReport.project
+   */
+  export type IndicatorReport$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
   }
 
   /**
@@ -34440,7 +34522,8 @@ export namespace Prisma {
     createAt: 'createAt',
     updateAt: 'updateAt',
     result: 'result',
-    resultTypeId: 'resultTypeId'
+    resultTypeId: 'resultTypeId',
+    projectId: 'projectId'
   };
 
   export type IndicatorScalarFieldEnum = (typeof IndicatorScalarFieldEnum)[keyof typeof IndicatorScalarFieldEnum]
@@ -34483,7 +34566,8 @@ export namespace Prisma {
     createAt: 'createAt',
     updateAt: 'updateAt',
     indicatorId: 'indicatorId',
-    resultTypeId: 'resultTypeId'
+    resultTypeId: 'resultTypeId',
+    projectId: 'projectId'
   };
 
   export type IndicatorReportScalarFieldEnum = (typeof IndicatorReportScalarFieldEnum)[keyof typeof IndicatorReportScalarFieldEnum]
@@ -34927,7 +35011,8 @@ export namespace Prisma {
     targetType: 'targetType',
     responsiblePersons: 'responsiblePersons',
     result: 'result',
-    resultTypeId: 'resultTypeId'
+    resultTypeId: 'resultTypeId',
+    projectId: 'projectId'
   };
 
   export type IndicatorOrderByRelevanceFieldEnum = (typeof IndicatorOrderByRelevanceFieldEnum)[keyof typeof IndicatorOrderByRelevanceFieldEnum]
@@ -34963,7 +35048,8 @@ export namespace Prisma {
     attachmentUrl: 'attachmentUrl',
     status: 'status',
     indicatorId: 'indicatorId',
-    resultTypeId: 'resultTypeId'
+    resultTypeId: 'resultTypeId',
+    projectId: 'projectId'
   };
 
   export type IndicatorReportOrderByRelevanceFieldEnum = (typeof IndicatorReportOrderByRelevanceFieldEnum)[keyof typeof IndicatorReportOrderByRelevanceFieldEnum]
@@ -35491,7 +35577,6 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     kpi?: KpiListRelationFilter
-    project?: ProjectListRelationFilter
   }
 
   export type StrategicObjectiveOrderByWithRelationInput = {
@@ -35503,7 +35588,6 @@ export namespace Prisma {
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     kpi?: KpiOrderByRelationAggregateInput
-    project?: ProjectOrderByRelationAggregateInput
     _relevance?: StrategicObjectiveOrderByRelevanceInput
   }
 
@@ -35519,7 +35603,6 @@ export namespace Prisma {
     createAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"StrategicObjective"> | Date | string | null
     kpi?: KpiListRelationFilter
-    project?: ProjectListRelationFilter
   }, "strategicObjectiveId">
 
   export type StrategicObjectiveOrderByWithAggregationInput = {
@@ -35756,7 +35839,6 @@ export namespace Prisma {
     strategicObjectiveId?: StringNullableFilter<"Project"> | string | null
     createAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Project"> | Date | string | null
-    strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
     teamMember?: TeamMemberListRelationFilter
     partner?: PartnerListRelationFilter
     impact?: ImpactListRelationFilter
@@ -35766,6 +35848,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkListRelationFilter
     request?: RequestListRelationFilter
     report?: ReportListRelationFilter
+    indicator?: IndicatorListRelationFilter
+    indicatorReport?: IndicatorReportListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -35784,7 +35868,6 @@ export namespace Prisma {
     strategicObjectiveId?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
-    strategicObjective?: StrategicObjectiveOrderByWithRelationInput
     teamMember?: TeamMemberOrderByRelationAggregateInput
     partner?: PartnerOrderByRelationAggregateInput
     impact?: ImpactOrderByRelationAggregateInput
@@ -35794,6 +35877,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkOrderByRelationAggregateInput
     request?: RequestOrderByRelationAggregateInput
     report?: ReportOrderByRelationAggregateInput
+    indicator?: IndicatorOrderByRelationAggregateInput
+    indicatorReport?: IndicatorReportOrderByRelationAggregateInput
     _relevance?: ProjectOrderByRelevanceInput
   }
 
@@ -35816,7 +35901,6 @@ export namespace Prisma {
     strategicObjectiveId?: StringNullableFilter<"Project"> | string | null
     createAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Project"> | Date | string | null
-    strategicObjective?: XOR<StrategicObjectiveNullableScalarRelationFilter, StrategicObjectiveWhereInput> | null
     teamMember?: TeamMemberListRelationFilter
     partner?: PartnerListRelationFilter
     impact?: ImpactListRelationFilter
@@ -35826,6 +35910,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkListRelationFilter
     request?: RequestListRelationFilter
     report?: ReportListRelationFilter
+    indicator?: IndicatorListRelationFilter
+    indicatorReport?: IndicatorReportListRelationFilter
   }, "projectId">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -36349,7 +36435,9 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
     result?: StringNullableFilter<"Indicator"> | string | null
     resultTypeId?: StringNullableFilter<"Indicator"> | string | null
+    projectId?: StringNullableFilter<"Indicator"> | string | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     IndicatorReport?: IndicatorReportListRelationFilter
     IndicatorDisaggregation?: IndicatorDisaggregationListRelationFilter
     PeriodicTarget?: PeriodicTargetListRelationFilter
@@ -36378,7 +36466,9 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     result?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
     ResultType?: ResultTypeOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
     IndicatorReport?: IndicatorReportOrderByRelationAggregateInput
     IndicatorDisaggregation?: IndicatorDisaggregationOrderByRelationAggregateInput
     PeriodicTarget?: PeriodicTargetOrderByRelationAggregateInput
@@ -36411,7 +36501,9 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
     result?: StringNullableFilter<"Indicator"> | string | null
     resultTypeId?: StringNullableFilter<"Indicator"> | string | null
+    projectId?: StringNullableFilter<"Indicator"> | string | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     IndicatorReport?: IndicatorReportListRelationFilter
     IndicatorDisaggregation?: IndicatorDisaggregationListRelationFilter
     PeriodicTarget?: PeriodicTargetListRelationFilter
@@ -36440,6 +36532,7 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     result?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
     _count?: IndicatorCountOrderByAggregateInput
     _avg?: IndicatorAvgOrderByAggregateInput
     _max?: IndicatorMaxOrderByAggregateInput
@@ -36473,6 +36566,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableWithAggregatesFilter<"Indicator"> | Date | string | null
     result?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
     resultTypeId?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
+    projectId?: StringNullableWithAggregatesFilter<"Indicator"> | string | null
   }
 
   export type IndicatorDisaggregationWhereInput = {
@@ -36610,8 +36704,10 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    projectId?: StringNullableFilter<"IndicatorReport"> | string | null
     indicator?: XOR<IndicatorNullableScalarRelationFilter, IndicatorWhereInput> | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     indicatorReportComment?: IndicatorReportCommentListRelationFilter
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationListRelationFilter
   }
@@ -36632,8 +36728,10 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     indicatorId?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
     indicator?: IndicatorOrderByWithRelationInput
     ResultType?: ResultTypeOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
     indicatorReportComment?: IndicatorReportCommentOrderByRelationAggregateInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationOrderByRelationAggregateInput
     _relevance?: IndicatorReportOrderByRelevanceInput
@@ -36658,8 +36756,10 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    projectId?: StringNullableFilter<"IndicatorReport"> | string | null
     indicator?: XOR<IndicatorNullableScalarRelationFilter, IndicatorWhereInput> | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     indicatorReportComment?: IndicatorReportCommentListRelationFilter
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationListRelationFilter
   }, "indicatorReportId">
@@ -36680,6 +36780,7 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     indicatorId?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    projectId?: SortOrderInput | SortOrder
     _count?: IndicatorReportCountOrderByAggregateInput
     _max?: IndicatorReportMaxOrderByAggregateInput
     _min?: IndicatorReportMinOrderByAggregateInput
@@ -36704,6 +36805,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableWithAggregatesFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
+    projectId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
   }
 
   export type IndicatorReportDisaggregationWhereInput = {
@@ -38281,7 +38383,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpi?: KpiCreateNestedManyWithoutStrategicObjectiveInput
-    project?: ProjectCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUncheckedCreateInput = {
@@ -38293,7 +38394,6 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     kpi?: KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-    project?: ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUpdateInput = {
@@ -38305,7 +38405,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUpdateManyWithoutStrategicObjectiveNestedInput
-    project?: ProjectUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveUncheckedUpdateInput = {
@@ -38317,7 +38416,6 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     kpi?: KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
-    project?: ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveCreateManyInput = {
@@ -38575,9 +38673,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -38587,6 +38685,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -38614,6 +38714,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -38629,9 +38731,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -38641,6 +38743,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -38668,6 +38772,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -38701,6 +38807,7 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39212,6 +39319,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    project?: ProjectCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
@@ -39240,6 +39348,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
@@ -39268,6 +39377,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
@@ -39296,6 +39406,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
@@ -39324,6 +39435,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
   }
 
   export type IndicatorUpdateManyMutationInput = {
@@ -39373,6 +39485,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorDisaggregationCreateInput = {
@@ -39501,6 +39614,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
+    project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationCreateNestedManyWithoutIndicatorReportInput
   }
@@ -39521,6 +39635,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -39541,6 +39656,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -39561,6 +39677,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -39581,6 +39698,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
   }
 
   export type IndicatorReportUpdateManyMutationInput = {
@@ -39615,6 +39733,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportDisaggregationCreateInput = {
@@ -41329,17 +41448,7 @@ export namespace Prisma {
     none?: KpiWhereInput
   }
 
-  export type ProjectListRelationFilter = {
-    every?: ProjectWhereInput
-    some?: ProjectWhereInput
-    none?: ProjectWhereInput
-  }
-
   export type KpiOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41590,6 +41699,18 @@ export namespace Prisma {
     none?: ReportWhereInput
   }
 
+  export type IndicatorListRelationFilter = {
+    every?: IndicatorWhereInput
+    some?: IndicatorWhereInput
+    none?: IndicatorWhereInput
+  }
+
+  export type IndicatorReportListRelationFilter = {
+    every?: IndicatorReportWhereInput
+    some?: IndicatorReportWhereInput
+    none?: IndicatorReportWhereInput
+  }
+
   export type TeamMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -41615,6 +41736,14 @@ export namespace Prisma {
   }
 
   export type ReportOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IndicatorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IndicatorReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41764,26 +41893,6 @@ export namespace Prisma {
     projectId?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
-  }
-
-  export type IndicatorListRelationFilter = {
-    every?: IndicatorWhereInput
-    some?: IndicatorWhereInput
-    none?: IndicatorWhereInput
-  }
-
-  export type IndicatorReportListRelationFilter = {
-    every?: IndicatorReportWhereInput
-    some?: IndicatorReportWhereInput
-    none?: IndicatorReportWhereInput
-  }
-
-  export type IndicatorOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type IndicatorReportOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type ResultTypeOrderByRelevanceInput = {
@@ -41997,6 +42106,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     result?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorAvgOrderByAggregateInput = {
@@ -42027,6 +42137,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     result?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorMinOrderByAggregateInput = {
@@ -42052,6 +42163,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     result?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorSumOrderByAggregateInput = {
@@ -42189,6 +42301,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorReportMaxOrderByAggregateInput = {
@@ -42207,6 +42320,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorReportMinOrderByAggregateInput = {
@@ -42225,6 +42339,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    projectId?: SortOrder
   }
 
   export type IndicatorReportScalarRelationFilter = {
@@ -43330,25 +43445,11 @@ export namespace Prisma {
     connect?: KpiWhereUniqueInput | KpiWhereUniqueInput[]
   }
 
-  export type ProjectCreateNestedManyWithoutStrategicObjectiveInput = {
-    create?: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput> | ProjectCreateWithoutStrategicObjectiveInput[] | ProjectUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutStrategicObjectiveInput | ProjectCreateOrConnectWithoutStrategicObjectiveInput[]
-    createMany?: ProjectCreateManyStrategicObjectiveInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-  }
-
   export type KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput = {
     create?: XOR<KpiCreateWithoutStrategicObjectiveInput, KpiUncheckedCreateWithoutStrategicObjectiveInput> | KpiCreateWithoutStrategicObjectiveInput[] | KpiUncheckedCreateWithoutStrategicObjectiveInput[]
     connectOrCreate?: KpiCreateOrConnectWithoutStrategicObjectiveInput | KpiCreateOrConnectWithoutStrategicObjectiveInput[]
     createMany?: KpiCreateManyStrategicObjectiveInputEnvelope
     connect?: KpiWhereUniqueInput | KpiWhereUniqueInput[]
-  }
-
-  export type ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput = {
-    create?: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput> | ProjectCreateWithoutStrategicObjectiveInput[] | ProjectUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutStrategicObjectiveInput | ProjectCreateOrConnectWithoutStrategicObjectiveInput[]
-    createMany?: ProjectCreateManyStrategicObjectiveInputEnvelope
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
   }
 
   export type KpiUpdateManyWithoutStrategicObjectiveNestedInput = {
@@ -43365,20 +43466,6 @@ export namespace Prisma {
     deleteMany?: KpiScalarWhereInput | KpiScalarWhereInput[]
   }
 
-  export type ProjectUpdateManyWithoutStrategicObjectiveNestedInput = {
-    create?: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput> | ProjectCreateWithoutStrategicObjectiveInput[] | ProjectUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutStrategicObjectiveInput | ProjectCreateOrConnectWithoutStrategicObjectiveInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutStrategicObjectiveInput | ProjectUpsertWithWhereUniqueWithoutStrategicObjectiveInput[]
-    createMany?: ProjectCreateManyStrategicObjectiveInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutStrategicObjectiveInput | ProjectUpdateWithWhereUniqueWithoutStrategicObjectiveInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutStrategicObjectiveInput | ProjectUpdateManyWithWhereWithoutStrategicObjectiveInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-  }
-
   export type KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput = {
     create?: XOR<KpiCreateWithoutStrategicObjectiveInput, KpiUncheckedCreateWithoutStrategicObjectiveInput> | KpiCreateWithoutStrategicObjectiveInput[] | KpiUncheckedCreateWithoutStrategicObjectiveInput[]
     connectOrCreate?: KpiCreateOrConnectWithoutStrategicObjectiveInput | KpiCreateOrConnectWithoutStrategicObjectiveInput[]
@@ -43391,20 +43478,6 @@ export namespace Prisma {
     update?: KpiUpdateWithWhereUniqueWithoutStrategicObjectiveInput | KpiUpdateWithWhereUniqueWithoutStrategicObjectiveInput[]
     updateMany?: KpiUpdateManyWithWhereWithoutStrategicObjectiveInput | KpiUpdateManyWithWhereWithoutStrategicObjectiveInput[]
     deleteMany?: KpiScalarWhereInput | KpiScalarWhereInput[]
-  }
-
-  export type ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput = {
-    create?: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput> | ProjectCreateWithoutStrategicObjectiveInput[] | ProjectUncheckedCreateWithoutStrategicObjectiveInput[]
-    connectOrCreate?: ProjectCreateOrConnectWithoutStrategicObjectiveInput | ProjectCreateOrConnectWithoutStrategicObjectiveInput[]
-    upsert?: ProjectUpsertWithWhereUniqueWithoutStrategicObjectiveInput | ProjectUpsertWithWhereUniqueWithoutStrategicObjectiveInput[]
-    createMany?: ProjectCreateManyStrategicObjectiveInputEnvelope
-    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
-    update?: ProjectUpdateWithWhereUniqueWithoutStrategicObjectiveInput | ProjectUpdateWithWhereUniqueWithoutStrategicObjectiveInput[]
-    updateMany?: ProjectUpdateManyWithWhereWithoutStrategicObjectiveInput | ProjectUpdateManyWithWhereWithoutStrategicObjectiveInput[]
-    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
   }
 
   export type StrategicObjectiveCreateNestedOneWithoutKpiInput = {
@@ -43487,12 +43560,6 @@ export namespace Prisma {
     update?: XOR<XOR<KpiUpdateToOneWithWhereWithoutKpiDisaggregationInput, KpiUpdateWithoutKpiDisaggregationInput>, KpiUncheckedUpdateWithoutKpiDisaggregationInput>
   }
 
-  export type StrategicObjectiveCreateNestedOneWithoutProjectInput = {
-    create?: XOR<StrategicObjectiveCreateWithoutProjectInput, StrategicObjectiveUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: StrategicObjectiveCreateOrConnectWithoutProjectInput
-    connect?: StrategicObjectiveWhereUniqueInput
-  }
-
   export type TeamMemberCreateNestedManyWithoutProjectInput = {
     create?: XOR<TeamMemberCreateWithoutProjectInput, TeamMemberUncheckedCreateWithoutProjectInput> | TeamMemberCreateWithoutProjectInput[] | TeamMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TeamMemberCreateOrConnectWithoutProjectInput | TeamMemberCreateOrConnectWithoutProjectInput[]
@@ -43554,6 +43621,20 @@ export namespace Prisma {
     connectOrCreate?: ReportCreateOrConnectWithoutProjectInput | ReportCreateOrConnectWithoutProjectInput[]
     createMany?: ReportCreateManyProjectInputEnvelope
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
+  }
+
+  export type IndicatorCreateNestedManyWithoutProjectInput = {
+    create?: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput> | IndicatorCreateWithoutProjectInput[] | IndicatorUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorCreateOrConnectWithoutProjectInput | IndicatorCreateOrConnectWithoutProjectInput[]
+    createMany?: IndicatorCreateManyProjectInputEnvelope
+    connect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+  }
+
+  export type IndicatorReportCreateNestedManyWithoutProjectInput = {
+    create?: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput> | IndicatorReportCreateWithoutProjectInput[] | IndicatorReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorReportCreateOrConnectWithoutProjectInput | IndicatorReportCreateOrConnectWithoutProjectInput[]
+    createMany?: IndicatorReportCreateManyProjectInputEnvelope
+    connect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
   }
 
   export type TeamMemberUncheckedCreateNestedManyWithoutProjectInput = {
@@ -43619,14 +43700,18 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
-  export type StrategicObjectiveUpdateOneWithoutProjectNestedInput = {
-    create?: XOR<StrategicObjectiveCreateWithoutProjectInput, StrategicObjectiveUncheckedCreateWithoutProjectInput>
-    connectOrCreate?: StrategicObjectiveCreateOrConnectWithoutProjectInput
-    upsert?: StrategicObjectiveUpsertWithoutProjectInput
-    disconnect?: StrategicObjectiveWhereInput | boolean
-    delete?: StrategicObjectiveWhereInput | boolean
-    connect?: StrategicObjectiveWhereUniqueInput
-    update?: XOR<XOR<StrategicObjectiveUpdateToOneWithWhereWithoutProjectInput, StrategicObjectiveUpdateWithoutProjectInput>, StrategicObjectiveUncheckedUpdateWithoutProjectInput>
+  export type IndicatorUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput> | IndicatorCreateWithoutProjectInput[] | IndicatorUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorCreateOrConnectWithoutProjectInput | IndicatorCreateOrConnectWithoutProjectInput[]
+    createMany?: IndicatorCreateManyProjectInputEnvelope
+    connect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+  }
+
+  export type IndicatorReportUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput> | IndicatorReportCreateWithoutProjectInput[] | IndicatorReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorReportCreateOrConnectWithoutProjectInput | IndicatorReportCreateOrConnectWithoutProjectInput[]
+    createMany?: IndicatorReportCreateManyProjectInputEnvelope
+    connect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
   }
 
   export type TeamMemberUpdateManyWithoutProjectNestedInput = {
@@ -43755,6 +43840,34 @@ export namespace Prisma {
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
   }
 
+  export type IndicatorUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput> | IndicatorCreateWithoutProjectInput[] | IndicatorUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorCreateOrConnectWithoutProjectInput | IndicatorCreateOrConnectWithoutProjectInput[]
+    upsert?: IndicatorUpsertWithWhereUniqueWithoutProjectInput | IndicatorUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: IndicatorCreateManyProjectInputEnvelope
+    set?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    disconnect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    delete?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    connect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    update?: IndicatorUpdateWithWhereUniqueWithoutProjectInput | IndicatorUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: IndicatorUpdateManyWithWhereWithoutProjectInput | IndicatorUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
+  }
+
+  export type IndicatorReportUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput> | IndicatorReportCreateWithoutProjectInput[] | IndicatorReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorReportCreateOrConnectWithoutProjectInput | IndicatorReportCreateOrConnectWithoutProjectInput[]
+    upsert?: IndicatorReportUpsertWithWhereUniqueWithoutProjectInput | IndicatorReportUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: IndicatorReportCreateManyProjectInputEnvelope
+    set?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    disconnect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    delete?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    connect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    update?: IndicatorReportUpdateWithWhereUniqueWithoutProjectInput | IndicatorReportUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: IndicatorReportUpdateManyWithWhereWithoutProjectInput | IndicatorReportUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
+  }
+
   export type TeamMemberUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<TeamMemberCreateWithoutProjectInput, TeamMemberUncheckedCreateWithoutProjectInput> | TeamMemberCreateWithoutProjectInput[] | TeamMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: TeamMemberCreateOrConnectWithoutProjectInput | TeamMemberCreateOrConnectWithoutProjectInput[]
@@ -43879,6 +43992,34 @@ export namespace Prisma {
     update?: ReportUpdateWithWhereUniqueWithoutProjectInput | ReportUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: ReportUpdateManyWithWhereWithoutProjectInput | ReportUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
+  }
+
+  export type IndicatorUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput> | IndicatorCreateWithoutProjectInput[] | IndicatorUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorCreateOrConnectWithoutProjectInput | IndicatorCreateOrConnectWithoutProjectInput[]
+    upsert?: IndicatorUpsertWithWhereUniqueWithoutProjectInput | IndicatorUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: IndicatorCreateManyProjectInputEnvelope
+    set?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    disconnect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    delete?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    connect?: IndicatorWhereUniqueInput | IndicatorWhereUniqueInput[]
+    update?: IndicatorUpdateWithWhereUniqueWithoutProjectInput | IndicatorUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: IndicatorUpdateManyWithWhereWithoutProjectInput | IndicatorUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
+  }
+
+  export type IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput> | IndicatorReportCreateWithoutProjectInput[] | IndicatorReportUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: IndicatorReportCreateOrConnectWithoutProjectInput | IndicatorReportCreateOrConnectWithoutProjectInput[]
+    upsert?: IndicatorReportUpsertWithWhereUniqueWithoutProjectInput | IndicatorReportUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: IndicatorReportCreateManyProjectInputEnvelope
+    set?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    disconnect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    delete?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    connect?: IndicatorReportWhereUniqueInput | IndicatorReportWhereUniqueInput[]
+    update?: IndicatorReportUpdateWithWhereUniqueWithoutProjectInput | IndicatorReportUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: IndicatorReportUpdateManyWithWhereWithoutProjectInput | IndicatorReportUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
   }
 
   export type ProjectCreateNestedOneWithoutTeamMemberInput = {
@@ -44441,6 +44582,12 @@ export namespace Prisma {
     connect?: ResultTypeWhereUniqueInput
   }
 
+  export type ProjectCreateNestedOneWithoutIndicatorInput = {
+    create?: XOR<ProjectCreateWithoutIndicatorInput, ProjectUncheckedCreateWithoutIndicatorInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutIndicatorInput
+    connect?: ProjectWhereUniqueInput
+  }
+
   export type IndicatorReportCreateNestedManyWithoutIndicatorInput = {
     create?: XOR<IndicatorReportCreateWithoutIndicatorInput, IndicatorReportUncheckedCreateWithoutIndicatorInput> | IndicatorReportCreateWithoutIndicatorInput[] | IndicatorReportUncheckedCreateWithoutIndicatorInput[]
     connectOrCreate?: IndicatorReportCreateOrConnectWithoutIndicatorInput | IndicatorReportCreateOrConnectWithoutIndicatorInput[]
@@ -44491,6 +44638,16 @@ export namespace Prisma {
     delete?: ResultTypeWhereInput | boolean
     connect?: ResultTypeWhereUniqueInput
     update?: XOR<XOR<ResultTypeUpdateToOneWithWhereWithoutIndicatorInput, ResultTypeUpdateWithoutIndicatorInput>, ResultTypeUncheckedUpdateWithoutIndicatorInput>
+  }
+
+  export type ProjectUpdateOneWithoutIndicatorNestedInput = {
+    create?: XOR<ProjectCreateWithoutIndicatorInput, ProjectUncheckedCreateWithoutIndicatorInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutIndicatorInput
+    upsert?: ProjectUpsertWithoutIndicatorInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutIndicatorInput, ProjectUpdateWithoutIndicatorInput>, ProjectUncheckedUpdateWithoutIndicatorInput>
   }
 
   export type IndicatorReportUpdateManyWithoutIndicatorNestedInput = {
@@ -44617,6 +44774,12 @@ export namespace Prisma {
     connect?: ResultTypeWhereUniqueInput
   }
 
+  export type ProjectCreateNestedOneWithoutIndicatorReportInput = {
+    create?: XOR<ProjectCreateWithoutIndicatorReportInput, ProjectUncheckedCreateWithoutIndicatorReportInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutIndicatorReportInput
+    connect?: ProjectWhereUniqueInput
+  }
+
   export type IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput = {
     create?: XOR<IndicatorReportCommentCreateWithoutIndicatorReportInput, IndicatorReportCommentUncheckedCreateWithoutIndicatorReportInput> | IndicatorReportCommentCreateWithoutIndicatorReportInput[] | IndicatorReportCommentUncheckedCreateWithoutIndicatorReportInput[]
     connectOrCreate?: IndicatorReportCommentCreateOrConnectWithoutIndicatorReportInput | IndicatorReportCommentCreateOrConnectWithoutIndicatorReportInput[]
@@ -44663,6 +44826,16 @@ export namespace Prisma {
     delete?: ResultTypeWhereInput | boolean
     connect?: ResultTypeWhereUniqueInput
     update?: XOR<XOR<ResultTypeUpdateToOneWithWhereWithoutIndicatorReportInput, ResultTypeUpdateWithoutIndicatorReportInput>, ResultTypeUncheckedUpdateWithoutIndicatorReportInput>
+  }
+
+  export type ProjectUpdateOneWithoutIndicatorReportNestedInput = {
+    create?: XOR<ProjectCreateWithoutIndicatorReportInput, ProjectUncheckedCreateWithoutIndicatorReportInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutIndicatorReportInput
+    upsert?: ProjectUpsertWithoutIndicatorReportInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutIndicatorReportInput, ProjectUpdateWithoutIndicatorReportInput>, ProjectUncheckedUpdateWithoutIndicatorReportInput>
   }
 
   export type IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput = {
@@ -46048,68 +46221,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProjectCreateWithoutStrategicObjectiveInput = {
-    projectId?: string
-    projectName?: string | null
-    budgetCurrency?: string | null
-    totalBudgetAmount?: string | null
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    country?: string | null
-    state?: string | null
-    localGovernment?: string | null
-    community?: string | null
-    thematicAreasOrPillar?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
-    partner?: PartnerCreateNestedManyWithoutProjectInput
-    impact?: ImpactCreateNestedManyWithoutProjectInput
-    outcome?: OutcomeCreateNestedManyWithoutProjectInput
-    output?: OutputCreateNestedManyWithoutProjectInput
-    activity?: ActivityCreateNestedManyWithoutProjectInput
-    logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
-    request?: RequestCreateNestedManyWithoutProjectInput
-    report?: ReportCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectUncheckedCreateWithoutStrategicObjectiveInput = {
-    projectId?: string
-    projectName?: string | null
-    budgetCurrency?: string | null
-    totalBudgetAmount?: string | null
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    country?: string | null
-    state?: string | null
-    localGovernment?: string | null
-    community?: string | null
-    thematicAreasOrPillar?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    teamMember?: TeamMemberUncheckedCreateNestedManyWithoutProjectInput
-    partner?: PartnerUncheckedCreateNestedManyWithoutProjectInput
-    impact?: ImpactUncheckedCreateNestedManyWithoutProjectInput
-    outcome?: OutcomeUncheckedCreateNestedManyWithoutProjectInput
-    output?: OutputUncheckedCreateNestedManyWithoutProjectInput
-    activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
-    logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
-    request?: RequestUncheckedCreateNestedManyWithoutProjectInput
-    report?: ReportUncheckedCreateNestedManyWithoutProjectInput
-  }
-
-  export type ProjectCreateOrConnectWithoutStrategicObjectiveInput = {
-    where: ProjectWhereUniqueInput
-    create: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput>
-  }
-
-  export type ProjectCreateManyStrategicObjectiveInputEnvelope = {
-    data: ProjectCreateManyStrategicObjectiveInput | ProjectCreateManyStrategicObjectiveInput[]
-    skipDuplicates?: boolean
-  }
-
   export type KpiUpsertWithWhereUniqueWithoutStrategicObjectiveInput = {
     where: KpiWhereUniqueInput
     update: XOR<KpiUpdateWithoutStrategicObjectiveInput, KpiUncheckedUpdateWithoutStrategicObjectiveInput>
@@ -46150,43 +46261,6 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"Kpi"> | Date | string | null
   }
 
-  export type ProjectUpsertWithWhereUniqueWithoutStrategicObjectiveInput = {
-    where: ProjectWhereUniqueInput
-    update: XOR<ProjectUpdateWithoutStrategicObjectiveInput, ProjectUncheckedUpdateWithoutStrategicObjectiveInput>
-    create: XOR<ProjectCreateWithoutStrategicObjectiveInput, ProjectUncheckedCreateWithoutStrategicObjectiveInput>
-  }
-
-  export type ProjectUpdateWithWhereUniqueWithoutStrategicObjectiveInput = {
-    where: ProjectWhereUniqueInput
-    data: XOR<ProjectUpdateWithoutStrategicObjectiveInput, ProjectUncheckedUpdateWithoutStrategicObjectiveInput>
-  }
-
-  export type ProjectUpdateManyWithWhereWithoutStrategicObjectiveInput = {
-    where: ProjectScalarWhereInput
-    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutStrategicObjectiveInput>
-  }
-
-  export type ProjectScalarWhereInput = {
-    AND?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    OR?: ProjectScalarWhereInput[]
-    NOT?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
-    projectId?: StringFilter<"Project"> | string
-    projectName?: StringNullableFilter<"Project"> | string | null
-    budgetCurrency?: StringNullableFilter<"Project"> | string | null
-    totalBudgetAmount?: StringNullableFilter<"Project"> | string | null
-    startDate?: DateTimeNullableFilter<"Project"> | Date | string | null
-    endDate?: DateTimeNullableFilter<"Project"> | Date | string | null
-    country?: StringNullableFilter<"Project"> | string | null
-    state?: StringNullableFilter<"Project"> | string | null
-    localGovernment?: StringNullableFilter<"Project"> | string | null
-    community?: StringNullableFilter<"Project"> | string | null
-    thematicAreasOrPillar?: StringNullableFilter<"Project"> | string | null
-    status?: StringNullableFilter<"Project"> | string | null
-    strategicObjectiveId?: StringNullableFilter<"Project"> | string | null
-    createAt?: DateTimeNullableFilter<"Project"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"Project"> | Date | string | null
-  }
-
   export type StrategicObjectiveCreateWithoutKpiInput = {
     strategicObjectiveId?: string
     statement?: string | null
@@ -46195,7 +46269,6 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    project?: ProjectCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveUncheckedCreateWithoutKpiInput = {
@@ -46206,7 +46279,6 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    project?: ProjectUncheckedCreateNestedManyWithoutStrategicObjectiveInput
   }
 
   export type StrategicObjectiveCreateOrConnectWithoutKpiInput = {
@@ -46259,7 +46331,6 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    project?: ProjectUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type StrategicObjectiveUncheckedUpdateWithoutKpiInput = {
@@ -46270,7 +46341,6 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    project?: ProjectUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
   }
 
   export type KpiDisaggregationUpsertWithWhereUniqueWithoutKpiInput = {
@@ -46399,33 +46469,6 @@ export namespace Prisma {
     strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type StrategicObjectiveCreateWithoutProjectInput = {
-    strategicObjectiveId?: string
-    statement?: string | null
-    thematicAreas?: string | null
-    pillarLead?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    kpi?: KpiCreateNestedManyWithoutStrategicObjectiveInput
-  }
-
-  export type StrategicObjectiveUncheckedCreateWithoutProjectInput = {
-    strategicObjectiveId?: string
-    statement?: string | null
-    thematicAreas?: string | null
-    pillarLead?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-    kpi?: KpiUncheckedCreateNestedManyWithoutStrategicObjectiveInput
-  }
-
-  export type StrategicObjectiveCreateOrConnectWithoutProjectInput = {
-    where: StrategicObjectiveWhereUniqueInput
-    create: XOR<StrategicObjectiveCreateWithoutProjectInput, StrategicObjectiveUncheckedCreateWithoutProjectInput>
   }
 
   export type TeamMemberCreateWithoutProjectInput = {
@@ -46854,37 +46897,120 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type StrategicObjectiveUpsertWithoutProjectInput = {
-    update: XOR<StrategicObjectiveUpdateWithoutProjectInput, StrategicObjectiveUncheckedUpdateWithoutProjectInput>
-    create: XOR<StrategicObjectiveCreateWithoutProjectInput, StrategicObjectiveUncheckedCreateWithoutProjectInput>
-    where?: StrategicObjectiveWhereInput
+  export type IndicatorCreateWithoutProjectInput = {
+    indicatorId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    statement?: string | null
+    linkKpiToSdnOrgKpi?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    result?: string | null
+    ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
+    IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
 
-  export type StrategicObjectiveUpdateToOneWithWhereWithoutProjectInput = {
-    where?: StrategicObjectiveWhereInput
-    data: XOR<StrategicObjectiveUpdateWithoutProjectInput, StrategicObjectiveUncheckedUpdateWithoutProjectInput>
+  export type IndicatorUncheckedCreateWithoutProjectInput = {
+    indicatorId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    statement?: string | null
+    linkKpiToSdnOrgKpi?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    result?: string | null
+    resultTypeId?: string | null
+    IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
+    PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
 
-  export type StrategicObjectiveUpdateWithoutProjectInput = {
-    strategicObjectiveId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreas?: NullableStringFieldUpdateOperationsInput | string | null
-    pillarLead?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpi?: KpiUpdateManyWithoutStrategicObjectiveNestedInput
+  export type IndicatorCreateOrConnectWithoutProjectInput = {
+    where: IndicatorWhereUniqueInput
+    create: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput>
   }
 
-  export type StrategicObjectiveUncheckedUpdateWithoutProjectInput = {
-    strategicObjectiveId?: StringFieldUpdateOperationsInput | string
-    statement?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreas?: NullableStringFieldUpdateOperationsInput | string | null
-    pillarLead?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    kpi?: KpiUncheckedUpdateManyWithoutStrategicObjectiveNestedInput
+  export type IndicatorCreateManyProjectInputEnvelope = {
+    data: IndicatorCreateManyProjectInput | IndicatorCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type IndicatorReportCreateWithoutProjectInput = {
+    indicatorReportId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    indicatorStatement?: string | null
+    responsiblePersons?: string | null
+    actualDate?: Date | string | null
+    cumulativeActual?: string | null
+    actualNarrative?: string | null
+    attachmentUrl?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
+    ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
+    indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
+    IndicatorReportDisaggregation?: IndicatorReportDisaggregationCreateNestedManyWithoutIndicatorReportInput
+  }
+
+  export type IndicatorReportUncheckedCreateWithoutProjectInput = {
+    indicatorReportId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    indicatorStatement?: string | null
+    responsiblePersons?: string | null
+    actualDate?: Date | string | null
+    cumulativeActual?: string | null
+    actualNarrative?: string | null
+    attachmentUrl?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    indicatorId?: string | null
+    resultTypeId?: string | null
+    indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
+    IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
+  }
+
+  export type IndicatorReportCreateOrConnectWithoutProjectInput = {
+    where: IndicatorReportWhereUniqueInput
+    create: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput>
+  }
+
+  export type IndicatorReportCreateManyProjectInputEnvelope = {
+    data: IndicatorReportCreateManyProjectInput | IndicatorReportCreateManyProjectInput[]
+    skipDuplicates?: boolean
   }
 
   export type TeamMemberUpsertWithWhereUniqueWithoutProjectInput = {
@@ -47145,6 +47271,89 @@ export namespace Prisma {
     updateAt?: DateTimeFilter<"Report"> | Date | string
   }
 
+  export type IndicatorUpsertWithWhereUniqueWithoutProjectInput = {
+    where: IndicatorWhereUniqueInput
+    update: XOR<IndicatorUpdateWithoutProjectInput, IndicatorUncheckedUpdateWithoutProjectInput>
+    create: XOR<IndicatorCreateWithoutProjectInput, IndicatorUncheckedCreateWithoutProjectInput>
+  }
+
+  export type IndicatorUpdateWithWhereUniqueWithoutProjectInput = {
+    where: IndicatorWhereUniqueInput
+    data: XOR<IndicatorUpdateWithoutProjectInput, IndicatorUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type IndicatorUpdateManyWithWhereWithoutProjectInput = {
+    where: IndicatorScalarWhereInput
+    data: XOR<IndicatorUpdateManyMutationInput, IndicatorUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type IndicatorScalarWhereInput = {
+    AND?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
+    OR?: IndicatorScalarWhereInput[]
+    NOT?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
+    indicatorId?: StringFilter<"Indicator"> | string
+    indicatorSource?: StringNullableFilter<"Indicator"> | string | null
+    orgKpiId?: StringNullableFilter<"Indicator"> | string | null
+    thematicAreasOrPillar?: StringNullableFilter<"Indicator"> | string | null
+    statement?: StringNullableFilter<"Indicator"> | string | null
+    linkKpiToSdnOrgKpi?: StringNullableFilter<"Indicator"> | string | null
+    definition?: StringNullableFilter<"Indicator"> | string | null
+    specificArea?: StringNullableFilter<"Indicator"> | string | null
+    unitOfMeasure?: StringNullableFilter<"Indicator"> | string | null
+    itemInMeasure?: StringNullableFilter<"Indicator"> | string | null
+    baseLineDate?: DateTimeNullableFilter<"Indicator"> | Date | string | null
+    cumulativeValue?: IntNullableFilter<"Indicator"> | number | null
+    baselineNarrative?: StringNullableFilter<"Indicator"> | string | null
+    targetDate?: DateTimeNullableFilter<"Indicator"> | Date | string | null
+    cumulativeTarget?: IntNullableFilter<"Indicator"> | number | null
+    targetNarrative?: StringNullableFilter<"Indicator"> | string | null
+    targetType?: StringNullableFilter<"Indicator"> | string | null
+    responsiblePersons?: StringNullableFilter<"Indicator"> | string | null
+    createAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
+    result?: StringNullableFilter<"Indicator"> | string | null
+    resultTypeId?: StringNullableFilter<"Indicator"> | string | null
+    projectId?: StringNullableFilter<"Indicator"> | string | null
+  }
+
+  export type IndicatorReportUpsertWithWhereUniqueWithoutProjectInput = {
+    where: IndicatorReportWhereUniqueInput
+    update: XOR<IndicatorReportUpdateWithoutProjectInput, IndicatorReportUncheckedUpdateWithoutProjectInput>
+    create: XOR<IndicatorReportCreateWithoutProjectInput, IndicatorReportUncheckedCreateWithoutProjectInput>
+  }
+
+  export type IndicatorReportUpdateWithWhereUniqueWithoutProjectInput = {
+    where: IndicatorReportWhereUniqueInput
+    data: XOR<IndicatorReportUpdateWithoutProjectInput, IndicatorReportUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type IndicatorReportUpdateManyWithWhereWithoutProjectInput = {
+    where: IndicatorReportScalarWhereInput
+    data: XOR<IndicatorReportUpdateManyMutationInput, IndicatorReportUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type IndicatorReportScalarWhereInput = {
+    AND?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
+    OR?: IndicatorReportScalarWhereInput[]
+    NOT?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
+    indicatorReportId?: StringFilter<"IndicatorReport"> | string
+    indicatorSource?: StringNullableFilter<"IndicatorReport"> | string | null
+    orgKpiId?: StringNullableFilter<"IndicatorReport"> | string | null
+    thematicAreasOrPillar?: StringNullableFilter<"IndicatorReport"> | string | null
+    indicatorStatement?: StringNullableFilter<"IndicatorReport"> | string | null
+    responsiblePersons?: StringNullableFilter<"IndicatorReport"> | string | null
+    actualDate?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
+    cumulativeActual?: StringNullableFilter<"IndicatorReport"> | string | null
+    actualNarrative?: StringNullableFilter<"IndicatorReport"> | string | null
+    attachmentUrl?: StringNullableFilter<"IndicatorReport"> | string | null
+    status?: StringNullableFilter<"IndicatorReport"> | string | null
+    createAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
+    updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
+    indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
+    resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    projectId?: StringNullableFilter<"IndicatorReport"> | string | null
+  }
+
   export type ProjectCreateWithoutTeamMemberInput = {
     projectId?: string
     projectName?: string | null
@@ -47158,9 +47367,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
     outcome?: OutcomeCreateNestedManyWithoutProjectInput
@@ -47169,6 +47378,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutTeamMemberInput = {
@@ -47195,6 +47406,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutTeamMemberInput = {
@@ -47226,9 +47439,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
     outcome?: OutcomeUpdateManyWithoutProjectNestedInput
@@ -47237,6 +47450,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutTeamMemberInput = {
@@ -47263,6 +47478,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserCreateWithoutPartnerInput = {
@@ -47333,9 +47550,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
     outcome?: OutcomeCreateNestedManyWithoutProjectInput
@@ -47344,6 +47561,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutPartnerInput = {
@@ -47370,6 +47589,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutPartnerInput = {
@@ -47462,9 +47683,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
     outcome?: OutcomeUpdateManyWithoutProjectNestedInput
@@ -47473,6 +47694,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutPartnerInput = {
@@ -47499,6 +47722,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ImpactCreateWithoutResultTypeInput = {
@@ -47627,6 +47852,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     result?: string | null
+    project?: ProjectCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
@@ -47654,6 +47880,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     result?: string | null
+    projectId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
@@ -47684,6 +47911,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
+    project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationCreateNestedManyWithoutIndicatorReportInput
   }
@@ -47703,6 +47931,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     indicatorId?: string | null
+    projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -47781,34 +48010,6 @@ export namespace Prisma {
     data: XOR<IndicatorUpdateManyMutationInput, IndicatorUncheckedUpdateManyWithoutResultTypeInput>
   }
 
-  export type IndicatorScalarWhereInput = {
-    AND?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
-    OR?: IndicatorScalarWhereInput[]
-    NOT?: IndicatorScalarWhereInput | IndicatorScalarWhereInput[]
-    indicatorId?: StringFilter<"Indicator"> | string
-    indicatorSource?: StringNullableFilter<"Indicator"> | string | null
-    orgKpiId?: StringNullableFilter<"Indicator"> | string | null
-    thematicAreasOrPillar?: StringNullableFilter<"Indicator"> | string | null
-    statement?: StringNullableFilter<"Indicator"> | string | null
-    linkKpiToSdnOrgKpi?: StringNullableFilter<"Indicator"> | string | null
-    definition?: StringNullableFilter<"Indicator"> | string | null
-    specificArea?: StringNullableFilter<"Indicator"> | string | null
-    unitOfMeasure?: StringNullableFilter<"Indicator"> | string | null
-    itemInMeasure?: StringNullableFilter<"Indicator"> | string | null
-    baseLineDate?: DateTimeNullableFilter<"Indicator"> | Date | string | null
-    cumulativeValue?: IntNullableFilter<"Indicator"> | number | null
-    baselineNarrative?: StringNullableFilter<"Indicator"> | string | null
-    targetDate?: DateTimeNullableFilter<"Indicator"> | Date | string | null
-    cumulativeTarget?: IntNullableFilter<"Indicator"> | number | null
-    targetNarrative?: StringNullableFilter<"Indicator"> | string | null
-    targetType?: StringNullableFilter<"Indicator"> | string | null
-    responsiblePersons?: StringNullableFilter<"Indicator"> | string | null
-    createAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"Indicator"> | Date | string | null
-    result?: StringNullableFilter<"Indicator"> | string | null
-    resultTypeId?: StringNullableFilter<"Indicator"> | string | null
-  }
-
   export type IndicatorReportUpsertWithWhereUniqueWithoutResultTypeInput = {
     where: IndicatorReportWhereUniqueInput
     update: XOR<IndicatorReportUpdateWithoutResultTypeInput, IndicatorReportUncheckedUpdateWithoutResultTypeInput>
@@ -47825,27 +48026,6 @@ export namespace Prisma {
     data: XOR<IndicatorReportUpdateManyMutationInput, IndicatorReportUncheckedUpdateManyWithoutResultTypeInput>
   }
 
-  export type IndicatorReportScalarWhereInput = {
-    AND?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
-    OR?: IndicatorReportScalarWhereInput[]
-    NOT?: IndicatorReportScalarWhereInput | IndicatorReportScalarWhereInput[]
-    indicatorReportId?: StringFilter<"IndicatorReport"> | string
-    indicatorSource?: StringNullableFilter<"IndicatorReport"> | string | null
-    orgKpiId?: StringNullableFilter<"IndicatorReport"> | string | null
-    thematicAreasOrPillar?: StringNullableFilter<"IndicatorReport"> | string | null
-    indicatorStatement?: StringNullableFilter<"IndicatorReport"> | string | null
-    responsiblePersons?: StringNullableFilter<"IndicatorReport"> | string | null
-    actualDate?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
-    cumulativeActual?: StringNullableFilter<"IndicatorReport"> | string | null
-    actualNarrative?: StringNullableFilter<"IndicatorReport"> | string | null
-    attachmentUrl?: StringNullableFilter<"IndicatorReport"> | string | null
-    status?: StringNullableFilter<"IndicatorReport"> | string | null
-    createAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
-    updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
-    indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
-    resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
-  }
-
   export type ProjectCreateWithoutImpactInput = {
     projectId?: string
     projectName?: string | null
@@ -47859,9 +48039,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     outcome?: OutcomeCreateNestedManyWithoutProjectInput
@@ -47870,6 +48050,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutImpactInput = {
@@ -47896,6 +48078,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutImpactInput = {
@@ -47986,9 +48170,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     outcome?: OutcomeUpdateManyWithoutProjectNestedInput
@@ -47997,6 +48181,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutImpactInput = {
@@ -48023,6 +48209,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutImpactInput = {
@@ -48110,9 +48298,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -48121,6 +48309,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutOutcomeInput = {
@@ -48147,6 +48337,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutOutcomeInput = {
@@ -48270,9 +48462,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -48281,6 +48473,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutOutcomeInput = {
@@ -48307,6 +48501,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutOutcomeInput = {
@@ -48398,9 +48594,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -48409,6 +48605,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutOutputInput = {
@@ -48435,6 +48633,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutOutputInput = {
@@ -48714,9 +48914,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -48725,6 +48925,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutOutputInput = {
@@ -48751,6 +48953,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ResultTypeUpsertWithoutOutputInput = {
@@ -48837,6 +49041,67 @@ export namespace Prisma {
     create: XOR<ResultTypeCreateWithoutIndicatorInput, ResultTypeUncheckedCreateWithoutIndicatorInput>
   }
 
+  export type ProjectCreateWithoutIndicatorInput = {
+    projectId?: string
+    projectName?: string | null
+    budgetCurrency?: string | null
+    totalBudgetAmount?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    country?: string | null
+    state?: string | null
+    localGovernment?: string | null
+    community?: string | null
+    thematicAreasOrPillar?: string | null
+    status?: string | null
+    strategicObjectiveId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
+    partner?: PartnerCreateNestedManyWithoutProjectInput
+    impact?: ImpactCreateNestedManyWithoutProjectInput
+    outcome?: OutcomeCreateNestedManyWithoutProjectInput
+    output?: OutputCreateNestedManyWithoutProjectInput
+    activity?: ActivityCreateNestedManyWithoutProjectInput
+    logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
+    request?: RequestCreateNestedManyWithoutProjectInput
+    report?: ReportCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutIndicatorInput = {
+    projectId?: string
+    projectName?: string | null
+    budgetCurrency?: string | null
+    totalBudgetAmount?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    country?: string | null
+    state?: string | null
+    localGovernment?: string | null
+    community?: string | null
+    thematicAreasOrPillar?: string | null
+    status?: string | null
+    strategicObjectiveId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    teamMember?: TeamMemberUncheckedCreateNestedManyWithoutProjectInput
+    partner?: PartnerUncheckedCreateNestedManyWithoutProjectInput
+    impact?: ImpactUncheckedCreateNestedManyWithoutProjectInput
+    outcome?: OutcomeUncheckedCreateNestedManyWithoutProjectInput
+    output?: OutputUncheckedCreateNestedManyWithoutProjectInput
+    activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
+    logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
+    request?: RequestUncheckedCreateNestedManyWithoutProjectInput
+    report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutIndicatorInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutIndicatorInput, ProjectUncheckedCreateWithoutIndicatorInput>
+  }
+
   export type IndicatorReportCreateWithoutIndicatorInput = {
     indicatorReportId?: string
     indicatorSource?: string | null
@@ -48852,6 +49117,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
+    project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationCreateNestedManyWithoutIndicatorReportInput
   }
@@ -48871,6 +49137,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     resultTypeId?: string | null
+    projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -48960,6 +49227,73 @@ export namespace Prisma {
     outcome?: OutcomeUncheckedUpdateManyWithoutResultTypeNestedInput
     output?: OutputUncheckedUpdateManyWithoutResultTypeNestedInput
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutResultTypeNestedInput
+  }
+
+  export type ProjectUpsertWithoutIndicatorInput = {
+    update: XOR<ProjectUpdateWithoutIndicatorInput, ProjectUncheckedUpdateWithoutIndicatorInput>
+    create: XOR<ProjectCreateWithoutIndicatorInput, ProjectUncheckedCreateWithoutIndicatorInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutIndicatorInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutIndicatorInput, ProjectUncheckedUpdateWithoutIndicatorInput>
+  }
+
+  export type ProjectUpdateWithoutIndicatorInput = {
+    projectId?: StringFieldUpdateOperationsInput | string
+    projectName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
+    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
+    partner?: PartnerUpdateManyWithoutProjectNestedInput
+    impact?: ImpactUpdateManyWithoutProjectNestedInput
+    outcome?: OutcomeUpdateManyWithoutProjectNestedInput
+    output?: OutputUpdateManyWithoutProjectNestedInput
+    activity?: ActivityUpdateManyWithoutProjectNestedInput
+    logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
+    request?: RequestUpdateManyWithoutProjectNestedInput
+    report?: ReportUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutIndicatorInput = {
+    projectId?: StringFieldUpdateOperationsInput | string
+    projectName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
+    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    teamMember?: TeamMemberUncheckedUpdateManyWithoutProjectNestedInput
+    partner?: PartnerUncheckedUpdateManyWithoutProjectNestedInput
+    impact?: ImpactUncheckedUpdateManyWithoutProjectNestedInput
+    outcome?: OutcomeUncheckedUpdateManyWithoutProjectNestedInput
+    output?: OutputUncheckedUpdateManyWithoutProjectNestedInput
+    activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
+    logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
+    request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
+    report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type IndicatorReportUpsertWithWhereUniqueWithoutIndicatorInput = {
@@ -49055,6 +49389,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    project?: ProjectCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
@@ -49082,6 +49417,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
@@ -49125,6 +49461,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
@@ -49152,6 +49489,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
   }
@@ -49179,6 +49517,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    project?: ProjectCreateNestedOneWithoutIndicatorInput
     IndicatorReport?: IndicatorReportCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
   }
@@ -49206,6 +49545,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     IndicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
   }
@@ -49249,6 +49589,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
   }
@@ -49276,6 +49617,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
   }
@@ -49303,6 +49645,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorInput
+    project?: ProjectCreateNestedOneWithoutIndicatorInput
     IndicatorDisaggregation?: IndicatorDisaggregationCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetCreateNestedManyWithoutIndicatorInput
   }
@@ -49330,6 +49673,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     result?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedCreateNestedManyWithoutIndicatorInput
     PeriodicTarget?: PeriodicTargetUncheckedCreateNestedManyWithoutIndicatorInput
   }
@@ -49360,6 +49704,67 @@ export namespace Prisma {
   export type ResultTypeCreateOrConnectWithoutIndicatorReportInput = {
     where: ResultTypeWhereUniqueInput
     create: XOR<ResultTypeCreateWithoutIndicatorReportInput, ResultTypeUncheckedCreateWithoutIndicatorReportInput>
+  }
+
+  export type ProjectCreateWithoutIndicatorReportInput = {
+    projectId?: string
+    projectName?: string | null
+    budgetCurrency?: string | null
+    totalBudgetAmount?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    country?: string | null
+    state?: string | null
+    localGovernment?: string | null
+    community?: string | null
+    thematicAreasOrPillar?: string | null
+    status?: string | null
+    strategicObjectiveId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
+    partner?: PartnerCreateNestedManyWithoutProjectInput
+    impact?: ImpactCreateNestedManyWithoutProjectInput
+    outcome?: OutcomeCreateNestedManyWithoutProjectInput
+    output?: OutputCreateNestedManyWithoutProjectInput
+    activity?: ActivityCreateNestedManyWithoutProjectInput
+    logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
+    request?: RequestCreateNestedManyWithoutProjectInput
+    report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutIndicatorReportInput = {
+    projectId?: string
+    projectName?: string | null
+    budgetCurrency?: string | null
+    totalBudgetAmount?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    country?: string | null
+    state?: string | null
+    localGovernment?: string | null
+    community?: string | null
+    thematicAreasOrPillar?: string | null
+    status?: string | null
+    strategicObjectiveId?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    teamMember?: TeamMemberUncheckedCreateNestedManyWithoutProjectInput
+    partner?: PartnerUncheckedCreateNestedManyWithoutProjectInput
+    impact?: ImpactUncheckedCreateNestedManyWithoutProjectInput
+    outcome?: OutcomeUncheckedCreateNestedManyWithoutProjectInput
+    output?: OutputUncheckedCreateNestedManyWithoutProjectInput
+    activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
+    logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
+    request?: RequestUncheckedCreateNestedManyWithoutProjectInput
+    report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutIndicatorReportInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutIndicatorReportInput, ProjectUncheckedCreateWithoutIndicatorReportInput>
   }
 
   export type IndicatorReportCommentCreateWithoutIndicatorReportInput = {
@@ -49444,6 +49849,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
   }
@@ -49471,6 +49877,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
   }
@@ -49502,6 +49909,73 @@ export namespace Prisma {
     outcome?: OutcomeUncheckedUpdateManyWithoutResultTypeNestedInput
     output?: OutputUncheckedUpdateManyWithoutResultTypeNestedInput
     Indicator?: IndicatorUncheckedUpdateManyWithoutResultTypeNestedInput
+  }
+
+  export type ProjectUpsertWithoutIndicatorReportInput = {
+    update: XOR<ProjectUpdateWithoutIndicatorReportInput, ProjectUncheckedUpdateWithoutIndicatorReportInput>
+    create: XOR<ProjectCreateWithoutIndicatorReportInput, ProjectUncheckedCreateWithoutIndicatorReportInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutIndicatorReportInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutIndicatorReportInput, ProjectUncheckedUpdateWithoutIndicatorReportInput>
+  }
+
+  export type ProjectUpdateWithoutIndicatorReportInput = {
+    projectId?: StringFieldUpdateOperationsInput | string
+    projectName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
+    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
+    partner?: PartnerUpdateManyWithoutProjectNestedInput
+    impact?: ImpactUpdateManyWithoutProjectNestedInput
+    outcome?: OutcomeUpdateManyWithoutProjectNestedInput
+    output?: OutputUpdateManyWithoutProjectNestedInput
+    activity?: ActivityUpdateManyWithoutProjectNestedInput
+    logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
+    request?: RequestUpdateManyWithoutProjectNestedInput
+    report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutIndicatorReportInput = {
+    projectId?: StringFieldUpdateOperationsInput | string
+    projectName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
+    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
+    community?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    teamMember?: TeamMemberUncheckedUpdateManyWithoutProjectNestedInput
+    partner?: PartnerUncheckedUpdateManyWithoutProjectNestedInput
+    impact?: ImpactUncheckedUpdateManyWithoutProjectNestedInput
+    outcome?: OutcomeUncheckedUpdateManyWithoutProjectNestedInput
+    output?: OutputUncheckedUpdateManyWithoutProjectNestedInput
+    activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
+    logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
+    request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
+    report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type IndicatorReportCommentUpsertWithWhereUniqueWithoutIndicatorReportInput = {
@@ -49574,6 +50048,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
+    project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
   }
 
@@ -49593,6 +50068,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
 
@@ -49628,6 +50104,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
   }
 
@@ -49647,6 +50124,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
 
@@ -49666,6 +50144,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
+    project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationCreateNestedManyWithoutIndicatorReportInput
   }
 
@@ -49685,6 +50164,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    projectId?: string | null
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
 
@@ -49720,6 +50200,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUpdateManyWithoutIndicatorReportNestedInput
   }
 
@@ -49739,6 +50220,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
 
@@ -49786,9 +50268,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -49797,6 +50279,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutActivityInput = {
@@ -49823,6 +50307,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutActivityInput = {
@@ -49985,9 +50471,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -49996,6 +50482,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutActivityInput = {
@@ -50022,6 +50510,8 @@ export namespace Prisma {
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ActivityReportUpsertWithWhereUniqueWithoutActivityInput = {
@@ -50313,9 +50803,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -50324,6 +50814,8 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutLogicalFrameworkInput = {
@@ -50350,6 +50842,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutLogicalFrameworkInput = {
@@ -50381,9 +50875,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -50392,6 +50886,8 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutLogicalFrameworkInput = {
@@ -50418,6 +50914,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type OutputCreateWithoutRequestInput = {
@@ -50464,9 +50962,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -50475,6 +50973,8 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     report?: ReportCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutRequestInput = {
@@ -50501,6 +51001,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     report?: ReportUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutRequestInput = {
@@ -50754,9 +51256,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -50765,6 +51267,8 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     report?: ReportUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutRequestInput = {
@@ -50791,6 +51295,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutRequestInput = {
@@ -51962,9 +52468,9 @@ export namespace Prisma {
     community?: string | null
     thematicAreasOrPillar?: string | null
     status?: string | null
+    strategicObjectiveId?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
-    strategicObjective?: StrategicObjectiveCreateNestedOneWithoutProjectInput
     teamMember?: TeamMemberCreateNestedManyWithoutProjectInput
     partner?: PartnerCreateNestedManyWithoutProjectInput
     impact?: ImpactCreateNestedManyWithoutProjectInput
@@ -51973,6 +52479,8 @@ export namespace Prisma {
     activity?: ActivityCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkCreateNestedManyWithoutProjectInput
     request?: RequestCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutReportInput = {
@@ -51999,6 +52507,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedCreateNestedManyWithoutProjectInput
     logicalFramework?: LogicalFrameworkUncheckedCreateNestedManyWithoutProjectInput
     request?: RequestUncheckedCreateNestedManyWithoutProjectInput
+    indicator?: IndicatorUncheckedCreateNestedManyWithoutProjectInput
+    indicatorReport?: IndicatorReportUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutReportInput = {
@@ -52030,9 +52540,9 @@ export namespace Prisma {
     community?: NullableStringFieldUpdateOperationsInput | string | null
     thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    strategicObjectiveId?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    strategicObjective?: StrategicObjectiveUpdateOneWithoutProjectNestedInput
     teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
     partner?: PartnerUpdateManyWithoutProjectNestedInput
     impact?: ImpactUpdateManyWithoutProjectNestedInput
@@ -52041,6 +52551,8 @@ export namespace Prisma {
     activity?: ActivityUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
     request?: RequestUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutReportInput = {
@@ -52067,6 +52579,8 @@ export namespace Prisma {
     activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
     logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
     request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
+    indicator?: IndicatorUncheckedUpdateManyWithoutProjectNestedInput
+    indicatorReport?: IndicatorReportUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type PartnerCreateManyUserInput = {
@@ -52589,23 +53103,6 @@ export namespace Prisma {
     updateAt?: Date | string | null
   }
 
-  export type ProjectCreateManyStrategicObjectiveInput = {
-    projectId?: string
-    projectName?: string | null
-    budgetCurrency?: string | null
-    totalBudgetAmount?: string | null
-    startDate?: Date | string | null
-    endDate?: Date | string | null
-    country?: string | null
-    state?: string | null
-    localGovernment?: string | null
-    community?: string | null
-    thematicAreasOrPillar?: string | null
-    status?: string | null
-    createAt?: Date | string | null
-    updateAt?: Date | string | null
-  }
-
   export type KpiUpdateWithoutStrategicObjectiveInput = {
     kpiId?: StringFieldUpdateOperationsInput | string
     statement?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52664,75 +53161,6 @@ export namespace Prisma {
     targetType?: NullableStringFieldUpdateOperationsInput | string | null
     responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
     type?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ProjectUpdateWithoutStrategicObjectiveInput = {
-    projectId?: StringFieldUpdateOperationsInput | string
-    projectName?: NullableStringFieldUpdateOperationsInput | string | null
-    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
-    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    teamMember?: TeamMemberUpdateManyWithoutProjectNestedInput
-    partner?: PartnerUpdateManyWithoutProjectNestedInput
-    impact?: ImpactUpdateManyWithoutProjectNestedInput
-    outcome?: OutcomeUpdateManyWithoutProjectNestedInput
-    output?: OutputUpdateManyWithoutProjectNestedInput
-    activity?: ActivityUpdateManyWithoutProjectNestedInput
-    logicalFramework?: LogicalFrameworkUpdateManyWithoutProjectNestedInput
-    request?: RequestUpdateManyWithoutProjectNestedInput
-    report?: ReportUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateWithoutStrategicObjectiveInput = {
-    projectId?: StringFieldUpdateOperationsInput | string
-    projectName?: NullableStringFieldUpdateOperationsInput | string | null
-    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
-    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
-    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    teamMember?: TeamMemberUncheckedUpdateManyWithoutProjectNestedInput
-    partner?: PartnerUncheckedUpdateManyWithoutProjectNestedInput
-    impact?: ImpactUncheckedUpdateManyWithoutProjectNestedInput
-    outcome?: OutcomeUncheckedUpdateManyWithoutProjectNestedInput
-    output?: OutputUncheckedUpdateManyWithoutProjectNestedInput
-    activity?: ActivityUncheckedUpdateManyWithoutProjectNestedInput
-    logicalFramework?: LogicalFrameworkUncheckedUpdateManyWithoutProjectNestedInput
-    request?: RequestUncheckedUpdateManyWithoutProjectNestedInput
-    report?: ReportUncheckedUpdateManyWithoutProjectNestedInput
-  }
-
-  export type ProjectUncheckedUpdateManyWithoutStrategicObjectiveInput = {
-    projectId?: StringFieldUpdateOperationsInput | string
-    projectName?: NullableStringFieldUpdateOperationsInput | string | null
-    budgetCurrency?: NullableStringFieldUpdateOperationsInput | string | null
-    totalBudgetAmount?: NullableStringFieldUpdateOperationsInput | string | null
-    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
-    state?: NullableStringFieldUpdateOperationsInput | string | null
-    localGovernment?: NullableStringFieldUpdateOperationsInput | string | null
-    community?: NullableStringFieldUpdateOperationsInput | string | null
-    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -52925,6 +53353,49 @@ export namespace Prisma {
     budgetUtilization?: number | null
     createAt?: Date | string
     updateAt?: Date | string
+  }
+
+  export type IndicatorCreateManyProjectInput = {
+    indicatorId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    statement?: string | null
+    linkKpiToSdnOrgKpi?: string | null
+    definition?: string | null
+    specificArea?: string | null
+    unitOfMeasure?: string | null
+    itemInMeasure?: string | null
+    baseLineDate?: Date | string | null
+    cumulativeValue?: number | null
+    baselineNarrative?: string | null
+    targetDate?: Date | string | null
+    cumulativeTarget?: number | null
+    targetNarrative?: string | null
+    targetType?: string | null
+    responsiblePersons?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    result?: string | null
+    resultTypeId?: string | null
+  }
+
+  export type IndicatorReportCreateManyProjectInput = {
+    indicatorReportId?: string
+    indicatorSource?: string | null
+    orgKpiId?: string | null
+    thematicAreasOrPillar?: string | null
+    indicatorStatement?: string | null
+    responsiblePersons?: string | null
+    actualDate?: Date | string | null
+    cumulativeActual?: string | null
+    actualNarrative?: string | null
+    attachmentUrl?: string | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    indicatorId?: string | null
+    resultTypeId?: string | null
   }
 
   export type TeamMemberUpdateWithoutProjectInput = {
@@ -53421,6 +53892,145 @@ export namespace Prisma {
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type IndicatorUpdateWithoutProjectInput = {
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    ResultType?: ResultTypeUpdateOneWithoutIndicatorNestedInput
+    IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
+  }
+
+  export type IndicatorUncheckedUpdateWithoutProjectInput = {
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
+    IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
+    PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
+  }
+
+  export type IndicatorUncheckedUpdateManyWithoutProjectInput = {
+    indicatorId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    statement?: NullableStringFieldUpdateOperationsInput | string | null
+    linkKpiToSdnOrgKpi?: NullableStringFieldUpdateOperationsInput | string | null
+    definition?: NullableStringFieldUpdateOperationsInput | string | null
+    specificArea?: NullableStringFieldUpdateOperationsInput | string | null
+    unitOfMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    itemInMeasure?: NullableStringFieldUpdateOperationsInput | string | null
+    baseLineDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeValue?: NullableIntFieldUpdateOperationsInput | number | null
+    baselineNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeTarget?: NullableIntFieldUpdateOperationsInput | number | null
+    targetNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    targetType?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    result?: NullableStringFieldUpdateOperationsInput | string | null
+    resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type IndicatorReportUpdateWithoutProjectInput = {
+    indicatorReportId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    actualDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeActual?: NullableStringFieldUpdateOperationsInput | string | null
+    actualNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
+    ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
+    indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
+    IndicatorReportDisaggregation?: IndicatorReportDisaggregationUpdateManyWithoutIndicatorReportNestedInput
+  }
+
+  export type IndicatorReportUncheckedUpdateWithoutProjectInput = {
+    indicatorReportId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    actualDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeActual?: NullableStringFieldUpdateOperationsInput | string | null
+    actualNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
+    IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
+  }
+
+  export type IndicatorReportUncheckedUpdateManyWithoutProjectInput = {
+    indicatorReportId?: StringFieldUpdateOperationsInput | string
+    indicatorSource?: NullableStringFieldUpdateOperationsInput | string | null
+    orgKpiId?: NullableStringFieldUpdateOperationsInput | string | null
+    thematicAreasOrPillar?: NullableStringFieldUpdateOperationsInput | string | null
+    indicatorStatement?: NullableStringFieldUpdateOperationsInput | string | null
+    responsiblePersons?: NullableStringFieldUpdateOperationsInput | string | null
+    actualDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cumulativeActual?: NullableStringFieldUpdateOperationsInput | string | null
+    actualNarrative?: NullableStringFieldUpdateOperationsInput | string | null
+    attachmentUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type ImpactCreateManyResultTypeInput = {
     impactId?: string
     statement: string
@@ -53476,6 +54086,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     result?: string | null
+    projectId?: string | null
   }
 
   export type IndicatorReportCreateManyResultTypeInput = {
@@ -53493,6 +54104,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     indicatorId?: string | null
+    projectId?: string | null
   }
 
   export type ImpactUpdateWithoutResultTypeInput = {
@@ -53624,6 +54236,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
+    project?: ProjectUpdateOneWithoutIndicatorNestedInput
     IndicatorReport?: IndicatorReportUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUpdateManyWithoutIndicatorNestedInput
@@ -53651,6 +54264,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReport?: IndicatorReportUncheckedUpdateManyWithoutIndicatorNestedInput
     IndicatorDisaggregation?: IndicatorDisaggregationUncheckedUpdateManyWithoutIndicatorNestedInput
     PeriodicTarget?: PeriodicTargetUncheckedUpdateManyWithoutIndicatorNestedInput
@@ -53678,6 +54292,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     result?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportUpdateWithoutResultTypeInput = {
@@ -53695,6 +54310,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -53714,6 +54330,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -53733,6 +54350,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OutcomeCreateManyImpactInput = {
@@ -54172,6 +54790,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     resultTypeId?: string | null
+    projectId?: string | null
   }
 
   export type IndicatorDisaggregationCreateManyIndicatorInput = {
@@ -54203,6 +54822,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
+    project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -54222,6 +54842,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -54241,6 +54862,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorDisaggregationUpdateWithoutIndicatorInput = {

@@ -129,6 +129,7 @@ export interface IIndicator {
   responsiblePersons?: string | null;
   result?: string | null;
   resultTypeId?: string | null;
+  projectId?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
   impactId?: string | null;
@@ -180,6 +181,7 @@ export interface IIndicatorWithDisaggregation {
   targetNarrative?: string | null;
   targetType?: string | null;
   responsiblePersons?: string | null;
+  projectId?: string | null;
   createAt?: Date | null;
   updateAt?: Date | null;
   result?: string | null;
@@ -230,6 +232,7 @@ export interface IIndicatorView {
   resultTypeId?: string | null;
   resultName?: string | null;
   result?: string | null;
+  projectId?: string | null;
 
   // From related Impact
   resultStatement?: string | null;
@@ -258,6 +261,7 @@ export interface IIndicatorReport {
   updateAt?: Date | null;
   indicatorId?: string | null;
   resultTypeId?: string | null;
+  projectId?: string | null;
   IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
 }
 
@@ -277,7 +281,7 @@ export interface IIndicatorReportWithDisaggregation {
   updateAt?: Date | null;
   indicatorId?: string | null;
   resultTypeId?: string | null;
-
+  projectId?: string | null;
   // Included relation
   IndicatorReportDisaggregation: {
     indicatorReportDisaggregationId: string;
@@ -309,6 +313,7 @@ export interface IIndicatorReportView {
   resultProjectId?: string | null;
   resultTypeId?: string | null;
   resultName?: string | null;
+  projectId?: string | null;
   IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
 }
 

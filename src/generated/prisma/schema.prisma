@@ -83,7 +83,6 @@ model StrategicObjective {
   createAt             DateTime? @default(now())
   updateAt             DateTime? @default(now())
   kpi                  Kpi[]
-  project              Project[]
 
   @@map("strategic_objective")
 }
@@ -126,22 +125,21 @@ model KpiDisaggregation {
 }
 
 model Project {
-  projectId             String              @id @default(uuid())
+  projectId             String             @id @default(uuid())
   projectName           String?
   budgetCurrency        String?
   totalBudgetAmount     String?
-  startDate             DateTime?           @default(now())
-  endDate               DateTime?           @default(now())
+  startDate             DateTime?          @default(now())
+  endDate               DateTime?          @default(now())
   country               String?
   state                 String?
   localGovernment       String?
   community             String?
   thematicAreasOrPillar String?
   status                String?
-  strategicObjective    StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
   strategicObjectiveId  String?
-  createAt              DateTime?           @default(now())
-  updateAt              DateTime?           @default(now())
+  createAt              DateTime?          @default(now())
+  updateAt              DateTime?          @default(now())
   teamMember            TeamMember[]
   partner               Partner[]
   impact                Impact[]
@@ -151,6 +149,8 @@ model Project {
   logicalFramework      LogicalFramework[]
   request               Request[]
   report                Report[]
+  indicator             Indicator[]
+  indicatorReport       IndicatorReport[]
 
   @@map("project")
 }
@@ -281,6 +281,8 @@ model Indicator {
   result                  String?
   ResultType              ResultType?               @relation(fields: [resultTypeId], references: [resultTypeId])
   resultTypeId            String?
+  project                 Project?                  @relation(fields: [projectId], references: [projectId])
+  projectId               String?
   IndicatorReport         IndicatorReport[]
   IndicatorDisaggregation IndicatorDisaggregation[]
   PeriodicTarget          PeriodicTarget[]
@@ -333,6 +335,8 @@ model IndicatorReport {
   indicatorId                   String?
   ResultType                    ResultType?                     @relation(fields: [resultTypeId], references: [resultTypeId])
   resultTypeId                  String?
+  project                       Project?                        @relation(fields: [projectId], references: [projectId])
+  projectId                     String?
   indicatorReportComment        IndicatorReportComment[]
   IndicatorReportDisaggregation IndicatorReportDisaggregation[]
 

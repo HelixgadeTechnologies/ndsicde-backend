@@ -312,7 +312,8 @@ exports.Prisma.IndicatorScalarFieldEnum = {
   createAt: 'createAt',
   updateAt: 'updateAt',
   result: 'result',
-  resultTypeId: 'resultTypeId'
+  resultTypeId: 'resultTypeId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.IndicatorDisaggregationScalarFieldEnum = {
@@ -346,7 +347,8 @@ exports.Prisma.IndicatorReportScalarFieldEnum = {
   createAt: 'createAt',
   updateAt: 'updateAt',
   indicatorId: 'indicatorId',
-  resultTypeId: 'resultTypeId'
+  resultTypeId: 'resultTypeId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.IndicatorReportDisaggregationScalarFieldEnum = {
@@ -709,7 +711,8 @@ exports.Prisma.IndicatorOrderByRelevanceFieldEnum = {
   targetType: 'targetType',
   responsiblePersons: 'responsiblePersons',
   result: 'result',
-  resultTypeId: 'resultTypeId'
+  resultTypeId: 'resultTypeId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.IndicatorDisaggregationOrderByRelevanceFieldEnum = {
@@ -736,7 +739,8 @@ exports.Prisma.IndicatorReportOrderByRelevanceFieldEnum = {
   attachmentUrl: 'attachmentUrl',
   status: 'status',
   indicatorId: 'indicatorId',
-  resultTypeId: 'resultTypeId'
+  resultTypeId: 'resultTypeId',
+  projectId: 'projectId'
 };
 
 exports.Prisma.IndicatorReportDisaggregationOrderByRelevanceFieldEnum = {

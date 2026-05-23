@@ -313,7 +313,8 @@ export const createOrUpdateIndicator = async (
           targetType: payload.targetType,
           responsiblePersons: payload.responsiblePersons,
           result: payload.result as string,
-          resultTypeId: payload.resultTypeId
+          resultTypeId: payload.resultTypeId,
+          projectId: payload.projectId,
         },
       });
 
@@ -373,6 +374,7 @@ export const createOrUpdateIndicator = async (
           responsiblePersons: payload.responsiblePersons,
           result: payload.result as string,
           resultTypeId: payload.resultTypeId,
+          projectId: payload.projectId,
           updateAt: new Date(),
         },
       });
@@ -486,6 +488,7 @@ export async function saveIndicatorReport(
         status: IReportStatus.pending,
         resultTypeId: payload.resultTypeId,
         indicatorId: payload.indicatorId,
+        projectId: payload.projectId,
       },
     });
 
@@ -527,6 +530,7 @@ export async function saveIndicatorReport(
         status: payload.status,
         resultTypeId: payload.resultTypeId,
         indicatorId: payload.indicatorId,
+        projectId: payload.projectId,
         updateAt: new Date(), // update timestamp
       },
     });

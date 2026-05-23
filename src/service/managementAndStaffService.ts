@@ -89,9 +89,7 @@ export const getProjectsService = async () => {
             startDate: true,
             endDate: true,
             thematicAreasOrPillar: true,
-            strategicObjective: {
-                select: { statement: true }
-            },
+            strategicObjectiveId: true,
             teamMember: {
                 select: {
                     fullName: true
@@ -100,7 +98,32 @@ export const getProjectsService = async () => {
         }
     });
 
-    return projects;
+    const allSoIds = [...new Set(
+        projects.flatMap((p) =>
+            p.strategicObjectiveId
+                ? p.strategicObjectiveId.split(",").map((id) => id.trim()).filter(Boolean)
+                : []
+        )
+    )];
+
+    const soStatementMap = new Map<string, string>();
+    if (allSoIds.length > 0) {
+        const sos = await prisma.strategicObjective.findMany({
+            where:  { strategicObjectiveId: { in: allSoIds } },
+            select: { strategicObjectiveId: true, statement: true },
+        });
+        for (const so of sos) soStatementMap.set(so.strategicObjectiveId, so.statement ?? "");
+    }
+
+    return projects.map((p) => ({
+        ...p,
+        strategicObjective: p.strategicObjectiveId
+            ? p.strategicObjectiveId.split(",")
+                .map((id) => soStatementMap.get(id.trim()) ?? "")
+                .filter(Boolean)
+                .join(", ")
+            : "",
+    }));
 };
 
 

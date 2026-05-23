@@ -283,11 +283,33 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
             THEMATIC_AREA_SUMMARY: [],
             KPI_OVERVIEW_CHART:    { monthly: [], quarterly: [], baseline: 0, annualTarget: 0 },
             KPI_TABLE_DATA:        [],
-            PROJECT_INDICATOR_PERFORMANCE: { kpis: [], averagePerformance: 0 },
         };
     }
 
     const kpiIds = kpis.map((k) => k.kpiId);
+
+    const kpiToSoMap = new Map<string, string>();
+    for (const kpi of kpis) {
+        if (kpi.strategicObjectiveId) kpiToSoMap.set(kpi.kpiId, kpi.strategicObjectiveId);
+    }
+
+    const soIds = [...new Set(kpis.map((k) => k.strategicObjectiveId).filter(Boolean))] as string[];
+
+    const soProjectCountMap = new Map<string, number>();
+    if (soIds.length > 0) {
+        const allProjects = await prisma.project.findMany({
+            select: { strategicObjectiveId: true },
+        });
+        for (const p of allProjects) {
+            if (!p.strategicObjectiveId) continue;
+            const ids = p.strategicObjectiveId.split(",").map((id) => id.trim());
+            for (const id of ids) {
+                if (soIds.includes(id)) {
+                    soProjectCountMap.set(id, (soProjectCountMap.get(id) ?? 0) + 1);
+                }
+            }
+        }
+    }
 
     // ── 2. Fetch approved IndicatorReports that link to these org KPIs ─────────
     const reports = await prisma.indicatorReport.findMany({
@@ -321,6 +343,8 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
         kpiAggMap.set(kpi.kpiId, { totalActual: 0, monthlyActuals: new Map(), quarterlyActuals: new Map() });
     }
 
+    const soActualMap = new Map<string, number>();
+
     for (const report of reports) {
         if (!report.orgKpiId) continue;
         const agg = kpiAggMap.get(report.orgKpiId);
@@ -331,6 +355,12 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
             0
         );
         agg.totalActual += reportActual;
+
+        const soId = kpiToSoMap.get(report.orgKpiId);
+        if (soId) {
+            const cumActual = parseInt(report.cumulativeActual ?? "0", 10);
+            if (!isNaN(cumActual)) soActualMap.set(soId, (soActualMap.get(soId) ?? 0) + cumActual);
+        }
 
         const date = report.actualDate;
         if (date) {
@@ -375,30 +405,45 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
             : 0,
     }));
 
-    // ── 5. KPI_TABLE_DATA ───────────────────────────────────────────────────
+    // ── 5. KPI_TABLE_DATA (grouped by Strategic Objective) ──────────────────
     const statusLabel = (perf: number): string => {
         if (perf >= 100) return "Met";
         if (perf >= 50)  return "Partially Met";
         return "Not Met";
     };
 
-    const KPI_TABLE_DATA = kpis.map((kpi) => {
-        const agg    = kpiAggMap.get(kpi.kpiId)!;
-        const target = kpi.cumulativeTarget ?? 0;
-        const base   = kpi.cumulativeTarget ?? 0;
-        const perf   = target > 0 ? Number(((agg.totalActual / target) * 100).toFixed(2)) : 0;
+    const soKpisMap = new Map<string, typeof kpis>();
+    for (const kpi of kpis) {
+        const soId = kpi.strategicObjectiveId ?? "Uncategorised";
+        if (!soKpisMap.has(soId)) soKpisMap.set(soId, []);
+        soKpisMap.get(soId)!.push(kpi);
+    }
+
+    const KPI_TABLE_DATA = Array.from(soKpisMap.entries()).map(([soId, soKpis]) => {
+        const so           = soKpis[0].strategicObjective;
+        const soActual     = soActualMap.get(soId) ?? 0;
+        const totalProjects = soProjectCountMap.get(soId) ?? 0;
+
         return {
-            kpiId:             kpi.kpiId,
-            code:              kpi.specificArea ?? "",
-            statement:         kpi.statement    ?? "",
-            thematicArea:      kpi.strategicObjective?.thematicAreas ?? "",
-            strategicObjective: kpi.strategicObjective?.statement   ?? "",
-            resultLevel:       kpi.type         ?? "",
-            baseline:          base,
-            target,
-            actual:            agg.totalActual,
-            performance:       perf,
-            status:            statusLabel(perf),
+            strategicObjectiveId: soId,
+            strategicObjective:   so?.statement    ?? "",
+            thematicArea:         so?.thematicAreas ?? "",
+            totalProjects:        totalProjects,
+            kpis: soKpis.map((kpi) => {
+                const target = kpi.cumulativeTarget ?? 0;
+                const perf   = target > 0 ? Number(((soActual / target) * 100).toFixed(2)) : 0;
+                return {
+                    kpiId:       kpi.kpiId,
+                    code:        kpi.specificArea ?? "",
+                    statement:   kpi.statement    ?? "",
+                    resultLevel: kpi.type         ?? "",
+                    baseline:    kpi.cumulativeTarget ?? 0,
+                    target,
+                    actual:      soActual,
+                    performance: perf,
+                    status:      statusLabel(perf),
+                };
+            }),
         };
     });
 
@@ -449,35 +494,10 @@ export async function getOrgKpiDashboardData(filters: IOrgKpiDashboardFilters = 
         annualTarget: totalTarget,
     };
 
-    // ── 7. PROJECT_INDICATOR_PERFORMANCE ─────────────────────────────────────
-    const kpiPerformances = kpis.map((kpi) => {
-        const agg    = kpiAggMap.get(kpi.kpiId)!;
-        const target = kpi.cumulativeTarget ?? 0;
-        const perf   = target > 0 ? Number(((agg.totalActual / target) * 100).toFixed(2)) : 0;
-        return {
-            kpiId:      kpi.kpiId,
-            code:       kpi.specificArea ?? "",
-            statement:  kpi.statement    ?? "",
-            actual:     agg.totalActual,
-            target,
-            performance: perf,
-        };
-    });
-
-    const avgPerformance = kpiPerformances.length > 0
-        ? Number((kpiPerformances.reduce((s, k) => s + k.performance, 0) / kpiPerformances.length).toFixed(2))
-        : 0;
-
-    const PROJECT_INDICATOR_PERFORMANCE = {
-        kpis: kpiPerformances,
-        averagePerformance: avgPerformance,
-    };
-
     return {
         THEMATIC_AREA_SUMMARY,
         KPI_OVERVIEW_CHART,
         KPI_TABLE_DATA,
-        PROJECT_INDICATOR_PERFORMANCE,
     };
 }
 

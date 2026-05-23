@@ -75,48 +75,47 @@ model Role {
 }
 
 model StrategicObjective {
-  strategicObjectiveId String      @id @default(uuid())
+  strategicObjectiveId String    @id @default(uuid())
   statement            String?
   thematicAreas        String?
   pillarLead           String?
   status               String?
-  createAt             DateTime?   @default(now())
-  updateAt             DateTime?   @default(now())
+  createAt             DateTime? @default(now())
+  updateAt             DateTime? @default(now())
   kpi                  Kpi[]
-  project              Project[]
 
   @@map("strategic_objective")
 }
 
 model Kpi {
   kpiId                String              @id @default(uuid())
-  statement               String?
-  definition              String?
-  specificArea            String?
-  unitOfMeasure           String?
-  itemInMeasure           String?
-  baseLineDate            DateTime?
-  cumulativeValue         Int?
-  baselineNarrative       String?
-  targetDate              DateTime?
-  cumulativeTarget        Int?
-  targetNarrative         String?
-  targetType              String?
-  responsiblePersons      String?
+  statement            String?
+  definition           String?
+  specificArea         String?
+  unitOfMeasure        String?
+  itemInMeasure        String?
+  baseLineDate         DateTime?
+  cumulativeValue      Int?
+  baselineNarrative    String?
+  targetDate           DateTime?
+  cumulativeTarget     Int?
+  targetNarrative      String?
+  targetType           String?
+  responsiblePersons   String?
   type                 String?
   strategicObjective   StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
   strategicObjectiveId String?
-  createAt                DateTime?                 @default(now())
-  updateAt                DateTime?                 @default(now())
-  kpiDisaggregation       KpiDisaggregation[]
+  createAt             DateTime?           @default(now())
+  updateAt             DateTime?           @default(now())
+  kpiDisaggregation    KpiDisaggregation[]
 
   @@map("kpi")
 }
 
 model KpiDisaggregation {
-  kpiDisaggregationId String    @id @default(uuid())
+  kpiDisaggregationId String @id @default(uuid())
   kpiId               String
-  kpi                 Kpi       @relation(fields: [kpiId], references: [kpiId])
+  kpi                 Kpi    @relation(fields: [kpiId], references: [kpiId])
   type                String
   category            String
   target              Int?
@@ -138,7 +137,6 @@ model Project {
   community             String?
   thematicAreasOrPillar String?
   status                String?
-  strategicObjective    StrategicObjective? @relation(fields: [strategicObjectiveId], references: [strategicObjectiveId])
   strategicObjectiveId  String?
   createAt              DateTime?           @default(now())
   updateAt              DateTime?           @default(now())
@@ -151,6 +149,8 @@ model Project {
   logicalFramework      LogicalFramework[]
   request               Request[]
   report                Report[]
+  indicator             Indicator[]
+  indicatorReport       IndicatorReport[]
 
   @@map("project")
 }
@@ -281,9 +281,12 @@ model Indicator {
   result                  String?
   ResultType              ResultType?               @relation(fields: [resultTypeId], references: [resultTypeId])
   resultTypeId            String?
+  project                 Project?                  @relation(fields: [projectId], references: [projectId])
+  projectId               String?
   IndicatorReport         IndicatorReport[]
   IndicatorDisaggregation IndicatorDisaggregation[]
   PeriodicTarget          PeriodicTarget[]
+
   @@map("indicator")
 }
 
@@ -295,19 +298,19 @@ model IndicatorDisaggregation {
   type     String // "gender", "state", "age"
   category String // "Male", "Lagos", "18-25"
 
-  target       Int? // optional per breakdown target
-  baseline     Int?
+  target   Int? // optional per breakdown target
+  baseline Int?
 
   @@map("indicator_disaggregation")
 }
 
 // Periodic target
 model PeriodicTarget {
-  periodicTargetId String @id @default(uuid())
+  periodicTargetId String    @id @default(uuid())
   indicatorId      String
   indicator        Indicator @relation(fields: [indicatorId], references: [indicatorId])
-  target       Int? // optional per breakdown target
-  targetDate    DateTime?
+  target           Int? // optional per breakdown target
+  targetDate       DateTime?
 
   @@map("periodic_target")
 }
@@ -332,6 +335,8 @@ model IndicatorReport {
   indicatorId                   String?
   ResultType                    ResultType?                     @relation(fields: [resultTypeId], references: [resultTypeId])
   resultTypeId                  String?
+  project                       Project?                        @relation(fields: [projectId], references: [projectId])
+  projectId                     String?
   indicatorReportComment        IndicatorReportComment[]
   IndicatorReportDisaggregation IndicatorReportDisaggregation[]
 
@@ -383,17 +388,17 @@ model Activity {
   updateAt            DateTime?        @default(now())
   activityReport      ActivityReport[]
   lineItem            LineItem[]
-  subActivities         SubActivities[]
+  subActivities       SubActivities[]
 
   @@map("activity")
 }
 
 model SubActivities {
   subActivitiesId String    @id @default(uuid())
-  activityId    String?
-  activity      Activity? @relation(fields: [activityId], references: [activityId])
-  description   String?
-  activityDate  DateTime?
+  activityId      String?
+  activity        Activity? @relation(fields: [activityId], references: [activityId])
+  description     String?
+  activityDate    DateTime?
 
   @@map("subactivities")
 }
@@ -428,79 +433,79 @@ model LogicalFramework {
 
 // REQUEST
 model Request {
-  requestId                  String       @id @default(uuid())
-  staff                      String?
-  output                     Output?      @relation(fields: [outputId], references: [outputId])
-  outputId                   String?
-  activityTitle              String?
-  activityBudgetCode         String?
-  activityLocation           String?
-  activityPurposeDescription String?
-  activityStartDate          DateTime?
-  activityEndDate            DateTime?
-  budgetCode                 String?
-  modeOfTransport            String?
-  driverName                 String?
-  driversPhoneNumber         String?
-  vehiclePlateNumber         String?
-  vehicleColor               String?
-  departureTime              DateTime?
-  route                      String?
-  recipientPhoneNumber       String?
-  documentName               String?
-  documentURL                String?
-  project                    Project?     @relation(fields: [projectId], references: [projectId])
-  projectId                  String?
-  approval_A                 Int?
-  approval_B                 Int?
-  approval_C                 Int?
-  approval_D                 Int?
-  approval_E                 Int?
-  approvedBy_A               String?      @db.VarChar(191)
-  approvedBy_B               String?      @db.VarChar(191)
-  approvedBy_C               String?      @db.VarChar(191)
-  approvedBy_D               String?      @db.VarChar(191)
-  approvedBy_E               String?      @db.VarChar(191)
-  comment_A                  String?
-  comment_B                  String?
-  comment_C                  String?
-  comment_D                  String?
-  comment_E                  String?
-  approvalStep               Int?         @default(0)
-  status                     String?
-  createAt                   DateTime?    @default(now())
-  updateAt                   DateTime?    @default(now())
-  user                       User?        @relation(fields: [createdBy], references: [userId])
-  createdBy                  String?
-  isJourneyManagementRequired              Boolean        @default(false)
-  purposeOfTrip                            String?
-  vehicleMake                              String?
-  vehicleModel                             String?
-  departureDate                            DateTime?
-  departureLocationAndTime                 String?
-  destination                              String?
-  contactPersonPhoneNumberAtDestination    String?
-  flightDepartureState                     String?
-  flightDepartureTime                      String?
-  flightArrivalState                       String?
-  flightArrivalTime                        String?
-  hotelAccommodationName                   String?
-  hotelAddress                             String?
-  returnDate                               DateTime?
-  returnTime                               String?
-  airportDropoffOfficerName                String?
-  airportPickupOfficerName                 String?
-  budgetName                               String?
-  retirement                               Retirement[]
-  lineItems                                LineItem[]
-  otherPersonnel                           OtherPersonnel[]
+  requestId                             String           @id @default(uuid())
+  staff                                 String?
+  output                                Output?          @relation(fields: [outputId], references: [outputId])
+  outputId                              String?
+  activityTitle                         String?
+  activityBudgetCode                    String?
+  activityLocation                      String?
+  activityPurposeDescription            String?
+  activityStartDate                     DateTime?
+  activityEndDate                       DateTime?
+  budgetCode                            String?
+  modeOfTransport                       String?
+  driverName                            String?
+  driversPhoneNumber                    String?
+  vehiclePlateNumber                    String?
+  vehicleColor                          String?
+  departureTime                         DateTime?
+  route                                 String?
+  recipientPhoneNumber                  String?
+  documentName                          String?
+  documentURL                           String?
+  project                               Project?         @relation(fields: [projectId], references: [projectId])
+  projectId                             String?
+  approval_A                            Int?
+  approval_B                            Int?
+  approval_C                            Int?
+  approval_D                            Int?
+  approval_E                            Int?
+  approvedBy_A                          String?          @db.VarChar(191)
+  approvedBy_B                          String?          @db.VarChar(191)
+  approvedBy_C                          String?          @db.VarChar(191)
+  approvedBy_D                          String?          @db.VarChar(191)
+  approvedBy_E                          String?          @db.VarChar(191)
+  comment_A                             String?
+  comment_B                             String?
+  comment_C                             String?
+  comment_D                             String?
+  comment_E                             String?
+  approvalStep                          Int?             @default(0)
+  status                                String?
+  createAt                              DateTime?        @default(now())
+  updateAt                              DateTime?        @default(now())
+  user                                  User?            @relation(fields: [createdBy], references: [userId])
+  createdBy                             String?
+  isJourneyManagementRequired           Boolean          @default(false)
+  purposeOfTrip                         String?
+  vehicleMake                           String?
+  vehicleModel                          String?
+  departureDate                         DateTime?
+  departureLocationAndTime              String?
+  destination                           String?
+  contactPersonPhoneNumberAtDestination String?
+  flightDepartureState                  String?
+  flightDepartureTime                   String?
+  flightArrivalState                    String?
+  flightArrivalTime                     String?
+  hotelAccommodationName                String?
+  hotelAddress                          String?
+  returnDate                            DateTime?
+  returnTime                            String?
+  airportDropoffOfficerName             String?
+  airportPickupOfficerName              String?
+  budgetName                            String?
+  retirement                            Retirement[]
+  lineItems                             LineItem[]
+  otherPersonnel                        OtherPersonnel[]
 
   @@map("request")
 }
 
 model OtherPersonnel {
-  otherPersonnelId String   @id @default(uuid())
-  request          Request  @relation(fields: [requestId], references: [requestId])
+  otherPersonnelId String  @id @default(uuid())
+  request          Request @relation(fields: [requestId], references: [requestId])
   requestId        String
   name             String?
   company          String?
@@ -510,21 +515,21 @@ model OtherPersonnel {
 }
 
 model LineItem {
-  lineItemId   String     @id @default(uuid())
-  requestId    String
-  request      Request    @relation(fields: [requestId], references: [requestId])
-  activity     Activity?  @relation(fields: [activityId], references: [activityId])
-  activityId   String?
-  description  String?
-  quantity     Int?
-  frequency    Int?
-  unitCost     Int?
-  totalBudget  Int?
-  totalSpent   Int?
-  receiptURL   String?
-  variance     Int?
-  createAt     DateTime?  @default(now())
-  updateAt     DateTime?  @default(now())
+  lineItemId  String    @id @default(uuid())
+  requestId   String
+  request     Request   @relation(fields: [requestId], references: [requestId])
+  activity    Activity? @relation(fields: [activityId], references: [activityId])
+  activityId  String?
+  description String?
+  quantity    Int?
+  frequency   Int?
+  unitCost    Int?
+  totalBudget Int?
+  totalSpent  Int?
+  receiptURL  String?
+  variance    Int?
+  createAt    DateTime? @default(now())
+  updateAt    DateTime? @default(now())
 
   @@map("lineitem")
 }
@@ -549,8 +554,8 @@ model Retirement {
   comment_A               String?
   comment_B               String?
   comment_C               String?
-  approvalStep            Int?              @default(0)
-  needJournalId            Boolean      @default(false)
+  approvalStep            Int?      @default(0)
+  needJournalId           Boolean   @default(false)
   journalId               String?
   request                 Request?  @relation(fields: [requestId], references: [requestId])
   requestId               String?
