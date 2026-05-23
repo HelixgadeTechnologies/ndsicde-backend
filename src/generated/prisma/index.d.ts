@@ -28023,8 +28023,6 @@ export namespace Prisma {
   }
 
   export type RequestAvgAggregateOutputType = {
-    activityBudgetCode: number | null
-    budgetCode: number | null
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
@@ -28034,8 +28032,6 @@ export namespace Prisma {
   }
 
   export type RequestSumAggregateOutputType = {
-    activityBudgetCode: number | null
-    budgetCode: number | null
     approval_A: number | null
     approval_B: number | null
     approval_C: number | null
@@ -28049,12 +28045,12 @@ export namespace Prisma {
     staff: string | null
     outputId: string | null
     activityTitle: string | null
-    activityBudgetCode: number | null
+    activityBudgetCode: string | null
     activityLocation: string | null
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    budgetCode: number | null
+    budgetCode: string | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28112,12 +28108,12 @@ export namespace Prisma {
     staff: string | null
     outputId: string | null
     activityTitle: string | null
-    activityBudgetCode: number | null
+    activityBudgetCode: string | null
     activityLocation: string | null
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    budgetCode: number | null
+    budgetCode: string | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28236,8 +28232,6 @@ export namespace Prisma {
 
 
   export type RequestAvgAggregateInputType = {
-    activityBudgetCode?: true
-    budgetCode?: true
     approval_A?: true
     approval_B?: true
     approval_C?: true
@@ -28247,8 +28241,6 @@ export namespace Prisma {
   }
 
   export type RequestSumAggregateInputType = {
-    activityBudgetCode?: true
-    budgetCode?: true
     approval_A?: true
     approval_B?: true
     approval_C?: true
@@ -28538,12 +28530,12 @@ export namespace Prisma {
     staff: string | null
     outputId: string | null
     activityTitle: string | null
-    activityBudgetCode: number | null
+    activityBudgetCode: string | null
     activityLocation: string | null
     activityPurposeDescription: string | null
     activityStartDate: Date | null
     activityEndDate: Date | null
-    budgetCode: number | null
+    budgetCode: string | null
     modeOfTransport: string | null
     driverName: string | null
     driversPhoneNumber: string | null
@@ -28776,12 +28768,12 @@ export namespace Prisma {
       staff: string | null
       outputId: string | null
       activityTitle: string | null
-      activityBudgetCode: number | null
+      activityBudgetCode: string | null
       activityLocation: string | null
       activityPurposeDescription: string | null
       activityStartDate: Date | null
       activityEndDate: Date | null
-      budgetCode: number | null
+      budgetCode: string | null
       modeOfTransport: string | null
       driverName: string | null
       driversPhoneNumber: string | null
@@ -29211,12 +29203,12 @@ export namespace Prisma {
     readonly staff: FieldRef<"Request", 'String'>
     readonly outputId: FieldRef<"Request", 'String'>
     readonly activityTitle: FieldRef<"Request", 'String'>
-    readonly activityBudgetCode: FieldRef<"Request", 'Int'>
+    readonly activityBudgetCode: FieldRef<"Request", 'String'>
     readonly activityLocation: FieldRef<"Request", 'String'>
     readonly activityPurposeDescription: FieldRef<"Request", 'String'>
     readonly activityStartDate: FieldRef<"Request", 'DateTime'>
     readonly activityEndDate: FieldRef<"Request", 'DateTime'>
-    readonly budgetCode: FieldRef<"Request", 'Int'>
+    readonly budgetCode: FieldRef<"Request", 'String'>
     readonly modeOfTransport: FieldRef<"Request", 'String'>
     readonly driverName: FieldRef<"Request", 'String'>
     readonly driversPhoneNumber: FieldRef<"Request", 'String'>
@@ -35042,8 +35034,10 @@ export namespace Prisma {
     staff: 'staff',
     outputId: 'outputId',
     activityTitle: 'activityTitle',
+    activityBudgetCode: 'activityBudgetCode',
     activityLocation: 'activityLocation',
     activityPurposeDescription: 'activityPurposeDescription',
+    budgetCode: 'budgetCode',
     modeOfTransport: 'modeOfTransport',
     driverName: 'driverName',
     driversPhoneNumber: 'driversPhoneNumber',
@@ -37139,12 +37133,12 @@ export namespace Prisma {
     staff?: StringNullableFilter<"Request"> | string | null
     outputId?: StringNullableFilter<"Request"> | string | null
     activityTitle?: StringNullableFilter<"Request"> | string | null
-    activityBudgetCode?: IntNullableFilter<"Request"> | number | null
+    activityBudgetCode?: StringNullableFilter<"Request"> | string | null
     activityLocation?: StringNullableFilter<"Request"> | string | null
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    budgetCode?: IntNullableFilter<"Request"> | number | null
+    budgetCode?: StringNullableFilter<"Request"> | string | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -37281,12 +37275,12 @@ export namespace Prisma {
     staff?: StringNullableFilter<"Request"> | string | null
     outputId?: StringNullableFilter<"Request"> | string | null
     activityTitle?: StringNullableFilter<"Request"> | string | null
-    activityBudgetCode?: IntNullableFilter<"Request"> | number | null
+    activityBudgetCode?: StringNullableFilter<"Request"> | string | null
     activityLocation?: StringNullableFilter<"Request"> | string | null
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    budgetCode?: IntNullableFilter<"Request"> | number | null
+    budgetCode?: StringNullableFilter<"Request"> | string | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -37421,12 +37415,12 @@ export namespace Prisma {
     staff?: StringNullableWithAggregatesFilter<"Request"> | string | null
     outputId?: StringNullableWithAggregatesFilter<"Request"> | string | null
     activityTitle?: StringNullableWithAggregatesFilter<"Request"> | string | null
-    activityBudgetCode?: IntNullableWithAggregatesFilter<"Request"> | number | null
+    activityBudgetCode?: StringNullableWithAggregatesFilter<"Request"> | string | null
     activityLocation?: StringNullableWithAggregatesFilter<"Request"> | string | null
     activityPurposeDescription?: StringNullableWithAggregatesFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
-    budgetCode?: IntNullableWithAggregatesFilter<"Request"> | number | null
+    budgetCode?: StringNullableWithAggregatesFilter<"Request"> | string | null
     modeOfTransport?: StringNullableWithAggregatesFilter<"Request"> | string | null
     driverName?: StringNullableWithAggregatesFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableWithAggregatesFilter<"Request"> | string | null
@@ -40059,12 +40053,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -40126,12 +40120,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -40191,12 +40185,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40258,12 +40252,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40324,12 +40318,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -40386,12 +40380,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40447,12 +40441,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42615,8 +42609,6 @@ export namespace Prisma {
   }
 
   export type RequestAvgOrderByAggregateInput = {
-    activityBudgetCode?: SortOrder
-    budgetCode?: SortOrder
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
@@ -42752,8 +42744,6 @@ export namespace Prisma {
   }
 
   export type RequestSumOrderByAggregateInput = {
-    activityBudgetCode?: SortOrder
-    budgetCode?: SortOrder
     approval_A?: SortOrder
     approval_B?: SortOrder
     approval_C?: SortOrder
@@ -45513,12 +45503,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -45579,12 +45569,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -45798,12 +45788,12 @@ export namespace Prisma {
     staff?: StringNullableFilter<"Request"> | string | null
     outputId?: StringNullableFilter<"Request"> | string | null
     activityTitle?: StringNullableFilter<"Request"> | string | null
-    activityBudgetCode?: IntNullableFilter<"Request"> | number | null
+    activityBudgetCode?: StringNullableFilter<"Request"> | string | null
     activityLocation?: StringNullableFilter<"Request"> | string | null
     activityPurposeDescription?: StringNullableFilter<"Request"> | string | null
     activityStartDate?: DateTimeNullableFilter<"Request"> | Date | string | null
     activityEndDate?: DateTimeNullableFilter<"Request"> | Date | string | null
-    budgetCode?: IntNullableFilter<"Request"> | number | null
+    budgetCode?: StringNullableFilter<"Request"> | string | null
     modeOfTransport?: StringNullableFilter<"Request"> | string | null
     driverName?: StringNullableFilter<"Request"> | string | null
     driversPhoneNumber?: StringNullableFilter<"Request"> | string | null
@@ -46680,12 +46670,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -46746,12 +46736,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -48527,12 +48517,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -48592,12 +48582,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -50927,12 +50917,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -50993,12 +50983,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51073,12 +51063,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51139,12 +51129,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51203,12 +51193,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51269,12 +51259,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51392,12 +51382,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51458,12 +51448,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51571,12 +51561,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51637,12 +51627,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -51772,12 +51762,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -51838,12 +51828,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52094,12 +52084,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -52213,12 +52203,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52279,12 +52269,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52344,12 +52334,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -52861,12 +52851,12 @@ export namespace Prisma {
     staff?: string | null
     outputId?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -53186,12 +53176,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53252,12 +53242,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53317,12 +53307,12 @@ export namespace Prisma {
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     outputId?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53863,12 +53853,12 @@ export namespace Prisma {
     requestId?: string
     staff?: string | null
     activityTitle?: string | null
-    activityBudgetCode?: number | null
+    activityBudgetCode?: string | null
     activityLocation?: string | null
     activityPurposeDescription?: string | null
     activityStartDate?: Date | string | null
     activityEndDate?: Date | string | null
-    budgetCode?: number | null
+    budgetCode?: string | null
     modeOfTransport?: string | null
     driverName?: string | null
     driversPhoneNumber?: string | null
@@ -53979,12 +53969,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54044,12 +54034,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -54109,12 +54099,12 @@ export namespace Prisma {
     requestId?: StringFieldUpdateOperationsInput | string
     staff?: NullableStringFieldUpdateOperationsInput | string | null
     activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
-    activityBudgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
     activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
     activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    budgetCode?: NullableIntFieldUpdateOperationsInput | number | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
     modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
     driverName?: NullableStringFieldUpdateOperationsInput | string | null
     driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null

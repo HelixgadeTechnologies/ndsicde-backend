@@ -11,12 +11,12 @@ export interface IRequest {
   staff?: string;
   outputId?: string;
   activityTitle?: string;
-  activityBudgetCode?: number;
+  activityBudgetCode?: string;
   activityLocation?: string;
   activityPurposeDescription?: string;
   activityStartDate?: Date;
   activityEndDate?: Date;
-  budgetCode?: number;
+  budgetCode?: string;
   modeOfTransport?: string;
   driverName?: string;
   driversPhoneNumber?: string;
@@ -96,7 +96,7 @@ export interface IRequestView {
   outputId?: string;
   outputStatement?: string;
   activityTitle?: string;
-  activityBudgetCode?: number;
+  activityBudgetCode?: string;
   activityLocation?: string;
   activityPurposeDescription?: string;
   activityStartDate?: Date;
@@ -105,7 +105,7 @@ export interface IRequestView {
   quantity?: number;
   frequency?: number;
   unitCost?: number;
-  budgetCode?: number;
+  budgetCode?: string;
   total?: number;
   modeOfTransport?: string;
   driverName?: string;

@@ -433,12 +433,12 @@ model Request {
   output                     Output?      @relation(fields: [outputId], references: [outputId])
   outputId                   String?
   activityTitle              String?
-  activityBudgetCode         Int?
+  activityBudgetCode         String?
   activityLocation           String?
   activityPurposeDescription String?
   activityStartDate          DateTime?
   activityEndDate            DateTime?
-  budgetCode                 Int?
+  budgetCode                 String?
   modeOfTransport            String?
   driverName                 String?
   driversPhoneNumber         String?
