@@ -11,6 +11,7 @@ import {
   deleteActivity,
   deleteActivityReport,
   deleteImpact,
+  deleteIndicator,
   deleteIndicatorReport,
   deleteLogicalFramework,
   deleteOutcome,
@@ -372,11 +373,11 @@ export const getAllResultType = async (req: Request, res: Response) => {
   }
 };
 
-// Delete Impact
+// Delete Indicator
 export const deleteIndicatorController = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    await deleteImpact(id);
+    const { indicatorId } = req.params;
+    await deleteIndicator(indicatorId);
     res.status(200).json(successResponse("Indicator deleted successfully", null));
   } catch (error: any) {
     res.status(500).json(errorResponse(error.message));

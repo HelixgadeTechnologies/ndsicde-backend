@@ -13,6 +13,7 @@ import {
   deleteActivityController,
   deleteActivityReportController,
   deleteImpactController,
+  deleteIndicatorController,
   deleteLogicalFrameworkController,
   deleteOutcomeController,
   deleteOutputController,
@@ -664,7 +665,7 @@ projectManagementRouter.get("/indicator/:indicatorId", getIndicatorById);
  */
 projectManagementRouter.delete(
   "/indicator/:indicatorId",
-  deleteImpactController
+  deleteIndicatorController
 );
 
 /**
