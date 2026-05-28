@@ -261,6 +261,7 @@ export interface IIndicatorReport {
   updateAt?: Date | null;
   indicatorId?: string | null;
   resultTypeId?: string | null;
+  resultId?: string | null;
   projectId?: string | null;
   IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
 }
@@ -281,6 +282,7 @@ export interface IIndicatorReportWithDisaggregation {
   updateAt?: Date | null;
   indicatorId?: string | null;
   resultTypeId?: string | null;
+  resultId?: string | null;
   projectId?: string | null;
   // Included relation
   IndicatorReportDisaggregation: {
@@ -313,6 +315,7 @@ export interface IIndicatorReportView {
   resultProjectId?: string | null;
   resultTypeId?: string | null;
   resultName?: string | null;
+  resultId?: string | null;
   projectId?: string | null;
   IndicatorReportDisaggregation?: IIndicatorReportDisaggregation[];
 }

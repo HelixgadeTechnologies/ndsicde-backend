@@ -338,6 +338,7 @@ model IndicatorReport {
   indicatorId                   String?
   ResultType                    ResultType?                     @relation(fields: [resultTypeId], references: [resultTypeId])
   resultTypeId                  String?
+  resultId                      String?
   project                       Project?                        @relation(fields: [projectId], references: [projectId])
   projectId                     String?
   indicatorReportComment        IndicatorReportComment[]

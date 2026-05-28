@@ -217,6 +217,14 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "impact-uuid-5678",
             },
+            resultId: {
+              type: "string",
+              example: "result-uuid-1234",
+            },
+            projectId: {
+              type: "string",
+              example: "project-uuid-1234",
+            },
             IndicatorReportDisaggregation: {
               type: "array",
               items: {

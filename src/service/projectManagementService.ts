@@ -487,6 +487,7 @@ export async function saveIndicatorReport(
         attachmentUrl: payload.attachmentUrl,
         status: IReportStatus.pending,
         resultTypeId: payload.resultTypeId,
+        resultId: payload.resultId,
         indicatorId: payload.indicatorId,
         projectId: payload.projectId,
       },
@@ -562,9 +563,7 @@ export async function getAllIndicatorReportByResultId(resultId: string): Promise
 > {
   const reports = await prisma.indicatorReport.findMany({
     where: {
-      indicator: {
-        result: resultId,
-      },
+      resultId: resultId,
     },
     include: {
       IndicatorReportDisaggregation: true,

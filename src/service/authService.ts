@@ -34,7 +34,6 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         password: hashedPassword,
         signature: data.signature ?? null,
         signatureMimeType: data.signatureMimeType ?? null
-        
       } as Prisma.UserCreateInput
     });
   } else {

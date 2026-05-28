@@ -351,6 +351,7 @@ exports.Prisma.IndicatorReportScalarFieldEnum = {
   updateAt: 'updateAt',
   indicatorId: 'indicatorId',
   resultTypeId: 'resultTypeId',
+  resultId: 'resultId',
   projectId: 'projectId'
 };
 
@@ -744,6 +745,7 @@ exports.Prisma.IndicatorReportOrderByRelevanceFieldEnum = {
   status: 'status',
   indicatorId: 'indicatorId',
   resultTypeId: 'resultTypeId',
+  resultId: 'resultId',
   projectId: 'projectId'
 };
 

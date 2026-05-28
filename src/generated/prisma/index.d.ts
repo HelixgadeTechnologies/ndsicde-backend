@@ -20950,6 +20950,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    resultId: string | null
     projectId: string | null
   }
 
@@ -20969,6 +20970,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    resultId: string | null
     projectId: string | null
   }
 
@@ -20988,6 +20990,7 @@ export namespace Prisma {
     updateAt: number
     indicatorId: number
     resultTypeId: number
+    resultId: number
     projectId: number
     _all: number
   }
@@ -21009,6 +21012,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    resultId?: true
     projectId?: true
   }
 
@@ -21028,6 +21032,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    resultId?: true
     projectId?: true
   }
 
@@ -21047,6 +21052,7 @@ export namespace Prisma {
     updateAt?: true
     indicatorId?: true
     resultTypeId?: true
+    resultId?: true
     projectId?: true
     _all?: true
   }
@@ -21139,6 +21145,7 @@ export namespace Prisma {
     updateAt: Date | null
     indicatorId: string | null
     resultTypeId: string | null
+    resultId: string | null
     projectId: string | null
     _count: IndicatorReportCountAggregateOutputType | null
     _min: IndicatorReportMinAggregateOutputType | null
@@ -21175,6 +21182,7 @@ export namespace Prisma {
     updateAt?: boolean
     indicatorId?: boolean
     resultTypeId?: boolean
+    resultId?: boolean
     projectId?: boolean
     indicator?: boolean | IndicatorReport$indicatorArgs<ExtArgs>
     ResultType?: boolean | IndicatorReport$ResultTypeArgs<ExtArgs>
@@ -21202,10 +21210,11 @@ export namespace Prisma {
     updateAt?: boolean
     indicatorId?: boolean
     resultTypeId?: boolean
+    resultId?: boolean
     projectId?: boolean
   }
 
-  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId" | "projectId", ExtArgs["result"]["indicatorReport"]>
+  export type IndicatorReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"indicatorReportId" | "indicatorSource" | "orgKpiId" | "thematicAreasOrPillar" | "indicatorStatement" | "responsiblePersons" | "actualDate" | "cumulativeActual" | "actualNarrative" | "attachmentUrl" | "status" | "createAt" | "updateAt" | "indicatorId" | "resultTypeId" | "resultId" | "projectId", ExtArgs["result"]["indicatorReport"]>
   export type IndicatorReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     indicator?: boolean | IndicatorReport$indicatorArgs<ExtArgs>
     ResultType?: boolean | IndicatorReport$ResultTypeArgs<ExtArgs>
@@ -21240,6 +21249,7 @@ export namespace Prisma {
       updateAt: Date | null
       indicatorId: string | null
       resultTypeId: string | null
+      resultId: string | null
       projectId: string | null
     }, ExtArgs["result"]["indicatorReport"]>
     composites: {}
@@ -21630,6 +21640,7 @@ export namespace Prisma {
     readonly updateAt: FieldRef<"IndicatorReport", 'DateTime'>
     readonly indicatorId: FieldRef<"IndicatorReport", 'String'>
     readonly resultTypeId: FieldRef<"IndicatorReport", 'String'>
+    readonly resultId: FieldRef<"IndicatorReport", 'String'>
     readonly projectId: FieldRef<"IndicatorReport", 'String'>
   }
     
@@ -34641,6 +34652,7 @@ export namespace Prisma {
     updateAt: 'updateAt',
     indicatorId: 'indicatorId',
     resultTypeId: 'resultTypeId',
+    resultId: 'resultId',
     projectId: 'projectId'
   };
 
@@ -35124,6 +35136,7 @@ export namespace Prisma {
     status: 'status',
     indicatorId: 'indicatorId',
     resultTypeId: 'resultTypeId',
+    resultId: 'resultId',
     projectId: 'projectId'
   };
 
@@ -36796,6 +36809,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    resultId?: StringNullableFilter<"IndicatorReport"> | string | null
     projectId?: StringNullableFilter<"IndicatorReport"> | string | null
     indicator?: XOR<IndicatorNullableScalarRelationFilter, IndicatorWhereInput> | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
@@ -36820,6 +36834,7 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     indicatorId?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    resultId?: SortOrderInput | SortOrder
     projectId?: SortOrderInput | SortOrder
     indicator?: IndicatorOrderByWithRelationInput
     ResultType?: ResultTypeOrderByWithRelationInput
@@ -36848,6 +36863,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    resultId?: StringNullableFilter<"IndicatorReport"> | string | null
     projectId?: StringNullableFilter<"IndicatorReport"> | string | null
     indicator?: XOR<IndicatorNullableScalarRelationFilter, IndicatorWhereInput> | null
     ResultType?: XOR<ResultTypeNullableScalarRelationFilter, ResultTypeWhereInput> | null
@@ -36872,6 +36888,7 @@ export namespace Prisma {
     updateAt?: SortOrderInput | SortOrder
     indicatorId?: SortOrderInput | SortOrder
     resultTypeId?: SortOrderInput | SortOrder
+    resultId?: SortOrderInput | SortOrder
     projectId?: SortOrderInput | SortOrder
     _count?: IndicatorReportCountOrderByAggregateInput
     _max?: IndicatorReportMaxOrderByAggregateInput
@@ -36897,6 +36914,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableWithAggregatesFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
+    resultId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
     projectId?: StringNullableWithAggregatesFilter<"IndicatorReport"> | string | null
   }
 
@@ -39725,6 +39743,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
     project?: ProjectCreateNestedOneWithoutIndicatorReportInput
@@ -39748,6 +39767,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
@@ -39767,6 +39787,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
     project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
@@ -39790,6 +39811,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
@@ -39811,6 +39833,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
   }
 
@@ -39828,6 +39851,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportUncheckedUpdateManyInput = {
@@ -39846,6 +39870,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42460,6 +42485,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    resultId?: SortOrder
     projectId?: SortOrder
   }
 
@@ -42479,6 +42505,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    resultId?: SortOrder
     projectId?: SortOrder
   }
 
@@ -42498,6 +42525,7 @@ export namespace Prisma {
     updateAt?: SortOrder
     indicatorId?: SortOrder
     resultTypeId?: SortOrder
+    resultId?: SortOrder
     projectId?: SortOrder
   }
 
@@ -47180,6 +47208,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
@@ -47202,6 +47231,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -47554,6 +47584,7 @@ export namespace Prisma {
     updateAt?: DateTimeNullableFilter<"IndicatorReport"> | Date | string | null
     indicatorId?: StringNullableFilter<"IndicatorReport"> | string | null
     resultTypeId?: StringNullableFilter<"IndicatorReport"> | string | null
+    resultId?: StringNullableFilter<"IndicatorReport"> | string | null
     projectId?: StringNullableFilter<"IndicatorReport"> | string | null
   }
 
@@ -48125,6 +48156,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
@@ -48146,6 +48178,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     indicatorId?: string | null
+    resultId?: string | null
     projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
@@ -49331,6 +49364,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
     project?: ProjectCreateNestedOneWithoutIndicatorReportInput
     indicatorReportComment?: IndicatorReportCommentCreateNestedManyWithoutIndicatorReportInput
@@ -49352,6 +49386,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
@@ -50261,6 +50296,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
     project?: ProjectCreateNestedOneWithoutIndicatorReportInput
@@ -50283,6 +50319,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -50317,6 +50354,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
     project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
@@ -50339,6 +50377,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -50357,6 +50396,7 @@ export namespace Prisma {
     status?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
+    resultId?: string | null
     indicator?: IndicatorCreateNestedOneWithoutIndicatorReportInput
     ResultType?: ResultTypeCreateNestedOneWithoutIndicatorReportInput
     project?: ProjectCreateNestedOneWithoutIndicatorReportInput
@@ -50379,6 +50419,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedCreateNestedManyWithoutIndicatorReportInput
   }
@@ -50413,6 +50454,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
     project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
@@ -50435,6 +50477,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -53647,6 +53690,7 @@ export namespace Prisma {
     updateAt?: Date | string | null
     indicatorId?: string | null
     resultTypeId?: string | null
+    resultId?: string | null
   }
 
   export type TeamMemberUpdateWithoutProjectInput = {
@@ -54238,6 +54282,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
@@ -54260,6 +54305,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
   }
@@ -54280,6 +54326,7 @@ export namespace Prisma {
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ImpactCreateManyResultTypeInput = {
@@ -54355,6 +54402,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     indicatorId?: string | null
+    resultId?: string | null
     projectId?: string | null
   }
 
@@ -54560,6 +54608,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     indicator?: IndicatorUpdateOneWithoutIndicatorReportNestedInput
     project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
@@ -54581,6 +54630,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
@@ -54601,6 +54651,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     indicatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -55041,6 +55092,7 @@ export namespace Prisma {
     createAt?: Date | string | null
     updateAt?: Date | string | null
     resultTypeId?: string | null
+    resultId?: string | null
     projectId?: string | null
   }
 
@@ -55072,6 +55124,7 @@ export namespace Prisma {
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     ResultType?: ResultTypeUpdateOneWithoutIndicatorReportNestedInput
     project?: ProjectUpdateOneWithoutIndicatorReportNestedInput
     indicatorReportComment?: IndicatorReportCommentUpdateManyWithoutIndicatorReportNestedInput
@@ -55093,6 +55146,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     indicatorReportComment?: IndicatorReportCommentUncheckedUpdateManyWithoutIndicatorReportNestedInput
     IndicatorReportDisaggregation?: IndicatorReportDisaggregationUncheckedUpdateManyWithoutIndicatorReportNestedInput
@@ -55113,6 +55167,7 @@ export namespace Prisma {
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resultTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    resultId?: NullableStringFieldUpdateOperationsInput | string | null
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
