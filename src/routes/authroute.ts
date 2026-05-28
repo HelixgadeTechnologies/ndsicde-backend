@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUser, fetchAllUsers, fetchUserById, forgotPasswordController, login, register, test, updateLogInUser, updateUserProfilePicture } from "../controllers/authController";
+import { forgotPasswordController, login, test, updateLogInUser, updateUserProfilePicture } from "../controllers/authController";
 import { changePasswordController } from "../controllers/managementAndStaffControlleer";
 
 const authRoutes: Router = Router();
@@ -120,6 +120,13 @@ authRoutes.post("/forgot-password", forgotPasswordController);
  *               designation:
  *                 type: string
  *                 description: Job title or designation of the user
+ *               signature:
+ *                 type: string
+ *                 description: Base64-encoded signature image
+ *               signatureMimeType:
+ *                 type: string
+ *                 description: MIME type of the signature image (e.g., image/png)
+ *                 example: image/png
  *               password:
  *                 type: string
  *     responses:

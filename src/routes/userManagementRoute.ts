@@ -59,6 +59,13 @@ const userManagementRoutes: Router = Router();
  *                     type: integer
  *                     description: Approval level for retirement requests (0 = none)
  *                     example: 0
+ *                   signature:
+ *                     type: string
+ *                     description: Base64-encoded signature image
+ *                   signatureMimeType:
+ *                     type: string
+ *                     description: MIME type of the signature image (e.g., image/png)
+ *                     example: image/png
  *     responses:
  *       201:
  *         description: User created successfully

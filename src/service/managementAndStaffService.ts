@@ -77,8 +77,6 @@ export const getKpiPerformanceService = async (year: number) => {
 };
 
 
-
-
 export const getProjectsService = async () => {
     const projects = await prisma.project.findMany({
         orderBy: { createAt: "desc" },
