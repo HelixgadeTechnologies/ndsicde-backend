@@ -12,6 +12,12 @@ export interface IUser {
     state?: string | null;
     localGovernmentArea?: string | null;
     profilePic?: string | null;
+    profilePicMimeType?: string | null;
+    signature?: string | null;
+    signatureMimeType?: string | null;
+    activityKpiApproval?: number;
+    retirementApproval?: number;
+    designation?: string | null;
     password?: string | null;
     loginLast?: string | null;
     createAt?: string | null;
@@ -33,8 +39,13 @@ export interface IUserView {
   state?: string;
   localGovernmentArea?: string;
   profilePic?: string;
-  password?: string;
   profilePicMimeType?: string;
+  signature?: string;
+  signatureMimeType?: string;
+  activityKpiApproval?: number;
+  retirementApproval?: number;
+  designation?: string;
+  password?: string;
   loginLast?: Date;
   createAt?: Date;
   updateAt?: Date;

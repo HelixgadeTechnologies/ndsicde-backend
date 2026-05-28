@@ -138,6 +138,9 @@ exports.Prisma.UserScalarFieldEnum = {
   profilePicMimeType: 'profilePicMimeType',
   signature: 'signature',
   signatureMimeType: 'signatureMimeType',
+  activityKpiApproval: 'activityKpiApproval',
+  retirementApproval: 'retirementApproval',
+  designation: 'designation',
   loginLast: 'loginLast',
   createAt: 'createAt',
   updateAt: 'updateAt'
@@ -575,7 +578,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   profilePic: 'profilePic',
   profilePicMimeType: 'profilePicMimeType',
   signature: 'signature',
-  signatureMimeType: 'signatureMimeType'
+  signatureMimeType: 'signatureMimeType',
+  designation: 'designation'
 };
 
 exports.Prisma.GeneralSettingsOrderByRelevanceFieldEnum = {

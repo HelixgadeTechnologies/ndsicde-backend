@@ -48,6 +48,17 @@ const userManagementRoutes: Router = Router();
  *                     type: string
  *                   assignedProjectId:
  *                     type: string
+ *                   designation:
+ *                     type: string
+ *                     description: Job title or designation of the user
+ *                   activityKpiApproval:
+ *                     type: integer
+ *                     description: Approval level for activity/KPI (0 = none)
+ *                     example: 0
+ *                   retirementApproval:
+ *                     type: integer
+ *                     description: Approval level for retirement requests (0 = none)
+ *                     example: 0
  *     responses:
  *       201:
  *         description: User created successfully

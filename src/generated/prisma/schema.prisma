@@ -33,6 +33,9 @@ model User {
   profilePicMimeType  String?
   signature           String?
   signatureMimeType   String?
+  activityKpiApproval Int          @default(0)
+  retirementApproval  Int          @default(0)
+  designation         String?
   loginLast           DateTime?
   createAt            DateTime?    @default(now())
   updateAt            DateTime?    @default(now())

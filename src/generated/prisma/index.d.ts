@@ -3723,8 +3723,20 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    activityKpiApproval: number | null
+    retirementApproval: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    activityKpiApproval: number | null
+    retirementApproval: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -3745,6 +3757,9 @@ export namespace Prisma {
     profilePicMimeType: string | null
     signature: string | null
     signatureMimeType: string | null
+    activityKpiApproval: number | null
+    retirementApproval: number | null
+    designation: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
@@ -3768,6 +3783,9 @@ export namespace Prisma {
     profilePicMimeType: string | null
     signature: string | null
     signatureMimeType: string | null
+    activityKpiApproval: number | null
+    retirementApproval: number | null
+    designation: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
@@ -3791,12 +3809,25 @@ export namespace Prisma {
     profilePicMimeType: number
     signature: number
     signatureMimeType: number
+    activityKpiApproval: number
+    retirementApproval: number
+    designation: number
     loginLast: number
     createAt: number
     updateAt: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    activityKpiApproval?: true
+    retirementApproval?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    activityKpiApproval?: true
+    retirementApproval?: true
+  }
 
   export type UserMinAggregateInputType = {
     userId?: true
@@ -3816,6 +3847,9 @@ export namespace Prisma {
     profilePicMimeType?: true
     signature?: true
     signatureMimeType?: true
+    activityKpiApproval?: true
+    retirementApproval?: true
+    designation?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3839,6 +3873,9 @@ export namespace Prisma {
     profilePicMimeType?: true
     signature?: true
     signatureMimeType?: true
+    activityKpiApproval?: true
+    retirementApproval?: true
+    designation?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3862,6 +3899,9 @@ export namespace Prisma {
     profilePicMimeType?: true
     signature?: true
     signatureMimeType?: true
+    activityKpiApproval?: true
+    retirementApproval?: true
+    designation?: true
     loginLast?: true
     createAt?: true
     updateAt?: true
@@ -3906,6 +3946,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -3936,6 +3988,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -3958,10 +4012,15 @@ export namespace Prisma {
     profilePicMimeType: string | null
     signature: string | null
     signatureMimeType: string | null
+    activityKpiApproval: number
+    retirementApproval: number
+    designation: string | null
     loginLast: Date | null
     createAt: Date | null
     updateAt: Date | null
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -3998,6 +4057,9 @@ export namespace Prisma {
     profilePicMimeType?: boolean
     signature?: boolean
     signatureMimeType?: boolean
+    activityKpiApproval?: boolean
+    retirementApproval?: boolean
+    designation?: boolean
     loginLast?: boolean
     createAt?: boolean
     updateAt?: boolean
@@ -4028,12 +4090,15 @@ export namespace Prisma {
     profilePicMimeType?: boolean
     signature?: boolean
     signatureMimeType?: boolean
+    activityKpiApproval?: boolean
+    retirementApproval?: boolean
+    designation?: boolean
     loginLast?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "fullName" | "email" | "address" | "phoneNumber" | "roleId" | "status" | "assignedProjectId" | "department" | "community" | "state" | "localGovernmentArea" | "password" | "profilePic" | "profilePicMimeType" | "signature" | "signatureMimeType" | "loginLast" | "createAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "fullName" | "email" | "address" | "phoneNumber" | "roleId" | "status" | "assignedProjectId" | "department" | "community" | "state" | "localGovernmentArea" | "password" | "profilePic" | "profilePicMimeType" | "signature" | "signatureMimeType" | "activityKpiApproval" | "retirementApproval" | "designation" | "loginLast" | "createAt" | "updateAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | User$roleArgs<ExtArgs>
     partner?: boolean | User$partnerArgs<ExtArgs>
@@ -4068,6 +4133,9 @@ export namespace Prisma {
       profilePicMimeType: string | null
       signature: string | null
       signatureMimeType: string | null
+      activityKpiApproval: number
+      retirementApproval: number
+      designation: string | null
       loginLast: Date | null
       createAt: Date | null
       updateAt: Date | null
@@ -4461,6 +4529,9 @@ export namespace Prisma {
     readonly profilePicMimeType: FieldRef<"User", 'String'>
     readonly signature: FieldRef<"User", 'String'>
     readonly signatureMimeType: FieldRef<"User", 'String'>
+    readonly activityKpiApproval: FieldRef<"User", 'Int'>
+    readonly retirementApproval: FieldRef<"User", 'Int'>
+    readonly designation: FieldRef<"User", 'String'>
     readonly loginLast: FieldRef<"User", 'DateTime'>
     readonly createAt: FieldRef<"User", 'DateTime'>
     readonly updateAt: FieldRef<"User", 'DateTime'>
@@ -34309,6 +34380,9 @@ export namespace Prisma {
     profilePicMimeType: 'profilePicMimeType',
     signature: 'signature',
     signatureMimeType: 'signatureMimeType',
+    activityKpiApproval: 'activityKpiApproval',
+    retirementApproval: 'retirementApproval',
+    designation: 'designation',
     loginLast: 'loginLast',
     createAt: 'createAt',
     updateAt: 'updateAt'
@@ -34836,7 +34910,8 @@ export namespace Prisma {
     profilePic: 'profilePic',
     profilePicMimeType: 'profilePicMimeType',
     signature: 'signature',
-    signatureMimeType: 'signatureMimeType'
+    signatureMimeType: 'signatureMimeType',
+    designation: 'designation'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -35236,6 +35311,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -35246,13 +35328,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
@@ -35287,6 +35362,9 @@ export namespace Prisma {
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
     signature?: StringNullableFilter<"User"> | string | null
     signatureMimeType?: StringNullableFilter<"User"> | string | null
+    activityKpiApproval?: IntFilter<"User"> | number
+    retirementApproval?: IntFilter<"User"> | number
+    designation?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -35314,6 +35392,9 @@ export namespace Prisma {
     profilePicMimeType?: SortOrderInput | SortOrder
     signature?: SortOrderInput | SortOrder
     signatureMimeType?: SortOrderInput | SortOrder
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
+    designation?: SortOrderInput | SortOrder
     loginLast?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
@@ -35345,6 +35426,9 @@ export namespace Prisma {
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
     signature?: StringNullableFilter<"User"> | string | null
     signatureMimeType?: StringNullableFilter<"User"> | string | null
+    activityKpiApproval?: IntFilter<"User"> | number
+    retirementApproval?: IntFilter<"User"> | number
+    designation?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -35372,12 +35456,17 @@ export namespace Prisma {
     profilePicMimeType?: SortOrderInput | SortOrder
     signature?: SortOrderInput | SortOrder
     signatureMimeType?: SortOrderInput | SortOrder
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
+    designation?: SortOrderInput | SortOrder
     loginLast?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -35401,6 +35490,9 @@ export namespace Prisma {
     profilePicMimeType?: StringNullableWithAggregatesFilter<"User"> | string | null
     signature?: StringNullableWithAggregatesFilter<"User"> | string | null
     signatureMimeType?: StringNullableWithAggregatesFilter<"User"> | string | null
+    activityKpiApproval?: IntWithAggregatesFilter<"User"> | number
+    retirementApproval?: IntWithAggregatesFilter<"User"> | number
+    designation?: StringNullableWithAggregatesFilter<"User"> | string | null
     loginLast?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -38033,6 +38125,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38060,6 +38155,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38085,6 +38183,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38112,6 +38213,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38138,6 +38242,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -38160,6 +38267,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38183,6 +38293,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41153,6 +41266,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -41228,9 +41352,17 @@ export namespace Prisma {
     profilePicMimeType?: SortOrder
     signature?: SortOrder
     signatureMimeType?: SortOrder
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
+    designation?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -41251,6 +41383,9 @@ export namespace Prisma {
     profilePicMimeType?: SortOrder
     signature?: SortOrder
     signatureMimeType?: SortOrder
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
+    designation?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
@@ -41274,9 +41409,17 @@ export namespace Prisma {
     profilePicMimeType?: SortOrder
     signature?: SortOrder
     signatureMimeType?: SortOrder
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
+    designation?: SortOrder
     loginLast?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    activityKpiApproval?: SortOrder
+    retirementApproval?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -41313,6 +41456,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -43292,6 +43451,14 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -45442,6 +45609,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -45471,17 +45649,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -45509,6 +45676,33 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -46084,6 +46278,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -46109,6 +46306,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -46164,6 +46364,9 @@ export namespace Prisma {
     profilePicMimeType?: StringNullableFilter<"User"> | string | null
     signature?: StringNullableFilter<"User"> | string | null
     signatureMimeType?: StringNullableFilter<"User"> | string | null
+    activityKpiApproval?: IntFilter<"User"> | number
+    retirementApproval?: IntFilter<"User"> | number
+    designation?: StringNullableFilter<"User"> | string | null
     loginLast?: DateTimeNullableFilter<"User"> | Date | string | null
     createAt?: DateTimeNullableFilter<"User"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -47499,6 +47702,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -47525,6 +47731,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -47626,6 +47835,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47652,6 +47864,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51027,6 +51242,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -51053,6 +51271,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -51327,6 +51548,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51353,6 +51577,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52215,6 +52442,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -52241,6 +52471,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -52422,6 +52655,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -52448,6 +52684,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53006,6 +53245,9 @@ export namespace Prisma {
     profilePicMimeType?: string | null
     signature?: string | null
     signatureMimeType?: string | null
+    activityKpiApproval?: number
+    retirementApproval?: number
+    designation?: string | null
     loginLast?: Date | string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
@@ -53028,6 +53270,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53053,6 +53298,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53078,6 +53326,9 @@ export namespace Prisma {
     profilePicMimeType?: NullableStringFieldUpdateOperationsInput | string | null
     signature?: NullableStringFieldUpdateOperationsInput | string | null
     signatureMimeType?: NullableStringFieldUpdateOperationsInput | string | null
+    activityKpiApproval?: IntFieldUpdateOperationsInput | number
+    retirementApproval?: IntFieldUpdateOperationsInput | number
+    designation?: NullableStringFieldUpdateOperationsInput | string | null
     loginLast?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

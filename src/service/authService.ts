@@ -28,6 +28,9 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         phoneNumber: data.phoneNumber ?? null,
         status: data.status?.toUpperCase() ?? null,
         assignedProjectId: data.assignedProjectId ?? null,
+        designation: data.designation ?? null,
+        activityKpiApproval: data.activityKpiApproval ?? 0,
+        retirementApproval: data.retirementApproval ?? 0,
         password: hashedPassword
       } as Prisma.UserCreateInput
     });
@@ -42,6 +45,9 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         phoneNumber: data.phoneNumber ?? null,
         status: data.status?.toUpperCase() ?? null,
         assignedProjectId: data.assignedProjectId ?? null,
+        designation: data.designation ?? null,
+        activityKpiApproval: data.activityKpiApproval ?? undefined,
+        retirementApproval: data.retirementApproval ?? undefined,
         updateAt: new Date(),
       },
     });

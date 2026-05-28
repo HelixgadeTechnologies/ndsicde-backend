@@ -33,6 +33,9 @@ model User {
   profilePicMimeType  String?
   signature           String?
   signatureMimeType   String?
+  activityKpiApproval Int          @default(0)
+  retirementApproval  Int          @default(0)
+  designation         String?
   loginLast           DateTime?
   createAt            DateTime?    @default(now())
   updateAt            DateTime?    @default(now())
@@ -125,12 +128,12 @@ model KpiDisaggregation {
 }
 
 model Project {
-  projectId             String              @id @default(uuid())
+  projectId             String             @id @default(uuid())
   projectName           String?
   budgetCurrency        String?
   totalBudgetAmount     String?
-  startDate             DateTime?           @default(now())
-  endDate               DateTime?           @default(now())
+  startDate             DateTime?          @default(now())
+  endDate               DateTime?          @default(now())
   country               String?
   state                 String?
   localGovernment       String?
@@ -138,8 +141,8 @@ model Project {
   thematicAreasOrPillar String?
   status                String?
   strategicObjectiveId  String?
-  createAt              DateTime?           @default(now())
-  updateAt              DateTime?           @default(now())
+  createAt              DateTime?          @default(now())
+  updateAt              DateTime?          @default(now())
   teamMember            TeamMember[]
   partner               Partner[]
   impact                Impact[]

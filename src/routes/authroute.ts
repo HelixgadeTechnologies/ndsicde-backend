@@ -117,6 +117,9 @@ authRoutes.post("/forgot-password", forgotPasswordController);
  *                 type: string
  *               roleId:
  *                 type: string
+ *               designation:
+ *                 type: string
+ *                 description: Job title or designation of the user
  *               password:
  *                 type: string
  *     responses:
