@@ -31,7 +31,10 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         designation: data.designation ?? null,
         activityKpiApproval: data.activityKpiApproval ?? 0,
         retirementApproval: data.retirementApproval ?? 0,
-        password: hashedPassword
+        password: hashedPassword,
+        signature: data.signature ?? null,
+        signatureMimeType: data.signatureMimeType ?? null
+        
       } as Prisma.UserCreateInput
     });
   } else {
@@ -48,6 +51,8 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         designation: data.designation ?? null,
         activityKpiApproval: data.activityKpiApproval ?? undefined,
         retirementApproval: data.retirementApproval ?? undefined,
+        signature: data.signature ?? undefined,
+        signatureMimeType: data.signatureMimeType ?? undefined,
         updateAt: new Date(),
       },
     });
