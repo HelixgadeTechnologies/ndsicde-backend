@@ -376,8 +376,9 @@ export const getAllResultType = async (req: Request, res: Response) => {
 // Delete Indicator
 export const deleteIndicatorController = async (req: Request, res: Response) => {
   try {
-    const { indicatorId } = req.params;
-    await deleteIndicator(indicatorId);
+    const { id } = req.params;
+    console.log(id, "id");
+    await deleteIndicator(id);
     res.status(200).json(successResponse("Indicator deleted successfully", null));
   } catch (error: any) {
     res.status(500).json(errorResponse(error.message));
@@ -476,7 +477,7 @@ export const removeIndicatorReport = async (
   res: Response
 ) => {
   try {
-    const id = req.params.id;
+    const { id } = req.body;
     await deleteIndicatorReport(id);
 
     res

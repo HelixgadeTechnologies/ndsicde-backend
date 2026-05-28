@@ -644,8 +644,8 @@ projectManagementRouter.get("/indicator/:indicatorId", getIndicatorById);
 
 /**
  * @swagger
- * /api/projectManagement/indicator/{indicatorId}:
- *   delete:
+ * /api/projectManagement/indicator/{id}:
+ *   post:
  *     security:
  *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
  *     summary: Delete an Indicator
@@ -663,8 +663,8 @@ projectManagementRouter.get("/indicator/:indicatorId", getIndicatorById);
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.delete(
-  "/indicator/:indicatorId",
+projectManagementRouter.post(
+  "/indicator/:id",
   deleteIndicatorController
 );
 
@@ -770,20 +770,25 @@ projectManagementRouter.get(
 
 /**
  * @swagger
- * /api/projectManagement/indicator-report/{id}:
- *   delete:
+ * /api/projectManagement/indicator-report/delete:
+ *   post:
  *     security:
- *       - bearerAuth: []  # 👈 This enables JWT token authentication in Swagger
+ *       - bearerAuth: []
  *     summary: Delete an Indicator Report Format
- *     description: Deletes an Indicator Report Format by its ID.
+ *     description: Deletes an Indicator Report Format and all its related disaggregations and comments by ID.
  *     tags: [INDICATOR REPORT]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Indicator Report Format ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - id
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 description: Indicator Report Format ID
  *     responses:
  *       200:
  *         description: Successfully deleted
@@ -792,7 +797,7 @@ projectManagementRouter.get(
  *       500:
  *         description: Internal server error
  */
-projectManagementRouter.delete("/indicator-report/:id", removeIndicatorReport);
+projectManagementRouter.post("/indicator-report/delete", removeIndicatorReport);
 
 /**
  * @swagger

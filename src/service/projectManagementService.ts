@@ -1,4 +1,3 @@
-import { prisma, Project } from "../lib/prisma";
 import {
   IActivity,
   IActivityReport,
@@ -8,8 +7,8 @@ import {
   IImpactView,
   IIndicator,
   IIndicatorReport,
-  IIndicatorWithDisaggregation,
   IIndicatorReportWithDisaggregation,
+  IIndicatorWithDisaggregation,
   ILogicalFramework,
   ILogicalFrameworkView,
   IOutcome,
@@ -18,14 +17,13 @@ import {
   IOutputView,
   IPartner,
   IPartnerView,
+  IProjectStatus,
+  IProjectView,
   IReportStatus,
   ITeamMember,
   ITeamMemberView,
 } from "../interface/projectManagementInterface";
-import {
-  IProjectStatus,
-  IProjectView,
-} from "../interface/projectManagementInterface";
+import { prisma, Project } from "../lib/prisma";
 
 export const saveProject = async (
   data: Partial<Project>,
@@ -462,9 +460,9 @@ export const getIndicatorByResultTypeId = async (resultTypeId: string): Promise<
 // Delete Indicator
 export const deleteIndicator = async (indicatorId: string) => {
   await prisma.indicatorReport.deleteMany({ where: { indicatorId } });
-  return await prisma.indicator.delete({
-    where: { indicatorId },
-  });
+  await prisma.indicatorDisaggregation.deleteMany({ where: { indicatorId } });
+  await prisma.periodicTarget.deleteMany({ where: { indicatorId } });
+  return await prisma.indicator.delete({ where: { indicatorId } });
 };
 
 
@@ -586,9 +584,9 @@ export async function getIndicatorReportById(
 }
 
 export async function deleteIndicatorReport(id: string) {
-  return await prisma.indicatorReport.delete({
-    where: { indicatorReportId: id },
-  });
+  await prisma.indicatorReportDisaggregation.deleteMany({ where: { indicatorReportId: id } });
+  await prisma.indicatorReportComment.deleteMany({ where: { indicatorReportId: id } });
+  return await prisma.indicatorReport.delete({ where: { indicatorReportId: id } });
 }
 
 // Create or Update Outcome
