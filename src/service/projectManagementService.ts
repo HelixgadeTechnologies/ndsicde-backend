@@ -530,6 +530,7 @@ export async function saveIndicatorReport(
         attachmentUrl: payload.attachmentUrl,
         status: payload.status,
         resultTypeId: payload.resultTypeId,
+        resultId: payload.resultId,
         indicatorId: payload.indicatorId,
         projectId: payload.projectId,
         updateAt: new Date(), // update timestamp
