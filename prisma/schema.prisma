@@ -500,6 +500,7 @@ model Request {
   airportDropoffOfficerName             String?
   airportPickupOfficerName              String?
   budgetName                            String?
+  sendTo                                String?
   retirement                            Retirement[]
   lineItems                             LineItem[]
   otherPersonnel                        OtherPersonnel[]

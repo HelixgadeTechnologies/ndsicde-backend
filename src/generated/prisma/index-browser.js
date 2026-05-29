@@ -476,7 +476,8 @@ exports.Prisma.RequestScalarFieldEnum = {
   returnTime: 'returnTime',
   airportDropoffOfficerName: 'airportDropoffOfficerName',
   airportPickupOfficerName: 'airportPickupOfficerName',
-  budgetName: 'budgetName'
+  budgetName: 'budgetName',
+  sendTo: 'sendTo'
 };
 
 exports.Prisma.OtherPersonnelScalarFieldEnum = {
@@ -837,7 +838,8 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
   returnTime: 'returnTime',
   airportDropoffOfficerName: 'airportDropoffOfficerName',
   airportPickupOfficerName: 'airportPickupOfficerName',
-  budgetName: 'budgetName'
+  budgetName: 'budgetName',
+  sendTo: 'sendTo'
 };
 
 exports.Prisma.OtherPersonnelOrderByRelevanceFieldEnum = {

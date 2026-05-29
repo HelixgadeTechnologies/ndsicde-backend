@@ -73,6 +73,7 @@ export interface IRequest {
   comment_D?: string;
   comment_E?: string;
   approvalStep?: number;
+  sendTo?: string;
 }
 
 export interface ILineItem {
@@ -161,6 +162,8 @@ export interface IRequestView {
   airportDropoffOfficerName?: string;
   airportPickupOfficerName?: string;
   budgetName?: string;
+  sendTo?: string;
+  sendToName?:string;
 }
 
 // Approval-related types and interfaces

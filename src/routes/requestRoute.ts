@@ -3,11 +3,11 @@ import {
     createOrUpdateRequestController,
     deleteRequestController,
     getAllRequestsController,
-    getRequestByIdController,
-    requestApprovalController,
     getDataValidationStatsController,
+    getRequestByIdController,
+    getRequestsByProjectIdController,
     getRequestsWithDateFilterController,
-    getRequestsByProjectIdController
+    requestApprovalController
 } from "../controllers/requestController";
 
 const requestRouter: Router = Router();
@@ -119,6 +119,10 @@ const requestRouter: Router = Router();
  *                     type: string
  *                     format: uuid
  *                     description: User ID of the staff creating the request
+ *                   sendTo:
+ *                     type: string
+ *                     format: uuid
+ *                     description: User ID of the staff sending the request
  *                   status:
  *                     type: string
  *                     example: "Pending"
@@ -616,6 +620,6 @@ requestRouter.post("/data-validation/list", getRequestsWithDateFilterController)
  *       500:
  *         description: Server error
  */
-requestRouter.get("/getRequestByProjectId/:projectId",getRequestsByProjectIdController);
+requestRouter.get("/getRequestByProjectId/:projectId", getRequestsByProjectIdController);
 
 export default requestRouter;

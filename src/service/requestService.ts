@@ -56,6 +56,7 @@ export const createOrUpdateRequest = async (
           documentURL: payload.documentURL,
           projectId: payload.projectId,
           createdBy: payload.createdBy,
+          sendTo:payload.sendTo,
           status: payload.status ?? "Pending",
           ...JOURNEY_FIELDS(payload),
         },
@@ -121,7 +122,10 @@ export const createOrUpdateRequest = async (
           documentURL: payload.documentURL,
           projectId: payload.projectId,
           createdBy: payload.createdBy,
+          sendTo:payload.sendTo,
           status: payload.status,
+
+          
           updateAt: new Date(),
           ...JOURNEY_FIELDS(payload),
         },

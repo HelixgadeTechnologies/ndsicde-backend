@@ -480,6 +480,7 @@ export const removeIndicatorReport = async (
 ) => {
   try {
     const { id } = req.body;
+    console.log(id, "id");
     await deleteIndicatorReport(id);
 
     res
