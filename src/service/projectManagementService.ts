@@ -560,16 +560,23 @@ export async function saveIndicatorReport(
 export async function getAllIndicatorReportByResultId(resultId: string): Promise<
   IIndicatorReportWithDisaggregation[]
 > {
-  const reports = await prisma.indicatorReport.findMany({
-    where: {
-      resultId: resultId,
-    },
-    include: {
-      IndicatorReportDisaggregation: true,
-    },
-  });
+  try{
+    console.log(resultId, "resultId");
+    const reports = await prisma.indicatorReport.findMany({
+      where: {
+        resultId: resultId,
+      },
+      include: {
+        IndicatorReportDisaggregation: true,
+      },
+    });
+    console.log(reports, "reports");
 
-  return reports as any;
+    return reports as any;
+  }catch(error){
+    console.log(error, "error");
+    throw error;
+  }
 }
 
 export async function getIndicatorReportById(

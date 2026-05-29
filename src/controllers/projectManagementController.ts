@@ -418,6 +418,7 @@ export const getIndicatorReportsByResult = async (
 ) => {
   try {
     const resultId = req.params.resultId;
+    console.log(resultId, "resultId");
     const results = await getAllIndicatorReportByResultId(resultId);
 
     if (!results || results.length === 0) {
@@ -448,6 +449,7 @@ export const getImpactIndicatorReportById = async (
 ) => {
   try {
     const id = req.params.id;
+    console.log(id, "id");
     const result = await getIndicatorReportById(id);
 
     if (!result) {

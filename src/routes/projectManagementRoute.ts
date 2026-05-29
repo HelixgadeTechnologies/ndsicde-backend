@@ -23,6 +23,7 @@ import {
   fetchProjectById,
   fetchProjectStatusStats,
   getActivityByIdController,
+  getActivityByProjectIdController,
   getActivityReportByIdController,
   getAllActivitiesController,
   getAllActivityReportsController,
@@ -34,29 +35,27 @@ import {
   getAllPartnersController,
   getAllResultType,
   getAllTeamMemberController,
+  getImpactByProjectIdController,
   getImpactIndicatorReportById,
   getIndicatorById,
+  getIndicatorByResultTypeIdController,
   getIndicatorReportsByResult,
   getLogicalFrameworkByIdController,
+  getLogicalFrameworkByProjectIdController,
   getOrgKpiDashboardDataController,
   getOutcomeByIdController,
   getOutcomeByProjectIdController,
   getOutputByIdController,
   getOutputByProjectIdController,
   getPartnerByEmailController,
+  getPartnerByProjectIdController,
   getProjectActivityDashboardDataController,
-  getResultDashboardDataController,
   getResultDashboardFullDataController,
   getResultDashboardKpiSectionDataController,
-  getImpactByProjectIdController,
-  getActivityByProjectIdController,
-  getLogicalFrameworkByProjectIdController,
   getTeamMemberByProjectIdController,
-  getPartnerByProjectIdController,
-  getIndicatorByResultTypeIdController,
   removeIndicatorReport,
   removeProject,
-  saveOutcomeController,
+  saveOutcomeController
 } from "../controllers/projectManagementController";
 
 const projectManagementRouter: Router = Router();
@@ -706,7 +705,7 @@ projectManagementRouter.post(
 
 /**
  * @swagger
- * /api/projectManagement/indicator-report/{resultId}:
+ * /api/projectManagement/indicator-report/getByResultId/{resultId}:
  *   get:
  *     summary: Get all Indicator Report Formats
  *     description: Fetches all Indicator Report Formats from the database.
@@ -733,13 +732,13 @@ projectManagementRouter.post(
  *         description: Internal server error
  */
 projectManagementRouter.get(
-  "/indicator-reports/:resultId",
+  "/indicator-report/getByResultId/:resultId",
   getIndicatorReportsByResult
 );
 
 /**
  * @swagger
- * /api/projectManagement/indicator-report/{id}:
+ * /api/projectManagement/indicator-report/getById/{id}:
  *   get:
  *     summary: Get a single Indicator Report Format by ID
  *     description: Fetches a single Indicator Report Format by its ID.
@@ -763,8 +762,9 @@ projectManagementRouter.get(
  *       500:
  *         description: Internal server error
  */
+
 projectManagementRouter.get(
-  "/indicator-report/:id",
+  "/indicator-report/getById/:id",
   getImpactIndicatorReportById
 );
 
@@ -1639,7 +1639,7 @@ projectManagementRouter.get(
  */
 projectManagementRouter.get(
   "/result_dashboard_kpi/:projectId",
-getResultDashboardKpiSectionDataController
+  getResultDashboardKpiSectionDataController
 );
 
 /**
