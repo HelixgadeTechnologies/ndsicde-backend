@@ -134,6 +134,11 @@ export type LogicalFramework = $Result.DefaultSelection<Prisma.$LogicalFramework
  */
 export type Request = $Result.DefaultSelection<Prisma.$RequestPayload>
 /**
+ * Model SupportingDocument
+ * 
+ */
+export type SupportingDocument = $Result.DefaultSelection<Prisma.$SupportingDocumentPayload>
+/**
  * Model OtherPersonnel
  * 
  */
@@ -514,6 +519,16 @@ export class PrismaClient<
     * ```
     */
   get request(): Prisma.RequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.supportingDocument`: Exposes CRUD operations for the **SupportingDocument** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SupportingDocuments
+    * const supportingDocuments = await prisma.supportingDocument.findMany()
+    * ```
+    */
+  get supportingDocument(): Prisma.SupportingDocumentDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.otherPersonnel`: Exposes CRUD operations for the **OtherPersonnel** model.
@@ -1012,6 +1027,7 @@ export namespace Prisma {
     ActivityReport: 'ActivityReport',
     LogicalFramework: 'LogicalFramework',
     Request: 'Request',
+    SupportingDocument: 'SupportingDocument',
     OtherPersonnel: 'OtherPersonnel',
     LineItem: 'LineItem',
     Retirement: 'Retirement',
@@ -1031,7 +1047,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "otherPersonnel" | "lineItem" | "retirement" | "report"
+      modelProps: "user" | "generalSettings" | "role" | "strategicObjective" | "kpi" | "kpiDisaggregation" | "project" | "teamMember" | "partner" | "resultType" | "impact" | "outcome" | "output" | "indicator" | "indicatorDisaggregation" | "periodicTarget" | "indicatorReport" | "indicatorReportDisaggregation" | "indicatorReportComment" | "activity" | "subActivities" | "activityReport" | "logicalFramework" | "request" | "supportingDocument" | "otherPersonnel" | "lineItem" | "retirement" | "report"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2619,6 +2635,72 @@ export namespace Prisma {
           }
         }
       }
+      SupportingDocument: {
+        payload: Prisma.$SupportingDocumentPayload<ExtArgs>
+        fields: Prisma.SupportingDocumentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SupportingDocumentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SupportingDocumentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          findFirst: {
+            args: Prisma.SupportingDocumentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SupportingDocumentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          findMany: {
+            args: Prisma.SupportingDocumentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>[]
+          }
+          create: {
+            args: Prisma.SupportingDocumentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          createMany: {
+            args: Prisma.SupportingDocumentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SupportingDocumentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          update: {
+            args: Prisma.SupportingDocumentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          deleteMany: {
+            args: Prisma.SupportingDocumentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SupportingDocumentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SupportingDocumentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SupportingDocumentPayload>
+          }
+          aggregate: {
+            args: Prisma.SupportingDocumentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSupportingDocument>
+          }
+          groupBy: {
+            args: Prisma.SupportingDocumentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SupportingDocumentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SupportingDocumentCountArgs<ExtArgs>
+            result: $Utils.Optional<SupportingDocumentCountAggregateOutputType> | number
+          }
+        }
+      }
       OtherPersonnel: {
         payload: Prisma.$OtherPersonnelPayload<ExtArgs>
         fields: Prisma.OtherPersonnelFieldRefs
@@ -3015,6 +3097,7 @@ export namespace Prisma {
     activityReport?: ActivityReportOmit
     logicalFramework?: LogicalFrameworkOmit
     request?: RequestOmit
+    supportingDocument?: SupportingDocumentOmit
     otherPersonnel?: OtherPersonnelOmit
     lineItem?: LineItemOmit
     retirement?: RetirementOmit
@@ -3672,12 +3755,14 @@ export namespace Prisma {
     retirement: number
     lineItems: number
     otherPersonnel: number
+    supportingDocuments: number
   }
 
   export type RequestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     retirement?: boolean | RequestCountOutputTypeCountRetirementArgs
     lineItems?: boolean | RequestCountOutputTypeCountLineItemsArgs
     otherPersonnel?: boolean | RequestCountOutputTypeCountOtherPersonnelArgs
+    supportingDocuments?: boolean | RequestCountOutputTypeCountSupportingDocumentsArgs
   }
 
   // Custom InputTypes
@@ -3710,6 +3795,13 @@ export namespace Prisma {
    */
   export type RequestCountOutputTypeCountOtherPersonnelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OtherPersonnelWhereInput
+  }
+
+  /**
+   * RequestCountOutputType without action
+   */
+  export type RequestCountOutputTypeCountSupportingDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportingDocumentWhereInput
   }
 
 
@@ -28854,6 +28946,7 @@ export namespace Prisma {
     retirement?: boolean | Request$retirementArgs<ExtArgs>
     lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
     otherPersonnel?: boolean | Request$otherPersonnelArgs<ExtArgs>
+    supportingDocuments?: boolean | Request$supportingDocumentsArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["request"]>
 
@@ -28932,6 +29025,7 @@ export namespace Prisma {
     retirement?: boolean | Request$retirementArgs<ExtArgs>
     lineItems?: boolean | Request$lineItemsArgs<ExtArgs>
     otherPersonnel?: boolean | Request$otherPersonnelArgs<ExtArgs>
+    supportingDocuments?: boolean | Request$supportingDocumentsArgs<ExtArgs>
     _count?: boolean | RequestCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -28944,6 +29038,7 @@ export namespace Prisma {
       retirement: Prisma.$RetirementPayload<ExtArgs>[]
       lineItems: Prisma.$LineItemPayload<ExtArgs>[]
       otherPersonnel: Prisma.$OtherPersonnelPayload<ExtArgs>[]
+      supportingDocuments: Prisma.$SupportingDocumentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       requestId: string
@@ -29354,6 +29449,7 @@ export namespace Prisma {
     retirement<T extends Request$retirementArgs<ExtArgs> = {}>(args?: Subset<T, Request$retirementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RetirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     lineItems<T extends Request$lineItemsArgs<ExtArgs> = {}>(args?: Subset<T, Request$lineItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LineItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     otherPersonnel<T extends Request$otherPersonnelArgs<ExtArgs> = {}>(args?: Subset<T, Request$otherPersonnelArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtherPersonnelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    supportingDocuments<T extends Request$supportingDocumentsArgs<ExtArgs> = {}>(args?: Subset<T, Request$supportingDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -29922,6 +30018,30 @@ export namespace Prisma {
   }
 
   /**
+   * Request.supportingDocuments
+   */
+  export type Request$supportingDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    where?: SupportingDocumentWhereInput
+    orderBy?: SupportingDocumentOrderByWithRelationInput | SupportingDocumentOrderByWithRelationInput[]
+    cursor?: SupportingDocumentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportingDocumentScalarFieldEnum | SupportingDocumentScalarFieldEnum[]
+  }
+
+  /**
    * Request without action
    */
   export type RequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29937,6 +30057,951 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SupportingDocument
+   */
+
+  export type AggregateSupportingDocument = {
+    _count: SupportingDocumentCountAggregateOutputType | null
+    _min: SupportingDocumentMinAggregateOutputType | null
+    _max: SupportingDocumentMaxAggregateOutputType | null
+  }
+
+  export type SupportingDocumentMinAggregateOutputType = {
+    supportingDocumentId: string | null
+    requestId: string | null
+    documentName: string | null
+    documentURL: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportingDocumentMaxAggregateOutputType = {
+    supportingDocumentId: string | null
+    requestId: string | null
+    documentName: string | null
+    documentURL: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SupportingDocumentCountAggregateOutputType = {
+    supportingDocumentId: number
+    requestId: number
+    documentName: number
+    documentURL: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SupportingDocumentMinAggregateInputType = {
+    supportingDocumentId?: true
+    requestId?: true
+    documentName?: true
+    documentURL?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportingDocumentMaxAggregateInputType = {
+    supportingDocumentId?: true
+    requestId?: true
+    documentName?: true
+    documentURL?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SupportingDocumentCountAggregateInputType = {
+    supportingDocumentId?: true
+    requestId?: true
+    documentName?: true
+    documentURL?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SupportingDocumentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportingDocument to aggregate.
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportingDocuments to fetch.
+     */
+    orderBy?: SupportingDocumentOrderByWithRelationInput | SupportingDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SupportingDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportingDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportingDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SupportingDocuments
+    **/
+    _count?: true | SupportingDocumentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SupportingDocumentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SupportingDocumentMaxAggregateInputType
+  }
+
+  export type GetSupportingDocumentAggregateType<T extends SupportingDocumentAggregateArgs> = {
+        [P in keyof T & keyof AggregateSupportingDocument]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSupportingDocument[P]>
+      : GetScalarType<T[P], AggregateSupportingDocument[P]>
+  }
+
+
+
+
+  export type SupportingDocumentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportingDocumentWhereInput
+    orderBy?: SupportingDocumentOrderByWithAggregationInput | SupportingDocumentOrderByWithAggregationInput[]
+    by: SupportingDocumentScalarFieldEnum[] | SupportingDocumentScalarFieldEnum
+    having?: SupportingDocumentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SupportingDocumentCountAggregateInputType | true
+    _min?: SupportingDocumentMinAggregateInputType
+    _max?: SupportingDocumentMaxAggregateInputType
+  }
+
+  export type SupportingDocumentGroupByOutputType = {
+    supportingDocumentId: string
+    requestId: string
+    documentName: string | null
+    documentURL: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    _count: SupportingDocumentCountAggregateOutputType | null
+    _min: SupportingDocumentMinAggregateOutputType | null
+    _max: SupportingDocumentMaxAggregateOutputType | null
+  }
+
+  type GetSupportingDocumentGroupByPayload<T extends SupportingDocumentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SupportingDocumentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SupportingDocumentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SupportingDocumentGroupByOutputType[P]>
+            : GetScalarType<T[P], SupportingDocumentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SupportingDocumentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    supportingDocumentId?: boolean
+    requestId?: boolean
+    documentName?: boolean
+    documentURL?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["supportingDocument"]>
+
+
+
+  export type SupportingDocumentSelectScalar = {
+    supportingDocumentId?: boolean
+    requestId?: boolean
+    documentName?: boolean
+    documentURL?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SupportingDocumentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"supportingDocumentId" | "requestId" | "documentName" | "documentURL" | "createdAt" | "updatedAt", ExtArgs["result"]["supportingDocument"]>
+  export type SupportingDocumentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    request?: boolean | RequestDefaultArgs<ExtArgs>
+  }
+
+  export type $SupportingDocumentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SupportingDocument"
+    objects: {
+      request: Prisma.$RequestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      supportingDocumentId: string
+      requestId: string
+      documentName: string | null
+      documentURL: string | null
+      createdAt: Date | null
+      updatedAt: Date | null
+    }, ExtArgs["result"]["supportingDocument"]>
+    composites: {}
+  }
+
+  type SupportingDocumentGetPayload<S extends boolean | null | undefined | SupportingDocumentDefaultArgs> = $Result.GetResult<Prisma.$SupportingDocumentPayload, S>
+
+  type SupportingDocumentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SupportingDocumentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SupportingDocumentCountAggregateInputType | true
+    }
+
+  export interface SupportingDocumentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupportingDocument'], meta: { name: 'SupportingDocument' } }
+    /**
+     * Find zero or one SupportingDocument that matches the filter.
+     * @param {SupportingDocumentFindUniqueArgs} args - Arguments to find a SupportingDocument
+     * @example
+     * // Get one SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SupportingDocumentFindUniqueArgs>(args: SelectSubset<T, SupportingDocumentFindUniqueArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SupportingDocument that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SupportingDocumentFindUniqueOrThrowArgs} args - Arguments to find a SupportingDocument
+     * @example
+     * // Get one SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SupportingDocumentFindUniqueOrThrowArgs>(args: SelectSubset<T, SupportingDocumentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SupportingDocument that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentFindFirstArgs} args - Arguments to find a SupportingDocument
+     * @example
+     * // Get one SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SupportingDocumentFindFirstArgs>(args?: SelectSubset<T, SupportingDocumentFindFirstArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SupportingDocument that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentFindFirstOrThrowArgs} args - Arguments to find a SupportingDocument
+     * @example
+     * // Get one SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SupportingDocumentFindFirstOrThrowArgs>(args?: SelectSubset<T, SupportingDocumentFindFirstOrThrowArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SupportingDocuments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SupportingDocuments
+     * const supportingDocuments = await prisma.supportingDocument.findMany()
+     * 
+     * // Get first 10 SupportingDocuments
+     * const supportingDocuments = await prisma.supportingDocument.findMany({ take: 10 })
+     * 
+     * // Only select the `supportingDocumentId`
+     * const supportingDocumentWithSupportingDocumentIdOnly = await prisma.supportingDocument.findMany({ select: { supportingDocumentId: true } })
+     * 
+     */
+    findMany<T extends SupportingDocumentFindManyArgs>(args?: SelectSubset<T, SupportingDocumentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SupportingDocument.
+     * @param {SupportingDocumentCreateArgs} args - Arguments to create a SupportingDocument.
+     * @example
+     * // Create one SupportingDocument
+     * const SupportingDocument = await prisma.supportingDocument.create({
+     *   data: {
+     *     // ... data to create a SupportingDocument
+     *   }
+     * })
+     * 
+     */
+    create<T extends SupportingDocumentCreateArgs>(args: SelectSubset<T, SupportingDocumentCreateArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SupportingDocuments.
+     * @param {SupportingDocumentCreateManyArgs} args - Arguments to create many SupportingDocuments.
+     * @example
+     * // Create many SupportingDocuments
+     * const supportingDocument = await prisma.supportingDocument.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SupportingDocumentCreateManyArgs>(args?: SelectSubset<T, SupportingDocumentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SupportingDocument.
+     * @param {SupportingDocumentDeleteArgs} args - Arguments to delete one SupportingDocument.
+     * @example
+     * // Delete one SupportingDocument
+     * const SupportingDocument = await prisma.supportingDocument.delete({
+     *   where: {
+     *     // ... filter to delete one SupportingDocument
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SupportingDocumentDeleteArgs>(args: SelectSubset<T, SupportingDocumentDeleteArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SupportingDocument.
+     * @param {SupportingDocumentUpdateArgs} args - Arguments to update one SupportingDocument.
+     * @example
+     * // Update one SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SupportingDocumentUpdateArgs>(args: SelectSubset<T, SupportingDocumentUpdateArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SupportingDocuments.
+     * @param {SupportingDocumentDeleteManyArgs} args - Arguments to filter SupportingDocuments to delete.
+     * @example
+     * // Delete a few SupportingDocuments
+     * const { count } = await prisma.supportingDocument.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SupportingDocumentDeleteManyArgs>(args?: SelectSubset<T, SupportingDocumentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SupportingDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SupportingDocuments
+     * const supportingDocument = await prisma.supportingDocument.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SupportingDocumentUpdateManyArgs>(args: SelectSubset<T, SupportingDocumentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SupportingDocument.
+     * @param {SupportingDocumentUpsertArgs} args - Arguments to update or create a SupportingDocument.
+     * @example
+     * // Update or create a SupportingDocument
+     * const supportingDocument = await prisma.supportingDocument.upsert({
+     *   create: {
+     *     // ... data to create a SupportingDocument
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SupportingDocument we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SupportingDocumentUpsertArgs>(args: SelectSubset<T, SupportingDocumentUpsertArgs<ExtArgs>>): Prisma__SupportingDocumentClient<$Result.GetResult<Prisma.$SupportingDocumentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SupportingDocuments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentCountArgs} args - Arguments to filter SupportingDocuments to count.
+     * @example
+     * // Count the number of SupportingDocuments
+     * const count = await prisma.supportingDocument.count({
+     *   where: {
+     *     // ... the filter for the SupportingDocuments we want to count
+     *   }
+     * })
+    **/
+    count<T extends SupportingDocumentCountArgs>(
+      args?: Subset<T, SupportingDocumentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SupportingDocumentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SupportingDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SupportingDocumentAggregateArgs>(args: Subset<T, SupportingDocumentAggregateArgs>): Prisma.PrismaPromise<GetSupportingDocumentAggregateType<T>>
+
+    /**
+     * Group by SupportingDocument.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SupportingDocumentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SupportingDocumentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SupportingDocumentGroupByArgs['orderBy'] }
+        : { orderBy?: SupportingDocumentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SupportingDocumentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupportingDocumentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SupportingDocument model
+   */
+  readonly fields: SupportingDocumentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SupportingDocument.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SupportingDocumentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    request<T extends RequestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RequestDefaultArgs<ExtArgs>>): Prisma__RequestClient<$Result.GetResult<Prisma.$RequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SupportingDocument model
+   */
+  interface SupportingDocumentFieldRefs {
+    readonly supportingDocumentId: FieldRef<"SupportingDocument", 'String'>
+    readonly requestId: FieldRef<"SupportingDocument", 'String'>
+    readonly documentName: FieldRef<"SupportingDocument", 'String'>
+    readonly documentURL: FieldRef<"SupportingDocument", 'String'>
+    readonly createdAt: FieldRef<"SupportingDocument", 'DateTime'>
+    readonly updatedAt: FieldRef<"SupportingDocument", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SupportingDocument findUnique
+   */
+  export type SupportingDocumentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportingDocument to fetch.
+     */
+    where: SupportingDocumentWhereUniqueInput
+  }
+
+  /**
+   * SupportingDocument findUniqueOrThrow
+   */
+  export type SupportingDocumentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportingDocument to fetch.
+     */
+    where: SupportingDocumentWhereUniqueInput
+  }
+
+  /**
+   * SupportingDocument findFirst
+   */
+  export type SupportingDocumentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportingDocument to fetch.
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportingDocuments to fetch.
+     */
+    orderBy?: SupportingDocumentOrderByWithRelationInput | SupportingDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportingDocuments.
+     */
+    cursor?: SupportingDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportingDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportingDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportingDocuments.
+     */
+    distinct?: SupportingDocumentScalarFieldEnum | SupportingDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * SupportingDocument findFirstOrThrow
+   */
+  export type SupportingDocumentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportingDocument to fetch.
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportingDocuments to fetch.
+     */
+    orderBy?: SupportingDocumentOrderByWithRelationInput | SupportingDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SupportingDocuments.
+     */
+    cursor?: SupportingDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportingDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportingDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportingDocuments.
+     */
+    distinct?: SupportingDocumentScalarFieldEnum | SupportingDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * SupportingDocument findMany
+   */
+  export type SupportingDocumentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter, which SupportingDocuments to fetch.
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SupportingDocuments to fetch.
+     */
+    orderBy?: SupportingDocumentOrderByWithRelationInput | SupportingDocumentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SupportingDocuments.
+     */
+    cursor?: SupportingDocumentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SupportingDocuments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SupportingDocuments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SupportingDocuments.
+     */
+    distinct?: SupportingDocumentScalarFieldEnum | SupportingDocumentScalarFieldEnum[]
+  }
+
+  /**
+   * SupportingDocument create
+   */
+  export type SupportingDocumentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SupportingDocument.
+     */
+    data: XOR<SupportingDocumentCreateInput, SupportingDocumentUncheckedCreateInput>
+  }
+
+  /**
+   * SupportingDocument createMany
+   */
+  export type SupportingDocumentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SupportingDocuments.
+     */
+    data: SupportingDocumentCreateManyInput | SupportingDocumentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SupportingDocument update
+   */
+  export type SupportingDocumentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SupportingDocument.
+     */
+    data: XOR<SupportingDocumentUpdateInput, SupportingDocumentUncheckedUpdateInput>
+    /**
+     * Choose, which SupportingDocument to update.
+     */
+    where: SupportingDocumentWhereUniqueInput
+  }
+
+  /**
+   * SupportingDocument updateMany
+   */
+  export type SupportingDocumentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SupportingDocuments.
+     */
+    data: XOR<SupportingDocumentUpdateManyMutationInput, SupportingDocumentUncheckedUpdateManyInput>
+    /**
+     * Filter which SupportingDocuments to update
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * Limit how many SupportingDocuments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SupportingDocument upsert
+   */
+  export type SupportingDocumentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SupportingDocument to update in case it exists.
+     */
+    where: SupportingDocumentWhereUniqueInput
+    /**
+     * In case the SupportingDocument found by the `where` argument doesn't exist, create a new SupportingDocument with this data.
+     */
+    create: XOR<SupportingDocumentCreateInput, SupportingDocumentUncheckedCreateInput>
+    /**
+     * In case the SupportingDocument was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SupportingDocumentUpdateInput, SupportingDocumentUncheckedUpdateInput>
+  }
+
+  /**
+   * SupportingDocument delete
+   */
+  export type SupportingDocumentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
+    /**
+     * Filter which SupportingDocument to delete.
+     */
+    where: SupportingDocumentWhereUniqueInput
+  }
+
+  /**
+   * SupportingDocument deleteMany
+   */
+  export type SupportingDocumentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SupportingDocuments to delete
+     */
+    where?: SupportingDocumentWhereInput
+    /**
+     * Limit how many SupportingDocuments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SupportingDocument without action
+   */
+  export type SupportingDocumentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportingDocument
+     */
+    select?: SupportingDocumentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportingDocument
+     */
+    omit?: SupportingDocumentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportingDocumentInclude<ExtArgs> | null
   }
 
 
@@ -34828,6 +35893,18 @@ export namespace Prisma {
   export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
 
 
+  export const SupportingDocumentScalarFieldEnum: {
+    supportingDocumentId: 'supportingDocumentId',
+    requestId: 'requestId',
+    documentName: 'documentName',
+    documentURL: 'documentURL',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SupportingDocumentScalarFieldEnum = (typeof SupportingDocumentScalarFieldEnum)[keyof typeof SupportingDocumentScalarFieldEnum]
+
+
   export const OtherPersonnelScalarFieldEnum: {
     otherPersonnelId: 'otherPersonnelId',
     requestId: 'requestId',
@@ -35279,6 +36356,16 @@ export namespace Prisma {
   };
 
   export type RequestOrderByRelevanceFieldEnum = (typeof RequestOrderByRelevanceFieldEnum)[keyof typeof RequestOrderByRelevanceFieldEnum]
+
+
+  export const SupportingDocumentOrderByRelevanceFieldEnum: {
+    supportingDocumentId: 'supportingDocumentId',
+    requestId: 'requestId',
+    documentName: 'documentName',
+    documentURL: 'documentURL'
+  };
+
+  export type SupportingDocumentOrderByRelevanceFieldEnum = (typeof SupportingDocumentOrderByRelevanceFieldEnum)[keyof typeof SupportingDocumentOrderByRelevanceFieldEnum]
 
 
   export const OtherPersonnelOrderByRelevanceFieldEnum: {
@@ -37435,6 +38522,7 @@ export namespace Prisma {
     retirement?: RetirementListRelationFilter
     lineItems?: LineItemListRelationFilter
     otherPersonnel?: OtherPersonnelListRelationFilter
+    supportingDocuments?: SupportingDocumentListRelationFilter
   }
 
   export type RequestOrderByWithRelationInput = {
@@ -37506,6 +38594,7 @@ export namespace Prisma {
     retirement?: RetirementOrderByRelationAggregateInput
     lineItems?: LineItemOrderByRelationAggregateInput
     otherPersonnel?: OtherPersonnelOrderByRelationAggregateInput
+    supportingDocuments?: SupportingDocumentOrderByRelationAggregateInput
     _relevance?: RequestOrderByRelevanceInput
   }
 
@@ -37581,6 +38670,7 @@ export namespace Prisma {
     retirement?: RetirementListRelationFilter
     lineItems?: LineItemListRelationFilter
     otherPersonnel?: OtherPersonnelListRelationFilter
+    supportingDocuments?: SupportingDocumentListRelationFilter
   }, "requestId">
 
   export type RequestOrderByWithAggregationInput = {
@@ -37719,6 +38809,67 @@ export namespace Prisma {
     budgetName?: StringNullableWithAggregatesFilter<"Request"> | string | null
     sendTo?: StringNullableWithAggregatesFilter<"Request"> | string | null
     sendTo2?: StringNullableWithAggregatesFilter<"Request"> | string | null
+  }
+
+  export type SupportingDocumentWhereInput = {
+    AND?: SupportingDocumentWhereInput | SupportingDocumentWhereInput[]
+    OR?: SupportingDocumentWhereInput[]
+    NOT?: SupportingDocumentWhereInput | SupportingDocumentWhereInput[]
+    supportingDocumentId?: StringFilter<"SupportingDocument"> | string
+    requestId?: StringFilter<"SupportingDocument"> | string
+    documentName?: StringNullableFilter<"SupportingDocument"> | string | null
+    documentURL?: StringNullableFilter<"SupportingDocument"> | string | null
+    createdAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }
+
+  export type SupportingDocumentOrderByWithRelationInput = {
+    supportingDocumentId?: SortOrder
+    requestId?: SortOrder
+    documentName?: SortOrderInput | SortOrder
+    documentURL?: SortOrderInput | SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    request?: RequestOrderByWithRelationInput
+    _relevance?: SupportingDocumentOrderByRelevanceInput
+  }
+
+  export type SupportingDocumentWhereUniqueInput = Prisma.AtLeast<{
+    supportingDocumentId?: string
+    AND?: SupportingDocumentWhereInput | SupportingDocumentWhereInput[]
+    OR?: SupportingDocumentWhereInput[]
+    NOT?: SupportingDocumentWhereInput | SupportingDocumentWhereInput[]
+    requestId?: StringFilter<"SupportingDocument"> | string
+    documentName?: StringNullableFilter<"SupportingDocument"> | string | null
+    documentURL?: StringNullableFilter<"SupportingDocument"> | string | null
+    createdAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+    request?: XOR<RequestScalarRelationFilter, RequestWhereInput>
+  }, "supportingDocumentId">
+
+  export type SupportingDocumentOrderByWithAggregationInput = {
+    supportingDocumentId?: SortOrder
+    requestId?: SortOrder
+    documentName?: SortOrderInput | SortOrder
+    documentURL?: SortOrderInput | SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    _count?: SupportingDocumentCountOrderByAggregateInput
+    _max?: SupportingDocumentMaxOrderByAggregateInput
+    _min?: SupportingDocumentMinOrderByAggregateInput
+  }
+
+  export type SupportingDocumentScalarWhereWithAggregatesInput = {
+    AND?: SupportingDocumentScalarWhereWithAggregatesInput | SupportingDocumentScalarWhereWithAggregatesInput[]
+    OR?: SupportingDocumentScalarWhereWithAggregatesInput[]
+    NOT?: SupportingDocumentScalarWhereWithAggregatesInput | SupportingDocumentScalarWhereWithAggregatesInput[]
+    supportingDocumentId?: StringWithAggregatesFilter<"SupportingDocument"> | string
+    requestId?: StringWithAggregatesFilter<"SupportingDocument"> | string
+    documentName?: StringNullableWithAggregatesFilter<"SupportingDocument"> | string | null
+    documentURL?: StringNullableWithAggregatesFilter<"SupportingDocument"> | string | null
+    createdAt?: DateTimeNullableWithAggregatesFilter<"SupportingDocument"> | Date | string | null
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"SupportingDocument"> | Date | string | null
   }
 
   export type OtherPersonnelWhereInput = {
@@ -40408,6 +41559,7 @@ export namespace Prisma {
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateInput = {
@@ -40476,6 +41628,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUpdateInput = {
@@ -40544,6 +41697,7 @@ export namespace Prisma {
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateInput = {
@@ -40612,6 +41766,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateManyInput = {
@@ -40804,6 +41959,68 @@ export namespace Prisma {
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SupportingDocumentCreateInput = {
+    supportingDocumentId?: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    request: RequestCreateNestedOneWithoutSupportingDocumentsInput
+  }
+
+  export type SupportingDocumentUncheckedCreateInput = {
+    supportingDocumentId?: string
+    requestId: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type SupportingDocumentUpdateInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    request?: RequestUpdateOneRequiredWithoutSupportingDocumentsNestedInput
+  }
+
+  export type SupportingDocumentUncheckedUpdateInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SupportingDocumentCreateManyInput = {
+    supportingDocumentId?: string
+    requestId: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type SupportingDocumentUpdateManyMutationInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SupportingDocumentUncheckedUpdateManyInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    requestId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OtherPersonnelCreateInput = {
@@ -42887,7 +44104,17 @@ export namespace Prisma {
     none?: OtherPersonnelWhereInput
   }
 
+  export type SupportingDocumentListRelationFilter = {
+    every?: SupportingDocumentWhereInput
+    some?: SupportingDocumentWhereInput
+    none?: SupportingDocumentWhereInput
+  }
+
   export type OtherPersonnelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportingDocumentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43121,6 +44348,39 @@ export namespace Prisma {
   export type RequestScalarRelationFilter = {
     is?: RequestWhereInput
     isNot?: RequestWhereInput
+  }
+
+  export type SupportingDocumentOrderByRelevanceInput = {
+    fields: SupportingDocumentOrderByRelevanceFieldEnum | SupportingDocumentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type SupportingDocumentCountOrderByAggregateInput = {
+    supportingDocumentId?: SortOrder
+    requestId?: SortOrder
+    documentName?: SortOrder
+    documentURL?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportingDocumentMaxOrderByAggregateInput = {
+    supportingDocumentId?: SortOrder
+    requestId?: SortOrder
+    documentName?: SortOrder
+    documentURL?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SupportingDocumentMinOrderByAggregateInput = {
+    supportingDocumentId?: SortOrder
+    requestId?: SortOrder
+    documentName?: SortOrder
+    documentURL?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type OtherPersonnelOrderByRelevanceInput = {
@@ -45420,6 +46680,13 @@ export namespace Prisma {
     connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
   }
 
+  export type SupportingDocumentCreateNestedManyWithoutRequestInput = {
+    create?: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput> | SupportingDocumentCreateWithoutRequestInput[] | SupportingDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: SupportingDocumentCreateOrConnectWithoutRequestInput | SupportingDocumentCreateOrConnectWithoutRequestInput[]
+    createMany?: SupportingDocumentCreateManyRequestInputEnvelope
+    connect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+  }
+
   export type RetirementUncheckedCreateNestedManyWithoutRequestInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -45439,6 +46706,13 @@ export namespace Prisma {
     connectOrCreate?: OtherPersonnelCreateOrConnectWithoutRequestInput | OtherPersonnelCreateOrConnectWithoutRequestInput[]
     createMany?: OtherPersonnelCreateManyRequestInputEnvelope
     connect?: OtherPersonnelWhereUniqueInput | OtherPersonnelWhereUniqueInput[]
+  }
+
+  export type SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput = {
+    create?: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput> | SupportingDocumentCreateWithoutRequestInput[] | SupportingDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: SupportingDocumentCreateOrConnectWithoutRequestInput | SupportingDocumentCreateOrConnectWithoutRequestInput[]
+    createMany?: SupportingDocumentCreateManyRequestInputEnvelope
+    connect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -45517,6 +46791,20 @@ export namespace Prisma {
     deleteMany?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
   }
 
+  export type SupportingDocumentUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput> | SupportingDocumentCreateWithoutRequestInput[] | SupportingDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: SupportingDocumentCreateOrConnectWithoutRequestInput | SupportingDocumentCreateOrConnectWithoutRequestInput[]
+    upsert?: SupportingDocumentUpsertWithWhereUniqueWithoutRequestInput | SupportingDocumentUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: SupportingDocumentCreateManyRequestInputEnvelope
+    set?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    disconnect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    delete?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    connect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    update?: SupportingDocumentUpdateWithWhereUniqueWithoutRequestInput | SupportingDocumentUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: SupportingDocumentUpdateManyWithWhereWithoutRequestInput | SupportingDocumentUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: SupportingDocumentScalarWhereInput | SupportingDocumentScalarWhereInput[]
+  }
+
   export type RetirementUncheckedUpdateManyWithoutRequestNestedInput = {
     create?: XOR<RetirementCreateWithoutRequestInput, RetirementUncheckedCreateWithoutRequestInput> | RetirementCreateWithoutRequestInput[] | RetirementUncheckedCreateWithoutRequestInput[]
     connectOrCreate?: RetirementCreateOrConnectWithoutRequestInput | RetirementCreateOrConnectWithoutRequestInput[]
@@ -45557,6 +46845,34 @@ export namespace Prisma {
     update?: OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput | OtherPersonnelUpdateWithWhereUniqueWithoutRequestInput[]
     updateMany?: OtherPersonnelUpdateManyWithWhereWithoutRequestInput | OtherPersonnelUpdateManyWithWhereWithoutRequestInput[]
     deleteMany?: OtherPersonnelScalarWhereInput | OtherPersonnelScalarWhereInput[]
+  }
+
+  export type SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput = {
+    create?: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput> | SupportingDocumentCreateWithoutRequestInput[] | SupportingDocumentUncheckedCreateWithoutRequestInput[]
+    connectOrCreate?: SupportingDocumentCreateOrConnectWithoutRequestInput | SupportingDocumentCreateOrConnectWithoutRequestInput[]
+    upsert?: SupportingDocumentUpsertWithWhereUniqueWithoutRequestInput | SupportingDocumentUpsertWithWhereUniqueWithoutRequestInput[]
+    createMany?: SupportingDocumentCreateManyRequestInputEnvelope
+    set?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    disconnect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    delete?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    connect?: SupportingDocumentWhereUniqueInput | SupportingDocumentWhereUniqueInput[]
+    update?: SupportingDocumentUpdateWithWhereUniqueWithoutRequestInput | SupportingDocumentUpdateWithWhereUniqueWithoutRequestInput[]
+    updateMany?: SupportingDocumentUpdateManyWithWhereWithoutRequestInput | SupportingDocumentUpdateManyWithWhereWithoutRequestInput[]
+    deleteMany?: SupportingDocumentScalarWhereInput | SupportingDocumentScalarWhereInput[]
+  }
+
+  export type RequestCreateNestedOneWithoutSupportingDocumentsInput = {
+    create?: XOR<RequestCreateWithoutSupportingDocumentsInput, RequestUncheckedCreateWithoutSupportingDocumentsInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutSupportingDocumentsInput
+    connect?: RequestWhereUniqueInput
+  }
+
+  export type RequestUpdateOneRequiredWithoutSupportingDocumentsNestedInput = {
+    create?: XOR<RequestCreateWithoutSupportingDocumentsInput, RequestUncheckedCreateWithoutSupportingDocumentsInput>
+    connectOrCreate?: RequestCreateOrConnectWithoutSupportingDocumentsInput
+    upsert?: RequestUpsertWithoutSupportingDocumentsInput
+    connect?: RequestWhereUniqueInput
+    update?: XOR<XOR<RequestUpdateToOneWithWhereWithoutSupportingDocumentsInput, RequestUpdateWithoutSupportingDocumentsInput>, RequestUncheckedUpdateWithoutSupportingDocumentsInput>
   }
 
   export type RequestCreateNestedOneWithoutOtherPersonnelInput = {
@@ -46015,6 +47331,7 @@ export namespace Prisma {
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutUserInput = {
@@ -46082,6 +47399,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutUserInput = {
@@ -47067,6 +48385,7 @@ export namespace Prisma {
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutProjectInput = {
@@ -47134,6 +48453,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutProjectInput = {
@@ -49092,6 +50412,7 @@ export namespace Prisma {
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutOutputInput = {
@@ -49159,6 +50480,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutOutputInput = {
@@ -51529,6 +52851,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SupportingDocumentCreateWithoutRequestInput = {
+    supportingDocumentId?: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type SupportingDocumentUncheckedCreateWithoutRequestInput = {
+    supportingDocumentId?: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type SupportingDocumentCreateOrConnectWithoutRequestInput = {
+    where: SupportingDocumentWhereUniqueInput
+    create: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput>
+  }
+
+  export type SupportingDocumentCreateManyRequestInputEnvelope = {
+    data: SupportingDocumentCreateManyRequestInput | SupportingDocumentCreateManyRequestInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OutputUpsertWithoutRequestInput = {
     update: XOR<OutputUpdateWithoutRequestInput, OutputUncheckedUpdateWithoutRequestInput>
     create: XOR<OutputCreateWithoutRequestInput, OutputUncheckedCreateWithoutRequestInput>
@@ -51759,6 +53107,322 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"OtherPersonnel"> | string | null
   }
 
+  export type SupportingDocumentUpsertWithWhereUniqueWithoutRequestInput = {
+    where: SupportingDocumentWhereUniqueInput
+    update: XOR<SupportingDocumentUpdateWithoutRequestInput, SupportingDocumentUncheckedUpdateWithoutRequestInput>
+    create: XOR<SupportingDocumentCreateWithoutRequestInput, SupportingDocumentUncheckedCreateWithoutRequestInput>
+  }
+
+  export type SupportingDocumentUpdateWithWhereUniqueWithoutRequestInput = {
+    where: SupportingDocumentWhereUniqueInput
+    data: XOR<SupportingDocumentUpdateWithoutRequestInput, SupportingDocumentUncheckedUpdateWithoutRequestInput>
+  }
+
+  export type SupportingDocumentUpdateManyWithWhereWithoutRequestInput = {
+    where: SupportingDocumentScalarWhereInput
+    data: XOR<SupportingDocumentUpdateManyMutationInput, SupportingDocumentUncheckedUpdateManyWithoutRequestInput>
+  }
+
+  export type SupportingDocumentScalarWhereInput = {
+    AND?: SupportingDocumentScalarWhereInput | SupportingDocumentScalarWhereInput[]
+    OR?: SupportingDocumentScalarWhereInput[]
+    NOT?: SupportingDocumentScalarWhereInput | SupportingDocumentScalarWhereInput[]
+    supportingDocumentId?: StringFilter<"SupportingDocument"> | string
+    requestId?: StringFilter<"SupportingDocument"> | string
+    documentName?: StringNullableFilter<"SupportingDocument"> | string | null
+    documentURL?: StringNullableFilter<"SupportingDocument"> | string | null
+    createdAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"SupportingDocument"> | Date | string | null
+  }
+
+  export type RequestCreateWithoutSupportingDocumentsInput = {
+    requestId?: string
+    staff?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: string | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    budgetCode?: string | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approval_E?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    approvedBy_E?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
+    sendTo?: string | null
+    sendTo2?: string | null
+    output?: OutputCreateNestedOneWithoutRequestInput
+    project?: ProjectCreateNestedOneWithoutRequestInput
+    user?: UserCreateNestedOneWithoutRequestInput
+    retirement?: RetirementCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestUncheckedCreateWithoutSupportingDocumentsInput = {
+    requestId?: string
+    staff?: string | null
+    outputId?: string | null
+    activityTitle?: string | null
+    activityBudgetCode?: string | null
+    activityLocation?: string | null
+    activityPurposeDescription?: string | null
+    activityStartDate?: Date | string | null
+    activityEndDate?: Date | string | null
+    budgetCode?: string | null
+    modeOfTransport?: string | null
+    driverName?: string | null
+    driversPhoneNumber?: string | null
+    vehiclePlateNumber?: string | null
+    vehicleColor?: string | null
+    departureTime?: Date | string | null
+    route?: string | null
+    recipientPhoneNumber?: string | null
+    documentName?: string | null
+    documentURL?: string | null
+    projectId?: string | null
+    approval_A?: number | null
+    approval_B?: number | null
+    approval_C?: number | null
+    approval_D?: number | null
+    approval_E?: number | null
+    approvedBy_A?: string | null
+    approvedBy_B?: string | null
+    approvedBy_C?: string | null
+    approvedBy_D?: string | null
+    approvedBy_E?: string | null
+    comment_A?: string | null
+    comment_B?: string | null
+    comment_C?: string | null
+    comment_D?: string | null
+    comment_E?: string | null
+    approvalStep?: number | null
+    status?: string | null
+    createAt?: Date | string | null
+    updateAt?: Date | string | null
+    createdBy?: string | null
+    isJourneyManagementRequired?: boolean
+    purposeOfTrip?: string | null
+    vehicleMake?: string | null
+    vehicleModel?: string | null
+    departureDate?: Date | string | null
+    departureLocationAndTime?: string | null
+    destination?: string | null
+    contactPersonPhoneNumberAtDestination?: string | null
+    flightDepartureState?: string | null
+    flightDepartureTime?: string | null
+    flightArrivalState?: string | null
+    flightArrivalTime?: string | null
+    hotelAccommodationName?: string | null
+    hotelAddress?: string | null
+    returnDate?: Date | string | null
+    returnTime?: string | null
+    airportDropoffOfficerName?: string | null
+    airportPickupOfficerName?: string | null
+    budgetName?: string | null
+    sendTo?: string | null
+    sendTo2?: string | null
+    retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
+    lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+  }
+
+  export type RequestCreateOrConnectWithoutSupportingDocumentsInput = {
+    where: RequestWhereUniqueInput
+    create: XOR<RequestCreateWithoutSupportingDocumentsInput, RequestUncheckedCreateWithoutSupportingDocumentsInput>
+  }
+
+  export type RequestUpsertWithoutSupportingDocumentsInput = {
+    update: XOR<RequestUpdateWithoutSupportingDocumentsInput, RequestUncheckedUpdateWithoutSupportingDocumentsInput>
+    create: XOR<RequestCreateWithoutSupportingDocumentsInput, RequestUncheckedCreateWithoutSupportingDocumentsInput>
+    where?: RequestWhereInput
+  }
+
+  export type RequestUpdateToOneWithWhereWithoutSupportingDocumentsInput = {
+    where?: RequestWhereInput
+    data: XOR<RequestUpdateWithoutSupportingDocumentsInput, RequestUncheckedUpdateWithoutSupportingDocumentsInput>
+  }
+
+  export type RequestUpdateWithoutSupportingDocumentsInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
+    output?: OutputUpdateOneWithoutRequestNestedInput
+    project?: ProjectUpdateOneWithoutRequestNestedInput
+    user?: UserUpdateOneWithoutRequestNestedInput
+    retirement?: RetirementUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+  }
+
+  export type RequestUncheckedUpdateWithoutSupportingDocumentsInput = {
+    requestId?: StringFieldUpdateOperationsInput | string
+    staff?: NullableStringFieldUpdateOperationsInput | string | null
+    outputId?: NullableStringFieldUpdateOperationsInput | string | null
+    activityTitle?: NullableStringFieldUpdateOperationsInput | string | null
+    activityBudgetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    activityLocation?: NullableStringFieldUpdateOperationsInput | string | null
+    activityPurposeDescription?: NullableStringFieldUpdateOperationsInput | string | null
+    activityStartDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    activityEndDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    budgetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    modeOfTransport?: NullableStringFieldUpdateOperationsInput | string | null
+    driverName?: NullableStringFieldUpdateOperationsInput | string | null
+    driversPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehiclePlateNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleColor?: NullableStringFieldUpdateOperationsInput | string | null
+    departureTime?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    route?: NullableStringFieldUpdateOperationsInput | string | null
+    recipientPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    approval_A?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_B?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_C?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_D?: NullableIntFieldUpdateOperationsInput | number | null
+    approval_E?: NullableIntFieldUpdateOperationsInput | number | null
+    approvedBy_A?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_B?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_D?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedBy_E?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_A?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_B?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_D?: NullableStringFieldUpdateOperationsInput | string | null
+    comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    isJourneyManagementRequired?: BoolFieldUpdateOperationsInput | boolean
+    purposeOfTrip?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleMake?: NullableStringFieldUpdateOperationsInput | string | null
+    vehicleModel?: NullableStringFieldUpdateOperationsInput | string | null
+    departureDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    departureLocationAndTime?: NullableStringFieldUpdateOperationsInput | string | null
+    destination?: NullableStringFieldUpdateOperationsInput | string | null
+    contactPersonPhoneNumberAtDestination?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightDepartureTime?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalState?: NullableStringFieldUpdateOperationsInput | string | null
+    flightArrivalTime?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAccommodationName?: NullableStringFieldUpdateOperationsInput | string | null
+    hotelAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    returnDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    returnTime?: NullableStringFieldUpdateOperationsInput | string | null
+    airportDropoffOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
+    budgetName?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
+    retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
+    lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+  }
+
   export type RequestCreateWithoutOtherPersonnelInput = {
     requestId?: string
     staff?: string | null
@@ -51824,6 +53488,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutOtherPersonnelInput = {
@@ -51891,6 +53556,7 @@ export namespace Prisma {
     sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutOtherPersonnelInput = {
@@ -51974,6 +53640,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutOtherPersonnelInput = {
@@ -52041,6 +53708,7 @@ export namespace Prisma {
     sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestCreateWithoutLineItemsInput = {
@@ -52108,6 +53776,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutLineItemsInput = {
@@ -52175,6 +53844,7 @@ export namespace Prisma {
     sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutLineItemsInput = {
@@ -52301,6 +53971,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutLineItemsInput = {
@@ -52368,6 +54039,7 @@ export namespace Prisma {
     sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type ActivityUpsertWithoutLineItemInput = {
@@ -52484,6 +54156,7 @@ export namespace Prisma {
     user?: UserCreateNestedOneWithoutRequestInput
     lineItems?: LineItemCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentCreateNestedManyWithoutRequestInput
   }
 
   export type RequestUncheckedCreateWithoutRetirementInput = {
@@ -52551,6 +54224,7 @@ export namespace Prisma {
     sendTo2?: string | null
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
+    supportingDocuments?: SupportingDocumentUncheckedCreateNestedManyWithoutRequestInput
   }
 
   export type RequestCreateOrConnectWithoutRetirementInput = {
@@ -52695,6 +54369,7 @@ export namespace Prisma {
     user?: UserUpdateOneWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutRetirementInput = {
@@ -52762,6 +54437,7 @@ export namespace Prisma {
     sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type UserUpsertWithoutRetirementInput = {
@@ -53156,6 +54832,7 @@ export namespace Prisma {
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutUserInput = {
@@ -53223,6 +54900,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutUserInput = {
@@ -54107,6 +55785,7 @@ export namespace Prisma {
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutProjectInput = {
@@ -54174,6 +55853,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutProjectInput = {
@@ -55062,6 +56742,7 @@ export namespace Prisma {
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateWithoutOutputInput = {
@@ -55129,6 +56810,7 @@ export namespace Prisma {
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
+    supportingDocuments?: SupportingDocumentUncheckedUpdateManyWithoutRequestNestedInput
   }
 
   export type RequestUncheckedUpdateManyWithoutOutputInput = {
@@ -55565,6 +57247,14 @@ export namespace Prisma {
     phoneNumber?: string | null
   }
 
+  export type SupportingDocumentCreateManyRequestInput = {
+    supportingDocumentId?: string
+    documentName?: string | null
+    documentURL?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
   export type RetirementUpdateWithoutRequestInput = {
     retirementId?: StringFieldUpdateOperationsInput | string
     activityLineDescription?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55713,6 +57403,30 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SupportingDocumentUpdateWithoutRequestInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SupportingDocumentUncheckedUpdateWithoutRequestInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SupportingDocumentUncheckedUpdateManyWithoutRequestInput = {
+    supportingDocumentId?: StringFieldUpdateOperationsInput | string
+    documentName?: NullableStringFieldUpdateOperationsInput | string | null
+    documentURL?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

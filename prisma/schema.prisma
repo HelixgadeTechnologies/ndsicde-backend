@@ -505,10 +505,21 @@ model Request {
   retirement                            Retirement[]
   lineItems                             LineItem[]
   otherPersonnel                        OtherPersonnel[]
-
+  supportingDocuments                   SupportingDocument[]
   @@map("request")
 }
 
+model SupportingDocument {
+  supportingDocumentId String  @id @default(uuid())
+  request          Request @relation(fields: [requestId], references: [requestId])
+  requestId        String
+  documentName             String?
+  documentURL             String?
+  createdAt         DateTime? @default(now())
+  updatedAt         DateTime? @updatedAt
+
+  @@map("supporting_document")
+}
 model OtherPersonnel {
   otherPersonnelId String  @id @default(uuid())
   request          Request @relation(fields: [requestId], references: [requestId])

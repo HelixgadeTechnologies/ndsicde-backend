@@ -1,4 +1,4 @@
-import { IDataValidationStats, ILineItem, IOtherPersonnel, IRequest, IRequestView } from "../interface/requestInterface";
+import { IDataValidationStats, ILineItem, IOtherPersonnel, IRequest, IRequestView, ISupportingDocument } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
 
 const JOURNEY_FIELDS = (payload: IRequest) => ({
@@ -30,6 +30,7 @@ export const createOrUpdateRequest = async (
 ) => {
   const lineItems: ILineItem[]         = payload.lineItems       || [];
   const otherPersonnel: IOtherPersonnel[] = payload.otherPersonnel || [];
+  const supportingDocuments: ISupportingDocument[] = payload.supportingDocuments || [];
 
   if (isCreate) {
     return await prisma.$transaction(async (tx) => {
@@ -86,6 +87,16 @@ export const createOrUpdateRequest = async (
             name:        p.name        || null,
             company:     p.company     || null,
             phoneNumber: p.phoneNumber || null,
+          })),
+        });
+      }
+
+      if (supportingDocuments.length > 0) {
+        await tx.supportingDocument.createMany({
+          data: supportingDocuments.map((s) => ({
+            requestId: newRequest.requestId,
+            documentName: s.documentName,
+            documentURL: s.documentURL,
           })),
         });
       }
@@ -162,6 +173,17 @@ export const createOrUpdateRequest = async (
         });
       }
 
+      await tx.supportingDocument.deleteMany({ where: { requestId: payload.requestId } });
+      if (supportingDocuments.length > 0) {
+        await tx.supportingDocument.createMany({
+          data: supportingDocuments.map((s) => ({
+            requestId: payload.requestId!,
+            documentName: s.documentName,
+            documentURL: s.documentURL,
+          })),
+        });
+      }
+
       return await tx.request.findUnique({
         where: { requestId: payload.requestId },
         include: { lineItems: true, otherPersonnel: true },
@@ -181,15 +203,17 @@ export const getAllRequests = async (): Promise<IRequestView[]> => {
 
   const requestIds = requests.map((r) => r.requestId);
 
-  const [allLineItems, allOtherPersonnel] = await Promise.all([
+  const [allLineItems, allOtherPersonnel,allSupportingDocuments] = await Promise.all([
     prisma.lineItem.findMany({ where: { requestId: { in: requestIds } } }),
     prisma.otherPersonnel.findMany({ where: { requestId: { in: requestIds } } }),
+    prisma.supportingDocument.findMany({ where: { requestId: { in: requestIds } } }),
   ]);
 
   return requests.map((r) => ({
     ...r,
     lineItems:      allLineItems.filter((li) => li.requestId === r.requestId),
     otherPersonnel: allOtherPersonnel.filter((p) => p.requestId === r.requestId),
+    supportingDocuments: allSupportingDocuments.filter((s) => s.requestId === r.requestId),
   }));
 };
 
@@ -203,12 +227,13 @@ export const getRequestById = async (
 
   if (result.length === 0) return null;
 
-  const [lineItems, otherPersonnel] = await Promise.all([
+  const [lineItems, otherPersonnel,supportingDocuments] = await Promise.all([
     prisma.lineItem.findMany({ where: { requestId } }),
     prisma.otherPersonnel.findMany({ where: { requestId } }),
+    prisma.supportingDocument.findMany({ where: { requestId } }),
   ]);
 
-  return { ...result[0], lineItems, otherPersonnel };
+  return { ...result[0], lineItems, otherPersonnel,supportingDocuments };
 };
 
 

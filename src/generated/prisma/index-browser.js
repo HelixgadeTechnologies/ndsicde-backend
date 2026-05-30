@@ -481,6 +481,15 @@ exports.Prisma.RequestScalarFieldEnum = {
   sendTo2: 'sendTo2'
 };
 
+exports.Prisma.SupportingDocumentScalarFieldEnum = {
+  supportingDocumentId: 'supportingDocumentId',
+  requestId: 'requestId',
+  documentName: 'documentName',
+  documentURL: 'documentURL',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.OtherPersonnelScalarFieldEnum = {
   otherPersonnelId: 'otherPersonnelId',
   requestId: 'requestId',
@@ -844,6 +853,13 @@ exports.Prisma.RequestOrderByRelevanceFieldEnum = {
   sendTo2: 'sendTo2'
 };
 
+exports.Prisma.SupportingDocumentOrderByRelevanceFieldEnum = {
+  supportingDocumentId: 'supportingDocumentId',
+  requestId: 'requestId',
+  documentName: 'documentName',
+  documentURL: 'documentURL'
+};
+
 exports.Prisma.OtherPersonnelOrderByRelevanceFieldEnum = {
   otherPersonnelId: 'otherPersonnelId',
   requestId: 'requestId',
@@ -914,6 +930,7 @@ exports.Prisma.ModelName = {
   ActivityReport: 'ActivityReport',
   LogicalFramework: 'LogicalFramework',
   Request: 'Request',
+  SupportingDocument: 'SupportingDocument',
   OtherPersonnel: 'OtherPersonnel',
   LineItem: 'LineItem',
   Retirement: 'Retirement',

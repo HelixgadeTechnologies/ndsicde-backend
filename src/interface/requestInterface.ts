@@ -6,6 +6,13 @@ export interface IOtherPersonnel {
   phoneNumber?: string | null;
 }
 
+export interface ISupportingDocument {
+  supportingDocumentId?: string;
+  requestId?: string;
+  documentName?: string | null;
+  documentURL?: string | null;
+}
+
 export interface IRequest {
   requestId: string;
   staff?: string;
@@ -34,7 +41,7 @@ export interface IRequest {
   createdBy?: string;
   lineItems?: Array<ILineItem>;
   otherPersonnel?: Array<IOtherPersonnel>;
-
+  supportingDocuments?: Array<ISupportingDocument>;
   // Journey management fields
   isJourneyManagementRequired?: boolean;
   purposeOfTrip?: string;
@@ -137,6 +144,7 @@ export interface IRequestView {
   comment_E?: string;
   lineItems?: Array<ILineItem>;
   otherPersonnel?: Array<IOtherPersonnel>;
+  supportingDocuments?: Array<ISupportingDocument>;
   projectId?: string;
   projectName?: string;
   status?: string;

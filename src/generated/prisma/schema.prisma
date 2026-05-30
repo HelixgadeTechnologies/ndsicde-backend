@@ -437,9 +437,9 @@ model LogicalFramework {
 
 // REQUEST
 model Request {
-  requestId                             String           @id @default(uuid())
+  requestId                             String               @id @default(uuid())
   staff                                 String?
-  output                                Output?          @relation(fields: [outputId], references: [outputId])
+  output                                Output?              @relation(fields: [outputId], references: [outputId])
   outputId                              String?
   activityTitle                         String?
   activityBudgetCode                    String?
@@ -458,30 +458,30 @@ model Request {
   recipientPhoneNumber                  String?
   documentName                          String?
   documentURL                           String?
-  project                               Project?         @relation(fields: [projectId], references: [projectId])
+  project                               Project?             @relation(fields: [projectId], references: [projectId])
   projectId                             String?
   approval_A                            Int?
   approval_B                            Int?
   approval_C                            Int?
   approval_D                            Int?
   approval_E                            Int?
-  approvedBy_A                          String?          @db.VarChar(191)
-  approvedBy_B                          String?          @db.VarChar(191)
-  approvedBy_C                          String?          @db.VarChar(191)
-  approvedBy_D                          String?          @db.VarChar(191)
-  approvedBy_E                          String?          @db.VarChar(191)
+  approvedBy_A                          String?              @db.VarChar(191)
+  approvedBy_B                          String?              @db.VarChar(191)
+  approvedBy_C                          String?              @db.VarChar(191)
+  approvedBy_D                          String?              @db.VarChar(191)
+  approvedBy_E                          String?              @db.VarChar(191)
   comment_A                             String?
   comment_B                             String?
   comment_C                             String?
   comment_D                             String?
   comment_E                             String?
-  approvalStep                          Int?             @default(0)
+  approvalStep                          Int?                 @default(0)
   status                                String?
-  createAt                              DateTime?        @default(now())
-  updateAt                              DateTime?        @default(now())
-  user                                  User?            @relation(fields: [createdBy], references: [userId])
+  createAt                              DateTime?            @default(now())
+  updateAt                              DateTime?            @default(now())
+  user                                  User?                @relation(fields: [createdBy], references: [userId])
   createdBy                             String?
-  isJourneyManagementRequired           Boolean          @default(false)
+  isJourneyManagementRequired           Boolean              @default(false)
   purposeOfTrip                         String?
   vehicleMake                           String?
   vehicleModel                          String?
@@ -505,8 +505,21 @@ model Request {
   retirement                            Retirement[]
   lineItems                             LineItem[]
   otherPersonnel                        OtherPersonnel[]
+  supportingDocuments                   SupportingDocument[]
 
   @@map("request")
+}
+
+model SupportingDocument {
+  supportingDocumentId String    @id @default(uuid())
+  request              Request   @relation(fields: [requestId], references: [requestId])
+  requestId            String
+  documentName         String?
+  documentURL          String?
+  createdAt            DateTime? @default(now())
+  updatedAt            DateTime? @updatedAt
+
+  @@map("supporting_document")
 }
 
 model OtherPersonnel {

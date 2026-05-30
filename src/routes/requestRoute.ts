@@ -234,7 +234,19 @@ const requestRouter: Router = Router();
  *                         phoneNumber:
  *                           type: string
  *                           example: "08099887766"
- *
+ *                   supportingDocuments:
+ *                     type: array
+ *                     description: Supporting documents for the request
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         documentName:
+ *                           type: string
+ *                           example: "Document 1"
+ *                         documentURL:
+ *                           type: string
+ *                           example: "https://example.com/document1.pdf"
+ * 
  *     responses:
  *       200:
  *         description: Request created/updated successfully with line items and other personnel
