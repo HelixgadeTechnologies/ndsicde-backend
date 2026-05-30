@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { IGeneralSettings, ILogin, ILoginUpdate, IRole, IRoleView, IUser, IUserView } from "../interface/authInterface"
 import { JWT_SECRET } from "../secrets";
-// import { sendAdminRegistrationEmail } from "../utils/mail";
+import { sendWelcomeEmail } from "../utils/mail";
 import { deleteFile, getFileName, uploadFile } from "../utils/upload";
 
 
@@ -15,11 +15,10 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
     const existingUser = await prisma.user.findUnique({ where: { email: data.email } });
     if (existingUser) throw new Error("User with this email already exists");
 
-    // await sendAdminRegistrationEmail(data.email, data.lastName as string, "Admin")
     // hash password
     const hashedPassword = await bcrypt.hash("12345", 10);
 
-    return prisma.user.create({
+    const newUser = await prisma.user.create({
       data: {
         fullName: data.fullName ?? null,
         email: data.email ?? null,
@@ -36,6 +35,14 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
         signatureMimeType: data.signatureMimeType ?? null
       } as Prisma.UserCreateInput
     });
+
+    if (newUser && newUser.email) {
+      sendWelcomeEmail(newUser.email, newUser.fullName || "User").catch((err) => {
+        console.error("Welcome email failed to send:", err);
+      });
+    }
+
+    return newUser;
   } else {
     return prisma.user.update({
       where: { userId: data.userId },
