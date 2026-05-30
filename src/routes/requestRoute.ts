@@ -123,6 +123,10 @@ const requestRouter: Router = Router();
  *                     type: string
  *                     format: uuid
  *                     description: User ID of the staff sending the request
+ *                   sendTo2:
+ *                     type: string
+ *                     format: uuid
+ *                     description: User ID of the staff sending the request
  *                   status:
  *                     type: string
  *                     example: "Pending"
