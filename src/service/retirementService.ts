@@ -269,13 +269,15 @@ export const approveRetirement = async (
 
       for (const level of RETIREMENT_ALL_LEVELS) {
         if (level === currentLevel) {
-          resetData[`approval_${level}`]   = ApprovalStatus.REVIEW;
-          resetData[`approvedBy_${level}`] = approvedBy;
-          resetData[`comment_${level}`]    = comment || null;
+          resetData[`approval_${level}`]    = ApprovalStatus.REVIEW;
+          resetData[`approvedBy_${level}`]  = approvedBy;
+          resetData[`comment_${level}`]     = comment || null;
+          resetData[`approvalDate${level}`] = null;
         } else {
-          resetData[`approval_${level}`]   = null;
-          resetData[`approvedBy_${level}`] = null;
-          resetData[`comment_${level}`]    = null;
+          resetData[`approval_${level}`]    = null;
+          resetData[`approvedBy_${level}`]  = null;
+          resetData[`comment_${level}`]     = null;
+          resetData[`approvalDate${level}`] = null;
         }
       }
 
@@ -289,9 +291,10 @@ export const approveRetirement = async (
       return await prisma.retirement.update({
         where: { retirementId },
         data: {
-          [`approval_${currentLevel}`]:   ApprovalStatus.REJECTED,
-          [`approvedBy_${currentLevel}`]: approvedBy,
-          [`comment_${currentLevel}`]:    comment || null,
+          [`approval_${currentLevel}`]:    ApprovalStatus.REJECTED,
+          [`approvedBy_${currentLevel}`]:  approvedBy,
+          [`comment_${currentLevel}`]:     comment || null,
+          [`approvalDate${currentLevel}`]: new Date(),
           approvalStep: RETIREMENT_LEVEL_NUMBER[currentLevel],
           status:       "Rejected",
           updateAt:     new Date(),
@@ -306,9 +309,10 @@ export const approveRetirement = async (
       return await prisma.retirement.update({
         where: { retirementId },
         data: {
-          [`approval_${currentLevel}`]:   ApprovalStatus.APPROVED,
-          [`approvedBy_${currentLevel}`]: approvedBy,
-          [`comment_${currentLevel}`]:    comment || null,
+          [`approval_${currentLevel}`]:    ApprovalStatus.APPROVED,
+          [`approvedBy_${currentLevel}`]:  approvedBy,
+          [`comment_${currentLevel}`]:     comment || null,
+          [`approvalDate${currentLevel}`]: new Date(),
           approvalStep:  RETIREMENT_LEVEL_NUMBER[currentLevel],
           needJournalId: isFinalLevel,
           status:        isFinalLevel ? "Approved" : `InReview`,

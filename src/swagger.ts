@@ -550,6 +550,11 @@ const options: swaggerJSDoc.Options = {
             comment_C:    { type: "string", nullable: true },
             comment_D:    { type: "string", nullable: true },
             comment_E:    { type: "string", nullable: true },
+            approvalDateA: { type: "string", format: "date-time", nullable: true },
+            approvalDateB: { type: "string", format: "date-time", nullable: true },
+            approvalDateC: { type: "string", format: "date-time", nullable: true },
+            approvalDateD: { type: "string", format: "date-time", nullable: true },
+            approvalDateE: { type: "string", format: "date-time", nullable: true },
 
             // Journey management fields
             purposeOfTrip:                         { type: "string", nullable: true },

@@ -28333,6 +28333,11 @@ export namespace Prisma {
     comment_C: string | null
     comment_D: string | null
     comment_E: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
+    approvalDateD: Date | null
+    approvalDateE: Date | null
     approvalStep: number | null
     status: string | null
     createAt: Date | null
@@ -28398,6 +28403,11 @@ export namespace Prisma {
     comment_C: string | null
     comment_D: string | null
     comment_E: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
+    approvalDateD: Date | null
+    approvalDateE: Date | null
     approvalStep: number | null
     status: string | null
     createAt: Date | null
@@ -28463,6 +28473,11 @@ export namespace Prisma {
     comment_C: number
     comment_D: number
     comment_E: number
+    approvalDateA: number
+    approvalDateB: number
+    approvalDateC: number
+    approvalDateD: number
+    approvalDateE: number
     approvalStep: number
     status: number
     createAt: number
@@ -28548,6 +28563,11 @@ export namespace Prisma {
     comment_C?: true
     comment_D?: true
     comment_E?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
+    approvalDateD?: true
+    approvalDateE?: true
     approvalStep?: true
     status?: true
     createAt?: true
@@ -28613,6 +28633,11 @@ export namespace Prisma {
     comment_C?: true
     comment_D?: true
     comment_E?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
+    approvalDateD?: true
+    approvalDateE?: true
     approvalStep?: true
     status?: true
     createAt?: true
@@ -28678,6 +28703,11 @@ export namespace Prisma {
     comment_C?: true
     comment_D?: true
     comment_E?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
+    approvalDateD?: true
+    approvalDateE?: true
     approvalStep?: true
     status?: true
     createAt?: true
@@ -28830,6 +28860,11 @@ export namespace Prisma {
     comment_C: string | null
     comment_D: string | null
     comment_E: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
+    approvalDateD: Date | null
+    approvalDateE: Date | null
     approvalStep: number | null
     status: string | null
     createAt: Date | null
@@ -28914,6 +28949,11 @@ export namespace Prisma {
     comment_C?: boolean
     comment_D?: boolean
     comment_E?: boolean
+    approvalDateA?: boolean
+    approvalDateB?: boolean
+    approvalDateC?: boolean
+    approvalDateD?: boolean
+    approvalDateE?: boolean
     approvalStep?: boolean
     status?: boolean
     createAt?: boolean
@@ -28989,6 +29029,11 @@ export namespace Prisma {
     comment_C?: boolean
     comment_D?: boolean
     comment_E?: boolean
+    approvalDateA?: boolean
+    approvalDateB?: boolean
+    approvalDateC?: boolean
+    approvalDateD?: boolean
+    approvalDateE?: boolean
     approvalStep?: boolean
     status?: boolean
     createAt?: boolean
@@ -29017,7 +29062,7 @@ export namespace Prisma {
     sendTo2?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired" | "purposeOfTrip" | "vehicleMake" | "vehicleModel" | "departureDate" | "departureLocationAndTime" | "destination" | "contactPersonPhoneNumberAtDestination" | "flightDepartureState" | "flightDepartureTime" | "flightArrivalState" | "flightArrivalTime" | "hotelAccommodationName" | "hotelAddress" | "returnDate" | "returnTime" | "airportDropoffOfficerName" | "airportPickupOfficerName" | "budgetName" | "sendTo" | "sendTo2", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalDateA" | "approvalDateB" | "approvalDateC" | "approvalDateD" | "approvalDateE" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired" | "purposeOfTrip" | "vehicleMake" | "vehicleModel" | "departureDate" | "departureLocationAndTime" | "destination" | "contactPersonPhoneNumberAtDestination" | "flightDepartureState" | "flightDepartureTime" | "flightArrivalState" | "flightArrivalTime" | "hotelAccommodationName" | "hotelAddress" | "returnDate" | "returnTime" | "airportDropoffOfficerName" | "airportPickupOfficerName" | "budgetName" | "sendTo" | "sendTo2", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
@@ -29077,6 +29122,11 @@ export namespace Prisma {
       comment_C: string | null
       comment_D: string | null
       comment_E: string | null
+      approvalDateA: Date | null
+      approvalDateB: Date | null
+      approvalDateC: Date | null
+      approvalDateD: Date | null
+      approvalDateE: Date | null
       approvalStep: number | null
       status: string | null
       createAt: Date | null
@@ -29515,6 +29565,11 @@ export namespace Prisma {
     readonly comment_C: FieldRef<"Request", 'String'>
     readonly comment_D: FieldRef<"Request", 'String'>
     readonly comment_E: FieldRef<"Request", 'String'>
+    readonly approvalDateA: FieldRef<"Request", 'DateTime'>
+    readonly approvalDateB: FieldRef<"Request", 'DateTime'>
+    readonly approvalDateC: FieldRef<"Request", 'DateTime'>
+    readonly approvalDateD: FieldRef<"Request", 'DateTime'>
+    readonly approvalDateE: FieldRef<"Request", 'DateTime'>
     readonly approvalStep: FieldRef<"Request", 'Int'>
     readonly status: FieldRef<"Request", 'String'>
     readonly createAt: FieldRef<"Request", 'DateTime'>
@@ -33093,6 +33148,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
     approvalStep: number | null
     needJournalId: boolean | null
     journalId: string | null
@@ -33122,6 +33180,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
     approvalStep: number | null
     needJournalId: boolean | null
     journalId: string | null
@@ -33151,6 +33212,9 @@ export namespace Prisma {
     comment_A: number
     comment_B: number
     comment_C: number
+    approvalDateA: number
+    approvalDateB: number
+    approvalDateC: number
     approvalStep: number
     needJournalId: number
     journalId: number
@@ -33206,6 +33270,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
     approvalStep?: true
     needJournalId?: true
     journalId?: true
@@ -33235,6 +33302,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
     approvalStep?: true
     needJournalId?: true
     journalId?: true
@@ -33264,6 +33334,9 @@ export namespace Prisma {
     comment_A?: true
     comment_B?: true
     comment_C?: true
+    approvalDateA?: true
+    approvalDateB?: true
+    approvalDateC?: true
     approvalStep?: true
     needJournalId?: true
     journalId?: true
@@ -33380,6 +33453,9 @@ export namespace Prisma {
     comment_A: string | null
     comment_B: string | null
     comment_C: string | null
+    approvalDateA: Date | null
+    approvalDateB: Date | null
+    approvalDateC: Date | null
     approvalStep: number | null
     needJournalId: boolean
     journalId: string | null
@@ -33428,6 +33504,9 @@ export namespace Prisma {
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
+    approvalDateA?: boolean
+    approvalDateB?: boolean
+    approvalDateC?: boolean
     approvalStep?: boolean
     needJournalId?: boolean
     journalId?: boolean
@@ -33461,6 +33540,9 @@ export namespace Prisma {
     comment_A?: boolean
     comment_B?: boolean
     comment_C?: boolean
+    approvalDateA?: boolean
+    approvalDateB?: boolean
+    approvalDateC?: boolean
     approvalStep?: boolean
     needJournalId?: boolean
     journalId?: boolean
@@ -33471,7 +33553,7 @@ export namespace Prisma {
     updateAt?: boolean
   }
 
-  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "approvalStep" | "needJournalId" | "journalId" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
+  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "approvalDateA" | "approvalDateB" | "approvalDateC" | "approvalStep" | "needJournalId" | "journalId" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
   export type RetirementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | Retirement$requestArgs<ExtArgs>
     user?: boolean | Retirement$userArgs<ExtArgs>
@@ -33502,6 +33584,9 @@ export namespace Prisma {
       comment_A: string | null
       comment_B: string | null
       comment_C: string | null
+      approvalDateA: Date | null
+      approvalDateB: Date | null
+      approvalDateC: Date | null
       approvalStep: number | null
       needJournalId: boolean
       journalId: string | null
@@ -33899,6 +33984,9 @@ export namespace Prisma {
     readonly comment_A: FieldRef<"Retirement", 'String'>
     readonly comment_B: FieldRef<"Retirement", 'String'>
     readonly comment_C: FieldRef<"Retirement", 'String'>
+    readonly approvalDateA: FieldRef<"Retirement", 'DateTime'>
+    readonly approvalDateB: FieldRef<"Retirement", 'DateTime'>
+    readonly approvalDateC: FieldRef<"Retirement", 'DateTime'>
     readonly approvalStep: FieldRef<"Retirement", 'Int'>
     readonly needJournalId: FieldRef<"Retirement", 'Boolean'>
     readonly journalId: FieldRef<"Retirement", 'String'>
@@ -35862,6 +35950,11 @@ export namespace Prisma {
     comment_C: 'comment_C',
     comment_D: 'comment_D',
     comment_E: 'comment_E',
+    approvalDateA: 'approvalDateA',
+    approvalDateB: 'approvalDateB',
+    approvalDateC: 'approvalDateC',
+    approvalDateD: 'approvalDateD',
+    approvalDateE: 'approvalDateE',
     approvalStep: 'approvalStep',
     status: 'status',
     createAt: 'createAt',
@@ -35954,6 +36047,9 @@ export namespace Prisma {
     comment_A: 'comment_A',
     comment_B: 'comment_B',
     comment_C: 'comment_C',
+    approvalDateA: 'approvalDateA',
+    approvalDateB: 'approvalDateB',
+    approvalDateC: 'approvalDateC',
     approvalStep: 'approvalStep',
     needJournalId: 'needJournalId',
     journalId: 'journalId',
@@ -38490,6 +38586,11 @@ export namespace Prisma {
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
     comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateD?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateE?: DateTimeNullableFilter<"Request"> | Date | string | null
     approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
@@ -38562,6 +38663,11 @@ export namespace Prisma {
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
     comment_E?: SortOrderInput | SortOrder
+    approvalDateA?: SortOrderInput | SortOrder
+    approvalDateB?: SortOrderInput | SortOrder
+    approvalDateC?: SortOrderInput | SortOrder
+    approvalDateD?: SortOrderInput | SortOrder
+    approvalDateE?: SortOrderInput | SortOrder
     approvalStep?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
@@ -38638,6 +38744,11 @@ export namespace Prisma {
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
     comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateD?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateE?: DateTimeNullableFilter<"Request"> | Date | string | null
     approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
@@ -38710,6 +38821,11 @@ export namespace Prisma {
     comment_C?: SortOrderInput | SortOrder
     comment_D?: SortOrderInput | SortOrder
     comment_E?: SortOrderInput | SortOrder
+    approvalDateA?: SortOrderInput | SortOrder
+    approvalDateB?: SortOrderInput | SortOrder
+    approvalDateC?: SortOrderInput | SortOrder
+    approvalDateD?: SortOrderInput | SortOrder
+    approvalDateE?: SortOrderInput | SortOrder
     approvalStep?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
@@ -38783,6 +38899,11 @@ export namespace Prisma {
     comment_C?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_D?: StringNullableWithAggregatesFilter<"Request"> | string | null
     comment_E?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    approvalDateA?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    approvalDateB?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    approvalDateC?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    approvalDateD?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
+    approvalDateE?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
     approvalStep?: IntNullableWithAggregatesFilter<"Request"> | number | null
     status?: StringNullableWithAggregatesFilter<"Request"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Request"> | Date | string | null
@@ -39051,6 +39172,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     approvalStep?: IntNullableFilter<"Retirement"> | number | null
     needJournalId?: BoolFilter<"Retirement"> | boolean
     journalId?: StringNullableFilter<"Retirement"> | string | null
@@ -39082,6 +39206,9 @@ export namespace Prisma {
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
+    approvalDateA?: SortOrderInput | SortOrder
+    approvalDateB?: SortOrderInput | SortOrder
+    approvalDateC?: SortOrderInput | SortOrder
     approvalStep?: SortOrderInput | SortOrder
     needJournalId?: SortOrder
     journalId?: SortOrderInput | SortOrder
@@ -39117,6 +39244,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     approvalStep?: IntNullableFilter<"Retirement"> | number | null
     needJournalId?: BoolFilter<"Retirement"> | boolean
     journalId?: StringNullableFilter<"Retirement"> | string | null
@@ -39148,6 +39278,9 @@ export namespace Prisma {
     comment_A?: SortOrderInput | SortOrder
     comment_B?: SortOrderInput | SortOrder
     comment_C?: SortOrderInput | SortOrder
+    approvalDateA?: SortOrderInput | SortOrder
+    approvalDateB?: SortOrderInput | SortOrder
+    approvalDateC?: SortOrderInput | SortOrder
     approvalStep?: SortOrderInput | SortOrder
     needJournalId?: SortOrder
     journalId?: SortOrderInput | SortOrder
@@ -39185,6 +39318,9 @@ export namespace Prisma {
     comment_A?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_B?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     comment_C?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    approvalDateA?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
+    approvalDateB?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
+    approvalDateC?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
     approvalStep?: IntNullableWithAggregatesFilter<"Retirement"> | number | null
     needJournalId?: BoolWithAggregatesFilter<"Retirement"> | boolean
     journalId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
@@ -41528,6 +41664,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -41599,6 +41740,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -41666,6 +41812,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41737,6 +41888,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41806,6 +41962,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -41869,6 +42030,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -41933,6 +42099,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42207,6 +42378,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -42236,6 +42410,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -42265,6 +42442,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42294,6 +42474,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42323,6 +42506,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -42352,6 +42538,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42379,6 +42568,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44161,6 +44353,11 @@ export namespace Prisma {
     comment_C?: SortOrder
     comment_D?: SortOrder
     comment_E?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
+    approvalDateD?: SortOrder
+    approvalDateE?: SortOrder
     approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
@@ -44235,6 +44432,11 @@ export namespace Prisma {
     comment_C?: SortOrder
     comment_D?: SortOrder
     comment_E?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
+    approvalDateD?: SortOrder
+    approvalDateE?: SortOrder
     approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
@@ -44300,6 +44502,11 @@ export namespace Prisma {
     comment_C?: SortOrder
     comment_D?: SortOrder
     comment_E?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
+    approvalDateD?: SortOrder
+    approvalDateE?: SortOrder
     approvalStep?: SortOrder
     status?: SortOrder
     createAt?: SortOrder
@@ -44515,6 +44722,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
     approvalStep?: SortOrder
     needJournalId?: SortOrder
     journalId?: SortOrder
@@ -44556,6 +44766,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
     approvalStep?: SortOrder
     needJournalId?: SortOrder
     journalId?: SortOrder
@@ -44585,6 +44798,9 @@ export namespace Prisma {
     comment_A?: SortOrder
     comment_B?: SortOrder
     comment_C?: SortOrder
+    approvalDateA?: SortOrder
+    approvalDateB?: SortOrder
+    approvalDateC?: SortOrder
     approvalStep?: SortOrder
     needJournalId?: SortOrder
     journalId?: SortOrder
@@ -47301,6 +47517,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -47371,6 +47592,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -47431,6 +47657,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -47459,6 +47688,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -47593,6 +47825,11 @@ export namespace Prisma {
     comment_C?: StringNullableFilter<"Request"> | string | null
     comment_D?: StringNullableFilter<"Request"> | string | null
     comment_E?: StringNullableFilter<"Request"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateD?: DateTimeNullableFilter<"Request"> | Date | string | null
+    approvalDateE?: DateTimeNullableFilter<"Request"> | Date | string | null
     approvalStep?: IntNullableFilter<"Request"> | number | null
     status?: StringNullableFilter<"Request"> | string | null
     createAt?: DateTimeNullableFilter<"Request"> | Date | string | null
@@ -47659,6 +47896,9 @@ export namespace Prisma {
     comment_A?: StringNullableFilter<"Retirement"> | string | null
     comment_B?: StringNullableFilter<"Retirement"> | string | null
     comment_C?: StringNullableFilter<"Retirement"> | string | null
+    approvalDateA?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateB?: DateTimeNullableFilter<"Retirement"> | Date | string | null
+    approvalDateC?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     approvalStep?: IntNullableFilter<"Retirement"> | number | null
     needJournalId?: BoolFilter<"Retirement"> | boolean
     journalId?: StringNullableFilter<"Retirement"> | string | null
@@ -48355,6 +48595,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -48424,6 +48669,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -50382,6 +50632,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -50451,6 +50706,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -52740,6 +53000,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -52768,6 +53031,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -53170,6 +53436,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53240,6 +53511,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53322,6 +53598,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53392,6 +53673,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53458,6 +53744,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53528,6 +53819,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53610,6 +53906,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53680,6 +53981,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53746,6 +54052,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53816,6 +54127,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -53941,6 +54257,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54011,6 +54332,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54126,6 +54452,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -54196,6 +54527,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -54339,6 +54675,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54409,6 +54750,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54682,6 +55028,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -54728,6 +55079,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -54802,6 +55156,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54872,6 +55231,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54940,6 +55304,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -54986,6 +55355,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55014,6 +55386,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55042,6 +55417,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55384,6 +55762,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -55755,6 +56138,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -55824,6 +56212,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -55892,6 +56285,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -56595,6 +56993,11 @@ export namespace Prisma {
     comment_C?: string | null
     comment_D?: string | null
     comment_E?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
+    approvalDateD?: Date | string | null
+    approvalDateE?: Date | string | null
     approvalStep?: number | null
     status?: string | null
     createAt?: Date | string | null
@@ -56712,6 +57115,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -56781,6 +57189,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -56849,6 +57262,11 @@ export namespace Prisma {
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
     comment_D?: NullableStringFieldUpdateOperationsInput | string | null
     comment_E?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateD?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateE?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -57216,6 +57634,9 @@ export namespace Prisma {
     comment_A?: string | null
     comment_B?: string | null
     comment_C?: string | null
+    approvalDateA?: Date | string | null
+    approvalDateB?: Date | string | null
+    approvalDateC?: Date | string | null
     approvalStep?: number | null
     needJournalId?: boolean
     journalId?: string | null
@@ -57274,6 +57695,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57302,6 +57726,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
@@ -57330,6 +57757,9 @@ export namespace Prisma {
     comment_A?: NullableStringFieldUpdateOperationsInput | string | null
     comment_B?: NullableStringFieldUpdateOperationsInput | string | null
     comment_C?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalDateA?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateB?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    approvalDateC?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approvalStep?: NullableIntFieldUpdateOperationsInput | number | null
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null

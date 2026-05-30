@@ -36,6 +36,9 @@ export interface IRetirementView {
   comment_A?: string;
   comment_B?: string;
   comment_C?: string;
+  approvalDateA?: Date;
+  approvalDateB?: Date;
+  approvalDateC?: Date;
   approvalStep?: number;
   needJournalId?: boolean;
   journalId?: string;

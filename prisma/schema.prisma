@@ -475,6 +475,11 @@ model Request {
   comment_C                             String?
   comment_D                             String?
   comment_E                             String?
+  approvalDateA                         DateTime?
+  approvalDateB                         DateTime?
+  approvalDateC                         DateTime?
+  approvalDateD                         DateTime?
+  approvalDateE                         DateTime?
   approvalStep                          Int?             @default(0)
   status                                String?
   createAt                              DateTime?        @default(now())
@@ -571,6 +576,9 @@ model Retirement {
   comment_A               String?
   comment_B               String?
   comment_C               String?
+  approvalDateA           DateTime? 
+  approvalDateB           DateTime? 
+  approvalDateC           DateTime? 
   approvalStep            Int?      @default(0)
   needJournalId           Boolean   @default(false)
   journalId               String?

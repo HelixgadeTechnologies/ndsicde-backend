@@ -79,6 +79,11 @@ export interface IRequest {
   comment_C?: string;
   comment_D?: string;
   comment_E?: string;
+  approvalDateA?: Date;
+  approvalDateB?: Date;
+  approvalDateC?: Date;
+  approvalDateD?: Date;
+  approvalDateE?: Date;
   approvalStep?: number;
   sendTo?: string;
   sendTo2?: string;
@@ -142,6 +147,11 @@ export interface IRequestView {
   comment_C?: string;
   comment_D?: string;
   comment_E?: string;
+  approvalDateA?: Date;
+  approvalDateB?: Date;
+  approvalDateC?: Date;
+  approvalDateD?: Date;
+  approvalDateE?: Date;
   lineItems?: Array<ILineItem>;
   otherPersonnel?: Array<IOtherPersonnel>;
   supportingDocuments?: Array<ISupportingDocument>;
