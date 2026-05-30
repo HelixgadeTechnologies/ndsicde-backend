@@ -501,6 +501,7 @@ model Request {
   airportPickupOfficerName              String?
   budgetName                            String?
   sendTo                                String?
+  sendTo2                               String?
   retirement                            Retirement[]
   lineItems                             LineItem[]
   otherPersonnel                        OtherPersonnel[]

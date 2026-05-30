@@ -28266,6 +28266,7 @@ export namespace Prisma {
     airportPickupOfficerName: string | null
     budgetName: string | null
     sendTo: string | null
+    sendTo2: string | null
   }
 
   export type RequestMaxAggregateOutputType = {
@@ -28330,6 +28331,7 @@ export namespace Prisma {
     airportPickupOfficerName: string | null
     budgetName: string | null
     sendTo: string | null
+    sendTo2: string | null
   }
 
   export type RequestCountAggregateOutputType = {
@@ -28394,6 +28396,7 @@ export namespace Prisma {
     airportPickupOfficerName: number
     budgetName: number
     sendTo: number
+    sendTo2: number
     _all: number
   }
 
@@ -28478,6 +28481,7 @@ export namespace Prisma {
     airportPickupOfficerName?: true
     budgetName?: true
     sendTo?: true
+    sendTo2?: true
   }
 
   export type RequestMaxAggregateInputType = {
@@ -28542,6 +28546,7 @@ export namespace Prisma {
     airportPickupOfficerName?: true
     budgetName?: true
     sendTo?: true
+    sendTo2?: true
   }
 
   export type RequestCountAggregateInputType = {
@@ -28606,6 +28611,7 @@ export namespace Prisma {
     airportPickupOfficerName?: true
     budgetName?: true
     sendTo?: true
+    sendTo2?: true
     _all?: true
   }
 
@@ -28757,6 +28763,7 @@ export namespace Prisma {
     airportPickupOfficerName: string | null
     budgetName: string | null
     sendTo: string | null
+    sendTo2: string | null
     _count: RequestCountAggregateOutputType | null
     _avg: RequestAvgAggregateOutputType | null
     _sum: RequestSumAggregateOutputType | null
@@ -28840,6 +28847,7 @@ export namespace Prisma {
     airportPickupOfficerName?: boolean
     budgetName?: boolean
     sendTo?: boolean
+    sendTo2?: boolean
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
     user?: boolean | Request$userArgs<ExtArgs>
@@ -28913,9 +28921,10 @@ export namespace Prisma {
     airportPickupOfficerName?: boolean
     budgetName?: boolean
     sendTo?: boolean
+    sendTo2?: boolean
   }
 
-  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired" | "purposeOfTrip" | "vehicleMake" | "vehicleModel" | "departureDate" | "departureLocationAndTime" | "destination" | "contactPersonPhoneNumberAtDestination" | "flightDepartureState" | "flightDepartureTime" | "flightArrivalState" | "flightArrivalTime" | "hotelAccommodationName" | "hotelAddress" | "returnDate" | "returnTime" | "airportDropoffOfficerName" | "airportPickupOfficerName" | "budgetName" | "sendTo", ExtArgs["result"]["request"]>
+  export type RequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"requestId" | "staff" | "outputId" | "activityTitle" | "activityBudgetCode" | "activityLocation" | "activityPurposeDescription" | "activityStartDate" | "activityEndDate" | "budgetCode" | "modeOfTransport" | "driverName" | "driversPhoneNumber" | "vehiclePlateNumber" | "vehicleColor" | "departureTime" | "route" | "recipientPhoneNumber" | "documentName" | "documentURL" | "projectId" | "approval_A" | "approval_B" | "approval_C" | "approval_D" | "approval_E" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "approvedBy_D" | "approvedBy_E" | "comment_A" | "comment_B" | "comment_C" | "comment_D" | "comment_E" | "approvalStep" | "status" | "createAt" | "updateAt" | "createdBy" | "isJourneyManagementRequired" | "purposeOfTrip" | "vehicleMake" | "vehicleModel" | "departureDate" | "departureLocationAndTime" | "destination" | "contactPersonPhoneNumberAtDestination" | "flightDepartureState" | "flightDepartureTime" | "flightArrivalState" | "flightArrivalTime" | "hotelAccommodationName" | "hotelAddress" | "returnDate" | "returnTime" | "airportDropoffOfficerName" | "airportPickupOfficerName" | "budgetName" | "sendTo" | "sendTo2", ExtArgs["result"]["request"]>
   export type RequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     output?: boolean | Request$outputArgs<ExtArgs>
     project?: boolean | Request$projectArgs<ExtArgs>
@@ -28998,6 +29007,7 @@ export namespace Prisma {
       airportPickupOfficerName: string | null
       budgetName: string | null
       sendTo: string | null
+      sendTo2: string | null
     }, ExtArgs["result"]["request"]>
     composites: {}
   }
@@ -29434,6 +29444,7 @@ export namespace Prisma {
     readonly airportPickupOfficerName: FieldRef<"Request", 'String'>
     readonly budgetName: FieldRef<"Request", 'String'>
     readonly sendTo: FieldRef<"Request", 'String'>
+    readonly sendTo2: FieldRef<"Request", 'String'>
   }
     
 
@@ -34810,7 +34821,8 @@ export namespace Prisma {
     airportDropoffOfficerName: 'airportDropoffOfficerName',
     airportPickupOfficerName: 'airportPickupOfficerName',
     budgetName: 'budgetName',
-    sendTo: 'sendTo'
+    sendTo: 'sendTo',
+    sendTo2: 'sendTo2'
   };
 
   export type RequestScalarFieldEnum = (typeof RequestScalarFieldEnum)[keyof typeof RequestScalarFieldEnum]
@@ -35262,7 +35274,8 @@ export namespace Prisma {
     airportDropoffOfficerName: 'airportDropoffOfficerName',
     airportPickupOfficerName: 'airportPickupOfficerName',
     budgetName: 'budgetName',
-    sendTo: 'sendTo'
+    sendTo: 'sendTo',
+    sendTo2: 'sendTo2'
   };
 
   export type RequestOrderByRelevanceFieldEnum = (typeof RequestOrderByRelevanceFieldEnum)[keyof typeof RequestOrderByRelevanceFieldEnum]
@@ -37415,6 +37428,7 @@ export namespace Prisma {
     airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
     budgetName?: StringNullableFilter<"Request"> | string | null
     sendTo?: StringNullableFilter<"Request"> | string | null
+    sendTo2?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -37485,6 +37499,7 @@ export namespace Prisma {
     airportPickupOfficerName?: SortOrderInput | SortOrder
     budgetName?: SortOrderInput | SortOrder
     sendTo?: SortOrderInput | SortOrder
+    sendTo2?: SortOrderInput | SortOrder
     output?: OutputOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
@@ -37559,6 +37574,7 @@ export namespace Prisma {
     airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
     budgetName?: StringNullableFilter<"Request"> | string | null
     sendTo?: StringNullableFilter<"Request"> | string | null
+    sendTo2?: StringNullableFilter<"Request"> | string | null
     output?: XOR<OutputNullableScalarRelationFilter, OutputWhereInput> | null
     project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -37629,6 +37645,7 @@ export namespace Prisma {
     airportPickupOfficerName?: SortOrderInput | SortOrder
     budgetName?: SortOrderInput | SortOrder
     sendTo?: SortOrderInput | SortOrder
+    sendTo2?: SortOrderInput | SortOrder
     _count?: RequestCountOrderByAggregateInput
     _avg?: RequestAvgOrderByAggregateInput
     _max?: RequestMaxOrderByAggregateInput
@@ -37701,6 +37718,7 @@ export namespace Prisma {
     airportPickupOfficerName?: StringNullableWithAggregatesFilter<"Request"> | string | null
     budgetName?: StringNullableWithAggregatesFilter<"Request"> | string | null
     sendTo?: StringNullableWithAggregatesFilter<"Request"> | string | null
+    sendTo2?: StringNullableWithAggregatesFilter<"Request"> | string | null
   }
 
   export type OtherPersonnelWhereInput = {
@@ -40383,6 +40401,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -40453,6 +40472,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
@@ -40517,6 +40537,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -40587,6 +40608,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
@@ -40654,6 +40676,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
   }
 
   export type RequestUpdateManyMutationInput = {
@@ -40715,6 +40738,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RequestUncheckedUpdateManyInput = {
@@ -40779,6 +40803,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OtherPersonnelCreateInput = {
@@ -42934,6 +42959,7 @@ export namespace Prisma {
     airportPickupOfficerName?: SortOrder
     budgetName?: SortOrder
     sendTo?: SortOrder
+    sendTo2?: SortOrder
   }
 
   export type RequestAvgOrderByAggregateInput = {
@@ -43007,6 +43033,7 @@ export namespace Prisma {
     airportPickupOfficerName?: SortOrder
     budgetName?: SortOrder
     sendTo?: SortOrder
+    sendTo2?: SortOrder
   }
 
   export type RequestMinOrderByAggregateInput = {
@@ -43071,6 +43098,7 @@ export namespace Prisma {
     airportPickupOfficerName?: SortOrder
     budgetName?: SortOrder
     sendTo?: SortOrder
+    sendTo2?: SortOrder
   }
 
   export type RequestSumOrderByAggregateInput = {
@@ -45981,6 +46009,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -46049,6 +46078,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
@@ -46270,6 +46300,7 @@ export namespace Prisma {
     airportPickupOfficerName?: StringNullableFilter<"Request"> | string | null
     budgetName?: StringNullableFilter<"Request"> | string | null
     sendTo?: StringNullableFilter<"Request"> | string | null
+    sendTo2?: StringNullableFilter<"Request"> | string | null
   }
 
   export type RetirementUpsertWithWhereUniqueWithoutUserInput = {
@@ -47030,6 +47061,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -47098,6 +47130,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
@@ -49053,6 +49086,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
     retirement?: RetirementCreateNestedManyWithoutRequestInput
@@ -49121,6 +49155,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
@@ -51783,6 +51818,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -51852,6 +51888,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -51931,6 +51968,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -52000,6 +52038,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -52063,6 +52102,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -52132,6 +52172,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     retirement?: RetirementUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -52254,6 +52295,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -52323,6 +52365,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -52435,6 +52478,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     output?: OutputCreateNestedOneWithoutRequestInput
     project?: ProjectCreateNestedOneWithoutRequestInput
     user?: UserCreateNestedOneWithoutRequestInput
@@ -52504,6 +52548,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
     lineItems?: LineItemUncheckedCreateNestedManyWithoutRequestInput
     otherPersonnel?: OtherPersonnelUncheckedCreateNestedManyWithoutRequestInput
   }
@@ -52644,6 +52689,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
@@ -52713,6 +52759,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
   }
@@ -52983,6 +53030,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
   }
 
   export type RetirementCreateManyUserInput = {
@@ -53102,6 +53150,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     project?: ProjectUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -53170,6 +53219,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
@@ -53236,6 +53286,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RetirementUpdateWithoutUserInput = {
@@ -53680,6 +53731,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
   }
 
   export type ReportCreateManyProjectInput = {
@@ -54049,6 +54101,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     output?: OutputUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -54117,6 +54170,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
@@ -54183,6 +54237,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReportUpdateWithoutProjectInput = {
@@ -54885,6 +54940,7 @@ export namespace Prisma {
     airportPickupOfficerName?: string | null
     budgetName?: string | null
     sendTo?: string | null
+    sendTo2?: string | null
   }
 
   export type ActivityUpdateWithoutOutputInput = {
@@ -55000,6 +55056,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     project?: ProjectUpdateOneWithoutRequestNestedInput
     user?: UserUpdateOneWithoutRequestNestedInput
     retirement?: RetirementUpdateManyWithoutRequestNestedInput
@@ -55068,6 +55125,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
     retirement?: RetirementUncheckedUpdateManyWithoutRequestNestedInput
     lineItems?: LineItemUncheckedUpdateManyWithoutRequestNestedInput
     otherPersonnel?: OtherPersonnelUncheckedUpdateManyWithoutRequestNestedInput
@@ -55134,6 +55192,7 @@ export namespace Prisma {
     airportPickupOfficerName?: NullableStringFieldUpdateOperationsInput | string | null
     budgetName?: NullableStringFieldUpdateOperationsInput | string | null
     sendTo?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo2?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IndicatorReportCreateManyIndicatorInput = {

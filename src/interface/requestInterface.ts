@@ -74,6 +74,8 @@ export interface IRequest {
   comment_E?: string;
   approvalStep?: number;
   sendTo?: string;
+  sendTo2?: string;
+
 }
 
 export interface ILineItem {
@@ -164,6 +166,8 @@ export interface IRequestView {
   budgetName?: string;
   sendTo?: string;
   sendToName?:string;
+  sendTo2?: string;
+  sendToName2?:string;
 }
 
 // Approval-related types and interfaces
