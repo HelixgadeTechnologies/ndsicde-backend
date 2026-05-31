@@ -70,33 +70,9 @@ export const saveProject = async (
 
 export const getAllProjects = async () => {
   const projects: Array<IProjectView> = await prisma.$queryRaw`
-    SELECT * FROM project_view
-  `;
-
-  if (projects.length === 0) return [];
-
-  const allUsers = await prisma.user.findMany({
-    where: { assignedProjectId: { not: null } },
-    select: {
-      userId: true,
-      fullName: true,
-      email: true,
-      designation: true,
-      department: true,
-      assignedProjectId: true,
-      role: { select: { roleName: true } },
-    },
-  });
-
-  return projects.map((project) => ({
-    ...project,
-    assignedUsers: allUsers.filter((user) =>
-      user.assignedProjectId
-        ?.split(",")
-        .map((id) => id.trim())
-        .includes(project.projectId)
-    ),
-  }));
+  SELECT * FROM project_view
+`;
+  return projects;
 };
 export const getProjectsStatus = async () => {
   const outcomes = await prisma.$queryRaw<any[]>`
@@ -114,32 +90,9 @@ export const getProjectsStatus = async () => {
 };
 
 export const getProjectById = async (projectId: string) => {
-  const project = await prisma.project.findUnique({ where: { projectId } });
-
-  if (!project) return null;
-
-  const assignedUsers = await prisma.user.findMany({
-    where: { assignedProjectId: { not: null } },
-    select: {
-      userId: true,
-      fullName: true,
-      email: true,
-      designation: true,
-      department: true,
-      assignedProjectId: true,
-      role: { select: { roleName: true } },
-    },
+  return await prisma.project.findUnique({
+    where: { projectId },
   });
-
-  return {
-    ...project,
-    assignedUsers: assignedUsers.filter((user) =>
-      user.assignedProjectId
-        ?.split(",")
-        .map((id) => id.trim())
-        .includes(projectId)
-    ),
-  };
 };
 
 export const deleteProject = async (projectId: string) => {
@@ -195,13 +148,26 @@ export const getAllTeamMember = async () => {
 };
 
 // Get team member by project id (from view)
-export const getTeamMemberByProjectId = async (
-  projectId: string
-): Promise<ITeamMemberView[]> => {
-  const rows: ITeamMemberView[] = await prisma.$queryRaw`
-    SELECT * FROM team_member_view WHERE "projectId" = ${projectId}
-  `;
-  return rows;
+export const getTeamMemberByProjectId = async (projectId: string) => {
+  const users = await prisma.user.findMany({
+    where: { assignedProjectId: { not: null } },
+    select: {
+      userId: true,
+      fullName: true,
+      email: true,
+      designation: true,
+      department: true,
+      assignedProjectId: true,
+      role: { select: { roleName: true } },
+    },
+  });
+
+  return users.filter((user) =>
+    user.assignedProjectId
+      ?.split(",")
+      .map((id) => id.trim())
+      .includes(projectId)
+  );
 };
 
 export const deleteTeamMember = async (teamMemberId: string) => {
@@ -608,20 +574,17 @@ export async function getAllIndicatorReportByResultId(resultId: string): Promise
   IIndicatorReportWithDisaggregation[]
 > {
   try{
-    console.log(resultId, "resultId");
-    const reports = await prisma.indicatorReport.findMany({
-      where: {
-        resultId: resultId,
-      },
-      include: {
-        IndicatorReportDisaggregation: true,
-      },
-    });
-    console.log(reports, "reports");
+  const reports = await prisma.indicatorReport.findMany({
+    where: {
+      resultId: resultId,
+    },
+    include: {
+      IndicatorReportDisaggregation: true,
+    },
+  });
 
-    return reports as any;
+  return reports as any;
   }catch(error){
-    console.log(error, "error");
     throw error;
   }
 }
