@@ -422,10 +422,7 @@ requestRouter.delete("/request/:id", deleteRequestController);
  *                 type: string
  *                 description: Optional comment or reason for this approval action
  *                 example: "Approved for budget allocation"
- *               projectId:
- *                 type: string
- *                 description: Optional project ID
- *                 example: "550e8400-e29b-41d4-a716-446655440000"
+ 
  *     responses:
  *       200:
  *         description: Approval processed successfully

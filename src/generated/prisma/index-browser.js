@@ -548,6 +548,7 @@ exports.Prisma.RetirementScalarFieldEnum = {
   requestId: 'requestId',
   status: 'status',
   createdBy: 'createdBy',
+  sendTo: 'sendTo',
   createAt: 'createAt',
   updateAt: 'updateAt'
 };
@@ -899,7 +900,8 @@ exports.Prisma.RetirementOrderByRelevanceFieldEnum = {
   journalId: 'journalId',
   requestId: 'requestId',
   status: 'status',
-  createdBy: 'createdBy'
+  createdBy: 'createdBy',
+  sendTo: 'sendTo'
 };
 
 exports.Prisma.ReportOrderByRelevanceFieldEnum = {

@@ -590,6 +590,7 @@ model Retirement {
   status                  String?
   user                    User?     @relation(fields: [createdBy], references: [userId])
   createdBy               String?
+  sendTo                  String?
   createAt                DateTime? @default(now())
   updateAt                DateTime? @default(now())
 

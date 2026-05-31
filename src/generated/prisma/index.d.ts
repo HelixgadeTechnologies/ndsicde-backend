@@ -33202,6 +33202,7 @@ export namespace Prisma {
     requestId: string | null
     status: string | null
     createdBy: string | null
+    sendTo: string | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -33234,6 +33235,7 @@ export namespace Prisma {
     requestId: string | null
     status: string | null
     createdBy: string | null
+    sendTo: string | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -33266,6 +33268,7 @@ export namespace Prisma {
     requestId: number
     status: number
     createdBy: number
+    sendTo: number
     createAt: number
     updateAt: number
     _all: number
@@ -33324,6 +33327,7 @@ export namespace Prisma {
     requestId?: true
     status?: true
     createdBy?: true
+    sendTo?: true
     createAt?: true
     updateAt?: true
   }
@@ -33356,6 +33360,7 @@ export namespace Prisma {
     requestId?: true
     status?: true
     createdBy?: true
+    sendTo?: true
     createAt?: true
     updateAt?: true
   }
@@ -33388,6 +33393,7 @@ export namespace Prisma {
     requestId?: true
     status?: true
     createdBy?: true
+    sendTo?: true
     createAt?: true
     updateAt?: true
     _all?: true
@@ -33507,6 +33513,7 @@ export namespace Prisma {
     requestId: string | null
     status: string | null
     createdBy: string | null
+    sendTo: string | null
     createAt: Date | null
     updateAt: Date | null
     _count: RetirementCountAggregateOutputType | null
@@ -33558,6 +33565,7 @@ export namespace Prisma {
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
+    sendTo?: boolean
     createAt?: boolean
     updateAt?: boolean
     request?: boolean | Retirement$requestArgs<ExtArgs>
@@ -33594,11 +33602,12 @@ export namespace Prisma {
     requestId?: boolean
     status?: boolean
     createdBy?: boolean
+    sendTo?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "approvalDateA" | "approvalDateB" | "approvalDateC" | "approvalStep" | "needJournalId" | "journalId" | "requestId" | "status" | "createdBy" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
+  export type RetirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"retirementId" | "activityLineDescription" | "quantity" | "frequency" | "unitCost" | "actualCost" | "totalBudget" | "documentName" | "documentURL" | "approval_A" | "approval_B" | "approval_C" | "approvedBy_A" | "approvedBy_B" | "approvedBy_C" | "comment_A" | "comment_B" | "comment_C" | "approvalDateA" | "approvalDateB" | "approvalDateC" | "approvalStep" | "needJournalId" | "journalId" | "requestId" | "status" | "createdBy" | "sendTo" | "createAt" | "updateAt", ExtArgs["result"]["retirement"]>
   export type RetirementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     request?: boolean | Retirement$requestArgs<ExtArgs>
     user?: boolean | Retirement$userArgs<ExtArgs>
@@ -33638,6 +33647,7 @@ export namespace Prisma {
       requestId: string | null
       status: string | null
       createdBy: string | null
+      sendTo: string | null
       createAt: Date | null
       updateAt: Date | null
     }, ExtArgs["result"]["retirement"]>
@@ -34038,6 +34048,7 @@ export namespace Prisma {
     readonly requestId: FieldRef<"Retirement", 'String'>
     readonly status: FieldRef<"Retirement", 'String'>
     readonly createdBy: FieldRef<"Retirement", 'String'>
+    readonly sendTo: FieldRef<"Retirement", 'String'>
     readonly createAt: FieldRef<"Retirement", 'DateTime'>
     readonly updateAt: FieldRef<"Retirement", 'DateTime'>
   }
@@ -36102,6 +36113,7 @@ export namespace Prisma {
     requestId: 'requestId',
     status: 'status',
     createdBy: 'createdBy',
+    sendTo: 'sendTo',
     createAt: 'createAt',
     updateAt: 'updateAt'
   };
@@ -36546,7 +36558,8 @@ export namespace Prisma {
     journalId: 'journalId',
     requestId: 'requestId',
     status: 'status',
-    createdBy: 'createdBy'
+    createdBy: 'createdBy',
+    sendTo: 'sendTo'
   };
 
   export type RetirementOrderByRelevanceFieldEnum = (typeof RetirementOrderByRelevanceFieldEnum)[keyof typeof RetirementOrderByRelevanceFieldEnum]
@@ -39234,6 +39247,7 @@ export namespace Prisma {
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
+    sendTo?: StringNullableFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     request?: XOR<RequestNullableScalarRelationFilter, RequestWhereInput> | null
@@ -39268,6 +39282,7 @@ export namespace Prisma {
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
+    sendTo?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     request?: RequestOrderByWithRelationInput
@@ -39306,6 +39321,7 @@ export namespace Prisma {
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
+    sendTo?: StringNullableFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     request?: XOR<RequestNullableScalarRelationFilter, RequestWhereInput> | null
@@ -39340,6 +39356,7 @@ export namespace Prisma {
     requestId?: SortOrderInput | SortOrder
     status?: SortOrderInput | SortOrder
     createdBy?: SortOrderInput | SortOrder
+    sendTo?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: RetirementCountOrderByAggregateInput
@@ -39380,6 +39397,7 @@ export namespace Prisma {
     requestId?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     status?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     createdBy?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
+    sendTo?: StringNullableWithAggregatesFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Retirement"> | Date | string | null
   }
@@ -42445,6 +42463,7 @@ export namespace Prisma {
     needJournalId?: boolean
     journalId?: string | null
     status?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     request?: RequestCreateNestedOneWithoutRetirementInput
@@ -42479,6 +42498,7 @@ export namespace Prisma {
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -42509,6 +42529,7 @@ export namespace Prisma {
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     request?: RequestUpdateOneWithoutRetirementNestedInput
@@ -42543,6 +42564,7 @@ export namespace Prisma {
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -42575,6 +42597,7 @@ export namespace Prisma {
     requestId?: string | null
     status?: string | null
     createdBy?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -42605,6 +42628,7 @@ export namespace Prisma {
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -42637,6 +42661,7 @@ export namespace Prisma {
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -44802,6 +44827,7 @@ export namespace Prisma {
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
+    sendTo?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -44846,6 +44872,7 @@ export namespace Prisma {
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
+    sendTo?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -44878,6 +44905,7 @@ export namespace Prisma {
     requestId?: SortOrder
     status?: SortOrder
     createdBy?: SortOrder
+    sendTo?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -47737,6 +47765,7 @@ export namespace Prisma {
     needJournalId?: boolean
     journalId?: string | null
     status?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     request?: RequestCreateNestedOneWithoutRetirementInput
@@ -47769,6 +47798,7 @@ export namespace Prisma {
     journalId?: string | null
     requestId?: string | null
     status?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -47980,6 +48010,7 @@ export namespace Prisma {
     requestId?: StringNullableFilter<"Retirement"> | string | null
     status?: StringNullableFilter<"Retirement"> | string | null
     createdBy?: StringNullableFilter<"Retirement"> | string | null
+    sendTo?: StringNullableFilter<"Retirement"> | string | null
     createAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Retirement"> | Date | string | null
   }
@@ -53082,6 +53113,7 @@ export namespace Prisma {
     needJournalId?: boolean
     journalId?: string | null
     status?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     user?: UserCreateNestedOneWithoutRetirementInput
@@ -53114,6 +53146,7 @@ export namespace Prisma {
     journalId?: string | null
     status?: string | null
     createdBy?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -55162,6 +55195,7 @@ export namespace Prisma {
     journalId?: string | null
     requestId?: string | null
     status?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -55437,6 +55471,7 @@ export namespace Prisma {
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     request?: RequestUpdateOneWithoutRetirementNestedInput
@@ -55469,6 +55504,7 @@ export namespace Prisma {
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -55500,6 +55536,7 @@ export namespace Prisma {
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     requestId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -57717,6 +57754,7 @@ export namespace Prisma {
     journalId?: string | null
     status?: string | null
     createdBy?: string | null
+    sendTo?: string | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -57777,6 +57815,7 @@ export namespace Prisma {
     needJournalId?: BoolFieldUpdateOperationsInput | boolean
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutRetirementNestedInput
@@ -57809,6 +57848,7 @@ export namespace Prisma {
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -57840,6 +57880,7 @@ export namespace Prisma {
     journalId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: NullableStringFieldUpdateOperationsInput | string | null
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    sendTo?: NullableStringFieldUpdateOperationsInput | string | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

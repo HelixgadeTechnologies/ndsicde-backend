@@ -70,9 +70,33 @@ export const saveProject = async (
 
 export const getAllProjects = async () => {
   const projects: Array<IProjectView> = await prisma.$queryRaw`
-  SELECT * FROM project_view
-`;
-  return projects;
+    SELECT * FROM project_view
+  `;
+
+  if (projects.length === 0) return [];
+
+  const allUsers = await prisma.user.findMany({
+    where: { assignedProjectId: { not: null } },
+    select: {
+      userId: true,
+      fullName: true,
+      email: true,
+      designation: true,
+      department: true,
+      assignedProjectId: true,
+      role: { select: { roleName: true } },
+    },
+  });
+
+  return projects.map((project) => ({
+    ...project,
+    assignedUsers: allUsers.filter((user) =>
+      user.assignedProjectId
+        ?.split(",")
+        .map((id) => id.trim())
+        .includes(project.projectId)
+    ),
+  }));
 };
 export const getProjectsStatus = async () => {
   const outcomes = await prisma.$queryRaw<any[]>`
@@ -90,9 +114,32 @@ export const getProjectsStatus = async () => {
 };
 
 export const getProjectById = async (projectId: string) => {
-  return await prisma.project.findUnique({
-    where: { projectId },
+  const project = await prisma.project.findUnique({ where: { projectId } });
+
+  if (!project) return null;
+
+  const assignedUsers = await prisma.user.findMany({
+    where: { assignedProjectId: { not: null } },
+    select: {
+      userId: true,
+      fullName: true,
+      email: true,
+      designation: true,
+      department: true,
+      assignedProjectId: true,
+      role: { select: { roleName: true } },
+    },
   });
+
+  return {
+    ...project,
+    assignedUsers: assignedUsers.filter((user) =>
+      user.assignedProjectId
+        ?.split(",")
+        .map((id) => id.trim())
+        .includes(projectId)
+    ),
+  };
 };
 
 export const deleteProject = async (projectId: string) => {

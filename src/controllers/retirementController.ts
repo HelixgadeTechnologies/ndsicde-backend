@@ -103,7 +103,7 @@ export const approveRetirementController = async (
   res: Response
 ) => {
   try {
-    const { retirementId, approvalStatus, approvedBy, comment,projectId } = req.body;
+    const { retirementId, approvalStatus, approvedBy, comment } = req.body;
 
     if (!retirementId || approvalStatus === undefined || !approvedBy) {
       return res
@@ -121,8 +121,7 @@ export const approveRetirementController = async (
       retirementId,
       Number(approvalStatus),
       approvedBy,
-      comment,
-      projectId
+      comment
     );
 
     return res

@@ -1,5 +1,6 @@
 import { IDataValidationStats, ILineItem, IOtherPersonnel, IRequest, IRequestView, ISupportingDocument } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
+import { getNextApproverEmails, sendApprovalCompleteEmail, sendPendingApprovalEmail, sendRejectionEmail, sendReviewRequestEmail } from "../utils/mail";
 
 const JOURNEY_FIELDS = (payload: IRequest) => ({
   isJourneyManagementRequired:           payload.isJourneyManagementRequired ?? false,
@@ -265,7 +266,6 @@ export const requestApproval = async (
   approvalStatus: number,
   approvedBy: string,
   comment?: string,
-  projectId?:string
 ) => {
   try {
 
@@ -327,43 +327,63 @@ export const requestApproval = async (
         }
       }
 
-      return await prisma.request.update({ where: { requestId }, data: resetData });
+      const updated = await prisma.request.update({ where: { requestId }, data: resetData });
+      const creator = request.createdBy
+        ? await prisma.user.findUnique({ where: { userId: request.createdBy }, select: { email: true } })
+        : null;
+      if (creator?.email) await sendReviewRequestEmail(creator.email, request.activityTitle || "Request", comment);
+      return updated;
     }
 
     // =====================================
     // ❌ HANDLE REJECTION
     // =====================================
     if (approvalStatus === ApprovalStatus.REJECTED) {
-      return await prisma.request.update({
+      const updated = await prisma.request.update({
         where: { requestId },
         data: {
-          [`approval_${currentLevel}`]:   ApprovalStatus.REJECTED,
-          [`approvedBy_${currentLevel}`]: approvedBy,
-          [`comment_${currentLevel}`]:    comment || null,
+          [`approval_${currentLevel}`]:    ApprovalStatus.REJECTED,
+          [`approvedBy_${currentLevel}`]:  approvedBy,
+          [`comment_${currentLevel}`]:     comment || null,
           [`approvalDate${currentLevel}`]: new Date(),
           approvalStep: LEVEL_NUMBER[currentLevel],
           status:       "Rejected",
           updateAt:     new Date(),
         },
       });
+      const creator = request.createdBy
+        ? await prisma.user.findUnique({ where: { userId: request.createdBy }, select: { email: true } })
+        : null;
+      if (creator?.email) await sendRejectionEmail(creator.email, request.activityTitle || "Request", comment);
+      return updated;
     }
 
     // =====================================
     // ✅ HANDLE APPROVAL
     // =====================================
     if (approvalStatus === ApprovalStatus.APPROVED) {
-      return await prisma.request.update({
+      const updated = await prisma.request.update({
         where: { requestId },
         data: {
-          [`approval_${currentLevel}`]:   ApprovalStatus.APPROVED,
-          [`approvedBy_${currentLevel}`]: approvedBy,
-          [`comment_${currentLevel}`]:    comment || null,
+          [`approval_${currentLevel}`]:    ApprovalStatus.APPROVED,
+          [`approvedBy_${currentLevel}`]:  approvedBy,
+          [`comment_${currentLevel}`]:     comment || null,
           [`approvalDate${currentLevel}`]: new Date(),
           approvalStep: LEVEL_NUMBER[currentLevel],
           status:       isFinalLevel ? "Approved" : "InReview",
           updateAt:     new Date(),
         },
       });
+      if (isFinalLevel) {
+        const creator = request.createdBy
+          ? await prisma.user.findUnique({ where: { userId: request.createdBy }, select: { email: true } })
+          : null;
+        if (creator?.email) await sendApprovalCompleteEmail(creator.email, request.activityTitle || "Request");
+      } else {
+        const nextEmails = await getNextApproverEmails(approvedBy, "Request", requestId);
+        await sendPendingApprovalEmail(nextEmails, request.activityTitle || "Request");
+      }
+      return updated;
     }
 
     throw new Error("Invalid approval status");

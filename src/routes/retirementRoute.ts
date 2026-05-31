@@ -79,6 +79,10 @@ const retirementRouter: Router = Router();
  *                     type: string
  *                     example: "Pending"
  *                     description: Defaults to "Pending" on create if omitted
+ *                   sendTo:
+ *                     type: string
+ *                     description: Who to send the retirement to
+ *                     example: "Manager"
  *                   lineItems:
  *                     type: array
  *                     description: |
@@ -494,10 +498,6 @@ retirementRouter.delete("/:retirementId", removeRetirement);
  *                 type: string
  *                 description: Optional comment or reason for this approval action
  *                 example: "All receipts verified and amounts match."
- *               projectId:
- *                 type: string
- *                 description: Optional project ID
- *                 example: "550e8400-e29b-41d4-a716-446655440000"
  *     responses:
  *       200:
  *         description: Retirement approval processed successfully

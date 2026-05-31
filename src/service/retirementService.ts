@@ -1,6 +1,7 @@
 import { IRetirement, IRetirementView } from "../interface/retirementInterface";
 import { ILineItem } from "../interface/requestInterface";
 import { prisma } from "../lib/prisma";
+import { getNextApproverEmails, sendApprovalCompleteEmail, sendApprovalCompleteRetirementEmail, sendJournalEntryEmail, sendPendingApprovalEmail, sendRejectionEmail, sendReviewRequestEmail } from "../utils/mail";
 
 // ✅ Create or Update Retirement (with LineItems)
 export const createOrUpdateRetirement = async (
@@ -24,6 +25,7 @@ export const createOrUpdateRetirement = async (
           documentURL: payload.documentURL,
           requestId: payload.requestId,
           status: payload.status ?? "Pending",
+          sendTo: payload.sendTo
         },
       });
 
@@ -86,6 +88,7 @@ export const createOrUpdateRetirement = async (
           documentURL: payload.documentURL,
           requestId: payload.requestId,
           status: payload.status,
+          sendTo: payload.sendTo,
           updateAt: new Date(),
         },
       });
@@ -224,7 +227,6 @@ export const approveRetirement = async (
   approvalStatus: number,
   approvedBy: string,
   comment?: string,
-  projectId?:string
 ) => {
   try {
     const retirement = await prisma.retirement.findUnique({
@@ -282,14 +284,19 @@ export const approveRetirement = async (
         }
       }
 
-      return await prisma.retirement.update({ where: { retirementId }, data: resetData });
+      const updated = await prisma.retirement.update({ where: { retirementId }, data: resetData });
+      const creator = retirement.createdBy
+        ? await prisma.user.findUnique({ where: { userId: retirement.createdBy }, select: { email: true } })
+        : null;
+      if (creator?.email) await sendReviewRequestEmail(creator.email, retirement.activityLineDescription || "Retirement", comment);
+      return updated;
     }
 
     // =====================================
     // ❌ REJECTION
     // =====================================
     if (approvalStatus === ApprovalStatus.REJECTED) {
-      return await prisma.retirement.update({
+      const updated = await prisma.retirement.update({
         where: { retirementId },
         data: {
           [`approval_${currentLevel}`]:    ApprovalStatus.REJECTED,
@@ -301,13 +308,18 @@ export const approveRetirement = async (
           updateAt:     new Date(),
         },
       });
+      const creator = retirement.createdBy
+        ? await prisma.user.findUnique({ where: { userId: retirement.createdBy }, select: { email: true } })
+        : null;
+      if (creator?.email) await sendRejectionEmail(creator.email, retirement.activityLineDescription || "Retirement", comment);
+      return updated;
     }
 
     // =====================================
     // ✅ APPROVAL
     // =====================================
     if (approvalStatus === ApprovalStatus.APPROVED) {
-      return await prisma.retirement.update({
+      const updated = await prisma.retirement.update({
         where: { retirementId },
         data: {
           [`approval_${currentLevel}`]:    ApprovalStatus.APPROVED,
@@ -320,6 +332,17 @@ export const approveRetirement = async (
           updateAt:      new Date(),
         },
       });
+      const nextEmails = await getNextApproverEmails(approvedBy, "Retirement", undefined, retirementId);
+      if (isFinalLevel) {
+        await sendJournalEntryEmail(nextEmails,  "Retirement");
+        const creator = retirement.sendTo
+          ? await prisma.user.findUnique({ where: { userId: retirement.sendTo }, select: { email: true } })
+          : null;
+        if (creator?.email) await sendApprovalCompleteRetirementEmail(creator.email, "Retirement");
+      } else {
+        await sendPendingApprovalEmail(nextEmails,"Retirement");
+      }
+      return updated;
     }
 
     throw new Error("Invalid approval status");

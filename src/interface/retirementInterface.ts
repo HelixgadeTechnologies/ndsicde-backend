@@ -13,6 +13,7 @@ export interface IRetirement {
   requestId?: string;
   status?: string;
   createAt?: Date;
+  sendTo?:string;
   updateAt?: Date;
   lineItems?: ILineItem[];
 }
@@ -45,6 +46,7 @@ export interface IRetirementView {
   activityTitle?: string;
   status?: string;
   createAt?: Date;
+  sendTo?:string;
   updateAt?: Date;
   projectName?: string;
   projectId?: string;
