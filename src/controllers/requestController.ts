@@ -120,7 +120,7 @@ export const requestApprovalController = async (
   res: Response
 ) => {
   try {
-    const { requestId, approvalStatus, approvedBy, comment } = req.body;
+    const { requestId, approvalStatus, approvedBy, comment,projectId } = req.body;
 
     // Validate required fields
     if (!requestId || !approvalStatus || !approvedBy) {
@@ -136,7 +136,7 @@ export const requestApprovalController = async (
         .json(errorResponse("approvalStatus must be 1 (Approved), 2 (Rejected) or 3 (Review)"));
     }
 
-    const result = await requestApproval(requestId, approvalStatus, approvedBy, comment);
+    const result = await requestApproval(requestId, approvalStatus, approvedBy, comment,projectId);
 
     return res
       .status(200)

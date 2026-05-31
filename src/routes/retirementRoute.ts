@@ -494,6 +494,10 @@ retirementRouter.delete("/:retirementId", removeRetirement);
  *                 type: string
  *                 description: Optional comment or reason for this approval action
  *                 example: "All receipts verified and amounts match."
+ *               projectId:
+ *                 type: string
+ *                 description: Optional project ID
+ *                 example: "550e8400-e29b-41d4-a716-446655440000"
  *     responses:
  *       200:
  *         description: Retirement approval processed successfully

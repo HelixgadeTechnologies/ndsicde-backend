@@ -223,7 +223,8 @@ export const approveRetirement = async (
   retirementId: string,
   approvalStatus: number,
   approvedBy: string,
-  comment?: string
+  comment?: string,
+  projectId?:string
 ) => {
   try {
     const retirement = await prisma.retirement.findUnique({

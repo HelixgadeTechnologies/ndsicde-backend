@@ -264,9 +264,11 @@ export const requestApproval = async (
   requestId: string,
   approvalStatus: number,
   approvedBy: string,
-  comment?: string
+  comment?: string,
+  projectId?:string
 ) => {
   try {
+
     const request = await prisma.request.findUnique({ where: { requestId } });
 
     if (!request) throw new Error("Request not found");
