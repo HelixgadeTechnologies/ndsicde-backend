@@ -70,6 +70,7 @@ model Role {
   roleName    String?
   description String?
   permission  String?
+  level       Int?
   createAt    DateTime? @default(now())
   updateAt    DateTime? @default(now())
   users       User[]

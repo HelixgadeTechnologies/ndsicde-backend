@@ -6076,8 +6076,18 @@ export namespace Prisma {
 
   export type AggregateRole = {
     _count: RoleCountAggregateOutputType | null
+    _avg: RoleAvgAggregateOutputType | null
+    _sum: RoleSumAggregateOutputType | null
     _min: RoleMinAggregateOutputType | null
     _max: RoleMaxAggregateOutputType | null
+  }
+
+  export type RoleAvgAggregateOutputType = {
+    level: number | null
+  }
+
+  export type RoleSumAggregateOutputType = {
+    level: number | null
   }
 
   export type RoleMinAggregateOutputType = {
@@ -6085,6 +6095,7 @@ export namespace Prisma {
     roleName: string | null
     description: string | null
     permission: string | null
+    level: number | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -6094,6 +6105,7 @@ export namespace Prisma {
     roleName: string | null
     description: string | null
     permission: string | null
+    level: number | null
     createAt: Date | null
     updateAt: Date | null
   }
@@ -6103,17 +6115,27 @@ export namespace Prisma {
     roleName: number
     description: number
     permission: number
+    level: number
     createAt: number
     updateAt: number
     _all: number
   }
 
 
+  export type RoleAvgAggregateInputType = {
+    level?: true
+  }
+
+  export type RoleSumAggregateInputType = {
+    level?: true
+  }
+
   export type RoleMinAggregateInputType = {
     roleId?: true
     roleName?: true
     description?: true
     permission?: true
+    level?: true
     createAt?: true
     updateAt?: true
   }
@@ -6123,6 +6145,7 @@ export namespace Prisma {
     roleName?: true
     description?: true
     permission?: true
+    level?: true
     createAt?: true
     updateAt?: true
   }
@@ -6132,6 +6155,7 @@ export namespace Prisma {
     roleName?: true
     description?: true
     permission?: true
+    level?: true
     createAt?: true
     updateAt?: true
     _all?: true
@@ -6175,6 +6199,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: RoleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: RoleMinAggregateInputType
@@ -6205,6 +6241,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: RoleCountAggregateInputType | true
+    _avg?: RoleAvgAggregateInputType
+    _sum?: RoleSumAggregateInputType
     _min?: RoleMinAggregateInputType
     _max?: RoleMaxAggregateInputType
   }
@@ -6214,9 +6252,12 @@ export namespace Prisma {
     roleName: string | null
     description: string | null
     permission: string | null
+    level: number | null
     createAt: Date | null
     updateAt: Date | null
     _count: RoleCountAggregateOutputType | null
+    _avg: RoleAvgAggregateOutputType | null
+    _sum: RoleSumAggregateOutputType | null
     _min: RoleMinAggregateOutputType | null
     _max: RoleMaxAggregateOutputType | null
   }
@@ -6240,6 +6281,7 @@ export namespace Prisma {
     roleName?: boolean
     description?: boolean
     permission?: boolean
+    level?: boolean
     createAt?: boolean
     updateAt?: boolean
     users?: boolean | Role$usersArgs<ExtArgs>
@@ -6253,11 +6295,12 @@ export namespace Prisma {
     roleName?: boolean
     description?: boolean
     permission?: boolean
+    level?: boolean
     createAt?: boolean
     updateAt?: boolean
   }
 
-  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"roleId" | "roleName" | "description" | "permission" | "createAt" | "updateAt", ExtArgs["result"]["role"]>
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"roleId" | "roleName" | "description" | "permission" | "level" | "createAt" | "updateAt", ExtArgs["result"]["role"]>
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Role$usersArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -6273,6 +6316,7 @@ export namespace Prisma {
       roleName: string | null
       description: string | null
       permission: string | null
+      level: number | null
       createAt: Date | null
       updateAt: Date | null
     }, ExtArgs["result"]["role"]>
@@ -6649,6 +6693,7 @@ export namespace Prisma {
     readonly roleName: FieldRef<"Role", 'String'>
     readonly description: FieldRef<"Role", 'String'>
     readonly permission: FieldRef<"Role", 'String'>
+    readonly level: FieldRef<"Role", 'Int'>
     readonly createAt: FieldRef<"Role", 'DateTime'>
     readonly updateAt: FieldRef<"Role", 'DateTime'>
   }
@@ -35602,6 +35647,7 @@ export namespace Prisma {
     roleName: 'roleName',
     description: 'description',
     permission: 'permission',
+    level: 'level',
     createAt: 'createAt',
     updateAt: 'updateAt'
   };
@@ -36826,6 +36872,7 @@ export namespace Prisma {
     roleName?: StringNullableFilter<"Role"> | string | null
     description?: StringNullableFilter<"Role"> | string | null
     permission?: StringNullableFilter<"Role"> | string | null
+    level?: IntNullableFilter<"Role"> | number | null
     createAt?: DateTimeNullableFilter<"Role"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Role"> | Date | string | null
     users?: UserListRelationFilter
@@ -36836,6 +36883,7 @@ export namespace Prisma {
     roleName?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     permission?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     users?: UserOrderByRelationAggregateInput
@@ -36850,6 +36898,7 @@ export namespace Prisma {
     roleName?: StringNullableFilter<"Role"> | string | null
     description?: StringNullableFilter<"Role"> | string | null
     permission?: StringNullableFilter<"Role"> | string | null
+    level?: IntNullableFilter<"Role"> | number | null
     createAt?: DateTimeNullableFilter<"Role"> | Date | string | null
     updateAt?: DateTimeNullableFilter<"Role"> | Date | string | null
     users?: UserListRelationFilter
@@ -36860,11 +36909,14 @@ export namespace Prisma {
     roleName?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     permission?: SortOrderInput | SortOrder
+    level?: SortOrderInput | SortOrder
     createAt?: SortOrderInput | SortOrder
     updateAt?: SortOrderInput | SortOrder
     _count?: RoleCountOrderByAggregateInput
+    _avg?: RoleAvgOrderByAggregateInput
     _max?: RoleMaxOrderByAggregateInput
     _min?: RoleMinOrderByAggregateInput
+    _sum?: RoleSumOrderByAggregateInput
   }
 
   export type RoleScalarWhereWithAggregatesInput = {
@@ -36875,6 +36927,7 @@ export namespace Prisma {
     roleName?: StringNullableWithAggregatesFilter<"Role"> | string | null
     description?: StringNullableWithAggregatesFilter<"Role"> | string | null
     permission?: StringNullableWithAggregatesFilter<"Role"> | string | null
+    level?: IntNullableWithAggregatesFilter<"Role"> | number | null
     createAt?: DateTimeNullableWithAggregatesFilter<"Role"> | Date | string | null
     updateAt?: DateTimeNullableWithAggregatesFilter<"Role"> | Date | string | null
   }
@@ -39766,6 +39819,7 @@ export namespace Prisma {
     roleName?: string | null
     description?: string | null
     permission?: string | null
+    level?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     users?: UserCreateNestedManyWithoutRoleInput
@@ -39776,6 +39830,7 @@ export namespace Prisma {
     roleName?: string | null
     description?: string | null
     permission?: string | null
+    level?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
     users?: UserUncheckedCreateNestedManyWithoutRoleInput
@@ -39786,6 +39841,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     users?: UserUpdateManyWithoutRoleNestedInput
@@ -39796,6 +39852,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     users?: UserUncheckedUpdateManyWithoutRoleNestedInput
@@ -39806,6 +39863,7 @@ export namespace Prisma {
     roleName?: string | null
     description?: string | null
     permission?: string | null
+    level?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -39815,6 +39873,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -39824,6 +39883,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -43042,6 +43102,17 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
@@ -43063,8 +43134,13 @@ export namespace Prisma {
     roleName?: SortOrder
     description?: SortOrder
     permission?: SortOrder
+    level?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type RoleAvgOrderByAggregateInput = {
+    level?: SortOrder
   }
 
   export type RoleMaxOrderByAggregateInput = {
@@ -43072,6 +43148,7 @@ export namespace Prisma {
     roleName?: SortOrder
     description?: SortOrder
     permission?: SortOrder
+    level?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -43081,8 +43158,29 @@ export namespace Prisma {
     roleName?: SortOrder
     description?: SortOrder
     permission?: SortOrder
+    level?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
+  }
+
+  export type RoleSumOrderByAggregateInput = {
+    level?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type KpiListRelationFilter = {
@@ -43129,17 +43227,6 @@ export namespace Prisma {
     status?: SortOrder
     createAt?: SortOrder
     updateAt?: SortOrder
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type StrategicObjectiveNullableScalarRelationFilter = {
@@ -43234,22 +43321,6 @@ export namespace Prisma {
   export type KpiSumOrderByAggregateInput = {
     cumulativeValue?: SortOrder
     cumulativeTarget?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type KpiScalarRelationFilter = {
@@ -45137,6 +45208,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateManyWithoutRoleNestedInput = {
     create?: XOR<UserCreateWithoutRoleInput, UserUncheckedCreateWithoutRoleInput> | UserCreateWithoutRoleInput[] | UserUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserCreateOrConnectWithoutRoleInput | UserCreateOrConnectWithoutRoleInput[]
@@ -45225,14 +45304,6 @@ export namespace Prisma {
     connectOrCreate?: KpiDisaggregationCreateOrConnectWithoutKpiInput | KpiDisaggregationCreateOrConnectWithoutKpiInput[]
     createMany?: KpiDisaggregationCreateManyKpiInputEnvelope
     connect?: KpiDisaggregationWhereUniqueInput | KpiDisaggregationWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type StrategicObjectiveUpdateOneWithoutKpiNestedInput = {
@@ -47434,6 +47505,7 @@ export namespace Prisma {
     roleName?: string | null
     description?: string | null
     permission?: string | null
+    level?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -47443,6 +47515,7 @@ export namespace Prisma {
     roleName?: string | null
     description?: string | null
     permission?: string | null
+    level?: number | null
     createAt?: Date | string | null
     updateAt?: Date | string | null
   }
@@ -47726,6 +47799,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -47735,6 +47809,7 @@ export namespace Prisma {
     roleName?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     permission?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableIntFieldUpdateOperationsInput | number | null
     createAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updateAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

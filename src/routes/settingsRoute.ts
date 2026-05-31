@@ -112,6 +112,8 @@ settingsRouter.get("/general", fetchGeneralSettings);
  *                     type: string
  *                   permission:
  *                     type: string
+ *                   level:
+ *                     type: number
  *     responses:
  *       201:
  *         description: Role created or updated successfully

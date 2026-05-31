@@ -176,7 +176,8 @@ export const registerRole = async (data: IRole, isCreate: boolean) => {
   const roleData = {
     roleName: data.roleName ?? null,
     description: data.description ?? null,
-    permission: data.permission ?? null
+    permission: data.permission ?? null,
+    level: data.level ?? null,
   };
 
   if (isCreate) {

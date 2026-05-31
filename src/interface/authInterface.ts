@@ -102,6 +102,7 @@ export interface IRole {
     roleName?: string;
     description?: string;
     permission?: string;
+    level?: number;
     createAt?: string;
     updateAt?: string;
 }
