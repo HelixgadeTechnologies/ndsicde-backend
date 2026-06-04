@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import {
   createOrUpdateActivity,
   createOrUpdateActivityReport,
@@ -53,11 +52,7 @@ import {
   saveOutcome,
   saveProject,
 } from "../service/projectManagementService";
-import {
-  errorResponse,
-  notFoundResponse,
-  successResponse,
-} from "../utils/responseHandler";
+import { errorResponse, notFoundResponse, successResponse } from "../utils/responseHandler";
 import {
   IActivity,
   IActivityReport,
@@ -67,1004 +62,405 @@ import {
   IOutcome,
   IOutput,
 } from "../interface/projectManagementInterface";
-import { getOrgKpiDashboardData, getProjectActivityDashboardData, getResultDashboardData, getResultDashboardFullData, getResultDashboardKpiSectionData } from "../service/kpiDashboardService";
+import {
+  getOrgKpiDashboardData,
+  getProjectActivityDashboardData,
+  getResultDashboardData,
+  getResultDashboardFullData,
+  getResultDashboardKpiSectionData,
+} from "../service/kpiDashboardService";
+import { asyncHandler } from "../middlewares/errorMiddleware";
 
-export const createOrUpdateProject = async (req: Request, res: Response) => {
+export const createOrUpdateProject = asyncHandler(async (req, res) => {
   const { isCreate, data } = req.body;
-  //  const userId = req.user?.userId; // Assuming user ID is available from authentication middleware
-  try {
-    const project = await saveProject(data, isCreate);
-    const message = isCreate
-      ? "Project created successfully"
-      : "Project updated successfully";
-    res.status(isCreate ? 201 : 200).json(successResponse(message, project));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
+  const project = await saveProject(data, isCreate);
+  const message = isCreate ? "Project created successfully" : "Project updated successfully";
+  res.status(isCreate ? 201 : 200).json(successResponse(message, project));
+});
 
-export const fetchAllProjects = async (_req: Request, res: Response) => {
-  try {
-    const projects = await getAllProjects();
-    res.status(200).json(successResponse("Projects retrieved", projects));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
+export const fetchAllProjects = asyncHandler(async (_req, res) => {
+  const projects = await getAllProjects();
+  res.status(200).json(successResponse("Projects retrieved", projects));
+});
 
-export const fetchProjectById = async (req: Request, res: Response) => {
+export const fetchProjectById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
-  try {
-    const project = await getProjectById(id);
-    if (!project) {
-      return res.status(404).json({ message: "Project not found" });
-    }
-    res.status(200).json(successResponse("Project found", project));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+  const project = await getProjectById(id);
+  if (!project) {
+    return res.status(404).json(notFoundResponse("Project not found", null));
   }
-};
+  res.status(200).json(successResponse("Project found", project));
+});
 
-export const removeProject = async (req: Request, res: Response) => {
+export const removeProject = asyncHandler(async (req, res) => {
   const { projectId } = req.body;
+  const deleted = await deleteProject(projectId);
+  res.status(200).json(successResponse("Project deleted successfully", deleted));
+});
 
-  try {
-    const deleted = await deleteProject(projectId);
+export const fetchProjectStatusStats = asyncHandler(async (_req, res) => {
+  const stats = await getProjectsStatus();
+  res.status(200).json(successResponse("Project status summary", stats));
+});
 
-    res
-      .status(200)
-      .json(successResponse("Project deleted successfully", deleted));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const createOrUpdateTeamMemberController = asyncHandler(async (req, res) => {
+  const { isCreate, data } = req.body;
+  const result = await createOrUpdateTeamMember(data, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Team member created successfully" : "Team member updated successfully", result));
+});
+
+export const getAllTeamMemberController = asyncHandler(async (_req, res) => {
+  const result = await getAllTeamMember();
+  res.status(200).json(successResponse("Team Members", result));
+});
+
+export const deleteTeamMemberController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteTeamMember(id);
+  res.status(200).json(successResponse("Team member deleted successfully", null));
+});
+
+export const createOrUpdatePartnerController = asyncHandler(async (req, res) => {
+  const { isCreate, data } = req.body;
+  const result = await createOrUpdatePartner(data, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Partner created successfully" : "Partner updated successfully", result));
+});
+
+export const getAllPartnersController = asyncHandler(async (_req, res) => {
+  const result = await getAllPartners();
+  res.status(200).json(successResponse("Partners", result));
+});
+
+export const deletePartnerController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deletePartner(id);
+  res.status(200).json(successResponse("Partner deleted successfully", null));
+});
+
+export const getPartnerByEmailController = asyncHandler(async (req, res) => {
+  const { email } = req.params;
+  const partner = await getPartnerByEmail(email);
+  if (!partner) {
+    return res.status(404).json(notFoundResponse("Partner not found", null));
   }
-};
+  res.status(200).json(successResponse("Partner retrieved successfully", partner));
+});
 
-export const fetchProjectStatusStats = async (req: Request, res: Response) => {
-  try {
-    const stats = await getProjectsStatus();
-    res.status(200).json(successResponse("Project status summary", stats));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const createOrUpdateImpactController = asyncHandler(async (req, res) => {
+  const { isCreate, data } = req.body;
+  const result = await createOrUpdateImpact(data, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Impact created successfully" : "Impact updated successfully", result));
+});
+
+export const getAllImpactsController = asyncHandler(async (_req, res) => {
+  const result = await getAllImpact();
+  res.status(200).json(successResponse("Impacts retrieved successfully", result));
+});
+
+export const deleteImpactController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteImpact(id);
+  res.status(200).json(successResponse("Impact deleted successfully", null));
+});
+
+export const createOrUpdateIndicatorController = asyncHandler(async (req, res) => {
+  const { isCreate, data }: { isCreate: boolean; data: IIndicator } = req.body;
+  const result = await createOrUpdateIndicator(data, isCreate);
+  return res.status(isCreate ? 201 : 200).json(successResponse(isCreate ? "Indicator created successfully" : "Indicator updated successfully", result));
+});
+
+export const getAllIndicatorsByResult = asyncHandler(async (req, res) => {
+  const { resultId } = req.params;
+  const indicators = await getAllImpactIndicatorsByResultIdView(resultId);
+  if (!indicators || indicators.length === 0) {
+    return res.status(404).json(notFoundResponse("Indicators not found", null));
   }
-};
+  return res.status(200).json(successResponse("Indicators retrieved", indicators));
+});
 
-// Create or Update TeamMember
-export const createOrUpdateTeamMemberController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, data } = req.body;
-    const result = await createOrUpdateTeamMember(data, isCreate);
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Team member created successfully"
-            : "Team member updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getIndicatorById = asyncHandler(async (req, res) => {
+  const { indicatorId } = req.params;
+  const indicator = await getIndicatorByIdView(indicatorId);
+  if (!indicator) {
+    return res.status(404).json(notFoundResponse("Indicator not found", null));
   }
-};
+  return res.status(200).json(successResponse("Indicator retrieved", indicator));
+});
 
-// Get all TeamMembers
-export const getAllTeamMemberController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const result = await getAllTeamMember();
-    res.status(200).json(successResponse("Team Members", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getAllResultType = asyncHandler(async (_req, res) => {
+  const results = await getResultType();
+  if (results.length < 1) {
+    return res.status(404).json(notFoundResponse("Result type not found", null));
   }
-};
+  return res.status(200).json(successResponse("Result type retrieved", results));
+});
 
-// Delete TeamMember
-export const deleteTeamMemberController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-    await deleteTeamMember(id);
-    res
-      .status(200)
-      .json(successResponse("Team member deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const deleteIndicatorController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteIndicator(id);
+  res.status(200).json(successResponse("Indicator deleted successfully", null));
+});
+
+export const createOrUpdateIndicatorReport = asyncHandler(async (req, res) => {
+  const payload: IIndicatorReport = req.body.payload;
+  const isCreate: boolean = req.body.isCreate;
+  const result = await saveIndicatorReport(payload, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Indicator created successfully" : "Indicator updated successfully", result));
+});
+
+export const getIndicatorReportsByResult = asyncHandler(async (req, res) => {
+  const { resultId } = req.params;
+  const results = await getAllIndicatorReportByResultId(resultId);
+  if (!results || results.length === 0) {
+    return res.status(404).json(notFoundResponse("indicator report not found", null));
   }
-};
+  res.status(200).json(successResponse("indicator report fetched successfully", results));
+});
 
-// Create or Update Partner
-export const createOrUpdatePartnerController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, data } = req.body;
-    const result = await createOrUpdatePartner(data, isCreate);
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Partner created successfully"
-            : "Partner updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getImpactIndicatorReportById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await getIndicatorReportById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("indicator report not found", null));
   }
-};
+  res.status(200).json(successResponse("indicator report fetched successfully", result));
+});
 
-// Get all Partners
-export const getAllPartnersController = async (req: Request, res: Response) => {
-  try {
-    const result = await getAllPartners();
-    res.status(200).json(successResponse("Partners", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
+export const removeIndicatorReport = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  await deleteIndicatorReport(id);
+  res.status(200).json(successResponse("indicator report deleted successfully", null));
+});
 
-// Delete Partner
-export const deletePartnerController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    await deletePartner(id);
-    res.status(200).json(successResponse("Partner deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get Partner by Email
-export const getPartnerByEmailController = async (req: Request, res: Response) => {
-  try {
-    const { email } = req.params;
-    const partner = await getPartnerByEmail(email);
-    if (!partner) {
-      return res.status(404).json(notFoundResponse("Partner not found", null));
-    }
-    res.status(200).json(successResponse("Partner retrieved successfully", partner));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Create or Update Impact
-export const createOrUpdateImpactController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, data } = req.body;
-    const result = await createOrUpdateImpact(data, isCreate);
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Impact created successfully"
-            : "Impact updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get all Impacts
-export const getAllImpactsController = async (req: Request, res: Response) => {
-  try {
-    const result = await getAllImpact();
-    res
-      .status(200)
-      .json(successResponse("Impacts retrieved successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Delete Impact
-export const deleteImpactController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    await deleteImpact(id);
-    res.status(200).json(successResponse("Impact deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Impact indicator controllers will go here (create/update, get all, delete)
-
-// ✅ Create OR Update Indicator
-export const createOrUpdateIndicatorController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, data }: { isCreate: boolean; data: IIndicator } =
-      req.body;
-
-    const result = await createOrUpdateIndicator(data, isCreate);
-
-    return res
-      .status(isCreate ? 201 : 200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Indicator created successfully"
-            : "Indicator updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    return res
-      .status(500)
-      .json(
-        errorResponse(error.message || "Error processing impact indicator")
-      );
-  }
-};
-
-// ✅ Get all Impact Indicators (View)
-export const getAllIndicatorsByResult = async (req: Request, res: Response) => {
-  try {
-    const { resultId } = req.params;
-    const indicators = await getAllImpactIndicatorsByResultIdView(resultId);
-    if (!indicators || indicators.length === 0) {
-      return res
-        .status(404)
-        .json(notFoundResponse("Indicators not found", null));
-    }
-    return res
-      .status(200)
-      .json(successResponse("Indicators retrieved", indicators));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get single Impact Indicator by ID (View)
-export const getIndicatorById = async (req: Request, res: Response) => {
-  try {
-    const indicatorId = req.params.indicatorId;
-    const indicator = await getIndicatorByIdView(indicatorId);
-
-    if (!indicator) {
-      return res
-        .status(404)
-        .json(notFoundResponse("Indicator not found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Indicator retrieved", indicator));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-// ✅ Get single Impact Indicator by ID (View)
-export const getAllResultType = async (req: Request, res: Response) => {
-  try {
-    const results = await getResultType();
-
-    if (results.length < 1) {
-      return res
-        .status(404)
-        .json(notFoundResponse("Result type not found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("Result type retrieved", results));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Delete Indicator
-export const deleteIndicatorController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    console.log(id, "id");
-    await deleteIndicator(id);
-    res.status(200).json(successResponse("Indicator deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Create or Update
-export const createOrUpdateIndicatorReport = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const payload: IIndicatorReport = req.body.payload;
-    const isCreate: boolean = req.body.isCreate;
-
-    const result = await saveIndicatorReport(payload, isCreate);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Indicator created successfully"
-            : "Indicator updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get All
-export const getIndicatorReportsByResult = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const resultId = req.params.resultId;
-    console.log(resultId, "resultId");
-    const results = await getAllIndicatorReportByResultId(resultId);
-
-    if (!results || results.length === 0) {
-      return res
-        .status(404)
-        .json(
-          notFoundResponse("indicator report not found", null)
-        );
-    }
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "indicator report fetched successfully",
-          results
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get By ID
-export const getImpactIndicatorReportById = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const id = req.params.id;
-    console.log(id, "id");
-    const result = await getIndicatorReportById(id);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(
-          notFoundResponse("indicator report not found", null)
-        );
-    }
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "indicator report fetched successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Delete
-export const removeIndicatorReport = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.body;
-    console.log(id, "id");
-    await deleteIndicatorReport(id);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          "indicator report deleted successfully",
-          null
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Create or Update
-export const saveOutcomeController = async (req: Request, res: Response) => {
+export const saveOutcomeController = asyncHandler(async (req, res) => {
   const { isCreate, data }: { isCreate: boolean; data: IOutcome } = req.body;
-  try {
-    const result = await saveOutcome(data, isCreate);
+  const result = await saveOutcome(data, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Outcome created successfully" : "Outcome updated successfully", result));
+});
 
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate === true
-            ? "Outcome created successfully"
-            : "Outcome updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getAllOutcomesController = asyncHandler(async (_req, res) => {
+  const results = await getAllOutcomesView();
+  if (!results || results.length === 0) {
+    return res.status(404).json(notFoundResponse("Outcomes not found", null));
   }
-};
+  res.status(200).json(successResponse("Outcomes fetched successfully", results));
+});
 
-// Get All
-export const getAllOutcomesController = async (req: Request, res: Response) => {
-  try {
-    const results = await getAllOutcomesView();
-
-    if (!results || results.length === 0) {
-      return res.status(404).json(notFoundResponse("Outcomes not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("Outcomes fetched successfully", results));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// Get By ID
-export const getOutcomeByIdController = async (req: Request, res: Response) => {
+export const getOutcomeByIdController = asyncHandler(async (req, res) => {
   const { id } = req.params;
-
-  try {
-    const result = await getOutcomeViewById(id);
-
-    if (!result) {
-      return res.status(404).json(notFoundResponse("Outcome not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("Outcome fetched successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+  const result = await getOutcomeViewById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("Outcome not found", null));
   }
-};
+  res.status(200).json(successResponse("Outcome fetched successfully", result));
+});
 
-// Delete
-export const deleteOutcomeController = async (req: Request, res: Response) => {
+export const deleteOutcomeController = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  await deleteOutcome(id);
+  res.status(200).json(successResponse("Outcome deleted successfully", null));
+});
 
-  try {
-    await deleteOutcome(id);
+export const createOrUpdateOutputController = asyncHandler(async (req, res) => {
+  const { isCreate, payload }: { isCreate: boolean; payload: IOutput } = req.body;
+  const result = await createOrUpdateOutput(payload, isCreate);
+  res.status(200).json(successResponse(isCreate ? "Output created successfully" : "Output updated successfully", result));
+});
 
-    res.status(200).json(successResponse("Outcome deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getAllOutputsController = asyncHandler(async (_req, res) => {
+  const result = await getAllOutputs();
+  if (!result || result.length === 0) {
+    return res.status(404).json(notFoundResponse("Outputs not found", null));
   }
-};
+  res.status(200).json(successResponse("Outputs retrieved successfully", result));
+});
 
-
-
-// ✅ Create or Update Output
-export const createOrUpdateOutputController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, payload }: { isCreate: boolean; payload: IOutput } =
-      req.body;
-
-    const result = await createOrUpdateOutput(payload, isCreate);
-
-    res
-      .status(200)
-      .json(
-        successResponse(
-          isCreate
-            ? "Output created successfully"
-            : "Output updated successfully",
-          result
-        )
-      );
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getOutputByIdController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await getOutputById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("Output not found", null));
   }
-};
+  res.status(200).json(successResponse("Output retrieved successfully", result));
+});
 
-// ✅ Get all Outputs (from view)
-export const getAllOutputsController = async (req: Request, res: Response) => {
-  try {
-    const result = await getAllOutputs();
+export const deleteOutputController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteOutput(id);
+  res.status(200).json(successResponse("Output deleted successfully", null));
+});
 
-    if (!result || result.length === 0) {
-      return res.status(404).json(notFoundResponse("Outputs not found", null));
-    }
+export const createOrUpdateActivityController = asyncHandler(async (req, res) => {
+  const { isCreate, payload }: { isCreate: boolean; payload: IActivity } = req.body;
+  const result = await createOrUpdateActivity(payload, isCreate);
+  return res.status(200).json(successResponse(isCreate ? "Activity created successfully" : "Activity updated successfully", result));
+});
 
-    res
-      .status(200)
-      .json(successResponse("Outputs retrieved successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getAllActivitiesController = asyncHandler(async (_req, res) => {
+  const result = await getAllActivities();
+  if (!result || result.length === 0) {
+    return res.status(404).json(notFoundResponse("No activities found", null));
   }
-};
+  return res.status(200).json(successResponse("Activities fetched successfully", result));
+});
 
-// ✅ Get Output by Id (from view)
-export const getOutputByIdController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-
-    const result = await getOutputById(id);
-
-    if (!result) {
-      return res.status(404).json(notFoundResponse("Output not found", null));
-    }
-
-    res
-      .status(200)
-      .json(successResponse("Output retrieved successfully", result));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getActivityByIdController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await getActivityById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("Activity not found", null));
   }
-};
+  return res.status(200).json(successResponse("Activity fetched successfully", result));
+});
 
+export const deleteActivityController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteActivity(id);
+  return res.status(200).json(successResponse("Activity deleted successfully", null));
+});
 
-// ✅ Delete Output
-export const deleteOutputController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
+export const createOrUpdateActivityReportController = asyncHandler(async (req, res) => {
+  const { isCreate, payload }: { isCreate: boolean; payload: IActivityReport } = req.body;
+  const result = await createOrUpdateActivityReport(payload, isCreate);
+  return res.status(200).json(successResponse(isCreate ? "ActivityReport created successfully" : "ActivityReport updated successfully", result));
+});
 
-    await deleteOutput(id);
+export const getAllActivityReportsController = asyncHandler(async (_req, res) => {
+  const result = await getAllActivityReports();
+  return res.status(200).json(successResponse("ActivityReports fetched successfully", result));
+});
 
-    res.status(200).json(successResponse("Output deleted successfully", null));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
+export const getActivityReportByIdController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await getActivityReportById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("ActivityReport not found", null));
   }
-};
+  return res.status(200).json(successResponse("ActivityReport fetched successfully", result));
+});
 
+export const deleteActivityReportController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await deleteActivityReport(id);
+  return res.status(200).json(successResponse("ActivityReport deleted successfully", null));
+});
 
-// ✅ Create or Update Activity
-export const createOrUpdateActivityController = async (req: Request, res: Response) => {
-  try {
-    const { isCreate, payload } = req.body as { isCreate: boolean; payload: IActivity };
-    const result = await createOrUpdateActivity(payload, isCreate);
+export const createOrUpdateLogicalFrameworkController = asyncHandler(async (req, res) => {
+  const { isCreate, payload }: { isCreate: boolean; payload: ILogicalFramework } = req.body;
+  const result = await createOrUpdateLogicalFramework(payload, isCreate);
+  return res.status(200).json(successResponse(isCreate ? "LogicalFramework created successfully" : "LogicalFramework updated successfully", result));
+});
 
-    return res.status(200).json(
-      successResponse(
-        isCreate
-          ? "Activity created successfully"
-          : "Activity updated successfully",
-        result
-      )
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
+export const getAllLogicalFrameworksController = asyncHandler(async (_req, res) => {
+  const result = await getAllLogicalFrameworks();
+  return res.status(200).json(successResponse("LogicalFrameworks fetched successfully", result));
+});
+
+export const getLogicalFrameworkByIdController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await getLogicalFrameworkById(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("LogicalFramework not found", null));
   }
-};
+  return res.status(200).json(successResponse("LogicalFramework fetched successfully", result));
+});
 
-// ✅ Get All Activities
-export const getAllActivitiesController = async (req: Request, res: Response) => {
-  try {
-    const result = await getAllActivities();
-    if (!result || result.length === 0) {
-      return res.status(404).json(notFoundResponse("No activities found", null));
-    }
-    return res.status(200).json(
-      successResponse("Activities fetched successfully", result)
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
+export const deleteLogicalFrameworkController = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const result = await deleteLogicalFramework(id);
+  if (!result) {
+    return res.status(404).json(notFoundResponse("LogicalFramework not found", null));
   }
-};
+  return res.status(200).json(successResponse("LogicalFramework deleted successfully", result));
+});
 
-// ✅ Get Activity by Id
-export const getActivityByIdController = async (req: Request, res: Response) => {
-  try {
-    const id = req.params.id;
-    const result = await getActivityById(id);
-    if (!result) {
-      return res.status(404).json(notFoundResponse("Activity not found", null));
-    }
-    return res.status(200).json(
-      successResponse("Activity fetched successfully", result)
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getResultDashboardDataController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const dashboardData = await getResultDashboardData(projectId);
+  return res.status(200).json(successResponse("Data", dashboardData));
+});
 
-// ✅ Delete Activity
-export const deleteActivityController = async (req: Request, res: Response) => {
-  try {
-    const id = req.params.id;
-    await deleteActivity(id);
-    return res.status(200).json(
-      successResponse("Activity deleted successfully", null)
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getOrgKpiDashboardDataController = asyncHandler(async (req, res) => {
+  const { thematicArea, strategicObjectiveId, resultLevel, kpiId, startDate, endDate, disaggregationType, year } = req.query as Record<string, string | undefined>;
+  const dashboardData = await getOrgKpiDashboardData({
+    thematicArea, strategicObjectiveId, resultLevel, kpiId,
+    startDate: startDate ? new Date(startDate) : undefined,
+    endDate: endDate ? new Date(endDate) : undefined,
+    disaggregationType,
+    year: year ? parseInt(year) : undefined,
+  });
+  return res.status(200).json(successResponse("Data", dashboardData));
+});
 
-// ✅ Create or Update ActivityReport
-export const createOrUpdateActivityReportController = async (req: Request, res: Response) => {
-  try {
-    const { isCreate, payload } = req.body as { isCreate: boolean; payload: IActivityReport };
-    const result = await createOrUpdateActivityReport(payload, isCreate);
+export const getProjectActivityDashboardDataController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const dashboardData = await getProjectActivityDashboardData(projectId);
+  return res.status(200).json(successResponse("Data", dashboardData));
+});
 
-    return res.status(200).json(
-      successResponse(
-        isCreate
-          ? "ActivityReport created successfully"
-          : "ActivityReport updated successfully",
-        result
-      )
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getResultDashboardFullDataController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const dashboardData = await getResultDashboardFullData(projectId);
+  return res.status(200).json(successResponse("Data", dashboardData));
+});
 
-// ✅ Get All ActivityReports (from view)
-export const getAllActivityReportsController = async (_req: Request, res: Response) => {
-  try {
-    const result = await getAllActivityReports();
-    return res.status(200).json(successResponse("ActivityReports fetched successfully", result));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getResultDashboardKpiSectionDataController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const { thematicArea, strategicObjectiveId, resultLevel, indicatorId, startDate, endDate, disaggregationType, year } = req.query as Record<string, string | undefined>;
+  const dashboardData = await getResultDashboardKpiSectionData(projectId, {
+    thematicArea, strategicObjectiveId, resultLevel, indicatorId,
+    startDate: startDate ? new Date(startDate) : undefined,
+    endDate: endDate ? new Date(endDate) : undefined,
+    disaggregationType,
+    year: year ? parseInt(year) : undefined,
+  });
+  return res.status(200).json(successResponse("Data", dashboardData));
+});
 
-// ✅ Get ActivityReport by Id (from view)
-export const getActivityReportByIdController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const result = await getActivityReportById(id);
+export const getImpactByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const impacts = await getImpactByProjectIdView(projectId);
+  return res.status(200).json(successResponse("Impacts retrieved successfully", impacts));
+});
 
-    if (!result) {
-      return res.status(404).json(notFoundResponse("ActivityReport not found", null));
-    }
+export const getOutcomeByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const outcome = await getOutcomeViewByProjectId(projectId);
+  return res.status(200).json(successResponse("Outcome retrieved successfully", outcome));
+});
 
-    return res.status(200).json(successResponse("ActivityReport fetched successfully", result));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getOutputByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const output = await getOutputByProjectId(projectId);
+  return res.status(200).json(successResponse("Output retrieved successfully", output));
+});
 
-// ✅ Delete ActivityReport
-export const deleteActivityReportController = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    await deleteActivityReport(id);
-    return res.status(200).json(successResponse("ActivityReport deleted successfully", null));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
+export const getActivityByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const activities = await getActivityByProjectId(projectId);
+  return res.status(200).json(successResponse("Activities retrieved successfully", activities));
+});
 
+export const getLogicalFrameworkByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const logicalFramework = await getLogicalFrameworkByProjectId(projectId);
+  return res.status(200).json(successResponse("Logical framework retrieved successfully", logicalFramework));
+});
 
-// ✅ Create or Update LogicalFramework
-export const createOrUpdateLogicalFrameworkController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { isCreate, payload } = req.body as {
-      isCreate: boolean;
-      payload: ILogicalFramework;
-    };
+export const getTeamMemberByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const teamMembers = await getTeamMemberByProjectId(projectId);
+  return res.status(200).json(successResponse("Team members retrieved successfully", teamMembers));
+});
 
-    const result = await createOrUpdateLogicalFramework(payload, isCreate);
+export const getPartnerByProjectIdController = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const partners = await getPartnerByProjectId(projectId);
+  return res.status(200).json(successResponse("Partners retrieved successfully", partners));
+});
 
-    return res.status(200).json(
-      successResponse(
-        isCreate
-          ? "LogicalFramework created successfully"
-          : "LogicalFramework updated successfully",
-        result
-      )
-    );
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get all LogicalFrameworks
-export const getAllLogicalFrameworksController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const result = await getAllLogicalFrameworks();
-    return res
-      .status(200)
-      .json(successResponse("LogicalFrameworks fetched successfully", result));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get LogicalFramework by ID
-export const getLogicalFrameworkByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-    const result = await getLogicalFrameworkById(id);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(notFoundResponse("LogicalFramework not found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("LogicalFramework fetched successfully", result));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Delete LogicalFramework
-export const deleteLogicalFrameworkController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-    const result = await deleteLogicalFramework(id);
-
-    if (!result) {
-      return res
-        .status(404)
-        .json(notFoundResponse("LogicalFramework not found", null));
-    }
-
-    return res
-      .status(200)
-      .json(successResponse("LogicalFramework deleted successfully", result));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getResultDashboardDataController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const dashboardData = await getResultDashboardData(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Data", dashboardData));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-export const getOrgKpiDashboardDataController = async (req: Request, res: Response) => {
-  try {
-    const {
-      thematicArea,
-      strategicObjectiveId,
-      resultLevel,
-      kpiId,
-      startDate,
-      endDate,
-      disaggregationType,
-      year,
-    } = req.query as Record<string, string | undefined>;
-
-    const dashboardData = await getOrgKpiDashboardData({
-      thematicArea,
-      strategicObjectiveId,
-      resultLevel,
-      kpiId,
-      startDate: startDate ? new Date(startDate) : undefined,
-      endDate: endDate ? new Date(endDate) : undefined,
-      disaggregationType,
-      year: year ? parseInt(year) : undefined,
-    });
-
-    return res
-      .status(200)
-      .json(successResponse("Data", dashboardData));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-export const getProjectActivityDashboardDataController = async (req: Request, res: Response) => {
-  try {
-
-    const { projectId } = req.params;
-    const dashboardData = await getProjectActivityDashboardData(projectId);
-
-
-    return res
-      .status(200)
-      .json(successResponse("Data", dashboardData));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getResultDashboardFullDataController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const dashboardData = await getResultDashboardFullData(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Data", dashboardData));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getResultDashboardKpiSectionDataController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const {
-      thematicArea,
-      strategicObjectiveId,
-      resultLevel,
-      indicatorId,
-      startDate,
-      endDate,
-      disaggregationType,
-      year,
-    } = req.query as Record<string, string | undefined>;
-
-    const dashboardData = await getResultDashboardKpiSectionData(projectId, {
-      thematicArea,
-      strategicObjectiveId,
-      resultLevel,
-      indicatorId,
-      startDate: startDate ? new Date(startDate) : undefined,
-      endDate: endDate ? new Date(endDate) : undefined,
-      disaggregationType,
-      year: year ? parseInt(year) : undefined,
-    });
-
-    return res
-      .status(200)
-      .json(successResponse("Data", dashboardData));
-  } catch (error: any) {
-    console.error(error);
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get impacts by project id (from view)
-export const getImpactByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const impacts = await getImpactByProjectIdView(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Impacts retrieved successfully", impacts));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get outcome by project id (from view)
-export const getOutcomeByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const outcome = await getOutcomeViewByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Outcome retrieved successfully", outcome));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get output by project id (from view)
-export const getOutputByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const output = await getOutputByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Output retrieved successfully", output));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get activity by project id (from view)
-export const getActivityByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const activities = await getActivityByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Activities retrieved successfully", activities));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get logical framework by project id (from view)
-export const getLogicalFrameworkByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const logicalFramework = await getLogicalFrameworkByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Logical framework retrieved successfully", logicalFramework));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get team member by project id (from view)
-export const getTeamMemberByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const teamMembers = await getTeamMemberByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Team members retrieved successfully", teamMembers));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-// ✅ Get partner by project id (from view)
-export const getPartnerByProjectIdController = async (req: Request, res: Response) => {
-  try {
-    const { projectId } = req.params;
-    const partners = await getPartnerByProjectId(projectId);
-
-    return res
-      .status(200)
-      .json(successResponse("Partners retrieved successfully", partners));
-  } catch (error: any) {
-    return res.status(500).json(errorResponse(error.message));
-  }
-};
-
-export const getIndicatorByResultTypeIdController = async (req: Request, res: Response) => {
+export const getIndicatorByResultTypeIdController = asyncHandler(async (req, res) => {
   const { resultTypeId } = req.params;
-  try {
-    const indicators = await getIndicatorByResultTypeId(resultTypeId);
-    res.status(200).json(successResponse("Indicators retrieved successfully", indicators));
-  } catch (error: any) {
-    res.status(500).json(errorResponse(error.message));
-  }
-};
+  const indicators = await getIndicatorByResultTypeId(resultTypeId);
+  res.status(200).json(successResponse("Indicators retrieved successfully", indicators));
+});

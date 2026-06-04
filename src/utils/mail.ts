@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { EMAIL_PASS, EMAIL_USER, FRONT_END_URL, SMTP_HOST, SMTP_PORT } from "../secrets";
 import { prisma } from "../lib/prisma";
+import { logError } from "./errorLogger";
 
 const createTransporter = () =>
   nodemailer.createTransport({
@@ -85,7 +86,7 @@ export const sendWelcomeEmail = async (email: string, fullName: string) => {
 
     await transporter.sendMail(mailOptions);
   } catch (error) {
-    console.error("Error sending welcome email:", error);
+    await logError("EMAIL", "sendWelcomeEmail", error, { to: email });
   }
 };
 
@@ -204,7 +205,7 @@ export const sendPendingApprovalEmail = async (emails: string[], title: string) 
       `),
     });
   } catch (error) {
-    console.error("Error sending pending approval email:", error);
+    await logError("EMAIL", "sendPendingApprovalEmail", error, { to: emails, title });
   }
 };
 
@@ -228,7 +229,7 @@ export const sendApprovalCompleteEmail = async (email: string, title: string) =>
       `),
     });
   } catch (error) {
-    console.error("Error sending approval complete email:", error);
+    await logError("EMAIL", "sendApprovalCompleteEmail", error, { to: email, title });
   }
 };
 export const sendApprovalCompleteRetirementEmail = async (email: string, title: string) => {
@@ -251,7 +252,7 @@ export const sendApprovalCompleteRetirementEmail = async (email: string, title: 
       `),
     });
   } catch (error) {
-    console.error("Error sending approval complete email:", error);
+    await logError("EMAIL", "sendApprovalCompleteRetirementEmail", error, { to: email, title });
   }
 };
 
@@ -276,7 +277,7 @@ export const sendRejectionEmail = async (email: string, title: string, comment?:
       `),
     });
   } catch (error) {
-    console.error("Error sending rejection email:", error);
+    await logError("EMAIL", "sendRejectionEmail", error, { to: email, title });
   }
 };
 
@@ -301,7 +302,7 @@ export const sendJournalEntryEmail = async (emails: string[], title: string) => 
       `),
     });
   } catch (error) {
-    console.error("Error sending journal entry email:", error);
+    await logError("EMAIL", "sendJournalEntryEmail", error, { to: emails, title });
   }
 };
 
@@ -326,6 +327,6 @@ export const sendReviewRequestEmail = async (email: string, title: string, comme
       `),
     });
   } catch (error) {
-    console.error("Error sending review request email:", error);
+    await logError("EMAIL", "sendReviewRequestEmail", error, { to: email, title });
   }
 };

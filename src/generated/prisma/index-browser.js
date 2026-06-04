@@ -573,6 +573,16 @@ exports.Prisma.ReportScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.ErrorLogScalarFieldEnum = {
+  errorLogId: 'errorLogId',
+  type: 'type',
+  source: 'source',
+  message: 'message',
+  stack: 'stack',
+  context: 'context',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -915,6 +925,15 @@ exports.Prisma.ReportOrderByRelevanceFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.ErrorLogOrderByRelevanceFieldEnum = {
+  errorLogId: 'errorLogId',
+  type: 'type',
+  source: 'source',
+  message: 'message',
+  stack: 'stack',
+  context: 'context'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -945,7 +964,8 @@ exports.Prisma.ModelName = {
   OtherPersonnel: 'OtherPersonnel',
   LineItem: 'LineItem',
   Retirement: 'Retirement',
-  Report: 'Report'
+  Report: 'Report',
+  ErrorLog: 'ErrorLog'
 };
 
 /**

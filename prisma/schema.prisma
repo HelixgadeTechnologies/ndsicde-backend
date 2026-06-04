@@ -627,3 +627,15 @@ model Report {
 
   @@map("report")
 }
+
+model ErrorLog {
+  errorLogId String   @id @default(uuid())
+  type       String
+  source     String?
+  message    String   @db.Text
+  stack      String?  @db.Text
+  context    String?  @db.Text
+  createdAt  DateTime @default(now())
+
+  @@map("error_log")
+}
