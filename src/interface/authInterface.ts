@@ -25,30 +25,30 @@ export interface IUser {
 }
 
 export interface IUserView {
-  userId: string;
-  fullName?: string;
-  email?: string;
-  address?: string;
-  phoneNumber?: string;
-  roleId?: string;
-  roleName?: string;
-  status?: string;
-  assignedProjectId?: string;
-  department?: string;
-  community?: string;
-  state?: string;
-  localGovernmentArea?: string;
-  profilePic?: string;
-  profilePicMimeType?: string;
-  signature?: string;
-  signatureMimeType?: string;
-  activityKpiApproval?: number;
-  retirementApproval?: number;
-  designation?: string;
-  password?: string;
-  loginLast?: Date;
-  createAt?: Date;
-  updateAt?: Date;
+    userId: string;
+    fullName?: string;
+    email?: string;
+    address?: string;
+    phoneNumber?: string;
+    roleId?: string;
+    roleName?: string;
+    status?: string;
+    assignedProjectId?: string;
+    department?: string;
+    community?: string;
+    state?: string;
+    localGovernmentArea?: string;
+    profilePic?: string;
+    profilePicMimeType?: string;
+    signature?: string;
+    signatureMimeType?: string;
+    activityKpiApproval?: number;
+    retirementApproval?: number;
+    designation?: string;
+    password?: string;
+    loginLast?: Date;
+    createAt?: Date;
+    updateAt?: Date;
 }
 
 
@@ -108,13 +108,14 @@ export interface IRole {
 }
 
 export interface IRoleView {
-  roleId: string
-  roleName?: string
-  description?: string
-  permission?: string
-  createAt?: Date
-  updateAt?: Date
-  users: number // Count of users with this role
+    roleId: string
+    roleName?: string
+    description?: string
+    permission?: string
+    createAt?: Date
+    level?: number
+    updateAt?: Date
+    users: number // Count of users with this role
 }
 
 

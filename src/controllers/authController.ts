@@ -137,6 +137,8 @@ export const test = async (req: Request, res: Response) => {
 };
 
 export const changePasswordController = asyncHandler(async (req, res) => {
-  const result = await changePassword(req.body);
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+  const userId = req.user?.userId as string;
+  const result = await changePassword(userId, oldPassword, newPassword, confirmPassword);
   res.status(200).json(successResponse("Password changed successfully", result));
 });
