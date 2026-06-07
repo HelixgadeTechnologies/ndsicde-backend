@@ -336,28 +336,38 @@ requestRouter.get("/request/:id", getRequestByIdController);
 
 /**
  * @swagger
- * /api/request/request/{id}:
- *   delete:
+ * /api/request/request/delete:
+ *   post:
  *     summary: Delete Request by ID
+ *     description: Deletes a Request record. Send the `requestId` in the request body.
  *     tags: [Request]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: Request ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - requestId
+ *             properties:
+ *               requestId:
+ *                 type: string
+ *                 format: uuid
+ *                 description: The ID of the request to delete
+ *                 example: "550e8400-e29b-41d4-a716-446655440000"
  *     responses:
  *       200:
  *         description: Request deleted successfully
+ *       400:
+ *         description: requestId is required
  *       404:
  *         description: Request not found
  *       500:
  *         description: Server error
  */
-requestRouter.delete("/request/:id", deleteRequestController);
+requestRouter.post("/request/delete", deleteRequestController);
 
 /**
  * @swagger

@@ -273,10 +273,9 @@ export const requestApproval = async (
 
     if (!request) throw new Error("Request not found");
 
-    // Level B (Journey Management) is skipped when isJourneyManagementRequired = true
+    // Level B (Journey Management) is skipped when isJourneyManagementRequired = false
     const activeLevels: ApprovalLevel[] = request.isJourneyManagementRequired
-      ? ["A", "C", "D", "E"]
-      : ["A", "B", "C", "D", "E"];
+      ? ["A", "B", "C", "D", "E"]:["A", "C", "D", "E"];
 
     // Detect the first unset active level
     let currentLevel: ApprovalLevel | null = null;

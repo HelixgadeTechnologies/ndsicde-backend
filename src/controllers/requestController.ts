@@ -39,8 +39,11 @@ export const getRequestByIdController = asyncHandler(async (req, res) => {
 });
 
 export const deleteRequestController = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const result = await deleteRequest(id);
+  const { requestId } = req.body;
+  if (!requestId) {
+    return res.status(400).json(errorResponse("requestId is required"));
+  }
+  const result = await deleteRequest(requestId);
   if (!result) {
     return res.status(404).json(notFoundResponse("Request not found", null));
   }

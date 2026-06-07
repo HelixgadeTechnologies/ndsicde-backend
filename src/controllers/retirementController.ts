@@ -37,7 +37,10 @@ export const getRetirement = asyncHandler(async (req, res) => {
 });
 
 export const removeRetirement = asyncHandler(async (req, res) => {
-  const { retirementId } = req.params;
+  const { retirementId } = req.body;
+  if (!retirementId) {
+    return res.status(400).json(errorResponse("retirementId is required"));
+  }
   const result = await deleteRetirement(retirementId);
   if (!result) {
     return res.status(404).json(notFoundResponse("Retirement not found", null));

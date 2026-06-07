@@ -413,23 +413,32 @@ retirementRouter.get("/retirement/:retirementId", getRetirement);
 
 /**
  * @swagger
- * /api/retirement/{retirementId}:
- *   delete:
+ * /api/retirement/retirement/delete:
+ *   post:
  *     summary: Delete Retirement
- *     description: Delete a Retirement record by its `retirementId`.
+ *     description: Deletes a Retirement record. Send the `retirementId` in the request body.
  *     tags: [Retirement]
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - name: retirementId
- *         in: path
- *         required: true
- *         schema:
- *           type: string
- *           format: uuid
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - retirementId
+ *             properties:
+ *               retirementId:
+ *                 type: string
+ *                 format: uuid
+ *                 description: The ID of the retirement to delete
+ *                 example: "550e8400-e29b-41d4-a716-446655440000"
  *     responses:
  *       200:
  *         description: Retirement deleted successfully
+ *       400:
+ *         description: retirementId is required
  *       404:
  *         description: Retirement not found
  *       401:
@@ -437,7 +446,7 @@ retirementRouter.get("/retirement/:retirementId", getRetirement);
  *       500:
  *         description: Server error
  */
-retirementRouter.delete("/:retirementId", removeRetirement);
+retirementRouter.post("/retirement/delete", removeRetirement);
 
 /**
  * @swagger
