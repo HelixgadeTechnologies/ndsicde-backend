@@ -240,6 +240,9 @@ export const getRequestById = async (
 
 // ✅ Delete Request
 export const deleteRequest = async (requestId: string) => {
+  await prisma.otherPersonnel.deleteMany({ where: { requestId } });
+  await prisma.lineItem.deleteMany({ where: { requestId } });
+  await prisma.supportingDocument.deleteMany({ where: { requestId } });
   return await prisma.request.delete({
     where: { requestId },
   });

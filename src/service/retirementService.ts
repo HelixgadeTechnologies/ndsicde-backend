@@ -204,7 +204,7 @@ export const getRetirementByProjectId = async (
 export const deleteRetirement = async (retirementId: string) => {
   const existing = await prisma.retirement.findUnique({ where: { retirementId } });
   if (!existing) throw Object.assign(new Error("Retirement not found"), { statusCode: 404 });
-
+  await prisma.lineItem.deleteMany({ where: { requestId: existing.requestId as string } });
   return await prisma.retirement.delete({ where: { retirementId } });
 };
 
