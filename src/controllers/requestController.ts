@@ -24,7 +24,7 @@ export const createOrUpdateRequestController = asyncHandler(async (req, res) => 
 export const getAllRequestsController = asyncHandler(async (_req, res) => {
   const result = await getAllRequests();
   if (!result || result.length === 0) {
-    return res.status(404).json(notFoundResponse("No Requests found", null));
+    return res.status(404).json(notFoundResponse("No Requests found", []));
   }
   return res.status(200).json(successResponse("Requests fetched successfully", result));
 });
