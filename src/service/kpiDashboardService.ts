@@ -950,7 +950,10 @@ export async function getResultDashboardFullData(projectId: string) {
     const indicatorIds = [...new Set(indicatorRows.map((r) => r.indicatorId))];
 
     // ── 3. KPIs Due For Reporting: indicators that have NO IndicatorReport ──────
-    //    For each indicator, check if any report exists with that indicatorId.
+    //    An indicator is "due for reporting" if:
+    //      1) It has NO reports in IndicatorReport, AND
+    //      2) Its targetDate is NULL (no deadline) OR targetDate <= today
+    //      (If targetDate is in the future, reporting is not yet due.)
     const reportsExist = await prisma.indicatorReport.findMany({
         where: { indicatorId: { in: indicatorIds } },
         select: { indicatorId: true },
@@ -958,14 +961,20 @@ export async function getResultDashboardFullData(projectId: string) {
     });
     const indicatorsWithReport = new Set(reportsExist.map((r) => r.indicatorId));
 
-    // Group indicators by resultName to get counts per type
-    const indicatorsWithNoReport = indicatorRows.filter(
-        (r) => !indicatorsWithReport.has(r.indicatorId)
-    );
+    const today = new Date();
 
-    // Helper: de-duplicate by indicatorId, then group
+    // Indicators with no report AND (no deadline OR deadline has passed)
+    const indicatorsDue = indicatorRows.filter((r) => {
+        if (indicatorsWithReport.has(r.indicatorId)) return false;
+        // No targetDate set → always considered due
+        if (!r.targetDate) return true;
+        // Deadline must have arrived or passed
+        return r.targetDate <= today;
+    });
+
+    // Helper: de-duplicate by indicatorId, then group by result type
     const dueByType: Record<string, Set<string>> = {};
-    for (const row of indicatorsWithNoReport) {
+    for (const row of indicatorsDue) {
         const typeName = (row.resultName ?? "Unknown").toLowerCase();
         if (!dueByType[typeName]) dueByType[typeName] = new Set();
         dueByType[typeName].add(row.indicatorId);
@@ -1023,7 +1032,8 @@ export async function getResultDashboardFullData(projectId: string) {
         const disaggs = disaggByIndicator.get(indicatorId) ?? [];
         const target  = disaggs.reduce((s, d) => s + (d.target ?? 0), 0);
         const actual  = reportActualByIndicator.get(indicatorId) ?? 0;
-        const perf    = target > 0 ? (actual / target) * 100 : 0;
+        const rawPerf = target > 0 ? (actual / target) * 100 : 0;
+        const perf    = Math.min(rawPerf, 100); // cap at 100% to avoid over-achievement inflating averages
 
         const typeName = (meta.resultName ?? "Unknown").toLowerCase();
         if (!perfByType[typeName]) perfByType[typeName] = { sum: 0, count: 0 };
