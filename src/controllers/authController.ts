@@ -14,6 +14,7 @@ import {
   getGeneralSettings,
   registerGeneralSettings,
   registerRole,
+  saveUserSignature,
 } from "../service/authService";
 import {
   errorResponse,
@@ -141,4 +142,13 @@ export const changePasswordController = asyncHandler(async (req, res) => {
   const userId = req.user?.userId as string;
   const result = await changePassword(userId, oldPassword, newPassword, confirmPassword);
   res.status(200).json(successResponse("Password changed successfully", result));
+});
+
+export const saveUserSignatureController = asyncHandler(async (req, res) => {
+  const { userId, signature, signatureMimeType } = req.body;
+  if (!userId || !signature || !signatureMimeType) {
+    return res.status(400).json(errorResponse("userId, signature, and signatureMimeType are required"));
+  }
+  const user = await saveUserSignature(userId, signature, signatureMimeType);
+  res.status(200).json(successResponse("Signature saved successfully", user));
 });

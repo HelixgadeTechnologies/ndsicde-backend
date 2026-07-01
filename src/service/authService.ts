@@ -65,6 +65,17 @@ export const registerUser = async (data: IUser, isCreate: boolean) => {
   }
 };
 
+// a service function to save users signature to the database
+export const saveUserSignature = async (userId: string, signature: string, signatureMimeType: string) => {
+  const user = await prisma.user.update({
+    where: { userId },
+    data: {
+      signature,
+      signatureMimeType
+    }
+  });
+  return user;
+};
 
 export const getUserById = async (userId: string): Promise<Array<IUserView>> => {
   // Fetch user data from the database

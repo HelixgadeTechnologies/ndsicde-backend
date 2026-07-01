@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { deleteUser, fetchAllUsers, fetchUserById, register } from "../controllers/authController";
+import { deleteUser, fetchAllUsers, fetchUserById, register, saveUserSignatureController } from "../controllers/authController";
 
 const userManagementRoutes: Router = Router();
 
@@ -141,5 +141,44 @@ userManagementRoutes.get("/users/:userId", fetchUserById);
  *         description: Internal server error
  */
 userManagementRoutes.delete("/delete", deleteUser);
+
+/**
+ * @swagger
+ * /api/userManagement/save-signature:
+ *   post:
+ *     summary: Save or update a user's signature
+ *     tags: [User Management]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userId
+ *               - signature
+ *               - signatureMimeType
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: ID of the user
+ *               signature:
+ *                 type: string
+ *                 description: Base64-encoded signature image
+ *               signatureMimeType:
+ *                 type: string
+ *                 description: MIME type of the signature (e.g., image/png)
+ *                 example: image/png
+ *     responses:
+ *       200:
+ *         description: Signature saved successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Internal server error
+ */
+userManagementRoutes.post("/save-signature", saveUserSignatureController);
 
 export default userManagementRoutes
