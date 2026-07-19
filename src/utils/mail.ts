@@ -3,13 +3,17 @@ import { EMAIL_PASS, EMAIL_USER, FRONT_END_URL, SMTP_HOST, SMTP_PORT } from "../
 import { prisma } from "../lib/prisma";
 import { logError } from "./errorLogger";
 
+const SENDER = `"NDSICDE Platform" <${EMAIL_USER?.trim()}>`;
+
 const createTransporter = () =>
   nodemailer.createTransport({
     host: SMTP_HOST,
     port: Number(SMTP_PORT),
-    secure: true,
-    auth: { user: EMAIL_USER, pass: EMAIL_PASS },
-    tls: { rejectUnauthorized: false },
+    secure: Number(SMTP_PORT) === 465, // true for SSL on port 465
+    auth: {
+      user: EMAIL_USER?.trim(),
+      pass: EMAIL_PASS?.trim(),
+    },
   });
 
 export const sendWelcomeEmail = async (email: string, fullName: string) => {
@@ -17,7 +21,7 @@ export const sendWelcomeEmail = async (email: string, fullName: string) => {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: EMAIL_USER,
+      from: SENDER,
       to: email,
       subject: "Welcome to NDSICDE!",
       html: `
@@ -188,7 +192,7 @@ export const sendPendingApprovalEmail = async (emails: string[], title: string) 
   if (!emails.length) return;
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: emails.join(","),
       subject: `Action Required: Approval Pending — ${title}`,
       html: baseHtml(`
@@ -212,7 +216,7 @@ export const sendPendingApprovalEmail = async (emails: string[], title: string) 
 export const sendApprovalCompleteEmail = async (email: string, title: string) => {
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: email,
       subject: `Approved: ${title}`,
       html: baseHtml(`
@@ -235,7 +239,7 @@ export const sendApprovalCompleteEmail = async (email: string, title: string) =>
 export const sendApprovalCompleteRetirementEmail = async (email: string, title: string) => {
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: email,
       subject: `Approved: ${title}`,
       html: baseHtml(`
@@ -259,7 +263,7 @@ export const sendApprovalCompleteRetirementEmail = async (email: string, title: 
 export const sendRejectionEmail = async (email: string, title: string, comment?: string) => {
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: email,
       subject: `Rejected: ${title}`,
       html: baseHtml(`
@@ -285,7 +289,7 @@ export const sendJournalEntryEmail = async (emails: string[], title: string) => 
   if (!emails.length) return;
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: emails.join(","),
       subject: `Action Required: Enter Journal ID — ${title}`,
       html: baseHtml(`
@@ -309,7 +313,7 @@ export const sendJournalEntryEmail = async (emails: string[], title: string) => 
 export const sendReviewRequestEmail = async (email: string, title: string, comment?: string) => {
   try {
     await createTransporter().sendMail({
-      from: EMAIL_USER,
+      from: SENDER,
       to: email,
       subject: `Review Required: ${title}`,
       html: baseHtml(`
